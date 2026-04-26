@@ -1,0 +1,11 @@
+# AGENTS.md — Ralph++ Codebase Conventions
+Auto-updated each iteration.  Read this before implementing any task.
+
+## Fresh-context contract
+Each iteration starts with a clean context window.
+Memory persists via: git history · PROGRESS.md · PRD.json · this file.
+
+---
+
+### Iter 01 [lean_toolchain] Lean toolchain and lakefile
+[lean_toolchain] Lean toolchain and lakefile
