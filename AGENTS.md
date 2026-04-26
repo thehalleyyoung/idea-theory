@@ -15,3 +15,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 01 [lean_theorems] Lean theorems: Idea Structures
 [lean_theorems] Lean theorems: Idea Structures — bounced: lean/IdeaTheory/Theorems1.lean: contains `sorry`
+
+### Iter 02 [lean_theorems] Lean theorems: Idea Structures
+[lean_theorems] Lean theorems: Idea Structures — bounced: lean/IdeaTheory/Theorems1.lean: contains `sorry`
