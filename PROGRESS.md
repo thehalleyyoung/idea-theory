@@ -17,3 +17,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 02 — 2026-04-26 18:58
 **Task:** `foundations` Lean 4 foundations (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 01 — 2026-04-26 19:27
+**Task:** `theorems_1` Lean theorems: Idea Structures (attempt 1)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems1.lean: contains `sorry`
