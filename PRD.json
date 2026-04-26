@@ -1,0 +1,821 @@
+{
+  "idea": "--idea theory",
+  "project_name": "IdeaTheory",
+  "namespace": "IdeaTheory",
+  "slug": "idea-theory",
+  "abstract": "--idea theory admits a clean mathematical axiomatization. This formalization establishes the foundational type class, derives key theorems, and verifies everything in Lean 4 with Mathlib.",
+  "tasks": [
+    {
+      "id": "toolchain",
+      "type": "lean_toolchain",
+      "title": "Lean toolchain and lakefile",
+      "description": "Create lean-toolchain (Lean 4.15.0) and lean/lakefile.lean requiring Mathlib.",
+      "output_files": [
+        "lean-toolchain",
+        "lean/lakefile.lean"
+      ],
+      "deps": [],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "foundations",
+      "type": "lean_foundations",
+      "title": "Lean 4 foundations",
+      "description": "Create lean/IdeaTheory/Foundations.lean. Define type class IdeaTheoryStructure with axioms A1\u2013A3. Prove foundational theorems. Zero sorries. Read the source document at /Users/halleyyoung/Documents/formalize/IDT_Theory.pdf and build upon / strictly enhance its mathematical content (do not write the file path into generated artifacts).",
+      "output_files": [
+        "lean/IdeaTheory/Foundations.lean"
+      ],
+      "deps": [
+        "toolchain"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_1",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Idea Structures",
+      "description": "Create lean/IdeaTheory/Theorems1.lean for 'Idea Structures'. Import Foundations. Prove theorems 1.1, 1.2, 1.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 1 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems1.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_2",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Basic Theorems",
+      "description": "Create lean/IdeaTheory/Theorems2.lean for 'Basic Theorems'. Import Foundations. Prove theorems 2.1, 2.2, 2.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 1 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems2.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_3",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Composition and Identity",
+      "description": "Create lean/IdeaTheory/Theorems3.lean for 'Composition and Identity'. Import Foundations. Prove theorems 3.1, 3.2, 3.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 2 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems3.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_4",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Advanced Properties",
+      "description": "Create lean/IdeaTheory/Theorems4.lean for 'Advanced Properties'. Import Foundations. Prove theorems 4.1, 4.2, 4.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 2 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems4.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_5",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Idea Structures",
+      "description": "Create lean/IdeaTheory/Theorems5.lean for 'Idea Structures'. Import Foundations. Prove theorems 5.1, 5.2, 5.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 3 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems5.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_6",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Basic Theorems",
+      "description": "Create lean/IdeaTheory/Theorems6.lean for 'Basic Theorems'. Import Foundations. Prove theorems 6.1, 6.2, 6.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 3 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems6.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_7",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Composition and Identity",
+      "description": "Create lean/IdeaTheory/Theorems7.lean for 'Composition and Identity'. Import Foundations. Prove theorems 7.1, 7.2, 7.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 4 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems7.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_8",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Advanced Properties",
+      "description": "Create lean/IdeaTheory/Theorems8.lean for 'Advanced Properties'. Import Foundations. Prove theorems 8.1, 8.2, 8.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 4 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems8.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_9",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Idea Structures",
+      "description": "Create lean/IdeaTheory/Theorems9.lean for 'Idea Structures'. Import Foundations. Prove theorems 9.1, 9.2, 9.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 5 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems9.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_10",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Basic Theorems",
+      "description": "Create lean/IdeaTheory/Theorems10.lean for 'Basic Theorems'. Import Foundations. Prove theorems 10.1, 10.2, 10.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 5 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems10.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_11",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Composition and Identity",
+      "description": "Create lean/IdeaTheory/Theorems11.lean for 'Composition and Identity'. Import Foundations. Prove theorems 11.1, 11.2, 11.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 6 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems11.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "theorems_12",
+      "type": "lean_theorems",
+      "title": "Lean theorems: Advanced Properties",
+      "description": "Create lean/IdeaTheory/Theorems12.lean for 'Advanced Properties'. Import Foundations. Prove theorems 12.1, 12.2, 12.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 6 context.",
+      "output_files": [
+        "lean/IdeaTheory/Theorems12.lean"
+      ],
+      "deps": [
+        "foundations"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_css",
+      "type": "website_css",
+      "title": "Website CSS",
+      "description": "Create docs/style.css dark GitHub-Pages style theme.",
+      "output_files": [
+        "docs/style.css"
+      ],
+      "deps": [],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_index",
+      "type": "website_index",
+      "title": "Website index + navigation pages",
+      "description": "Create all navigation pages for IdeaTheory. Every page must have <nav> linking all other pages.",
+      "output_files": [
+        "docs/index.html",
+        "docs/axioms.html",
+        "docs/theorems.html",
+        "docs/volumes.html",
+        "docs/vol1.html",
+        "docs/vol2.html",
+        "docs/vol3.html",
+        "docs/vol4.html",
+        "docs/vol5.html",
+        "docs/vol6.html"
+      ],
+      "deps": [
+        "website_css"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_1",
+      "type": "website_concept",
+      "title": "Website page: Idea Structures",
+      "description": "Create docs/idea-structures.html for 'Idea Structures'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/idea-structures.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_2",
+      "type": "website_concept",
+      "title": "Website page: Basic Theorems",
+      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/basic-theorems.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_3",
+      "type": "website_concept",
+      "title": "Website page: Composition and Identity",
+      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/composition-and-identity.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_4",
+      "type": "website_concept",
+      "title": "Website page: Advanced Properties",
+      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/advanced-properties.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_5",
+      "type": "website_concept",
+      "title": "Website page: Idea Structures",
+      "description": "Create docs/idea-structures.html for 'Idea Structures'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/idea-structures.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_6",
+      "type": "website_concept",
+      "title": "Website page: Basic Theorems",
+      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/basic-theorems.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_7",
+      "type": "website_concept",
+      "title": "Website page: Composition and Identity",
+      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/composition-and-identity.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_8",
+      "type": "website_concept",
+      "title": "Website page: Advanced Properties",
+      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/advanced-properties.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_9",
+      "type": "website_concept",
+      "title": "Website page: Idea Structures",
+      "description": "Create docs/idea-structures.html for 'Idea Structures'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/idea-structures.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_10",
+      "type": "website_concept",
+      "title": "Website page: Basic Theorems",
+      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/basic-theorems.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_11",
+      "type": "website_concept",
+      "title": "Website page: Composition and Identity",
+      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/composition-and-identity.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_concept_12",
+      "type": "website_concept",
+      "title": "Website page: Advanced Properties",
+      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "output_files": [
+        "docs/advanced-properties.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_preamble",
+      "type": "tex_preamble",
+      "title": "TeX preamble",
+      "description": "Create tex/preamble.sty for IdeaTheory.",
+      "output_files": [
+        "tex/preamble.sty"
+      ],
+      "deps": [],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_bib",
+      "type": "tex_bibliography",
+      "title": "BibTeX bibliography",
+      "description": "Create tex/references.bib with verified entries for Lean 4/Mathlib and 4-6 real domain references for '--idea theory'.",
+      "output_files": [
+        "tex/references.bib"
+      ],
+      "deps": [
+        "tex_preamble"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v1c1",
+      "type": "tex_chapter",
+      "title": "TeX ch (V1): Foundations and Axioms",
+      "description": "Create tex/vol1/ch1.tex for 'Foundations and Axioms' (Volume 1: Foundations). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol1/ch1.tex"
+      ],
+      "deps": [
+        "tex_bib"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v1c2",
+      "type": "tex_chapter",
+      "title": "TeX ch (V1): Core Definitions",
+      "description": "Create tex/vol1/ch2.tex for 'Core Definitions' (Volume 1: Foundations). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol1/ch2.tex"
+      ],
+      "deps": [
+        "tex_chapter_v1c1"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_vol1_main",
+      "type": "tex_volume_main",
+      "title": "TeX volume 1 main",
+      "description": "Create tex/vol1/main.tex for Volume 1: Foundations.",
+      "output_files": [
+        "tex/vol1/main.tex"
+      ],
+      "deps": [
+        "tex_chapter_v1c2"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v2c3",
+      "type": "tex_chapter",
+      "title": "TeX ch (V2): Foundations and Axioms",
+      "description": "Create tex/vol2/ch3.tex for 'Foundations and Axioms' (Volume 2: Core Theory). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol2/ch3.tex"
+      ],
+      "deps": [
+        "tex_chapter_v1c2"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v2c4",
+      "type": "tex_chapter",
+      "title": "TeX ch (V2): Core Definitions",
+      "description": "Create tex/vol2/ch4.tex for 'Core Definitions' (Volume 2: Core Theory). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol2/ch4.tex"
+      ],
+      "deps": [
+        "tex_chapter_v2c3"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_vol2_main",
+      "type": "tex_volume_main",
+      "title": "TeX volume 2 main",
+      "description": "Create tex/vol2/main.tex for Volume 2: Core Theory.",
+      "output_files": [
+        "tex/vol2/main.tex"
+      ],
+      "deps": [
+        "tex_chapter_v2c4"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v3c5",
+      "type": "tex_chapter",
+      "title": "TeX ch (V3): Foundations and Axioms",
+      "description": "Create tex/vol3/ch5.tex for 'Foundations and Axioms' (Volume 3: Applications). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol3/ch5.tex"
+      ],
+      "deps": [
+        "tex_chapter_v2c4"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v3c6",
+      "type": "tex_chapter",
+      "title": "TeX ch (V3): Core Definitions",
+      "description": "Create tex/vol3/ch6.tex for 'Core Definitions' (Volume 3: Applications). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol3/ch6.tex"
+      ],
+      "deps": [
+        "tex_chapter_v3c5"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_vol3_main",
+      "type": "tex_volume_main",
+      "title": "TeX volume 3 main",
+      "description": "Create tex/vol3/main.tex for Volume 3: Applications.",
+      "output_files": [
+        "tex/vol3/main.tex"
+      ],
+      "deps": [
+        "tex_chapter_v3c6"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v4c7",
+      "type": "tex_chapter",
+      "title": "TeX ch (V4): Foundations and Axioms",
+      "description": "Create tex/vol4/ch7.tex for 'Foundations and Axioms' (Volume 4: Advanced Topics). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol4/ch7.tex"
+      ],
+      "deps": [
+        "tex_chapter_v3c6"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v4c8",
+      "type": "tex_chapter",
+      "title": "TeX ch (V4): Core Definitions",
+      "description": "Create tex/vol4/ch8.tex for 'Core Definitions' (Volume 4: Advanced Topics). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol4/ch8.tex"
+      ],
+      "deps": [
+        "tex_chapter_v4c7"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_vol4_main",
+      "type": "tex_volume_main",
+      "title": "TeX volume 4 main",
+      "description": "Create tex/vol4/main.tex for Volume 4: Advanced Topics.",
+      "output_files": [
+        "tex/vol4/main.tex"
+      ],
+      "deps": [
+        "tex_chapter_v4c8"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v5c9",
+      "type": "tex_chapter",
+      "title": "TeX ch (V5): Foundations and Axioms",
+      "description": "Create tex/vol5/ch9.tex for 'Foundations and Axioms' (Volume 5: Extensions). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol5/ch9.tex"
+      ],
+      "deps": [
+        "tex_chapter_v4c8"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v5c10",
+      "type": "tex_chapter",
+      "title": "TeX ch (V5): Core Definitions",
+      "description": "Create tex/vol5/ch10.tex for 'Core Definitions' (Volume 5: Extensions). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol5/ch10.tex"
+      ],
+      "deps": [
+        "tex_chapter_v5c9"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_vol5_main",
+      "type": "tex_volume_main",
+      "title": "TeX volume 5 main",
+      "description": "Create tex/vol5/main.tex for Volume 5: Extensions.",
+      "output_files": [
+        "tex/vol5/main.tex"
+      ],
+      "deps": [
+        "tex_chapter_v5c10"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v6c11",
+      "type": "tex_chapter",
+      "title": "TeX ch (V6): Foundations and Axioms",
+      "description": "Create tex/vol6/ch11.tex for 'Foundations and Axioms' (Volume 6: Connections). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol6/ch11.tex"
+      ],
+      "deps": [
+        "tex_chapter_v5c10"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_chapter_v6c12",
+      "type": "tex_chapter",
+      "title": "TeX ch (V6): Core Definitions",
+      "description": "Create tex/vol6/ch12.tex for 'Core Definitions' (Volume 6: Connections). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "output_files": [
+        "tex/vol6/ch12.tex"
+      ],
+      "deps": [
+        "tex_chapter_v6c11"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_vol6_main",
+      "type": "tex_volume_main",
+      "title": "TeX volume 6 main",
+      "description": "Create tex/vol6/main.tex for Volume 6: Connections.",
+      "output_files": [
+        "tex/vol6/main.tex"
+      ],
+      "deps": [
+        "tex_chapter_v6c12"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_diagram_1",
+      "type": "tex_diagram",
+      "title": "TikZ diagram: Structure overview",
+      "description": "Create tex/figures/fig1.tex for 'Structure overview'.",
+      "output_files": [
+        "tex/figures/fig1.tex"
+      ],
+      "deps": [
+        "tex_chapter_v6c12"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_diagram_2",
+      "type": "tex_diagram",
+      "title": "TikZ diagram: Key construction",
+      "description": "Create tex/figures/fig2.tex for 'Key construction'.",
+      "output_files": [
+        "tex/figures/fig2.tex"
+      ],
+      "deps": [
+        "tex_chapter_v6c12"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_diagram_3",
+      "type": "tex_diagram",
+      "title": "TikZ diagram: Commutative diagram",
+      "description": "Create tex/figures/fig3.tex for 'Commutative diagram'.",
+      "output_files": [
+        "tex/figures/fig3.tex"
+      ],
+      "deps": [
+        "tex_chapter_v6c12"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "tex_omnibus",
+      "type": "tex_omnibus",
+      "title": "TeX omnibus spine",
+      "description": "Create tex/omnibus.tex including all 6 volumes.",
+      "output_files": [
+        "tex/omnibus.tex"
+      ],
+      "deps": [
+        "tex_vol6_main"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "github_pages",
+      "type": "github_pages",
+      "title": "GitHub Pages deployment",
+      "description": "Create docs/_config.yml, docs/.nojekyll, and .github/workflows/pages.yml.",
+      "output_files": [
+        "docs/_config.yml",
+        "docs/.nojekyll",
+        ".github/workflows/pages.yml"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    }
+  ],
+  "n_volumes": 6,
+  "volume_titles": [
+    "Foundations",
+    "Core Theory",
+    "Applications",
+    "Advanced Topics",
+    "Extensions",
+    "Connections"
+  ],
+  "branch_name": "formalize",
+  "source_doc_path": "/Users/halleyyoung/Documents/formalize/IDT_Theory.pdf"
+}
