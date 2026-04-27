@@ -573,3 +573,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 26 [website_concept] Website page: emergence 2-cocycle
 [website_concept] Website page: emergence 2-cocycle — bounced: docs/emergence-2-cocycle.html: broken link → idea-composition-monoid.html; docs/emergence-2-cocycle.html: broken link → transmission-chains.html
+
+### Iter 27 [website_concept] Website page: emergence 2-cocycle
+[website_concept] Website page: emergence 2-cocycle

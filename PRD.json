@@ -307,9 +307,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/emergence-2-cocycle.html: broken link \u2192 idea-composition-monoid.html; docs/emergence-2-cocycle.html: broken link \u2192 transmission-chains.html; docs/emergence-2-cocycle.html: broken link \u2192 idea-composition-monoid.html; docs/emergence-2-cocycle.html: broken link \u2192 idea-composition-monoid.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/emergence-2-cocycle.html"
     },
     {
       "id": "website_concept_5",

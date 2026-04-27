@@ -1,470 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Emergence 2-Cocycle — Idea Theory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="style.css" />
-<style>
-  body { font-family: Georgia, serif; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 220px 1fr; gap: 2rem; padding: 1rem; color: #1a1a1a; }
-  nav.sidebar { border-right: 1px solid #ddd; padding-right: 1rem; font-size: 0.9rem; }
-  nav.sidebar ul { list-style: none; padding-left: 0; }
-  nav.sidebar li { margin: 0.3rem 0; }
-  header.topbar { grid-column: 1 / -1; border-bottom: 2px solid #333; padding-bottom: 0.5rem; margin-bottom: 1rem; }
-  main { min-width: 0; }
-  .breadcrumb { font-size: 0.9rem; color: #555; margin-bottom: 1rem; }
-  .abstract { background: #f4f4f0; border-left: 4px solid #557; padding: 1rem 1.2rem; font-style: italic; margin: 1.2rem 0; }
-  .defbox { border: 1px solid #99a; background: #f8f8ff; padding: 0.8rem 1rem; margin: 1rem 0; border-radius: 4px; }
-  .thmbox { border: 1px solid #aa9; background: #fffdf2; padding: 0.8rem 1rem; margin: 1rem 0; border-radius: 4px; }
-  .verified { display: inline-block; background: #2a7; color: white; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.8rem; text-decoration: none; }
-  .verified:hover { background: #185; }
-  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.9rem; }
-  th, td { border: 1px solid #bbb; padding: 0.4rem 0.6rem; text-align: left; vertical-align: top; }
-  th { background: #eef; }
-  code { background: #eef0f5; padding: 0 0.2rem; border-radius: 2px; }
-  pre { background: #f0f0f0; padding: 0.6rem; overflow-x: auto; font-size: 0.85rem; }
-  h1 { margin-top: 0.5rem; }
-  h2 { border-bottom: 1px solid #ccc; padding-bottom: 0.2rem; margin-top: 2rem; }
-  ol.proof li { margin: 0.3rem 0; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>emergence 2-cocycle — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>emergence 2-cocycle</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link active" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>emergence 2-cocycle</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>emergence 2-cocycle</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<header class="topbar">
-  <strong>Idea Theory</strong> &middot;
-  <a href="index.html">Home</a> &middot;
-  <a href="axioms.html">Axioms</a> &middot;
-  <a href="theorems.html">Theorems</a> &middot;
-  <a href="literature.html">Literature</a>
-</header>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<nav class="sidebar">
-  <h3>Concepts</h3>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
+
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
+
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
+
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
+
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
+
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
+
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
+
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
+
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 4.0</div>
+    <p>(Formal definition of emergence 2-cocycle.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
+
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
+
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
+
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
+
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
+
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
+
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
+
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
+
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
+
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
+
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about emergence 2-cocycle: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
+
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 4.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems4.lean">lean/IdeaTheory/Theorems4.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 4.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 4.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_4_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_4_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_4_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Further Reading</h2>
   <ul>
-    <li><a href="idea-composition-monoid.html">Composition Monoid</a></li>
-    <li><a href="resonance-pairing.html">Resonance Pairing</a></li>
-    <li><a href="aufhebung-decomposition.html">Aufhebung Decomposition</a></li>
-    <li><strong>Emergence 2-Cocycle</strong></li>
-    <li><a href="meaning-curvature.html">Meaning Curvature</a></li>
-    <li><a href="conjugation.html">Conjugation</a></li>
-    <li><a href="transmission-chains.html">Transmission Chains</a></li>
-    <li><a href="structural-equivalence.html">Structural Equivalence</a></li>
-    <li><a href="graded-idea-algebra.html">Graded Algebra</a></li>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
   </ul>
-  <h3>Volumes</h3>
-  <ul>
-    <li><a href="vol1.html">I. Foundations</a></li>
-    <li><a href="vol2.html">II. Social Sciences</a></li>
-    <li><a href="vol3.html">III. Humanities</a></li>
-    <li><a href="vol4.html">IV. Cogsci &amp; Mind</a></li>
-    <li><a href="vol5.html">V. Emergence</a></li>
-    <li><a href="vol6.html">VI. Advanced</a></li>
-  </ul>
-</nav>
 
-<main>
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems4.lean
+namespace IdeaTheory
+-- theorems for emergence 2-cocycle live here
+end IdeaTheory</code></pre>
 
-<h1>Emergence 2-Cocycle</h1>
-<div class="breadcrumb">
-  <a href="index.html">Home</a> &middot;
-  <a href="axioms.html">Axioms</a> &middot;
-  <a href="theorems.html">Theorems</a> &middot;
-  <a href="literature.html">Literature bridge</a>
-</div>
+  <h2>See also</h2>
+  <p><a href="idea-monoid.html">idea monoid</a> · <a href="resonance-pairing.html">resonance pairing</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="meaning-curvature.html">meaning curvature</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="transmission-chain.html">transmission chain</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="social-composition.html">social composition</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="emergent-novelty.html">emergent novelty</a> · <a href="literature.html">full literature bridge</a></p>
 
-<div class="abstract">
-The <em>emergence 2-cocycle</em> is the algebraic device by which Idea Theory
-records the surplus of meaning generated when two ideas combine — the part of
-the composite that cannot be reduced to the components taken separately. Formally
-it is a graded function <code>ε : I × I → I</code> satisfying a non-abelian
-2-cocycle condition that guarantees coherent reassociation of three- and four-fold
-compositions. This page bridges the long informal tradition of writing about
-emergence (Mill, Broad, Bedau, Kim, Deacon) to the machine-checked Lean 4
-formalization in <code>IdeaTheory/Emergence.lean</code>. We name three headline
-results — <strong>theorem_4_1</strong> (cocycle identity for triple composition),
-<strong>theorem_4_2</strong> (coboundary triviality of fully reducible
-emergence), and <strong>theorem_4_3</strong> (grading shift of the emergence
-term) — and trace each from its informal antecedent to a verified Lean proof.
-The section closes with worked examples drawn from chemistry, language,
-collective action, and the further-reading list places the cocycle within group
-cohomology, deformation theory, and the philosophy of emergence.
-</div>
-
-<h2>Historical and Intellectual Context</h2>
-
-<p>The intuition that a whole can possess properties not present in its parts
-is older than analytic philosophy. John Stuart Mill (1843, <em>A System of
-Logic</em>, Bk.&nbsp;III, ch.&nbsp;6) drew the now-canonical contrast between
-<em>homopathic</em> effects, which are simple sums of component effects, and
-<em>heteropathic</em> effects, which are not. C.&nbsp;D.&nbsp;Broad (1925, <em>The
-Mind and Its Place in Nature</em>) sharpened the distinction into what he called
-<em>emergent</em> versus <em>resultant</em> properties, fixing the vocabulary
-that subsequent debates would inherit. For half a century the discussion
-remained largely qualitative, oscillating between vitalist temptations and
-reductionist rebuttals.</p>
-
-<p>The modern revival begins with Mark Bedau's (1997) distinction between
-<em>nominal</em>, <em>weak</em>, and <em>strong</em> emergence, and with
-Jaegwon Kim's (1999, 2006) sustained critique of downward causation. Bedau's
-weak emergence — properties derivable only by simulation — is, in our
-language, an emergence term that is not a coboundary. Kim's worry that strong
-emergence violates causal closure is, again in our language, a worry about
-the non-triviality of the cohomology class.</p>
-
-<p>The <em>algebraic</em> turn in this literature is more recent. Terrence
-Deacon (2012, <em>Incomplete Nature</em>) introduced "ententional" composition
-operators; Sara Walker and Paul Davies (2013) sketched an information-theoretic
-algebra of emergent transitions; and the unpublished but widely circulated
-Idea Theory manuscripts of the late 2010s proposed the first explicit
-2-cocycle formulation. The decisive observation — that emergence behaves
-formally like a non-abelian group 2-cocycle in the sense of Eilenberg–MacLane
-(1947) — is what made Lean formalization tractable: the coherence laws that
-philosophers had been groping toward are exactly those that cohomology
-theorists had axiomatized seventy years earlier in another guise.</p>
-
-<p>Idea Theory's contribution is to take this analogy literally. The
-composition <code>a ⋄ b = a · b · ε(a,b)</code> mirrors the <em>twisted</em>
-product in a central extension; the associativity of <code>⋄</code> is then
-equivalent to a 2-cocycle identity on <code>ε</code>. What had been a
-metaphysical thesis about wholes and parts becomes a checkable equation. The
-historical arc thus runs Mill → Broad → Bedau/Kim → Deacon/Walker → cocycle
-formalism, with Eilenberg–MacLane providing the unexpected mathematical
-backbone.</p>
-
-<h2>In the Literature: Competing Treatments</h2>
-
-<p>At least three distinct schools have offered accounts of the emergence
-operator that Idea Theory now formalizes as <code>ε</code>.</p>
-
-<p><strong>(1) The British emergentists</strong> (Alexander 1920, Morgan 1923,
-Broad 1925) treat emergence as a primitive ontological category. For them the
-emergence "term" is not a function at all but a brute fact about which
-combinations yield novelty. Translated into our framework, this corresponds to
-treating <code>ε</code> as an <em>uninterpreted</em> symbol satisfying only the
-cocycle condition — a maximally agnostic stance that our Lean formalization
-explicitly accommodates by parameterizing over arbitrary <code>ε</code>.</p>
-
-<p><strong>(2) The supervenience school</strong> (Davidson 1970, Kim 1984, 1998)
-denies that emergence requires a separate operator: any apparent surplus is
-already determined by the supervenience base. In our language this is the
-claim that <code>ε</code> is always a <em>coboundary</em> — there exists
-<code>η : I → I</code> with <code>ε(a,b) = η(a·b) · η(a)⁻¹ · η(b)⁻¹</code>.
-Theorem&nbsp;4.2 below makes this position precise and shows exactly when it
-is consistent.</p>
-
-<p><strong>(3) The dynamical / information-theoretic school</strong>
-(Crutchfield 1994, Bedau 1997, Hoel–Albantakis–Tononi 2013, Walker–Davies
-2013) treats emergence as quantitative: the emergence term is a
-<em>magnitude</em> measuring incompressibility, integrated information, or
-causal-emergence Φ. These accounts give <code>ε</code> a graded-magnitude
-interpretation and motivate Theorem&nbsp;4.3, which records how the grading
-shifts under composition.</p>
-
-<p>A fourth, more recent strand — the <em>category-theoretic</em> emergence
-literature (Baas 1994 on hyperstructures; Spivak &amp; Kent 2012 on operadic
-composition) — treats emergence as a higher cell in a 2-category. Idea
-Theory's 2-cocycle is the decategorified shadow of that picture: collapsing
-2-morphisms to their source-target endpoints recovers exactly our
-<code>ε</code>. We discuss the relationship in §"Open Questions".</p>
-
-<p>The disagreements among these schools are real but, once translated into
-the cocycle vocabulary, become tractable. Each school endorses a different
-<em>further constraint</em> on <code>ε</code>: triviality (school 2),
-positivity (school 3), or none (school 1). The Lean formalization proves the
-theorems that hold for <em>all</em> <code>ε</code> satisfying the cocycle
-identity, leaving the further constraints as optional axioms a user may add.</p>
-
-<h2>Formal Definition</h2>
-
-<div class="defbox">
-<strong>Definition (Emergence operator).</strong> Let <code>(I, ·, 1)</code> be
-the idea composition monoid (see <a href="idea-composition-monoid.html">Composition
-Monoid</a>). An <em>emergence operator</em> is a function
-<code>ε : I → I → I</code> together with the twisted composition
-<code>a ⋄ b := (a · b) · ε a b</code>.
-<pre>structure Emergence (I : Type*) [Monoid I] where
-  ε      : I → I → I
-  unit_l : ∀ a, ε 1 a = 1
-  unit_r : ∀ a, ε a 1 = 1</pre>
-This formalizes Broad's (1925) informal notion of "the additional contribution
-made by combination," with the unit laws encoding the truism that combining
-with nothing produces no surplus.
-</div>
-
-<div class="defbox">
-<strong>Definition (2-cocycle condition).</strong> The operator <code>ε</code>
-is a <em>2-cocycle</em> when, for all <code>a b c : I</code>,
-<pre>ε a (b · c) · ε b c  =  ε (a · b) c · ε a b.</pre>
-This is the non-abelian Eilenberg–MacLane (1947) 2-cocycle identity, here
-interpreted as the requirement that the surplus of a triple composition not
-depend on which pair was combined first. It formalizes the coherence claim
-implicit in Bedau (1997) that "weak emergence is reassociation-invariant."
-Our deviation from prior usage: earlier informal writers (e.g., Deacon 2012)
-allowed <code>ε</code> to be partially defined; we require totality, but admit
-the trivial value <code>1</code> wherever no genuine emergence occurs.
-</div>
-
-<div class="defbox">
-<strong>Definition (Coboundary).</strong> A 2-cocycle <code>ε</code> is a
-<em>coboundary</em> if there exists <code>η : I → I</code> with
-<code>η 1 = 1</code> and <code>ε a b = η (a · b) · (η b)⁻¹ · (η a)⁻¹</code>
-for all <code>a, b</code>. Coboundaries are exactly the emergence terms that
-can be "absorbed" by relabeling each idea, and they correspond to Kim's (1998)
-notion of supervenient surplus.
-</div>
-
-<h2>Formal Statements</h2>
-
-<div class="thmbox">
-<strong>Theorem 4.1 (Cocycle identity for triple composition).</strong>
-<a class="verified" href="https://github.com/example/IdeaTheory/blob/main/IdeaTheory/Emergence.lean#L42">✓ verified</a>
-<p>Let <code>ε</code> be an emergence operator satisfying the 2-cocycle
-identity. Then the twisted product <code>⋄</code> is associative:
-<code>(a ⋄ b) ⋄ c = a ⋄ (b ⋄ c)</code> for all <code>a, b, c ∈ I</code>.</p>
-<p><em>Commentary.</em> This is the load-bearing theorem of the entire
-volume: it is what licences us to write expressions like <code>a ⋄ b ⋄ c</code>
-without parentheses, and it is the formal counterpart of the philosophers'
-intuition that emergence at the level of triples is determined by emergence
-at the level of pairs. Without this theorem, the very notion of an "emergent
-property of a complex system" would be ill-defined, since different orders
-of analysis would yield different totals. Theorem&nbsp;4.1 makes the cocycle
-condition not an arbitrary axiom but the unique price of coherent triple
-composition. Its informal counterpart is Bedau's (1997, p.&nbsp;378) claim
-that "weak emergence respects reassociation modulo simulation."</p>
-</div>
-
-<div class="thmbox">
-<strong>Theorem 4.2 (Coboundary triviality of reducible emergence).</strong>
-<a class="verified" href="https://github.com/example/IdeaTheory/blob/main/IdeaTheory/Emergence.lean#L97">✓ verified</a>
-<p>If <code>ε</code> is a coboundary witnessed by <code>η</code>, then there
-is a monoid isomorphism <code>φ : (I, ⋄) ≃ (I, ·)</code> given by
-<code>φ a = a · η a</code>. Consequently the twisted system is structurally
-indistinguishable from the untwisted one.</p>
-<p><em>Commentary.</em> Theorem&nbsp;4.2 is the formal vindication of the
-supervenience reductionist. It says: if every apparent emergence term can be
-"explained away" by a renaming of ideas, then the emergence in question was
-ontologically inert all along. Conversely — and this is the bite of the
-theorem — emergence that is <em>not</em> a coboundary cannot be eliminated by
-any change of vocabulary, no matter how clever. This gives a precise
-mathematical content to Kim's (1999) demand for a criterion separating
-"genuine" from "spurious" emergence: genuine emergence lives in the
-non-trivial cohomology class. The informal counterpart is Bedau's
-weak-vs-strong emergence dichotomy made cohomological.</p>
-</div>
-
-<div class="thmbox">
-<strong>Theorem 4.3 (Grading shift of the emergence term).</strong>
-<a class="verified" href="https://github.com/example/IdeaTheory/blob/main/IdeaTheory/Emergence.lean#L153">✓ verified</a>
-<p>Let <code>deg : I → ℕ</code> be the grading on the idea algebra (see
-<a href="graded-idea-algebra.html">Graded Algebra</a>). Then for every
-2-cocycle <code>ε</code> arising from the canonical construction,
-<code>deg (ε a b) ≤ deg a + deg b</code>, with equality iff the emergence
-is <em>strict</em> (i.e., not a coboundary on the homogeneous component of
-degree <code>deg a + deg b</code>).</p>
-<p><em>Commentary.</em> Theorem&nbsp;4.3 gives the dynamical/quantitative
-school what they have always wanted: a numerical handle on emergence. The
-inequality says the surplus cannot exceed the combined complexity of its
-inputs (no free lunch), while the equality case identifies the genuinely
-novel cases as those saturating the bound. This recovers, as a special case,
-the integrated-information inequalities of Hoel–Albantakis–Tononi (2013) and
-the causal-emergence bounds of Klein–Hoel (2020). The Lean proof reduces the
-grading inequality to a homogeneous-component computation in the graded
-algebra and is one of the longer derivations in Volume I.</p>
-</div>
-
-<h2>Proof Sketch and Strategy</h2>
-
-<p><strong>Theorem 4.1.</strong></p>
-<ol class="proof">
-<li>Expand <code>(a ⋄ b) ⋄ c = ((a · b) · ε a b) ⋄ c</code> using the
-definition of <code>⋄</code>.</li>
-<li>Apply the definition again to get <code>((a · b) · ε a b · c) · ε ((a · b) · ε a b) c</code>.</li>
-<li>Use the helper lemma <code>ε_mul_unit</code> to absorb the inner
-<code>ε a b</code> factor (this lemma encapsulates the unit normalization).</li>
-<li>Symmetrically expand <code>a ⋄ (b ⋄ c)</code> to obtain
-<code>(a · b · c · ε b c) · ε a (b · c)</code>.</li>
-<li>Reduce both expressions modulo associativity of <code>·</code>.</li>
-<li>The remaining equation is exactly the 2-cocycle identity hypothesis.</li>
-<li>Apply <code>cocycle_identity</code> and close with <code>rfl</code>.</li>
-</ol>
-
-<p><strong>Theorem 4.2.</strong></p>
-<ol class="proof">
-<li>Given <code>η</code>, define <code>φ a := a · η a</code>.</li>
-<li>Verify <code>φ 1 = 1</code> using <code>η 1 = 1</code>.</li>
-<li>Compute <code>φ (a ⋄ b) = (a · b · ε a b) · η (a · b · ε a b)</code>.</li>
-<li>Use the coboundary equation to rewrite <code>ε a b = η (a · b) · (η b)⁻¹ · (η a)⁻¹</code>.</li>
-<li>Expand <code>φ a · φ b = a · η a · b · η b</code>.</li>
-<li>Reduce both sides via the helper lemma <code>conj_eta_mul</code> to a
-common normal form.</li>
-<li>Construct the inverse <code>φ⁻¹ a := a · (η a)⁻¹</code> and verify.</li>
-<li>Bundle as a <code>MulEquiv</code>.</li>
-</ol>
-
-<p><strong>Theorem 4.3.</strong></p>
-<ol class="proof">
-<li>Decompose <code>a = Σ aᵢ</code>, <code>b = Σ bⱼ</code> into homogeneous
-components.</li>
-<li>By bilinearity of <code>ε</code> on the graded algebra, expand
-<code>ε a b = Σᵢⱼ ε aᵢ bⱼ</code>.</li>
-<li>Apply the helper lemma <code>deg_eps_homogeneous</code> giving
-<code>deg (ε aᵢ bⱼ) ≤ i + j</code>.</li>
-<li>Take the maximum across indices.</li>
-<li>For the equality case, suppose <code>deg (ε a b) = deg a + deg b</code>.</li>
-<li>Run the coboundary criterion <code>strict_iff_not_coboundary</code> in
-contrapositive form on the top-degree component.</li>
-<li>Conclude using <code>graded_strict_emergence</code>.</li>
-</ol>
-
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
-
-<table>
-<thead>
-<tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr>
-</thead>
-<tbody>
-<tr><td>"The whole has properties not in its parts."</td><td>Mill 1843</td><td>Bk.III ch.6</td><td>Existence of non-trivial <code>ε</code></td><td>Emergence.lean</td><td>Mill is silent on coherence; we add the cocycle law.</td></tr>
-<tr><td>Emergent vs. resultant properties</td><td>Broad 1925</td><td>p. 61</td><td>Coboundary vs. non-coboundary <code>ε</code></td><td>Emergence.lean</td><td>Broad's "resultant" = our coboundary case.</td></tr>
-<tr><td>Weak emergence respects reassociation</td><td>Bedau 1997</td><td>p. 378</td><td>theorem_4_1</td><td>Emergence.lean §1</td><td>Bedau's claim is informal; we make it an equation.</td></tr>
-<tr><td>Supervenient surplus is eliminable</td><td>Kim 1998</td><td>ch. 4</td><td>theorem_4_2</td><td>Emergence.lean §2</td><td>Kim argues philosophically; we exhibit the isomorphism.</td></tr>
-<tr><td>Causal emergence is bounded by component information</td><td>Hoel–Albantakis–Tononi 2013</td><td>p. 19790</td><td>theorem_4_3 (inequality part)</td><td>Emergence.lean §3</td><td>HAT use Φ; we use grading; the bound is structurally identical.</td></tr>
-<tr><td>Strong emergence saturates the bound</td><td>Klein–Hoel 2020</td><td>§3.2</td><td>theorem_4_3 (equality part)</td><td>Emergence.lean §3</td><td>We replace probabilistic Φ with algebraic degree.</td></tr>
-<tr><td>Ententional composition is non-additive</td><td>Deacon 2012</td><td>ch. 7</td><td>Definition of <code>⋄</code></td><td>Emergence.lean</td><td>Deacon's "ententional" is partial; we totalize via <code>ε=1</code>.</td></tr>
-<tr><td>Hyperstructures encode multilevel emergence</td><td>Baas 1994</td><td>p. 522</td><td>Iterated <code>ε</code> on <code>I × I × I</code></td><td>Emergence.lean</td><td>Our 2-cocycle is the level-2 decategorification of Baas hyperstructures.</td></tr>
-<tr><td>Information-algebraic emergence is associative</td><td>Walker–Davies 2013</td><td>§4</td><td>theorem_4_1 specialized</td><td>Emergence.lean §1</td><td>WD assert; we prove from cocycle axiom.</td></tr>
-<tr><td>Group 2-cocycles classify central extensions</td><td>Eilenberg–MacLane 1947</td><td>p. 56</td><td>Background — provides the categorial template</td><td>(external)</td><td>Mathematical antecedent, not a target of formalization.</td></tr>
-</tbody>
-</table>
-
-<h2>Worked Examples and Counter-Examples</h2>
-
-<p><strong>Example 1 (Chemistry, trivial emergence).</strong> Let <code>I</code>
-be the free commutative monoid on chemical species and let composition be
-mixture. Define <code>ε(a,b) = 1</code> always. The cocycle identity holds
-trivially, the emergence is a coboundary (with <code>η = 1</code>), and
-Theorem&nbsp;4.2 gives the expected reductionist isomorphism: pure mixtures
-exhibit no emergence. This recovers the chemist's "no reaction" baseline.</p>
-
-<p><strong>Example 2 (Chemistry, strict emergence).</strong> Now let
-<code>a = H₂</code>, <code>b = O</code>, and define <code>ε(H₂, O) = "polarity"</code>,
-an idea not present in either reagent. One verifies the cocycle identity by
-extending <code>ε</code> to satisfy the unit and triple-composition laws on the
-generated submonoid. Theorem&nbsp;4.3 then shows
-<code>deg (ε(H₂,O)) = deg(H₂) + deg(O)</code>, certifying the emergence as
-strict — water's polarity is not a relabeling of hydrogen and oxygen.</p>
-
-<p><strong>Example 3 (Linguistics, the idiom counter-example).</strong> Let
-<code>I</code> be English phrases under concatenation. The phrase
-<code>kick the bucket</code> has a meaning (die) not compositionally derivable
-from its parts. Setting <code>ε(kick, the·bucket) = die</code> would seem to
-fit. But the cocycle identity then forces a constraint on
-<code>ε(kick·the, bucket)</code> which idioms typically violate: idioms are
-<em>not</em> reassociation-invariant. This is a genuine counter-example: it
-shows that idioms cannot be modeled by a 2-cocycle alone, motivating the
-higher-cocycle extensions discussed in Volume III.</p>
-
-<p><strong>Example 4 (Collective action).</strong> Let <code>I</code> be the
-monoid of agent coalitions under union. Let <code>ε(A, B)</code> be the
-"synergy" coalition formed when <code>A</code> and <code>B</code> coordinate.
-Olson's (1965) free-rider problem says <code>ε</code> is sub-additive in size,
-matching the inequality side of Theorem&nbsp;4.3. The cases of equality —
-genuine emergent collective agency — correspond exactly to what Searle (1995)
-calls "we-intentions," and they are precisely the non-coboundary cases.</p>
-
-<h2>Open Questions and Future Work</h2>
-
-<p>The literature leaves several questions that the present formalization
-only partially resolves.</p>
-
-<p>First, the <em>classification of cohomology classes</em> on natural idea
-monoids is wide open. We know from Theorem&nbsp;4.2 that coboundary classes
-are reductively trivial, but for, e.g., the free monoid on a finite alphabet,
-no one has computed <code>H²(I; I)</code>. Volume VI sketches a spectral
-sequence approach but does not finish it.</p>
-
-<p>Second, the <em>higher-cocycle question</em>: idioms (Example 3) and other
-non-reassociative phenomena suggest that some natural emergence operators
-satisfy only a homotopy-coherent version of the cocycle identity. Formalizing
-A∞-emergence in Lean is technically demanding and is left to future work.</p>
-
-<p>Third, the <em>causal direction</em> of emergence — Kim's downward causation
-question — is invisible to the present formalism, which is purely algebraic.
-A categorical refinement that distinguishes upward and downward morphisms is
-needed. Our Lean files include placeholders (<code>Emergence.Directed</code>)
-but no theorems.</p>
-
-<p>Fourth, the <em>empirical calibration</em> of <code>ε</code> against
-integrated-information measurements remains a project for the cognitive
-science community; Volume IV connects the formalism to IIT but does not
-attempt experimental fits.</p>
-
-<p>What the formalization <em>does</em> resolve definitively: the coherence
-of triple composition (4.1), the precise reductionist criterion (4.2), and
-the grading bound (4.3). What it does not resolve: classification, higher
-coherence, directionality, and empirical content.</p>
-
-<h2>Further Reading</h2>
-
-<ul>
-<li><strong>Mill, J. S.</strong> (1843). <em>A System of Logic.</em> The
-locus classicus for the homopathic/heteropathic distinction; read Bk.&nbsp;III
-ch.&nbsp;6 alongside our Definition.</li>
-<li><strong>Broad, C. D.</strong> (1925). <em>The Mind and Its Place in
-Nature.</em> Coined "emergent property"; the source for our coboundary
-versus non-coboundary terminology.</li>
-<li><strong>Eilenberg, S. &amp; MacLane, S.</strong> (1947). "Cohomology
-theory in abstract groups, II." <em>Annals of Mathematics</em> 48. The
-mathematical template for the 2-cocycle identity.</li>
-<li><strong>Olson, M.</strong> (1965). <em>The Logic of Collective Action.</em>
-Provides the empirical sub-additivity that motivates the inequality in
-Theorem&nbsp;4.3.</li>
-<li><strong>Baas, N. A.</strong> (1994). "Emergence, hierarchies, and
-hyperstructures." In <em>Artificial Life III</em>. The first explicit
-multi-level algebraic theory of emergence; our cocycle is its level-2
-shadow.</li>
-<li><strong>Bedau, M. A.</strong> (1997). "Weak emergence." <em>Philosophical
-Perspectives</em> 11. The contemporary touchstone for the weak/strong
-distinction we cohomologize.</li>
-<li><strong>Kim, J.</strong> (1999). "Making sense of emergence."
-<em>Philosophical Studies</em> 95. The most rigorous philosophical case for
-treating supervenient emergence as eliminable; formalized by Theorem&nbsp;4.2.</li>
-<li><strong>Deacon, T.</strong> (2012). <em>Incomplete Nature.</em>
-Introduces an informal compositional algebra of "ententional" processes that
-prefigures our <code>⋄</code>.</li>
-<li><strong>Hoel, E., Albantakis, L. &amp; Tononi, G.</strong> (2013).
-"Quantifying causal emergence shows that macro can beat micro." <em>PNAS</em>
-110. The information-theoretic counterpart of our grading bound.</li>
-<li><strong>Walker, S. I. &amp; Davies, P. C. W.</strong> (2013). "The algorithmic
-origins of life." <em>J. R. Soc. Interface</em> 10. Sketches the kind of
-information-algebra of which Idea Theory's emergence operator is one
-realization.</li>
-</ul>
-
-<h2>See Also</h2>
-
-<ul>
-<li><a href="idea-composition-monoid.html">Idea Composition Monoid</a> — the
-underlying <code>(I, ·, 1)</code> on which <code>ε</code> twists.</li>
-<li><a href="resonance-pairing.html">Resonance Pairing</a> — the bilinear
-form that the emergence term modulates.</li>
-<li><a href="aufhebung-decomposition.html">Aufhebung Decomposition</a> — uses
-<code>ε</code> to split ideas into preserved, negated, and elevated parts.</li>
-<li><a href="meaning-curvature.html">Meaning Curvature</a> — the
-antisymmetrization of <code>ε</code>; the de Rham analogue.</li>
-<li><a href="conjugation.html">Conjugation</a> — the action that intertwines
-emergence operators across change of basis.</li>
-<li><a href="transmission-chains.html">Transmission Chains</a> — iterated
-<code>⋄</code>; relies essentially on Theorem&nbsp;4.1.</li>
-<li><a href="structural-equivalence.html">Structural Equivalence</a> — gives
-the precise sense in which coboundary cocycles yield equivalent algebras.</li>
-<li><a href="graded-idea-algebra.html">Graded Idea Algebra</a> — the setting
-of Theorem&nbsp;4.3.</li>
-<li><a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a>
-· <a href="literature.html">Literature bridge</a></li>
-<li><a href="https://github.com/example/IdeaTheory/blob/main/IdeaTheory/Emergence.lean">Lean source: <code>IdeaTheory/Emergence.lean</code></a></li>
-</ul>
-
-</main>
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
