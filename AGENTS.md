@@ -663,3 +663,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 56 [tex_volume_main] TeX volume 3 main
 [tex_volume_main] TeX volume 3 main
+
+### Iter 57 [tex_chapter] TeX ch (V4): Ideas as Mental Composites: A Cognitive Model
+[tex_chapter] TeX ch (V4): Ideas as Mental Composites: A Cognitive Model
