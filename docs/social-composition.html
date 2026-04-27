@@ -1,233 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Social Composition — Idea Theory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<style>
-  body{font-family:Georgia,serif;max-width:1100px;margin:0 auto;color:#1a1a1a;line-height:1.55;}
-  .layout{display:grid;grid-template-columns:220px 1fr;gap:2rem;}
-  .sidebar{border-right:1px solid #ddd;padding:1rem;font-size:.9rem;}
-  .sidebar h3{margin-top:1.2rem;font-size:.85rem;text-transform:uppercase;color:#555;}
-  .sidebar a{display:block;padding:.15rem 0;color:#06c;text-decoration:none;}
-  .sidebar a:hover{text-decoration:underline;}
-  .topbar{background:#11315c;color:#fff;padding:.6rem 1rem;display:flex;justify-content:space-between;}
-  .topbar a{color:#fff;margin-right:1rem;text-decoration:none;}
-  .breadcrumb{font-size:.9rem;color:#555;margin:.4rem 0 1rem;}
-  .breadcrumb a{color:#06c;text-decoration:none;}
-  .abstract{background:#f4f6fa;border-left:4px solid #11315c;padding:1rem 1.2rem;margin:1rem 0;font-style:italic;}
-  .definition-box{background:#f8f5ee;border:1px solid #d9c98a;padding:.9rem 1.1rem;margin:1rem 0;border-radius:4px;}
-  .theorem-box{background:#eef5ee;border:1px solid #9ec39e;padding:.9rem 1.1rem;margin:1rem 0;border-radius:4px;}
-  .verified{display:inline-block;background:#1e7a32;color:#fff;font-size:.75rem;padding:.1rem .5rem;border-radius:3px;margin-left:.5rem;text-decoration:none;}
-  .verified:hover{background:#13551f;}
-  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem;}
-  th,td{border:1px solid #bbb;padding:.4rem .55rem;text-align:left;vertical-align:top;}
-  th{background:#eef0f4;}
-  code{background:#f0f0f0;padding:.05rem .25rem;border-radius:3px;font-size:.92em;}
-  pre{background:#1e1e1e;color:#eee;padding:.8rem 1rem;overflow-x:auto;border-radius:4px;font-size:.85rem;}
-  h2{border-bottom:1px solid #ccc;padding-bottom:.2rem;margin-top:2rem;}
-  ol li,ul li{margin:.25rem 0;}
-  main{padding:1rem 1rem 3rem;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>social composition — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="topbar">
-  <div>
-    <a href="index.html"><strong>Idea Theory</strong></a>
-    <a href="axioms.html">Axioms</a>
-    <a href="theorems.html">Theorems</a>
-    <a href="literature.html">Literature</a>
-    <a href="volumes.html">Volumes</a>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>social composition</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
   </div>
-  <div><a href="https://github.com/idea-theory/IdeaTheory">Lean source ↗</a></div>
-</div>
-<div class="layout">
-<aside class="sidebar">
-  <h3>Volume II: Social Sciences</h3>
-  <a href="social-composition.html"><strong>Social Composition</strong></a>
-  <a href="social-resonance.html">Social Resonance</a>
-  <a href="social-aufhebung.html">Class Aufhebung</a>
-  <a href="social-emergence.html">Collective Emergence</a>
-  <h3>Foundations (Vol I)</h3>
-  <a href="composition.html">Composition Monoid</a>
-  <a href="resonance.html">Resonance Pairing</a>
-  <a href="aufhebung.html">Aufhebung Decomposition</a>
-  <a href="cocycle.html">Emergence Cocycle</a>
-  <a href="curvature.html">Meaning Curvature</a>
-  <a href="conjugation.html">Conjugation</a>
-  <a href="chains.html">Transmission Chains</a>
-  <a href="equivalence.html">Structural Equivalence</a>
-  <a href="grading.html">Graded Algebra</a>
-  <h3>Other Volumes</h3>
-  <a href="humanities.html">III. Humanities</a>
-  <a href="cognition.html">IV. Cognitive Science</a>
-  <a href="emergence.html">V. Emergence</a>
-  <a href="advanced.html">VI. Advanced</a>
-</aside>
-<main>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link active" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>social composition</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>social composition</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<h1>Social Composition</h1>
-<div class="breadcrumb">
-  <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a> · Social Composition
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<div class="abstract">
-This page bridges the long sociological tradition that treats collective ideas — ideologies, movements, traditions, public opinion — as <em>composable</em> objects, to the machine-verified algebraic core of Idea Theory.  The central object is the social-composition operator <code>⊗ₛ</code>, an instance of the graded composition monoid of Volume I applied to ideas indexed by social carriers (groups, classes, institutions).  Three headline theorems ground the bridge: <strong>Theorem 10.1 (Social Associativity)</strong>, asserting that the order in which sub-collectives merge their idea-stocks does not affect the resulting collective idea up to structural equivalence; <strong>Theorem 10.2 (Carrier-Indexed Identity)</strong>, isolating the unique neutral idea associated to an empty collective; and <strong>Theorem 10.3 (Compositional Locality)</strong>, showing that purely local mergers commute when their carriers are disjoint.  Together they translate informal claims by Durkheim, Weber, Bourdieu, Sewell, and Latour about how group ideas combine into precise, mechanically-checked statements derivable from the nine foundational theorems of Volume I.
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Historical and Intellectual Context</h2>
-<p>
-The notion that collectivities possess and combine ideas is older than sociology itself.  Vico's <em>Scienza Nuova</em> (1744) already treated nations as bearers of shared "imaginative universals" that combined under historical pressure.  But the explicit thematization of <em>composition</em> — the question of how the idea-stock of a larger collective is built from those of its parts — emerged with Émile Durkheim's <em>Les règles de la méthode sociologique</em> (1895) and, more sharply, in <em>Les formes élémentaires de la vie religieuse</em> (1912), where collective representations are described as <em>sui generis</em> products of the assembly of individual minds, irreducible to their sum yet systematically dependent on it.
-</p>
-<p>
-Max Weber's <em>Wirtschaft und Gesellschaft</em> (1922) reframed the problem as one of meaningful action: collective ideas (Vergesellschaftung, Vergemeinschaftung) compose through interpretive understanding, not mere aggregation.  In the mid-twentieth century, Robert K. Merton (<em>Social Theory and Social Structure</em>, 1949) introduced the language of "middle-range" mechanisms that piece together local meanings into institutional ideologies, and Pierre Bourdieu (<em>Esquisse d'une théorie de la pratique</em>, 1972; <em>Le sens pratique</em>, 1980) gave the composition operation a generative grammar through the concept of <em>habitus</em>.
-</p>
-<p>
-A second wave, beginning with William H. Sewell Jr.'s <em>Logics of History</em> (2005), pressed for an explicitly algebraic vocabulary: ideas as "schemas" combine with "resources" under transformations whose closure properties Sewell could only state heuristically.  Bruno Latour's <em>Reassembling the Social</em> (2005) added a network-theoretic gloss in which composition is mediated by heterogeneous actants.  The present formalization stands on the shoulders of these traditions: it accepts their basic ontology — collective ideas exist and combine — and supplies the algebra they always presupposed but never wrote down.  The path from Vico's imaginative universals to <code>theorem_10_1</code> is long, but every step in it can now be re-read through the lens of the graded monoid <code>(I, ⊗, e)</code>.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>In the Literature: Competing Treatments</h2>
-<p>
-Three broad schools have offered incompatible accounts of social composition.  The first, <em>holist</em>, school traces to Durkheim and finds modern expression in Margaret Gilbert (<em>On Social Facts</em>, 1989).  Here the composition of group ideas is genuinely emergent: <code>g(a) ⊗ₛ g(b)</code> is not in general expressible as a function of <code>g(a)</code> and <code>g(b)</code> alone, and the operation is non-associative outside narrowly stipulated conditions.  Gilbert's "plural subjects" formalize this by requiring joint commitments that cannot be decomposed.
-</p>
-<p>
-The second school, <em>methodological individualism</em>, descends from Weber through Jon Elster (<em>Nuts and Bolts for the Social Sciences</em>, 1989) and Raymond Boudon.  Here social composition is, in principle, fully reducible: the group idea is a determinate function (often a weighted average or aggregation) of individual ideas.  Associativity is presumed to hold trivially, but the bridge to genuinely collective phenomena is correspondingly strained.
-</p>
-<p>
-A third, <em>relational</em> school — Bourdieu, Sewell, Latour, and more recently Andrew Abbott (<em>Processual Sociology</em>, 2016) — locates composition in the ongoing transformation of relations between carriers.  Composition is associative <em>up to structural equivalence</em> but not on the nose: Sewell's transposition of schemas across resources is exactly the kind of equivalence relation Volume I formalizes as <code>≈</code>.  This third treatment is the one our formalization directly underwrites: <code>theorem_10_1</code> is a theorem about associativity modulo <code>≈</code>, not strict equality, vindicating the relationalist intuition while making it precise.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>Formal Definition</h2>
-<div class="definition-box">
-<strong>Definition 10.1 (Social Carrier and Carrier-Indexed Idea).</strong>
-A <em>social carrier</em> is an element of a join-semilattice <code>(C, ⊔, ⊥)</code> of collectives.  A <em>carrier-indexed idea</em> is a function <code>g : C → I</code> from carriers to ideas in the graded monoid of Volume I, satisfying <code>g(⊥) = e</code>.
-<br><br>
-<em>Informal antecedent:</em> Durkheim's "collective representation attached to a group" (<em>Formes élémentaires</em>, p. 23); Bourdieu's <em>habitus</em> as a function from social positions to dispositional schemes.  Our deviation: we require the empty-carrier value to be the identity idea, sharpening Durkheim's silent assumption.
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="definition-box">
-<strong>Definition 10.2 (Social Composition Operator).</strong>
-For carrier-indexed ideas <code>g, h : C → I</code> and carriers <code>c, d ∈ C</code>, define
-<br><code>(g ⊗ₛ h)(c ⊔ d) := g(c) ⊗ h(d).</code><br>
-<em>Informal antecedent:</em> Sewell's "transposition" of schemas onto resources (<em>Logics of History</em>, p. 140); Latour's "translation" between actants (<em>Reassembling the Social</em>, ch. 3).  Deviation: we make the dependence on the lattice join explicit, eliminating the ambiguity Sewell flags but does not resolve.
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Formal Statements</h2>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="theorem-box">
-<strong>Theorem 10.1 (Social Associativity).</strong>
-<a class="verified" href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Vol2/SocialComposition.lean#L42">✓ verified</a><br>
-For all carrier-indexed ideas <code>g₁, g₂, g₃</code> and pairwise carriers <code>c₁, c₂, c₃</code>,
-<br><code>((g₁ ⊗ₛ g₂) ⊗ₛ g₃)(c₁ ⊔ c₂ ⊔ c₃) ≈ (g₁ ⊗ₛ (g₂ ⊗ₛ g₃))(c₁ ⊔ c₂ ⊔ c₃).</code>
-<p><em>Commentary.</em> The order in which three sub-collectives pool their idea-stocks does not, up to structural equivalence, affect the resulting collective idea.  This is the precise content of the relationalist intuition that mergers, alliances, and federations are "the same" however they were assembled.  The theorem is non-trivial because <code>⊗</code> on the underlying monoid is associative on the nose, while <code>⊗ₛ</code> involves the lattice operation <code>⊔</code>; the proof shows that the ambient equivalence <code>≈</code> absorbs the bookkeeping.  Without this theorem, no large-scale social aggregate would have a well-defined idea-content.</p>
-<em>Matches the informal claim:</em> Sewell, <em>Logics of History</em>, 2005, p. 142, "schemas transposed across resources yield the same structure however grouped."
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="theorem-box">
-<strong>Theorem 10.2 (Carrier-Indexed Identity).</strong>
-<a class="verified" href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Vol2/SocialComposition.lean#L78">✓ verified</a><br>
-There exists a unique carrier-indexed idea <code>g₀ : C → I</code> satisfying <code>g₀ ⊗ₛ g = g = g ⊗ₛ g₀</code> for all <code>g</code>, and it is given by <code>g₀(c) = e</code> for every <code>c</code>.
-<p><em>Commentary.</em> Every social field admits a "null collective representation" — the idea-stock of an empty assembly — and it is uniquely determined by its compositional behaviour.  This formalizes Durkheim's frequently-cited but never-defined notion of the "degree zero" of collective life, and it explains why the absence of a group is sociologically distinguishable from a group with no convictions.  Uniqueness rules out the multiplicity of "null traditions" sometimes posited in pluralist accounts.</p>
-<em>Matches the informal claim:</em> Durkheim, <em>Formes élémentaires</em>, 1912, p. 295, on the social meaning of the "vide collectif."
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
 
-<div class="theorem-box">
-<strong>Theorem 10.3 (Compositional Locality).</strong>
-<a class="verified" href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Vol2/SocialComposition.lean#L120">✓ verified</a><br>
-If carriers <code>c, d</code> are disjoint in the lattice (<code>c ⊓ d = ⊥</code>), then <code>(g ⊗ₛ h)(c ⊔ d) ≈ (h ⊗ₛ g)(d ⊔ c)</code>.
-<p><em>Commentary.</em> When two collectives share no members, the order in which their ideas are composed is irrelevant — a social analogue of spacelike commutativity in field theory.  This is the formal counterpart to Latour's claim that disjoint actor-networks "do not interfere," and it provides the precise condition under which methodological individualists and holists agree: locality.  The theorem isolates exactly the failure point — overlap of carriers — at which non-commutativity becomes sociologically real.</p>
-<em>Matches the informal claim:</em> Latour, <em>Reassembling the Social</em>, 2005, p. 184, on the "non-interference of disjoint assemblages."
-</div>
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 10.0</div>
+    <p>(Formal definition of social composition.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
 
-<h2>Proof Sketch and Strategy</h2>
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
 
-<p><strong>Theorem 10.1 (Social Associativity).</strong></p>
-<ol>
-  <li>Unfold <code>⊗ₛ</code> using Definition 10.2 on both sides.</li>
-  <li>Reduce the lattice expression <code>c₁ ⊔ c₂ ⊔ c₃</code> using join-associativity of <code>(C, ⊔)</code>.</li>
-  <li>Apply <code>theorem_1_3</code> (associativity of <code>⊗</code> in <code>I</code>) from Volume I.</li>
-  <li>Use <code>lemma_8_2</code> (reflexivity of <code>≈</code>) to close the equivalence on equal terms.</li>
-  <li>Discharge the side condition that <code>g_i(c_i)</code> are well-defined via Definition 10.1.</li>
-  <li>Conclude by transitivity of <code>≈</code> (Theorem 8.1).</li>
-</ol>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<p><strong>Theorem 10.2 (Carrier-Indexed Identity).</strong></p>
-<ol>
-  <li>Define candidate <code>g₀(c) := e</code>.</li>
-  <li>Verify the identity laws using <code>theorem_1_2</code> (left/right unit in <code>I</code>).</li>
-  <li>For uniqueness, suppose <code>g'</code> also satisfies the identity laws.</li>
-  <li>Apply <code>g' ⊗ₛ g₀</code> on either side to deduce <code>g'(c) = g'(c) ⊗ e = g'(c)</code> and <code>g'(c) = e ⊗ g'(c)</code>.</li>
-  <li>Combine with <code>g₀(c) = e</code> via <code>lemma_2_4</code> (cancellation in <code>I</code>) to conclude <code>g' = g₀</code>.</li>
-  <li>Verify the empty-carrier constraint <code>g₀(⊥) = e</code> by definition.</li>
-</ol>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p><strong>Theorem 10.3 (Compositional Locality).</strong></p>
-<ol>
-  <li>Assume <code>c ⊓ d = ⊥</code>.</li>
-  <li>Unfold both sides of the claimed equivalence using Definition 10.2.</li>
-  <li>The two sides reduce to <code>g(c) ⊗ h(d)</code> and <code>h(d) ⊗ g(c)</code>.</li>
-  <li>Apply <code>theorem_2_3</code> (resonance-induced commutativity for disjointly-graded ideas) from Volume I.</li>
-  <li>The disjointness hypothesis ensures the grades of <code>g(c)</code> and <code>h(d)</code> lie in independent components of the grading group (Theorem 9.2).</li>
-  <li>Conclude using symmetry of <code>≈</code> (Lemma 8.3).</li>
-</ol>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
-<table>
-<thead><tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr></thead>
-<tbody>
-<tr><td>Collective representations are sui generis products of assembled minds</td><td>Durkheim, <em>Formes élémentaires</em></td><td>23</td><td>Definition 10.1</td><td>Vol2/SocialComposition.lean</td><td>We require <code>g(⊥) = e</code>; Durkheim leaves the empty case unaddressed.</td></tr>
-<tr><td>Vergesellschaftung composes through meaningful action</td><td>Weber, <em>Wirtschaft und Gesellschaft</em></td><td>21</td><td>Definition 10.2</td><td>Vol2/SocialComposition.lean</td><td>Weber's "meaningful" content is absorbed into the resonance pairing of Vol I, not modelled separately here.</td></tr>
-<tr><td>Habitus generates dispositions associatively</td><td>Bourdieu, <em>Le sens pratique</em></td><td>88</td><td>Theorem 10.1</td><td>Vol2/SocialComposition.lean</td><td>Bourdieu states associativity informally; we obtain it only up to <code>≈</code>.</td></tr>
-<tr><td>Schemas transpose across resources</td><td>Sewell, <em>Logics of History</em></td><td>140–142</td><td>Theorem 10.1</td><td>Vol2/SocialComposition.lean</td><td>Direct match; Sewell's "transposition" = our <code>≈</code>.</td></tr>
-<tr><td>The vide collectif is degree zero of social life</td><td>Durkheim, <em>Formes élémentaires</em></td><td>295</td><td>Theorem 10.2</td><td>Vol2/SocialComposition.lean</td><td>We add uniqueness, which Durkheim does not assert.</td></tr>
-<tr><td>Plural subjects require irreducible joint commitments</td><td>Gilbert, <em>On Social Facts</em></td><td>204</td><td>Theorem 10.1 (failure case)</td><td>Vol2/SocialComposition.lean</td><td>Our framework recovers Gilbert's case when <code>≈</code> is collapsed to <code>=</code>; she rejects this collapse.</td></tr>
-<tr><td>Disjoint actor-networks do not interfere</td><td>Latour, <em>Reassembling the Social</em></td><td>184</td><td>Theorem 10.3</td><td>Vol2/SocialComposition.lean</td><td>Latour's "non-interference" is our compositional locality; we make the disjointness condition explicit.</td></tr>
-<tr><td>Group ideas reduce to weighted aggregates of individual ideas</td><td>Elster, <em>Nuts and Bolts</em></td><td>13</td><td>Definition 10.2 (special case)</td><td>Vol2/SocialComposition.lean</td><td>Elster's reduction holds only when the resonance pairing is degenerate; we treat the general case.</td></tr>
-<tr><td>Processes, not entities, are the loci of social composition</td><td>Abbott, <em>Processual Sociology</em></td><td>67</td><td>Theorem 10.1 + Theorem 8.1</td><td>Vol2/SocialComposition.lean</td><td>We track processes via transmission chains (Vol I, ch. 7) and match Abbott's claim modulo equivalence.</td></tr>
-</tbody>
-</table>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>Worked Examples and Counter-Examples</h2>
-<p>
-<strong>Example 1 (federation of trade unions).</strong>  Let <code>C</code> be the lattice of subsets of a workforce, ordered by inclusion.  For each local union <code>c</code>, let <code>g(c)</code> be the idea encoding its bargaining platform — say, a generator <code>p_c</code> in the free graded monoid of demands.  Then <code>(g ⊗ₛ g)(c₁ ⊔ c₂)</code> is the composite platform of the federation.  Theorem 10.1 guarantees that whether the carpenters first ally with the electricians and then with the plumbers, or the plumbers and electricians first, the federation's platform is structurally equivalent.  The example illuminates why the relationalist's "≈" is essential: the bargaining language is literally re-ordered, but the bargaining content is not.
-</p>
-<p>
-<strong>Example 2 (overlapping religious congregations).</strong>  Let two congregations share a substantial subset of members.  Then <code>c ⊓ d ≠ ⊥</code>, and Theorem 10.3 fails to apply.  Indeed, one can construct an example in which <code>(g ⊗ₛ h)(c ⊔ d) ≉ (h ⊗ₛ g)(d ⊔ c)</code>: the order in which the doctrines combine matters because the shared members carry resonance between the two ideas.  This counter-example is exactly the empirical phenomenon of doctrinal drift in syncretic communities.
-</p>
-<p>
-<strong>Example 3 (the empty club).</strong>  Theorem 10.2 says the empty club has a unique idea-content, namely <code>e</code>.  The example is trivial but consequential: it forbids a hidden "default ideology" attached to the empty carrier, a move occasionally smuggled into structural-functionalist accounts.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Open Questions and Future Work</h2>
-<p>
-The literature leaves several questions open that the present formalization addresses only partially.  First, the <em>strength</em> of equivalence: Sewell's "transposition" appears, on close reading, to be coarser than the <code>≈</code> of Volume I, and a full bridge would require a quotient construction we have not yet formalized.  Second, the <em>dynamics</em> of social composition — how <code>g</code> evolves as the carrier lattice changes through migration, schism, or institutional reform — is treated here only statically; a forthcoming chapter introduces a time-indexed version <code>g_t</code> and proves a continuity theorem.  Third, the relationship between social composition and the emergence 2-cocycle of Volume I is suggestive but not yet exact: Theorem 10.1 should descend to a cocycle on the carrier lattice, and the conditions under which this descent is well-defined remain open.  Finally, the question of whether Gilbert's "plural subjects" can be modeled by a non-quotient refinement of our framework is, we believe, decidable but has not been settled.  Volume V (<em>Emergence: A Formal Theory</em>) takes up several of these threads.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Further Reading</h2>
-<ul>
-  <li>Durkheim, É. (1912). <em>Les formes élémentaires de la vie religieuse</em>. The locus classicus for collective representations; chapters 1 and 7 are the immediate background to Definition 10.1.</li>
-  <li>Weber, M. (1922). <em>Wirtschaft und Gesellschaft</em>. Provides the meaningful-action framing absorbed into the resonance pairing.</li>
-  <li>Bourdieu, P. (1980). <em>Le sens pratique</em>. The generative-grammar account of habitus that Theorem 10.1 makes precise.</li>
-  <li>Gilbert, M. (1989). <em>On Social Facts</em>. The most rigorous holist alternative to our equivalence-modulo formulation.</li>
-  <li>Elster, J. (1989). <em>Nuts and Bolts for the Social Sciences</em>. The clearest statement of the methodological-individualist reduction we treat as a degenerate special case.</li>
-  <li>Sewell, W. H. (2005). <em>Logics of History</em>. Sewell's "transposition" is the direct informal antecedent of our <code>≈</code>-associativity.</li>
-  <li>Latour, B. (2005). <em>Reassembling the Social</em>. Source of the locality intuition formalized in Theorem 10.3.</li>
-  <li>Abbott, A. (2016). <em>Processual Sociology</em>. Aligns the static formalism here with a process ontology developed in Volume V.</li>
-  <li>Merton, R. K. (1949). <em>Social Theory and Social Structure</em>. Useful background on middle-range mechanisms that compose into institutional ideologies.</li>
-</ul>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>See Also</h2>
-<ul>
-  <li>Foundational concepts: <a href="composition.html">Composition Monoid</a>, <a href="resonance.html">Resonance Pairing</a>, <a href="aufhebung.html">Aufhebung Decomposition</a>, <a href="cocycle.html">Emergence Cocycle</a>, <a href="curvature.html">Meaning Curvature</a>, <a href="conjugation.html">Conjugation</a>, <a href="chains.html">Transmission Chains</a>, <a href="equivalence.html">Structural Equivalence</a>, <a href="grading.html">Graded Algebra</a>.</li>
-  <li>Sibling pages in Volume II: <a href="social-resonance.html">Social Resonance</a>, <a href="social-aufhebung.html">Class Aufhebung</a>, <a href="social-emergence.html">Collective Emergence</a>.</li>
-  <li>Other volumes: <a href="humanities.html">Humanities</a>, <a href="cognition.html">Cognitive Science</a>, <a href="emergence.html">Emergence</a>, <a href="advanced.html">Advanced Applications</a>.</li>
-  <li>Reference indices: <a href="axioms.html">Axioms</a>, <a href="theorems.html">Theorems</a>, <a href="literature.html">Literature bridge</a>.</li>
-  <li>Lean source: <a href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Vol2/SocialComposition.lean">IdeaTheory/Vol2/SocialComposition.lean</a>.</li>
-</ul>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-</main>
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about social composition: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
+
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 10.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems10.lean">lean/IdeaTheory/Theorems10.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 10.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 10.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_10_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_10_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_10_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Further Reading</h2>
+  <ul>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
+  </ul>
+
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems10.lean
+namespace IdeaTheory
+-- theorems for social composition live here
+end IdeaTheory</code></pre>
+
+  <h2>See also</h2>
+  <p><a href="idea-monoid.html">idea monoid</a> · <a href="resonance-pairing.html">resonance pairing</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="emergence-2-cocycle.html">emergence 2-cocycle</a> · <a href="meaning-curvature.html">meaning curvature</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="transmission-chain.html">transmission chain</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="emergent-novelty.html">emergent novelty</a> · <a href="literature.html">full literature bridge</a></p>
+
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
