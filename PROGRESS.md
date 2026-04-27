@@ -544,3 +544,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 03 — 2026-04-27 10:03
 **Task:** `theorems_3` Lean theorems: Composition and Identity (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 04 — 2026-04-27 10:17
+**Task:** `theorems_4` Lean theorems: Advanced Properties (attempt 1)  
+**Verdict:** ✓ PASS  
