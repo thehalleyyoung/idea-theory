@@ -511,3 +511,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Issues:**
   - lean/IdeaTheory/Theorems8.lean: contains `sorry`
   - lean/IdeaTheory/Theorems8.lean: contains `admit`
+
+## Iter 06 — 2026-04-27 08:56
+**Task:** `theorems_8` Lean theorems: Advanced Properties (attempt 3)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems8.lean: missing namespace declaration
