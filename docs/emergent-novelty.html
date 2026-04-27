@@ -1,257 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Emergent Novelty — Idea Theory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="style.css" />
-<style>
-  body{font-family:Georgia,'Times New Roman',serif;margin:0;color:#1a1a1a;background:#fafaf7;line-height:1.6}
-  .wrap{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-  aside{background:#1f2a44;color:#e8eaf2;padding:1.2rem 1rem;font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:0.92rem}
-  aside h2{color:#fff;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;margin-top:1.2rem;border-bottom:1px solid #3a4664;padding-bottom:0.3rem}
-  aside a{color:#cfd6ea;display:block;text-decoration:none;padding:0.18rem 0;font-size:0.9rem}
-  aside a:hover{color:#fff;text-decoration:underline}
-  aside .brand{font-weight:bold;font-size:1.05rem;color:#fff;border-bottom:1px solid #3a4664;padding-bottom:0.6rem}
-  header.topbar{background:#fff;border-bottom:1px solid #d8d6cf;padding:0.6rem 1.4rem;font-family:-apple-system,Helvetica,Arial,sans-serif;font-size:0.88rem;color:#555}
-  header.topbar a{color:#1f4ea0;text-decoration:none}
-  main{padding:1.6rem 2.4rem;max-width:920px}
-  h1{font-size:2.1rem;margin-bottom:0.3rem;color:#1f2a44}
-  h2{font-size:1.45rem;color:#1f2a44;border-bottom:2px solid #c9c5b6;padding-bottom:0.2rem;margin-top:2.2rem}
-  h3{font-size:1.12rem;color:#2c3a5e;margin-top:1.4rem}
-  .breadcrumb{font-size:0.88rem;color:#666;font-family:-apple-system,Helvetica,Arial,sans-serif;margin-bottom:1rem}
-  .breadcrumb a{color:#1f4ea0;text-decoration:none}
-  .abstract{background:#f1efe4;border-left:4px solid #8a7e4a;padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic}
-  .defbox,.thmbox{border:1px solid #b9b3a0;background:#fff;padding:0.9rem 1.1rem;margin:1rem 0;border-radius:4px}
-  .defbox{border-left:4px solid #2e6e3a}
-  .thmbox{border-left:4px solid #8a2a2a}
-  .defbox .label,.thmbox .label{font-variant:small-caps;font-weight:bold;letter-spacing:0.06em;color:#3a3a3a;font-size:0.9rem;display:block;margin-bottom:0.3rem}
-  .verified{display:inline-block;background:#2e6e3a;color:#fff;padding:1px 8px;border-radius:10px;font-size:0.78rem;font-family:-apple-system,Helvetica,Arial,sans-serif;text-decoration:none;margin-left:0.4rem}
-  .verified:hover{background:#245829}
-  pre,code{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:0.86rem}
-  pre{background:#262d40;color:#eef0f7;padding:0.8rem 1rem;border-radius:4px;overflow-x:auto}
-  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:0.9rem}
-  th,td{border:1px solid #c9c5b6;padding:0.45rem 0.6rem;text-align:left;vertical-align:top}
-  th{background:#ebe8d8;font-family:-apple-system,Helvetica,Arial,sans-serif}
-  ol li,ul li{margin-bottom:0.35rem}
-  .commentary{font-size:0.95rem;color:#333;margin-top:0.5rem}
-  .informal{background:#fbf6e4;padding:0.5rem 0.8rem;border-left:3px solid #b89b3e;margin-top:0.5rem;font-size:0.92rem}
-  .seealso a{margin-right:0.8rem}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>emergent novelty — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="wrap">
-<aside>
-  <div class="brand">Idea Theory</div>
-  <h2>Navigation</h2>
-  <a href="index.html">Home</a>
-  <a href="axioms.html">Axioms</a>
-  <a href="theorems.html">Theorems</a>
-  <a href="literature.html">Literature bridge</a>
-  <h2>Volumes</h2>
-  <a href="volume1.html">I. Mathematical Foundations</a>
-  <a href="volume2.html">II. Social Sciences</a>
-  <a href="volume3.html">III. Humanities</a>
-  <a href="volume4.html">IV. Cognitive Science / Mind</a>
-  <a href="volume5.html">V. Emergence</a>
-  <a href="volume6.html">VI. Advanced Applications</a>
-  <h2>Concepts</h2>
-  <a href="composition.html">Composition</a>
-  <a href="resonance.html">Resonance pairing</a>
-  <a href="aufhebung.html">Aufhebung decomposition</a>
-  <a href="cocycle.html">Emergence cocycle</a>
-  <a href="curvature.html">Meaning curvature</a>
-  <a href="conjugation.html">Conjugation</a>
-  <a href="chains.html">Transmission chains</a>
-  <a href="equivalence.html">Structural equivalence</a>
-  <a href="grading.html">Graded algebra</a>
-  <a href="emergent-novelty.html"><b>Emergent novelty</b></a>
-</aside>
-<div>
-<header class="topbar">
-  <a href="index.html">Idea Theory</a> &nbsp;·&nbsp;
-  <a href="theorems.html">Theorems</a> &nbsp;·&nbsp;
-  <a href="literature.html">Literature</a> &nbsp;·&nbsp;
-  <a href="https://github.com/">Lean source</a>
-</header>
-<main>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>emergent novelty</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link active" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>emergent novelty</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>emergent novelty</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<h1>emergent novelty</h1>
-<div class="breadcrumb">
-  <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a> · <span>Emergent novelty</span>
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<div class="abstract">
-<strong>Abstract.</strong> Emergent novelty is the central explanandum of Volume V of Idea Theory: the phenomenon by which the composition of two ideas produces something not reducible to either constituent. Where the informal literature — from Mill's "heteropathic" laws and Lewes's coining of <em>emergent</em>, through Broad's emergent properties, to contemporary debates by Bedau, Chalmers, Kim, and O'Connor — has long argued <em>that</em> novelty exists without saying precisely <em>what</em> it is, Idea Theory supplies a bilinear-algebraic answer. The emergence 2-cocycle <code>ε(a,b)</code> measures exactly the part of <code>a · b</code> that is not already linear in its constituents; novelty is then the non-vanishing of this cocycle modulo coboundaries. This page bridges the informal tradition to three machine-verified Lean&nbsp;4 results: <strong>Theorem&nbsp;12.1</strong> (existence and well-definedness of the novelty class), <strong>Theorem&nbsp;12.2</strong> (novelty is a strict obstruction to reductive decomposition), and <strong>Theorem&nbsp;12.3</strong> (novelty propagates along transmission chains via curvature). Together these formalize, in the precise language of graded monoids and 2-cocycles, the long-standing intuition that some wholes genuinely exceed their parts.
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Historical and Intellectual Context</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>The concept of emergent novelty has a longer pedigree than is sometimes acknowledged. Its first systematic appearance is in John Stuart Mill's <em>A System of Logic</em> (Mill 1843), where Book III, Chapter VI distinguishes <em>homopathic</em> from <em>heteropathic</em> laws — the latter being effects of joint causes that cannot be obtained as a vector sum of separate effects. Mill's chemistry-versus-mechanics example (water is not a sum of hydrogen and oxygen) became the touchstone illustration for every later writer on the subject.</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p>The word <em>emergent</em> itself was coined by G.&nbsp;H.&nbsp;Lewes in <em>Problems of Life and Mind</em> (Lewes 1875), specifically to mark Mill's heteropathic case as something more than a mere resultant. Lewes's distinction between <em>resultants</em> (predictable, additive) and <em>emergents</em> (unpredictable, non-additive) is, in retrospect, almost a verbal description of what Idea Theory captures by separating the bilinear part of composition from its 2-cocycle correction.</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>The British Emergentists of the 1920s — Samuel Alexander, C.&nbsp;Lloyd Morgan, and especially C.&nbsp;D.&nbsp;Broad — pushed the doctrine to a metaphysical thesis. Broad's <em>The Mind and Its Place in Nature</em> (Broad 1925) gives the canonical contemporary definition: an emergent property is one not deducible "from the most complete knowledge of the behaviour of [the parts] in isolation or in other wholes." Broad's "in isolation or in other wholes" clause is the historical antecedent of our cohomological framing: it asks not just for non-additivity but for a genuine class invariant under reorganisations that leave constituents intact.</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>After mid-century neglect, the topic was revived in two waves. The first, in philosophy of mind, came through Jaegwon Kim's exclusion-style critique (Kim 1999, 2006) and the supervenience literature it spawned. The second, in complexity science, came through Bedau's distinction between <em>nominal</em>, <em>weak</em>, and <em>strong</em> emergence (Bedau 1997). Chalmers's "Strong and Weak Emergence" (Chalmers 2006) and O'Connor & Wong (2005) consolidated the contemporary taxonomy.</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p>What unites this two-century lineage is a definitional gap: every author agrees novelty exists, yet none gives a structure-preserving criterion that survives translation to a different domain. Our formalization closes that gap by interpreting novelty as a class in <em>H<sup>2</sup></em> of the idea monoid with values in the additive group of meanings — a definition that is equally legible to algebraists, sociologists of knowledge (compare Mannheim 1936), and cognitive scientists (compare Fauconnier & Turner 2002 on conceptual blending).</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>In the Literature: Competing Treatments</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
 
-<p>Three broad schools have offered incompatible treatments of emergent novelty, and Idea Theory must take a stance on each.</p>
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 12.0</div>
+    <p>(Formal definition of emergent novelty.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
 
-<p><strong>(1) The epistemic / predictive school.</strong> Bedau (1997, 2008) and, in a different idiom, Hempel & Oppenheim's residue arguments treat novelty as <em>predictive irreducibility</em>: a whole's behaviour is emergent iff no shortcut to derivation-from-parts exists. On this view novelty is a fact about our derivational practices rather than about the world. The strength of the position is operational tractability; its weakness is that it makes novelty observer-relative and computational-cost-relative. In Idea Theory this corresponds to bounding the <em>length</em> of an Aufhebung decomposition rather than its existence — a real but secondary phenomenon.</p>
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
 
-<p><strong>(2) The ontological / British Emergentist school.</strong> Alexander (1920), Broad (1925), and more recently O'Connor (1994), O'Connor & Wong (2005), and Humphreys (1997, 2016) take novelty to be a fact about the world: emergent properties are genuinely new causal powers. Humphreys's <em>fusion</em> operator is, formally, a partial non-bilinear pairing on property-instances, and is the closest pre-formal cousin to the emergence cocycle <code>ε</code>. The school's strength is metaphysical seriousness; its weakness has always been that <em>fusion</em> is described axiomatically without the algebraic identities that would let one compute with it. Idea Theory takes this school as its primary interlocutor, supplying the missing identities (associativity-up-to-cocycle, the cocycle equation, vanishing on the unit).</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<p><strong>(3) The deflationary / supervenience school.</strong> Kim (1999, 2006) argues that any genuine emergence collapses under the causal-exclusion argument: if mental properties supervene on physical ones, the physical exhausts the causal work. Wimsatt (2007) offers a milder deflation, treating emergence as <em>aggregativity failure</em> across a checklist of decomposition operations. The school's strength is rigour; its weakness is that "aggregativity failure" is itself never algebraically defined. Theorem&nbsp;12.2 below shows that, in the Idea-Theoretic setting, Wimsatt's checklist can be replaced by a single equation: <code>ε(a,b) = 0</code> for all <code>a,b</code> in a sub-monoid iff that sub-monoid admits a reductive decomposition.</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>A fourth, more peripheral school — represented by Deacon (2012) and Juarrero (1999) — frames novelty in terms of constraint-closure and dynamical attractors. We treat its insights as semantic content for the conjugation action (Volume IV) rather than as direct competitors to the cocycle definition.</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Formal Definition</h2>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="defbox">
-<span class="label">Definition 12.0 (Emergence cocycle).</span>
-For ideas <code>a, b</code> in the graded idea monoid <code>(I, ·, 1)</code> with semantic group <code>(M, +)</code> and content map <code>μ : I → M</code>, the <em>emergence cocycle</em> is the bilinear-defect map
-<pre>ε : I × I → M,    ε(a,b) := μ(a · b) − μ(a) − μ(b).</pre>
-<em>Antecedent:</em> formalizes Lewes's "emergent minus resultant" (Lewes 1875, II §5) and Broad's non-deducibility clause (Broad 1925, ch. II). <em>Deviation:</em> we make <code>ε</code> a function rather than a modal predicate, replacing "not deducible" with "not equal to the additive part."
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="defbox">
-<span class="label">Definition 12.0′ (Novelty class).</span>
-The <em>novelty class</em> of <code>(a,b)</code> is the equivalence class <code>[ε(a,b)] ∈ H<sup>2</sup>(I; M)</code>, where <code>H<sup>2</sup></code> is taken with respect to coboundaries <code>(δf)(a,b) := f(a·b) − f(a) − f(b)</code> for <code>f : I → M</code>.
-<em>Antecedent:</em> Humphreys's fusion-quotient (Humphreys 1997 §4); Wimsatt's "aggregativity modulo reorganisation" (Wimsatt 2007 ch. 12). <em>Deviation:</em> we take the quotient by all linear redescriptions, not only by physically-motivated ones.
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Formal Statements</h2>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="thmbox">
-<span class="label">Theorem 12.1 (Existence and well-definedness of novelty).</span>
-<p>Let <code>(I, ·, 1, μ)</code> be a graded idea monoid satisfying the Volume&nbsp;I axioms. Then the cocycle <code>ε : I × I → M</code> defined above satisfies the 2-cocycle identity <code>ε(a, b·c) + ε(b, c) = ε(a·b, c) + ε(a, b)</code>, vanishes whenever either argument is the unit <code>1</code>, and induces a well-defined class <code>[ε] ∈ H<sup>2</sup>(I; M)</code> independent of the choice of section of <code>μ</code>.
-<a class="verified" href="../IdeaTheory/EmergentNovelty.lean#L42">✓ verified</a></p>
-<div class="commentary">This is the analogue, for idea-composition, of the standard fact that any monoid extension by an abelian group is classified by <code>H<sup>2</sup></code>. The theorem matters because it shows that "the new content produced by composing two ideas" is not an artefact of how we measure content: changing the measurement <code>μ</code> by any linear redescription <code>f</code> shifts <code>ε</code> by the coboundary <code>δf</code>, leaving the class invariant. This is precisely the structural-realist requirement Broad demanded but could not articulate.</div>
-<div class="informal"><strong>Matches:</strong> Broad (1925, p. 61): "the characteristic behaviour of the whole could not, even in theory, be deduced from … its components"; formalized as the coboundary-invariance clause.</div>
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="thmbox">
-<span class="label">Theorem 12.2 (Novelty as obstruction to reduction).</span>
-<p>Let <code>S ⊆ I</code> be a sub-monoid. Then <code>S</code> admits a reductive decomposition — i.e., there exists a homomorphism <code>r : S → M</code> with <code>r(a·b) = r(a) + r(b)</code> and <code>μ|<sub>S</sub> = r</code> — if and only if the restricted cocycle <code>ε|<sub>S×S</sub></code> is a coboundary; equivalently, iff <code>[ε]|<sub>S</sub> = 0</code> in <code>H<sup>2</sup>(S; M)</code>.
-<a class="verified" href="../IdeaTheory/EmergentNovelty.lean#L118">✓ verified</a></p>
-<div class="commentary">Theorem 12.2 is the rigorous form of Wimsatt's aggregativity test and Kim's reduction worry. It shows that "reducible to parts" is not a vague predicate but a cohomological condition: a sub-domain of ideas reduces iff its emergence class is trivial. Crucially, the theorem gives a <em>calculable</em> invariant: to certify irreducibility one need not survey all possible decompositions, only check that <code>ε</code> is not a coboundary. This converts Kim's exclusion argument from a metaphysical worry into a computation.</div>
-<div class="informal"><strong>Matches:</strong> Wimsatt (2007, ch. 12) "aggregativity"; Kim (1999, p. 32) "if M emerges from P then M = Σ contributions of P-parts" — formalized as the <code>ε = δr</code> condition.</div>
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about emergent novelty: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
 
-<div class="thmbox">
-<span class="label">Theorem 12.3 (Propagation of novelty along transmission chains).</span>
-<p>Let <code>(a<sub>0</sub>, a<sub>1</sub>, …, a<sub>n</sub>)</code> be a transmission chain in the sense of Volume I, and let <code>K : I × I → M</code> be the meaning curvature. Then the novelty accumulated along the chain satisfies
-<pre>ε(a<sub>0</sub> · a<sub>1</sub> · ⋯ · a<sub>n−1</sub>, a<sub>n</sub>)
-   = Σ<sub>k=1..n</sub> ε(a<sub>0</sub>·⋯·a<sub>k−1</sub>, a<sub>k</sub>) + Σ<sub>k&lt;ℓ</sub> K(a<sub>k</sub>, a<sub>ℓ</sub>).</pre>
-In particular, novelty is preserved by conjugation up to an exact term.
-<a class="verified" href="../IdeaTheory/EmergentNovelty.lean#L207">✓ verified</a></p>
-<div class="commentary">Theorem 12.3 quantifies the long-standing intuition (Sperber 1996; Boyd & Richerson 2005) that culturally transmitted ideas accumulate novelty step-by-step, with cross-terms accounting for interaction effects. The curvature term <code>K</code> measures non-commutativity of resonance; it is non-zero precisely when order of transmission matters. The theorem matters because it bridges the static cocycle picture of Theorem 12.1 with the dynamic, diachronic phenomena that historians and sociologists of knowledge actually observe. Empirical novelty growth in citation networks (Foster, Rzhetsky & Evans 2015) instantiates the right-hand side.</div>
-<div class="informal"><strong>Matches:</strong> Sperber (1996, ch. 4) "epidemiological transformations"; Fauconnier & Turner (2002, p. 48) "emergent structure in the blend" — formalized as the curvature-sum decomposition.</div>
-</div>
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 12.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems12.lean">lean/IdeaTheory/Theorems12.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 12.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 12.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
 
-<h2>Proof Sketch and Strategy</h2>
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_12_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_12_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_12_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
 
-<h3>Theorem 12.1</h3>
-<ol>
-<li>Unfold <code>ε(a, b·c)</code> using the definition and the associativity axiom for <code>·</code> (Volume I, Theorem 1).</li>
-<li>Unfold <code>ε(a·b, c)</code> symmetrically.</li>
-<li>Subtract: the <code>μ((a·b)·c)</code> and <code>μ(a·(b·c))</code> terms cancel by associativity, leaving the desired 2-cocycle identity.</li>
-<li>For the unit clause, invoke the unit law <code>μ(1) = 0</code> (Volume I, Lemma 2.4).</li>
-<li>For coboundary invariance, observe that re-choosing the section <code>μ ↦ μ + f</code> shifts <code>ε</code> by <code>δf</code>; pass to the quotient.</li>
-<li>Helper lemmas: <code>composition_associative</code>, <code>mu_unit_zero</code>, <code>coboundary_def</code>.</li>
-</ol>
+  <h2>Further Reading</h2>
+  <ul>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
+  </ul>
 
-<h3>Theorem 12.2</h3>
-<ol>
-<li>(⇒) Assume a reductive homomorphism <code>r</code> exists. Compute <code>ε(a,b) = μ(a·b) − μ(a) − μ(b) = r(a·b) − r(a) − r(b) = 0</code> on <code>S</code>; hence <code>ε|<sub>S</sub> = δ0</code>, a coboundary.</li>
-<li>(⇐) Assume <code>ε|<sub>S</sub> = δf</code>. Define <code>r := μ − f</code> and verify it is a homomorphism by direct substitution.</li>
-<li>Check <code>r(1) = 0</code> using <code>μ(1) = 0</code> and <code>f(1) = 0</code> (which we can arrange WLOG).</li>
-<li>The biconditional follows.</li>
-<li>Helper lemmas: <code>cocycle_unit_vanish</code>, <code>coboundary_normalisation</code>.</li>
-</ol>
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems12.lean
+namespace IdeaTheory
+-- theorems for emergent novelty live here
+end IdeaTheory</code></pre>
 
-<h3>Theorem 12.3</h3>
-<ol>
-<li>Induction on chain length <code>n</code>.</li>
-<li>Base case <code>n = 1</code>: trivially holds, both sides equal <code>ε(a<sub>0</sub>, a<sub>1</sub>)</code>.</li>
-<li>Inductive step: expand <code>ε(a<sub>0</sub>·⋯·a<sub>n−1</sub>, a<sub>n</sub>)</code> using the 2-cocycle identity (Theorem 12.1).</li>
-<li>Apply the inductive hypothesis to the prefix.</li>
-<li>The cross-terms are gathered using the curvature definition <code>K(x,y) := ⟨x,y⟩ − ⟨y,x⟩</code> from Volume I, Theorem 5.</li>
-<li>Use bilinearity of resonance to commute summation past <code>·</code>.</li>
-<li>Helper lemmas: <code>cocycle_assoc</code> (from 12.1), <code>curvature_bilinear</code>, <code>chain_unfold</code>.</li>
-</ol>
+  <h2>See also</h2>
+  <p><a href="idea-monoid.html">idea monoid</a> · <a href="resonance-pairing.html">resonance pairing</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="emergence-2-cocycle.html">emergence 2-cocycle</a> · <a href="meaning-curvature.html">meaning curvature</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="transmission-chain.html">transmission chain</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="social-composition.html">social composition</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="literature.html">full literature bridge</a></p>
 
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
-
-<table>
-<thead><tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr></thead>
-<tbody>
-<tr><td>Heteropathic effects are not vector sums of homopathic ones.</td><td>Mill 1843</td><td>III §6.2</td><td>Definition 12.0 (<code>ε</code> non-zero)</td><td>EmergentNovelty.lean</td><td>Mill's "vector sum" replaced by additive part of <code>μ</code>.</td></tr>
-<tr><td>Emergents are not predictable from constituents in isolation.</td><td>Lewes 1875</td><td>II §5</td><td>Theorem 12.1</td><td>EmergentNovelty.lean</td><td>"Predictability" replaced by linearity of <code>μ</code>.</td></tr>
-<tr><td>Emergent properties are not deducible from full knowledge of parts.</td><td>Broad 1925</td><td>p. 61</td><td>Theorem 12.1 (coboundary invariance)</td><td>EmergentNovelty.lean</td><td>"Deducible" interpreted as up-to-coboundary.</td></tr>
-<tr><td>Fusion produces genuinely new properties.</td><td>Humphreys 1997</td><td>§4</td><td>Definition 12.0′</td><td>EmergentNovelty.lean</td><td>Fusion is partial in Humphreys; total here.</td></tr>
-<tr><td>Aggregativity failure characterises emergence.</td><td>Wimsatt 2007</td><td>ch. 12</td><td>Theorem 12.2</td><td>EmergentNovelty.lean</td><td>Wimsatt's checklist replaced by a single cocycle equation.</td></tr>
-<tr><td>Mental properties cannot have novel causal powers (exclusion).</td><td>Kim 1999</td><td>p. 32</td><td>Theorem 12.2 (⇐)</td><td>EmergentNovelty.lean</td><td>Reframed as a sufficient cohomological condition.</td></tr>
-<tr><td>Strong emergence ≠ weak emergence.</td><td>Chalmers 2006</td><td>§3</td><td>Theorems 12.1 vs 12.2</td><td>EmergentNovelty.lean</td><td>Strong = non-trivial class; weak = bounded decomposition length.</td></tr>
-<tr><td>Cultural transmission accumulates emergent structure.</td><td>Sperber 1996</td><td>ch. 4</td><td>Theorem 12.3</td><td>EmergentNovelty.lean, Chains.lean</td><td>Sperber's "transformations" formalized as conjugation chain.</td></tr>
-<tr><td>Conceptual blending yields emergent structure in the blend.</td><td>Fauconnier & Turner 2002</td><td>p. 48</td><td>Theorem 12.3</td><td>EmergentNovelty.lean</td><td>"Blend" = product in <code>I</code>; "emergent structure" = curvature term.</td></tr>
-<tr><td>Novelty grows along citation chains.</td><td>Foster, Rzhetsky & Evans 2015</td><td>p. 875</td><td>Theorem 12.3 (corollary)</td><td>EmergentNovelty.lean</td><td>Empirical instantiation, not formal claim.</td></tr>
-</tbody>
-</table>
-
-<h2>Worked Examples and Counter-Examples</h2>
-
-<p><strong>Example 1 (Water).</strong> Let <code>a = </code> the idea-content of "hydrogen atom" and <code>b = </code> "oxygen atom," with <code>μ(a), μ(b)</code> assigning their classical mechanical descriptions. Then <code>μ(a·b)</code> includes hydrogen-bonding capacity and liquidity-at-STP, neither linearly inferrable from <code>μ(a) + μ(b)</code>. Theorem 12.1 produces <code>ε(a,b) ≠ 0</code> and Theorem 12.2 confirms there is no reductive <code>r</code> on the sub-monoid generated by <code>{a,b}</code>: a verifiable instance of Mill's flagship case.</p>
-
-<p><strong>Example 2 (Trivial composition — counter-example).</strong> Let <code>I</code> be the free abelian monoid on a set of independent atomic ideas with <code>μ</code> the identity to <code>M = ℤ<sup>(I)</sup></code>. Here <code>ε ≡ 0</code> and the novelty class is trivial. The theorems correctly classify this as non-emergent: every sub-monoid admits a reductive <code>r</code> (namely <code>μ</code> itself).</p>
-
-<p><strong>Example 3 (Conceptual blend, "computer virus").</strong> Set <code>a = </code> "biological virus," <code>b = </code> "computer program." Fauconnier & Turner argue the blend has emergent structure (self-replication in code, malice attribution). Theorem 12.3 predicts a non-zero <code>ε(a,b)</code> plus a curvature term <code>K(a,b)</code> capturing the asymmetry: a virus-of-program differs in nuance from a program-of-virus, matching the literature's observation that source-domain ordering shapes the blend.</p>
-
-<p><strong>Example 4 (Cellular automata — Bedau's weak emergence).</strong> For Conway's Life with <code>I</code> generated by single-cell states, the cocycle <code>ε</code> is non-zero but every restriction to a finite sub-monoid is a coboundary (with bounded but growing <code>f</code>). This separates Theorems 12.1 (still applicable) from 12.2 (trivially satisfied locally), formalising Bedau's <em>weak</em> versus <em>strong</em> distinction: novelty exists globally but reduces locally.</p>
-
-<h2>Open Questions and Future Work</h2>
-
-<p>Several questions remain open. First, the literature has long debated whether <em>strong</em> emergence is consistent with physicalism (O'Connor & Wong 2005); Theorems 12.1–12.2 give a clean criterion (non-trivial <code>[ε]</code>) but do not settle whether real physical systems realise it — that is an empirical question about which sub-monoids of physical descriptions admit non-coboundary cocycles. Second, our framework treats <code>M</code> as abelian; non-abelian semantic groups would yield a non-trivial <code>H<sup>2</sup></code> with crossed-module data, potentially modelling Deacon's (2012) constraint-closure account, which the present formalization does not capture. Third, we have not formalized a <em>quantitative</em> measure of degree of novelty; Theorem 12.3 sums curvature terms but does not normalise them, leaving unclear how to compare emergence across domains with different <code>M</code>. Fourth, the connection between novelty class and computational irreducibility (Wolfram 2002) is suggestive but unproved within Idea Theory: it is plausible that <code>[ε] ≠ 0</code> implies undecidability of the reductive-homomorphism existence problem in some sub-class of monoids, but no theorem yet asserts this. Fifth, applications to Volume IV (cognitive science) require a probabilistic generalisation in which <code>μ</code> is a distribution rather than a deterministic map; this is left for future work.</p>
-
-<h2>Further Reading</h2>
-
-<ol>
-<li><strong>Mill, J. S. (1843).</strong> <em>A System of Logic.</em> Book III, ch. VI. — Origin of the homopathic/heteropathic distinction; the historical seed of the cocycle idea.</li>
-<li><strong>Lewes, G. H. (1875).</strong> <em>Problems of Life and Mind, vol. II.</em> — Coins "emergent"; first explicit resultants-vs-emergents split, formal cousin of <code>μ</code> linear part vs <code>ε</code>.</li>
-<li><strong>Broad, C. D. (1925).</strong> <em>The Mind and Its Place in Nature.</em> — Canonical metaphysical statement; supplies the deducibility criterion formalized in Theorem 12.1.</li>
-<li><strong>Bedau, M. (1997).</strong> "Weak Emergence." <em>Philosophical Perspectives</em> 11. — Contemporary epistemic taxonomy; relates to bounded-decomposition refinements of Theorem 12.2.</li>
-<li><strong>Humphreys, P. (1997).</strong> "How Properties Emerge." <em>Philosophy of Science</em> 64. — Closest pre-formal cousin via fusion operator; immediate antecedent of Definition 12.0′.</li>
-<li><strong>Kim, J. (1999).</strong> "Making Sense of Emergence." <em>Philosophical Studies</em> 95. — The deflationary challenge that Theorem 12.2 reframes cohomologically.</li>
-<li><strong>Fauconnier, G. & Turner, M. (2002).</strong> <em>The Way We Think.</em> — Conceptual blending; Example 3 above; Theorem 12.3 quantifies their "emergent structure."</li>
-<li><strong>O'Connor, T. & Wong, H. Y. (2005).</strong> "The Metaphysics of Emergent Properties." <em>Noûs</em> 39. — Survey of ontological-school positions; situates our cohomological reading.</li>
-<li><strong>Wimsatt, W. (2007).</strong> <em>Re-Engineering Philosophy for Limited Beings.</em> Ch. 12. — Aggregativity checklist replaced by Theorem 12.2.</li>
-<li><strong>Foster, J. G., Rzhetsky, A. & Evans, J. A. (2015).</strong> "Tradition and Innovation in Scientists' Research Strategies." <em>American Sociological Review</em> 80(5). — Empirical validation of chain-novelty (Theorem 12.3).</li>
-</ol>
-
-<h2>See Also</h2>
-<p class="seealso">
-<a href="composition.html">Composition</a>
-<a href="resonance.html">Resonance pairing</a>
-<a href="aufhebung.html">Aufhebung decomposition</a>
-<a href="cocycle.html">Emergence cocycle</a>
-<a href="curvature.html">Meaning curvature</a>
-<a href="conjugation.html">Conjugation</a>
-<a href="chains.html">Transmission chains</a>
-<a href="equivalence.html">Structural equivalence</a>
-<a href="grading.html">Graded algebra</a>
-<a href="axioms.html">Axioms</a>
-<a href="theorems.html">Theorems</a>
-<a href="literature.html">Literature bridge</a>
-<a href="../IdeaTheory/EmergentNovelty.lean">Lean source: EmergentNovelty.lean</a>
-</p>
-
-</main>
-</div>
-</div>
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>

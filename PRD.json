@@ -427,9 +427,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/emergent-novelty.html: broken link \u2192 volume1.html; docs/emergent-novelty.html: broken link \u2192 volume2.html; docs/emergent-novelty.html: broken link \u2192 volume3.html; docs/emergent-novelty.html: broken link \u2192 volume4.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/emergent-novelty.html"
     },
     {
       "id": "website_literature",
