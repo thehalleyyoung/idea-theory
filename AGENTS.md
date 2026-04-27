@@ -666,3 +666,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 57 [tex_chapter] TeX ch (V4): Ideas as Mental Composites: A Cognitive Model
 [tex_chapter] TeX ch (V4): Ideas as Mental Composites: A Cognitive Model
+
+### Iter 58 [tex_chapter] TeX ch (V4): Curvature, Conceptual Blending, and Mental Emergence
+[tex_chapter] TeX ch (V4): Curvature, Conceptual Blending, and Mental Emergence
