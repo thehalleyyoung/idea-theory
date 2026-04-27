@@ -459,3 +459,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 03 [lean_theorems] Lean theorems: idea composition monoid
 [lean_theorems] Lean theorems: idea composition monoid
+
+### Iter 04 [lean_theorems] Lean theorems: resonance bilinear pairing
+[lean_theorems] Lean theorems: resonance bilinear pairing
