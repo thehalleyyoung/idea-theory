@@ -932,3 +932,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 10 — 2026-04-27 14:49
 **Task:** `theorems_8` Lean theorems: structural equivalence (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 11 — 2026-04-27 14:51
+**Task:** `theorems_9` Lean theorems: graded idea algebra (attempt 1)  
+**Verdict:** ✓ PASS  
