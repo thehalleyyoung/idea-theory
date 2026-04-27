@@ -121,3 +121,11 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - lean/IdeaTheory/Theorems2.lean: contains `sorry`
+
+## Iter 13 — 2026-04-26 23:31
+**Task:** `theorems_2` Lean theorems: Basic Theorems (attempt 16)  
+**Verdict:** ✗ BOUNCE (3 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems2.lean: contains `sorry`
+  - lean/IdeaTheory/Theorems2.lean: contains `admit`
+  - lean/IdeaTheory/Theorems2.lean: contains `native_decide`

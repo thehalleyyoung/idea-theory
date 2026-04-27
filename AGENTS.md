@@ -66,3 +66,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 12 [lean_theorems] Lean theorems: Basic Theorems
 [lean_theorems] Lean theorems: Basic Theorems — bounced: lean/IdeaTheory/Theorems2.lean: contains `sorry`
+
+### Iter 13 [lean_theorems] Lean theorems: Basic Theorems
+[lean_theorems] Lean theorems: Basic Theorems — bounced: lean/IdeaTheory/Theorems2.lean: contains `sorry`; lean/IdeaTheory/Theorems2.lean: contains `admit`
