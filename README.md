@@ -1,6 +1,6 @@
             # IdeaTheory
 
-            > Idea Theory develops a rigorous algebraic framework for 'ideas' as composable structures with identity, equivalence, and emergent properties. Beginning from elementary mathematical foundations, the theory extends naturally to interpretations across the social sciences, humanities, philosophy, and the problem of emergence, providing a unified formal language for describing how complex meaning arises from simpler constituents.
+            > Idea Theory develops a rigorous algebraic and categorical framework for the composition, emergence, and transmission of ideas, grounded in basic mathematics of monoids, cocycles, and graded structures. The theory provides a unified language whose foundational theorems admit faithful interpretations in the social sciences, humanities, cognitive science, philosophy of mind, and the formal study of emergence.
 
 > Foundations seeded from existing mathematical source material.
 
@@ -18,12 +18,12 @@
 
 | # | Directory | Title |
 |---|-----------|-------|
-| Vol 1 | `tex/vol1/` | Foundations of Idea Theory |
-| Vol 2 | `tex/vol2/` | Core Algebraic Theory of Ideas |
-| Vol 3 | `tex/vol3/` | Ideas in the Social Sciences |
-| Vol 4 | `tex/vol4/` | Ideas in the Humanities and Narrative |
-| Vol 5 | `tex/vol5/` | Philosophy of Ideas and the Problem of Emergence |
-| Vol 6 | `tex/vol6/` | Advanced Connections and Extensions |
+| Vol 1 | `tex/vol1/` | Mathematical Foundations of Idea Theory |
+| Vol 2 | `tex/vol2/` | Idea Theory and the Social Sciences |
+| Vol 3 | `tex/vol3/` | Idea Theory and the Humanities |
+| Vol 4 | `tex/vol4/` | Idea Theory, Cognitive Science, and Philosophy of Mind |
+| Vol 5 | `tex/vol5/` | Emergence: A Formal Theory |
+| Vol 6 | `tex/vol6/` | Advanced Applications and Unifying Perspectives |
 
             ## Build
 
