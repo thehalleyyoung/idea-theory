@@ -636,3 +636,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 47 [tex_bibliography] BibTeX bibliography
 [tex_bibliography] BibTeX bibliography
+
+### Iter 48 [tex_chapter] TeX ch (V1): The Nine Foundational Theorems
+[tex_chapter] TeX ch (V1): The Nine Foundational Theorems

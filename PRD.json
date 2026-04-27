@@ -485,9 +485,9 @@
       "deps": [
         "tex_bib"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: tex/vol1/ch1.tex"
     },
     {
       "id": "tex_chapter_v1c2",
