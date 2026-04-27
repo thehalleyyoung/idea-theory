@@ -1022,3 +1022,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 15 — 2026-04-27 17:15
 **Task:** `theorems_12` Lean theorems: emergent novelty (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 16 — 2026-04-27 17:16
+**Task:** `website_css` Website CSS (attempt 1)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - docs/style.css: missing sidebar/nav element

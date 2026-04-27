@@ -1,0 +1,445 @@
+
+/* IdeaTheory — Dark GitHub-Pages Theme
+   Project: IdeaTheory
+   Purpose: Stylesheet for the project website that bridges the informal
+   literature on "Idea Theory" to machine-verified Lean theorems.
+   Companion to LaTeX chapters and Lean sources under IdeaTheory/. */
+
+:root {
+  --bg:            #0d1117;
+  --bg-elev:       #161b22;
+  --bg-elev-2:     #1c2128;
+  --border:        #30363d;
+  --border-muted:  #21262d;
+  --fg:            #c9d1d9;
+  --fg-muted:      #8b949e;
+  --fg-strong:     #f0f6fc;
+  --accent:        #58a6ff;
+  --accent-hover:  #79b8ff;
+  --accent-soft:   rgba(88,166,255,0.12);
+  --success:       #3fb950;
+  --warning:       #d29922;
+  --danger:        #f85149;
+  --math:          #d2a8ff;
+  --code-bg:       #1f242c;
+  --shadow:        0 4px 14px rgba(0,0,0,0.4);
+  --radius:        6px;
+  --radius-lg:     10px;
+  --maxw:          900px;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+          "Liberation Mono", monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue",
+          Arial, "Noto Sans", sans-serif;
+  --serif: "Charter", "Iowan Old Style", "Source Serif Pro", Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Layout ---------- */
+.container, main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+header.site-header {
+  background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 1.25rem;
+}
+
+header.site-header .inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+header.site-header h1,
+header.site-header .site-title {
+  margin: 0;
+  font-size: 1.75rem;
+  color: var(--fg-strong);
+  letter-spacing: -0.01em;
+}
+
+header.site-header .tagline {
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+}
+
+nav.site-nav {
+  background: var(--bg-elev);
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav.site-nav ul {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+  padding: 0;
+}
+
+nav.site-nav a {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  color: var(--fg);
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+}
+
+nav.site-nav a:hover,
+nav.site-nav a.active {
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+footer.site-footer {
+  border-top: 1px solid var(--border);
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+}
+
+footer.site-footer a { color: var(--accent); }
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--fg-strong);
+  line-height: 1.25;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+h1 { font-size: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+h2 { font-size: 1.5rem; border-bottom: 1px solid var(--border-muted); padding-bottom: 0.3rem; }
+h3 { font-size: 1.2rem; }
+h4 { font-size: 1.05rem; color: var(--fg); }
+
+p { margin: 0.75rem 0; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+strong { color: var(--fg-strong); }
+em { color: var(--fg); }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+ul, ol { padding-left: 1.5rem; }
+li { margin: 0.25rem 0; }
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid var(--accent);
+  background: var(--bg-elev);
+  color: var(--fg-muted);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ---------- Code ---------- */
+code, kbd, samp, pre {
+  font-family: var(--mono);
+  font-size: 0.92em;
+}
+
+code {
+  background: var(--code-bg);
+  color: #ffa657;
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  border: 1px solid var(--border-muted);
+}
+
+pre {
+  background: var(--code-bg);
+  color: var(--fg);
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0;
+}
+
+/* Lean / math syntax accents (optional class hooks) */
+.lean-keyword { color: #ff7b72; }
+.lean-name    { color: #d2a8ff; }
+.lean-comment { color: #8b949e; font-style: italic; }
+.math, .katex { color: var(--math); }
+
+/* ---------- Tables (used for bridge / translation tables) ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.6rem 0.85rem;
+  border-bottom: 1px solid var(--border-muted);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--bg-elev-2);
+  color: var(--fg-strong);
+  font-weight: 600;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(88,166,255,0.04); }
+
+/* Bridge table (informal claim ↔ formal statement) */
+table.bridge th:first-child,
+table.bridge td:first-child { width: 45%; }
+table.bridge td code { color: var(--math); }
+
+/* ---------- Cards & Volume Grid ---------- */
+.volume-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.1rem;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+  box-shadow: var(--shadow);
+}
+
+.card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.card h3 { margin-top: 0; }
+.card .meta {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  margin-top: 0.5rem;
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 0.75rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1rem 0;
+}
+.callout.literature { border-color: var(--math); background: rgba(210,168,255,0.08); }
+.callout.warning    { border-color: var(--warning); background: rgba(210,153,34,0.08); }
+.callout.success    { border-color: var(--success); background: rgba(63,185,80,0.08); }
+.callout.danger     { border-color: var(--danger);  background: rgba(248,81,73,0.08); }
+.callout .label {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--fg-strong);
+  margin-right: 0.4rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* "In the Literature" and "Further Reading" sections on concept pages */
+section.in-literature,
+section.further-reading {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+section.in-literature h2,
+section.further-reading h2 {
+  margin-top: 0;
+  border: none;
+  font-size: 1.15rem;
+  color: var(--accent-hover);
+}
+
+/* Bibliographic references */
+.references, .bibliography {
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+}
+.references li, .bibliography li { margin-bottom: 0.5rem; }
+.references cite, .bibliography cite {
+  color: var(--fg);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ---------- Badges (theorem status, volume tags) ---------- */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--bg-elev-2);
+  color: var(--fg);
+  margin-right: 0.25rem;
+}
+.badge.verified  { color: var(--success); border-color: rgba(63,185,80,0.4); }
+.badge.pending   { color: var(--warning); border-color: rgba(210,153,34,0.4); }
+.badge.failing   { color: var(--danger);  border-color: rgba(248,81,73,0.4); }
+.badge.vol1 { color: #58a6ff; }
+.badge.vol2 { color: #3fb950; }
+.badge.vol3 { color: #d2a8ff; }
+.badge.vol4 { color: #ffa657; }
+.badge.vol5 { color: #ff7b72; }
+.badge.vol6 { color: #79c0ff; }
+
+/* ---------- Theorem / Definition blocks ---------- */
+.theorem, .definition, .lemma, .proposition, .corollary {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  background: var(--bg-elev);
+  padding: 0.85rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1.25rem 0;
+}
+.theorem    { border-left-color: var(--accent); }
+.definition { border-left-color: var(--math); }
+.lemma      { border-left-color: var(--success); }
+.proposition{ border-left-color: var(--warning); }
+.corollary  { border-left-color: #79c0ff; }
+.theorem .title,
+.definition .title,
+.lemma .title,
+.proposition .title,
+.corollary .title {
+  font-weight: 700;
+  color: var(--fg-strong);
+  margin-right: 0.4rem;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  background: var(--bg-elev-2);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-hover);
+  text-decoration: none;
+}
+.btn.primary {
+  background: var(--accent);
+  color: #0d1117;
+  border-color: var(--accent);
+}
+.btn.primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #0d1117;
+}
+
+/* ---------- Images & figures ---------- */
+img { max-width: 100%; height: auto; border-radius: var(--radius); }
+
+figure {
+  margin: 1.25rem 0;
+  text-align: center;
+}
+figcaption {
+  color: var(--fg-muted);
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+/* ---------- Selection & focus ---------- */
+::selection {
+  background: rgba(88,166,255,0.35);
+  color: var(--fg-strong);
+}
+
+a:focus-visible,
+.btn:focus-visible,
+nav.site-nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Scrollbars ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 5px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: #484f58; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  body { font-size: 15px; }
+  header.site-header h1 { font-size: 1.4rem; }
+  .container, main { padding: 1.25rem 1rem 3rem; }
+  table { font-size: 0.88rem; }
+  nav.site-nav ul { gap: 0.15rem; }
+  nav.site-nav a { padding: 0.35rem 0.55rem; font-size: 0.85rem; }
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  nav.site-nav, footer.site-footer { display: none; }
+  a { color: #000; text-decoration: underline; }
+  pre, code { background: #f6f8fa; color: #000; border-color: #d0d7de; }
+}

@@ -224,8 +224,8 @@
       ],
       "deps": [],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/style.css: missing sidebar/nav element"
     },
     {
       "id": "website_index",
