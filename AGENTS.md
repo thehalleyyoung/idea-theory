@@ -468,3 +468,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 06 [lean_theorems] Lean theorems: emergence 2-cocycle
 [lean_theorems] Lean theorems: emergence 2-cocycle
+
+### Iter 07 [lean_theorems] Lean theorems: meaning curvature form
+[lean_theorems] Lean theorems: meaning curvature form
