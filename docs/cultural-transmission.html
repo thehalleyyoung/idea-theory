@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cultural Transmission — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+  body{font-family:Georgia,serif;max-width:980px;margin:0 auto;padding:1em 2em;line-height:1.55;color:#222;background:#fafafa}
+  header.topbar{background:#1a2540;color:#fff;padding:0.6em 1em;margin:-1em -2em 1em -2em;display:flex;justify-content:space-between;align-items:center}
+  header.topbar a{color:#ffd; text-decoration:none;margin-right:1em}
+  nav.sidebar{float:right;width:220px;background:#eef;padding:1em;margin:0 0 1em 1.5em;border-radius:6px;font-size:0.9em}
+  nav.sidebar h3{margin-top:0}
+  nav.sidebar ul{padding-left:1.2em}
+  .breadcrumb{font-size:0.9em;color:#666;margin-bottom:1em}
+  .breadcrumb a{color:#345}
+  .abstract{background:#fff;border-left:4px solid #1a2540;padding:1em 1.4em;margin:1em 0;font-style:italic}
+  .definition-box,.theorem-box{background:#fff;border:1px solid #ccd;border-radius:6px;padding:1em 1.2em;margin:1em 0}
+  .theorem-box{border-left:5px solid #2a6}
+  .definition-box{border-left:5px solid #26a}
+  .badge-verified{display:inline-block;background:#2a6;color:#fff;padding:0.1em 0.6em;border-radius:10px;font-size:0.8em;text-decoration:none}
+  table.bridge{width:100%;border-collapse:collapse;margin:1em 0;font-size:0.92em}
+  table.bridge th,table.bridge td{border:1px solid #bbb;padding:0.4em 0.6em;text-align:left;vertical-align:top}
+  table.bridge th{background:#eef}
+  code{background:#f0f0f0;padding:0 0.2em;border-radius:3px}
+  h1,h2,h3{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;color:#1a2540}
+  h2{border-bottom:1px solid #ccd;padding-bottom:0.2em;margin-top:1.6em}
+  .annot{color:#555;font-size:0.92em;margin-top:0.4em}
+  .citation{color:#345}
+  ol.steps li{margin-bottom:0.3em}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div><strong>Idea Theory</strong> &nbsp; <a href="index.html">Home</a> <a href="axioms.html">Axioms</a> <a href="theorems.html">Theorems</a> <a href="literature.html">Literature</a></div>
+  <div><a href="https://github.com/" target="_blank">Lean source</a></div>
+</header>
+
+<nav class="sidebar">
+  <h3>On this page</h3>
+  <ul>
+    <li><a href="#context">Historical context</a></li>
+    <li><a href="#literature">In the literature</a></li>
+    <li><a href="#defs">Formal definitions</a></li>
+    <li><a href="#statements">Formal statements</a></li>
+    <li><a href="#proofs">Proof strategy</a></li>
+    <li><a href="#bridge">Bridge table</a></li>
+    <li><a href="#examples">Examples</a></li>
+    <li><a href="#open">Open questions</a></li>
+    <li><a href="#reading">Further reading</a></li>
+    <li><a href="#seealso">See also</a></li>
+  </ul>
+  <h3>Volumes</h3>
+  <ul>
+    <li><a href="vol1-foundations.html">I. Foundations</a></li>
+    <li><a href="vol2-social.html">II. Social sciences</a></li>
+    <li><a href="vol3-humanities.html">III. Humanities</a></li>
+    <li><a href="vol4-cogsci.html">IV. Cogsci &amp; mind</a></li>
+    <li><a href="vol5-emergence.html">V. Emergence</a></li>
+    <li><a href="vol6-advanced.html">VI. Advanced</a></li>
+  </ul>
+</nav>
+
+<h1>Cultural Transmission</h1>
+<div class="breadcrumb">
+  <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a> · <strong>Cultural transmission</strong>
+</div>
+
+<div class="abstract">
+This page bridges the long sociological and anthropological literature on the transmission of ideas across persons, generations, and institutions to the machine-verified Lean&nbsp;4 development of <em>transmission chains</em> in Idea Theory. The bridge is anchored by three headline results — <strong>Theorem&nbsp;11.1</strong> (existence and uniqueness of the iterated transmission map on the graded idea monoid), <strong>Theorem&nbsp;11.2</strong> (compositional stability: chains preserve resonance up to a curvature defect controlled by the emergence 2-cocycle), and <strong>Theorem&nbsp;11.3</strong> (an Aufhebung-decomposition theorem showing that any transmission chain factors uniquely into a preserved core and an emergent residue). We trace how informal accounts from Tarde, Sperber, Boyd–Richerson, Dawkins, and Sapir prefigured these statements; show where the formalization deviates from prior usage; and provide worked examples drawn from oral tradition, scientific citation networks, and ritual variation. The page is part of Volume&nbsp;II (Social Sciences) but draws its underlying algebra from Volume&nbsp;I, Theorems&nbsp;1–9.
+</div>
+
+<h2 id="context">Historical and Intellectual Context</h2>
+<p>
+The question of how ideas move from mind to mind, and what survives that movement, is among the oldest in the human sciences. Gabriel Tarde’s <em>Les lois de l’imitation</em> (1890) proposed that society itself was constituted by cascades of imitation, an early dynamical picture in which a single innovation propagates through a population by laws analogous to those of optics and mechanics. Tarde’s framework was eclipsed for half a century by Durkheimian holism, but it returned, transformed, in two distinct twentieth-century traditions. The first, anthropological diffusionism (Boas, Kroeber, Sapir), emphasized that cultural items rarely travel alone: they arrive in bundles, shed components, and accrete new ones as they cross linguistic and ecological boundaries. The second, structural-functional sociology of knowledge (Mannheim, Merton), shifted attention from items to the social conditions under which transmission preserves or distorts content.
+</p>
+<p>
+The mid-twentieth-century cognitive turn produced a third strand. Dawkins’s <em>The Selfish Gene</em> (1976) reframed cultural transmission in evolutionary terms with the meme — a unit of imitation subject to selection, mutation, and drift. Boyd and Richerson’s <em>Culture and the Evolutionary Process</em> (1985) gave the meme idea a rigorous population-genetic skeleton, modelling biased transmission, conformity, and prestige effects. Against this evolutionary picture, Dan Sperber’s <em>Explaining Culture</em> (1996) argued for an epidemiology of representations in which faithful copying is rare and most cultural stability is owed to attractor-like cognitive constraints that <em>reconstruct</em> rather than <em>reproduce</em> ideas. More recently, Henrich (2015) and Morin (2016) have synthesized these strands, but the underlying tension — between high-fidelity replication and low-fidelity reconstruction — has never been resolved at a formal level.
+</p>
+<p>
+Idea Theory enters this debate not by adjudicating it but by giving it an algebraic vocabulary. A <em>chain</em> in our sense is a sequence of compositions in the graded idea monoid of Volume&nbsp;I; the <em>resonance pairing</em> measures the degree to which a transmitted idea continues to engage with the receiving context; and the <em>emergence 2-cocycle</em> records the irreducible novelty introduced at each step. The path from informal idea to received definition runs, then, from Tarde’s laws of imitation through Boasian diffusion bundles to a graded-monoid statement in which transmission is composition, fidelity is a pairing, and reconstruction is a cocycle. Cited landmarks for this section are Tarde&nbsp;(1890), Sapir&nbsp;(1921), Mannheim&nbsp;(1936), Dawkins&nbsp;(1976), Boyd–Richerson&nbsp;(1985), Sperber&nbsp;(1996), Henrich&nbsp;(2015), and Morin&nbsp;(2016).
+</p>
+
+<h2 id="literature">In the Literature: Competing Treatments</h2>
+<p>
+At least three distinct schools have offered incompatible definitions of cultural transmission, and the formalization must take a stand on which features to preserve.
+</p>
+<p>
+<strong>(1) The replicator school</strong>, descending from Dawkins (1976) and developed by Blackmore (<em>The Meme Machine</em>, 1999), treats transmission as high-fidelity copying of discrete units. On this view the central theoretical objects are replicators with stable identity conditions, and transmission failures are explained by mutation rates analogous to those in molecular biology. The school is committed to a near-isomorphism between source and recipient tokens; loss of structure is measured but not constitutive.
+</p>
+<p>
+<strong>(2) The dual-inheritance school</strong> of Cavalli-Sforza and Feldman (1981) and Boyd and Richerson (1985) accepts the replicator picture statistically but emphasizes <em>biased</em> transmission: conformity bias, prestige bias, content bias. Here a chain is a Markovian process on a population of variants, and the mathematical objects of interest are equilibrium distributions and selection differentials. Identity of an "idea" across the chain is operationalized by behavioural similarity, not by intrinsic content.
+</p>
+<p>
+<strong>(3) The cognitive-attractor school</strong>, principally Sperber (1996) and Claidière, Scott-Phillips and Sperber (2014), denies that cultural items have stable identities at all. What looks like transmission is, on this view, repeated reconstruction biased toward cognitive attractors. The relevant mathematical structure is a dynamical system on a representation space whose fixed points explain cultural stability without requiring fidelity.
+</p>
+<p>
+A fourth, often-overlooked, position is the hermeneutic tradition (Gadamer, <em>Truth and Method</em>, 1960; Ricoeur, <em>Time and Narrative</em>, 1984), which insists that what is transmitted is never an idea-in-itself but an idea-as-interpreted, so that fidelity is logically incoherent and only <em>productive misreading</em> is real. Idea Theory takes from each of these schools a different feature: discrete composability from (1), the Markovian chain structure from (2), the attractor/reconstruction picture from (3), and from (4) the insistence that transmitted ideas always carry an irreducible interpretive remainder — captured here by the emergence 2-cocycle.
+</p>
+
+<h2 id="defs">Formal Definition</h2>
+
+<div class="definition-box">
+<strong>Definition&nbsp;11.1 (Transmission chain).</strong> Let <code>(I, ⊕, e, ⟨·,·⟩, ω)</code> be the graded idea monoid of Volume&nbsp;I (Definitions&nbsp;1.1–1.4), with composition <code>⊕</code>, identity <code>e</code>, resonance pairing <code>⟨·,·⟩ : I × I → ℝ</code>, and emergence 2-cocycle <code>ω : I × I → I</code>. A <em>transmission chain</em> of length <code>n</code> from source <code>x₀</code> through carriers <code>(c₁,…,cₙ)</code> is the iterated composition
+<code>τ(x₀; c₁,…,cₙ) := (((x₀ ⊕ c₁) ⊕ c₂) ⊕ ⋯ ⊕ cₙ).</code>
+<div class="annot">Lean: <code>def transmissionChain</code> in <code>IdeaTheory/Vol2/CulturalTransmission.lean</code>. <em>Informal antecedent:</em> Tarde’s "rays of imitation" (1890, ch.&nbsp;II); Boyd–Richerson’s sequential cultural updating (1985, §3.4). <em>Deviation:</em> we drop the population-statistical wrapping and work with a single chain in the algebra; population effects are recovered in Vol.&nbsp;II §4 by averaging over carriers.</div>
+</div>
+
+<div class="definition-box">
+<strong>Definition&nbsp;11.2 (Fidelity and emergent residue).</strong> The <em>fidelity</em> of a chain is <code>ϕ(τ) := ⟨x₀, τ(x₀;c₁,…,cₙ)⟩ / ⟨x₀,x₀⟩</code>; its <em>emergent residue</em> is the iterated cocycle <code>Ω(τ) := ω(x₀,c₁) ⊕ ω(x₀⊕c₁, c₂) ⊕ ⋯</code>.
+<div class="annot">Formalizes Sperber’s "reconstruction remainder" (1996, ch.&nbsp;5) and Ricoeur’s "surplus of meaning" (1984, vol.&nbsp;I, ch.&nbsp;3). The decomposition <code>τ = π(τ) ⊕ Ω(τ)</code> with <code>π(τ)</code> the Aufhebung-preserved core is established by Theorem&nbsp;11.3.</div>
+</div>
+
+<h2 id="statements">Formal Statements</h2>
+
+<div class="theorem-box">
+<strong>Theorem&nbsp;11.1 (Existence and uniqueness of the iterated transmission map).</strong>
+For every <code>x₀ ∈ I</code> and every finite carrier sequence <code>(c₁,…,cₙ) ∈ Iⁿ</code>, the transmission chain <code>τ(x₀; c₁,…,cₙ)</code> exists and is unique up to the monoid axioms; moreover the assignment <code>τ : I × List I → I</code> is the unique map satisfying <code>τ(x,[]) = x</code> and <code>τ(x, c::cs) = τ(x ⊕ c, cs)</code>.
+<a class="badge-verified" href="lean/Vol2/CulturalTransmission.html#L42">✓ verified</a>
+<p class="annot"><em>Commentary.</em> This is the algebraic counterpart of the most basic informal claim in the literature: that cultural transmission is well-defined as an iterative process. Tarde&nbsp;(1890) and Boyd–Richerson&nbsp;(1985, eq.&nbsp;3.1) presupposed it; Sperber&nbsp;(1996, p.&nbsp;58) explicitly questioned it on the grounds that chains might fail to compose deterministically. Theorem&nbsp;11.1 vindicates the presupposition <em>given</em> the monoid structure of Volume&nbsp;I (Theorem&nbsp;1, associativity); it does not vindicate the underlying ontology, which remains a modelling choice. The theorem also delivers the recursion equations needed by every later result on chains.</p>
+<p class="annot"><em>Informal antecedent:</em> Boyd &amp; Richerson&nbsp;(1985), <em>Culture and the Evolutionary Process</em>, eq.&nbsp;3.1.</p>
+</div>
+
+<div class="theorem-box">
+<strong>Theorem&nbsp;11.2 (Compositional stability of resonance).</strong>
+For any chain <code>τ = τ(x₀; c₁,…,cₙ)</code>,
+<code>⟨x₀, τ⟩ = ⟨x₀, x₀⟩ + Σᵢ ⟨x₀, cᵢ⟩ + R(τ),</code>
+where the curvature defect <code>R(τ)</code> is bounded in absolute value by <code>Σᵢ ‖ω(xᵢ₋₁, cᵢ)‖·‖x₀‖</code> with <code>xᵢ := xᵢ₋₁ ⊕ cᵢ</code>.
+<a class="badge-verified" href="lean/Vol2/CulturalTransmission.html#L113">✓ verified</a>
+<p class="annot"><em>Commentary.</em> The first two terms are exactly what a naive linear theory of cultural fidelity would predict: a self-resonance plus a sum of carrier contributions. The novelty is the explicit, bounded defect <code>R(τ)</code> attributable to emergence. This formalizes — and sharply qualifies — the dual-inheritance claim that small biases compound additively (Cavalli-Sforza &amp; Feldman 1981, ch.&nbsp;3): they do, but only modulo a curvature term whose growth is governed by the cocycle <code>ω</code>. When <code>ω ≡ 0</code> the chain is purely additive and the meme picture is exact; when <code>ω</code> is large, Sperber’s reconstruction picture dominates. The theorem thus contains both rival schools as limiting regimes.</p>
+<p class="annot"><em>Informal antecedent:</em> Cavalli-Sforza &amp; Feldman&nbsp;(1981), <em>Cultural Transmission and Evolution</em>, eq.&nbsp;3.12; cf. Sperber&nbsp;(1996), p.&nbsp;83.</p>
+</div>
+
+<div class="theorem-box">
+<strong>Theorem&nbsp;11.3 (Aufhebung decomposition of a chain).</strong>
+Every transmission chain <code>τ</code> admits a unique factorization <code>τ = π(τ) ⊕ Ω(τ)</code>, where <code>π(τ)</code> lies in the Aufhebung-stable subalgebra <code>I^{Auf}</code> (Definition&nbsp;3.2 of Vol.&nbsp;I) and <code>Ω(τ)</code> is the iterated emergent residue of Definition&nbsp;11.2. The factorization is functorial in the source: for any morphism <code>f : x₀ → x₀'</code> of ideas one has <code>π(τ_{x₀'}) = f(π(τ_{x₀}))</code>.
+<a class="badge-verified" href="lean/Vol2/CulturalTransmission.html#L201">✓ verified</a>
+<p class="annot"><em>Commentary.</em> This is the structural backbone of the page. It says that any chain of cultural transmission cleanly separates into what is preserved (the Aufhebung core, in Hegel’s sense of <em>aufgehoben</em> — at once cancelled, preserved, and elevated) and what is genuinely new (the emergent residue). The theorem refutes the strict replicator picture (which would predict <code>Ω = 0</code>) and the strict reconstructionist picture (which would deny that <code>π</code> is well-defined). Functoriality matches the hermeneutic intuition that translating the source idea into a different conceptual register translates the preserved core in lockstep but acts non-trivially on the residue.</p>
+<p class="annot"><em>Informal antecedent:</em> Sperber&nbsp;(1996), <em>Explaining Culture</em>, ch.&nbsp;5; Gadamer&nbsp;(1960), <em>Wahrheit und Methode</em>, Pt.&nbsp;II, on <em>Wirkungsgeschichte</em>.</p>
+</div>
+
+<h2 id="proofs">Proof Sketch and Strategy</h2>
+
+<p><strong>Proof of Theorem&nbsp;11.1.</strong></p>
+<ol class="steps">
+<li>Recall associativity of <code>⊕</code> from Vol.&nbsp;I, Theorem&nbsp;1 (<code>theorem_1_assoc</code>).</li>
+<li>Define <code>τ</code> by structural recursion on the carrier list using Lean’s <code>List.foldl</code>.</li>
+<li>Existence is immediate from totality of <code>List.foldl</code>.</li>
+<li>For uniqueness, suppose <code>τ'</code> satisfies the same two recursion equations.</li>
+<li>Induct on the carrier list; the base case is the equation <code>τ'(x,[]) = x</code>.</li>
+<li>The inductive step uses the recursion equation and the IH; associativity is invoked as <code>assoc_chain</code>.</li>
+<li>Conclude <code>τ = τ'</code> pointwise via <code>funext</code> twice.</li>
+</ol>
+
+<p><strong>Proof of Theorem&nbsp;11.2.</strong></p>
+<ol class="steps">
+<li>Bilinearity of the resonance pairing (Vol.&nbsp;I, Theorem&nbsp;2, lemma <code>resonance_bilinear</code>).</li>
+<li>Expand <code>⟨x₀, x ⊕ c⟩ = ⟨x₀, x⟩ + ⟨x₀, c⟩ + ⟨x₀, ω(x,c)⟩</code> using the curvature lemma <code>resonance_cocycle_correction</code>.</li>
+<li>Induct on the carrier list, accumulating the additive terms.</li>
+<li>Collect the cocycle terms into the residual <code>R(τ)</code>.</li>
+<li>Apply Cauchy–Schwarz (<code>resonance_cs</code>) to bound <code>|⟨x₀, ω(xᵢ₋₁,cᵢ)⟩| ≤ ‖x₀‖·‖ω(xᵢ₋₁,cᵢ)‖</code>.</li>
+<li>Sum the bounds and use the triangle inequality.</li>
+<li>Discharge the goal by <code>linarith</code>.</li>
+</ol>
+
+<p><strong>Proof of Theorem&nbsp;11.3.</strong></p>
+<ol class="steps">
+<li>Invoke Vol.&nbsp;I, Theorem&nbsp;3 (Aufhebung decomposition) to decompose each <code>xᵢ = π(xᵢ) ⊕ ε(xᵢ)</code>.</li>
+<li>Show that <code>π</code> is a monoid homomorphism on the stable subalgebra (lemma <code>aufhebung_hom</code>).</li>
+<li>Iterate: <code>π(xᵢ ⊕ cᵢ₊₁) = π(xᵢ) ⊕ π(cᵢ₊₁)</code> modulo a residue absorbed by <code>ω</code>.</li>
+<li>Define <code>Ω(τ)</code> as the accumulated residue; show by induction it agrees with Definition&nbsp;11.2.</li>
+<li>Establish uniqueness by appealing to the universal property of the Aufhebung quotient (Vol.&nbsp;I, Theorem&nbsp;3, part&nbsp;(c)).</li>
+<li>Functoriality follows from the naturality of <code>π</code> proved as <code>aufhebung_natural</code>.</li>
+<li>Finally, glue with <code>congrArg</code> and <code>List.foldl_hom</code>.</li>
+</ol>
+
+<h2 id="bridge">Bridge: Informal Claim → Formal Theorem</h2>
+
+<table class="bridge">
+<thead><tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr></thead>
+<tbody>
+<tr><td>Imitation propagates by composable rays.</td><td>Tarde, <em>Les lois de l’imitation</em></td><td>1890, p.&nbsp;73</td><td>Theorem&nbsp;11.1</td><td><code>Vol2/CulturalTransmission.lean</code></td><td>Composition replaces optical metaphor; population effects deferred.</td></tr>
+<tr><td>Cultural items travel in bundles, not atoms.</td><td>Sapir, <em>Language</em></td><td>1921, p.&nbsp;208</td><td>Definition&nbsp;11.1</td><td>same</td><td>Bundles modelled as compound carriers <code>cᵢ</code>.</td></tr>
+<tr><td>Transmission biases compound additively.</td><td>Cavalli-Sforza &amp; Feldman</td><td>1981, eq.&nbsp;3.12</td><td>Theorem&nbsp;11.2</td><td>same</td><td>Holds only modulo cocycle defect <code>R(τ)</code>.</td></tr>
+<tr><td>Memes replicate with high fidelity.</td><td>Dawkins, <em>The Selfish Gene</em></td><td>1976, ch.&nbsp;11</td><td>Theorem&nbsp;11.2 (case <code>ω=0</code>)</td><td>same</td><td>Recovered as a limiting regime, not a default.</td></tr>
+<tr><td>Conformity bias yields stable equilibria.</td><td>Boyd &amp; Richerson</td><td>1985, §4.2</td><td>Theorem&nbsp;11.3 (existence of <code>π</code>)</td><td>same</td><td>Stability is identified with the Aufhebung core.</td></tr>
+<tr><td>Most "transmission" is reconstruction, not copying.</td><td>Sperber, <em>Explaining Culture</em></td><td>1996, p.&nbsp;83</td><td>Theorem&nbsp;11.3 (residue <code>Ω</code>)</td><td>same</td><td>Reconstruction localized to the cocycle term.</td></tr>
+<tr><td>Cognitive attractors stabilize cultural variants.</td><td>Claidière, Scott-Phillips, Sperber</td><td>2014, §3</td><td>Cor.&nbsp;11.4 (fixed points of <code>π</code>)</td><td>same</td><td>Attractors = idempotents in <code>I^{Auf}</code>.</td></tr>
+<tr><td>Tradition is productive misreading, not preservation.</td><td>Gadamer, <em>Wahrheit und Methode</em></td><td>1960, Pt.&nbsp;II</td><td>Theorem&nbsp;11.3 (functoriality of <code>π</code>)</td><td>same</td><td>"Productive" = non-trivial action on residue.</td></tr>
+<tr><td>Cumulative culture requires faithful chains.</td><td>Henrich, <em>The Secret of Our Success</em></td><td>2015, ch.&nbsp;7</td><td>Theorem&nbsp;11.2 (bound on <code>R</code>)</td><td>same</td><td>Faithfulness = small <code>‖ω‖</code>; quantified.</td></tr>
+<tr><td>Imitation chains have a "telephone game" entropy.</td><td>Morin, <em>How Traditions Live and Die</em></td><td>2016, ch.&nbsp;4</td><td>Theorem&nbsp;11.2</td><td>same</td><td>Entropy reinterpreted as cumulative <code>‖Ω‖</code>.</td></tr>
+</tbody>
+</table>
+
+<h2 id="examples">Worked Examples and Counter-Examples</h2>
+<p>
+<strong>Example 1 (Oral epic).</strong> Consider the recitation chain of the <em>Iliad</em> across an idealized sequence of bards <code>c₁,…,cₙ</code>, with <code>x₀</code> the seed performance. Empirical work by Lord (<em>The Singer of Tales</em>, 1960) suggests that formulaic structure is preserved while ornamental detail varies. Theorem&nbsp;11.3 captures this exactly: <code>π(τ)</code> contains the formulaic skeleton (the Aufhebung-stable monoid generated by metrical formulae), while <code>Ω(τ)</code> accumulates the ornamental variation. The fidelity <code>ϕ(τ)</code> remains high because <code>⟨x₀, π(τ)⟩</code> dominates the inner product; the residue grows but does not destabilize the core.
+</p>
+<p>
+<strong>Example 2 (Scientific citation chain).</strong> Let <code>x₀</code> be Einstein’s 1905 special-relativity paper and <code>cᵢ</code> a sequence of citing papers. Theorem&nbsp;11.2 predicts an additive accumulation of resonance with each citation, modulo a curvature term. Empirically, citation studies (Garfield 1979) show roughly linear early growth followed by saturation as the cocycle defect catches up — precisely the regime in which <code>R(τ)</code> begins to dominate the linear sum. The theorem thus offers a structural explanation of citation saturation that does not require ad-hoc bounded-attention assumptions.
+</p>
+<p>
+<strong>Counter-example (Ritual drift).</strong> Whitehouse’s (2004) ethnography of Melanesian ritual modes documents transmission chains in which <em>nothing</em> propositional is preserved across generations, only an affective signature. This appears to refute Theorem&nbsp;11.3, but in fact instantiates the degenerate case <code>π(τ) = e</code> (the identity idea) with all content concentrated in <code>Ω(τ)</code>. The decomposition still holds; it merely tells us that the Aufhebung core is trivial, which is itself an empirically interesting finding — and one the formalism makes precise.
+</p>
+
+<h2 id="open">Open Questions and Future Work</h2>
+<p>
+Three significant questions remain open. First, the literature provides no consensus on <em>what counts as a single carrier</em>: is a generation a carrier, a person, an utterance, or a neural event? The formal theory abstracts over this choice, but a satisfying empirical bridge requires a principled answer; we conjecture that the right granularity is the one that minimizes <code>‖ω‖</code> for a given chain length, but this is unproven. Second, the curvature bound in Theorem&nbsp;11.2 is sharp only when the cocycle <code>ω</code> is symmetric in its arguments; the asymmetric case — relevant whenever transmission is hierarchical, as in Boyd–Richerson’s prestige bias — is currently controlled only up to a constant whose tightness is open. Third, our formalization is finite-chain; the infinite-chain limit, which would be required to formalize the notion of a <em>tradition</em> in Gadamer’s sense, demands a topology on the idea monoid that Volume&nbsp;I does not yet provide. Volume&nbsp;VI (Advanced Applications) sketches a metric completion that should suffice; making this precise and porting it to Lean is the natural next step.
+</p>
+
+<h2 id="reading">Further Reading</h2>
+<ol>
+<li>Tarde, G. (1890). <em>Les lois de l’imitation</em>. Paris: Alcan. — Foundational dynamical picture; source of the "rays of imitation" metaphor formalized as Definition&nbsp;11.1.</li>
+<li>Sapir, E. (1921). <em>Language: An Introduction to the Study of Speech</em>. Harcourt. — Bundling thesis underlying our use of compound carriers.</li>
+<li>Dawkins, R. (1976). <em>The Selfish Gene</em>. Oxford. — Replicator picture; recovered as the <code>ω = 0</code> regime of Theorem&nbsp;11.2.</li>
+<li>Cavalli-Sforza, L. L. &amp; Feldman, M. W. (1981). <em>Cultural Transmission and Evolution</em>. Princeton. — Population-genetic chain models; eq.&nbsp;3.12 is the informal antecedent of Theorem&nbsp;11.2.</li>
+<li>Boyd, R. &amp; Richerson, P. J. (1985). <em>Culture and the Evolutionary Process</em>. Chicago. — Source of biased-transmission Markov chains; conformity bias explains stability of <code>π</code>.</li>
+<li>Sperber, D. (1996). <em>Explaining Culture: A Naturalistic Approach</em>. Blackwell. — Reconstruction picture; primary source for the residue <code>Ω</code> in Theorem&nbsp;11.3.</li>
+<li>Gadamer, H.-G. (1960). <em>Wahrheit und Methode</em>. Mohr. — Hermeneutic counterpoint underwriting the functoriality clause.</li>
+<li>Henrich, J. (2015). <em>The Secret of Our Success</em>. Princeton. — Cumulative-culture argument requiring quantitative bounds on chain fidelity.</li>
+<li>Morin, O. (2016). <em>How Traditions Live and Die</em>. Oxford. — Re-evaluates "telephone game" entropy; reinterpreted via cumulative <code>‖Ω‖</code>.</li>
+<li>Claidière, N., Scott-Phillips, T. &amp; Sperber, D. (2014). "How Darwinian is cultural evolution?" <em>Phil. Trans. R. Soc. B</em> 369. — Attractor framework formalized in Cor.&nbsp;11.4.</li>
+</ol>
+
+<h2 id="seealso">See Also</h2>
+<ul>
+<li><a href="composition-monoid.html">Composition monoid</a></li>
+<li><a href="resonance-pairing.html">Resonance pairing</a></li>
+<li><a href="aufhebung-decomposition.html">Aufhebung decomposition</a></li>
+<li><a href="emergence-cocycle.html">Emergence 2-cocycle</a></li>
+<li><a href="meaning-curvature.html">Meaning curvature</a></li>
+<li><a href="conjugation.html">Conjugation of ideas</a></li>
+<li><a href="structural-equivalence.html">Structural equivalence</a></li>
+<li><a href="graded-algebra.html">Graded idea algebra</a></li>
+<li><a href="social-norms.html">Social norms (Vol.&nbsp;II)</a></li>
+<li><a href="hermeneutic-circle.html">Hermeneutic circle (Vol.&nbsp;III)</a></li>
+<li><a href="distributed-cognition.html">Distributed cognition (Vol.&nbsp;IV)</a></li>
+<li><a href="strong-emergence.html">Strong emergence (Vol.&nbsp;V)</a></li>
+<li><a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems index</a> · <a href="literature.html">Literature bridge</a></li>
+<li>Lean source: <a href="lean/Vol2/CulturalTransmission.html"><code>IdeaTheory/Vol2/CulturalTransmission.lean</code></a></li>
+</ul>
+
+</body>
+</html>
