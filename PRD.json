@@ -560,9 +560,9 @@
       "deps": [
         "tex_chapter_v2c4"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: tex/vol2/main.tex"
     },
     {
       "id": "tex_chapter_v3c5",

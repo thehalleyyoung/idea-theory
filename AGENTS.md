@@ -651,3 +651,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 52 [tex_chapter] TeX ch (V2): Transmission, Conjugation, and Cultural Change
 [tex_chapter] TeX ch (V2): Transmission, Conjugation, and Cultural Change
+
+### Iter 53 [tex_volume_main] TeX volume 2 main
+[tex_volume_main] TeX volume 2 main
