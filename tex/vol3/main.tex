@@ -1,0 +1,207 @@
+
+\documentclass[11pt,oneside]{book}
+\usepackage{../preamble}
+
+\title{Idea Theory and the Humanities\\
+\large Volume 3 of the IdeaTheory monograph}
+\author{The IdeaTheory Project}
+\date{\today}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\begin{abstract}
+This volume is the third installment of the six-volume IdeaTheory
+monograph. Where Volume~1 established a purely mathematical apparatus
+--- a graded monoid of ideas equipped with a bilinear resonance pairing
+$\langle-,-\rangle$, an Aufhebung decomposition $a\circ b = a\sqcup b
+\oplus \mathrm{Em}(a,b)$, an emergence $2$-cocycle, a meaning-curvature
+form, a conjugation action, transmission chains, and a notion of
+structural equivalence --- the present volume turns the formal
+machinery toward the humanities. Our aim is to demonstrate that the
+nine foundational theorems of Volume~1 are not merely abstract: each
+one admits a faithful, non-trivial interpretation in literary
+hermeneutics, historiography, art criticism, intellectual history,
+philology, rhetoric, and the philosophy of culture.
+
+The volume contains two chapters. Chapter~5, \emph{Hermeneutics,
+Tradition, and the Algebra of Reading}, develops the thesis that an
+act of interpretation is the application of a conjugation $a\mapsto
+g\cdot a\cdot g^{-1}$ on an idea-monoid, that hermeneutic traditions
+are transmission chains in the formal sense, and that the
+``hermeneutic circle'' is precisely the curvature term
+$\kappa(a,b)=\langle a,b\rangle - \langle b,a\rangle$ of Theorem~5.
+Chapter~6, \emph{Cultural Composition, Genre, and the Aufhebung of
+Form}, reads the Aufhebung decomposition as a model of how cultural
+artifacts (genres, styles, period concepts) compose: the $\sqcup$ part
+captures preserved formal material and the $\mathrm{Em}$ part captures
+genuine artistic or historical novelty. The emergence cocycle is shown
+to encode the associativity constraints any serious theory of
+intertextuality must satisfy.
+
+Each chapter follows the project's literature-bridge mandate. A
+\emph{Background from the Literature} section locates the discussion
+within Gadamer, Ricoeur, Jauss, Bakhtin, Auerbach, Bloom, Skinner,
+Pocock, Moretti, and the Begriffsgeschichte tradition. A
+\emph{From Informal Claims to Formal Statements} table translates
+named humanistic theses into precise statements which are then
+discharged against the Lean~4 theorems of Volume~1. The volume thus
+serves as a bridge: it does not re-prove mathematics, but exhibits
+the existing Lean-verified theorems as the formal core underlying
+recognizable claims in the humanities, and it identifies which
+informal claims do, and which do not, follow from the axioms.
+
+The reader is expected to have skimmed Volume~1 (or at least its
+statement of the nine theorems) and to be sympathetic to, though not
+expert in, contemporary humanistic theory.
+\end{abstract}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter*{Preface to Volume 3}
+\addcontentsline{toc}{chapter}{Preface to Volume 3}
+
+\section*{Motivation}
+The humanities have long generated formidable theoretical
+vocabularies --- hermeneutics, dialectics, intertextuality, genre
+theory, Begriffsgeschichte, reception aesthetics --- whose internal
+coherence is rarely tested against any precise mathematical standard.
+Volume~1 of this monograph proved nine theorems about a graded
+monoid of ``ideas'' equipped with a bilinear resonance pairing, an
+Aufhebung decomposition, and an emergence $2$-cocycle. Those proofs
+were carried out in Lean~4 and are, in a literal sense, machine
+checked. The present volume asks: \emph{which familiar humanistic
+theses are theorems of this apparatus, which are independent
+hypotheses, and which are simply false once stated precisely?}
+
+This is not an exercise in scientism. We do not claim that hermeneutic
+practice is ``really'' algebra. We claim, more modestly, that several
+of the most-quoted structural assertions in twentieth-century
+humanistic theory --- that interpretation is an action of a tradition
+on a text, that meaning has a curvature, that emergence in cultural
+composition is associative up to a $2$-cocycle, that transmission
+preserves resonance up to conjugation --- have precise formal
+counterparts whose status (theorem, axiom, or refuted conjecture) can
+be settled inside Volume~1's framework.
+
+\section*{Intended Audience}
+The volume is written for three overlapping audiences: humanists who
+are curious whether formal methods can capture anything they care
+about; mathematicians and computer scientists who want to see the
+Volume~1 theorems put under interpretive load; and historians and
+philosophers of ideas who already work with semi-formal models
+(Lovejoy's unit-ideas, Koselleck's Begriffe, Moretti's distant
+reading) and want a rigorous backbone.
+
+\section*{Prerequisites}
+Familiarity with Volume~1's statements (not its proofs) is
+sufficient. The nine theorems are reproduced in the appendix of
+each chapter where invoked. No Lean experience is required to read
+the prose; readers who wish to inspect the formal artifacts are
+referred to Appendix~A, which lists the Lean~4 files relevant to
+this volume.
+
+\section*{Reading Order}
+Chapters may be read in either order, though Chapter~5 introduces
+the conjugation/curvature reading of interpretation that Chapter~6
+re-uses when discussing genre transformation. Readers primarily
+interested in literary form should begin with Chapter~6; readers
+primarily interested in interpretation, tradition, and intellectual
+history should begin with Chapter~5.
+
+\section*{Relation to the Other Volumes}
+Volume~2 (Social Sciences) and Volume~4 (Cognitive Science and
+Philosophy of Mind) share the conjugation/curvature apparatus
+deployed here but apply it to different objects (institutions,
+mental representations). Volume~5 (Emergence) develops the
+$2$-cocycle reading of $\mathrm{Em}$ in much greater technical
+depth; we cite but do not duplicate that material. Volume~6
+(Advanced Applications) returns to several humanistic themes
+opened here, in particular the question of whether long
+transmission chains stabilize a canonical resonance class.
+
+\section*{Guided Tour}
+Chapter~5 opens with a re-reading of Gadamer's \emph{Wahrheit und
+Methode} in which the ``fusion of horizons'' is reconstructed as a
+specific instance of Theorem~6 (the conjugation action) and the
+hermeneutic circle is shown to coincide with the antisymmetric part
+of the resonance pairing (Theorem~5, meaning curvature). We then
+treat Ricoeur's threefold mimesis as a transmission chain in the
+sense of Theorem~7, and use Theorem~8 (structural equivalence) to
+articulate when two interpretive traditions count as ``the same.''
+
+Chapter~6 turns to cultural composition. We argue that genre is the
+graded part of the idea-monoid (Theorem~9), that period style is a
+conjugacy class, and that what Bakhtin calls ``the novelization of
+discourse'' is the non-vanishing of the emergence term
+$\mathrm{Em}(a,b)$ in the Aufhebung decomposition of Theorem~3. The
+chapter closes with a precise restatement, and partial verification,
+of Bloom's ``anxiety of influence'' as a non-commutativity claim
+about composition.
+
+Each chapter ends with a \emph{From Informal Claims to Formal
+Statements} table cross-referenced to the Lean~4 theorems of
+Volume~1, and a \emph{Further Reading} list keyed to
+\texttt{../references.bib}.
+
+\input{ch5}
+\input{ch6}
+
+\appendix
+\chapter{Lean 4 Files Relevant to Volume 3}
+This volume does not introduce new Lean files; it interprets the
+Volume~1 formalization. The following files are cited throughout.
+
+\paragraph{\texttt{IdeaTheory/Composition.lean}.}
+Defines the graded idea monoid and proves Theorem~1 (associativity
+and unit laws of $\circ$). Cited in Chapter~6 wherever cultural
+composition is modeled.
+
+\paragraph{\texttt{IdeaTheory/Resonance.lean}.}
+Defines the bilinear resonance pairing $\langle-,-\rangle$ and proves
+Theorem~2. Cited in Chapter~5 in the discussion of interpretive
+``fit'' and in Chapter~6 for genre resonance.
+
+\paragraph{\texttt{IdeaTheory/Aufhebung.lean}.}
+Establishes the decomposition $a\circ b = a\sqcup b\oplus
+\mathrm{Em}(a,b)$ (Theorem~3). The semantic backbone of Chapter~6's
+account of genre and form.
+
+\paragraph{\texttt{IdeaTheory/EmergenceCocycle.lean}.}
+Proves the $2$-cocycle identity for $\mathrm{Em}$ (Theorem~4). Used
+in Chapter~6 to formalize associativity of intertextual layering.
+
+\paragraph{\texttt{IdeaTheory/Curvature.lean}.}
+Defines $\kappa(a,b)=\langle a,b\rangle-\langle b,a\rangle$ and
+proves the meaning-curvature theorem (Theorem~5). The formal heart
+of Chapter~5's reconstruction of the hermeneutic circle.
+
+\paragraph{\texttt{IdeaTheory/Conjugation.lean}.}
+Proves Theorem~6 (the conjugation action $a\mapsto g\cdot a\cdot
+g^{-1}$ is a monoid automorphism preserving resonance up to a
+controlled twist). Underwrites the formal account of interpretation
+as situated reading in Chapter~5.
+
+\paragraph{\texttt{IdeaTheory/Chains.lean}.}
+Proves Theorem~7 on transmission chains, including the resonance
+telescoping inequality. Cited in Chapter~5 (tradition) and
+Chapter~6 (canon formation).
+
+\paragraph{\texttt{IdeaTheory/Equivalence.lean}.}
+Proves Theorem~8: structural equivalence is a congruence with
+respect to $\circ$, $\sqcup$, and $\mathrm{Em}$. Used in Chapter~5
+to make precise when two interpretive traditions are ``the same.''
+
+\paragraph{\texttt{IdeaTheory/Grading.lean}.}
+Proves Theorem~9 on the grading of the idea monoid. Provides the
+formal counterpart of genre and period in Chapter~6.
+
+\backmatter
+\bibliographystyle{alpha}
+\bibliography{../references}
+
+\end{document}
+=== END FILE ===
