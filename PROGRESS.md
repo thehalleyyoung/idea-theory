@@ -1224,3 +1224,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/graded-idea-algebra.html: broken link → vol1-foundations.html
   - docs/graded-idea-algebra.html: broken link → vol5-emergence.html
   - docs/graded-idea-algebra.html: broken link → vol6-advanced.html
+
+## Iter 37 — 2026-04-27 17:59
+**Task:** `website_concept_9` Website page: graded idea algebra (attempt 2)  
+**Verdict:** ✓ PASS  
