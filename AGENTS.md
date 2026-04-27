@@ -378,3 +378,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 05 [lean_theorems] Lean theorems: Aufhebung decomposition
 [lean_theorems] Lean theorems: Aufhebung decomposition
+
+### Iter 06 [lean_theorems] Lean theorems: emergence cocycle
+[lean_theorems] Lean theorems: emergence cocycle
