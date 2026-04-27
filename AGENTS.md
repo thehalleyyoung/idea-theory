@@ -117,3 +117,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 29 [lean_theorems] Lean theorems: Advanced Properties
 [lean_theorems] Lean theorems: Advanced Properties — bounced: lean/IdeaTheory/Theorems4.lean: contains `sorry`; lean/IdeaTheory/Theorems4.lean: contains `admit`
+
+### Iter 30 [lean_theorems] Lean theorems: Advanced Properties
+[lean_theorems] Lean theorems: Advanced Properties — bounced: lean/IdeaTheory/Theorems4.lean: contains `sorry`; lean/IdeaTheory/Theorems4.lean: contains `admit`
