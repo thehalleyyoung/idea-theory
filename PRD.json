@@ -76,8 +76,8 @@
         "foundations"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "missing file: lean/IdeaTheory/Theorems3.lean"
     },
     {
       "id": "theorems_4",

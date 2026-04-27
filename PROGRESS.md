@@ -139,3 +139,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 15 — 2026-04-26 23:39
 **Task:** `theorems_2` Lean theorems: Basic Theorems (attempt 18)  
 **Verdict:** ✓ PASS  
+
+## Iter 16 — 2026-04-26 23:49
+**Task:** `theorems_3` Lean theorems: Composition and Identity (attempt 1)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - missing file: lean/IdeaTheory/Theorems3.lean
