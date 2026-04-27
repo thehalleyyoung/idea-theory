@@ -1110,3 +1110,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/aufhebung-decomposition.html: broken link → transmission-chains.html
   - docs/aufhebung-decomposition.html: broken link → transmission-chains.html
   - docs/aufhebung-decomposition.html: broken link → graded-algebra.html
+
+## Iter 25 — 2026-04-27 17:35
+**Task:** `website_concept_3` Website page: Aufhebung decomposition (attempt 2)  
+**Verdict:** ✓ PASS  

@@ -292,9 +292,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/aufhebung-decomposition.html: broken link \u2192 transmission-chains.html; docs/aufhebung-decomposition.html: broken link \u2192 graded-algebra.html; docs/aufhebung-decomposition.html: broken link \u2192 vol1-foundations.html; docs/aufhebung-decomposition.html: broken link \u2192 vol2-social.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/aufhebung-decomposition.html"
     },
     {
       "id": "website_concept_4",
