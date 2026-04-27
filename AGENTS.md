@@ -366,3 +366,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 01 [lean_toolchain] Lean toolchain and lakefile
 [lean_toolchain] Lean toolchain and lakefile
+
+### Iter 02 [lean_foundations] Lean 4 foundations
+[lean_foundations] Lean 4 foundations
