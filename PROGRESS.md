@@ -748,3 +748,12 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - missing file: lean/IdeaTheory/Theorems10.lean
+
+## Iter 14 — 2026-04-27 13:57
+**Task:** `theorems_10` Lean theorems: semantic weight (attempt 3)  
+**Verdict:** ✗ BOUNCE (4 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems10.lean: contains `sorry`
+  - lean/IdeaTheory/Theorems10.lean: contains `admit`
+  - lean/IdeaTheory/Theorems10.lean: contains `native_decide`
+  - lean/IdeaTheory/Theorems10.lean: missing namespace declaration
