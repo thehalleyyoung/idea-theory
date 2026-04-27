@@ -339,3 +339,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 03 [lean_theorems] Lean theorems: idea structure
 [lean_theorems] Lean theorems: idea structure
+
+### Iter 04 [lean_theorems] Lean theorems: composition
+[lean_theorems] Lean theorems: composition
