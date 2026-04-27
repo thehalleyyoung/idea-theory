@@ -282,3 +282,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 01 [lean_theorems] Lean theorems: Basic Theorems
 [lean_theorems] Lean theorems: Basic Theorems
+
+### Iter 02 [lean_theorems] Lean theorems: Composition and Identity
+[lean_theorems] Lean theorems: Composition and Identity
