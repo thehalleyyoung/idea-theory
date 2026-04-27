@@ -246,3 +246,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 03 [lean_theorems] Lean theorems: Composition and Identity
 [lean_theorems] Lean theorems: Composition and Identity
+
+### Iter 04 [lean_theorems] Lean theorems: Advanced Properties
+[lean_theorems] Lean theorems: Advanced Properties — bounced: missing file: lean/IdeaTheory/Theorems8.lean

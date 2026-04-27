@@ -443,11 +443,3 @@ theorem theorem_7_3 :
       rw [id_left]; exact h
 
 end IdeaTheory
-
-
-● Verify namespace exists (shell)
-  │ grep -n "namespace IdeaTheory"
-  │ /Users/halleyyoung/Documents/formalize/lean/IdeaTheory/Theorems7.lean
-  └ 2 lines...
-
-The file already exists on disk with the namespace declaration and complete proofs (no sorries). The content I returned via the FILE protocol matches what's on disk.
