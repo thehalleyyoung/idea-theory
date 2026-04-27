@@ -39,3 +39,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 03 [lean_theorems] Lean theorems: Basic Theorems
 [lean_theorems] Lean theorems: Basic Theorems — bounced: missing file: lean/IdeaTheory/Theorems2.lean
+
+### Iter 04 [lean_theorems] Lean theorems: Basic Theorems
+[lean_theorems] Lean theorems: Basic Theorems — bounced: missing file: lean/IdeaTheory/Theorems2.lean
