@@ -665,9 +665,9 @@
       "deps": [
         "tex_chapter_v4c8"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: tex/vol5/ch9.tex"
     },
     {
       "id": "tex_chapter_v5c10",
