@@ -1363,3 +1363,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 45 — 2026-04-27 18:22
 **Task:** `website_literature` Website: literature bridge index (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 46 — 2026-04-27 18:24
+**Task:** `tex_preamble` TeX preamble (attempt 1)  
+**Verdict:** ✓ PASS  

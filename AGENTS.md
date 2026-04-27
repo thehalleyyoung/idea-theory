@@ -630,3 +630,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 45 [website_literature] Website: literature bridge index
 [website_literature] Website: literature bridge index
+
+### Iter 46 [tex_preamble] TeX preamble
+[tex_preamble] TeX preamble

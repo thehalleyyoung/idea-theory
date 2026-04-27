@@ -1,0 +1,213 @@
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{preamble}[2026/04/27 IdeaTheory shared preamble]
+
+%% =====================================================================
+%% IdeaTheory --- shared LaTeX preamble
+%% Used by all six volumes:
+%%   Vol I   Mathematical Foundations of Idea Theory
+%%   Vol II  Idea Theory and the Social Sciences
+%%   Vol III Idea Theory and the Humanities
+%%   Vol IV  Idea Theory, Cognitive Science, and Philosophy of Mind
+%%   Vol V   Emergence: A Formal Theory
+%%   Vol VI  Advanced Applications and Unifying Perspectives
+%%
+%% Literature-bridge mandate: every chapter using this preamble is
+%% expected to include a "Background from the Literature" section and
+%% a "From Informal Claims to Formal Statements" translation table,
+%% supported by the macros provided below.
+%% =====================================================================
+
+%% ---------- Core typography ------------------------------------------
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{lmodern}
+\RequirePackage{microtype}
+\RequirePackage[english]{babel}
+\RequirePackage{geometry}
+\geometry{a4paper,margin=1in}
+\RequirePackage{setspace}
+\RequirePackage{parskip}
+
+%% ---------- Math ------------------------------------------------------
+\RequirePackage{amsmath,amssymb,amsthm,mathtools}
+\RequirePackage{stmaryrd}
+\RequirePackage{mathrsfs}
+\RequirePackage{bm}
+
+%% ---------- Graphics, tables, lists ----------------------------------
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{longtable}
+\RequirePackage{tabularx}
+\RequirePackage{multirow}
+\RequirePackage{enumitem}
+\RequirePackage{tikz}
+\RequirePackage{tikz-cd}
+\usetikzlibrary{arrows.meta,positioning,calc,decorations.pathmorphing}
+
+%% ---------- Code / Lean listings -------------------------------------
+\RequirePackage{listings}
+\definecolor{leanbg}{RGB}{248,248,248}
+\definecolor{leankw}{RGB}{0,0,160}
+\definecolor{leancm}{RGB}{100,120,100}
+\definecolor{leanst}{RGB}{160,40,40}
+\lstdefinelanguage{Lean}{
+  morekeywords={theorem,lemma,def,structure,class,instance,variable,variables,
+    namespace,end,open,section,import,axiom,inductive,abbrev,example,
+    let,fun,if,then,else,match,with,do,return,by,where,rfl,intro,intros,
+    apply,exact,have,show,refine,simp,ring,calc,refl,this,sorry},
+  sensitive=true,
+  morecomment=[l]{--},
+  morecomment=[s]{/-}{-/},
+  morestring=[b]",
+}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{leanbg},
+  keywordstyle=\color{leankw}\bfseries,
+  commentstyle=\color{leancm}\itshape,
+  stringstyle=\color{leanst},
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{black!30},
+  columns=fullflexible,
+  keepspaces=true,
+  language=Lean,
+}
+\newcommand{\leaninline}[1]{\lstinline[language=Lean]!#1!}
+
+%% ---------- Hyperlinks & cross-references (load late) ----------------
+\RequirePackage[colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=teal!60!black,
+  urlcolor=blue!55!black]{hyperref}
+\RequirePackage{cleveref}
+
+%% ---------- Bibliography ---------------------------------------------
+%% Volumes use \bibliography{references} with bibtex/biber as configured
+%% per-volume; the shared references.bib at the project root holds all
+%% literature entries (Hegel, Lakoff, Sperber, Dawkins, Sawyer, Chalmers,
+%% Bedau, Anderson, Kim, Mac Lane, etc.).
+
+%% =====================================================================
+%% Theorem environments
+%% =====================================================================
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{notation}[theorem]{Notation}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interpretation}[theorem]{Interpretation}
+
+%% =====================================================================
+%% Idea Theory notation
+%% =====================================================================
+%% Carrier and grading
+\newcommand{\Ideas}{\mathcal{I}}                  % set of ideas
+\newcommand{\IdeaAlg}{\mathbb{I}}                 % graded idea algebra
+\newcommand{\grade}[1]{\lvert #1 \rvert}          % grading |x|
+\newcommand{\Igrade}[1]{\Ideas_{#1}}              % graded piece I_n
+
+%% Composition / monoid
+\newcommand{\compose}{\mathbin{\diamond}}         % idea composition
+\newcommand{\unit}{\mathbf{1}}                    % unit idea
+\newcommand{\IdMon}{(\Ideas,\compose,\unit)}      % the idea monoid
+
+%% Resonance pairing
+\newcommand{\res}[2]{\langle #1 \mathbin{\Vert} #2 \rangle}
+\newcommand{\Res}{\mathsf{R}}                     % bilinear form symbol
+
+%% Aufhebung decomposition
+\newcommand{\Auf}{\mathfrak{A}}                   % Aufhebung operator
+\newcommand{\preserve}{\mathsf{P}}
+\newcommand{\negate}{\mathsf{N}}
+\newcommand{\elevate}{\mathsf{E}}
+\newcommand{\auftriple}[3]{(#1,#2,#3)}
+
+%% Emergence cocycle and curvature
+\newcommand{\emerg}{\omega}                       % 2-cocycle
+\newcommand{\dcoc}{\partial}                      % cocycle differential
+\newcommand{\curv}{\kappa}                        % meaning curvature
+\newcommand{\Curv}{\mathrm{K}}
+
+%% Conjugation, chains, equivalence
+\newcommand{\conj}[2]{{}^{#1}\!#2}                % conjugation action
+\newcommand{\chain}[1]{\mathsf{Ch}(#1)}
+\newcommand{\equivIdea}{\sim_{\Ideas}}
+\newcommand{\quotIdeas}{\Ideas/{\equivIdea}}
+
+%% Misc shorthands
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\eqdef}{\mathrel{\vcentcolon=}}
+\newcommand{\defeq}{\mathrel{\vcentcolon=}}
+\newcommand{\set}[1]{\{\,#1\,\}}
+\newcommand{\abs}[1]{\lvert #1 \rvert}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+
+%% =====================================================================
+%% Literature-bridge macros
+%% =====================================================================
+%% Section/environment for the mandatory "Background from the Literature".
+\newcommand{\litbackground}[1][Background from the Literature]{%
+  \section*{#1}\addcontentsline{toc}{section}{#1}}
+
+%% Environment for "From Informal Claims to Formal Statements" tables.
+\newenvironment{bridgetable}[1][From Informal Claims to Formal Statements]{%
+  \begin{table}[ht]
+  \centering
+  \caption*{\textbf{#1}}
+  \small
+  \begin{tabularx}{\linewidth}{@{}p{0.30\linewidth} p{0.18\linewidth} X@{}}
+    \toprule
+    \textbf{Informal claim (source)} & \textbf{Formal object} & \textbf{Lean / theorem reference}\\
+    \midrule
+}{%
+    \bottomrule
+  \end{tabularx}
+  \end{table}
+}
+\newcommand{\bridgerow}[3]{#1 & #2 & #3 \\}
+
+%% Inline literature anchor: \litcite{Hegel1807}{Phenomenology, \S\,178}
+\newcommand{\litcite}[2]{\citeauthor{#1}~(\citeyear{#1}, #2)}
+
+%% Pointer to a Lean theorem; expects a label set via \leantarget.
+\newcommand{\leanref}[1]{\textsf{Lean:}~\texttt{#1}}
+\newcommand{\leantarget}[1]{\hypertarget{lean:#1}{}\texttt{#1}}
+
+%% "In the Literature" callout box (lightweight, no extra packages).
+\newenvironment{intheliterature}{%
+  \par\medskip\noindent\textbf{In the Literature.}\itshape\ignorespaces
+}{\par\medskip}
+
+%% "Further Reading" list.
+\newenvironment{furtherreading}{%
+  \par\medskip\noindent\textbf{Further Reading.}\begin{itemize}[leftmargin=1.5em,itemsep=2pt]
+}{\end{itemize}\par\medskip}
+
+%% Volume header helper (used by each volume's main file).
+\newcommand{\volumeheader}[2]{%
+  \begin{center}
+    {\Large\scshape Idea Theory}\\[2pt]
+    {\large Volume #1: #2}
+  \end{center}\medskip}
+
+\endinput

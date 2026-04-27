@@ -455,9 +455,9 @@
         "tex/preamble.sty"
       ],
       "deps": [],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: tex/preamble.sty"
     },
     {
       "id": "tex_bib",
