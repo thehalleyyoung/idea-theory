@@ -1167,3 +1167,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/conjugation-action.html: broken link → vol5-emergence.html
   - docs/conjugation-action.html: broken link → vol6-advanced.html
   - docs/conjugation-action.html: broken link → idea-composition-monoid.html
+
+## Iter 31 — 2026-04-27 17:46
+**Task:** `website_concept_6` Website page: conjugation action (attempt 2)  
+**Verdict:** ✓ PASS  

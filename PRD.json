@@ -337,9 +337,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/conjugation-action.html: broken link \u2192 lean-source.html; docs/conjugation-action.html: broken link \u2192 idea-composition-monoid.html; docs/conjugation-action.html: broken link \u2192 vol1-foundations.html; docs/conjugation-action.html: broken link \u2192 vol2-social.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/conjugation-action.html"
     },
     {
       "id": "website_concept_7",
