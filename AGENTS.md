@@ -528,3 +528,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 11 [lean_theorems] Lean theorems: graded idea algebra
 [lean_theorems] Lean theorems: graded idea algebra
+
+### Iter 12 [lean_theorems] Lean theorems: social composition
+[lean_theorems] Lean theorems: social composition
