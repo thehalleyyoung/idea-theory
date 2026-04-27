@@ -1028,3 +1028,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - docs/style.css: missing sidebar/nav element
+
+## Iter 17 — 2026-04-27 17:17
+**Task:** `website_css` Website CSS (attempt 2)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - docs/style.css: missing sidebar/nav element

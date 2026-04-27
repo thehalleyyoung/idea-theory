@@ -224,7 +224,7 @@
       ],
       "deps": [],
       "passes": false,
-      "attempts": 1,
+      "attempts": 2,
       "reviewer_notes": "docs/style.css: missing sidebar/nav element"
     },
     {
