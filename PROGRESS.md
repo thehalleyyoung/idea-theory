@@ -656,3 +656,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 02 — 2026-04-27 12:36
 **Task:** `foundations` Lean 4 foundations (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 03 — 2026-04-27 12:39
+**Task:** `theorems_1` Lean theorems: idea structure (attempt 1)  
+**Verdict:** ✓ PASS  
