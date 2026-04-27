@@ -552,3 +552,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 19 [website_index] Website index + navigation pages
 [website_index] Website index + navigation pages
+
+### Iter 20 [website_concept] Website page: idea monoid
+[website_concept] Website page: idea monoid — bounced: docs/idea-monoid.html: broken link → emergence-cocycle.html; docs/idea-monoid.html: broken link → conjugation.html

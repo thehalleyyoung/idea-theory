@@ -1044,3 +1044,29 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 19 — 2026-04-27 17:21
 **Task:** `website_index` Website index + navigation pages (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 20 — 2026-04-27 17:24
+**Task:** `website_concept_1` Website page: idea monoid (attempt 1)  
+**Verdict:** ✗ BOUNCE (21 issues)  
+**Issues:**
+  - docs/idea-monoid.html: broken link → emergence-cocycle.html
+  - docs/idea-monoid.html: broken link → conjugation.html
+  - docs/idea-monoid.html: broken link → transmission-chains.html
+  - docs/idea-monoid.html: broken link → graded-algebra.html
+  - docs/idea-monoid.html: broken link → vol2-social.html
+  - docs/idea-monoid.html: broken link → vol3-humanities.html
+  - docs/idea-monoid.html: broken link → vol4-cognition.html
+  - docs/idea-monoid.html: broken link → vol5-emergence.html
+  - docs/idea-monoid.html: broken link → vol6-advanced.html
+  - docs/idea-monoid.html: broken link → emergence-cocycle.html
+  - docs/idea-monoid.html: broken link → conjugation.html
+  - docs/idea-monoid.html: broken link → graded-algebra.html
+  - docs/idea-monoid.html: broken link → emergence-cocycle.html
+  - docs/idea-monoid.html: broken link → conjugation.html
+  - docs/idea-monoid.html: broken link → transmission-chains.html
+  - docs/idea-monoid.html: broken link → graded-algebra.html
+  - docs/idea-monoid.html: broken link → vol2-social.html
+  - docs/idea-monoid.html: broken link → vol3-humanities.html
+  - docs/idea-monoid.html: broken link → vol4-cognition.html
+  - docs/idea-monoid.html: broken link → vol5-emergence.html
+  - docs/idea-monoid.html: broken link → vol6-advanced.html
