@@ -669,3 +669,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 58 [tex_chapter] TeX ch (V4): Curvature, Conceptual Blending, and Mental Emergence
 [tex_chapter] TeX ch (V4): Curvature, Conceptual Blending, and Mental Emergence
+
+### Iter 59 [tex_volume_main] TeX volume 4 main
+[tex_volume_main] TeX volume 4 main
