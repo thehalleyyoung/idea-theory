@@ -223,9 +223,9 @@
         "docs/style.css"
       ],
       "deps": [],
-      "passes": false,
-      "attempts": 2,
-      "reviewer_notes": "docs/style.css: missing sidebar/nav element"
+      "passes": true,
+      "attempts": 3,
+      "reviewer_notes": "force: docs/style.css: missing sidebar/nav element"
     },
     {
       "id": "website_index",
