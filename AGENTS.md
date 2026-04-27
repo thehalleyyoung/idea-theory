@@ -93,3 +93,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 21 [lean_theorems] Lean theorems: Advanced Properties
 [lean_theorems] Lean theorems: Advanced Properties — bounced: missing file: lean/IdeaTheory/Theorems4.lean
+
+### Iter 22 [lean_theorems] Lean theorems: Advanced Properties
+[lean_theorems] Lean theorems: Advanced Properties — bounced: missing file: lean/IdeaTheory/Theorems4.lean
