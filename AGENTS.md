@@ -642,3 +642,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 49 [tex_chapter] TeX ch (V1): Graded Algebra and Structural Equivalence
 [tex_chapter] TeX ch (V1): Graded Algebra and Structural Equivalence
+
+### Iter 50 [tex_volume_main] TeX volume 1 main
+[tex_volume_main] TeX volume 1 main

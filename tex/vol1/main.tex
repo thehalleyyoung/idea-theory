@@ -1,0 +1,203 @@
+
+\documentclass[11pt,oneside]{book}
+\usepackage{../preamble}
+
+\title{Mathematical Foundations of Idea Theory\\
+\large Volume 1 of the IdeaTheory monograph}
+\author{The IdeaTheory Project}
+\date{\today}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\begin{abstract}
+This volume lays the purely mathematical foundations of \emph{Idea Theory},
+the formal framework developed throughout the six-volume IdeaTheory
+monograph. An \emph{idea} is modelled as an element of a graded monoid
+$(I,\circ,e,\deg)$ equipped with a bilinear \emph{resonance pairing}
+$\rho : I \times I \to \mathbb{R}$, an \emph{Aufhebung decomposition}
+$a \circ b = \mathsf{pres}(a,b) + \mathsf{neg}(a,b) + \mathsf{syn}(a,b)$,
+and an \emph{emergence 2-cocycle} $\varepsilon$ measuring the failure of
+composition to be strictly additive on a chosen valuation. From these data
+we derive nine theorems whose statements and proofs are entirely
+mathematical: (1) the composition theorem establishing the monoid
+structure; (2) the bilinearity and non-degeneracy of the resonance
+pairing; (3) the existence and uniqueness of the Aufhebung decomposition;
+(4) the 2-cocycle identity for emergence; (5) the curvature theorem
+relating asymmetry of $\rho$ to a closed 2-form on $I$; (6) the
+conjugation theorem describing the action of invertible ideas by inner
+automorphism; (7) the chain theorem on iterated composition and
+transmission; (8) the structural-equivalence theorem characterising
+isomorphism classes of idea algebras; and (9) the grading theorem
+asserting that $\deg$ extends to a homomorphism into a totally ordered
+abelian group.
+
+The volume is deliberately self-contained and prerequisite-light: only
+elementary linear algebra, basic group and monoid theory, and a working
+familiarity with bilinear forms and 2-cocycles in the sense of group
+cohomology are assumed. Every definition is given twice — once in
+ordinary mathematical prose, once as it appears in the accompanying
+Lean~4 formalisation under the namespace \texttt{IdeaTheory} — and every
+theorem is stated with an explicit cross-reference to its machine-checked
+counterpart. A dedicated \emph{From Informal Claims to Formal Statements}
+table appears in each chapter, making the bridge between the
+non-formalised literature on ideas, concepts, and emergence and the
+fully verified Lean theorems entirely transparent.
+
+The remaining five volumes of the monograph reinterpret this single
+algebraic apparatus in five different domains: the social sciences
+(Volume~2), the humanities (Volume~3), cognitive science and the
+philosophy of mind (Volume~4), the philosophical problem of emergence
+(Volume~5), and a collection of advanced and unifying applications
+(Volume~6). The mathematics proved here is therefore the common spine
+of the entire project: every applied claim made in Volumes~2--6 is, in
+the end, an instance of one of the nine theorems established in this
+volume. Readers who care only about the formal core may stop after
+Volume~1; readers interested in interpretation will find that no further
+mathematics is needed beyond what is proved here.
+\end{abstract}
+
+\tableofcontents
+
+\chapter*{Preface to Volume~1}
+\addcontentsline{toc}{chapter}{Preface to Volume~1}
+
+\section*{Motivation}
+Talk of ``ideas'' pervades the social sciences, the humanities,
+cognitive science, and philosophy, yet the word has never had a
+mathematically respectable referent. Authors as different as
+Lovejoy~\cite{lovejoy1936}, Sperber~\cite{sperber1996}, Dennett~\cite{dennett1995},
+and Deacon~\cite{deacon2012} use ``idea'' to denote something that can
+be \emph{combined}, that can \emph{resonate} with or \emph{negate}
+another idea, that can \emph{emerge} from simpler constituents, and
+that can be \emph{transmitted} along chains of agents. Idea Theory
+takes these four verbs at face value and asks: \emph{is there a single
+algebraic object on which all four operations live, and in which the
+familiar informal claims become provable theorems?} Volume~1 answers
+yes, and proves the nine theorems that justify the answer.
+
+\section*{Intended audience and prerequisites}
+This volume is written for mathematicians, formal-methods researchers,
+and mathematically inclined philosophers and social scientists. The
+prerequisites are modest: undergraduate abstract algebra (groups,
+monoids, rings), undergraduate linear algebra (bilinear forms, dual
+spaces), and a passing acquaintance with the language of category
+theory and group cohomology — chiefly the notion of a 2-cocycle. No
+prior exposure to Lean~4 is required to read the prose; readers who
+wish to inspect the formalisation will find a gentle introduction in
+Chapter~1, and the project's \texttt{lakefile.lean} compiles against
+a current Mathlib release.
+
+\section*{Reading order}
+The volume contains two chapters. Chapter~1 fixes notation,
+introduces the data $(I,\circ,e,\deg,\rho,\mathsf{pres},
+\mathsf{neg},\mathsf{syn},\varepsilon)$ of an \emph{idea algebra},
+and proves Theorems~1--5 (composition, pairing, decomposition,
+cocycle, curvature). Chapter~2 proves Theorems~6--9 (conjugation,
+chains, equivalence, grading) and closes with a structure theorem
+classifying finite-dimensional idea algebras up to isomorphism.
+A reader in a hurry may read \S1.1--\S1.3 and \S2.4 and skip the
+rest on first pass; a reader wishing to use Volume~1 as a reference
+for any of Volumes~2--6 should read it linearly.
+
+\section*{Relation to the other five volumes}
+Volume~2 (\emph{Idea Theory and the Social Sciences}) interprets
+$\circ$ as cultural transmission and $\rho$ as ideological
+alignment. Volume~3 (\emph{Idea Theory and the Humanities}) reads
+the Aufhebung decomposition as a model of dialectical reading and
+intertextuality. Volume~4 (\emph{Cognitive Science and the
+Philosophy of Mind}) identifies the curvature 2-form with a measure
+of conceptual incongruity in mental representation. Volume~5
+(\emph{Emergence: A Formal Theory}) is a sustained meditation on the
+2-cocycle $\varepsilon$ as the precise mathematical content of the
+philosophical notion of emergence. Volume~6 (\emph{Advanced
+Applications and Unifying Perspectives}) collects applications that
+do not fit cleanly into a single discipline. \emph{None of those
+volumes prove any new mathematics}: every formal claim they invoke
+is one of the nine theorems below.
+
+\section*{Bridge to the Lean~4 formalisation}
+Every definition, lemma, and theorem in this volume has a
+machine-checked counterpart under the Lean namespace
+\texttt{IdeaTheory}. The appendix to this volume lists every Lean
+file relevant to Volume~1 with a one-paragraph description, and each
+chapter contains a \emph{From Informal Claims to Formal Statements}
+translation table mapping prose statements to their Lean names.
+
+\mainmatter
+
+\input{ch1}
+\input{ch2}
+
+\appendix
+
+\chapter{Lean~4 Files Relevant to Volume~1}
+\label{app:lean-vol1}
+
+The following Lean~4 source files, all under the namespace
+\texttt{IdeaTheory}, contain the machine-verified counterparts of the
+definitions and theorems proved in this volume. Each is part of the
+project's Lake build and depends only on a current Mathlib release.
+
+\paragraph{\texttt{IdeaTheory/Foundations.lean}.}
+Foundational declarations shared by every later file: the carrier type
+\lstinline|Idea|, the composition operation \lstinline|comp|, the unit
+\lstinline|e|, the grading map \lstinline|deg|, and basic notation.
+Provides the \lstinline|IdeaAlgebra| typeclass that bundles the data of
+an idea algebra together with the axioms used in Theorems~1--9.
+
+\paragraph{\texttt{IdeaTheory/Composition.lean}.}
+Proves Theorem~1 (\emph{idea composition monoid}): associativity, unit
+laws, and cancellation properties of $\circ$. Docstrings cite the
+informal composition claims in the literature on cultural transmission
+and conceptual combination.
+
+\paragraph{\texttt{IdeaTheory/Resonance.lean}.}
+Proves Theorem~2 (\emph{resonance bilinear pairing}): bilinearity,
+non-degeneracy, and the relationship between $\rho$ and the curvature
+form. Bridges to the informal notion of ``ideological alignment''.
+
+\paragraph{\texttt{IdeaTheory/Aufhebung.lean}.}
+Proves Theorem~3 (\emph{Aufhebung decomposition}): existence and
+uniqueness of the splitting
+$a\circ b = \mathsf{pres}(a,b)+\mathsf{neg}(a,b)+\mathsf{syn}(a,b)$.
+Cites Hegelian and post-Hegelian discussions of dialectical
+sublation as the informal source.
+
+\paragraph{\texttt{IdeaTheory/Emergence.lean}.}
+Proves Theorem~4 (\emph{emergence 2-cocycle}): the 2-cocycle identity
+$\delta\varepsilon = 0$ and a normalisation lemma. Cites the
+philosophical literature on weak and strong emergence.
+
+\paragraph{\texttt{IdeaTheory/Curvature.lean}.}
+Proves Theorem~5 (\emph{meaning curvature form}): the antisymmetric
+part of $\rho$ defines a closed 2-form whose cohomology class is
+invariant under structural equivalence.
+
+\paragraph{\texttt{IdeaTheory/Conjugation.lean}.}
+Proves Theorem~6 (\emph{conjugation action}): invertible ideas act on
+$I$ by inner automorphisms preserving $\rho$, $\mathsf{pres}$,
+$\mathsf{neg}$, $\mathsf{syn}$, and $\varepsilon$.
+
+\paragraph{\texttt{IdeaTheory/Chains.lean}.}
+Proves Theorem~7 (\emph{transmission chain}): iterated composition is
+controlled by a telescoping sum of cocycle values, yielding the
+chain-rule formula used throughout Volumes~2 and~4.
+
+\paragraph{\texttt{IdeaTheory/Equivalence.lean}.}
+Proves Theorem~8 (\emph{structural equivalence}): two idea algebras
+are isomorphic iff their pairings, decompositions, and cocycles agree
+up to a graded monoid isomorphism.
+
+\paragraph{\texttt{IdeaTheory/Grading.lean}.}
+Proves Theorem~9 (\emph{graded idea algebra}): $\deg$ extends to a
+homomorphism into a totally ordered abelian group, and the resulting
+grading is compatible with $\rho$, the Aufhebung decomposition, and
+$\varepsilon$.
+
+\bibliographystyle{alpha}
+\bibliography{../references}
+
+\end{document}
+=== END FILE ===
