@@ -167,3 +167,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - missing file: lean/IdeaTheory/Theorems4.lean
+
+## Iter 21 — 2026-04-27 00:38
+**Task:** `theorems_4` Lean theorems: Advanced Properties (attempt 2)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - missing file: lean/IdeaTheory/Theorems4.lean
