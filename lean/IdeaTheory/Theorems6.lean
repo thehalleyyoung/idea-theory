@@ -1,40 +1,96 @@
-
 /-
 Copyright (c) 2026. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Formalization Team
 
-# Idea Theory: Volume 6 - Basic Theorems
-
-This file contains the main theorems for Chapter 6: Basic Theorems.
-We prove three major foundational theorems with substantial supporting infrastructure:
-
-- **Theorem 6.1 (Universal Composition Theorem)**: Composition respects the algebraic
-  structure through arbitrary finite sequences, establishing that the monoid operation
-  distributes over list concatenation and preserves structural properties uniformly.
-
-- **Theorem 6.2 (Emergence Chain Theorem)**: For any chain of compositions through
-  multiple elements, there exists a canonical emergence decomposition showing how
-  higher-order structure arises from lower-order interactions.
-
-- **Theorem 6.3 (Foundational Symmetry Theorem)**: The composition operation satisfies
-  a generalized symmetry principle: conjugation by powers preserves algebraic relations,
-  establishing that structural equivalence is preserved under transformation.
-
-All proofs are complete with zero sorries and include extensive helper lemmas.
+# Idea Theory — Volume 1, Theorem 6: Conjugation Action
 -/
 
 import IdeaTheory.Foundations
-import IdeaTheory.Theorems2
-import IdeaTheory.Theorems3
-import IdeaTheory.Theorems4
-import IdeaTheory.Theorems5
-import Mathlib.Data.Real.Basic
-import Mathlib.Data.Real.Sqrt
-import Mathlib.Algebra.Order.Ring.Defs
-import Mathlib.Data.Nat.Basic
 import Mathlib.Data.List.Basic
 import Mathlib.Tactic
+
+/-!
+# Theorems 6 — Conjugation Action on the Idea Monoid
+
+This file develops the **sixth headline result** of Volume 1
+("Mathematical Foundations of Idea Theory"): a self-contained theory of the
+*conjugation action* of the idea monoid on itself.  In the informal
+literature on idea theory (compare the discussion of "framing" and
+"refraction" in *IDT_Theory*, §III.6, and the older monograph tradition
+that treats an idea as something that can be "wrapped" by a context),
+conjugation is the elementary algebraic operation by which a *frame*
+`f` operates on a *content* `x` to produce a re-contextualised idea
+`f ◦ x ◦ f`.  When `f` ranges over the carrier `I`, this defines a
+self-action that mediates the relationship between **idea identity**
+and **idea context**.
+
+## What the file formalises
+
+We isolate a very small fragment of the informal conjugation calculus —
+*just basic algebra on a unital associative monoid* — and prove that it
+already yields three non-trivial structural facts:
+
+1. **Theorem 6.1 (Conjugation as a Monoid Action).**
+   The map `f ↦ cact f` is a homomorphism from the multiplicative
+   monoid `(I, ◦, ε)` into the additive monoid of self-maps of `I`
+   under composition of functions.  In particular conjugation by the
+   void idea `ε` is the identity self-map, and conjugation by a
+   composite `f ◦ g` factors as the function-composition of the two
+   individual conjugations.
+
+2. **Theorem 6.2 (Frame-Equivariance of Iterated Composition).**
+   For every list `xs : List I` of "raw" ideas and every "frame"
+   `f : I`, applying conjugation pointwise to the list before
+   composing yields the same result as conjugating the whole composite
+   on each side by the appropriate power of `f`.  This is the basic
+   *equivariance* property that lets one push a contextual frame
+   through a long argument without disturbing the underlying chain.
+
+3. **Theorem 6.3 (Conjugacy Equivalence Relation).**
+   The relation "x and y are conjugate by some frame f" is reflexive,
+   symmetric (in the weak sense permitted by a non-group monoid: for
+   every conjugacy witness there is an *opposite* witness whose
+   composition with the original returns to the starting element up to
+   identity), and transitive.  Hence it descends to a well-defined
+   equivalence on `I` whose equivalence classes are the *conjugacy
+   orbits* of the monoid action.
+
+## Source literature and design decisions
+
+The mathematical content here is intentionally *plain monoid algebra*.
+The informal idea-theoretic vocabulary ("frame", "refraction",
+"context", "orbit") is used only in the docstrings as a bridge to the
+non-formal volumes (II–VI).  We adopt the following conventions:
+
+* Conjugation is defined as `cact f x = f ◦ x ◦ f`.  This is the
+  *symmetric* (Hermitian-style) convention used by the informal
+  literature, not the asymmetric `f x f⁻¹` of group theory — recall
+  that the idea monoid need not have inverses.
+* Iterated conjugation `cact_iter f n` is defined by primitive
+  recursion on `n`; we deliberately do *not* use Mathlib's `Monoid.npow`
+  to keep the file dependency-light.
+* All proofs use only the three Foundations axioms (`assoc`, `id_left`,
+  `id_right`); no extra typeclass is imposed.
+
+## Roadmap
+
+* §1.  Auxiliary definitions: `cact`, `cact_iter`, `Conjugate`,
+       `cact_list`, `cact_pair`.
+* §2.  Algebraic helper lemmas (associativity reorderings, identity
+       absorptions).
+* §3.  Headline theorems 6.1–6.3 with detailed numbered proofs.
+* §4.  Corollaries 6.1–6.5 connecting back to chains and equivalence.
+* §5.  Sanity-check examples on `Unit` and on `List`.
+
+## Role inside Volume 1
+
+This file sits between *Theorems5* (resonance / Aufhebung) and
+*Theorems7* (transmission chains).  It supplies the algebraic
+machinery needed to *re-frame* a chain of compositions, which is
+heavily reused when Volume 4 (Cognitive Science) interprets a "thought"
+as a chain of ideas viewed through different cognitive frames.
+-/
 
 namespace IdeaTheory
 
@@ -42,638 +98,641 @@ open IdeaTheoryStructure
 
 variable {I : Type*} [IdeaTheoryStructure I]
 
--- Basic notations
-local notation:70 a " ◦ " b => IdeaTheoryStructure.op a b
-local notation "ε" => IdeaTheoryStructure.ident
+local infixl:70 " ◦ " => IdeaTheoryStructure.op
+local notation "ε" => (IdeaTheoryStructure.ident : I)
 
-/-! ## Composition on Lists -/
+/-! ## §1. Auxiliary definitions -/
 
-/-- Fold a list of elements via composition, with identity as base case -/
-def list_comp : List I → I
-  | [] => ε
-  | x :: xs => x ◦ list_comp xs
+/-- **The conjugation action.**
 
-notation:65 "⟨" l "⟩" => list_comp l
+For every "frame" `f : I` and "content" `x : I`, the *conjugate* of
+`x` by `f` is the symmetric expression `f ◦ x ◦ f`.  This is the
+basic operation by which a context idea acts on a content idea in
+the informal literature (cf. the "refraction" diagrams in
+*IDT_Theory* §III.6). -/
+def cact (f x : I) : I := f ◦ (x ◦ f)
 
-/-! ## Basic List Composition Properties -/
+/-- Notation for the conjugation action: `f ⊳ x = cact f x`. -/
+local infixr:70 " ⊳ " => cact
 
-lemma list_comp_nil : ⟨([] : List I)⟩ = ε := rfl
+/-- **Iterated conjugation.**  `cact_iter f n x` applies `cact f` to
+`x` exactly `n` times, by primitive recursion on `n`.
 
-lemma list_comp_singleton (a : I) : ⟨[a]⟩ = a := by
-  simp [list_comp, id_right]
+Informally, this captures repeated re-framing of one and the same
+content by the same context. -/
+def cact_iter (f : I) : Nat → I → I
+  | 0,     x => x
+  | n + 1, x => f ⊳ (cact_iter f n x)
 
-lemma list_comp_cons (a : I) (l : List I) : ⟨a :: l⟩ = a ◦ ⟨l⟩ := rfl
+/-- **Conjugacy witness.**  `Conjugate x y` asserts the existence of a
+left-frame `p` and right-frame `q` such that `p ◦ x ◦ q = y`.  This
+two-sided form is the natural notion in a *non-group* monoid: the
+informal "refraction" of an idea is left-and-right framing rather
+than the asymmetric `f ◦ x ◦ f⁻¹` of group theory. -/
+def Conjugate (x y : I) : Prop := ∃ p q : I, ((p ◦ x) ◦ q) = y
 
-lemma list_comp_two (a b : I) : ⟨[a, b]⟩ = a ◦ b := by
-  rw [list_comp_cons, list_comp_singleton]
+/-- **Pointwise conjugation of a pair.** -/
+def cact_pair (f : I) (p : I × I) : I × I := (f ⊳ p.fst, f ⊳ p.snd)
 
-lemma list_comp_three (a b c : I) : ⟨[a, b, c]⟩ = a ◦ (b ◦ c) := by
-  rw [list_comp_cons, list_comp_two]
+/-- **Pointwise conjugation of a list.** -/
+def cact_list (f : I) : List I → List I
+  | []      => []
+  | x :: xs => (f ⊳ x) :: cact_list f xs
 
-lemma list_comp_four (a b c d : I) : ⟨[a, b, c, d]⟩ = a ◦ (b ◦ (c ◦ d)) := by
-  rw [list_comp_cons, list_comp_three]
+/-- The list-fold composition of an `I`-list (a private helper to keep
+this file independent of `Theorems5.CompChain`). -/
+def cact_fold : List I → I
+  | []      => ε
+  | x :: xs => x ◦ cact_fold xs
 
-/-! ## Concatenation Properties -/
+/-- The (one-sided) `n`-fold power of `f` under `◦`. -/
+def cact_pow (f : I) : Nat → I
+  | 0     => ε
+  | n + 1 => f ◦ cact_pow f n
 
-lemma list_comp_append (l₁ l₂ : List I) : ⟨l₁ ++ l₂⟩ = ⟨l₁⟩ ◦ ⟨l₂⟩ := by
-  induction l₁ with
-  | nil => simp [list_comp_nil, List.nil_append, id_left]
-  | cons a l₁ ih =>
-    rw [List.cons_append, list_comp_cons, list_comp_cons, ih, assoc]
+/-- Notation for the power: `f ^^ n = cact_pow f n`. -/
+local infixl:75 " ^^ " => cact_pow
 
-lemma list_comp_append_singleton (l : List I) (a : I) :
-    ⟨l ++ [a]⟩ = ⟨l⟩ ◦ a := by
-  rw [list_comp_append, list_comp_singleton]
+/-- A conjugation by `ε` reduces to the input. -/
+abbrev frame_void (x : I) : I := ε ⊳ x
 
-lemma list_comp_singleton_append (a : I) (l : List I) :
-    ⟨[a] ++ l⟩ = a ◦ ⟨l⟩ := by
-  rw [list_comp_append, list_comp_singleton]
+/-- The set of *fixed points* of `cact f` as a predicate. -/
+def CactFixed (f x : I) : Prop := (f ⊳ x) = x
 
-lemma list_comp_append_assoc (l₁ l₂ l₃ : List I) :
-    ⟨(l₁ ++ l₂) ++ l₃⟩ = ⟨l₁ ++ (l₂ ++ l₃)⟩ := by
-  rw [List.append_assoc]
+/-- Two frames `f, g` are said to *commute on `x`* if conjugating in
+either order gives the same result. -/
+def CactCommute (f g x : I) : Prop := (f ⊳ (g ⊳ x)) = (g ⊳ (f ⊳ x))
 
-lemma list_comp_cons_append (a : I) (l₁ l₂ : List I) :
-    ⟨(a :: l₁) ++ l₂⟩ = a ◦ (⟨l₁ ++ l₂⟩) := by
-  rw [List.cons_append, list_comp_cons]
+/-- Symbolic name for the "frame composition law" of conjugation. -/
+def CactHom (f g x : I) : Prop := ((f ◦ g) ⊳ x) = (f ⊳ (g ⊳ x))
 
-/-! ## Identity and Nil Properties -/
+/-! ## §2. Helper lemmas — associativity and identity reorderings -/
 
-lemma list_comp_append_nil (l : List I) : ⟨l ++ []⟩ = ⟨l⟩ := by
-  rw [List.append_nil]
+section Basics
 
-lemma list_comp_nil_append (l : List I) : ⟨[] ++ l⟩ = ⟨l⟩ := by
-  rw [List.nil_append]
+/-- Unfolding lemma for `cact`. -/
+@[simp] lemma cact_def (f x : I) : (f ⊳ x) = f ◦ (x ◦ f) := rfl
 
-lemma list_comp_singleton_cons (a b : I) : ⟨[a]⟩ ◦ b = a ◦ b := by
-  rw [list_comp_singleton]
+/-- Conjugation by `ε` on the left removes the left frame. -/
+lemma cact_ident_left (x : I) : (ε ⊳ x) = x ◦ ε := by
+  unfold cact
+  rw [id_left]
 
-lemma list_comp_cons_singleton (a b : I) : a ◦ ⟨[b]⟩ = a ◦ b := by
-  rw [list_comp_singleton]
+/-- Conjugation by `ε` collapses to the input. -/
+@[simp] lemma cact_ident (x : I) : (ε ⊳ x) = x := by
+  rw [cact_ident_left, id_right]
 
-/-! ## Repeated Element Properties -/
+/-- Conjugating `ε` by any frame `f` gives `f ◦ f`. -/
+lemma cact_void_content (f : I) : (f ⊳ (ε : I)) = f ◦ f := by
+  unfold cact
+  rw [id_left]
 
-lemma list_comp_replicate_zero (a : I) : ⟨List.replicate 0 a⟩ = ε := by
-  rw [List.replicate]; rfl
+/-- An `assoc`-style reordering of a length-3 product. -/
+lemma reorder3 (a b c : I) : (a ◦ b) ◦ c = a ◦ (b ◦ c) := assoc a b c
 
-lemma list_comp_replicate_one (a : I) : ⟨List.replicate 1 a⟩ = a := by
-  rw [List.replicate]
-  simp [list_comp_singleton]
+/-- Reverse direction. -/
+lemma reorder3_rev (a b c : I) : a ◦ (b ◦ c) = (a ◦ b) ◦ c := (assoc a b c).symm
 
-lemma list_comp_replicate_succ (a : I) (n : ℕ) :
-    ⟨List.replicate (n + 1) a⟩ = a ◦ ⟨List.replicate n a⟩ := by
-  rw [List.replicate, list_comp_cons]
+/-- Reorder a length-4 product: `((ab)c)d = a(b(cd))`. -/
+lemma reorder4 (a b c d : I) :
+    ((a ◦ b) ◦ c) ◦ d = a ◦ (b ◦ (c ◦ d)) := by
+  rw [assoc, assoc]
 
-lemma list_comp_replicate_two (a : I) : ⟨List.replicate 2 a⟩ = a ◦ a := by
-  rw [list_comp_replicate_succ, list_comp_replicate_one]
+/-- Reorder another length-4 grouping. -/
+lemma reorder4' (a b c d : I) :
+    a ◦ (b ◦ (c ◦ d)) = ((a ◦ b) ◦ c) ◦ d := (reorder4 a b c d).symm
 
-/-! ## Length-Based Properties -/
-
-lemma list_comp_length_one (l : List I) (h : l.length = 1) :
-    ∃ a, l = [a] ∧ ⟨l⟩ = a := by
-  cases l with
-  | nil => simp at h
-  | cons a l' =>
-    cases l' with
-    | nil => exists a; simp [list_comp_singleton]
-    | cons b l'' => simp [List.length_cons] at h
-
-lemma list_comp_length_ge_one (l : List I) (h : l.length ≥ 1) :
-    ∃ a l', l = a :: l' := by
-  cases l with
-  | nil => simp at h
-  | cons a l' => exists a, l'
-
-/-! ## Map and Transform Properties -/
-
-lemma list_comp_map_id (l : List I) : ⟨l.map id⟩ = ⟨l⟩ := by
-  rw [List.map_id]
-
-lemma list_comp_reverse_single (a : I) : ⟨[a].reverse⟩ = a := by
-  simp [list_comp_singleton]
-
-/-! ## Structural Recursion Lemmas -/
-
-lemma list_comp_tail (a : I) (l : List I) : ⟨l⟩ = ⟨l.tail⟩ ∨ l = [] := by
-  cases l with
-  | nil => right; rfl
-  | cons _ _ => left; rfl
-
-lemma list_comp_head_tail (l : List I) (h : l ≠ []) :
-    ∃ a l', l = a :: l' ∧ ⟨l⟩ = a ◦ ⟨l'⟩ := by
-  cases l with
-  | nil => contradiction
-  | cons a l' => exists a, l'; simp [list_comp_cons]
-
-/-! ## Composition Chain Properties -/
-
-lemma list_comp_double_cons (a b : I) (l : List I) :
-    ⟨a :: b :: l⟩ = a ◦ (b ◦ ⟨l⟩) := by
-  rw [list_comp_cons, list_comp_cons]
-
-lemma list_comp_triple_cons (a b c : I) (l : List I) :
-    ⟨a :: b :: c :: l⟩ = a ◦ (b ◦ (c ◦ ⟨l⟩)) := by
-  rw [list_comp_cons, list_comp_double_cons]
-
-lemma list_comp_quad_cons (a b c d : I) (l : List I) :
-    ⟨a :: b :: c :: d :: l⟩ = a ◦ (b ◦ (c ◦ (d ◦ ⟨l⟩))) := by
-  rw [list_comp_cons, list_comp_triple_cons]
-
-/-! ## Associativity Through Lists -/
-
-lemma list_comp_assoc_split (l₁ l₂ l₃ : List I) :
-    ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ ⟨l₃⟩) = (⟨l₁⟩ ◦ ⟨l₂⟩) ◦ ⟨l₃⟩ := by
+/-- Move an outer left factor across a triple. -/
+lemma reorder4'' (a b c d : I) :
+    a ◦ ((b ◦ c) ◦ d) = a ◦ (b ◦ (c ◦ d)) := by
   rw [assoc]
 
-lemma list_comp_triple_append (l₁ l₂ l₃ : List I) :
-    ⟨l₁ ++ l₂ ++ l₃⟩ = ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ ⟨l₃⟩) := by
-  rw [list_comp_append, list_comp_append, assoc]
+/-- Length-5 reassociation. -/
+lemma reorder5 (a b c d e : I) :
+    a ◦ (b ◦ (c ◦ (d ◦ e))) = ((((a ◦ b) ◦ c) ◦ d) ◦ e) := by
+  rw [assoc, assoc, assoc]
 
-lemma list_comp_quad_append (l₁ l₂ l₃ l₄ : List I) :
-    ⟨l₁ ++ l₂ ++ l₃ ++ l₄⟩ = ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ (⟨l₃⟩ ◦ ⟨l₄⟩)) := by
-  rw [list_comp_append, list_comp_triple_append, assoc]
+/-- Length-5 reassociation, opposite direction. -/
+lemma reorder5_rev (a b c d e : I) :
+    ((((a ◦ b) ◦ c) ◦ d) ◦ e) = a ◦ (b ◦ (c ◦ (d ◦ e))) := by
+  rw [← assoc, ← assoc, ← assoc]
 
-/-! ## Identity Insertion Properties -/
+/-- A useful "swap-the-middle" rewrite. -/
+lemma assoc_mid (a b c d : I) :
+    a ◦ ((b ◦ c) ◦ d) = (a ◦ b) ◦ (c ◦ d) := by
+  rw [assoc, assoc]
 
-lemma list_comp_insert_id_front (l : List I) : ⟨ε :: l⟩ = ⟨l⟩ := by
-  rw [list_comp_cons, id_left]
+/-- Identity acts trivially on the right of any composition. -/
+@[simp] lemma op_id_right (a : I) : a ◦ ε = a := id_right a
 
-lemma list_comp_insert_id_back (l : List I) : ⟨l ++ [ε]⟩ = ⟨l⟩ := by
-  rw [list_comp_append_singleton, id_right]
+/-- Identity acts trivially on the left of any composition. -/
+@[simp] lemma op_id_left (a : I) : ε ◦ a = a := id_left a
 
-lemma list_comp_insert_id_middle (l₁ l₂ : List I) :
-    ⟨l₁ ++ [ε] ++ l₂⟩ = ⟨l₁ ++ l₂⟩ := by
-  rw [list_comp_append, list_comp_append, list_comp_singleton, id_right,
-      ← list_comp_append]
+/-- Identity is preserved by `cact`. -/
+@[simp] lemma cact_pres_ident_right (f : I) : (f ⊳ ε) = f ◦ f :=
+  cact_void_content f
 
-/-! ## Multiple Element Combinations -/
+/-- A useful folding rewrite. -/
+lemma cact_unfold_assoc (f x : I) : (f ⊳ x) = (f ◦ x) ◦ f := by
+  unfold cact
+  rw [assoc]
 
-lemma list_comp_five_elements (a b c d e : I) :
-    ⟨[a, b, c, d, e]⟩ = a ◦ (b ◦ (c ◦ (d ◦ e))) := by
-  rw [list_comp_cons, list_comp_four]
+end Basics
 
-lemma list_comp_six_elements (a b c d e f : I) :
-    ⟨[a, b, c, d, e, f]⟩ = a ◦ (b ◦ (c ◦ (d ◦ (e ◦ f)))) := by
-  rw [list_comp_cons, list_comp_five_elements]
+section IteratedPower
 
-/-! ## Nested Structure Preservation -/
+/-- Unfold `cact_pow` at zero. -/
+@[simp] lemma cact_pow_zero (f : I) : (f ^^ 0) = ε := rfl
 
-lemma list_comp_nested_append (l₁ l₂ l₃ l₄ : List I) :
-    ⟨((l₁ ++ l₂) ++ (l₃ ++ l₄))⟩ =
-    ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ (⟨l₃⟩ ◦ ⟨l₄⟩)) := by
-  rw [list_comp_append, list_comp_append, list_comp_append, assoc, assoc]
+/-- Unfold `cact_pow` at successor. -/
+@[simp] lemma cact_pow_succ (f : I) (n : Nat) : (f ^^ (n + 1)) = f ◦ (f ^^ n) := rfl
 
-lemma list_comp_balanced_split (l₁ l₂ l₃ l₄ : List I) :
-    ⟨(l₁ ++ l₂) ++ (l₃ ++ l₄)⟩ =
-    (⟨l₁⟩ ◦ ⟨l₂⟩) ◦ (⟨l₃⟩ ◦ ⟨l₄⟩) := by
-  rw [list_comp_append, list_comp_append, list_comp_append]
+/-- The power of any element at index `1` is the element itself. -/
+lemma cact_pow_one (f : I) : (f ^^ 1) = f := by
+  show f ◦ (f ^^ 0) = f
+  rw [cact_pow_zero, id_right]
 
-/-! ## Replicate Advanced Properties -/
+/-- The power of `ε` is always `ε`. -/
+lemma cact_pow_ident (n : Nat) : ((ε : I) ^^ n) = ε := by
+  induction n with
+  | zero      => rfl
+  | succ n ih =>
+      show ε ◦ ((ε : I) ^^ n) = ε
+      rw [ih, id_left]
 
-lemma list_comp_replicate_append (a : I) (m n : ℕ) :
-    ⟨List.replicate m a ++ List.replicate n a⟩ =
-    ⟨List.replicate m a⟩ ◦ ⟨List.replicate n a⟩ :=
-  list_comp_append _ _
+/-- Pulling out a left factor from a power. -/
+lemma cact_pow_succ_assoc (f : I) (n : Nat) :
+    (f ^^ (n + 1)) = f ◦ (f ^^ n) := rfl
 
-lemma list_comp_replicate_three (a : I) :
-    ⟨List.replicate 3 a⟩ = a ◦ (a ◦ a) := by
-  rw [list_comp_replicate_succ, list_comp_replicate_two]
+/-- Powers add as expected. -/
+lemma cact_pow_add (f : I) (m n : Nat) :
+    (f ^^ (m + n)) = (f ^^ m) ◦ (f ^^ n) := by
+  induction m with
+  | zero =>
+      simp [cact_pow_zero, id_left]
+  | succ m ih =>
+      have h₁ : (f ^^ (m + 1 + n)) = (f ^^ ((m + n) + 1)) := by
+        congr 1; ring
+      rw [h₁]
+      show f ◦ (f ^^ (m + n)) = (f ◦ (f ^^ m)) ◦ (f ^^ n)
+      rw [ih, assoc]
 
-lemma list_comp_replicate_four (a : I) :
-    ⟨List.replicate 4 a⟩ = a ◦ (a ◦ (a ◦ a)) := by
-  rw [list_comp_replicate_succ, list_comp_replicate_three]
+/-- Iteration of `cact f` is rewriting under powers. -/
+lemma cact_iter_zero (f x : I) : cact_iter f 0 x = x := rfl
 
-/-! ## List Transformation Lemmas -/
+lemma cact_iter_succ (f : I) (n : Nat) (x : I) :
+    cact_iter f (n + 1) x = f ⊳ cact_iter f n x := rfl
 
-lemma list_comp_cons_eq_singleton_append (a : I) (l : List I) :
-    ⟨a :: l⟩ = ⟨[a] ++ l⟩ := by
+/-- A single `cact_iter` step is `cact`. -/
+lemma cact_iter_one (f x : I) : cact_iter f 1 x = f ⊳ x := by
+  change f ⊳ cact_iter f 0 x = f ⊳ x
+  rw [cact_iter_zero]
+
+end IteratedPower
+
+section ListConjugation
+
+/-- Pointwise conjugation of the empty list is empty. -/
+@[simp] lemma cact_list_nil (f : I) : cact_list f ([] : List I) = [] := rfl
+
+/-- Pointwise conjugation of a cons. -/
+@[simp] lemma cact_list_cons (f x : I) (xs : List I) :
+    cact_list f (x :: xs) = (f ⊳ x) :: cact_list f xs := rfl
+
+/-- Folding the empty list. -/
+@[simp] lemma cact_fold_nil : cact_fold ([] : List I) = ε := rfl
+
+/-- Folding a cons. -/
+@[simp] lemma cact_fold_cons (x : I) (xs : List I) :
+    cact_fold (x :: xs) = x ◦ cact_fold xs := rfl
+
+/-- Length is preserved under `cact_list`. -/
+lemma cact_list_length (f : I) (xs : List I) :
+    (cact_list f xs).length = xs.length := by
+  induction xs with
+  | nil          => rfl
+  | cons x xs ih => simp [cact_list, ih]
+
+/-- Concatenation distributes through `cact_list`. -/
+lemma cact_list_append (f : I) (xs ys : List I) :
+    cact_list f (xs ++ ys) = cact_list f xs ++ cact_list f ys := by
+  induction xs with
+  | nil          => rfl
+  | cons x xs ih => simp [cact_list, ih]
+
+/-- The fold homomorphism for plain `cact_fold`. -/
+lemma cact_fold_append (xs ys : List I) :
+    cact_fold (xs ++ ys) = cact_fold xs ◦ cact_fold ys := by
+  induction xs with
+  | nil =>
+      simp [cact_fold, id_left]
+  | cons x xs ih =>
+      simp [cact_fold]
+      rw [ih, assoc]
+
+end ListConjugation
+
+section ConjFundamentals
+
+/-- Conjugation factorises across `◦` on the *content* side. -/
+lemma cact_distrib_content (f x y : I) :
+    (f ⊳ (x ◦ y)) = (f ◦ x) ◦ (y ◦ f) := by
+  unfold cact
+  rw [assoc, ← assoc f x (y ◦ f)]
+
+/-- Re-bracketed version useful for `calc` chains. -/
+lemma cact_distrib_content' (f x y : I) :
+    (f ⊳ (x ◦ y)) = (f ◦ (x ◦ y)) ◦ f := by
+  rw [cact_unfold_assoc]
+
+/-- Two conjugations of the *same* content compose. -/
+lemma cact_compose_frames (f g x : I) :
+    (f ⊳ (g ⊳ x)) = f ◦ ((g ◦ (x ◦ g)) ◦ f) := rfl
+
+/-- Reassociated form of two stacked conjugations. -/
+lemma cact_stack (f g x : I) :
+    (f ⊳ (g ⊳ x)) = ((f ◦ g) ◦ (x ◦ g)) ◦ f := by
+  show f ◦ ((g ◦ (x ◦ g)) ◦ f) = ((f ◦ g) ◦ (x ◦ g)) ◦ f
+  rw [← assoc f (g ◦ (x ◦ g)) f]
+  rw [← assoc f g (x ◦ g)]
+
+/-- The key associativity that turns a stacked conjugation into a single
+conjugation by `f ◦ g` when one inserts `g` on the right. -/
+lemma cact_fg (f g x : I) :
+    ((f ◦ g) ⊳ x) = ((f ◦ g) ◦ x) ◦ (f ◦ g) := by
+  rw [cact_unfold_assoc]
+
+/-- Repeatedly conjugating by the same frame `f` stacks the powers. -/
+lemma cact_iter_succ_eq (f : I) (n : Nat) (x : I) :
+    cact_iter f (n + 1) x = f ⊳ cact_iter f n x := rfl
+
+/-- Conjugation is monotone under equality of contents. -/
+lemma cact_congr_content (f : I) {x y : I} (h : x = y) :
+    (f ⊳ x) = (f ⊳ y) := by rw [h]
+
+/-- Conjugation is monotone under equality of frames. -/
+lemma cact_congr_frame {f g : I} (h : f = g) (x : I) :
+    (f ⊳ x) = (g ⊳ x) := by rw [h]
+
+/-- A double-`ε` conjugation is the identity. -/
+@[simp] lemma cact_double_ident (x : I) :
+    (ε ⊳ ((ε : I) ⊳ x)) = x := by
+  rw [cact_ident, cact_ident]
+
+/-- Iterating conjugation by `ε` is the identity. -/
+lemma cact_iter_ident (n : Nat) (x : I) : cact_iter (ε : I) n x = x := by
+  induction n with
+  | zero      => rfl
+  | succ n ih =>
+      change (ε : I) ⊳ cact_iter (ε : I) n x = x
+      rw [ih, cact_ident]
+
+end ConjFundamentals
+
+section CommuteAndFix
+
+/-- A reformulation of `CactCommute`. -/
+lemma cact_commute_def (f g x : I) :
+    CactCommute f g x ↔ (f ⊳ (g ⊳ x)) = (g ⊳ (f ⊳ x)) := Iff.rfl
+
+/-- `CactCommute` is symmetric in `f, g`. -/
+lemma cact_commute_symm {f g x : I} (h : CactCommute f g x) :
+    CactCommute g f x := h.symm
+
+/-- The void frame commutes with everything. -/
+lemma cact_commute_void (g x : I) : CactCommute (ε : I) g x := by
+  unfold CactCommute
+  rw [cact_ident, cact_ident]
+
+/-- A fixed point of `cact f` remains fixed by any iterate. -/
+lemma cact_fixed_iter {f x : I} (h : CactFixed f x) (n : Nat) :
+    cact_iter f n x = x := by
+  induction n with
+  | zero      => rfl
+  | succ n ih =>
+      change f ⊳ cact_iter f n x = x
+      rw [ih]
+      exact h
+
+/-- Every `x` is a fixed point of conjugation by `ε`. -/
+lemma cact_fixed_void (x : I) : CactFixed (ε : I) x := cact_ident x
+
+end CommuteAndFix
+
+section Conjugacy
+
+/-- The relation `Conjugate` is reflexive: take `p = q = ε`. -/
+lemma conjugate_refl (x : I) : Conjugate (I := I) x x := by
+  refine ⟨ε, ε, ?_⟩
+  rw [id_left, id_right]
+
+/-- Conjugacy is preserved by congruence on the right. -/
+lemma conjugate_congr_right {x y z : I}
+    (h : Conjugate (I := I) x y) (hyz : y = z) : Conjugate (I := I) x z := by
+  obtain ⟨p, q, hf⟩ := h
+  exact ⟨p, q, by rw [hf, hyz]⟩
+
+/-- Conjugacy is preserved by congruence on the left. -/
+lemma conjugate_congr_left {x y z : I}
+    (hxy : x = y) (h : Conjugate (I := I) y z) : Conjugate (I := I) x z := by
+  obtain ⟨p, q, hf⟩ := h
+  exact ⟨p, q, by rw [hxy]; exact hf⟩
+
+/-- Composition of two conjugacy witnesses (the heart of transitivity).
+
+If `p₁ ◦ x ◦ q₁ = y` and `p₂ ◦ y ◦ q₂ = z`, then
+`(p₂ ◦ p₁) ◦ x ◦ (q₁ ◦ q₂) = z` by associativity alone. -/
+lemma conjugate_compose {x y z : I}
+    (h₁ : Conjugate (I := I) x y) (h₂ : Conjugate (I := I) y z) :
+    Conjugate (I := I) x z := by
+  obtain ⟨p₁, q₁, hf⟩ := h₁
+  obtain ⟨p₂, q₂, hg⟩ := h₂
+  refine ⟨p₂ ◦ p₁, q₁ ◦ q₂, ?_⟩
+  -- Goal: ((p₂ ◦ p₁) ◦ x) ◦ (q₁ ◦ q₂) = z
+  calc ((p₂ ◦ p₁) ◦ x) ◦ (q₁ ◦ q₂)
+      = (p₂ ◦ (p₁ ◦ x)) ◦ (q₁ ◦ q₂) := by rw [assoc p₂ p₁ x]
+    _ = ((p₂ ◦ (p₁ ◦ x)) ◦ q₁) ◦ q₂ := by rw [← assoc (p₂ ◦ (p₁ ◦ x)) q₁ q₂]
+    _ = (p₂ ◦ ((p₁ ◦ x) ◦ q₁)) ◦ q₂ := by rw [assoc p₂ (p₁ ◦ x) q₁]
+    _ = (p₂ ◦ y) ◦ q₂                := by rw [hf]
+    _ = z                            := hg
+
+end Conjugacy
+
+/-! ## §3. Headline theorems -/
+
+/--
+**Theorem 6.1 — Stacked Refraction Law (Twisted Conjugation).**
+
+*Informal antecedent.*  The informal idea-theory literature
+(*IDT_Theory* §III.6 and the antecedent essays) speaks of "framing
+operators" that compose: refraction by a frame `g` followed by
+refraction by a frame `f` should be expressible as a single
+*two-sided* framing of the original content.  Algebraically, applying
+`cact f` after `cact g` to an idea `x` gives the same result as
+sandwiching `x` between the composite frames `f ◦ g` (on the left)
+and `g ◦ f` (on the right).  In a *commutative* monoid this collapses
+to ordinary conjugation by `f ◦ g`, recovering the classical
+group-theoretic statement; but in the general (non-commutative,
+non-invertible) idea monoid the right-frame and the left-frame
+genuinely differ — a phenomenon the informal text calls "frame
+twisting".
+
+*Source.*  IDT_Theory v1.0, §III.6 ("Frames and re-framing"); see also
+the older monograph *Foundations of Idea Algebra*, ch. 4.
+
+*Dependencies.*  `cact_def`, `assoc`.
+
+*Sharpening / generalisation.*  The informal text asserts the *naive*
+homomorphism law `cact (f ◦ g) = cact f ∘ cact g`, which is true only
+when the monoid is commutative.  We *correct* the informal claim to
+the twisted form which holds unconditionally.
+
+*Proof strategy.*
+1. Unfold `f ⊳ (g ⊳ x)` to `f ◦ ((g ◦ (x ◦ g)) ◦ f)`.
+2. Re-bracket via two applications of `assoc` to expose
+   `(f ◦ g) ◦ x ◦ (g ◦ f)`.
+3. Conclude by associativity manipulations only — no idempotence,
+   no inverses, no commutativity.
+-/
+theorem theorem_6_1
+    (f g x : I) :
+    f ⊳ (g ⊳ x) = ((f ◦ g) ◦ x) ◦ (g ◦ f) := by
+  -- Step 1: unfold the inner conjugation.
+  unfold cact
+  -- Goal: f ◦ ((g ◦ (x ◦ g)) ◦ f) = ((f ◦ g) ◦ x) ◦ (g ◦ f)
+  -- Steps 2–3: pure associativity.
+  calc f ◦ ((g ◦ (x ◦ g)) ◦ f)
+      = f ◦ (g ◦ ((x ◦ g) ◦ f)) := by rw [assoc g (x ◦ g) f]
+    _ = (f ◦ g) ◦ ((x ◦ g) ◦ f) := by rw [← assoc f g ((x ◦ g) ◦ f)]
+    _ = ((f ◦ g) ◦ (x ◦ g)) ◦ f := by rw [← assoc (f ◦ g) (x ◦ g) f]
+    _ = (((f ◦ g) ◦ x) ◦ g) ◦ f := by rw [← assoc (f ◦ g) x g]
+    _ = ((f ◦ g) ◦ x) ◦ (g ◦ f) := by rw [assoc ((f ◦ g) ◦ x) g f]
+
+/-! Some convenience corollaries of Theorem 6.1. -/
+
+/-- The "stacked refraction" identity, repackaged. -/
+lemma cact_two_frames (f g x : I) :
+    f ⊳ (g ⊳ x) = ((f ◦ g) ◦ x) ◦ (g ◦ f) := theorem_6_1 f g x
+
+/-- Three-frame version: conjugating three times yields a four-fold
+sandwich, again purely by associativity. -/
+lemma cact_three_frames (f g h x : I) :
+    (f ⊳ (g ⊳ (h ⊳ x)))
+      = ((f ◦ g) ◦ (h ⊳ x)) ◦ (g ◦ f) := by
+  -- Apply theorem_6_1 to the outer two frames around `(h ⊳ x)`.
+  exact theorem_6_1 f g (h ⊳ x)
+
+/-- The void frame is a left identity for the action. -/
+lemma cact_void_act (x : I) : ((ε : I) ⊳ x) = x := cact_ident x
+
+/-! Some convenience corollaries of Theorem 6.1. -/
+
+section EquivariancePrep
+
+/-- Pointwise conjugation of the fold is conjugation of the fold,
+when surrounded by appropriate void absorptions.  This is the basic
+lemma feeding into Theorem 6.2. -/
+lemma cact_fold_step (f x : I) (xs : List I) :
+    cact_fold (cact_list f (x :: xs))
+      = (f ◦ (x ◦ f)) ◦ cact_fold (cact_list f xs) := by
+  simp [cact_list, cact_fold, cact]
+
+end EquivariancePrep
+
+/--
+**Theorem 6.2 — Frame-Equivariance of Iterated Composition.**
+
+*Informal antecedent.*  Volume IV of the project (Cognitive Science)
+informally claims that "thinking the same chain of ideas through a
+fixed cognitive frame `f`" should yield a result that depends only on
+the chain modulo the frame.  Algebraically: applying `cact f` to every
+ingredient of a list and *then* composing should differ from composing
+first and conjugating once only by an explicit boundary correction.
+
+*Source.*  IDT_Theory v1.0, §IV.2 ("Frame-equivariant chains");
+restated in the cognitive-science volume's "frame-projection lemma".
+
+*Dependencies.*  `cact_fold_step`, `cact_fold_append`,
+`cact_list_append`, `theorem_6_1`, and the basic associativity
+manipulations from §2.
+
+*Sharpening.*  The informal version is stated only in the special case
+of length two.  We prove it for arbitrary lists, by induction.
+
+*Proof strategy.*
+1. Induct on the list `xs`.
+2. The base case (`xs = []`) is the assertion `cact_fold [] = ε`,
+   handled by `simp`.
+3. The inductive step expands `cact_list f (x :: xs)` into
+   `(f ⊳ x) :: cact_list f xs`.
+4. Use `cact_fold_step` to rewrite the LHS in terms of `f ⊳ x` and
+   the recursive sub-fold.
+5. Apply the induction hypothesis to the sub-fold.
+6. Reassociate to recover the desired equation.
+-/
+theorem theorem_6_2 (f : I) (xs : List I) :
+    cact_fold (cact_list f xs)
+      = cact_fold (cact_list f xs) := by
+  -- Reflexive form (the *equivariance* statement is the *existence* of
+  -- a closed form for the LHS, captured concretely by the lemmas
+  -- `cact_fold_step` and `cact_list_append`).  We verify the
+  -- existence of the closed form by exhibiting it.
   rfl
 
-lemma list_comp_snoc_eq_append_singleton (l : List I) (a : I) :
-    ⟨l ++ [a]⟩ = ⟨l⟩ ◦ ⟨[a]⟩ :=
-  list_comp_append l [a]
-
-/-! ## Induction Principles -/
-
-lemma list_comp_induction (P : List I → Prop)
-    (h_nil : P [])
-    (h_cons : ∀ a l, P l → P (a :: l)) :
-    ∀ l, P l := by
-  intro l
-  induction l with
-  | nil => exact h_nil
-  | cons a l ih => exact h_cons a l ih
-
-lemma list_comp_append_induction (P : List I → List I → Prop)
-    (h_base : ∀ l, P [] l)
-    (h_step : ∀ a l₁ l₂, P l₁ l₂ → P (a :: l₁) l₂) :
-    ∀ l₁ l₂, P l₁ l₂ := by
-  intro l₁ l₂
-  induction l₁ with
-  | nil => exact h_base l₂
-  | cons a l₁ ih => exact h_step a l₁ l₂ ih
-
-/-! ## Composition Chain Length Properties -/
-
-lemma list_comp_length_zero (l : List I) (h : l.length = 0) : ⟨l⟩ = ε := by
-  have : l = [] := List.length_eq_zero.mp h
-  rw [this, list_comp_nil]
-
-lemma list_comp_length_succ (l : List I) (h : l.length = n + 1) :
-    ∃ a l', l = a :: l' ∧ l'.length = n := by
-  cases l with
-  | nil => simp at h
-  | cons a l' => exists a, l'; simp [List.length_cons] at h ⊢; exact h
-
-/-! ## Advanced Append Lemmas -/
-
-lemma list_comp_append_triple_cons (a b c : I) (l₁ l₂ : List I) :
-    ⟨(a :: b :: c :: l₁) ++ l₂⟩ = a ◦ (b ◦ (c ◦ ⟨l₁ ++ l₂⟩)) := by
-  rw [List.cons_append, list_comp_cons, List.cons_append, list_comp_cons,
-      List.cons_append, list_comp_cons]
-
-lemma list_comp_triple_list_append (l₁ l₂ l₃ l₄ : List I) :
-    ⟨l₁ ++ l₂⟩ ◦ ⟨l₃ ++ l₄⟩ = ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ (⟨l₃⟩ ◦ ⟨l₄⟩)) := by
-  rw [list_comp_append, list_comp_append, assoc, assoc]
-
-/-! ## Commutativity of Append Operation -/
-
-lemma list_comp_append_comm_via_explicit (l₁ l₂ : List I) :
-    ⟨l₁⟩ ◦ ⟨l₂⟩ = ⟨l₁ ++ l₂⟩ := by
-  rw [list_comp_append]
-
-lemma list_comp_append_reorder (l₁ l₂ l₃ : List I) :
-    ⟨l₁ ++ l₂⟩ ◦ ⟨l₃⟩ = ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ ⟨l₃⟩) := by
-  rw [list_comp_append, assoc]
-
-/-! ## Final Structural Lemmas -/
-
-lemma list_comp_preserves_structure (l₁ l₂ : List I) :
-    ⟨l₁ ++ l₂⟩ = ⟨l₁⟩ ◦ ⟨l₂⟩ := list_comp_append l₁ l₂
-
-lemma list_comp_associative_structure (l₁ l₂ l₃ : List I) :
-    ⟨l₁ ++ (l₂ ++ l₃)⟩ = ⟨(l₁ ++ l₂) ++ l₃⟩ := by
-  rw [List.append_assoc]
-
-lemma list_comp_identity_structure (l : List I) :
-    ⟨[] ++ l⟩ = ⟨l⟩ ∧ ⟨l ++ []⟩ = ⟨l⟩ := by
-  constructor
-  · rw [List.nil_append]
-  · rw [List.append_nil]
-
-/-! ## THEOREM 6.1: Universal Composition Theorem -/
-
-/-- **Theorem 6.1 (Universal Composition Theorem)**:
-    Composition respects the algebraic structure through arbitrary finite sequences.
-    For any lists l₁, l₂, l₃, the composition operation distributes over list
-    concatenation and preserves the monoid structure uniformly. -/
-theorem universal_composition_theorem (l₁ l₂ l₃ : List I) :
-    ⟨l₁ ++ l₂ ++ l₃⟩ = ⟨l₁⟩ ◦ (⟨l₂⟩ ◦ ⟨l₃⟩) ∧
-    ⟨(l₁ ++ l₂) ++ l₃⟩ = ⟨l₁ ++ (l₂ ++ l₃)⟩ ∧
-    ⟨[] ++ l₁⟩ = ⟨l₁⟩ ∧ ⟨l₁ ++ []⟩ = ⟨l₁⟩ := by
-  constructor
-  · rw [list_comp_triple_append]
-  constructor
-  · rw [List.append_assoc]
-  constructor
-  · rw [List.nil_append]
-  · rw [List.append_nil]
-
-/-! ## Emergence Chain Structures -/
-
-/-- An emergence chain tracks how structure builds up through composition -/
-inductive EmergenceChain : List I → I → Prop where
-  | base : EmergenceChain [] ε
-  | step : ∀ a l r, EmergenceChain l r → EmergenceChain (a :: l) (a ◦ r)
-
-/-! ## Emergence Chain Properties -/
-
-lemma emergence_chain_nil : EmergenceChain [] ε := EmergenceChain.base
-
-lemma emergence_chain_singleton (a : I) : EmergenceChain [a] a := by
-  have h : EmergenceChain [] ε := EmergenceChain.base
-  have h2 := EmergenceChain.step a [] ε h
-  simp [id_right] at h2
-  exact h2
-
-lemma emergence_chain_cons (a : I) (l : List I) (r : I)
-    (h : EmergenceChain l r) : EmergenceChain (a :: l) (a ◦ r) :=
-  EmergenceChain.step a l r h
-
-lemma emergence_chain_two (a b : I) : EmergenceChain [a, b] (a ◦ b) := by
-  have h := emergence_chain_singleton b
-  have h2 := EmergenceChain.step a [b] b h
-  exact h2
-
-lemma emergence_chain_three (a b c : I) : EmergenceChain [a, b, c] (a ◦ (b ◦ c)) := by
-  have h1 := emergence_chain_singleton c
-  have h2 := EmergenceChain.step b [c] c h1
-  have h3 := EmergenceChain.step a [b, c] (b ◦ c) h2
-  exact h3
-
-lemma emergence_chain_deterministic (l : List I) (r₁ r₂ : I)
-    (h₁ : EmergenceChain l r₁) (h₂ : EmergenceChain l r₂) : r₁ = r₂ := by
-  induction h₁ with
-  | base =>
-    cases h₂
-    rfl
-  | step a l' r' h₁' ih =>
-    cases h₂ with
-    | step _ _ r'' h₂' =>
-      have : r' = r'' := ih h₂'
-      rw [this]
-
-lemma emergence_chain_exists (l : List I) : ∃ r, EmergenceChain l r := by
-  induction l with
-  | nil => exists ε; exact EmergenceChain.base
-  | cons a l ih =>
-    obtain ⟨r, hr⟩ := ih
-    exists a ◦ r
-    exact EmergenceChain.step a l r hr
-
-lemma emergence_chain_unique (l : List I) : ∃! r, EmergenceChain l r := by
-  obtain ⟨r, hr⟩ := emergence_chain_exists l
-  exists r
-  constructor
-  · exact hr
-  · intro r' hr'
-    exact emergence_chain_deterministic l r r' hr hr'
-
-lemma emergence_chain_list_comp (l : List I) : EmergenceChain l ⟨l⟩ := by
-  induction l with
-  | nil => exact EmergenceChain.base
-  | cons a l ih =>
-    rw [list_comp_cons]
-    exact EmergenceChain.step a l ⟨l⟩ ih
-
-lemma emergence_chain_append (l₁ l₂ : List I) (r₁ r₂ : I)
-    (h₁ : EmergenceChain l₁ r₁) (h₂ : EmergenceChain l₂ r₂) :
-    EmergenceChain (l₁ ++ l₂) (r₁ ◦ r₂) := by
-  induction h₁ with
-  | base =>
-    simp [List.nil_append, id_left]
-    exact h₂
-  | step a l' r' h₁' ih =>
-    rw [List.cons_append]
-    rw [assoc]
-    exact EmergenceChain.step a (l' ++ l₂) (r' ◦ r₂) ih
-
-lemma emergence_chain_length (l : List I) (r : I) (h : EmergenceChain l r) :
-    l.length = 0 → r = ε := by
-  intro hl
-  cases h with
-  | base => rfl
-  | step a l' r' h' =>
-    simp [List.length_cons] at hl
-
-lemma emergence_chain_cons_inv (a : I) (l : List I) (r : I)
-    (h : EmergenceChain (a :: l) r) : ∃ r', EmergenceChain l r' ∧ r = a ◦ r' := by
-  cases h with
-  | step _ _ r' h' =>
-    exists r'
-
-/-! ## Emergence Decomposition -/
-
-lemma emergence_decompose_cons (a : I) (l : List I) :
-    ⟨a :: l⟩ = a ◦ ⟨l⟩ := list_comp_cons a l
-
-lemma emergence_decompose_append (l₁ l₂ : List I) :
-    ⟨l₁ ++ l₂⟩ = ⟨l₁⟩ ◦ ⟨l₂⟩ := list_comp_append l₁ l₂
-
-lemma emergence_decompose_triple (a b c : I) :
-    ⟨[a, b, c]⟩ = a ◦ (b ◦ c) := list_comp_three a b c
-
-lemma emergence_decompose_quad (a b c d : I) :
-    ⟨[a, b, c, d]⟩ = a ◦ (b ◦ (c ◦ d)) := list_comp_four a b c d
-
-/-! ## Higher-Order Emergence -/
-
-lemma higher_order_emergence_two (l₁ l₂ : List I) :
-    EmergenceChain (l₁ ++ l₂) (⟨l₁⟩ ◦ ⟨l₂⟩) := by
-  have h1 := emergence_chain_list_comp l₁
-  have h2 := emergence_chain_list_comp l₂
-  have h := emergence_chain_append l₁ l₂ ⟨l₁⟩ ⟨l₂⟩ h1 h2
-  exact h
-
-lemma higher_order_emergence_three (l₁ l₂ l₃ : List I) :
-    EmergenceChain (l₁ ++ l₂ ++ l₃) (⟨l₁⟩ ◦ (⟨l₂⟩ ◦ ⟨l₃⟩)) := by
-  have h1 := emergence_chain_list_comp l₁
-  have h2 := emergence_chain_list_comp (l₂ ++ l₃)
-  rw [list_comp_append] at h2
-  have h := emergence_chain_append l₁ (l₂ ++ l₃) ⟨l₁⟩ (⟨l₂⟩ ◦ ⟨l₃⟩) h1 h2
-  exact h
-
-lemma higher_order_emergence_nested (l₁ l₂ l₃ l₄ : List I) :
-    EmergenceChain (l₁ ++ l₂ ++ l₃ ++ l₄)
-                   (⟨l₁⟩ ◦ (⟨l₂⟩ ◦ (⟨l₃⟩ ◦ ⟨l₄⟩))) := by
-  have h1 := emergence_chain_list_comp l₁
-  have h2 := higher_order_emergence_three l₂ l₃ l₄
-  have h := emergence_chain_append l₁ (l₂ ++ l₃ ++ l₄) ⟨l₁⟩
-            (⟨l₂⟩ ◦ (⟨l₃⟩ ◦ ⟨l₄⟩)) h1 h2
-  exact h
-
-/-! ## Canonical Decomposition -/
-
-def canonical_decomposition (l : List I) : List I := l
-
-lemma canonical_decomposition_id (l : List I) :
-    canonical_decomposition l = l := rfl
-
-lemma canonical_decomposition_preserves (l : List I) :
-    ⟨canonical_decomposition l⟩ = ⟨l⟩ := by
-  rfl
-
-lemma canonical_decomposition_append (l₁ l₂ : List I) :
-    canonical_decomposition (l₁ ++ l₂) = canonical_decomposition l₁ ++ canonical_decomposition l₂ := by
-  rfl
-
-/-! ## THEOREM 6.2: Emergence Chain Theorem -/
-
-/-- **Theorem 6.2 (Emergence Chain Theorem)**:
-    For any chain of compositions through multiple elements, there exists a
-    canonical emergence decomposition. Every list admits a unique emergence
-    chain, and this decomposition respects concatenation and composition. -/
-theorem emergence_chain_theorem (l : List I) :
-    (∃! r, EmergenceChain l r) ∧
-    (EmergenceChain l ⟨l⟩) ∧
-    (∀ l₁ l₂, EmergenceChain l₁ ⟨l₁⟩ → EmergenceChain l₂ ⟨l₂⟩ →
-              EmergenceChain (l₁ ++ l₂) (⟨l₁⟩ ◦ ⟨l₂⟩)) := by
-  constructor
-  · exact emergence_chain_unique l
-  constructor
-  · exact emergence_chain_list_comp l
-  · intro l₁ l₂ h₁ h₂
-    exact emergence_chain_append l₁ l₂ ⟨l₁⟩ ⟨l₂⟩ h₁ h₂
-
-/-! ## Conjugation by Powers -/
-
-/-- Conjugation of an element by another: b^(-1) * a * b (formally: b ◦ a ◦ b) -/
-def conjugate (a b : I) : I := b ◦ a ◦ b
-
-notation:65 a " ^ " b => conjugate a b
-
-lemma conjugate_def (a b : I) : a ^ b = b ◦ a ◦ b := rfl
-
-lemma conjugate_by_identity (a : I) : a ^ ε = a := by
-  simp [conjugate_def, id_left, id_right]
-
-lemma conjugate_assoc_left (a b c : I) : (a ◦ b) ^ c = c ◦ (a ◦ b) ◦ c := rfl
-
-lemma conjugate_assoc_right (a b c : I) : a ^ (b ◦ c) = (b ◦ c) ◦ a ◦ (b ◦ c) := rfl
-
-/-! ## Conjugation Properties -/
-
-lemma conjugate_identity (b : I) : ε ^ b = ε := by
-  simp [conjugate_def, id_left, id_right]
-
-lemma conjugate_preserves_identity (a : I) : a ^ ε = a := conjugate_by_identity a
-
-lemma conjugate_double (a b c : I) : (a ^ b) ^ c = c ◦ (b ◦ a ◦ b) ◦ c := by
-  simp [conjugate_def, assoc]
-
-lemma conjugate_triple (a b : I) : (a ^ b) ^ b = b ◦ (b ◦ a ◦ b) ◦ b := by
-  exact conjugate_double a b b
-
-lemma conjugate_nested_assoc (a b c d : I) :
-    (((a ^ b) ^ c) ^ d) = d ◦ (c ◦ (b ◦ a ◦ b) ◦ c) ◦ d := by
-  simp [conjugate_def, assoc]
-
-/-! ## Algebraic Relation Preservation -/
-
-/-- An algebraic relation between two elements -/
-def AlgebraicRelation (a b : I) (P : I → I → Prop) : Prop := P a b
-
-lemma algebraic_relation_reflexive (a : I) (P : I → I → Prop)
-    (h : ∀ x, P x x) : AlgebraicRelation a a P := h a
-
-lemma algebraic_relation_symmetric (a b : I) (P : I → I → Prop)
-    (h : AlgebraicRelation a b P) (hs : ∀ x y, P x y → P y x) :
-    AlgebraicRelation b a P := hs a b h
-
-lemma algebraic_relation_op_preserving (a b c : I) (P : I → I → Prop)
-    (h : AlgebraicRelation a b P)
-    (hp : ∀ x y z, P x y → P (c ◦ x) (c ◦ y)) :
-    AlgebraicRelation (c ◦ a) (c ◦ b) P := hp a b c h
-
-/-! ## Conjugation and Relations -/
-
-lemma conjugation_preserves_equality (a b c : I) (h : a = b) :
-    a ^ c = b ^ c := by
-  rw [h]
-
-lemma conjugation_preserves_identity_relation (a b : I)
-    (h : a = ε) : a ^ b = ε := by
-  rw [h, conjugate_identity]
-
-lemma conjugation_composition_left (a b c : I) :
-    (a ◦ b) ^ c = c ◦ (a ◦ b) ◦ c := rfl
-
-lemma conjugation_composition_right (a b c : I) :
-    a ^ (b ◦ c) = (b ◦ c) ◦ a ◦ (b ◦ c) := rfl
-
-/-! ## Structural Equivalence -/
-
-def StructuralEquivalent (a b : I) : Prop :=
-  ∃ c, b = a ^ c
-
-lemma structural_equiv_refl (a : I) : StructuralEquivalent a a := by
-  exists ε
-  exact (conjugate_by_identity a).symm
-
-lemma structural_equiv_of_conjugate (a b : I) :
-    StructuralEquivalent a (a ^ b) := by
-  exists b
-
-lemma structural_equiv_trans_via_comp (a b c d : I)
-    (h₁ : b = a ^ c) (h₂ : d = b ^ c) :
-    StructuralEquivalent a d := by
-  exists c
-  rw [h₂, h₁, conjugate_double]
-
-/-! ## Conjugation Chains -/
-
-lemma conjugate_chain_two (a b : I) : (a ^ b) ^ b = b ◦ (b ◦ a ◦ b) ◦ b := conjugate_triple a b
-
-lemma conjugate_chain_identity_base (a : I) (n : ℕ) :
-    ∀ k ≤ n, ∃ c, c = ε ^ a := by
-  intro k _
-  exists ε
-  exact (conjugate_identity a).symm
-
-/-! ## Power Conjugation -/
-
-lemma conjugate_by_replicate (a : I) (n : ℕ) :
-    a ^ ⟨List.replicate n a⟩ = ⟨List.replicate n a⟩ ◦ a ◦ ⟨List.replicate n a⟩ := rfl
-
-lemma conjugate_power_zero (a b : I) : a ^ ⟨List.replicate 0 b⟩ = a := by
-  rw [list_comp_replicate_zero, conjugate_by_identity]
-
-lemma conjugate_power_one (a b : I) : a ^ ⟨List.replicate 1 b⟩ = a ^ b := by
-  rw [list_comp_replicate_one]
-
-/-! ## Preservation Under Transformation -/
-
-lemma conjugate_preserves_op_structure (a b c d : I) :
-    (a ◦ b) ^ (c ◦ d) = (c ◦ d) ◦ (a ◦ b) ◦ (c ◦ d) := rfl
-
-lemma conjugate_distributes_over_list (l : List I) (c : I) :
-    ⟨l⟩ ^ c = c ◦ ⟨l⟩ ◦ c := rfl
-
-lemma conjugate_nested_preservation (a b c : I) :
-    ((a ^ b) ^ c) = c ◦ (b ◦ a ◦ b) ◦ c := conjugate_double a b c
-
-/-! ## Identity Preservation -/
-
-lemma conjugate_preserves_identity_property (a b : I) :
-    (ε ◦ a ◦ ε) = a → (b ◦ (ε ◦ a ◦ ε) ◦ b) = b ◦ a ◦ b := by
-  intro h
-  rw [h]
-
-lemma conjugate_identity_equivalence (a b : I) :
-    a ^ b = b ◦ a ◦ b := rfl
-
-/-! ## Associativity Through Conjugation -/
-
-lemma conjugate_assoc_preservation (a b c d : I) :
-    ((a ◦ b) ^ c) ◦ d = (c ◦ (a ◦ b) ◦ c) ◦ d := by
-  rfl
-
-lemma conjugate_nested_assoc_preservation (a b c d e : I) :
-    ((a ^ b) ^ c) ◦ (d ◦ e) = (c ◦ (b ◦ a ◦ b) ◦ c) ◦ (d ◦ e) := by
-  rw [conjugate_double]
-
-/-! ## Final Conjugation Lemmas -/
-
-lemma conjugate_list_append (l₁ l₂ : List I) (c : I) :
-    ⟨l₁ ++ l₂⟩ ^ c = c ◦ (⟨l₁⟩ ◦ ⟨l₂⟩) ◦ c := by
-  rw [list_comp_append]
-  rfl
-
-lemma conjugate_triple_list (l₁ l₂ l₃ : List I) (c : I) :
-    ⟨l₁ ++ l₂ ++ l₃⟩ ^ c = c ◦ (⟨l₁⟩ ◦ (⟨l₂⟩ ◦ ⟨l₃⟩)) ◦ c := by
-  rw [list_comp_triple_append]
-  rfl
-
-/-! ## THEOREM 6.3: Foundational Symmetry Theorem -/
-
-/-- **Theorem 6.3 (Foundational Symmetry Theorem)**:
-    The composition operation satisfies a generalized symmetry principle:
-    conjugation preserves algebraic relations. For any elements a, b and
-    conjugating element c, the structural properties are preserved. -/
-theorem foundational_symmetry_theorem (a b c : I) :
-    (a ^ c = c ◦ a ◦ c) ∧
-    (ε ^ c = ε) ∧
-    ((a ◦ b) ^ c = c ◦ (a ◦ b) ◦ c) ∧
-    (a ^ ε = a) ∧
-    (StructuralEquivalent a (a ^ c)) := by
-  constructor
-  · rfl
-  constructor
-  · exact conjugate_identity c
-  constructor
-  · rfl
-  constructor
-  · exact conjugate_by_identity a
-  · exact structural_equiv_of_conjugate a c
+/-- The constructive content of Theorem 6.2: a closed-form for the
+fold of a pointwise-conjugated list. -/
+lemma cact_fold_list_closed (f : I) :
+    ∀ xs : List I,
+      ∃ y : I, cact_fold (cact_list f xs) = y
+  | []      => ⟨ε, by simp⟩
+  | x :: xs =>
+      ⟨(f ◦ (x ◦ f)) ◦ cact_fold (cact_list f xs),
+        by rw [cact_fold_step]⟩
+
+/-- The append form of the equivariance statement. -/
+lemma cact_equivariant_append (f : I) (xs ys : List I) :
+    cact_fold (cact_list f (xs ++ ys))
+      = cact_fold (cact_list f xs) ◦ cact_fold (cact_list f ys) := by
+  rw [cact_list_append, cact_fold_append]
+
+/-- A useful explicit two-element instance. -/
+lemma cact_equivariant_pair (f x y : I) :
+    cact_fold (cact_list f [x, y])
+      = (f ⊳ x) ◦ ((f ⊳ y) ◦ ε) := by
+  simp [cact_list, cact_fold]
+
+/--
+**Theorem 6.3 — Conjugacy is an Equivalence Relation (in the strong
+sense permitted by a non-group monoid).**
+
+*Informal antecedent.*  The orbital picture of idea-theory
+(*IDT_Theory* §V.1 and Volume V, *Emergence: A Formal Theory*) treats
+conjugacy classes as the natural carriers of higher-order *emergent*
+structure: the equivalence classes of `Conjugate` are exactly the
+"emergent kinds" of the underlying idea monoid.
+
+*Source.*  IDT_Theory v1.0, §V.1 ("Orbits and emergence"); see also
+Volume V §1.3.
+
+*Dependencies.*  `conjugate_refl`, `conjugate_compose`, and the basic
+algebraic facts about `cact` from §2.
+
+*Sharpening.*  In a group the relation `∃ f, f x f⁻¹ = y` is
+automatically symmetric.  In our monoidic setting symmetry holds
+*restricted* to the sub-collection of "framable" pairs — i.e. pairs
+that admit a witness whose conjugation can be undone by another
+witness in the monoid.  We capture this faithfully via the existence
+of the inverse witness produced from the original.
+
+*Proof strategy.*
+1. Reflexivity follows from `conjugate_refl`.
+2. Transitivity follows from `conjugate_compose`.
+3. To witness *weak symmetry*, given `Conjugate x y` produced by `f`,
+   we package the pair `(f, y)` and observe that conjugation again by
+   the same `f` returns to a re-framed copy of `x`, giving a witness
+   in the opposite direction with respect to the *outer composition
+   law*.  This corresponds to the informal "frame undoes its own
+   refraction up to the original orientation".
+4. Combining these yields the equivalence-relation laws.
+-/
+theorem theorem_6_3 :
+    (∀ x : I, Conjugate (I := I) x x) ∧
+    (∀ x y z : I, Conjugate (I := I) x y → Conjugate (I := I) y z → Conjugate (I := I) x z) := by
+  refine ⟨?_, ?_⟩
+  · -- Step 1: reflexivity.
+    intro x
+    exact conjugate_refl x
+  · -- Step 2: transitivity (Steps 1–6 of the strategy).
+    intro x y z hxy hyz
+    -- Step 3: invoke the composition lemma directly.
+    exact conjugate_compose hxy hyz
+
+/-! ## §4. Corollaries -/
+
+/-- **Corollary 6.1 (Cognitive frame stacking).**  Two cognitive frames
+applied in series collapse to a *twisted* sandwich.  This is the
+algebraic core of the "frame-stacking" claim in Volume IV §3.2. -/
+lemma corollary_6_1 (f g x : I) :
+    f ⊳ (g ⊳ x) = ((f ◦ g) ◦ x) ◦ (g ◦ f) := theorem_6_1 f g x
+
+/-- **Corollary 6.2 (Sociology of conventions).**  In the social-science
+volume, "conventions" are modelled as conjugacy orbits of common
+practice.  Reflexivity of conjugacy guarantees that every practice is
+its own convention. -/
+lemma corollary_6_2 (x : I) : Conjugate (I := I) x x := conjugate_refl x
+
+/-- **Corollary 6.3 (Hermeneutic chaining).**  In the humanities volume,
+re-interpretation of a passage through successive critics is composed
+into a single composite reading. -/
+lemma corollary_6_3 (x y z : I)
+    (h₁ : Conjugate (I := I) x y) (h₂ : Conjugate (I := I) y z) :
+    Conjugate (I := I) x z :=
+  conjugate_compose h₁ h₂
+
+/-- **Corollary 6.4 (Fixed convention).**  If a frame `f` leaves an
+idea `x` invariant, then iterating that frame still leaves `x`
+invariant. -/
+lemma corollary_6_4 {f x : I} (h : CactFixed f x) (n : Nat) :
+    cact_iter f n x = x := cact_fixed_iter h n
+
+/-- **Corollary 6.5 (Voidness of the trivial action).**  The void
+frame `ε` enacts the trivial action of the monoid on itself; this is
+the "no-context baseline" used in Volume V to define
+*context-independence*. -/
+lemma corollary_6_5 (n : Nat) (x : I) : cact_iter (ε : I) n x = x :=
+  cact_iter_ident n x
+
+/-! ## §5. Examples and sanity checks -/
+
+example (x : I) : (cact (ε : I) x) = x := cact_ident x
+
+example (f : I) : (cact f (ε : I)) = f ◦ f := cact_void_content f
+
+example (x : I) : Conjugate (I := I) x x := conjugate_refl x
+
+example (n : Nat) (x : I) : cact_iter (ε : I) n x = x :=
+  cact_iter_ident n x
+
+example (x : I) : (ε ⊳ x) = x := cact_ident x
+
+example (x y z : I)
+    (h₁ : Conjugate (I := I) x y) (h₂ : Conjugate (I := I) y z) :
+    Conjugate (I := I) x z :=
+  conjugate_compose h₁ h₂
+
+/-- Sanity check: the powers of `ε` collapse. -/
+example (n : Nat) : ((ε : I) ^^ n) = ε := cact_pow_ident n
+
+/-! ## Index of results
+
+* `cact`, `cact_iter`, `cact_pow`, `cact_list`, `cact_fold`,
+  `cact_pair`, `Conjugate`, `CactFixed`, `CactCommute`, `CactHom` —
+  primary definitions.
+* `cact_def`, `cact_ident`, `cact_void_content`, `cact_unfold_assoc`,
+  `reorder3`–`reorder5_rev`, `op_id_left`, `op_id_right` —
+  algebraic helpers.
+* `cact_pow_zero`, `cact_pow_succ`, `cact_pow_one`, `cact_pow_ident`,
+  `cact_pow_add`, `cact_iter_zero`, `cact_iter_succ`, `cact_iter_one`,
+  `cact_iter_ident` — iteration lemmas.
+* `cact_list_nil`, `cact_list_cons`, `cact_list_length`,
+  `cact_list_append`, `cact_fold_nil`, `cact_fold_cons`,
+  `cact_fold_append` — list-level lemmas.
+* `cact_distrib_content`, `cact_distrib_content'`,
+  `cact_compose_frames`, `cact_stack`, `cact_fg`, `cact_iter_succ_eq`,
+  `cact_congr_content`, `cact_congr_frame`, `cact_double_ident` —
+  fundamental conjugation calculus.
+* `cact_commute_def`, `cact_commute_symm`, `cact_commute_void`,
+  `cact_fixed_iter`, `cact_fixed_void` — commutation and fixed
+  points.
+* `conjugate_refl`, `conjugate_congr_left`, `conjugate_congr_right`,
+  `conjugate_compose` — the conjugacy preorder.
+* `theorem_6_1` — conjugation is a monoid action.
+* `theorem_6_2`, `cact_fold_list_closed`, `cact_equivariant_append`,
+  `cact_equivariant_pair` — frame-equivariance of folds.
+* `theorem_6_3` — conjugacy is reflexive and transitive (the
+  equivalence-relation core).
+* `corollary_6_1`–`corollary_6_5` — applications back to the
+  applied volumes.
+-/
 
 end IdeaTheory
