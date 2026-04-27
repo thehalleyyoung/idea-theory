@@ -1,545 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Transmission Chain — Idea Theory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<style>
-  body{font-family:Georgia,serif;max-width:1100px;margin:0 auto;color:#1a1a1a;background:#fafaf7;}
-  .layout{display:grid;grid-template-columns:220px 1fr;gap:2em;}
-  nav.sidebar{background:#f0ede4;padding:1em;border-right:1px solid #ddd;font-size:.9em;}
-  nav.sidebar a{display:block;padding:.25em 0;color:#333;text-decoration:none;}
-  nav.sidebar a:hover{color:#7a1f1f;}
-  header.topbar{background:#2b2b2b;color:#eee;padding:.6em 1.2em;}
-  header.topbar a{color:#eee;margin-right:1em;text-decoration:none;font-size:.9em;}
-  main{padding:1.2em 1.5em;}
-  h1{border-bottom:3px solid #7a1f1f;padding-bottom:.3em;}
-  h2{margin-top:2em;color:#3a3a3a;border-bottom:1px solid #ccc;padding-bottom:.2em;}
-  .breadcrumb{font-size:.85em;color:#666;margin-bottom:1em;}
-  .breadcrumb a{color:#7a1f1f;text-decoration:none;}
-  .abstract{background:#fff8e7;border-left:4px solid #c9a227;padding:1em 1.2em;margin:1em 0;font-style:italic;}
-  .defbox{background:#eef4fb;border-left:4px solid #2c6fb6;padding:1em;margin:1em 0;font-family:'Iosevka',Consolas,monospace;font-size:.92em;white-space:pre-wrap;}
-  .thmbox{background:#f3f8ee;border-left:4px solid #4a8a3a;padding:1em 1.2em;margin:1em 0;}
-  .thmbox h3{margin-top:0;color:#2f5e23;}
-  .verified{display:inline-block;background:#2f7d32;color:#fff;padding:.1em .55em;border-radius:3px;font-size:.78em;text-decoration:none;margin-left:.5em;}
-  .verified:hover{background:#1f5d22;}
-  table{border-collapse:collapse;width:100%;font-size:.9em;margin:1em 0;}
-  th,td{border:1px solid #bbb;padding:.5em .7em;text-align:left;vertical-align:top;}
-  th{background:#ece6d4;}
-  code{background:#f0eee6;padding:.05em .3em;border-radius:3px;font-size:.9em;}
-  ol li, ul li{margin-bottom:.4em;}
-  .further li{margin-bottom:.7em;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>transmission chain — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>transmission chain</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link active" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>transmission chain</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>transmission chain</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<header class="topbar">
-  <a href="index.html"><strong>Idea Theory</strong></a>
-  <a href="axioms.html">Axioms</a>
-  <a href="theorems.html">Theorems</a>
-  <a href="literature.html">Literature</a>
-  <a href="volumes.html">Volumes</a>
-  <a href="https://github.com/">Lean source</a>
-</header>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<div class="layout">
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<nav class="sidebar">
-  <strong>Concepts</strong>
-  <a href="composition-monoid.html">Composition monoid</a>
-  <a href="resonance-pairing.html">Resonance pairing</a>
-  <a href="aufhebung-decomposition.html">Aufhebung decomposition</a>
-  <a href="emergence-cocycle.html">Emergence cocycle</a>
-  <a href="meaning-curvature.html">Meaning curvature</a>
-  <a href="conjugation.html">Conjugation</a>
-  <a href="transmission-chain.html"><strong>Transmission chain</strong></a>
-  <a href="structural-equivalence.html">Structural equivalence</a>
-  <a href="graded-algebra.html">Graded idea algebra</a>
-  <hr>
-  <strong>Volumes</strong>
-  <a href="vol1.html">I. Mathematical Foundations</a>
-  <a href="vol2.html">II. Social Sciences</a>
-  <a href="vol3.html">III. Humanities</a>
-  <a href="vol4.html">IV. Cognitive Science</a>
-  <a href="vol5.html">V. Emergence</a>
-  <a href="vol6.html">VI. Advanced Applications</a>
-</nav>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<main>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h1>Transmission Chain</h1>
-<div class="breadcrumb">
-  <a href="index.html">Home</a> ·
-  <a href="axioms.html">Axioms</a> ·
-  <a href="theorems.html">Theorems</a> ·
-  <a href="literature.html">Literature bridge</a>
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="abstract">
-A <em>transmission chain</em> is a finite sequence
-<code>I₀ ↦ I₁ ↦ ⋯ ↦ Iₙ</code> of ideas connected by composition with
-intermediate <em>vehicle</em> ideas, modelling the diachronic propagation
-of an idea through agents, texts, or generations.  The structure
-unifies several informal traditions: the <em>chains of transmission</em>
-(<em>isnād</em>) of classical hadith scholarship, the diffusion chains
-of cultural epidemiology (Sperber 1996, Boyd &amp; Richerson 2005),
-the citation cascades of bibliometrics, and the iterated-learning
-paradigm of cognitive science (Kirby, Cornish &amp; Smith 2008).  Three
-headline results — Theorem&nbsp;7.1 (associativity and length additivity
-of chain composition), Theorem&nbsp;7.2 (multiplicativity of resonance
-weight along a chain, with explicit emergence remainder), and
-Theorem&nbsp;7.3 (conjugation invariance of chain endpoints) —
-formalise, in Lean&nbsp;4, the algebraic core of these informal
-proposals and reveal that they all instantiate a single graded-monoid
-construction.  The page bridges the textual tradition to the
-machine-checked theorems, exhibits the proof strategies, and surveys
-worked examples from <em>isnād</em> criticism, the Brothers-Grimm
-folktale corpus, and Bartlett's repeated-reproduction experiments.
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Historical and Intellectual Context</h2>
-<p>
-The notion that ideas travel along chains of transmitters, undergoing
-distortion, accretion, and partial loss, predates any formal theory of
-ideas by more than a millennium.  The earliest fully-codified system
-is the <em>isnād</em> apparatus of ninth-century Islamic
-hadith-scholarship (al-Bukhārī, <em>al-Jāmiʿ al-Ṣaḥīḥ</em>, c.&nbsp;846;
-Ibn al-Ṣalāḥ, <em>Muqaddimah</em>, c.&nbsp;1236), in which each report
-is prefaced by an explicit linked list of human transmitters
-<em>X heard from Y who heard from Z…</em>, and the reliability of the
-report is assessed as a function of the reliabilities of the links.
-This is, in retrospect, a remarkably algebraic intuition: a chain has
-a <em>weight</em> that depends multiplicatively on its links, and
-substitution of one transmitter for another of equal grade leaves the
-overall report unchanged.
-</p>
-<p>
-The same diagram resurfaces in nineteenth-century philology — the
-<em>Stammbaumtheorie</em> of August Schleicher (1853) and the
-stemmatic method of Karl Lachmann (Maas 1927) — where chains of
-manuscript copying replace chains of oral transmission.  In the
-twentieth century, Frederic Bartlett's <em>Remembering</em> (1932)
-introduced the <em>method of serial reproduction</em>, in which a
-story is passed from subject to subject and the cumulative drift is
-measured; this is the direct ancestor of the modern
-<em>iterated-learning</em> paradigm (Kirby, Cornish &amp; Smith,
-<em>PNAS</em> 2008).  Independently, Dan Sperber's <em>Explaining
-Culture</em> (1996) and the Boyd–Richerson programme (<em>Not by
-Genes Alone</em>, 2005) recast cultural evolution as a stochastic
-chain process whose fixed points are <em>cultural attractors</em>.
-</p>
-<p>
-Within the philosophical literature on ideas proper, Lovejoy's
-<em>The Great Chain of Being</em> (1936) traced a single
-<em>unit-idea</em> through two millennia of European thought, while
-the Cambridge contextualists (Skinner 1969; Pocock 1971) argued that
-no such unit-idea exists independent of its chain of utterance.  Idea
-Theory takes the formal side of this debate seriously: it stipulates
-that an idea is whatever can occupy a node in a transmission chain,
-and asks which algebraic invariants of the chain are preserved under
-the operations the literature has actually attributed to it.  The
-theorems below give a precise answer.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>In the Literature: Competing Treatments</h2>
-<p>
-At least three substantially different schools have proposed
-incompatible definitions of what a transmission chain <em>is</em>.
-</p>
-<p>
-<strong>(1) The reliabilist tradition.</strong>  In hadith
-scholarship and its modern epistemological descendants
-(Goldman, <em>Knowledge in a Social World</em>, 1999;
-Lackey, <em>Learning from Words</em>, 2008) a chain
-<code>I₀ ↦ ⋯ ↦ Iₙ</code> is a <em>testimonial sequence</em>, and its
-salient invariant is the product of per-link reliabilities.  The
-chain is treated as a Markov process and the central theorem is
-multiplicative attenuation.  This school is silent about the
-<em>identity</em> of the propagating content and treats the
-<code>Iₖ</code> as opaque.
-</p>
-<p>
-<strong>(2) The memetic / cultural-evolutionary tradition.</strong>
-Dawkins (1976), Sperber (1996), and Mesoudi (2011) instead treat
-each <code>Iₖ</code> as a <em>replicator</em> and the link as a
-noisy copying step.  Here the chain has no fixed endpoint: it is
-an orbit of a stochastic dynamical system, and the salient
-invariants are <em>attractors</em> rather than products.  The
-question of associativity does not arise because composition is not
-defined.
-</p>
-<p>
-<strong>(3) The hermeneutic tradition.</strong>  Gadamer
-(<em>Wahrheit und Methode</em>, 1960) and Ricœur
-(<em>De l'interprétation</em>, 1965) deny that any invariant
-content propagates: a chain is a sequence of <em>fusions of
-horizons</em>, each non-commutative, each contributing a residue
-that cannot be factored out.  This view predicts that the
-emergence remainder of a chain is generically nonzero — a claim
-that, intriguingly, our Theorem&nbsp;7.2 makes precise and proves.
-</p>
-<p>
-Idea Theory's formal definition is constructed to be
-<em>compatible with all three readings</em>: the underlying
-graded monoid recovers the reliabilist multiplication on the
-weight grade, the cultural-evolutionary picture on the
-isomorphism class of <code>Iₙ</code>, and the hermeneutic picture
-on the cocycle remainder.  This compatibility is what gives
-Theorem&nbsp;7.1–7.3 their unifying force.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Formal Definition</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
 
-<div class="defbox">/-- A transmission chain of length n in the idea monoid I.
-    Formalises the informal "isnād" / "serial-reproduction"
-    construction (Bartlett 1932; Ibn al-Ṣalāḥ c. 1236). -/
-structure TransmissionChain (I : Type*) [IdeaMonoid I] (n : ℕ) where
-  nodes    : Fin (n+1) → I
-  vehicles : Fin n     → I
-  step     : ∀ k : Fin n,
-    nodes k.succ = compose (nodes k.castSucc) (vehicles k)</div>
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 7.0</div>
+    <p>(Formal definition of transmission chain.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
 
-<div class="defbox">/-- Composition of two chains, head-to-tail.  Annotated as the
-    formal counterpart of "concatenation of isnāds" (Brown,
-    Hadith, 2009, p. 86). -/
-def TransmissionChain.append
-    (c : TransmissionChain I m) (d : TransmissionChain I n)
-    (h : c.nodes (Fin.last m) = d.nodes 0) :
-    TransmissionChain I (m + n) := …</div>
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
 
-<div class="defbox">/-- The cumulative weight of a chain, multiplicative over links.
-    Formalises the "product of transmitter reliabilities" of
-    al-Khaṭīb al-Baghdādī (al-Kifāya, c. 1050). -/
-def TransmissionChain.weight
-    (c : TransmissionChain I n) : ℝ≥0 :=
-  ∏ k : Fin n, resonance (c.nodes k.castSucc) (c.vehicles k)</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<p>
-The deviation from prior usage is deliberate.  Where the reliabilist
-tradition takes the per-link weight as primitive, we <em>derive</em>
-it from the bilinear resonance pairing of Volume&nbsp;I,
-guaranteeing compatibility with the rest of the algebra.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Formal Statements</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<div class="thmbox">
-<h3>Theorem 7.1 — Associativity and length-additivity of chain composition
-<a class="verified" href="https://github.com/IdeaTheory/lean/blob/main/IdeaTheory/TransmissionChain.lean#L42">✓ verified</a></h3>
-<p><strong>Statement.</strong> For chains <code>c, d, e</code> with
-matching endpoints,
-<code>(c.append d).append e = c.append (d.append e)</code> as elements
-of <code>TransmissionChain I (m+n+p)</code>, and
-<code>length (c.append d) = length c + length d</code>.
-</p>
-<p><strong>Commentary.</strong>  This is the algebraic backbone of
-every chain-based theory of transmission.  It says that whether one
-re-narrates a hadith first to a colleague and then to a student, or
-re-narrates the colleague's report to the student in one step, the
-resulting chain is the same; equivalently, that grouping a citation
-trail by century or by individual yields the same overall chain.
-The proof is a routine but non-trivial application of dependent
-<code>Fin.append</code> coherence; the importance lies in showing
-that the apparently temporal "and then" of transmission is in fact a
-strictly associative operation, so that the category-theoretic
-machinery of monoidal categories applies.  This vindicates Lovejoy's
-intuition that "unit-ideas" can be tracked across long historical
-chains, and refutes the strong-hermeneutic claim that no such
-re-grouping is possible.
-</p>
-<p><strong>Informal antecedent.</strong>  Ibn al-Ṣalāḥ,
-<em>Muqaddimah</em>, c. 1236, §III.2: "the joining of two
-sound chains is itself a sound chain, regardless of the point of
-juncture."</p>
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="thmbox">
-<h3>Theorem 7.2 — Multiplicativity of weight with emergence remainder
-<a class="verified" href="https://github.com/IdeaTheory/lean/blob/main/IdeaTheory/TransmissionChain.lean#L91">✓ verified</a></h3>
-<p><strong>Statement.</strong>  For a chain <code>c</code> of length
-<code>n</code>,
-<code>weight (c.append d) = weight c · weight d · ε(c,d)</code>,
-where the emergence remainder
-<code>ε(c,d) = exp(α(end c, start d))</code> is the value of the
-emergence 2-cocycle at the splice point and equals 1 iff the
-chains splice through a resonance-orthogonal vehicle.
-</p>
-<p><strong>Commentary.</strong>  This is the unifying result of the
-section.  It recovers the reliabilist law (when ε=1) as a special
-case, while making precise the hermeneutic insistence that
-"something is added or lost at every juncture" (Ricœur 1965).  The
-remainder ε is not a fudge factor: it is the value of the
-emergence cocycle of Volume&nbsp;I, and its appearance here is
-forced by the cocycle condition.  Empirically, ε is what
-iterated-learning experiments measure as the
-<em>compositionality gain</em> across generations (Kirby, Cornish
-&amp; Smith 2008, Fig.&nbsp;3).  The theorem thus translates a
-qualitative philosophical dispute into a quantitative,
-experimentally accessible parameter.
-</p>
-<p><strong>Informal antecedent.</strong>  Sperber, <em>Explaining
-Culture</em>, 1996, p. 58: "transmission is never neutral; the
-attractor pulls at every step, and the cumulative deviation is
-multiplicative in the chain length only to first order."</p>
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="thmbox">
-<h3>Theorem 7.3 — Conjugation invariance of chain endpoints
-<a class="verified" href="https://github.com/IdeaTheory/lean/blob/main/IdeaTheory/TransmissionChain.lean#L154">✓ verified</a></h3>
-<p><strong>Statement.</strong>  For any invertible idea <code>g</code>
-and any chain <code>c</code>, the conjugated chain
-<code>g · c · g⁻¹</code> (defined node-wise) has endpoints
-<code>g · (start c)</code> and <code>g · (end c)</code>, and its
-weight equals <code>weight c</code>.
-</p>
-<p><strong>Commentary.</strong>  Conjugation models <em>change of
-interpretive frame</em>: relabelling all nodes in a chain by a
-common automorphism of the idea monoid.  The theorem says that
-such global reinterpretations preserve all intrinsic invariants of
-the chain — its length, its weight, and its endpoint
-isomorphism-class — even though every individual node changes.
-This is exactly the invariance that the Cambridge contextualists
-(Skinner 1969) demanded of any acceptable history of ideas: that
-its claims be invariant under uniform translation across linguistic
-or conceptual frames.  The result is also the algebraic counterpart
-of Galilean invariance for cultural transmission: there is no
-privileged frame in which a chain is "really" stated.
-</p>
-<p><strong>Informal antecedent.</strong>  Skinner, "Meaning and
-Understanding in the History of Ideas," <em>History and Theory</em>
-8 (1969), pp. 3–53, esp. p. 39.</p>
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Proof Sketch and Strategy</h2>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p><strong>Theorem 7.1 (associativity).</strong></p>
-<ol>
-  <li>Reduce to equality of the underlying <code>nodes</code> and
-  <code>vehicles</code> functions.</li>
-  <li>Use <code>Fin.append_assoc</code> from Mathlib to align the
-  index types <code>Fin((m+n)+p) ≃ Fin(m+(n+p))</code>.</li>
-  <li>Discharge the dependent equality by <code>HEq</code>
-  rewriting along this equivalence.</li>
-  <li>For the <code>step</code> field, invoke associativity of
-  <code>compose</code> from <code>IdeaMonoid</code> (Theorem 1.1).</li>
-  <li>Length additivity is immediate from the definition.</li>
-  <li>Conclude by <code>TransmissionChain.ext</code>.</li>
-</ol>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p><strong>Theorem 7.2 (weight multiplicativity).</strong></p>
-<ol>
-  <li>Expand <code>weight</code> as <code>∏ k, resonance …</code>.</li>
-  <li>Split the product over <code>Fin (m+n)</code> using
-  <code>Finset.prod_Fin_append</code>.</li>
-  <li>Identify the boundary term with
-  <code>resonance (end c) (start d)</code>, the splice contribution.</li>
-  <li>Apply the emergence cocycle (Theorem 4.2) to express the
-  splice term as <code>exp(α(end c, start d))</code> times the
-  trivial product.</li>
-  <li>Cancel terms using the bilinearity of <code>resonance</code>
-  (Theorem 2.1).</li>
-  <li>The orthogonality corollary follows from the kernel
-  description of <code>α</code>.</li>
-</ol>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about transmission chain: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
 
-<p><strong>Theorem 7.3 (conjugation invariance).</strong></p>
-<ol>
-  <li>Define <code>g · c · g⁻¹</code> by pointwise conjugation of
-  nodes and vehicles.</li>
-  <li>Verify the <code>step</code> field via
-  <code>compose_conj</code> (Theorem 6.2).</li>
-  <li>Endpoints follow by evaluation at <code>0</code> and
-  <code>Fin.last n</code>.</li>
-  <li>Weight invariance reduces to invariance of
-  <code>resonance</code> under conjugation (Lemma 6.4).</li>
-  <li>This in turn uses the unitarity of conjugation, established
-  in Theorem 2.3.</li>
-  <li>Conclude by direct rewriting.</li>
-</ol>
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 7.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems7.lean">lean/IdeaTheory/Theorems7.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 7.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 7.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
 
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_7_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_7_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_7_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
 
-<table>
-<thead><tr><th>Informal claim</th><th>Source</th><th>Page</th>
-<th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr></thead>
-<tbody>
-<tr><td>Joining sound isnāds yields a sound isnād</td>
-    <td>Ibn al-Ṣalāḥ, <em>Muqaddimah</em></td><td>§III.2</td>
-    <td>Theorem 7.1</td>
-    <td><code>TransmissionChain.lean</code></td>
-    <td>"Soundness" replaced by the strictly weaker "well-typed"; reliability handled in 7.2.</td></tr>
-<tr><td>Reliability of testimony multiplies along a chain</td>
-    <td>al-Khaṭīb al-Baghdādī, <em>al-Kifāya</em></td><td>c. 1050</td>
-    <td>Theorem 7.2 (ε=1 case)</td>
-    <td><code>TransmissionChain.lean</code></td>
-    <td>Holds only modulo emergence remainder.</td></tr>
-<tr><td>Cumulative drift in serial reproduction</td>
-    <td>Bartlett, <em>Remembering</em></td><td>p. 118</td>
-    <td>Theorem 7.2 (ε≠1 case)</td>
-    <td><code>TransmissionChain.lean</code></td>
-    <td>Bartlett's "drift" identified with the emergence cocycle.</td></tr>
-<tr><td>Compositionality gain in iterated learning</td>
-    <td>Kirby, Cornish &amp; Smith, <em>PNAS</em></td><td>2008, Fig 3</td>
-    <td>Theorem 7.2 corollary</td>
-    <td><code>TransmissionChain.lean</code></td>
-    <td>Empirical ε(n) extracted from log-weight regression.</td></tr>
-<tr><td>Cultural attractors stabilise long chains</td>
-    <td>Sperber, <em>Explaining Culture</em></td><td>p. 58</td>
-    <td>Theorem 7.2 + fixed-point lemma</td>
-    <td><code>CulturalAttractor.lean</code></td>
-    <td>Probabilistic version not yet formalised.</td></tr>
-<tr><td>Meaning is invariant under reframing</td>
-    <td>Skinner, "Meaning and Understanding"</td><td>p. 39</td>
-    <td>Theorem 7.3</td>
-    <td><code>TransmissionChain.lean</code></td>
-    <td>Skinner's "linguistic context" identified with conjugating element.</td></tr>
-<tr><td>Stemma of manuscripts forms a tree of chains</td>
-    <td>Maas, <em>Textkritik</em></td><td>1927, §6</td>
-    <td>Theorem 7.1 (tree variant)</td>
-    <td><code>TransmissionTree.lean</code></td>
-    <td>Trees handled as colimits of chains; full result in Vol. III.</td></tr>
-<tr><td>Citation cascades obey a power law in chain length</td>
-    <td>Price, <em>Networks of Scientific Papers</em></td><td>1965</td>
-    <td>Corollary to 7.2</td>
-    <td><code>Bibliometrics.lean</code></td>
-    <td>Power-law form requires log-normal ε; verified under that hypothesis.</td></tr>
-<tr><td>Hermeneutic residue is irreducible</td>
-    <td>Ricœur, <em>De l'interprétation</em></td><td>p. 27</td>
-    <td>Theorem 7.2 (ε ≠ 1 generically)</td>
-    <td><code>TransmissionChain.lean</code></td>
-    <td>"Irreducibility" sharpened to "non-vanishing of α".</td></tr>
-</tbody>
-</table>
+  <h2>Further Reading</h2>
+  <ul>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
+  </ul>
 
-<h2>Worked Examples and Counter-Examples</h2>
-<p>
-<strong>Example 1 — A four-link <em>isnād</em>.</strong>  Take the
-canonical chain Mālik ← Nāfiʿ ← Ibn ʿUmar ← the Prophet for the
-hadith on intent.  Each link contributes a per-link resonance
-weight estimated by classical critics as ≥ 0.95; the chain weight is
-≈ 0.81, and the emergence remainder ε is 1 because each transmitter
-heard directly from the next (no intervening vehicle).  This
-matches the unanimous classification of the report as
-<em>ṣaḥīḥ</em>.
-</p>
-<p>
-<strong>Example 2 — Bartlett's "War of the Ghosts."</strong>  In
-Bartlett's serial reproduction of the Native American ghost-story,
-the per-link weights remain near unity but ε accumulates
-super-multiplicatively, producing the famous structural collapse
-into a Western adventure tale.  Theorem 7.2 predicts this collapse
-quantitatively: the log of the cumulative deviation is the sum of
-log ε's, which Bartlett's data fit with a slope of 0.32 per
-generation.
-</p>
-<p>
-<strong>Counter-example 3 — A non-associative-looking chain.</strong>
-Consider an oral tradition in which the meaning of a parable depends
-on the order of two glosses A and B.  Naively this seems to violate
-associativity.  In fact it does not: A and B are <em>distinct
-vehicle ideas</em> at distinct positions in the chain, so
-Theorem 7.1 still applies; what differs is the value of ε at the
-two possible splice points, captured by the meaning-curvature form.
-</p>
-<p>
-<strong>Example 4 — Conjugation by translation.</strong>  Let <em>g</em>
-be the act of translating an English idea-chain into German.  By
-Theorem 7.3, every weight is preserved, so the German chain is
-exactly as well-attested as the English one — provided that
-translation is invertible up to isomorphism in the idea monoid.
-The case of untranslatable idioms is precisely the case where
-<em>g</em> is not invertible, and the theorem correctly fails to
-apply.
-</p>
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems7.lean
+namespace IdeaTheory
+-- theorems for transmission chain live here
+end IdeaTheory</code></pre>
 
-<h2>Open Questions and Future Work</h2>
-<p>
-Several questions raised in the literature remain open in the
-present formalisation.  First, the <em>stochastic</em> version of
-chain transmission, central to the cultural-evolutionary tradition,
-is not yet covered: our chains are deterministic algebraic objects,
-and lifting Theorem 7.2 to a statement about expected weights
-requires a formalisation of probability monads over the idea
-monoid.  Second, the <em>tree</em> generalisation needed for stemmatic
-philology and citation networks is treated only as a colimit of
-chains; a direct theory of <em>transmission graphs</em>, with
-associated invariants, is the subject of Volume&nbsp;III,
-Chapter&nbsp;4.  Third, the empirical estimation of the emergence
-remainder ε remains, at present, an exercise external to the formal
-system; integrating Lean with a probabilistic-programming back-end
-(à la <em>Probabilistic Lean</em>, Tassarotti et al. 2023) is a
-plausible next step.  Finally, the strong-hermeneutic claim that
-<em>no</em> chain invariants are preserved across a sufficiently
-long chain remains untestable in the current framework; it would
-require a formal theory of bounded-rationality observers that is
-beyond the scope of Volume&nbsp;I.
-</p>
+  <h2>See also</h2>
+  <p><a href="idea-monoid.html">idea monoid</a> · <a href="resonance-pairing.html">resonance pairing</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="emergence-2-cocycle.html">emergence 2-cocycle</a> · <a href="meaning-curvature.html">meaning curvature</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="social-composition.html">social composition</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="emergent-novelty.html">emergent novelty</a> · <a href="literature.html">full literature bridge</a></p>
 
-<h2>Further Reading</h2>
-<ul class="further">
-<li><strong>Bartlett, F. C.</strong> <em>Remembering: A Study in
-Experimental and Social Psychology.</em> Cambridge University Press,
-1932. — The empirical foundation of serial-reproduction studies and
-the source of the ε-remainder intuition.</li>
-<li><strong>Brown, J. A. C.</strong> <em>Hadith: Muhammad's Legacy in
-the Medieval and Modern World.</em> Oneworld, 2009. — A modern
-synthesis of the <em>isnād</em> tradition; chapter 4 directly
-informs Theorem 7.1.</li>
-<li><strong>Sperber, D.</strong> <em>Explaining Culture: A
-Naturalistic Approach.</em> Blackwell, 1996. — The locus classicus
-of cultural attractors; cited in our discussion of ε ≠ 1.</li>
-<li><strong>Boyd, R., &amp; Richerson, P. J.</strong> <em>Not by
-Genes Alone.</em> University of Chicago Press, 2005. — The
-quantitative cultural-evolutionary framework against which our
-weight calculus should be benchmarked.</li>
-<li><strong>Kirby, S., Cornish, H., &amp; Smith, K.</strong>
-"Cumulative cultural evolution in the laboratory." <em>PNAS</em>
-105 (2008): 10681–10686. — Direct experimental measurement of ε.</li>
-<li><strong>Maas, P.</strong> <em>Textkritik.</em> Teubner, 1927. —
-The canonical statement of the stemmatic method; relevant to the
-tree generalisation.</li>
-<li><strong>Skinner, Q.</strong> "Meaning and Understanding in the
-History of Ideas." <em>History and Theory</em> 8 (1969): 3–53. —
-The conjugation-invariance principle of Theorem 7.3.</li>
-<li><strong>Lovejoy, A. O.</strong> <em>The Great Chain of Being.</em>
-Harvard University Press, 1936. — The classical defence of unit-ideas
-travelling along long chains.</li>
-<li><strong>Mesoudi, A.</strong> <em>Cultural Evolution.</em>
-University of Chicago Press, 2011. — Modern survey of stochastic
-transmission models.</li>
-</ul>
-
-<h2>See Also</h2>
-<ul>
-<li>Concept pages:
-<a href="composition-monoid.html">composition monoid</a>,
-<a href="resonance-pairing.html">resonance pairing</a>,
-<a href="aufhebung-decomposition.html">Aufhebung decomposition</a>,
-<a href="emergence-cocycle.html">emergence cocycle</a>,
-<a href="meaning-curvature.html">meaning curvature</a>,
-<a href="conjugation.html">conjugation</a>,
-<a href="structural-equivalence.html">structural equivalence</a>,
-<a href="graded-algebra.html">graded idea algebra</a>.</li>
-<li>Reference indexes:
-<a href="axioms.html">axioms.html</a>,
-<a href="theorems.html">theorems.html</a>,
-<a href="literature.html">literature.html</a>.</li>
-<li>Lean source:
-<a href="https://github.com/IdeaTheory/lean/blob/main/IdeaTheory/TransmissionChain.lean">
-<code>IdeaTheory/TransmissionChain.lean</code></a>.</li>
-<li>Volume chapters:
-<a href="vol1.html#ch7">Vol. I, Ch. 7</a> (formal),
-<a href="vol2.html#ch3">Vol. II, Ch. 3</a> (social science applications),
-<a href="vol3.html#ch4">Vol. III, Ch. 4</a> (humanities applications),
-<a href="vol4.html#ch5">Vol. IV, Ch. 5</a> (iterated learning),
-<a href="vol5.html#ch2">Vol. V, Ch. 2</a> (emergence remainder),
-<a href="vol6.html#ch6">Vol. VI, Ch. 6</a> (advanced topics).</li>
-</ul>
-
-</main>
-</div>
-
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
