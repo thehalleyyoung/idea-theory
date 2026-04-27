@@ -153,3 +153,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 41 [lean_theorems] Lean theorems: Idea Structures
 [lean_theorems] Lean theorems: Idea Structures — bounced: missing file: lean/IdeaTheory/Theorems5.lean
+
+### Iter 42 [lean_theorems] Lean theorems: Idea Structures
+[lean_theorems] Lean theorems: Idea Structures — bounced: lean/IdeaTheory/Theorems5.lean: contains `sorry`; lean/IdeaTheory/Theorems5.lean: contains `admit`
