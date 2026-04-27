@@ -1,6 +1,3 @@
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Finset.Basic
-import Mathlib.Algebra.Order.Monoid.Lemmas
 import Mathlib.Tactic
 
 /-!
@@ -40,7 +37,7 @@ open IdeaTheoryStructure in
 theorem ident_unique (e : α) (h : ∀ a, op e a = a) : e = ident := by
   have := h ident
   rw [id_right] at this
-  exact this.symm
+  exact this
 
 open IdeaTheoryStructure in
 /-- op is left-cancellative when the left argument is ident. -/

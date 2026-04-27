@@ -1,0 +1,20 @@
+{"log":
+ [{"message":
+   ".> LEAN_PATH=././.lake/packages/Cli/.lake/build/lib:././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/LeanSearchClient/.lake/build/lib:././.lake/packages/plausible/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib DYLD_LIBRARY_PATH= /Users/halleyyoung/.elan/toolchains/leanprover--lean4---v4.15.0/bin/lean -Dpp.unicode.fun=true -DautoImplicit=false -Dlinter.unusedVariables=false ././././IdeaTheory/Theorems1.lean -R ./././. -o ././.lake/build/lib/IdeaTheory/Theorems1.olean -i ././.lake/build/lib/IdeaTheory/Theorems1.ilean -c ././.lake/build/ir/IdeaTheory/Theorems1.c --json",
+   "level": "trace"},
+  {"message":
+   "././././IdeaTheory/Theorems1.lean:206:12: try 'simp' instead of 'simpa'\nnote: this linter can be disabled with `set_option linter.unnecessarySimpa false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems1.lean:209:12: try 'simp' instead of 'simpa'\nnote: this linter can be disabled with `set_option linter.unnecessarySimpa false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems1.lean:402:8: automatically included section variable(s) unused in theorem 'IdeaTheory.chainLength_nil':\n  [IdeaTheoryStructure I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [IdeaTheoryStructure I] in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems1.lean:404:8: automatically included section variable(s) unused in theorem 'IdeaTheory.chainLength_cons':\n  [IdeaTheoryStructure I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [IdeaTheoryStructure I] in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems1.lean:409:0: automatically included section variable(s) unused in theorem 'IdeaTheory.chainLength_append':\n  [IdeaTheoryStructure I]\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit [IdeaTheoryStructure I] in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"}],
+ "depHash": "6401237056137518039"}

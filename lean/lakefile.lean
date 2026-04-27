@@ -13,5 +13,5 @@ require mathlib from git
 
 @[default_target]
 lean_lib «IdeaTheory» where
-  srcDir := "lean"
+  srcDir := "."
   roots := #[`IdeaTheory]
