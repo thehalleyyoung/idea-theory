@@ -442,9 +442,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/literature.html: broken link \u2192 concepts/transmission-chain.html; docs/literature.html: broken link \u2192 concepts/structural-equivalence.html; docs/literature.html: broken link \u2192 concepts/resonance-pairing.html; docs/literature.html: broken link \u2192 concepts/transmission-chain.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/literature.html"
     },
     {
       "id": "tex_preamble",

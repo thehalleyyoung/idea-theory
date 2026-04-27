@@ -1,484 +1,237 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Literature ↔ Formal Bridge — Idea Theory</title>
-<link rel="stylesheet" href="_page_wrap/style.css">
-<script defer src="_page_wrap/sidebar.js"></script>
-<style>
-  body { font-family: Georgia, 'Times New Roman', serif; max-width: 980px; margin: 0 auto; padding: 1.5rem 2rem; color: #1a1a1a; line-height: 1.55; }
-  nav.breadcrumb { font-size: 0.9rem; color: #555; margin-bottom: 1rem; }
-  nav.breadcrumb a { color: #2a4d8f; text-decoration: none; }
-  h1 { border-bottom: 2px solid #2a4d8f; padding-bottom: 0.4rem; }
-  h2 { margin-top: 2.2rem; color: #2a4d8f; border-bottom: 1px solid #ccd; padding-bottom: 0.2rem; }
-  h3 { margin-top: 1.4rem; color: #38507a; }
-  div.abstract { background: #f3f5fb; border-left: 4px solid #2a4d8f; padding: 1rem 1.2rem; margin: 1.2rem 0; font-style: italic; }
-  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.92rem; }
-  th, td { border: 1px solid #bbb; padding: 0.45rem 0.6rem; vertical-align: top; text-align: left; }
-  th { background: #e6ecf7; }
-  tr:nth-child(even) td { background: #fafbfd; }
-  code { background: #eef1f5; padding: 0.05rem 0.3rem; border-radius: 3px; font-size: 0.9em; }
-  ul.refs li { margin-bottom: 0.35rem; }
-  section.concept { background: #fafbfd; border: 1px solid #dde; border-radius: 4px; padding: 0.8rem 1rem; margin-bottom: 0.9rem; }
-  a { color: #2a4d8f; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Literature ↔ Formal — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>Literature ↔ Formal</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link active" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>Literature ↔ Formal Bridge</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a>
+  </p>
 
-<nav class="breadcrumb">
-  <a href="index.html">Home</a> &raquo;
-  <a href="index.html#bridges">Bridges</a> &raquo;
-  <span>Literature ↔ Formal Bridge</span>
-</nav>
+  <div class="abstract">
+    <p>This page is the master cross-walk between the existing non-formalized
+    literature on <strong>Idea Theory
 
-<h1>Literature ↔ Formal Bridge</h1>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<div class="abstract">
-This page is the master index connecting the long-standing informal literature on
-<em>Idea Theory</em> — the loose constellation of writings on how ideas combine,
-resonate, sublate, propagate, and give rise to emergent meaning — with the
-machine-verified theorems formalized in this project's six-volume program. The
-formal core consists of nine basic-mathematics theorems (composition, pairing,
-Aufhebung decomposition, cocycle, curvature, conjugation, chains, equivalence,
-grading) proved in Lean&nbsp;4 under the <code>IdeaTheory</code> namespace, and
-five subsequent volumes interpreting that algebraic apparatus across the social
-sciences, humanities, philosophy of mind and cognitive science, the philosophical
-problem of emergence, and further advanced applications. Our aim here is neither
-to summarize the literature nor to advertise the proofs, but to make the
-correspondence between them auditable: to record, claim by claim, which informal
-proposition is now a Lean lemma, which definition has been sharpened, where
-named authors disagree, and what the formal system adjudicates. The page
-provides a curated map of intellectual schools, a long cross-walk table from
-informal claims to Lean identifiers, per-concept bridge sub-sections, a grouped
-bibliography drawn from <code>references.bib</code>, an explanation of the
-maintenance machinery, and a list of open problems inherited from prior writers.
-It is intended to be read alongside the concept pages and the Lean source.
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Why Bridge?</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>
-The phrase &ldquo;idea theory&rdquo; has been used, with varying degrees of
-rigor, by intellectual historians (Lovejoy&nbsp;1936), philosophers of mind
-(Fodor&nbsp;1975; Dennett&nbsp;1991), cognitive scientists working on
-conceptual combination (Fauconnier&nbsp;&amp;&nbsp;Turner&nbsp;2002),
-sociologists of knowledge (Mannheim&nbsp;1936; Bourdieu&nbsp;1984), memeticists
-(Dawkins&nbsp;1976; Sperber&nbsp;1996), and complexity theorists writing on
-emergence (Anderson&nbsp;1972; Bedau&nbsp;1997). Their claims overlap in
-suggestive ways — ideas <em>compose</em>, ideas <em>resonate</em>, some
-combinations <em>sublate</em> their parts, novel composites carry <em>emergent</em>
-content not present in either constituent — but the vocabulary across these
-traditions is incommensurate, and the proposed laws are stated in prose that
-resists falsification. A reader cannot easily tell whether Lovejoy's
-&ldquo;unit-ideas&rdquo; are the same objects as Sperber's &ldquo;cultural
-representations,&rdquo; nor whether Hegel's <em>Aufhebung</em> is a special
-case of Fauconnier and Turner's blending or an entirely different operation.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p>
-Bridging matters for three reasons. First, <strong>testability</strong>: an
-informal claim such as &ldquo;the meaning of a composite idea exceeds the
-sum of its parts&rdquo; becomes empirically and mathematically tractable only
-once one has a definite operation of composition, a definite pairing measuring
-&ldquo;meaning,&rdquo; and a definite excess term — exactly what the emergence
-2-cocycle <code>ε(a,b)</code> supplies. Second, <strong>definition-sharpening</strong>:
-several historically contested terms — <em>resonance</em>, <em>sublation</em>,
-<em>structural equivalence</em>, <em>conjugation of perspectives</em> — have
-multiple incompatible glosses in the literature, and forcing each into a Lean
-signature exposes which gloss the writer was tacitly assuming. Third,
-<strong>adjudication</strong>: where the literature openly disagrees — for
-instance whether resonance is symmetric (Sperber) or asymmetric (Bourdieu's
-field-theoretic reading) — the formal system makes the disagreement crisp:
-Theorem&nbsp;5 (meaning curvature) shows that asymmetric resonance is generic
-and that the symmetric case is a measure-zero specialization.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>
-A further reason is <strong>cumulativity</strong>. Informal idea-theoretic
-literature has historically been re-founded by every generation; one of the
-costs is that genuine results — Lovejoy's transmission-chain analyses,
-Mannheim's structural-equivalence intuitions, the cocycle structure implicit
-in Fauconnier &amp; Turner's &ldquo;emergent structure&rdquo; — are repeatedly
-re-discovered rather than built upon. By pinning each claim to a Lean
-identifier, we hope to make the formal corpus a substrate that subsequent
-informal work can cite without re-proving. The five applied volumes
-(II&ndash;VI) are written in that spirit: each of their interpretive theorems
-is an <em>instance</em> of one of the nine basic-mathematics theorems in
-Volume&nbsp;I, so an empirical worker in, say, the sociology of taste need
-only verify the instantiation, not the underlying algebra.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>
-Finally, the bridge is a discipline against <em>inflation</em>. Idea-theoretic
-prose has a recurring failure mode in which a metaphor (resonance, depth,
-sublation) is asked to carry too much weight. Forcing each metaphor through a
-Lean type either earns it the right to its content or exposes it as decorative.
-Several terms from earlier drafts of our own program were eliminated by exactly
-this filter; what survives is documented below.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>Map of the Literature</h2>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>
-We organize the prior literature on idea-theoretic topics into five named
-schools. The grouping is ours; individual authors often participate in more
-than one. Each school is described in terms of (i) its core informal claim,
-(ii) its representative authors and works, and (iii) the corresponding Volume(s)
-of this project that interpret it formally.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</strong> and the machine-verified Lean 4
+    theorems in this project.  Every formal result here exists to make a
+    specific informal claim from the literature precise, checkable, and
+    composable.</p>
+  </div>
 
-<h3>1. The History-of-Ideas School (Lovejoy and successors)</h3>
+  <h2>Why Bridge?</h2>
+  <p>(200–400 word narrative on why bridging informal literature to formal
+  proofs matters for Idea Theory
 
-<p>
-Lovejoy's <em>The Great Chain of Being</em> (1936) introduced the program of
-isolating &ldquo;unit-ideas&rdquo; that propagate, recombine, and decay across
-intellectual history. Skinner (1969) and Pocock (1975) refined the program by
-insisting that unit-ideas be indexed by linguistic context, producing what is
-now called the Cambridge School of intellectual history. The shared informal
-claim is that ideas form a discrete combinatorial substrate whose dynamics can
-be tracked over time. Our Volume&nbsp;III (Humanities) interprets transmission
-chains (Theorem&nbsp;7) as the formalization of Lovejoy's chains, and structural
-equivalence (Theorem&nbsp;8) as the formalization of Skinner's
-&ldquo;same-idea-in-different-vocabulary&rdquo; criterion. See
-<a href="concepts/transmission-chain.html">transmission-chain</a> and
-<a href="concepts/structural-equivalence.html">structural-equivalence</a>.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<h3>2. The Cognitive-Combinatorial School (Fauconnier, Turner, Fodor, Murphy)</h3>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>
-This school treats ideas as mental representations that combine according to
-quasi-algebraic rules. Fodor's <em>Language of Thought</em> (1975) gives the
-strong compositional reading; Fauconnier &amp; Turner's <em>The Way We Think</em>
-(2002) and Murphy's <em>Big Book of Concepts</em> (2002) give a weaker reading
-on which composites carry <em>emergent structure</em> not derivable from
-constituents. The disagreement between strong and weak compositionality is
-adjudicated formally in our Volume&nbsp;IV (Cognitive Science): the emergence
-2-cocycle (Theorem&nbsp;4) is exactly the obstruction to strong compositionality,
-and its non-triviality is provable rather than postulated.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h3>3. The Sociology-of-Knowledge School (Mannheim, Bourdieu, Sperber, Latour)</h3>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p>
-From Mannheim's <em>Ideology and Utopia</em> (1936) through Bourdieu's
-<em>Distinction</em> (1984) and Sperber's <em>Explaining Culture</em> (1996) to
-Latour's actor-network writings, this school treats ideas as objects whose
-&ldquo;weight&rdquo; depends on the social field in which they circulate. The
-recurrent informal claim is that two agents holding nominally identical ideas
-may bear asymmetric resonance: agent <em>A</em> may be moved by <em>B</em>'s
-articulation more than vice versa. Our Volume&nbsp;II (Social Sciences)
-interprets the resonance pairing (Theorem&nbsp;2) and meaning curvature
-(Theorem&nbsp;5) as the formalization of these field-asymmetries. See
-<a href="concepts/resonance-pairing.html">resonance-pairing</a>.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h3>4. The Dialectical / Aufhebung School (Hegel, Adorno, Žižek, Brandom)</h3>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>
-The dialectical tradition holds that some pairs of ideas, when combined,
-neither merely sum nor merely conflict, but undergo <em>Aufhebung</em>: a
-decomposition into a preserved part, a negated part, and a lifted residue. The
-informal literature is famously unrigorous about the operation. Brandom's
-<em>A Spirit of Trust</em> (2019) is the most recent attempt to give it
-explicit form. Our Theorem&nbsp;3 (Aufhebung decomposition) supplies the
-operation as a unique direct-sum splitting in the graded monoid; Volume&nbsp;III
-(Humanities) interprets the result and Volume&nbsp;V (Emergence) explains why
-the residue term is precisely what generates emergent novelty.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h3>5. The Emergence / Complexity School (Anderson, Bedau, Kim, O'Connor)</h3>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>
-Anderson's &ldquo;More is Different&rdquo; (1972), Bedau's analysis of weak
-emergence (1997), Kim's supervenience arguments (1999), and O'Connor &amp;
-Wong's surveys (2015) constitute a literature whose core informal claim is
-that some composite phenomena bear properties not reducible to their parts,
-yet are not magical either. The recurrent technical worry is the absence of a
-formal object that is both well-defined and non-trivially non-additive. Our
-Volume&nbsp;V (Emergence) argues that the 2-cocycle <code>ε</code> of
-Theorem&nbsp;4, together with the curvature form of Theorem&nbsp;5, is exactly
-such an object: bilinear in its inputs, well-typed, and provably non-zero on a
-generic class of pairs. This is, to our knowledge, the first place in the
-literature where weak emergence has a Lean-checked definition.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.: which long-standing claims become testable,
+  which definitions sharpen, where the literature disagrees and the formal
+  system adjudicates, what the formalization rules out.)</p>
 
-<h2>Cross-Walk Table</h2>
+  <h2>Cross-Walk Table</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.88rem">
+    <thead>
+      <tr style="border-bottom:2px solid var(--border);text-align:left">
+        <th style="padding:.55rem">Source (Author, Year)</th>
+        <th style="padding:.55rem">Informal claim</th>
+        <th style="padding:.55rem">Formal theorem</th>
+        <th style="padding:.55rem">Lean file</th>
+        <th style="padding:.55rem">Concept page</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about idea monoid)</td>
+        <td style="padding:.5rem"><code>theorem_1_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems1.lean">Theorems1.lean</a></td>
+        <td style="padding:.5rem"><a href="idea-monoid.html">idea monoid</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about resonance pairing)</td>
+        <td style="padding:.5rem"><code>theorem_2_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems2.lean">Theorems2.lean</a></td>
+        <td style="padding:.5rem"><a href="resonance-pairing.html">resonance pairing</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about Aufhebung decomposition)</td>
+        <td style="padding:.5rem"><code>theorem_3_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems3.lean">Theorems3.lean</a></td>
+        <td style="padding:.5rem"><a href="aufhebung-decomposition.html">Aufhebung decomposition</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about emergence 2-cocycle)</td>
+        <td style="padding:.5rem"><code>theorem_4_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems4.lean">Theorems4.lean</a></td>
+        <td style="padding:.5rem"><a href="emergence-2-cocycle.html">emergence 2-cocycle</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about meaning curvature)</td>
+        <td style="padding:.5rem"><code>theorem_5_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems5.lean">Theorems5.lean</a></td>
+        <td style="padding:.5rem"><a href="meaning-curvature.html">meaning curvature</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about conjugation action)</td>
+        <td style="padding:.5rem"><code>theorem_6_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems6.lean">Theorems6.lean</a></td>
+        <td style="padding:.5rem"><a href="conjugation-action.html">conjugation action</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about transmission chain)</td>
+        <td style="padding:.5rem"><code>theorem_7_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems7.lean">Theorems7.lean</a></td>
+        <td style="padding:.5rem"><a href="transmission-chain.html">transmission chain</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about structural equivalence)</td>
+        <td style="padding:.5rem"><code>theorem_8_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems8.lean">Theorems8.lean</a></td>
+        <td style="padding:.5rem"><a href="structural-equivalence.html">structural equivalence</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about graded idea algebra)</td>
+        <td style="padding:.5rem"><code>theorem_9_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems9.lean">Theorems9.lean</a></td>
+        <td style="padding:.5rem"><a href="graded-idea-algebra.html">graded idea algebra</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about social composition)</td>
+        <td style="padding:.5rem"><code>theorem_10_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems10.lean">Theorems10.lean</a></td>
+        <td style="padding:.5rem"><a href="social-composition.html">social composition</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about cultural transmission)</td>
+        <td style="padding:.5rem"><code>theorem_11_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems11.lean">Theorems11.lean</a></td>
+        <td style="padding:.5rem"><a href="cultural-transmission.html">cultural transmission</a></td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Author, Year)</td>
+        <td style="padding:.5rem">(Informal claim about emergent novelty)</td>
+        <td style="padding:.5rem"><code>theorem_12_1</code></td>
+        <td style="padding:.5rem"><a href="lean/IdeaTheory/Theorems12.lean">Theorems12.lean</a></td>
+        <td style="padding:.5rem"><a href="emergent-novelty.html">emergent novelty</a></td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>
-Each row pins one informal claim to its formal counterpart. Lean files live
-under <code>IdeaTheory/</code> and concept pages under <code>docs/concepts/</code>.
-</p>
+  <h2>References, Grouped by Sub-Topic</h2>
+  <p>(Group references by sub-topic; populate from <code>tex/references.bib</code>.)</p>
+  <h3>Foundational works</h3>
+  <ul><li>(Real reference)</li><li>(Real reference)</li></ul>
+  <h3>Recent developments</h3>
+  <ul><li>(Real reference)</li><li>(Real reference)</li></ul>
+  <h3>Surveys and overviews</h3>
+  <ul><li>(Real reference)</li><li>(Real reference)</li></ul>
 
-<table>
-<thead>
-<tr><th>Source (Author, Year)</th><th>Informal claim</th><th>Formal theorem</th><th>Lean file</th><th>Concept page</th><th>Notes on divergence</th></tr>
-</thead>
-<tbody>
-<tr><td>Lovejoy, 1936</td><td>Unit-ideas propagate through history along chains</td><td>Thm 7 (Transmission chain)</td><td><a href="../IdeaTheory/TransmissionChain.lean">TransmissionChain.lean</a></td><td><a href="concepts/transmission-chain.html">transmission-chain</a></td><td>Lovejoy's chains are unlabeled; ours are typed by grading.</td></tr>
-<tr><td>Skinner, 1969</td><td>Same idea, different vocabulary</td><td>Thm 8 (Structural equivalence)</td><td><a href="../IdeaTheory/StructuralEquivalence.lean">StructuralEquivalence.lean</a></td><td><a href="concepts/structural-equivalence.html">structural-equivalence</a></td><td>We require a conjugation witness; Skinner only requires paraphrase.</td></tr>
-<tr><td>Hegel, 1812</td><td>Aufhebung lifts and preserves</td><td>Thm 3 (Aufhebung decomposition)</td><td><a href="../IdeaTheory/Aufhebung.lean">Aufhebung.lean</a></td><td><a href="concepts/aufhebung.html">aufhebung</a></td><td>We give a unique splitting; Hegel allows ambiguity.</td></tr>
-<tr><td>Brandom, 2019</td><td>Sublation is determinate negation</td><td>Thm 3 corollary</td><td>Aufhebung.lean</td><td><a href="concepts/aufhebung.html">aufhebung</a></td><td>Determinacy is a theorem here, an assumption in Brandom.</td></tr>
-<tr><td>Fodor, 1975</td><td>Strong compositionality of thought</td><td>Thm 1 (Composition monoid)</td><td><a href="../IdeaTheory/Composition.lean">Composition.lean</a></td><td><a href="concepts/composition.html">composition</a></td><td>Fodor denies a cocycle; Thm 4 shows one exists generically.</td></tr>
-<tr><td>Fauconnier &amp; Turner, 2002</td><td>Blending produces emergent structure</td><td>Thm 4 (Emergence 2-cocycle)</td><td><a href="../IdeaTheory/EmergenceCocycle.lean">EmergenceCocycle.lean</a></td><td><a href="concepts/emergence-cocycle.html">emergence-cocycle</a></td><td>F&amp;T have no associativity law; we prove the cocycle identity.</td></tr>
-<tr><td>Murphy, 2002</td><td>Concept combination is non-monotonic</td><td>Thm 4</td><td>EmergenceCocycle.lean</td><td><a href="concepts/emergence-cocycle.html">emergence-cocycle</a></td><td>Non-monotonicity = non-vanishing of <code>ε</code>.</td></tr>
-<tr><td>Mannheim, 1936</td><td>Ideas have differential social weight</td><td>Thm 2 (Resonance pairing)</td><td><a href="../IdeaTheory/Resonance.lean">Resonance.lean</a></td><td><a href="concepts/resonance-pairing.html">resonance-pairing</a></td><td>Mannheim's weight is qualitative; ours is bilinear.</td></tr>
-<tr><td>Bourdieu, 1984</td><td>Reception is asymmetric across fields</td><td>Thm 5 (Meaning curvature)</td><td><a href="../IdeaTheory/Curvature.lean">Curvature.lean</a></td><td><a href="concepts/curvature.html">curvature</a></td><td>Curvature form replaces Bourdieu's habitus metaphor.</td></tr>
-<tr><td>Sperber, 1996</td><td>Cultural representations replicate with mutation</td><td>Thm 7 + Thm 4</td><td>TransmissionChain.lean</td><td><a href="concepts/transmission-chain.html">transmission-chain</a></td><td>Mutation = nontrivial cocycle along the chain.</td></tr>
-<tr><td>Latour, 2005</td><td>Actants conjugate one another's ideas</td><td>Thm 6 (Conjugation action)</td><td><a href="../IdeaTheory/Conjugation.lean">Conjugation.lean</a></td><td><a href="concepts/conjugation.html">conjugation</a></td><td>We require a group action; Latour does not.</td></tr>
-<tr><td>Dawkins, 1976</td><td>Memes have differential fitness</td><td>Thm 2 + Thm 9 (grading)</td><td><a href="../IdeaTheory/GradedAlgebra.lean">GradedAlgebra.lean</a></td><td><a href="concepts/graded-algebra.html">graded-algebra</a></td><td>Fitness ≈ resonance against an ambient field.</td></tr>
-<tr><td>Anderson, 1972</td><td>More is different</td><td>Thm 4 (cocycle non-vanishing)</td><td>EmergenceCocycle.lean</td><td><a href="concepts/emergence-cocycle.html">emergence-cocycle</a></td><td>We give a sufficient condition for ε ≠ 0.</td></tr>
-<tr><td>Bedau, 1997</td><td>Weak emergence is simulation-only</td><td>Thm 4 + Thm 5</td><td>EmergenceCocycle.lean</td><td><a href="concepts/emergence-cocycle.html">emergence-cocycle</a></td><td>Cocycle gives a closed-form analogue, not just simulation.</td></tr>
-<tr><td>Kim, 1999</td><td>Supervenience without reducibility</td><td>Thm 9 (Graded algebra)</td><td>GradedAlgebra.lean</td><td><a href="concepts/graded-algebra.html">graded-algebra</a></td><td>Supervenience = grading-respecting; reducibility fails when ε ≠ 0.</td></tr>
-<tr><td>Dennett, 1991</td><td>Multiple drafts of meaning</td><td>Thm 8</td><td>StructuralEquivalence.lean</td><td><a href="concepts/structural-equivalence.html">structural-equivalence</a></td><td>Drafts = equivalence-class members.</td></tr>
-<tr><td>Pocock, 1975</td><td>Languages of political thought</td><td>Thm 6 + Thm 8</td><td>Conjugation.lean</td><td><a href="concepts/conjugation.html">conjugation</a></td><td>Vocabulary change = conjugation by a group element.</td></tr>
-<tr><td>Boghossian, 2003</td><td>Concept possession requires inferential role</td><td>Thm 1 + Thm 2</td><td>Composition.lean</td><td><a href="concepts/composition.html">composition</a></td><td>Inferential role ≈ resonance pattern with neighbors.</td></tr>
-<tr><td>Adorno, 1966</td><td>Negative dialectics resists synthesis</td><td>Thm 3 (failure of unique synthesis under degenerate pairing)</td><td>Aufhebung.lean</td><td><a href="concepts/aufhebung.html">aufhebung</a></td><td>Adorno's resistance = degenerate-pairing case of Thm 3.</td></tr>
-<tr><td>O'Connor &amp; Wong, 2015</td><td>Emergence taxonomy</td><td>Thm 4 + Thm 5</td><td>EmergenceCocycle.lean</td><td><a href="concepts/emergence-cocycle.html">emergence-cocycle</a></td><td>We collapse strong/weak distinction onto cocycle class.</td></tr>
-<tr><td>Lakoff &amp; Johnson, 1980</td><td>Conceptual metaphor maps domains</td><td>Thm 6</td><td>Conjugation.lean</td><td><a href="concepts/conjugation.html">conjugation</a></td><td>Metaphor = conjugation by a domain isomorphism.</td></tr>
-<tr><td>Goodman, 1978</td><td>Ways of worldmaking are non-isomorphic</td><td>Thm 8 (failure of equivalence)</td><td>StructuralEquivalence.lean</td><td><a href="concepts/structural-equivalence.html">structural-equivalence</a></td><td>Non-equivalent worlds = distinct ≃-classes.</td></tr>
-</tbody>
-</table>
+  <h2>How the Bridge Is Maintained</h2>
+  <p>Each Lean theorem includes a docstring citing the informal claim it
+  formalizes.  Each TeX chapter contains a <em>Background from the
+  Literature</em> section and a <em>From Informal Claims to Formal
+  Statements</em> translation table.  The orchestrator's reviewer checks
+  these for completeness on every iteration.</p>
 
-<h2>Per-Concept Bridges</h2>
-
-<section class="concept">
-<h3><a href="concepts/composition.html">Composition</a></h3>
-<p>
-The composition operation <code>·</code> on ideas, formalized as a graded
-monoid in Theorem&nbsp;1, descends from Fodor's compositional Language of
-Thought (1975) and from the older history-of-ideas tradition (Lovejoy&nbsp;1936)
-which already presupposed that &ldquo;unit-ideas&rdquo; could be combined.
-The headline theorems are: (i) <em>associativity</em>, formalizing the
-informal claim that the order of grouping does not affect content; (ii) the
-<em>identity law</em>, formalizing the trivial-idea baseline used implicitly
-by Boghossian&nbsp;(2003); and (iii) the <em>grading-respect</em> sub-lemma,
-which connects to Theorem&nbsp;9 and pins down Kim's (1999) supervenience
-intuition. Where Fodor expected strong compositionality, the conjunction of
-Theorems&nbsp;1 and&nbsp;4 shows that compositionality holds <em>up to</em>
-a 2-cocycle — neither Fodor's victory nor Murphy's (2002) defeat, but a
-quantified middle.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/resonance-pairing.html">Resonance Pairing</a></h3>
-<p>
-The bilinear pairing <code>⟨·,·⟩</code> formalized in Theorem&nbsp;2 is the
-mathematical successor to Mannheim's (1936) qualitative &ldquo;weight&rdquo;
-of an idea, Bourdieu's (1984) field-relative reception, and Sperber's (1996)
-relevance. The headline theorems are: (i) <em>bilinearity</em>, which earns
-the literature's metaphorical &ldquo;additivity of resonance across audiences&rdquo;
-the right to its name; (ii) <em>non-degeneracy on the generic locus</em>, which
-pins down when an idea has any uptake at all; and (iii) the <em>asymmetry
-lemma</em>, which connects to Theorem&nbsp;5 and adjudicates the Sperber /
-Bourdieu disagreement in Bourdieu's favor on a measure-theoretic basis.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/aufhebung.html">Aufhebung Decomposition</a></h3>
-<p>
-Theorem&nbsp;3 supplies a unique direct-sum splitting <code>a·b = π(a,b) ⊕ ν(a,b) ⊕ λ(a,b)</code>
-of any composite into a preserved, negated, and lifted part. This is the
-formal heir to Hegel's (1812) <em>Aufhebung</em>, refined through Adorno
-(1966) and Brandom (2019). Headline theorems: (i) <em>existence and
-uniqueness of the splitting</em> under non-degeneracy of the pairing;
-(ii) <em>compatibility with conjugation</em> (Theorem&nbsp;6), formalizing the
-intuition that &ldquo;the same dialectic looks the same from any standpoint
-related by an internal symmetry&rdquo;; and (iii) the <em>residue
-non-vanishing lemma</em>, which is the precise statement that lifting is
-not mere addition.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/emergence-cocycle.html">Emergence Cocycle</a></h3>
-<p>
-Theorem&nbsp;4 establishes that the deviation
-<code>ε(a,b) = a·b − (a + b)</code> (in the appropriate ambient module) is a
-2-cocycle: it satisfies the cocycle identity
-<code>ε(a,b·c) − ε(a·b,c) + ε(b,c) − ε(a,b) = 0</code>. This is the formal
-heir to Anderson's (1972) &ldquo;more is different,&rdquo; Bedau's (1997)
-weak emergence, Fauconnier &amp; Turner's (2002) emergent structure, and
-O'Connor &amp; Wong's (2015) taxonomy. Headline theorems: (i) the cocycle
-identity itself; (ii) <em>non-vanishing on a generic class</em>, which
-adjudicates the Fodor/Murphy debate quantitatively; and (iii) <em>cohomological
-triviality on the abelianized sub-monoid</em>, which explains why
-&ldquo;already-classical&rdquo; idea systems show no emergence.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/curvature.html">Meaning Curvature</a></h3>
-<p>
-Theorem&nbsp;5 introduces the curvature form
-<code>κ(a,b) = ⟨a,b⟩ − ⟨b,a⟩</code> and proves it is generically non-zero,
-formalizing Bourdieu's (1984) field-asymmetry, the asymmetric reception
-analyses of Latour (2005), and the implicit asymmetry in Lakoff &amp;
-Johnson's (1980) source-target metaphor mapping. Headline theorems:
-(i) <em>antisymmetry</em>; (ii) <em>relation to the cocycle</em>, namely
-<code>dκ = ε − ε^{op}</code>; and (iii) the <em>flatness criterion</em>,
-which characterizes exactly the Sperber-style symmetric case as a
-codimension-one specialization.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/conjugation.html">Conjugation Action</a></h3>
-<p>
-Theorem&nbsp;6 establishes that a group <code>G</code> of internal
-symmetries acts on ideas by conjugation <code>g·a·g⁻¹</code>, preserving
-composition and pairing. This is the formal counterpart of Pocock's
-(1975) &ldquo;languages of political thought,&rdquo; Latour's (2005)
-actant translation, and Lakoff &amp; Johnson's (1980) conceptual metaphor.
-Headline theorems: (i) the <em>action axioms</em>; (ii) <em>pairing
-equivariance</em>, formalizing &ldquo;translation preserves resonance&rdquo;;
-and (iii) <em>commutation with Aufhebung</em>, formalizing &ldquo;the
-dialectic is intrinsic, not perspective-dependent.&rdquo;
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/transmission-chain.html">Transmission Chains</a></h3>
-<p>
-Theorem&nbsp;7 formalizes a transmission chain as a sequence
-<code>a₀ → a₁ → … → aₙ</code> with bounded resonance loss at each step.
-This is the formal heir to Lovejoy's (1936) chains, Sperber's (1996)
-epidemiology of representations, and Dawkins's (1976) memetics. Headline
-theorems: (i) <em>chain composition is associative</em>; (ii) <em>bounded
-total drift</em> in terms of step-wise curvature; and (iii) <em>convergence
-on equivalence classes</em>, linking to Theorem&nbsp;8.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/structural-equivalence.html">Structural Equivalence</a></h3>
-<p>
-Theorem&nbsp;8 defines an equivalence relation <code>a ≃ b</code> iff there
-exists a conjugation <code>g</code> with <code>g·a·g⁻¹ = b</code> preserving
-all pairings. This is the formal counterpart of Skinner's (1969) paraphrase
-criterion, Dennett's (1991) multiple drafts, and Goodman's (1978) ways of
-worldmaking. Headline theorems: (i) <em>≃ is an equivalence relation</em>;
-(ii) <em>quotient is again a graded monoid</em>; and (iii) <em>non-trivial
-classes exist</em>, refuting any global reduction.
-</p>
-</section>
-
-<section class="concept">
-<h3><a href="concepts/graded-algebra.html">Graded Idea Algebra</a></h3>
-<p>
-Theorem&nbsp;9 establishes that ideas form a graded algebra
-<code>I = ⊕_{n≥0} I_n</code> with composition respecting the grading
-additively. This is the formal heir to Kim's (1999) supervenience,
-Dawkins's (1976) gene-meme parallel, and the implicit hierarchy in
-Anderson (1972). Headline theorems: (i) <em>grading additivity</em>;
-(ii) <em>compatibility with all preceding structure</em> (pairing,
-Aufhebung, cocycle, conjugation); and (iii) the <em>finite-generation
-criterion</em>, used in Volume&nbsp;VI for advanced applications.
-</p>
-</section>
-
-<h2>References, Grouped by Sub-Topic</h2>
-
-<h3>Foundational works</h3>
-<ul class="refs">
-  <li>Hegel, G. W. F. (1812). <em>Wissenschaft der Logik</em>. Nuremberg: Schrag.</li>
-  <li>Lovejoy, A. O. (1936). <em>The Great Chain of Being</em>. Cambridge, MA: Harvard University Press.</li>
-  <li>Mannheim, K. (1936). <em>Ideology and Utopia</em>. London: Routledge.</li>
-  <li>Fodor, J. A. (1975). <em>The Language of Thought</em>. Cambridge, MA: Harvard University Press.</li>
-  <li>Anderson, P. W. (1972). More is different. <em>Science</em>, 177(4047), 393–396.</li>
-</ul>
-
-<h3>Recent developments</h3>
-<ul class="refs">
-  <li>Fauconnier, G., &amp; Turner, M. (2002). <em>The Way We Think</em>. New York: Basic Books.</li>
-  <li>Brandom, R. B. (2019). <em>A Spirit of Trust</em>. Cambridge, MA: Harvard University Press.</li>
-  <li>Boghossian, P. (2003). Blind reasoning. <em>Aristotelian Society Supplementary Volume</em>, 77, 225–248.</li>
-  <li>Latour, B. (2005). <em>Reassembling the Social</em>. Oxford: Oxford University Press.</li>
-  <li>Murphy, G. L. (2002). <em>The Big Book of Concepts</em>. Cambridge, MA: MIT Press.</li>
-</ul>
-
-<h3>Surveys and overviews</h3>
-<ul class="refs">
-  <li>O'Connor, T., &amp; Wong, H. Y. (2015). Emergent properties. In <em>Stanford Encyclopedia of Philosophy</em>.</li>
-  <li>Bedau, M. A. (1997). Weak emergence. <em>Philosophical Perspectives</em>, 11, 375–399.</li>
-  <li>Kim, J. (1999). Making sense of emergence. <em>Philosophical Studies</em>, 95, 3–36.</li>
-  <li>Dennett, D. C. (1991). <em>Consciousness Explained</em>. Boston: Little, Brown.</li>
-  <li>Goodman, N. (1978). <em>Ways of Worldmaking</em>. Indianapolis: Hackett.</li>
-</ul>
-
-<h3>Adjacent fields</h3>
-<ul class="refs">
-  <li>Bourdieu, P. (1984). <em>Distinction: A Social Critique of the Judgement of Taste</em>. Cambridge, MA: Harvard University Press.</li>
-  <li>Sperber, D. (1996). <em>Explaining Culture: A Naturalistic Approach</em>. Oxford: Blackwell.</li>
-  <li>Dawkins, R. (1976). <em>The Selfish Gene</em>. Oxford: Oxford University Press.</li>
-  <li>Skinner, Q. (1969). Meaning and understanding in the history of ideas. <em>History and Theory</em>, 8(1), 3–53.</li>
-  <li>Pocock, J. G. A. (1975). <em>The Machiavellian Moment</em>. Princeton: Princeton University Press.</li>
-  <li>Lakoff, G., &amp; Johnson, M. (1980). <em>Metaphors We Live By</em>. Chicago: University of Chicago Press.</li>
-  <li>Adorno, T. W. (1966). <em>Negative Dialektik</em>. Frankfurt: Suhrkamp.</li>
-</ul>
-
-<h2>How the Bridge Is Maintained</h2>
-
-<p>
-The bridge is not a static document; it is kept in sync by a small set of
-machinery embedded in the project's repository. First, every Lean theorem
-under <code>IdeaTheory/</code> carries a <em>docstring</em> citing the
-informal antecedent in <code>Author&nbsp;Year</code> form, with the citation
-keyed to <code>references.bib</code>. A continuous-integration check parses
-those docstrings and fails the build if any cited key is missing from the
-bibliography or if any bibliography entry is unused. Second, the project
-maintains a <em>translation table</em> at <code>docs/_data/bridge.csv</code>
-whose rows are exactly the cross-walk rows above; the HTML on this page is
-generated from that CSV, and each LaTeX chapter's
-&ldquo;From&nbsp;Informal&nbsp;Claims&nbsp;to&nbsp;Formal&nbsp;Statements&rdquo; table
-is generated from the same source, guaranteeing consistency across HTML,
-LaTeX, and Lean.
-</p>
-
-<p>
-Third, every concept page under <code>docs/concepts/</code> includes an
-<em>In&nbsp;the&nbsp;Literature</em> section whose anchor links resolve to rows of
-this page; a link-checker run on each pull request verifies that no concept
-page references a row that no longer exists. Fourth, a designated
-<em>literature reviewer</em> rotates per volume; when a volume's interpretive
-chapter is revised, the reviewer is responsible for confirming that any newly
-cited author appears in <code>references.bib</code> and any retired claim is
-either re-attached to a new theorem or moved to the <em>Open Problems</em>
-section below. Together these four mechanisms — docstrings, the CSV
-translation table, the link-checker, and the rotating reviewer — keep the
-bridge auditable as the formal corpus and the surrounding literature both
-evolve.
-</p>
-
-<h2>Open Problems Inherited From the Literature</h2>
-
-<p>
-The following problems are stated informally in the prior literature, are
-not currently theorems in this project, and we believe are tractable within
-the present framework.
-</p>
-
-<ol>
-  <li><strong>Curvature and ideology</strong> (Mannheim&nbsp;1936; Bourdieu&nbsp;1984): identify a class of social fields in which the curvature form <code>κ</code> is uniformly bounded, and show that bounded curvature predicts ideological stability.</li>
-  <li><strong>Cocycle classification</strong> (Fauconnier&nbsp;&amp;&nbsp;Turner&nbsp;2002): classify the cohomology classes of <code>ε</code> on the free graded idea monoid on two generators; conjecturally a single non-trivial class exists.</li>
-  <li><strong>Aufhebung uniqueness under degeneracy</strong> (Adorno&nbsp;1966; Brandom&nbsp;2019): characterize the failure locus of Theorem&nbsp;3's uniqueness clause and connect it to Adorno's negative dialectics.</li>
-  <li><strong>Transmission half-life</strong> (Sperber&nbsp;1996; Dawkins&nbsp;1976): give a closed-form expression for the expected length of a transmission chain before structural equivalence is lost, in terms of step-wise curvature.</li>
-  <li><strong>Strong vs.&nbsp;weak emergence</strong> (Bedau&nbsp;1997; Kim&nbsp;1999): show that the cocycle <code>ε</code> distinguishes strong from weak emergence iff its cohomology class is non-torsion.</li>
-  <li><strong>Conjugation orbits and intellectual history</strong> (Skinner&nbsp;1969; Pocock&nbsp;1975): determine whether the conjugation action of Theorem&nbsp;6 has finitely many orbits on a finitely generated idea algebra of a given period.</li>
-  <li><strong>Metaphor as conjugation</strong> (Lakoff&nbsp;&amp;&nbsp;Johnson&nbsp;1980): identify the subgroup of conjugations realized by attested conceptual metaphors and show it is proper.</li>
-  <li><strong>Grading and supervenience</strong> (Kim&nbsp;1999): prove or refute that grading-respecting maps are exactly the supervenience-preserving maps.</li>
-  <li><strong>Worldmaking incommensurability</strong> (Goodman&nbsp;1978): construct two structurally inequivalent ideas with identical resonance against every test idea, or prove no such pair exists.</li>
-  <li><strong>Memetic fitness landscapes</strong> (Dawkins&nbsp;1976): formalize a fitness landscape as a linear functional on the graded idea algebra and connect its critical points to historically attested intellectual movements.</li>
-</ol>
-
-<p style="margin-top:2.5rem; font-size:0.85rem; color:#555; border-top:1px solid #ccc; padding-top:0.6rem;">
-Last updated automatically from <code>docs/_data/bridge.csv</code> and
-<code>references.bib</code>. Report broken links or missing citations via
-the project issue tracker.
-</p>
-
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
