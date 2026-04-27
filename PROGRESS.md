@@ -908,3 +908,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 04 — 2026-04-27 14:37
 **Task:** `theorems_2` Lean theorems: resonance bilinear pairing (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 05 — 2026-04-27 14:42
+**Task:** `theorems_3` Lean theorems: Aufhebung decomposition (attempt 1)  
+**Verdict:** ✓ PASS  
