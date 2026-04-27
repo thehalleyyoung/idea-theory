@@ -1,6 +1,6 @@
             # IdeaTheory
 
-            > Idea Theory develops a rigorous algebraic and categorical framework for the composition, emergence, and transmission of ideas, grounded in basic mathematics of monoids, cocycles, and graded structures. The theory provides a unified language whose foundational theorems admit faithful interpretations in the social sciences, humanities, cognitive science, philosophy of mind, and the formal study of emergence.
+            > Idea Theory develops a rigorous algebraic framework in which ideas compose, resonate, and decompose via an Aufhebung operation, with emergence captured by a 2-cocycle and meaning by a curvature form. The first volume establishes the basic mathematics (monoids, bilinear pairings, graded algebras, cocycles, and equivalence relations), and the remaining five volumes interpret this machinery within the social sciences, humanities, philosophy of mind and cognitive science, the problem of emergence, and further advanced applications.
 
 > Foundations seeded from existing mathematical source material.
 
