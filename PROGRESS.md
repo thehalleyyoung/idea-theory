@@ -37,3 +37,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 01 — 2026-04-26 20:23
 **Task:** `theorems_2` Lean theorems: Basic Theorems (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 01 — 2026-04-26 20:59
+**Task:** `theorems_2` Lean theorems: Basic Theorems (attempt 2)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - missing file: lean/IdeaTheory/Theorems2.lean

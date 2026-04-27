@@ -60,9 +60,9 @@
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 1,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems2.lean"
+      "passes": false,
+      "attempts": 2,
+      "reviewer_notes": "missing file: lean/IdeaTheory/Theorems2.lean"
     },
     {
       "id": "theorems_3",
