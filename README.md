@@ -1,6 +1,6 @@
             # IdeaTheory
 
-            > --idea theory admits a clean mathematical axiomatization. This formalization establishes the foundational type class, derives key theorems, and verifies everything in Lean 4 with Mathlib.
+            > Idea Theory develops a rigorous algebraic framework for 'ideas' as composable structures with identity, equivalence, and emergent properties. Beginning from elementary mathematical foundations, the theory extends naturally to interpretations across the social sciences, humanities, philosophy, and the problem of emergence, providing a unified formal language for describing how complex meaning arises from simpler constituents.
 
 > Foundations seeded from existing mathematical source material.
 
@@ -18,12 +18,12 @@
 
 | # | Directory | Title |
 |---|-----------|-------|
-| Vol 1 | `tex/vol1/` | Foundations |
-| Vol 2 | `tex/vol2/` | Core Theory |
-| Vol 3 | `tex/vol3/` | Applications |
-| Vol 4 | `tex/vol4/` | Advanced Topics |
-| Vol 5 | `tex/vol5/` | Extensions |
-| Vol 6 | `tex/vol6/` | Connections |
+| Vol 1 | `tex/vol1/` | Foundations of Idea Theory |
+| Vol 2 | `tex/vol2/` | Core Algebraic Theory of Ideas |
+| Vol 3 | `tex/vol3/` | Ideas in the Social Sciences |
+| Vol 4 | `tex/vol4/` | Ideas in the Humanities and Narrative |
+| Vol 5 | `tex/vol5/` | Philosophy of Ideas and the Problem of Emergence |
+| Vol 6 | `tex/vol6/` | Advanced Connections and Extensions |
 
             ## Build
 
