@@ -15,9 +15,9 @@
         "lean/lakefile.lean"
       ],
       "deps": [],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: lean-toolchain, lean/lakefile.lean"
     },
     {
       "id": "foundations",
