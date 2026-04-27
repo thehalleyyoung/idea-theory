@@ -354,3 +354,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 08 [lean_theorems] Lean theorems: emergence
 [lean_theorems] Lean theorems: emergence
+
+### Iter 09 [lean_theorems] Lean theorems: social construction
+[lean_theorems] Lean theorems: social construction
