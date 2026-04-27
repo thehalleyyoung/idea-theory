@@ -1008,3 +1008,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 12 — 2026-04-27 16:50
 **Task:** `theorems_10` Lean theorems: social composition (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 13 — 2026-04-27 16:58
+**Task:** `theorems_11` Lean theorems: cultural transmission (attempt 1)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - missing file: lean/IdeaTheory/Theorems11.lean

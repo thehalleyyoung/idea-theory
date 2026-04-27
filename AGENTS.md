@@ -531,3 +531,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 12 [lean_theorems] Lean theorems: social composition
 [lean_theorems] Lean theorems: social composition
+
+### Iter 13 [lean_theorems] Lean theorems: cultural transmission
+[lean_theorems] Lean theorems: cultural transmission — bounced: missing file: lean/IdeaTheory/Theorems11.lean
