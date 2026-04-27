@@ -1320,3 +1320,42 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 43 — 2026-04-27 18:13
 **Task:** `website_concept_12` Website page: emergent novelty (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 44 — 2026-04-27 18:19
+**Task:** `website_literature` Website: literature bridge index (attempt 1)  
+**Verdict:** ✗ BOUNCE (34 issues)  
+**Issues:**
+  - docs/literature.html: broken link → concepts/transmission-chain.html
+  - docs/literature.html: broken link → concepts/structural-equivalence.html
+  - docs/literature.html: broken link → concepts/resonance-pairing.html
+  - docs/literature.html: broken link → concepts/transmission-chain.html
+  - docs/literature.html: broken link → concepts/structural-equivalence.html
+  - docs/literature.html: broken link → concepts/aufhebung.html
+  - docs/literature.html: broken link → concepts/aufhebung.html
+  - docs/literature.html: broken link → concepts/composition.html
+  - docs/literature.html: broken link → concepts/emergence-cocycle.html
+  - docs/literature.html: broken link → concepts/emergence-cocycle.html
+  - docs/literature.html: broken link → concepts/resonance-pairing.html
+  - docs/literature.html: broken link → concepts/curvature.html
+  - docs/literature.html: broken link → concepts/transmission-chain.html
+  - docs/literature.html: broken link → concepts/conjugation.html
+  - docs/literature.html: broken link → concepts/graded-algebra.html
+  - docs/literature.html: broken link → concepts/emergence-cocycle.html
+  - docs/literature.html: broken link → concepts/emergence-cocycle.html
+  - docs/literature.html: broken link → concepts/graded-algebra.html
+  - docs/literature.html: broken link → concepts/structural-equivalence.html
+  - docs/literature.html: broken link → concepts/conjugation.html
+  - docs/literature.html: broken link → concepts/composition.html
+  - docs/literature.html: broken link → concepts/aufhebung.html
+  - docs/literature.html: broken link → concepts/emergence-cocycle.html
+  - docs/literature.html: broken link → concepts/conjugation.html
+  - docs/literature.html: broken link → concepts/structural-equivalence.html
+  - docs/literature.html: broken link → concepts/composition.html
+  - docs/literature.html: broken link → concepts/resonance-pairing.html
+  - docs/literature.html: broken link → concepts/aufhebung.html
+  - docs/literature.html: broken link → concepts/emergence-cocycle.html
+  - docs/literature.html: broken link → concepts/curvature.html
+  - docs/literature.html: broken link → concepts/conjugation.html
+  - docs/literature.html: broken link → concepts/transmission-chain.html
+  - docs/literature.html: broken link → concepts/structural-equivalence.html
+  - docs/literature.html: broken link → concepts/graded-algebra.html

@@ -624,3 +624,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 43 [website_concept] Website page: emergent novelty
 [website_concept] Website page: emergent novelty
+
+### Iter 44 [website_literature] Website: literature bridge index
+[website_literature] Website: literature bridge index — bounced: docs/literature.html: broken link → concepts/transmission-chain.html; docs/literature.html: broken link → concepts/structural-equivalence.html
