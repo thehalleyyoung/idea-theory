@@ -353,8 +353,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/transmission-chain.html: broken link \u2192 composition-monoid.html; docs/transmission-chain.html: broken link \u2192 graded-algebra.html; docs/transmission-chain.html: broken link \u2192 composition-monoid.html; docs/transmission-chain.html: broken link \u2192 graded-algebra.html"
     },
     {
       "id": "website_concept_8",
