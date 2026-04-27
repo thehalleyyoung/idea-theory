@@ -398,8 +398,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/social-composition.html: broken link \u2192 social-resonance.html; docs/social-composition.html: broken link \u2192 social-aufhebung.html; docs/social-composition.html: broken link \u2192 social-emergence.html; docs/social-composition.html: broken link \u2192 composition.html"
     },
     {
       "id": "website_concept_11",

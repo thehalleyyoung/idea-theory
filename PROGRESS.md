@@ -1228,3 +1228,38 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 37 — 2026-04-27 17:59
 **Task:** `website_concept_9` Website page: graded idea algebra (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 38 — 2026-04-27 18:02
+**Task:** `website_concept_10` Website page: social composition (attempt 1)  
+**Verdict:** ✗ BOUNCE (30 issues)  
+**Issues:**
+  - docs/social-composition.html: broken link → social-resonance.html
+  - docs/social-composition.html: broken link → social-aufhebung.html
+  - docs/social-composition.html: broken link → social-emergence.html
+  - docs/social-composition.html: broken link → composition.html
+  - docs/social-composition.html: broken link → resonance.html
+  - docs/social-composition.html: broken link → aufhebung.html
+  - docs/social-composition.html: broken link → cocycle.html
+  - docs/social-composition.html: broken link → curvature.html
+  - docs/social-composition.html: broken link → chains.html
+  - docs/social-composition.html: broken link → equivalence.html
+  - docs/social-composition.html: broken link → grading.html
+  - docs/social-composition.html: broken link → humanities.html
+  - docs/social-composition.html: broken link → cognition.html
+  - docs/social-composition.html: broken link → emergence.html
+  - docs/social-composition.html: broken link → advanced.html
+  - docs/social-composition.html: broken link → composition.html
+  - docs/social-composition.html: broken link → resonance.html
+  - docs/social-composition.html: broken link → aufhebung.html
+  - docs/social-composition.html: broken link → cocycle.html
+  - docs/social-composition.html: broken link → curvature.html
+  - docs/social-composition.html: broken link → chains.html
+  - docs/social-composition.html: broken link → equivalence.html
+  - docs/social-composition.html: broken link → grading.html
+  - docs/social-composition.html: broken link → social-resonance.html
+  - docs/social-composition.html: broken link → social-aufhebung.html
+  - docs/social-composition.html: broken link → social-emergence.html
+  - docs/social-composition.html: broken link → humanities.html
+  - docs/social-composition.html: broken link → cognition.html
+  - docs/social-composition.html: broken link → emergence.html
+  - docs/social-composition.html: broken link → advanced.html
