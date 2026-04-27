@@ -1114,3 +1114,13 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 25 — 2026-04-27 17:35
 **Task:** `website_concept_3` Website page: Aufhebung decomposition (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 26 — 2026-04-27 17:38
+**Task:** `website_concept_4` Website page: emergence 2-cocycle (attempt 1)  
+**Verdict:** ✗ BOUNCE (5 issues)  
+**Issues:**
+  - docs/emergence-2-cocycle.html: broken link → idea-composition-monoid.html
+  - docs/emergence-2-cocycle.html: broken link → transmission-chains.html
+  - docs/emergence-2-cocycle.html: broken link → idea-composition-monoid.html
+  - docs/emergence-2-cocycle.html: broken link → idea-composition-monoid.html
+  - docs/emergence-2-cocycle.html: broken link → transmission-chains.html

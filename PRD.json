@@ -308,8 +308,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/emergence-2-cocycle.html: broken link \u2192 idea-composition-monoid.html; docs/emergence-2-cocycle.html: broken link \u2192 transmission-chains.html; docs/emergence-2-cocycle.html: broken link \u2192 idea-composition-monoid.html; docs/emergence-2-cocycle.html: broken link \u2192 idea-composition-monoid.html"
     },
     {
       "id": "website_concept_5",

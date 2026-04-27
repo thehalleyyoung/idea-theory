@@ -570,3 +570,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 25 [website_concept] Website page: Aufhebung decomposition
 [website_concept] Website page: Aufhebung decomposition
+
+### Iter 26 [website_concept] Website page: emergence 2-cocycle
+[website_concept] Website page: emergence 2-cocycle — bounced: docs/emergence-2-cocycle.html: broken link → idea-composition-monoid.html; docs/emergence-2-cocycle.html: broken link → transmission-chains.html
