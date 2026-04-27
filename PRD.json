@@ -210,9 +210,9 @@
       "deps": [
         "foundations"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: "
     },
     {
       "id": "website_css",
