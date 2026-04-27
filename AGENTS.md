@@ -393,3 +393,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 10 [lean_theorems] Lean theorems: structural equivalence
 [lean_theorems] Lean theorems: structural equivalence
+
+### Iter 11 [lean_theorems] Lean theorems: graded idea algebra
+[lean_theorems] Lean theorems: graded idea algebra
