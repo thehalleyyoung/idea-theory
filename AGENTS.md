@@ -330,3 +330,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 17 [lean_theorems] Lean theorems: Idea Structures
 [lean_theorems] Lean theorems: Idea Structures — bounced: lean/IdeaTheory/Theorems9.lean: missing namespace declaration
+
+### Iter 01 [lean_toolchain] Lean toolchain and lakefile
+[lean_toolchain] Lean toolchain and lakefile

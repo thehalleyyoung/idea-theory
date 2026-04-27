@@ -648,3 +648,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - lean/IdeaTheory/Theorems9.lean: missing namespace declaration
+
+## Iter 01 — 2026-04-27 12:35
+**Task:** `toolchain` Lean toolchain and lakefile (attempt 1)  
+**Verdict:** ✓ PASS  
