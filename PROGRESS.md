@@ -742,3 +742,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - missing file: lean/IdeaTheory/Theorems10.lean
+
+## Iter 13 — 2026-04-27 13:40
+**Task:** `theorems_10` Lean theorems: semantic weight (attempt 2)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - missing file: lean/IdeaTheory/Theorems10.lean

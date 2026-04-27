@@ -399,3 +399,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 12 [lean_theorems] Lean theorems: semantic weight
 [lean_theorems] Lean theorems: semantic weight — bounced: missing file: lean/IdeaTheory/Theorems10.lean
+
+### Iter 13 [lean_theorems] Lean theorems: semantic weight
+[lean_theorems] Lean theorems: semantic weight — bounced: missing file: lean/IdeaTheory/Theorems10.lean
