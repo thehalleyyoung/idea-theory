@@ -363,3 +363,10 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Issues:**
   - lean/IdeaTheory/Theorems5.lean: contains `sorry`
   - lean/IdeaTheory/Theorems5.lean: contains `admit`
+
+## Iter 50 — 2026-04-27 05:35
+**Task:** `theorems_5` Lean theorems: Idea Structures (attempt 15)  
+**Verdict:** ✗ BOUNCE (2 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems5.lean: contains `sorry`
+  - lean/IdeaTheory/Theorems5.lean: contains `admit`
