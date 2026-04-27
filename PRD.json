@@ -545,9 +545,9 @@
       "deps": [
         "tex_chapter_v2c3"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: tex/vol2/ch4.tex"
     },
     {
       "id": "tex_vol2_main",
