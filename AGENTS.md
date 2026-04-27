@@ -618,3 +618,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 41 [website_concept] Website page: cultural transmission
 [website_concept] Website page: cultural transmission
+
+### Iter 42 [website_concept] Website page: emergent novelty
+[website_concept] Website page: emergent novelty — bounced: docs/emergent-novelty.html: broken link → volume1.html; docs/emergent-novelty.html: broken link → volume2.html

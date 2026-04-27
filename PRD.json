@@ -428,8 +428,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/emergent-novelty.html: broken link \u2192 volume1.html; docs/emergent-novelty.html: broken link \u2192 volume2.html; docs/emergent-novelty.html: broken link \u2192 volume3.html; docs/emergent-novelty.html: broken link \u2192 volume4.html"
     },
     {
       "id": "website_literature",
