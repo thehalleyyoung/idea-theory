@@ -203,3 +203,11 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - missing file: lean/IdeaTheory/Theorems4.lean
+
+## Iter 27 — 2026-04-27 01:38
+**Task:** `theorems_4` Lean theorems: Advanced Properties (attempt 8)  
+**Verdict:** ✗ BOUNCE (3 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems4.lean: contains `sorry`
+  - lean/IdeaTheory/Theorems4.lean: contains `admit`
+  - lean/IdeaTheory/Theorems4.lean: contains `native_decide`

@@ -91,8 +91,8 @@
         "foundations"
       ],
       "passes": false,
-      "attempts": 7,
-      "reviewer_notes": "missing file: lean/IdeaTheory/Theorems4.lean"
+      "attempts": 8,
+      "reviewer_notes": "lean/IdeaTheory/Theorems4.lean: contains `sorry`; lean/IdeaTheory/Theorems4.lean: contains `admit`; lean/IdeaTheory/Theorems4.lean: contains `native_decide`"
     },
     {
       "id": "theorems_5",
