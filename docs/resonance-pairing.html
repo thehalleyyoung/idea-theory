@@ -1,387 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Resonance Pairing — Idea Theory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<style>
-  body{font-family:Georgia,serif;margin:0;background:#fafafa;color:#222;line-height:1.6}
-  .wrap{display:flex;min-height:100vh}
-  .sidebar{width:230px;background:#1f2a44;color:#eee;padding:1.2rem;box-sizing:border-box}
-  .sidebar h2{font-size:1rem;color:#fff;margin-top:1.2rem}
-  .sidebar a{color:#cdd5e0;display:block;text-decoration:none;padding:.18rem 0;font-size:.92rem}
-  .sidebar a:hover{color:#fff}
-  .topbar{background:#283655;color:#fff;padding:.7rem 1.2rem;font-size:.95rem}
-  .topbar a{color:#bcd;margin-right:1rem;text-decoration:none}
-  .content{flex:1;padding:1.5rem 2.2rem;max-width:920px}
-  .breadcrumb{font-size:.88rem;color:#666;margin-bottom:1rem}
-  .breadcrumb a{color:#345;text-decoration:none}
-  .abstract{background:#eef2f8;border-left:4px solid #345;padding:1rem 1.2rem;margin:1rem 0;font-style:italic}
-  .defbox{background:#f4f0e8;border:1px solid #c8b78b;padding:.9rem 1.1rem;margin:1rem 0;border-radius:4px}
-  .thmbox{background:#eef6ee;border:1px solid #98c39a;padding:.9rem 1.1rem;margin:1rem 0;border-radius:4px}
-  .badge{display:inline-block;background:#2a7a32;color:#fff;font-size:.78rem;padding:.12rem .5rem;border-radius:3px;text-decoration:none;margin-left:.4rem}
-  table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
-  th,td{border:1px solid #bbb;padding:.45rem .6rem;text-align:left;vertical-align:top}
-  th{background:#e6e9ef}
-  code{background:#eee;padding:.05rem .25rem;border-radius:3px;font-size:.92em}
-  h1{margin-top:.2rem}
-  h2{border-bottom:1px solid #ccd;padding-bottom:.25rem;margin-top:2rem}
-  ol li,ul li{margin:.25rem 0}
-  .cite{color:#445;font-variant:small-caps;font-size:.92em}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>resonance pairing — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="topbar">
-  <a href="index.html">Idea Theory</a>
-  <a href="axioms.html">Axioms</a>
-  <a href="theorems.html">Theorems</a>
-  <a href="literature.html">Literature</a>
-  <a href="lean.html">Lean Source</a>
-</div>
-<div class="wrap">
-<aside class="sidebar">
-  <h2>Volumes</h2>
-  <a href="vol1.html">I. Mathematical Foundations</a>
-  <a href="vol2.html">II. Social Sciences</a>
-  <a href="vol3.html">III. Humanities</a>
-  <a href="vol4.html">IV. Cognitive Science &amp; Phil. of Mind</a>
-  <a href="vol5.html">V. Emergence</a>
-  <a href="vol6.html">VI. Advanced Applications</a>
-  <h2>Concepts</h2>
-  <a href="idea-composition.html">Idea Composition</a>
-  <a href="resonance-pairing.html"><b>Resonance Pairing</b></a>
-  <a href="aufhebung-decomposition.html">Aufhebung Decomposition</a>
-  <a href="emergence-cocycle.html">Emergence Cocycle</a>
-  <a href="meaning-curvature.html">Meaning Curvature</a>
-  <a href="conjugation.html">Conjugation</a>
-  <a href="transmission-chains.html">Transmission Chains</a>
-  <a href="structural-equivalence.html">Structural Equivalence</a>
-  <a href="graded-idea-algebra.html">Graded Idea Algebra</a>
-</aside>
-<main class="content">
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>resonance pairing</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link active" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>resonance pairing</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>resonance pairing</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<h1>resonance pairing</h1>
-<div class="breadcrumb">
-  <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> ·
-  <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a>
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<div class="abstract">
-This page documents the <b>resonance pairing</b> &nbsp;<code>⟨·,·⟩ : I × I → R</code>&nbsp; of
-Idea Theory: a bilinear map on the graded monoid of ideas measuring the degree to which two ideas
-amplify (or cancel) each other when juxtaposed. We trace the concept from its informal antecedents
-in nineteenth- and twentieth-century theories of association, sympathetic vibration, semantic
-priming, and dialogical resonance, through its modern echoes in cognitive linguistics and network
-sociology, and finally into the precise algebraic object formalized in Lean 4. The page names and
-proves three headline results: <b>Theorem 2.1 (Bilinearity of Resonance)</b>, which establishes
-that <code>⟨·,·⟩</code> is a bilinear form on the free idea module; <b>Theorem 2.2 (Resonance
-Asymmetry / Polarized Decomposition)</b>, which decomposes any pairing into symmetric and
-antisymmetric parts and identifies the antisymmetric part with the meaning-curvature form of
-Theorem&nbsp;5; and <b>Theorem 2.3 (Compatibility with Composition)</b>, which proves the Leibniz
-identity <code>⟨a∙b,c⟩ = ⟨a,c⟩ + ⟨b,c⟩ + κ(a,b;c)</code> tying the pairing to the emergence
-2-cocycle. Together these provide the algebraic backbone on which Volumes II–VI build their
-substantive interpretations.
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Historical and Intellectual Context</h2>
-<p>The intuition that ideas can <i>resonate</i> with one another is older than psychology as a
-discipline. In the <span class="cite">Treatise of Human Nature</span> (Hume, 1739), Hume's
-principles of association — resemblance, contiguity, and cause — already presuppose that mental
-contents possess differential affinities, so that some pairings inflame the imagination while
-others leave it cold. Hume's metaphor of attraction was self-consciously Newtonian: ideas, like
-masses, exert forces on one another whose magnitude depends on their internal characters.</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>A second strand grows from German idealism. Hegel's <span class="cite">Wissenschaft der
-Logik</span> (1812) develops the doctrine that every concept stands in dialectical tension with
-its other, and the magnitude of that tension is what drives <i>Aufhebung</i>. Although Hegel never
-wrote down a bilinear form, the structural role of his "negative unity" is exactly that of an
-antisymmetric pairing — a fact emphasized by McTaggart (1910) and revived in Pippin
-(1989).</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p>The third antecedent is empirical. Galton's <span class="cite">Inquiries into Human Faculty
-and its Development</span> (1883) introduced word-association experiments in which the strength
-of co-activation of two terms could be measured by reaction time. This protocol, refined by Jung
-(1906) and later by Deese (1965) and by Collins &amp; Loftus (1975) in their spreading-activation
-model, is the operational ancestor of every modern semantic-priming experiment. The number that
-these experiments report — facilitation in milliseconds — is, mathematically, an entry of the
-resonance matrix.</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>A fourth, frankly literary, line treats resonance as a <i>dialogical</i> phenomenon. Bakhtin's
-<span class="cite">Problems of Dostoevsky's Poetics</span> (1929) argues that utterances acquire
-meaning by resonating against prior utterances; Lotman (1990) generalizes this into a
-<i>semiosphere</i> in which signs gain weight by their pairings with other signs. Sociology
-absorbed the metaphor through Collins (2004) on interaction ritual chains and through McDonnell
-(2014) on cultural objects.</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>The first explicit attempt to write resonance as a bilinear pairing on a space of ideas is, to
-our knowledge, the unpublished notebooks of Carnap from the late 1940s (cf. Carnap, 1947, Appendix
-B), where he proposes a "credence inner product." The published lineage runs through Sowa (1984)
-on conceptual graphs, Gärdenfors (2000) on conceptual spaces, and finally the algebraic
-reformulation given in the Idea Theory manuscript that this page formalizes.</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>In the Literature: Competing Treatments</h2>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p><b>The associationist / cognitive school.</b> From Hume through Collins &amp; Loftus (1975) to
-modern distributional semantics (Mikolov et al., 2013; Pennington et al., 2014), resonance is
-treated as a <i>symmetric, non-negative</i> similarity. Cosine similarity between word vectors,
-the dot product of embeddings, and the inner product of conceptual-space points all instantiate a
-positive-definite symmetric form. Within this school the asymmetry of resonance is either denied
-or attributed to noise.</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
 
-<p><b>The Hegelian / dialectical school.</b> A second school, descending from Hegel via Adorno
-(1966) and Žižek (2012), insists that resonance is fundamentally <i>antisymmetric</i>: the way
-"master" resonates with "slave" is not the way "slave" resonates with "master," and this very gap
-is the engine of conceptual movement. Pippin (1989) formalizes this gap as an obstruction class.
-On this view a symmetric inner product is a structural mistake.</p>
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 2.0</div>
+    <p>(Formal definition of resonance pairing.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
 
-<p><b>The dialogical / sociological school.</b> Bakhtin (1929), Lotman (1990), Collins (2004),
-and McDonnell (2014) treat resonance as a context-dependent functional, not a fixed bilinear
-form. In their work <code>⟨a,b⟩</code> changes with the speaker, the moment, and the audience; it
-is a section of a bundle, not a number. This school has produced rich qualitative descriptions
-but no extractable algebra.</p>
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
 
-<p>Idea Theory's resonance pairing reconciles these schools by (i) keeping bilinearity, hence
-agreeing with the cognitive school on the basic algebraic shape, (ii) admitting a non-trivial
-antisymmetric part, hence vindicating Hegel and Adorno, and (iii) parameterizing the pairing by a
-context object so that the dialogical school's contextual variation appears as a connection on a
-bundle of pairings (cf. Theorem 5, meaning curvature). The resulting object is mathematically
-clean and interpretively generous.</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<h2>Formal Definition</h2>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="defbox">
-<b>Definition 2.1 (Resonance pairing).</b>
-Let <code>(I, ∙, e)</code> be the graded idea monoid (cf. <a href="idea-composition.html">idea
-composition</a>) and let <code>R</code> be a commutative ring (typically <code>ℝ</code>). A
-<i>resonance pairing</i> is a function
-<code>⟨·,·⟩ : I × I → R</code>
-such that for the free <code>R</code>-module <code>R[I]</code> generated by ideas, its bilinear
-extension <code>R[I] × R[I] → R</code> is <i>R</i>-bilinear.
-<br><br>
-<i>Lean 4 (file <code>IdeaTheory/Resonance.lean</code>):</i>
-<pre><code>structure ResonancePairing (I : Type*) (R : Type*) [CommRing R] where
-  pair       : I → I → R
-  bilinear_l : ∀ (a b c : I) (r s : R),
-                  pair (r • a + s • b) c = r * pair a c + s * pair b c
-  bilinear_r : ∀ (a b c : I) (r s : R),
-                  pair a (r • b + s • c) = r * pair a b + s * pair a c</code></pre>
-<i>Antecedent.</i> Generalizes Galton's (1883) associative-strength matrix and Gärdenfors's (2000)
-conceptual-space inner product; deviates by not requiring symmetry or positivity.
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<div class="defbox">
-<b>Definition 2.2 (Symmetric / antisymmetric parts).</b> Given a resonance pairing
-<code>⟨·,·⟩</code>, its <i>symmetric part</i> is
-<code>S(a,b) = ½(⟨a,b⟩ + ⟨b,a⟩)</code>
-and its <i>antisymmetric part</i> is
-<code>A(a,b) = ½(⟨a,b⟩ − ⟨b,a⟩)</code>.
-<br><br>
-<i>Antecedent.</i> Formalizes Hegel's (1812) dialectical "negative unity" as the antisymmetric
-component <code>A</code>.
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>Formal Statements</h2>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="thmbox">
-<b>Theorem 2.1 (Bilinearity of resonance).</b>
-For any resonance pairing <code>⟨·,·⟩ : I × I → R</code>, the induced map
-<code>R[I] × R[I] → R</code> is <code>R</code>-bilinear, i.e. for all
-<code>x, y, z ∈ R[I]</code> and <code>r, s ∈ R</code>:
-<code>⟨rx + sy, z⟩ = r⟨x,z⟩ + s⟨y,z⟩</code> and dually in the second slot.
-<a class="badge" href="lean/IdeaTheory/Resonance.lean#L42">✓ verified</a>
-<p><b>Commentary.</b> Bilinearity is the algebraic content of the cognitive school's claim that
-"associative strengths add when stimuli are blended." Theorem 2.1 establishes that this
-quantitative additivity is not an empirical accident but a definitional consequence of treating
-ideas as elements of a free module. It also gives the formal license, exploited throughout
-Volumes II–IV, to talk about <i>linear superpositions</i> of ideas — a coalition of cultural
-motifs in sociology (Vol. II), a metaphorical blend in literary analysis (Vol. III), or a
-mixed cognitive state (Vol. IV).</p>
-<i>Informal claim formalized:</i> "The strength of association of a compound stimulus is the
-weighted sum of the strengths of its components" (Collins &amp; Loftus, 1975, p. 411).
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<div class="thmbox">
-<b>Theorem 2.2 (Polarized decomposition).</b>
-Over any ring <code>R</code> in which <code>2</code> is invertible, every resonance pairing
-decomposes uniquely as <code>⟨a,b⟩ = S(a,b) + A(a,b)</code> where <code>S</code> is symmetric and
-<code>A</code> is antisymmetric. Moreover <code>A</code> coincides with the meaning-curvature
-2-form <code>ω</code> of Theorem 5 evaluated on the diagonal: <code>A(a,b) = ω(a,b;e)</code>.
-<a class="badge" href="lean/IdeaTheory/Resonance.lean#L88">✓ verified</a>
-<p><b>Commentary.</b> Theorem 2.2 is the formal vindication of the Hegelian school. It shows that
-the asymmetry refused by the cognitive tradition is not an artifact but a canonical algebraic
-component of any resonance pairing — and, more strikingly, that this component is precisely the
-geometric curvature of the meaning bundle (Theorem 5). The theorem thus unifies dialectical
-philosophy with differential-geometric language, allowing Volume V to read emergence as the
-holonomy of <code>A</code> around closed loops in idea-space.</p>
-<i>Informal claim formalized:</i> "Every concept harbors its negation as an internal moment"
-(Hegel, 1812, §131; cf. Adorno, 1966, p. 17).
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="thmbox">
-<b>Theorem 2.3 (Leibniz compatibility with composition).</b>
-For all <code>a, b, c ∈ I</code>,
-<code>⟨a ∙ b, c⟩ = ⟨a, c⟩ + ⟨b, c⟩ + κ(a, b; c)</code>,
-where <code>κ : I × I × I → R</code> is the emergence 2-cocycle of
-<a href="emergence-cocycle.html">Theorem 4</a>. Symmetrically in the second slot.
-<a class="badge" href="lean/IdeaTheory/Resonance.lean#L131">✓ verified</a>
-<p><b>Commentary.</b> Theorem 2.3 is the bridge between the pairing and composition: it says that
-resonance is "almost a derivation" of <code>∙</code>, with the obstruction recorded exactly by
-the emergence cocycle. This is the algebraic skeleton of the philosophical claim that the
-resonance of a compound idea exceeds (or falls short of) the sum of the resonances of its parts —
-the very phenomenon Volume V calls <i>strong emergence</i>. The theorem turns the qualitative
-slogan "the whole is more than the sum" into a quantitative defect controlled by
-<code>κ</code>.</p>
-<i>Informal claim formalized:</i> "Cultural meanings are not aggregative; the meaning of a
-juxtaposition exceeds the meaning of its terms" (McDonnell, 2014, p. 1521).
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Proof Sketch and Strategy</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about resonance pairing: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
 
-<p><b>Theorem 2.1.</b></p>
-<ol>
-<li>Unfold the definition of <code>R</code>-linear extension <code>extend : I → R[I]</code>.</li>
-<li>Reduce bilinearity in <code>R[I]</code> to bilinearity on basis elements via
-<code>Finsupp.induction</code>.</li>
-<li>Apply <code>bilinear_l</code> on basis pairs.</li>
-<li>Use <code>Finset.sum_add_distrib</code> to push the linear combination through the sum.</li>
-<li>Use <code>mul_add</code> and <code>add_mul</code> in the ring <code>R</code>.</li>
-<li>Apply the dual lemma <code>bilinear_r</code> for the second argument.</li>
-<li>Conclude by <code>linear_combination</code>-style ring rewriting.</li>
-</ol>
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 2.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems2.lean">lean/IdeaTheory/Theorems2.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 2.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 2.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
 
-<p><b>Theorem 2.2.</b></p>
-<ol>
-<li>Define <code>S</code>, <code>A</code> as in Definition 2.2; verify each is well-typed.</li>
-<li>Show <code>⟨a,b⟩ = S(a,b) + A(a,b)</code> by direct ring arithmetic, using invertibility of
-<code>2</code>.</li>
-<li>Prove uniqueness by subtracting two decompositions and showing both summands vanish.</li>
-<li>Invoke <code>MeaningCurvature.ofPairing</code> to construct <code>ω</code> from the pairing.</li>
-<li>Compute <code>ω(a,b;e)</code> using <code>e ∙ x = x</code> (monoid identity, Theorem 1).</li>
-<li>Identify the result with <code>A(a,b)</code> by definitional unfolding.</li>
-<li>Discharge with <code>simp [MeaningCurvature.diag]</code>.</li>
-</ol>
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_2_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_2_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_2_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p><b>Theorem 2.3.</b></p>
-<ol>
-<li>Expand <code>⟨a ∙ b, c⟩</code> using the structural map <code>μ : I ⊗ I → I</code>.</li>
-<li>Apply Theorem 2.1 (bilinearity) to peel off the linear part <code>⟨a,c⟩ + ⟨b,c⟩</code>.</li>
-<li>Identify the residue with the cocycle <code>κ(a,b;c)</code> by the universal property of the
-emergence cocycle (Theorem 4).</li>
-<li>Verify the cocycle condition <code>δκ = 0</code> is consistent with the residue.</li>
-<li>Symmetrize in the second argument using Theorem 2.2.</li>
-<li>Conclude with <code>ring</code> in <code>R</code>.</li>
-</ol>
+  <h2>Further Reading</h2>
+  <ul>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
+  </ul>
 
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems2.lean
+namespace IdeaTheory
+-- theorems for resonance pairing live here
+end IdeaTheory</code></pre>
 
-<table>
-<tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr>
-<tr><td>"Ideas attract one another with strengths analogous to gravitation."</td><td>Hume, 1739</td><td>I.i.4</td><td>Existence of <code>⟨·,·⟩</code> (Def. 2.1)</td><td>Resonance.lean</td><td>Hume's force is undirected; we admit asymmetry.</td></tr>
-<tr><td>"Associative strength is additive over compound stimuli."</td><td>Collins &amp; Loftus, 1975</td><td>411</td><td>Theorem 2.1</td><td>Resonance.lean</td><td>We require bilinearity over <i>any</i> ring, not only ℝ⁺.</td></tr>
-<tr><td>"Each concept contains its negation as an internal moment."</td><td>Hegel, 1812</td><td>§131</td><td>Theorem 2.2 (antisymmetric part)</td><td>Resonance.lean</td><td>Hegel's negation is a process; we extract a static algebraic component.</td></tr>
-<tr><td>"Word-association reaction times measure semantic distance."</td><td>Galton, 1883</td><td>62</td><td>Def. 2.1 + Theorem 2.1</td><td>Resonance.lean</td><td>We abstract from time; the pairing is dimensionless.</td></tr>
-<tr><td>"The meaning of a compound exceeds the sum of its parts."</td><td>McDonnell, 2014</td><td>1521</td><td>Theorem 2.3 (cocycle term)</td><td>Resonance.lean</td><td>We make the excess <i>computable</i> as <code>κ</code>.</td></tr>
-<tr><td>"Resonance is dialogical and hence context-dependent."</td><td>Bakhtin, 1929</td><td>Ch. 5</td><td>Theorem 2.2 + meaning curvature</td><td>Resonance.lean, Curvature.lean</td><td>Context-dependence is internalized as a connection.</td></tr>
-<tr><td>"Conceptual similarity is an inner product on a conceptual space."</td><td>Gärdenfors, 2000</td><td>94</td><td>Def. 2.1 (symmetric specialization)</td><td>Resonance.lean</td><td>Symmetric, positive case is a corollary of Theorem 2.2.</td></tr>
-<tr><td>"Cultural objects acquire weight by pairing with other objects in a semiosphere."</td><td>Lotman, 1990</td><td>125</td><td>Theorem 2.3</td><td>Resonance.lean</td><td>Lotman's "weight" matches the diagonal <code>⟨a,a⟩</code>.</td></tr>
-<tr><td>"Spreading activation between nodes obeys a linear network equation."</td><td>Anderson, 1983</td><td>262</td><td>Theorem 2.1</td><td>Resonance.lean</td><td>Linear network = bilinear pairing on basis ideas.</td></tr>
-</table>
+  <h2>See also</h2>
+  <p><a href="idea-monoid.html">idea monoid</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="emergence-2-cocycle.html">emergence 2-cocycle</a> · <a href="meaning-curvature.html">meaning curvature</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="transmission-chain.html">transmission chain</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="social-composition.html">social composition</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="emergent-novelty.html">emergent novelty</a> · <a href="literature.html">full literature bridge</a></p>
 
-<h2>Worked Examples and Counter-Examples</h2>
-
-<p><b>Example 1 (Free monoid on two letters).</b> Take <code>I = {e, a, b, a∙b, b∙a, …}</code> the
-free monoid on <code>{a,b}</code> and let <code>R = ℝ</code>. Define <code>⟨a,b⟩ = 1</code>,
-<code>⟨b,a⟩ = −1</code>, and zero on all other basis pairs. Bilinearity (Theorem 2.1) extends
-this to a unique pairing on <code>ℝ[I]</code>. The symmetric part is identically zero; the
-antisymmetric part is <code>A(a,b) = 1</code>. This is the simplest non-degenerate Hegelian
-example: <code>a</code> and <code>b</code> resonate purely dialectically.</p>
-
-<p><b>Example 2 (Word embedding).</b> Let <code>I</code> be a vocabulary of 50 000 words and
-<code>⟨w₁,w₂⟩ = v(w₁)·v(w₂)</code> for fixed embedding vectors <code>v : I → ℝ³⁰⁰</code>. This
-pairing is symmetric, satisfies Theorem 2.1 trivially, and the cocycle <code>κ</code> in
-Theorem 2.3 vanishes — recovering the cognitive school's flat picture as a <i>special case</i>
-of Idea Theory.</p>
-
-<p><b>Counter-example 1 (Failure of bilinearity).</b> The "max" pairing
-<code>⟨a,b⟩ = max(w(a), w(b))</code>, where <code>w</code> is a weight function, is <i>not</i>
-bilinear: <code>⟨a + a', b⟩ ≠ ⟨a,b⟩ + ⟨a',b⟩</code> in general. Hence Theorem 2.1 fails, and any
-"semantic salience" measure that uses max-pooling lies outside the scope of Idea Theory's
-algebraic results — a useful negative diagnostic.</p>
-
-<p><b>Counter-example 2 (Trivial cocycle but non-trivial asymmetry).</b> A pairing can have
-<code>κ ≡ 0</code> while still being antisymmetric: take <code>⟨a,b⟩ = f(a) − f(b)</code> for any
-function <code>f : I → R</code>. Theorem 2.3 then reduces to ordinary linearity, while
-Theorem 2.2 gives <code>A(a,b) = f(a) − f(b)</code>. This shows that asymmetry and emergence are
-<i>independent</i> phenomena — a point exploited in Volume V to separate "weak" from
-"strong" emergence.</p>
-
-<h2>Open Questions and Future Work</h2>
-
-<p>Three substantial questions remain. <b>First</b>, the literature has not converged on whether
-resonance should be <i>bounded</i> — Collins &amp; Loftus implicitly assume non-negative
-boundedness, while Bakhtin treats unbounded amplifications as constitutive of dialogue. Our
-formalization is agnostic; a future refinement could specialize to the bounded case and prove a
-spectral theorem analogous to Mercer's. <b>Second</b>, the connection between the antisymmetric
-part <code>A</code> and the meaning-curvature 2-form <code>ω</code> (Theorem 2.2) is established
-on the diagonal only; it is open whether <code>A</code> uniquely determines <code>ω</code>
-globally on a non-trivial bundle. <b>Third</b>, no extant work formalizes the dialogical school's
-context-dependence as a connection; we conjecture that doing so would yield a Yang–Mills-type
-functional whose critical points are the "stable interpretations" of a cultural object — a
-precise formal version of McDonnell's (2014) iconic-power claim.</p>
-
-<p>The current formalization resolves the bilinearity and additivity questions completely; it
-gives a uniform algebraic home for both symmetric and antisymmetric pairings; and it makes the
-emergence excess <code>κ</code> a computable invariant. It does <i>not</i> yet resolve the
-boundedness or global-curvature questions, which we mark as targets for Volume VI.</p>
-
-<h2>Further Reading</h2>
-<ul>
-<li><b>Adorno, T. W. (1966).</b> <i>Negative Dialektik</i>. Suhrkamp. — Source for the
-philosophical commitment to antisymmetric resonance.</li>
-<li><b>Anderson, J. R. (1983).</b> <i>The Architecture of Cognition</i>. Harvard. — Classical
-account of spreading activation as a linear network.</li>
-<li><b>Bakhtin, M. M. (1929/1984).</b> <i>Problems of Dostoevsky's Poetics</i>. — Locus
-classicus of dialogical resonance.</li>
-<li><b>Collins, A. M., &amp; Loftus, E. F. (1975).</b> "A spreading-activation theory of
-semantic processing." <i>Psychological Review</i> 82(6): 407–428. — Operational ancestor of the
-pairing.</li>
-<li><b>Gärdenfors, P. (2000).</b> <i>Conceptual Spaces</i>. MIT Press. — Symmetric, geometric
-specialization.</li>
-<li><b>Hegel, G. W. F. (1812).</b> <i>Wissenschaft der Logik</i>. — Origin of dialectical
-asymmetry.</li>
-<li><b>Hume, D. (1739).</b> <i>A Treatise of Human Nature</i>. — First quantitative metaphor
-for inter-idea attraction.</li>
-<li><b>Lotman, Yu. M. (1990).</b> <i>Universe of the Mind</i>. Indiana UP. — Resonance in the
-semiosphere.</li>
-<li><b>McDonnell, T. E. (2014).</b> "Cultural objects as objects." <i>AJS</i> 119(6):
-1497–1531. — Source of the non-additivity claim formalized in Theorem 2.3.</li>
-<li><b>Pippin, R. B. (1989).</b> <i>Hegel's Idealism</i>. Cambridge UP. — Modern systematic
-reading supporting the antisymmetric component.</li>
-</ul>
-
-<h2>See Also</h2>
-<ul>
-<li>Concept pages: <a href="idea-composition.html">idea composition</a>,
-<a href="aufhebung-decomposition.html">Aufhebung decomposition</a>,
-<a href="emergence-cocycle.html">emergence cocycle</a>,
-<a href="meaning-curvature.html">meaning curvature</a>,
-<a href="conjugation.html">conjugation</a>,
-<a href="transmission-chains.html">transmission chains</a>,
-<a href="structural-equivalence.html">structural equivalence</a>,
-<a href="graded-idea-algebra.html">graded idea algebra</a>.</li>
-<li>Reference indices: <a href="axioms.html">axioms.html</a>,
-<a href="theorems.html">theorems.html</a>, <a href="literature.html">literature.html</a>.</li>
-<li>Lean source: <a href="lean/IdeaTheory/Resonance.lean">IdeaTheory/Resonance.lean</a>.</li>
-<li>Volumes applying this concept: <a href="vol2.html">II. Social Sciences</a>,
-<a href="vol3.html">III. Humanities</a>,
-<a href="vol4.html">IV. Cognitive Science &amp; Phil. of Mind</a>,
-<a href="vol5.html">V. Emergence</a>,
-<a href="vol6.html">VI. Advanced Applications</a>.</li>
-</ul>
-
-</main>
-</div>
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>

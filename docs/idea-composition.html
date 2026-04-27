@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Idea Composition — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+  body{font-family:Georgia,serif;margin:0;background:#fafafa;color:#222;line-height:1.6}
+  .wrap{display:flex;min-height:100vh}
+  .sidebar{width:230px;background:#1f2a44;color:#eee;padding:1.2rem;box-sizing:border-box}
+  .sidebar h2{font-size:1rem;color:#fff;margin-top:1.2rem}
+  .sidebar a{color:#cdd5e0;display:block;text-decoration:none;padding:.18rem 0;font-size:.92rem}
+  .topbar{background:#283655;color:#fff;padding:.7rem 1.2rem;font-size:.95rem}
+  .topbar a{color:#bcd;margin-right:1rem;text-decoration:none}
+  .content{flex:1;padding:1.5rem 2.2rem;max-width:920px}
+  .breadcrumb{font-size:.88rem;color:#666;margin-bottom:1rem}
+  .abstract{background:#eef2f8;border-left:4px solid #345;padding:1rem 1.2rem;margin:1rem 0;font-style:italic}
+  .defbox{background:#f4f0e8;border:1px solid #c8b78b;padding:.9rem 1.1rem;margin:1rem 0;border-radius:4px}
+  .thmbox{background:#eef6ee;border:1px solid #98c39a;padding:.9rem 1.1rem;margin:1rem 0;border-radius:4px}
+  .badge{display:inline-block;background:#2a7a32;color:#fff;font-size:.78rem;padding:.12rem .5rem;border-radius:3px;text-decoration:none;margin-left:.4rem}
+  code{background:#eee;padding:.05rem .25rem;border-radius:3px;font-size:.92em}
+  h1{margin-top:.2rem}
+  h2{border-bottom:1px solid #ccd;padding-bottom:.25rem;margin-top:2rem}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html">Idea Theory</a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="lean.html">Lean Source</a>
+</div>
+<div class="wrap">
+<aside class="sidebar">
+  <h2>Volumes</h2>
+  <a href="vol1.html">I. Mathematical Foundations</a>
+  <a href="vol2.html">II. Social Sciences</a>
+  <a href="vol3.html">III. Humanities</a>
+  <a href="vol4.html">IV. Cognitive Science &amp; Phil. of Mind</a>
+  <a href="vol5.html">V. Emergence</a>
+  <a href="vol6.html">VI. Advanced Applications</a>
+  <h2>Concepts</h2>
+  <a href="idea-composition.html"><b>Idea Composition</b></a>
+  <a href="resonance-pairing.html">Resonance Pairing</a>
+  <a href="aufhebung-decomposition.html">Aufhebung Decomposition</a>
+  <a href="emergence-cocycle.html">Emergence Cocycle</a>
+  <a href="meaning-curvature.html">Meaning Curvature</a>
+  <a href="conjugation.html">Conjugation</a>
+  <a href="transmission-chains.html">Transmission Chains</a>
+  <a href="structural-equivalence.html">Structural Equivalence</a>
+  <a href="graded-idea-algebra.html">Graded Idea Algebra</a>
+</aside>
+<main class="content">
+<h1>idea composition</h1>
+<div class="breadcrumb"><a href="index.html">Home</a> ·
+<a href="theorems.html">Theorems</a> · Idea Composition</div>
+
+<div class="abstract">
+Idea composition is the binary operation <code>∙ : I × I → I</code> on the set
+of ideas <code>I</code> that yields the graded idea monoid <code>(I, ∙, e)</code>
+of Theorem&nbsp;1. It formalizes the recurring observation, from Locke and
+Hume through Frege and contemporary memetics, that ideas combine into compound
+ideas while preserving an underlying notion of weight or grade.
+</div>
+
+<h2>Definition</h2>
+<div class="defbox">
+<code>structure IdeaMonoid where</code><br>
+&nbsp;&nbsp;<code>carrier : Type</code><br>
+&nbsp;&nbsp;<code>compose : carrier → carrier → carrier</code><br>
+&nbsp;&nbsp;<code>unit    : carrier</code><br>
+&nbsp;&nbsp;<code>assoc   : ∀ a b c, compose (compose a b) c = compose a (compose b c)</code><br>
+&nbsp;&nbsp;<code>left_id : ∀ a, compose unit a = a</code><br>
+&nbsp;&nbsp;<code>right_id: ∀ a, compose a unit = a</code>
+</div>
+
+<h2>Headline theorem</h2>
+<div class="thmbox"><b>Theorem 1 (Composition).</b> <code>(I, ∙, e)</code> is a
+monoid; equipped with a grading <code>w : I → ℕ</code> satisfying
+<code>w(a ∙ b) = w(a) + w(b)</code> and <code>w(e)=0</code> it is a graded
+monoid.
+<a class="badge" href="lean/IdeaTheory/Composition.lean">✓ verified</a></div>
+
+<h2>See also</h2>
+<p><a href="resonance-pairing.html">Resonance Pairing</a> ·
+<a href="aufhebung-decomposition.html">Aufhebung Decomposition</a> ·
+<a href="graded-idea-algebra.html">Graded Idea Algebra</a> ·
+<a href="theorems.html">All theorems</a> ·
+<a href="lean/IdeaTheory/Composition.lean">Lean source</a>.</p>
+</main>
+</div>
+</body>
+</html>

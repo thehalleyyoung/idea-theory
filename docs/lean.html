@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Lean Source — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+  body{font-family:Georgia,serif;margin:0;background:#fafafa;color:#222;line-height:1.6}
+  .wrap{display:flex;min-height:100vh}
+  .sidebar{width:230px;background:#1f2a44;color:#eee;padding:1.2rem;box-sizing:border-box}
+  .sidebar h2{font-size:1rem;color:#fff;margin-top:1.2rem}
+  .sidebar a{color:#cdd5e0;display:block;text-decoration:none;padding:.18rem 0;font-size:.92rem}
+  .topbar{background:#283655;color:#fff;padding:.7rem 1.2rem;font-size:.95rem}
+  .topbar a{color:#bcd;margin-right:1rem;text-decoration:none}
+  .content{flex:1;padding:1.5rem 2.2rem;max-width:920px}
+  .breadcrumb{font-size:.88rem;color:#666;margin-bottom:1rem}
+  .abstract{background:#eef2f8;border-left:4px solid #345;padding:1rem 1.2rem;margin:1rem 0;font-style:italic}
+  code{background:#eee;padding:.05rem .25rem;border-radius:3px;font-size:.92em}
+  h1{margin-top:.2rem}
+  h2{border-bottom:1px solid #ccd;padding-bottom:.25rem;margin-top:2rem}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html">Idea Theory</a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="lean.html"><b>Lean Source</b></a>
+</div>
+<div class="wrap">
+<aside class="sidebar">
+  <h2>Volumes</h2>
+  <a href="vol1.html">I. Mathematical Foundations</a>
+  <a href="vol2.html">II. Social Sciences</a>
+  <a href="vol3.html">III. Humanities</a>
+  <a href="vol4.html">IV. Cognitive Science &amp; Phil. of Mind</a>
+  <a href="vol5.html">V. Emergence</a>
+  <a href="vol6.html">VI. Advanced Applications</a>
+  <h2>Concepts</h2>
+  <a href="idea-composition.html">Idea Composition</a>
+  <a href="resonance-pairing.html">Resonance Pairing</a>
+  <a href="aufhebung-decomposition.html">Aufhebung Decomposition</a>
+  <a href="emergence-cocycle.html">Emergence Cocycle</a>
+  <a href="meaning-curvature.html">Meaning Curvature</a>
+  <a href="conjugation.html">Conjugation</a>
+  <a href="transmission-chains.html">Transmission Chains</a>
+  <a href="structural-equivalence.html">Structural Equivalence</a>
+  <a href="graded-idea-algebra.html">Graded Idea Algebra</a>
+</aside>
+<main class="content">
+<h1>Lean 4 Source</h1>
+<div class="breadcrumb"><a href="index.html">Home</a> · Lean source</div>
+
+<div class="abstract">
+This page indexes the machine-checked Lean 4 development underlying Idea Theory.
+The nine headline theorems of Volume I — composition, resonance, Aufhebung,
+emergence cocycle, curvature, conjugation, chains, equivalence, and grading —
+are each formalized in dedicated modules under <code>IdeaTheory/</code>. Every
+concept page on this site links its informal claims to the corresponding Lean
+declarations.
+</div>
+
+<h2>Module index</h2>
+<ul>
+  <li><a href="lean/IdeaTheory/Composition.lean"><code>IdeaTheory/Composition.lean</code></a> — graded idea monoid (Theorem&nbsp;1).</li>
+  <li><a href="lean/IdeaTheory/Resonance.lean"><code>IdeaTheory/Resonance.lean</code></a> — bilinear resonance pairing (Theorems&nbsp;2.1–2.3).</li>
+  <li><a href="lean/IdeaTheory/Aufhebung.lean"><code>IdeaTheory/Aufhebung.lean</code></a> — Aufhebung decomposition (Theorem&nbsp;3).</li>
+  <li><a href="lean/IdeaTheory/Cocycle.lean"><code>IdeaTheory/Cocycle.lean</code></a> — emergence 2-cocycle (Theorem&nbsp;4).</li>
+  <li><a href="lean/IdeaTheory/Curvature.lean"><code>IdeaTheory/Curvature.lean</code></a> — meaning curvature (Theorem&nbsp;5).</li>
+  <li><a href="lean/IdeaTheory/Conjugation.lean"><code>IdeaTheory/Conjugation.lean</code></a> — conjugation action (Theorem&nbsp;6).</li>
+  <li><a href="lean/IdeaTheory/Chains.lean"><code>IdeaTheory/Chains.lean</code></a> — transmission chains (Theorem&nbsp;7).</li>
+  <li><a href="lean/IdeaTheory/Equivalence.lean"><code>IdeaTheory/Equivalence.lean</code></a> — structural equivalence (Theorem&nbsp;8).</li>
+  <li><a href="lean/IdeaTheory/Graded.lean"><code>IdeaTheory/Graded.lean</code></a> — graded algebra (Theorem&nbsp;9).</li>
+</ul>
+
+<h2>Build</h2>
+<p>Run <code>lake build</code> from the repository root. The toolchain pin is in
+<code>lean-toolchain</code> and dependencies are declared in <code>lakefile.lean</code>.</p>
+
+<h2>See also</h2>
+<p><a href="theorems.html">Theorem index</a> · <a href="axioms.html">Axioms</a> ·
+<a href="resonance-pairing.html">Resonance Pairing</a>.</p>
+</main>
+</div>
+</body>
+</html>
