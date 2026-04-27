@@ -470,9 +470,9 @@
       "deps": [
         "tex_preamble"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: tex/references.bib"
     },
     {
       "id": "tex_chapter_v1c1",

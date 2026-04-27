@@ -1367,3 +1367,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 46 — 2026-04-27 18:24
 **Task:** `tex_preamble` TeX preamble (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 47 — 2026-04-27 18:25
+**Task:** `tex_bib` BibTeX bibliography (attempt 1)  
+**Verdict:** ✓ PASS  

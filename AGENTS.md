@@ -633,3 +633,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 46 [tex_preamble] TeX preamble
 [tex_preamble] TeX preamble
+
+### Iter 47 [tex_bibliography] BibTeX bibliography
+[tex_bibliography] BibTeX bibliography
