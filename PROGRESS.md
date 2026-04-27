@@ -504,3 +504,10 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - missing file: lean/IdeaTheory/Theorems8.lean
+
+## Iter 05 — 2026-04-27 08:55
+**Task:** `theorems_8` Lean theorems: Advanced Properties (attempt 2)  
+**Verdict:** ✗ BOUNCE (2 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems8.lean: contains `sorry`
+  - lean/IdeaTheory/Theorems8.lean: contains `admit`
