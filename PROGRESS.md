@@ -692,3 +692,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 11 — 2026-04-27 13:04
 **Task:** `theorems_9` Lean theorems: philosophical reference (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 01 — 2026-04-27 13:18
+**Task:** `toolchain` Lean toolchain and lakefile (attempt 1)  
+**Verdict:** ✓ PASS  
