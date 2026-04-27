@@ -278,8 +278,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/resonance-pairing.html: broken link \u2192 lean.html; docs/resonance-pairing.html: broken link \u2192 idea-composition.html; docs/resonance-pairing.html: broken link \u2192 emergence-cocycle.html; docs/resonance-pairing.html: broken link \u2192 conjugation.html"
     },
     {
       "id": "website_concept_3",

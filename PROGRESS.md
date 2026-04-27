@@ -1074,3 +1074,19 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 21 — 2026-04-27 17:25
 **Task:** `website_concept_1` Website page: idea monoid (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 22 — 2026-04-27 17:27
+**Task:** `website_concept_2` Website page: resonance pairing (attempt 1)  
+**Verdict:** ✗ BOUNCE (11 issues)  
+**Issues:**
+  - docs/resonance-pairing.html: broken link → lean.html
+  - docs/resonance-pairing.html: broken link → idea-composition.html
+  - docs/resonance-pairing.html: broken link → emergence-cocycle.html
+  - docs/resonance-pairing.html: broken link → conjugation.html
+  - docs/resonance-pairing.html: broken link → transmission-chains.html
+  - docs/resonance-pairing.html: broken link → idea-composition.html
+  - docs/resonance-pairing.html: broken link → emergence-cocycle.html
+  - docs/resonance-pairing.html: broken link → idea-composition.html
+  - docs/resonance-pairing.html: broken link → emergence-cocycle.html
+  - docs/resonance-pairing.html: broken link → conjugation.html
+  - docs/resonance-pairing.html: broken link → transmission-chains.html
