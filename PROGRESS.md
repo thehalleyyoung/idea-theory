@@ -838,3 +838,12 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - lean/IdeaTheory/Theorems10.lean: contains `admit`
   - lean/IdeaTheory/Theorems10.lean: contains `native_decide`
   - lean/IdeaTheory/Theorems10.lean: missing namespace declaration
+
+## Iter 24 — 2026-04-27 14:19
+**Task:** `theorems_10` Lean theorems: semantic weight (attempt 13)  
+**Verdict:** ✗ BOUNCE (4 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems10.lean: contains `sorry`
+  - lean/IdeaTheory/Theorems10.lean: contains `admit`
+  - lean/IdeaTheory/Theorems10.lean: contains `native_decide`
+  - lean/IdeaTheory/Theorems10.lean: missing namespace declaration

@@ -432,3 +432,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 23 [lean_theorems] Lean theorems: semantic weight
 [lean_theorems] Lean theorems: semantic weight — bounced: lean/IdeaTheory/Theorems10.lean: contains `sorry`; lean/IdeaTheory/Theorems10.lean: contains `admit`
+
+### Iter 24 [lean_theorems] Lean theorems: semantic weight
+[lean_theorems] Lean theorems: semantic weight — bounced: lean/IdeaTheory/Theorems10.lean: contains `sorry`; lean/IdeaTheory/Theorems10.lean: contains `admit`
