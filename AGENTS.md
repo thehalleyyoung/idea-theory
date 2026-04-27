@@ -507,3 +507,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 04 [lean_theorems] Lean theorems: resonance pairing
 [lean_theorems] Lean theorems: resonance pairing
+
+### Iter 05 [lean_theorems] Lean theorems: Aufhebung decomposition
+[lean_theorems] Lean theorems: Aufhebung decomposition
