@@ -285,3 +285,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 02 [lean_theorems] Lean theorems: Composition and Identity
 [lean_theorems] Lean theorems: Composition and Identity
+
+### Iter 03 [lean_theorems] Lean theorems: Advanced Properties
+[lean_theorems] Lean theorems: Advanced Properties
