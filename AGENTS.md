@@ -615,3 +615,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 40 [website_concept] Website page: cultural transmission
 [website_concept] Website page: cultural transmission — bounced: docs/cultural-transmission.html: broken link → vol1-foundations.html; docs/cultural-transmission.html: broken link → vol2-social.html
+
+### Iter 41 [website_concept] Website page: cultural transmission
+[website_concept] Website page: cultural transmission

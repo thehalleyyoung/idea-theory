@@ -1285,3 +1285,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/cultural-transmission.html: broken link → distributed-cognition.html
   - docs/cultural-transmission.html: broken link → strong-emergence.html
   - docs/cultural-transmission.html: broken link → lean/Vol2/CulturalTransmission.html
+
+## Iter 41 — 2026-04-27 18:06
+**Task:** `website_concept_11` Website page: cultural transmission (attempt 2)  
+**Verdict:** ✓ PASS  

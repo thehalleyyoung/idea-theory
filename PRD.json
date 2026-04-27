@@ -412,9 +412,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/cultural-transmission.html: broken link \u2192 vol1-foundations.html; docs/cultural-transmission.html: broken link \u2192 vol2-social.html; docs/cultural-transmission.html: broken link \u2192 vol3-humanities.html; docs/cultural-transmission.html: broken link \u2192 vol4-cogsci.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/cultural-transmission.html"
     },
     {
       "id": "website_concept_12",
