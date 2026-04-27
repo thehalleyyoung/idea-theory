@@ -368,8 +368,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/structural-equivalence.html: broken link \u2192 composition.html; docs/structural-equivalence.html: broken link \u2192 resonance.html; docs/structural-equivalence.html: broken link \u2192 aufhebung.html; docs/structural-equivalence.html: broken link \u2192 curvature.html"
     },
     {
       "id": "website_concept_9",

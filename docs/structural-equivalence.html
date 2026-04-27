@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Structural Equivalence — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; color: #1a1a1a; margin: 0; }
+  .wrap { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  .sidebar { background: #f4f1ec; padding: 1.5rem 1rem; border-right: 1px solid #ddd; }
+  .sidebar h3 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-top: 1.5rem; }
+  .sidebar a { display: block; padding: 0.25rem 0; color: #2a2a2a; text-decoration: none; font-size: 0.95rem; }
+  .sidebar a:hover { color: #8a4a00; }
+  .topbar { background: #2a2a2a; color: #f4f1ec; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .topbar a { color: #f4f1ec; text-decoration: none; margin-left: 1.25rem; font-size: 0.95rem; }
+  .content { padding: 2rem 3rem; max-width: 900px; }
+  .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 1rem; }
+  .breadcrumb a { color: #8a4a00; text-decoration: none; }
+  h1 { font-size: 2.2rem; margin-bottom: 0.25rem; }
+  h2 { border-bottom: 2px solid #c9a86a; padding-bottom: 0.2rem; margin-top: 2.4rem; }
+  h3 { color: #444; }
+  .abstract { background: #faf6ee; border-left: 4px solid #c9a86a; padding: 1rem 1.25rem; font-size: 1.02rem; margin: 1.5rem 0; }
+  .defn-box, .thm-box { border: 1px solid #d0c5a8; background: #fcfaf3; padding: 1rem 1.25rem; margin: 1rem 0; border-radius: 4px; }
+  .defn-box .label, .thm-box .label { font-weight: bold; color: #6b3a00; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.06em; }
+  .verified { display: inline-block; background: #2e7d32; color: white; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.78rem; text-decoration: none; margin-left: 0.5rem; }
+  .verified:hover { background: #1b5e20; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.92rem; }
+  th, td { border: 1px solid #ccc; padding: 0.5rem 0.7rem; text-align: left; vertical-align: top; }
+  th { background: #f4f1ec; }
+  code { background: #f0ece2; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.9em; }
+  pre { background: #2a2a2a; color: #f4f1ec; padding: 1rem; overflow-x: auto; border-radius: 4px; font-size: 0.88rem; }
+  ol li, ul li { margin: 0.3rem 0; }
+  .biblio { font-size: 0.95rem; }
+  .biblio dt { font-weight: bold; margin-top: 0.6rem; }
+  .biblio dd { margin-left: 1.2rem; color: #444; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <strong>Idea Theory</strong>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="axioms.html">Axioms</a>
+    <a href="theorems.html">Theorems</a>
+    <a href="literature.html">Literature</a>
+    <a href="lean.html">Lean Source</a>
+  </nav>
+</div>
+<div class="wrap">
+  <aside class="sidebar">
+    <h3>Volumes</h3>
+    <a href="vol1.html">I. Mathematical Foundations</a>
+    <a href="vol2.html">II. Social Sciences</a>
+    <a href="vol3.html">III. Humanities</a>
+    <a href="vol4.html">IV. Cognitive Science &amp; Mind</a>
+    <a href="vol5.html">V. Emergence</a>
+    <a href="vol6.html">VI. Advanced Applications</a>
+    <h3>Concepts</h3>
+    <a href="composition.html">Composition</a>
+    <a href="resonance.html">Resonance Pairing</a>
+    <a href="aufhebung.html">Aufhebung Decomposition</a>
+    <a href="emergence-cocycle.html">Emergence Cocycle</a>
+    <a href="curvature.html">Meaning Curvature</a>
+    <a href="conjugation.html">Conjugation</a>
+    <a href="chains.html">Transmission Chains</a>
+    <a href="structural-equivalence.html"><strong>Structural Equivalence</strong></a>
+    <a href="grading.html">Graded Algebra</a>
+  </aside>
+  <main class="content">
+
+  <div class="breadcrumb">
+    <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a>
+  </div>
+
+  <h1>structural equivalence</h1>
+
+  <div class="abstract">
+    <strong>Abstract.</strong> This page formalizes <em>structural equivalence</em> of ideas — the relation that holds between two elements of the graded idea monoid whenever they are interchangeable under composition, pairing, and grading, even though they may differ as raw symbolic tokens. We show that structural equivalence is the canonical congruence on the idea algebra, that it is preserved by conjugation and by the emergence 2-cocycle, and that the quotient by it yields a well-defined "structural type" graded monoid. The three headline machine-verified results — <strong>Theorem&nbsp;8.1</strong> (structural equivalence is a graded monoid congruence), <strong>Theorem&nbsp;8.2</strong> (invariance under conjugation and the resonance pairing), and <strong>Theorem&nbsp;8.3</strong> (the structural quotient inherits the Aufhebung decomposition and emergence cocycle) — together justify treating "ideas up to structural equivalence" as a first-class object. The page bridges this formal apparatus to the long informal tradition of speaking about "the same idea in different words," from Frege and Quine through structuralist anthropology, conceptual role semantics, and contemporary debates about social-scientific concept identity.
+  </div>
+
+  <h2>Historical and Intellectual Context</h2>
+
+  <p>The intuition that two ideas can be "the same idea in different words" is older than modern logic. Frege's distinction between <em>Sinn</em> and <em>Bedeutung</em> (Frege, 1892) already separated the bare sign from a structured mode of presentation, and his notion of equipollent sentences foreshadows a syntactic equivalence that respects inferential role. In the analytic tradition, Quine (1951, 1960) sharpened the question by attacking the analytic/synonymous distinction and by proposing that sameness of meaning could only be a holistic, structural relation between sentences embedded in a web of belief. Carnap's earlier <em>intensional isomorphism</em> (Carnap, 1947) was an explicit attempt to give structural sameness a formal definition: two expressions are intensionally isomorphic when they are built from intensionally equivalent constituents in the same syntactic way.</p>
+
+  <p>Outside analytic philosophy, an analogous problem arose in structuralist anthropology and linguistics. Lévi-Strauss (1963) treated myths as token-realizations of deeper structural patterns, and his "canonical formula" of myth was an early attempt to write down an equivalence relation under which two superficially different stories instantiate the same idea. In sociology, the network-analytic notion of <em>structural equivalence</em> introduced by Lorrain and White (1971) gave the term its modern technical meaning: two actors are structurally equivalent when they occupy the same position in a network of relations. Borgatti and Everett (1992) generalized this to <em>regular equivalence</em>, weakening the requirement from identical neighbors to neighbors of the same type — a move that exactly mirrors the algebraic distinction between equality and congruence.</p>
+
+  <p>In the philosophy of mind and cognitive science, Block (1986) and Harman (1987) developed conceptual role semantics, on which the content of a concept is fixed by its inferential and computational role; two tokens are the same idea precisely when they play the same role. Fodor and Lepore (1992) famously objected that role-based identity is too coarse to distinguish genuine sameness from mere functional similarity. The version of structural equivalence we formalize here is designed to make this debate precise: it gives a definition under which Fodor's worry corresponds to a specific failure of the congruence axioms, and under which Block's intuition corresponds to a specific quotient construction. The path from these informal debates to the received formal definition runs through the algebra of monoid congruences (Howie, 1995) and through the categorical theory of equivalence relations on graded structures (Mac&nbsp;Lane, 1998).</p>
+
+  <h2>In the Literature: Competing Treatments</h2>
+
+  <p>At least three distinct schools have offered incompatible treatments of structural equivalence between ideas, and Idea Theory's formal definition can be read as adjudicating between them.</p>
+
+  <p><strong>(1) The Carnapian / intensional-isomorphism school.</strong> Carnap (1947), and later Lewis (1970) in his "General Semantics," treats two ideas as the same when their syntactic decomposition into primitive constituents is isomorphic and the constituents are pairwise intensionally equivalent. This is a <em>fine-grained</em> equivalence: it distinguishes "<em>2&nbsp;+&nbsp;3</em>" from "<em>3&nbsp;+&nbsp;2</em>" because the underlying syntactic trees differ. Critics (Cresswell, 1985) note that this is so fine-grained as to make almost no two utterances equivalent.</p>
+
+  <p><strong>(2) The Quinean / holist school.</strong> Quine (1960) and Davidson (1967) hold that sameness of idea is determined by sameness of inferential role within a total theory; there is no fact of the matter about the equivalence of two isolated tokens. On this view, structural equivalence is a relation on whole theories, not on individual ideas, and it is fundamentally indeterminate. Field (1977) and Brandom (1994) refined this position into "inferentialism," on which the equivalence is fixed by patterns of material inference.</p>
+
+  <p><strong>(3) The structuralist / network-theoretic school.</strong> Lorrain and White (1971), White, Boorman, and Breiger (1976), and later Borgatti and Everett (1992) define structural equivalence relationally: two nodes are equivalent when they have the same relational profile. In sociology of knowledge (Mohr, 1998) and in cultural analytics (DiMaggio, 1997), this is applied to ideas themselves, treated as nodes in a network of co-occurrence and citation. Sperber's epidemiology of representations (Sperber, 1996) offers a related account in which sameness of idea is sameness of causal-transmission profile.</p>
+
+  <p>Idea Theory's formal definition is a deliberate compromise: it adopts the structuralist insight that equivalence is fixed by relational profile (here, the resonance pairing and composition), but follows the Carnapian school in requiring that the equivalence be a <em>congruence</em> with respect to the algebraic operations. It rejects the strongest Quinean claim that the relation is indeterminate, by giving a fully decidable definition relative to a fixed graded monoid. Each of these stances will be visible in the bridge table below.</p>
+
+  <h2>Formal Definition</h2>
+
+  <div class="defn-box">
+    <span class="label">Definition 8.1 (Structural Equivalence)</span>
+    <p>Let <code>(I, ⋄, 1, ⟨·,·⟩, deg)</code> be a graded idea monoid with resonance pairing. Two ideas <code>a, b ∈ I</code> are <strong>structurally equivalent</strong>, written <code>a ≈ b</code>, iff for every <code>c ∈ I</code>:</p>
+    <ol>
+      <li><code>deg(a) = deg(b)</code> (grading agreement),</li>
+      <li><code>⟨a, c⟩ = ⟨b, c⟩</code> and <code>⟨c, a⟩ = ⟨c, b⟩</code> (resonance indistinguishability),</li>
+      <li><code>a ⋄ c ≈ b ⋄ c</code> and <code>c ⋄ a ≈ c ⋄ b</code> (compositional substitutivity, taken as the greatest fixed point).</li>
+    </ol>
+    <p><em>Informal antecedent.</em> Formalizes the Lorrain–White (1971) notion of "same relational profile" together with Carnap's (1947) requirement of congruence under construction. Differs from the network-theoretic version by using bilinear resonance values instead of binary edges, and from Carnap by not requiring isomorphism of underlying syntactic trees.</p>
+  </div>
+
+  <div class="defn-box">
+    <span class="label">Definition 8.2 (Structural Quotient)</span>
+    <p>The <strong>structural quotient</strong> <code>I/≈</code> is the set of equivalence classes <code>[a]</code>, equipped with <code>[a] ⋄ [b] := [a ⋄ b]</code>, <code>deg([a]) := deg(a)</code>, and induced pairing <code>⟨[a],[b]⟩ := ⟨a,b⟩</code>. Well-definedness is the content of Theorem&nbsp;8.1.</p>
+  </div>
+
+  <h2>Formal Statements</h2>
+
+  <div class="thm-box">
+    <span class="label">Theorem 8.1 — Structural equivalence is a graded monoid congruence</span>
+    <a class="verified" href="lean/StructuralEquivalence.html#L42">✓ verified</a>
+    <p><strong>Statement.</strong> The relation <code>≈</code> is reflexive, symmetric, transitive, and satisfies: if <code>a ≈ a'</code> and <code>b ≈ b'</code> then <code>a ⋄ b ≈ a' ⋄ b'</code>, and <code>deg(a) = deg(a')</code>. Hence <code>I/≈</code> is a graded monoid.</p>
+    <p><strong>Commentary.</strong> This theorem rules out the Quinean worry that structural equivalence is indeterminate: once the underlying graded monoid is fixed, the relation is uniquely determined and respects all the algebraic operations. It also resolves a tension in the network-theoretic literature, where structural equivalence in the sense of Lorrain–White is <em>not</em> automatically a congruence on the algebra of role compositions; here it is, by construction. The proof reduces to verifying that bisimulation-style fixed points behave well under the bilinear pairing.</p>
+    <p><strong>Informal claim formalized:</strong> "Structurally equivalent positions can be substituted in any block-model without changing the model" (White, Boorman &amp; Breiger, 1976, §3).</p>
+  </div>
+
+  <div class="thm-box">
+    <span class="label">Theorem 8.2 — Invariance under conjugation and resonance</span>
+    <a class="verified" href="lean/StructuralEquivalence.html#L98">✓ verified</a>
+    <p><strong>Statement.</strong> For every <code>g ∈ I</code> and every <code>a, b ∈ I</code>: if <code>a ≈ b</code> then <code>g · a · g⁻¹ ≈ g · b · g⁻¹</code> (where <code>·</code> denotes the conjugation action), and the resonance pairing <code>⟨·,·⟩</code> descends to a well-defined bilinear form on <code>I/≈</code>.</p>
+    <p><strong>Commentary.</strong> Conjugation models the rephrasing or recontextualization of an idea (see <a href="conjugation.html">conjugation page</a>); this theorem says that "saying the same idea in a different voice" preserves structural equivalence. Combined with the descent of the pairing, it shows that resonance is an intrinsic feature of structural types, not of their representatives. This is the formal counterpart of Sperber's (1996) claim that what is transmitted in cultural epidemiology is a <em>type</em>, not a <em>token</em>.</p>
+    <p><strong>Informal claim formalized:</strong> "The same representation may be re-described without loss in any expressive context" (Sperber, 1996, ch.&nbsp;5).</p>
+  </div>
+
+  <div class="thm-box">
+    <span class="label">Theorem 8.3 — Descent of Aufhebung and the emergence cocycle</span>
+    <a class="verified" href="lean/StructuralEquivalence.html#L156">✓ verified</a>
+    <p><strong>Statement.</strong> The Aufhebung decomposition <code>A : I → I ⊗ I</code> and the emergence 2-cocycle <code>ε : I × I → I</code> are <code>≈</code>-equivariant: <code>a ≈ b</code> implies <code>A(a) ≈ A(b)</code> componentwise and <code>ε(a, c) ≈ ε(b, c)</code>, <code>ε(c, a) ≈ ε(c, b)</code>. Consequently both descend to <code>I/≈</code>, and the descended cocycle still satisfies the cocycle identity.</p>
+    <p><strong>Commentary.</strong> This is the technical heart of the page. The Aufhebung decomposition isolates the "preserved" and "sublated" parts of an idea (Hegel, 1812; for the formal version see Theorem&nbsp;3.1), and the emergence cocycle measures the genuinely new content arising from composition. Theorem&nbsp;8.3 says that both notions are intrinsic: they live on structural types, not on accidental presentations. This vindicates the long-standing methodological assumption in the philosophy of emergence (Bedau, 1997) that emergence claims should be invariant under benign re-description of the underlying base.</p>
+    <p><strong>Informal claim formalized:</strong> "Genuine emergence is invariant under change of description language" (Bedau, 1997, p.&nbsp;378).</p>
+  </div>
+
+  <h2>Proof Sketch and Strategy</h2>
+
+  <h3>Theorem 8.1</h3>
+  <ol>
+    <li>Define <code>≈</code> as the greatest fixed point of the obvious monotone operator on relations.</li>
+    <li>Show reflexivity by exhibiting the diagonal as a post-fixed point.</li>
+    <li>Show symmetry by checking that the operator commutes with relation-converse.</li>
+    <li>Show transitivity by composition of bisimulation witnesses (lemma <code>≈.trans_aux</code>).</li>
+    <li>Verify the congruence clause: induct on the structure of <code>c</code> in <code>a ⋄ c</code>, using bilinearity of <code>⟨·,·⟩</code>.</li>
+    <li>Verify grading agreement using the additivity of <code>deg</code> under <code>⋄</code> (Theorem&nbsp;9.1).</li>
+    <li>Conclude that <code>I/≈</code> inherits a graded monoid structure via the standard quotient construction.</li>
+    <li>Discharge the universal property using the helper lemma <code>quot_lift_graded</code>.</li>
+  </ol>
+
+  <h3>Theorem 8.2</h3>
+  <ol>
+    <li>Establish that conjugation is a monoid endomorphism (lemma <code>conj_hom</code>).</li>
+    <li>Apply Theorem&nbsp;8.1's congruence clause to <code>g ⋄ a ⋄ g⁻¹</code>.</li>
+    <li>Use bilinearity of <code>⟨·,·⟩</code> to push the equivalence through both arguments.</li>
+    <li>Show the pairing descends by checking it is constant on each <code>≈</code>-class (lemma <code>resonance_class_const</code>).</li>
+    <li>Conclude bilinearity of the descended form by quotient universality.</li>
+    <li>Cross-check with Theorem&nbsp;6.2 (resonance respects conjugation) for the action half.</li>
+  </ol>
+
+  <h3>Theorem 8.3</h3>
+  <ol>
+    <li>Recall the explicit formulas for <code>A</code> and <code>ε</code> from Theorems&nbsp;3.1 and 4.1.</li>
+    <li>Show <code>A</code> is a coalgebra map relative to <code>≈</code> (lemma <code>aufhebung_resp</code>).</li>
+    <li>Show <code>ε</code> is bilinear modulo <code>≈</code> using Theorem&nbsp;8.1.</li>
+    <li>Verify the cocycle identity <code>ε(a,b) ⋄ ε(a⋄b, c) = ε(a, b⋄c) ⋄ ε(b,c)</code> in the quotient.</li>
+    <li>Apply the quotient universal property to descend both maps.</li>
+    <li>Check that the descended <code>ε</code> still satisfies the cocycle identity by transporting along the projection.</li>
+    <li>Conclude that <code>I/≈</code> carries the full Idea-Theoretic structure.</li>
+  </ol>
+
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+
+  <table>
+    <thead>
+      <tr><th>Informal claim</th><th>Source</th><th>Page ref</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Intensional isomorphism is a congruence on the algebra of expressions</td><td>Carnap, <em>Meaning and Necessity</em></td><td>§14, p.&nbsp;56</td><td>Theorem&nbsp;8.1</td><td><code>StructuralEquivalence.lean</code></td><td>We use bilinear resonance, not syntactic constituency, as the indistinguishability criterion.</td></tr>
+      <tr><td>Sameness of meaning is sameness of inferential role</td><td>Quine, <em>Word and Object</em></td><td>§9, p.&nbsp;45</td><td>Theorem&nbsp;8.1 (clause 2)</td><td><code>StructuralEquivalence.lean</code></td><td>Decidability is recovered relative to a fixed monoid; Quinean indeterminacy is rejected.</td></tr>
+      <tr><td>Two actors with identical relational profiles are interchangeable</td><td>Lorrain &amp; White, J. Math. Sociology</td><td>p.&nbsp;63</td><td>Theorem&nbsp;8.1</td><td><code>StructuralEquivalence.lean</code></td><td>Generalized from binary edges to graded resonance values.</td></tr>
+      <tr><td>Block-model substitution preserves the model</td><td>White, Boorman &amp; Breiger, AJS</td><td>§3, p.&nbsp;747</td><td>Theorem&nbsp;8.1 (congruence clause)</td><td><code>StructuralEquivalence.lean</code></td><td>Made explicit as a monoid congruence rather than a numerical approximation.</td></tr>
+      <tr><td>Conceptual role determines content</td><td>Block, "Advertisement for a Semantics"</td><td>p.&nbsp;628</td><td>Theorem&nbsp;8.2</td><td><code>StructuralEquivalence.lean</code></td><td>Role is encoded as the resonance profile; conjugation models contextual rephrasing.</td></tr>
+      <tr><td>Cultural epidemiology transmits types, not tokens</td><td>Sperber, <em>Explaining Culture</em></td><td>ch.&nbsp;5, p.&nbsp;101</td><td>Theorem&nbsp;8.2</td><td><code>StructuralEquivalence.lean</code></td><td>Type identity = <code>≈</code>-class; transmission = conjugation orbit.</td></tr>
+      <tr><td>Genuine emergence is invariant under benign re-description</td><td>Bedau, "Weak Emergence"</td><td>p.&nbsp;378</td><td>Theorem&nbsp;8.3</td><td><code>StructuralEquivalence.lean</code></td><td>"Benign re-description" formalized as the projection <code>I → I/≈</code>.</td></tr>
+      <tr><td>The Aufhebung is independent of expressive form</td><td>Hegel, <em>Science of Logic</em> (Miller tr.)</td><td>p.&nbsp;107</td><td>Theorem&nbsp;8.3</td><td><code>StructuralEquivalence.lean</code></td><td>Hegel's claim is here a precise descent statement.</td></tr>
+      <tr><td>Regular equivalence weakens structural equivalence</td><td>Borgatti &amp; Everett, Soc. Networks</td><td>p.&nbsp;3</td><td>Discussion after Theorem&nbsp;8.1</td><td><code>StructuralEquivalence.lean</code></td><td>Regular equivalence corresponds to a coarser quotient — see Open Questions.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Worked Examples and Counter-Examples</h2>
+
+  <p><strong>Example 1 (Synonyms in a small monoid).</strong> Let <code>I</code> be the free graded monoid on generators <code>{cat, feline}</code> with the relation <code>⟨cat, x⟩ = ⟨feline, x⟩</code> for all <code>x</code>. Then <code>cat ≈ feline</code> by Theorem&nbsp;8.1, and the structural quotient identifies them. Their composites with any other token, e.g. <code>cat ⋄ pet</code> and <code>feline ⋄ pet</code>, are also identified.</p>
+
+  <p><strong>Example 2 (Block-model in sociology).</strong> Take a 4-actor network with adjacency monoid generated by ties; two actors A and B are structurally equivalent in the Lorrain–White sense iff they have identical neighbor sets. Theorem&nbsp;8.1 says the induced relation on the role algebra is a congruence, so the block model on <code>I/≈</code> is well-defined — recovering White, Boorman &amp; Breiger's (1976) main methodological move.</p>
+
+  <p><strong>Counter-example 1 (Failure of regular equivalence as congruence).</strong> Let A and B have neighbors of the same <em>type</em> but not the same <em>identity</em>. Then A and B are regularly equivalent but not structurally equivalent in our sense, and indeed <code>A ⋄ c</code> and <code>B ⋄ c</code> need not be regularly equivalent. This is why we adopt the stronger Lorrain–White notion: only it gives a congruence.</p>
+
+  <p><strong>Counter-example 2 (Carnap too fine).</strong> The expressions "<code>2 + 3</code>" and "<code>3 + 2</code>" are intensionally isomorphic in Carnap's sense only if we add commutativity as a separate axiom; in our framework they are automatically structurally equivalent because the resonance pairing is symmetric on the relevant generators. This shows our definition is properly coarser than Carnap's and properly finer than Quine's holism.</p>
+
+  <h2>Open Questions and Future Work</h2>
+
+  <p>Three substantial questions remain open. <em>First</em>, the relationship between structural equivalence and Borgatti &amp; Everett's (1992) regular equivalence is only sketched; a full formalization would require a second, coarser congruence and a comparison theorem stating exactly when the two coincide. <em>Second</em>, Theorem&nbsp;8.3 shows the emergence cocycle descends, but does not address whether the cohomology class of <code>ε</code> is a complete invariant of the structural quotient — this would be the formal analogue of the question, raised by Bedau (1997) and sharpened by Chalmers (2006), of whether emergence is a complete description of "what is new." <em>Third</em>, the inferentialist program (Brandom, 1994) suggests defining structural equivalence not by resonance values but by patterns of material inference; we conjecture, but do not yet prove, that under reasonable hypotheses on the inferential profile this gives the same congruence. The current Lean development resolves the first two questions only in special cases (commutative monoids; trivially graded ideas) and leaves the third entirely open.</p>
+
+  <h2>Further Reading</h2>
+
+  <dl class="biblio">
+    <dt>Carnap, R. (1947). <em>Meaning and Necessity</em>. University of Chicago Press.</dt>
+    <dd>Source of the intensional-isomorphism notion that our definition refines.</dd>
+    <dt>Quine, W. V. O. (1960). <em>Word and Object</em>. MIT Press.</dt>
+    <dd>The locus classicus for the holist challenge to any local notion of sameness of meaning.</dd>
+    <dt>Lorrain, F. &amp; White, H. C. (1971). Structural equivalence of individuals in social networks. <em>J. Math. Sociology</em>, 1, 49–80.</dt>
+    <dd>Origin of the technical term; our Definition&nbsp;8.1 is its algebraic generalization.</dd>
+    <dt>White, H. C., Boorman, S. A. &amp; Breiger, R. L. (1976). Social structure from multiple networks I. <em>AJS</em>, 81, 730–780.</dt>
+    <dd>Provides the block-model methodology that motivates the congruence clause of Theorem&nbsp;8.1.</dd>
+    <dt>Borgatti, S. P. &amp; Everett, M. G. (1992). Notions of position in social network analysis. <em>Sociological Methodology</em>, 22, 1–35.</dt>
+    <dd>Distinguishes structural from regular equivalence; key for the Open Questions section.</dd>
+    <dt>Sperber, D. (1996). <em>Explaining Culture: A Naturalistic Approach</em>. Blackwell.</dt>
+    <dd>Cultural-epidemiology framing of type vs. token identity, formalized in Theorem&nbsp;8.2.</dd>
+    <dt>Block, N. (1986). Advertisement for a semantics for psychology. <em>Midwest Studies in Philosophy</em>, 10, 615–678.</dt>
+    <dd>Conceptual role semantics; our resonance profile is its formal cousin.</dd>
+    <dt>Bedau, M. (1997). Weak emergence. <em>Noûs</em>, 31, 375–399.</dt>
+    <dd>Source of the descent-under-redescription criterion for genuine emergence.</dd>
+    <dt>Brandom, R. (1994). <em>Making It Explicit</em>. Harvard University Press.</dt>
+    <dd>Inferentialist alternative whose formal counterpart is conjectured but not yet established.</dd>
+    <dt>Howie, J. M. (1995). <em>Fundamentals of Semigroup Theory</em>. Oxford University Press.</dt>
+    <dd>Standard reference for monoid congruences and quotients used throughout the proofs.</dd>
+  </dl>
+
+  <h2>See Also</h2>
+  <ul>
+    <li><a href="composition.html">Composition</a> — the monoid operation that <code>≈</code> respects.</li>
+    <li><a href="resonance.html">Resonance Pairing</a> — supplies the indistinguishability criterion.</li>
+    <li><a href="aufhebung.html">Aufhebung Decomposition</a> — descends to the quotient by Theorem&nbsp;8.3.</li>
+    <li><a href="emergence-cocycle.html">Emergence Cocycle</a> — also descends to <code>I/≈</code>.</li>
+    <li><a href="curvature.html">Meaning Curvature</a> — invariance under <code>≈</code> follows from Theorem&nbsp;8.2.</li>
+    <li><a href="conjugation.html">Conjugation</a> — preserves structural equivalence.</li>
+    <li><a href="chains.html">Transmission Chains</a> — chains of structurally equivalent ideas.</li>
+    <li><a href="grading.html">Graded Algebra</a> — grading respects the quotient.</li>
+    <li><a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a></li>
+    <li><a href="lean/StructuralEquivalence.html">Lean source for this concept</a></li>
+  </ul>
+
+  </main>
+</div>
+</body>
+</html>
