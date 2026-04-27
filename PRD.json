@@ -195,9 +195,9 @@
       "deps": [
         "foundations"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "missing file: lean/IdeaTheory/Theorems11.lean"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: "
     },
     {
       "id": "theorems_12",
