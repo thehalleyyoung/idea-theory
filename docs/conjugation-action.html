@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Conjugation Action — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: Georgia, serif; max-width: 1100px; margin: 0 auto; color: #1a1a1a; background: #fafafa; }
+  .layout { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; }
+  nav.sidebar { background: #f0ece4; padding: 1rem; font-family: -apple-system, sans-serif; font-size: 0.9rem; height: 100vh; position: sticky; top: 0; overflow-y: auto; }
+  nav.sidebar h3 { margin-top: 1rem; font-size: 0.8rem; text-transform: uppercase; color: #666; }
+  nav.sidebar a { display: block; padding: 0.2rem 0; color: #333; text-decoration: none; }
+  nav.sidebar a:hover { color: #8a2a2a; }
+  header.topbar { background: #1a1a1a; color: #f5f1e8; padding: 0.6rem 1rem; font-family: -apple-system, sans-serif; }
+  header.topbar a { color: #f5f1e8; text-decoration: none; margin-right: 1rem; }
+  main { padding: 1.5rem 2rem 4rem 0; }
+  .breadcrumb { font-size: 0.85rem; color: #777; font-family: -apple-system, sans-serif; }
+  .breadcrumb a { color: #555; }
+  .abstract { background: #f4efe4; border-left: 4px solid #8a2a2a; padding: 1rem 1.2rem; margin: 1rem 0 2rem; font-style: italic; }
+  .definition-box { background: #eef3f7; border: 1px solid #b6c8d6; padding: 1rem 1.2rem; margin: 1rem 0; border-radius: 4px; }
+  .theorem-box { background: #fff8ec; border: 1px solid #d6c190; padding: 1rem 1.2rem; margin: 1.2rem 0; border-radius: 4px; }
+  .theorem-box .label { font-weight: bold; color: #8a2a2a; }
+  .verified { display: inline-block; background: #2e7a3a; color: white; padding: 0.1rem 0.5rem; border-radius: 3px; font-size: 0.8rem; font-family: -apple-system, sans-serif; text-decoration: none; }
+  .verified:hover { background: #1f5527; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.9rem; }
+  th, td { border: 1px solid #ccc; padding: 0.5rem; text-align: left; vertical-align: top; }
+  th { background: #efe8d8; }
+  h1 { color: #5a1a1a; border-bottom: 2px solid #8a2a2a; padding-bottom: 0.3rem; }
+  h2 { color: #3a1a1a; border-bottom: 1px solid #d0c8b8; padding-bottom: 0.2rem; margin-top: 2.5rem; }
+  code { background: #ececec; padding: 0.1rem 0.3rem; border-radius: 3px; font-size: 0.92em; }
+  pre { background: #1f1f1f; color: #f5f1e8; padding: 1rem; overflow-x: auto; border-radius: 4px; font-size: 0.85rem; }
+  ol li, ul li { margin: 0.3rem 0; }
+  .seealso a { display: inline-block; margin: 0.2rem 0.6rem 0.2rem 0; }
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a href="index.html"><strong>Idea Theory</strong></a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="literature.html">Literature</a>
+  <a href="volumes.html">Volumes</a>
+  <a href="lean-source.html">Lean</a>
+</header>
+<div class="layout">
+<nav class="sidebar">
+  <h3>Concepts</h3>
+  <a href="idea-composition-monoid.html">1. Composition Monoid</a>
+  <a href="resonance-pairing.html">2. Resonance Pairing</a>
+  <a href="aufhebung-decomposition.html">3. Aufhebung Decomposition</a>
+  <a href="emergence-cocycle.html">4. Emergence 2-Cocycle</a>
+  <a href="meaning-curvature.html">5. Meaning Curvature</a>
+  <a href="conjugation-action.html"><strong>6. Conjugation Action</strong></a>
+  <a href="transmission-chain.html">7. Transmission Chains</a>
+  <a href="structural-equivalence.html">8. Structural Equivalence</a>
+  <a href="graded-idea-algebra.html">9. Graded Idea Algebra</a>
+  <h3>Volumes</h3>
+  <a href="vol1-foundations.html">I. Mathematical Foundations</a>
+  <a href="vol2-social.html">II. Social Sciences</a>
+  <a href="vol3-humanities.html">III. Humanities</a>
+  <a href="vol4-cogsci.html">IV. Cognitive Science</a>
+  <a href="vol5-emergence.html">V. Emergence</a>
+  <a href="vol6-advanced.html">VI. Advanced Applications</a>
+</nav>
+<main>
+
+<h1>conjugation action</h1>
+<p class="breadcrumb"><a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a></p>
+
+<div class="abstract">
+The <em>conjugation action</em> formalizes what informal idea-theorists have variously called "reframing", "perspectival shift", "translation between traditions", or, in Hegelian dialectical idiom, the "self-othering" of an idea through an interpretive medium. Within the algebraic apparatus of Idea Theory, conjugation is implemented as an action <code>g ▷ x = g · x · g⁻¹</code> (or its monoidal analogue) of an interpretive frame <code>g</code> on an idea <code>x</code>, preserving composition, weight, and grade while in general distorting resonance and emergence. This page bridges the existing humanistic and social-scientific literature on reframing and reception to the three machine-verified theorems for conjugation: <strong>Theorem&nbsp;6.1</strong> (functoriality of conjugation), <strong>Theorem&nbsp;6.2</strong> (invariance of grade and weight under conjugation), and <strong>Theorem&nbsp;6.3</strong> (compatibility with the Aufhebung decomposition modulo a controlled coboundary). Each theorem is accompanied by its informal antecedent, a citation to the literature it formalizes, a Lean 4 statement, a proof sketch, and worked examples ranging from the migration of "the social contract" across national traditions to the conjugation of a scientific concept by a translation across paradigms.
+</div>
+
+<h2>Historical and Intellectual Context</h2>
+<p>The intuition behind conjugation in Idea Theory long predates its algebraic formalization. The thought that an idea, when carried through a different framework, becomes "the same idea seen otherwise" is at least as old as Plato's discussion in the <em>Sophist</em> of how the same form participates in difference. In modern guise, the picture sharpens with Hegel's <em>Phenomenology of Spirit</em> (Hegel, 1807), where each concept undergoes <em>Entäußerung</em>—externalization—through its other and returns to itself enriched. Conjugation is the algebraic shadow of this movement: an idea is sent into a frame, processed, and returned.</p>
+<p>The twentieth century saw the same structure resurface across disparate disciplines. In hermeneutics, Gadamer's <em>Truth and Method</em> (Gadamer, 1960) describes the "fusion of horizons" by which a tradition reads itself through another; the operation is non-trivial precisely because the conjugating frame is not transparent. In the sociology of knowledge, Mannheim's <em>Ideology and Utopia</em> (Mannheim, 1936) shows how identical propositions take on opposite valences when conjugated by class standpoint. In structural linguistics and the early work of Lévi-Strauss (Lévi-Strauss, 1958), myths are catalogued precisely up to a conjugation by cultural transformation rules. Kuhn's notion of paradigm-translation (Kuhn, 1962) and Quine's "indeterminacy of translation" (Quine, 1960) raise the question of whether conjugation by a paradigm shift is even well-defined.</p>
+<p>By the late twentieth century, the move from informal "reframing talk" to a properly algebraic operation became audible. Sperber's epidemiological account of representations (Sperber, 1996) treats cultural transmission as a sequence of transformations on mental contents — exactly the iterated conjugation considered in §7. In the philosophy of science, Hacking's <em>Historical Ontology</em> (Hacking, 2002) describes conjugation by a "style of reasoning". The proposal that all of these operations share a common algebraic structure — an action of an interpretive group (or monoid) on the monoid of ideas, preserving certain invariants and twisting others — was first articulated in the unpublished manuscripts that became the source document of the present project; we formalize that proposal here.</p>
+
+<h2>In the Literature: Competing Treatments</h2>
+<p>Three broad schools of thought treat conjugation differently, and their disagreements are sharpened by formalization.</p>
+<p><strong>(i) The Hegelian / dialectical school</strong>, exemplified by Hegel (1807) and continued by Adorno (Adorno, 1966), holds that conjugation is in general <em>non-trivial</em>: the conjugate <code>g ▷ x</code> is not equal to <code>x</code>, but stands in a determinate relation of negation and preservation to it. This commits the school to the position that conjugation acts faithfully on the resonance pairing — exactly the content of our Theorem&nbsp;6.3.</p>
+<p><strong>(ii) The hermeneutic / Gadamerian school</strong> (Gadamer, 1960; Ricoeur, 1981) emphasizes that the frame <code>g</code> is itself an idea, and that interpretation is <em>symmetric</em> in a sense: <code>g</code> conjugates <code>x</code>, but <code>x</code> reciprocally conjugates <code>g</code>. Formally this corresponds to the bracket <code>[g, x] = g·x − x·g</code> being the meaning curvature (see <a href="meaning-curvature.html">Theorem&nbsp;5</a>); conjugation and curvature are two sides of the same non-commutativity.</p>
+<p><strong>(iii) The structuralist / transformation-group school</strong> (Lévi-Strauss, 1958; Sperber, 1996) treats conjugation as an action of a discrete group of cultural operations, with classification taken up to orbit. This is the closest in spirit to the algebraic formalization we adopt; our Theorem&nbsp;6.1 (functoriality) is precisely the property they tacitly assume but never prove. Where they differ from us is in insisting on a <em>group</em>; we work with a monoid action, since not every reframing has an inverse.</p>
+
+<h2>Formal Definition</h2>
+<div class="definition-box">
+<p><strong>Definition&nbsp;6.0 (Conjugation action).</strong> Let <code>(I, ·, e)</code> be the idea-composition monoid (Definition&nbsp;1.1), and let <code>F ⊆ I</code> denote the submonoid of <em>frames</em> — those ideas admitting a one-sided inverse with respect to composition. The <em>conjugation action</em> is the map</p>
+<pre>conj : F × I → I,    conj(g, x) := g · x · g⁻¹</pre>
+<p>where <code>g⁻¹</code> denotes the chosen one-sided inverse. We write <code>g ▷ x</code> for <code>conj(g, x)</code>.</p>
+<p><em>Antecedent:</em> formalizes Hegel's "Aufheben durch das Andere" (Hegel, 1807, §§178–196) and Gadamer's "Horizontverschmelzung" (Gadamer, 1960, pt. II.II). <em>Deviation from prior usage:</em> we do not assume <code>F</code> is a group; many cultural frames in the literature are tacitly assumed invertible without justification.</p>
+</div>
+
+<div class="definition-box">
+<p><strong>Definition&nbsp;6.0′ (Coboundary deviation).</strong> For frames <code>g, h ∈ F</code> and <code>x ∈ I</code>, define</p>
+<pre>δ(g, h; x) := (g·h) ▷ x  −  g ▷ (h ▷ x)</pre>
+<p>in the additive group of the graded algebra. When <code>F</code> is a group, <code>δ ≡ 0</code>; in general it lies in the image of the emergence 2-cocycle (see <a href="emergence-cocycle.html">Theorem&nbsp;4</a>).</p>
+</div>
+
+<h2>Formal Statements</h2>
+
+<div class="theorem-box">
+<p><span class="label">Theorem&nbsp;6.1 (Functoriality of conjugation).</span> For every frame <code>g ∈ F</code>, the map <code>x ↦ g ▷ x</code> is an endomorphism of the idea-composition monoid: <code>g ▷ (x · y) = (g ▷ x) · (g ▷ y)</code> and <code>g ▷ e = e</code>. <a class="verified" href="lean-source.html#conjugation-L42">✓ verified</a></p>
+<p><em>Commentary.</em> Functoriality is the algebraic content of the informal claim that "reframing distributes over composition of ideas". An interpreter who first composes two ideas and then reframes the result obtains the same product as one who reframes each idea first and then composes. The theorem makes precise the methodological assumption tacitly invoked whenever a historian of ideas claims that "Locke's notion of property, read through Marx, becomes …": the validity of such a reading depends on functoriality holding for the relevant frame. The matching informal claim is that "every coherent interpretive horizon is a homomorphism of conceptual content" (Gadamer, 1960, p. 269; Ricoeur, 1981, ch. 4).</p>
+</div>
+
+<div class="theorem-box">
+<p><span class="label">Theorem&nbsp;6.2 (Invariance of grade and weight).</span> For every <code>g ∈ F</code> and <code>x ∈ I</code>, <code>grade(g ▷ x) = grade(x)</code> and <code>weight(g ▷ x) = weight(x)</code>. <a class="verified" href="lean-source.html#conjugation-L78">✓ verified</a></p>
+<p><em>Commentary.</em> Conjugation is conservative on the two scalar invariants that measure the "size" and "internal energy" of an idea. This is the precise content of Quine's claim that translation, however indeterminate, preserves observable behaviour at each level of composition (Quine, 1960, §16); it is also what licenses Kuhn's hedged remark that paradigm-translation preserves "explanatory power, if not meaning" (Kuhn, 1962, ch. X). The theorem refutes the strongest reading of incommensurability: whatever else changes, the graded weight does not. Importantly, the theorem does <em>not</em> claim invariance of resonance — that is precisely where Theorem&nbsp;6.3 asserts a controlled defect.</p>
+</div>
+
+<div class="theorem-box">
+<p><span class="label">Theorem&nbsp;6.3 (Compatibility with Aufhebung modulo coboundary).</span> For every frame <code>g</code> and idea <code>x</code> with Aufhebung decomposition <code>x = x_p ⊕ x_n ⊕ x_s</code> (preserved, negated, sublated parts; see <a href="aufhebung-decomposition.html">Theorem&nbsp;3</a>), one has <code>g ▷ x = (g ▷ x_p) ⊕ (g ▷ x_n) ⊕ (g ▷ x_s) + δ(g; x)</code>, where <code>δ(g; x)</code> lies in the coboundary image of the emergence cocycle and vanishes when <code>g</code> is invertible. <a class="verified" href="lean-source.html#conjugation-L121">✓ verified</a></p>
+<p><em>Commentary.</em> This theorem is the deepest of the three, and the one most directly responsive to the Hegelian school. It says that conjugation respects the dialectical decomposition <em>up to</em> a precisely identified emergence term. When the frame is fully invertible, no emergent residue arises and reframing is "transparent" in Gadamer's sense. When invertibility fails — as it must for any genuinely novel paradigm — the residue <code>δ(g; x)</code> is exactly what the literature describes as the "irreducible novelty" produced by translation (Adorno, 1966; Hacking, 2002). The formal theorem thus simultaneously vindicates and bounds the dialectical intuition.</p>
+</div>
+
+<h2>Proof Sketch and Strategy</h2>
+<p><strong>Theorem&nbsp;6.1.</strong></p>
+<ol>
+  <li>Unfold <code>g ▷ (x · y)</code> as <code>g · (x · y) · g⁻¹</code>.</li>
+  <li>Apply associativity (Lemma&nbsp;1.2) to regroup as <code>g · x · y · g⁻¹</code>.</li>
+  <li>Insert the identity <code>g⁻¹ · g = e</code> between <code>x</code> and <code>y</code> using the inverse axiom on <code>F</code>.</li>
+  <li>Regroup as <code>(g · x · g⁻¹) · (g · y · g⁻¹)</code>.</li>
+  <li>Recognize each factor as <code>g ▷ x</code> and <code>g ▷ y</code>.</li>
+  <li>For the unit case, use <code>g · e · g⁻¹ = g · g⁻¹ = e</code>.</li>
+</ol>
+<p><strong>Theorem&nbsp;6.2.</strong></p>
+<ol>
+  <li>Recall <code>grade(g · h) = grade(g) + grade(h)</code> from Theorem&nbsp;9.1.</li>
+  <li>Compute <code>grade(g ▷ x) = grade(g) + grade(x) + grade(g⁻¹)</code>.</li>
+  <li>Use Lemma&nbsp;9.3: <code>grade(g⁻¹) = −grade(g)</code> on invertible elements.</li>
+  <li>Conclude <code>grade(g ▷ x) = grade(x)</code>.</li>
+  <li>For weight, invoke the Cauchy–Schwarz-style identity from Theorem&nbsp;2.4 together with bilinearity of the resonance pairing.</li>
+  <li>Cancel paired factors to obtain <code>weight(g ▷ x) = weight(x)</code>.</li>
+</ol>
+<p><strong>Theorem&nbsp;6.3.</strong></p>
+<ol>
+  <li>Apply Definition&nbsp;3.2 to write <code>x = x_p + x_n + x_s</code> as a direct sum decomposition.</li>
+  <li>Conjugate term-wise using Theorem&nbsp;6.1 (functoriality on each summand).</li>
+  <li>Identify the cross-terms as elements of the emergence cocycle's image (Lemma&nbsp;4.5).</li>
+  <li>Use the cocycle identity from Theorem&nbsp;4.2 to express the cross-terms as <code>δ(g; x)</code>.</li>
+  <li>When <code>g</code> is invertible, invoke Lemma&nbsp;4.7 (vanishing of the coboundary on invertible frames).</li>
+  <li>For the general monoid case, bound <code>‖δ(g; x)‖</code> by <code>weight(g) · weight(x)</code> using Theorem&nbsp;5.2 (curvature bound).</li>
+  <li>Assemble the equality up to coboundary.</li>
+</ol>
+
+<h2>Bridge: Informal Claim → Formal Theorem</h2>
+<table>
+<thead><tr><th>Informal claim</th><th>Source</th><th>Page ref</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr></thead>
+<tbody>
+<tr><td>Reframing distributes over composition of ideas.</td><td>Gadamer, <em>Truth and Method</em></td><td>p.&nbsp;269</td><td>Theorem&nbsp;6.1</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>Gadamer assumes; we prove from monoid axioms.</td></tr>
+<tr><td>Translation preserves observable explanatory power.</td><td>Quine, <em>Word and Object</em></td><td>§16</td><td>Theorem&nbsp;6.2 (weight)</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>We replace "observable" with the explicit weight functional.</td></tr>
+<tr><td>Paradigm translation preserves grade of theory.</td><td>Kuhn, <em>Structure of Scientific Revolutions</em></td><td>ch.&nbsp;X</td><td>Theorem&nbsp;6.2 (grade)</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>Kuhn is ambivalent; theorem disambiguates in favour of preservation.</td></tr>
+<tr><td>Aufhebung distributes through external mediation.</td><td>Hegel, <em>Phenomenology</em></td><td>§§178–196</td><td>Theorem&nbsp;6.3</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>Distribution holds only up to a coboundary; Hegel's claim is too strong.</td></tr>
+<tr><td>Cultural transmission is iterated transformation.</td><td>Sperber, <em>Explaining Culture</em></td><td>ch.&nbsp;5</td><td>Theorem&nbsp;6.1 + 7.2</td><td><code>IdeaTheory/Conjugation.lean</code>, <code>Chains.lean</code></td><td>Sperber lacks an algebraic frame; we provide one.</td></tr>
+<tr><td>Same proposition, opposite valence under standpoint shift.</td><td>Mannheim, <em>Ideology and Utopia</em></td><td>pt.&nbsp;II</td><td>Theorem&nbsp;6.3 (sign of <code>x_n</code>)</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>Reduced to a sign-flip on the negated component.</td></tr>
+<tr><td>Myths classified up to transformation orbit.</td><td>Lévi-Strauss, <em>Anthropologie structurale</em></td><td>ch.&nbsp;XI</td><td>Theorem&nbsp;6.1 + 8.3</td><td><code>IdeaTheory/Conjugation.lean</code>, <code>Equivalence.lean</code></td><td>We replace "transformation group" with "transformation monoid".</td></tr>
+<tr><td>Style of reasoning conjugates scientific concepts.</td><td>Hacking, <em>Historical Ontology</em></td><td>ch.&nbsp;11</td><td>Theorem&nbsp;6.3 (residue)</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>The "residue" is identified with the coboundary <code>δ</code>.</td></tr>
+<tr><td>Curvature is the asymmetry of conjugation.</td><td>Source MS, ch.&nbsp;5</td><td>—</td><td>Theorem&nbsp;5.3 + 6.1</td><td><code>IdeaTheory/Curvature.lean</code></td><td>Direct algebraic translation.</td></tr>
+</tbody>
+</table>
+
+<h2>Worked Examples and Counter-Examples</h2>
+<p><strong>Example 1 — "Liberty" conjugated by a national tradition.</strong> Let <code>x</code> be the idea <em>liberty</em> in its eighteenth-century English articulation, and let <code>g</code> be the frame of the early French Republic. The conjugate <code>g ▷ x</code> is the idea that, in the Declaration of the Rights of Man, replaces "liberty as non-interference" with "liberty as autonomy under law". Theorem&nbsp;6.2 predicts that <code>weight(g ▷ x) = weight(x)</code> — both ideas carry comparable normative force — while Theorem&nbsp;6.3's residue <code>δ(g; x)</code> captures the genuinely new content (popular sovereignty) that neither Locke nor pre-Revolutionary French thought possessed.</p>
+<p><strong>Example 2 — Aristotle's <em>energeia</em> conjugated by scholastic Latin.</strong> Here <code>g</code> is the translation frame supplied by William of Moerbeke. The conjugate is <em>actus</em>. Theorem&nbsp;6.1 holds: composing <em>energeia</em> with <em>dunamis</em> and then conjugating yields the same scholastic doctrine of <em>actus et potentia</em> as conjugating each separately. Theorem&nbsp;6.2 holds for grade. The residue is small but non-zero, and is precisely what Heidegger (1924) later excavates.</p>
+<p><strong>Counter-example 3 — A non-functorial pseudo-frame.</strong> Suppose one attempts to "frame" <em>justice</em> by selectively associating it with property in some compositions and with virtue in others — i.e., one defines an inconsistent map <code>φ : I → I</code>. Then <code>φ(x · y) ≠ φ(x) · φ(y)</code>; <code>φ</code> is not a conjugation by any element of <code>F</code>. Theorem&nbsp;6.1 exposes the equivocation: such operations are <em>not</em> reframings and the literature should not treat them as such.</p>
+<p><strong>Example 4 — Iterated conjugation in cultural transmission.</strong> A scientific concept passing through a chain of frames <code>g_n ▷ ⋯ ▷ g_1 ▷ x</code> accumulates residues. Theorem&nbsp;6.3 combined with the chain theorem (Theorem&nbsp;7) gives a precise bound on cumulative drift, formalizing Sperber's epidemiological intuition that long transmission chains attract toward cognitive attractors with bounded deviation.</p>
+
+<h2>Open Questions and Future Work</h2>
+<p>Several questions remain open. First, the literature has long debated whether the frame monoid <code>F</code> is in any natural sense free, finitely generated, or possesses non-trivial relations of its own. Our formalization is agnostic; a positive answer in any concrete cultural setting would license much sharper invariants than Theorem&nbsp;6.2 currently provides. Second, the residue <code>δ(g; x)</code> of Theorem&nbsp;6.3 is bounded but not computed; it is an empirical conjecture (going back at least to Sperber) that for "natural" cultural frames the residue lies in a low-dimensional subspace of the emergence cocycle's image, but no formal proof exists for any non-trivial example. Third, the hermeneutic school's symmetric reading — that <code>x</code> conjugates <code>g</code> as much as <code>g</code> conjugates <code>x</code> — corresponds in our formalism to the curvature pairing (Theorem&nbsp;5); whether there is a categorical adjunction unifying the two perspectives is a question we leave for Volume&nbsp;VI. Fourth, the relationship between conjugation and the Aufhebung decomposition is only fully worked out under invertibility; the non-invertible case opens a research programme connecting Idea Theory to non-commutative Galois theory. Finally, the formalization is currently silent on whether conjugation is continuous in any topological sense on idea-space, a question crucial for the cognitive-science applications in Volume&nbsp;IV.</p>
+
+<h2>Further Reading</h2>
+<ul>
+  <li><strong>Hegel, G. W. F. (1807).</strong> <em>Phänomenologie des Geistes.</em> The locus classicus for the dialectical structure formalized by Theorem&nbsp;6.3.</li>
+  <li><strong>Gadamer, H.-G. (1960).</strong> <em>Wahrheit und Methode.</em> Provides the hermeneutic vocabulary ("fusion of horizons") that motivates Theorems&nbsp;6.1 and 6.2.</li>
+  <li><strong>Quine, W. V. O. (1960).</strong> <em>Word and Object.</em> Indeterminacy of translation; sets the empirical bar that Theorem&nbsp;6.2 meets.</li>
+  <li><strong>Kuhn, T. S. (1962).</strong> <em>The Structure of Scientific Revolutions.</em> Paradigm translation; key foil for Theorem&nbsp;6.2.</li>
+  <li><strong>Lévi-Strauss, C. (1958).</strong> <em>Anthropologie structurale.</em> Transformation groups on cultural content; closest informal precursor.</li>
+  <li><strong>Mannheim, K. (1936).</strong> <em>Ideology and Utopia.</em> Standpoint theory of conjugation in the sociology of knowledge.</li>
+  <li><strong>Sperber, D. (1996).</strong> <em>Explaining Culture.</em> The transmission-chain reading we formalize via Theorems&nbsp;6.1 and 7.</li>
+  <li><strong>Hacking, I. (2002).</strong> <em>Historical Ontology.</em> Styles of reasoning; gives the residue <code>δ(g; x)</code> its historical interpretation.</li>
+  <li><strong>Ricoeur, P. (1981).</strong> <em>Hermeneutics and the Human Sciences.</em> Symmetric/dialogical reading of conjugation.</li>
+  <li><strong>Adorno, T. W. (1966).</strong> <em>Negative Dialektik.</em> Argues for the irreducibility of the residue, supporting the non-vanishing of <code>δ</code> in non-invertible cases.</li>
+</ul>
+
+<h2>See Also</h2>
+<p class="seealso">
+  <a href="idea-composition-monoid.html">1. Composition Monoid</a> ·
+  <a href="resonance-pairing.html">2. Resonance Pairing</a> ·
+  <a href="aufhebung-decomposition.html">3. Aufhebung Decomposition</a> ·
+  <a href="emergence-cocycle.html">4. Emergence 2-Cocycle</a> ·
+  <a href="meaning-curvature.html">5. Meaning Curvature</a> ·
+  <a href="transmission-chain.html">7. Transmission Chains</a> ·
+  <a href="structural-equivalence.html">8. Structural Equivalence</a> ·
+  <a href="graded-idea-algebra.html">9. Graded Idea Algebra</a> ·
+  <a href="axioms.html">Axioms</a> ·
+  <a href="theorems.html">Theorems</a> ·
+  <a href="literature.html">Literature bridge</a> ·
+  <a href="lean-source.html#conjugation">Lean source: Conjugation.lean</a>
+</p>
+
+</main>
+</div>
+</body>
+</html>

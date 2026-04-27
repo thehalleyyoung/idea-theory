@@ -1153,3 +1153,17 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 29 — 2026-04-27 17:42
 **Task:** `website_concept_5` Website page: meaning curvature (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 30 — 2026-04-27 17:45
+**Task:** `website_concept_6` Website page: conjugation action (attempt 1)  
+**Verdict:** ✗ BOUNCE (9 issues)  
+**Issues:**
+  - docs/conjugation-action.html: broken link → lean-source.html
+  - docs/conjugation-action.html: broken link → idea-composition-monoid.html
+  - docs/conjugation-action.html: broken link → vol1-foundations.html
+  - docs/conjugation-action.html: broken link → vol2-social.html
+  - docs/conjugation-action.html: broken link → vol3-humanities.html
+  - docs/conjugation-action.html: broken link → vol4-cogsci.html
+  - docs/conjugation-action.html: broken link → vol5-emergence.html
+  - docs/conjugation-action.html: broken link → vol6-advanced.html
+  - docs/conjugation-action.html: broken link → idea-composition-monoid.html
