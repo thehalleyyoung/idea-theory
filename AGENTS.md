@@ -549,3 +549,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 18 [website_css] Website CSS
 [website_css] Website CSS — bounced: docs/style.css: missing sidebar/nav element
+
+### Iter 19 [website_index] Website index + navigation pages
+[website_index] Website index + navigation pages

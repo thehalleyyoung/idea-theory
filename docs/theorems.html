@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Theorems — Idea Theory</title>
+<style>
+body{font-family:Georgia,serif;max-width:880px;margin:2em auto;padding:0 1em;line-height:1.55;color:#222}
+nav{background:#f4f1ea;padding:.8em 1em;border:1px solid #d8d2c2;border-radius:6px;margin-bottom:1.5em}
+nav a{margin-right:.8em;color:#5a3a1a;text-decoration:none}
+nav a:hover{text-decoration:underline}
+h1,h2,h3{font-family:Palatino,Georgia,serif;color:#3a2a10}
+table{border-collapse:collapse;margin:1em 0;width:100%}
+td,th{border:1px solid #c8c2b2;padding:.4em .7em;vertical-align:top}
+th{background:#efeadd}
+code{background:#f4f1ea;padding:0 .25em;border-radius:3px;font-family:Menlo,Consolas,monospace}
+.box{background:#fbfaf6;border-left:4px solid #8a6a2a;padding:.7em 1em;margin:1em 0}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="volumes.html">Volumes</a>
+  <a href="vol1.html">Vol I</a>
+  <a href="vol2.html">Vol II</a>
+  <a href="vol3.html">Vol III</a>
+  <a href="vol4.html">Vol IV</a>
+  <a href="vol5.html">Vol V</a>
+  <a href="vol6.html">Vol VI</a>
+</nav>
+
+<h1>The Nine Theorems</h1>
+<p>Volume I proves nine purely mathematical theorems. Each is a Lean 4 theorem in the <code>IdeaTheory</code> namespace, with a docstring citing the informal claim and source. Volumes II–VI <em>interpret</em> these theorems but add no further mathematical content to the foundation.</p>
+
+<table>
+<tr><th>#</th><th>Theorem</th><th>Lean file</th><th>Statement (informal)</th></tr>
+<tr><td>T1</td><td>Idea composition monoid</td><td><code>IdeaTheory/CompositionMonoid.lean</code></td><td>Ideas under composition form a monoid; associativity and identity hold.</td></tr>
+<tr><td>T2</td><td>Resonance bilinear pairing</td><td><code>IdeaTheory/ResonancePairing.lean</code></td><td><code>R</code> extends to a bilinear form on the free real module on ideas.</td></tr>
+<tr><td>T3</td><td>Aufhebung decomposition</td><td><code>IdeaTheory/Aufhebung.lean</code></td><td>Every idea factors uniquely (up to <code>~</code>) into preserved, negated, and sublated parts.</td></tr>
+<tr><td>T4</td><td>Emergence 2-cocycle</td><td><code>IdeaTheory/EmergenceCocycle.lean</code></td><td><code>κ</code> satisfies the 2-cocycle identity; coboundaries correspond to "trivial" emergence.</td></tr>
+<tr><td>T5</td><td>Meaning curvature form</td><td><code>IdeaTheory/MeaningCurvature.lean</code></td><td><code>γ = R − Rᵀ</code> is antisymmetric and obstructs commutativity of composition under <code>R</code>.</td></tr>
+<tr><td>T6</td><td>Conjugation action</td><td><code>IdeaTheory/Conjugation.lean</code></td><td>Conjugation by an invertible idea is a weight-preserving automorphism.</td></tr>
+<tr><td>T7</td><td>Transmission chain</td><td><code>IdeaTheory/TransmissionChain.lean</code></td><td>For any chain <code>x₀ → … → xₙ</code>, weight propagates additively up to total curvature defect.</td></tr>
+<tr><td>T8</td><td>Structural equivalence</td><td><code>IdeaTheory/StructuralEquivalence.lean</code></td><td><code>~</code> is a congruence; the quotient <code>I/~</code> inherits all nine structures.</td></tr>
+<tr><td>T9</td><td>Graded idea algebra</td><td><code>IdeaTheory/GradedAlgebra.lean</code></td><td>The free real module on <code>I</code> is an ℕ-graded associative algebra with respect to <code>g</code>, and <code>R</code> respects the grading.</td></tr>
+</table>
+
+<h2>Literature bridge (summary)</h2>
+<table>
+<tr><th>Theorem</th><th>Informal antecedent</th><th>Source</th></tr>
+<tr><td>T1</td><td>"Ideas combine and the order of combination matters."</td><td>Sperber (1996)</td></tr>
+<tr><td>T2</td><td>"Some ideas resonate with others."</td><td>Lotman (1990)</td></tr>
+<tr><td>T3</td><td>Aufhebung: preserve, negate, sublate.</td><td>Hegel (1812)</td></tr>
+<tr><td>T4</td><td>"The whole is more than the sum of its parts."</td><td>Bedau (1997)</td></tr>
+<tr><td>T5</td><td>"Meaning is path-dependent."</td><td>Ricoeur (1976)</td></tr>
+<tr><td>T6</td><td>"Translation preserves form, not surface."</td><td>Jakobson (1959)</td></tr>
+<tr><td>T7</td><td>Cultural transmission as chain.</td><td>Boyd &amp; Richerson (1985)</td></tr>
+<tr><td>T8</td><td>Structural equivalence of cultural items.</td><td>Lévi-Strauss (1958)</td></tr>
+<tr><td>T9</td><td>Hierarchical/levelled organisation of mind.</td><td>Fodor (1983)</td></tr>
+</table>
+
+<div class="box">Each theorem's Lean docstring carries the precise citation and the informal-to-formal translation.</div>
+</body>
+</html>

@@ -247,9 +247,9 @@
       "deps": [
         "website_css"
       ],
-      "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "passes": true,
+      "attempts": 1,
+      "reviewer_notes": "wrote: docs/index.html, docs/axioms.html, docs/theorems.html, docs/volumes.html, docs/vol1.html, docs/vol2.html, docs/vol3.html, docs/vol4.html, docs/vol5.html, docs/vol6.html"
     },
     {
       "id": "website_concept_1",

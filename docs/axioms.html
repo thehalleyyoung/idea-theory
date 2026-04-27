@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Axioms — Idea Theory</title>
+<style>
+body{font-family:Georgia,serif;max-width:880px;margin:2em auto;padding:0 1em;line-height:1.55;color:#222}
+nav{background:#f4f1ea;padding:.8em 1em;border:1px solid #d8d2c2;border-radius:6px;margin-bottom:1.5em}
+nav a{margin-right:.8em;color:#5a3a1a;text-decoration:none}
+nav a:hover{text-decoration:underline}
+h1,h2,h3{font-family:Palatino,Georgia,serif;color:#3a2a10}
+table{border-collapse:collapse;margin:1em 0;width:100%}
+td,th{border:1px solid #c8c2b2;padding:.4em .7em;vertical-align:top}
+th{background:#efeadd}
+code,pre{background:#f4f1ea;padding:.1em .3em;border-radius:3px;font-family:Menlo,Consolas,monospace}
+pre{padding:.7em 1em;overflow-x:auto}
+.box{background:#fbfaf6;border-left:4px solid #8a6a2a;padding:.7em 1em;margin:1em 0}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="volumes.html">Volumes</a>
+  <a href="vol1.html">Vol I</a>
+  <a href="vol2.html">Vol II</a>
+  <a href="vol3.html">Vol III</a>
+  <a href="vol4.html">Vol IV</a>
+  <a href="vol5.html">Vol V</a>
+  <a href="vol6.html">Vol VI</a>
+</nav>
+
+<h1>Axioms of Idea Theory</h1>
+<p>Idea Theory is built on a small, purely algebraic signature. The interpretive content of Volumes II–VI is added <em>on top</em> of these axioms; the axioms themselves make no extra-mathematical commitments.</p>
+
+<h2>Signature</h2>
+<pre>
+namespace IdeaTheory
+
+variable (I : Type*)               -- the carrier of ideas
+variable [Monoid I]                -- composition  ∘ : I × I → I
+variable (R : I → I → ℝ)           -- resonance pairing
+variable (w : I → ℝ)               -- weight / norm
+variable (κ : I → I → I → ℝ)       -- emergence 2-cocycle
+variable (γ : I → I → ℝ)           -- meaning curvature
+variable (g : I → ℕ)               -- grading
+</pre>
+
+<h2>Core axioms</h2>
+<table>
+<tr><th>Name</th><th>Statement</th><th>Used in Theorem</th></tr>
+<tr><td>A1 Composition</td><td><code>(I, ∘, 1)</code> is a monoid.</td><td>T1</td></tr>
+<tr><td>A2 Bilinearity</td><td><code>R</code> is bilinear over the free real module on <code>I</code>.</td><td>T2</td></tr>
+<tr><td>A3 Aufhebung split</td><td>Every <code>x ∈ I</code> admits a decomposition <code>x = π(x) ∘ ν(x) ∘ σ(x)</code> (preserved, negated, sublated parts).</td><td>T3</td></tr>
+<tr><td>A4 Cocycle condition</td><td><code>κ(a,b,c) − κ(a∘b,c,d) + κ(a,b∘c,d) − κ(a,b,c∘d) = 0</code>.</td><td>T4</td></tr>
+<tr><td>A5 Curvature</td><td><code>γ(a,b) = R(a,b) − R(b,a)</code> is antisymmetric.</td><td>T5</td></tr>
+<tr><td>A6 Conjugation</td><td>For each <code>g ∈ I</code>, <code>x ↦ g ∘ x ∘ g⁻¹</code> (when defined) is a weight-preserving automorphism on its image.</td><td>T6</td></tr>
+<tr><td>A7 Chains</td><td>Finite sequences <code>(xᵢ)</code> with linking morphisms form transmission chains; weight propagates additively up to a curvature defect.</td><td>T7</td></tr>
+<tr><td>A8 Equivalence</td><td>Structural equivalence <code>~</code> is the smallest congruence containing conjugation and trivial-cocycle moves.</td><td>T8</td></tr>
+<tr><td>A9 Grading</td><td><code>g(x ∘ y) = g(x) + g(y)</code>; <code>R</code> respects the grading.</td><td>T9</td></tr>
+</table>
+
+<h2>Literature bridge</h2>
+<p>The axioms are deliberately minimal so that informal claims from the literature translate cleanly. See each application volume for the bridge tables; key sources include Hegel (<em>Wissenschaft der Logik</em>) for Aufhebung, Lotman for the semiosphere, Sperber for the epidemiology of representations, Fodor &amp; Pylyshyn for compositionality, and Bedau / Humphreys for emergence.</p>
+
+<div class="box">All axioms are formalised in <code>IdeaTheory/Foundations.lean</code> and referenced by the nine theorem files.</div>
+</body>
+</html>
