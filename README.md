@@ -1,6 +1,6 @@
             # IdeaTheory
 
-            > Idea Theory develops a rigorous algebraic framework in which ideas compose, resonate, and decompose via an Aufhebung operation, with emergence captured by a 2-cocycle and meaning by a curvature form. The first volume establishes the basic mathematics (monoids, bilinear pairings, graded algebras, cocycles, and equivalence relations), and the remaining five volumes interpret this machinery within the social sciences, humanities, philosophy of mind and cognitive science, the problem of emergence, and further advanced applications.
+            > Idea Theory develops a rigorous algebraic framework in which 'ideas' are elements of a graded monoid equipped with a bilinear resonance pairing, an Aufhebung decomposition, and an emergence 2-cocycle. The first volume establishes nine purely mathematical theorems (composition, pairing, decomposition, cocycle, curvature, conjugation, chains, equivalence, grading), while the remaining five volumes interpret this apparatus across the social sciences, humanities, philosophy of mind and cognitive science, the problem of emergence, and further advanced applications.
 
 > Foundations seeded from existing mathematical source material.
 
