@@ -728,3 +728,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 09 — 2026-04-27 13:32
 **Task:** `theorems_7` Lean theorems: transmission chains (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 10 — 2026-04-27 13:34
+**Task:** `theorems_8` Lean theorems: structural equivalence (attempt 1)  
+**Verdict:** ✓ PASS  

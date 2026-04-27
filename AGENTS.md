@@ -390,3 +390,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 09 [lean_theorems] Lean theorems: transmission chains
 [lean_theorems] Lean theorems: transmission chains
+
+### Iter 10 [lean_theorems] Lean theorems: structural equivalence
+[lean_theorems] Lean theorems: structural equivalence
