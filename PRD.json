@@ -262,9 +262,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/idea-monoid.html: broken link \u2192 emergence-cocycle.html; docs/idea-monoid.html: broken link \u2192 conjugation.html; docs/idea-monoid.html: broken link \u2192 transmission-chains.html; docs/idea-monoid.html: broken link \u2192 graded-algebra.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/idea-monoid.html"
     },
     {
       "id": "website_concept_2",

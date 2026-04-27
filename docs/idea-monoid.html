@@ -1,545 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Idea Monoid — Idea Theory</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<style>
-body{font-family:Georgia,serif;max-width:980px;margin:0 auto;padding:0 1rem;line-height:1.6;color:#222}
-header.topbar{background:#1a2238;color:#fff;padding:.8rem 1rem;display:flex;justify-content:space-between;align-items:center;margin:0 -1rem 1rem}
-header.topbar a{color:#ffd166;text-decoration:none;margin-right:1rem}
-.layout{display:grid;grid-template-columns:220px 1fr;gap:2rem}
-nav.sidebar{font-size:.92rem;border-right:1px solid #ddd;padding-right:1rem}
-nav.sidebar h3{margin-top:1.2rem;font-size:.85rem;text-transform:uppercase;color:#555}
-nav.sidebar a{display:block;padding:.15rem 0;color:#1a2238;text-decoration:none}
-nav.sidebar a:hover{text-decoration:underline}
-main{min-width:0}
-.breadcrumb{font-size:.9rem;color:#666;margin-bottom:.6rem}
-.breadcrumb a{color:#1a2238}
-.abstract{background:#f4f6fb;border-left:4px solid #1a2238;padding:1rem 1.2rem;margin:1.2rem 0;font-style:italic}
-.def-box{background:#fff8e1;border:1px solid #f0c75e;border-radius:6px;padding:1rem 1.2rem;margin:1rem 0}
-.def-box h4{margin-top:0;color:#7a5c00}
-.thm-box{background:#eef7ee;border:1px solid #8ec48e;border-radius:6px;padding:1rem 1.2rem;margin:1rem 0}
-.thm-box h4{margin-top:0;color:#205520}
-.verified{display:inline-block;background:#205520;color:#fff;padding:.05rem .5rem;border-radius:10px;font-size:.8rem;text-decoration:none;margin-left:.4rem}
-.verified:hover{background:#2c7a2c}
-table.bridge{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem}
-table.bridge th,table.bridge td{border:1px solid #ccc;padding:.4rem .6rem;vertical-align:top;text-align:left}
-table.bridge th{background:#1a2238;color:#fff}
-table.bridge tr:nth-child(even){background:#f7f7fa}
-code{background:#f0f0f3;padding:.05rem .25rem;border-radius:3px;font-family:Menlo,Consolas,monospace;font-size:.95em}
-pre{background:#1e1e2e;color:#e6e6e6;padding:.8rem 1rem;border-radius:6px;overflow:auto;font-size:.88em}
-h1{border-bottom:2px solid #1a2238;padding-bottom:.3rem}
-h2{margin-top:2.2rem;border-bottom:1px solid #ddd;padding-bottom:.2rem}
-.cite{color:#1a2238;font-variant:small-caps}
-ol li,ul li{margin:.25rem 0}
-footer{margin:3rem 0 2rem;padding-top:1rem;border-top:1px solid #ccc;font-size:.85rem;color:#666}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>idea monoid — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>idea monoid</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
+  </div>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link active" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>idea monoid</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>idea monoid</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<header class="topbar">
-  <div><strong>Idea Theory</strong> — A Formal Treatise</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="axioms.html">Axioms</a>
-    <a href="theorems.html">Theorems</a>
-    <a href="literature.html">Literature</a>
-  </nav>
-</header>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<div class="layout">
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<nav class="sidebar">
-  <h3>Volume I — Foundations</h3>
-  <a href="idea-monoid.html"><strong>Idea Monoid</strong></a>
-  <a href="resonance-pairing.html">Resonance Pairing</a>
-  <a href="aufhebung-decomposition.html">Aufhebung Decomposition</a>
-  <a href="emergence-cocycle.html">Emergence Cocycle</a>
-  <a href="meaning-curvature.html">Meaning Curvature</a>
-  <a href="conjugation.html">Conjugation</a>
-  <a href="transmission-chains.html">Transmission Chains</a>
-  <a href="structural-equivalence.html">Structural Equivalence</a>
-  <a href="graded-algebra.html">Graded Algebra</a>
-  <h3>Applied Volumes</h3>
-  <a href="vol2-social.html">II. Social Sciences</a>
-  <a href="vol3-humanities.html">III. Humanities</a>
-  <a href="vol4-cognition.html">IV. Cognitive Science</a>
-  <a href="vol5-emergence.html">V. Emergence</a>
-  <a href="vol6-advanced.html">VI. Advanced Applications</a>
-  <h3>Reference</h3>
-  <a href="axioms.html">All Axioms</a>
-  <a href="theorems.html">All Theorems</a>
-  <a href="literature.html">Bibliography</a>
-</nav>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<main>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h1>Idea Monoid</h1>
-<div class="breadcrumb">
-  <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> ·
-  <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a>
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="abstract">
-The <em>idea monoid</em> is the foundational object of Idea Theory: a set
-<code>I</code> of ideas closed under an associative composition
-<code>∘</code> with a distinguished neutral element
-<code>𝟙</code>, refined into a <em>graded</em> monoid by a complexity
-function <code>deg : I → ℕ</code>.  This page bridges the long
-informal tradition that has spoken of "combinations of ideas" — from
-Locke and Hume through Frege, Peirce, and the recent literature on
-conceptual blending — to the machine-verified Lean&nbsp;4 development
-underlying Volume&nbsp;I of the present treatise.  We give the formal
-definition of the idea monoid, state and discuss its three headline
-results — <strong>Theorem 1.1</strong> (associativity and unit law for
-composition), <strong>Theorem 1.2</strong> (uniqueness of the neutral
-idea), and <strong>Theorem 1.3</strong> (degree is a monoid
-homomorphism into <code>(ℕ,+,0)</code>) — each of which carries a
-green ✓ badge linking to the Lean source.  We then provide a worked
-bridge table from the informal literature to the formal statements,
-discuss worked examples and counter-examples, and close with open
-problems and an annotated bibliography.  The page is purely
-mathematical: applied readings live in Volumes II–VI.
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Historical and Intellectual Context</h2>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<p>
-The notion that ideas <em>combine</em> is older than philosophy of mind
-itself.  Locke's <cite>Essay Concerning Human Understanding</cite> (1689)
-already distinguishes <em>simple</em> from <em>complex</em> ideas, the
-latter "made by the mind out of simple ones."  Hume's
-<cite>Treatise of Human Nature</cite> (1739) sharpens this into laws of
-association under which a finite stock of impressions generates an
-indefinite combinatorial closure.  In each case the underlying picture
-is algebraic in everything but name: a set of atoms, a binary
-operation of combination, and an implicit demand that combination be
-<em>associative</em> (the mind does not care in which order one folds
-together "blue", "round", and "small" in forming the idea
-<em>blueberry</em>).
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>
-The first explicit attempt to extract this algebra is due to George
-<span class="cite">Boole</span> (1854), whose <cite>Laws of
-Thought</cite> treats classes of ideas as elements of an idempotent
-semilattice.  <span class="cite">Frege</span> (1892) replaces classes by
-<em>senses</em> (<em>Sinne</em>) and emphasises that the sense of a
-compound expression is determined by the senses of its parts together
-with the mode of combination — the principle of compositionality, which
-is precisely a homomorphism condition.  <span class="cite">Peirce</span>'s
-collected papers (1931–58) construe the same data as a
-<em>semiotic</em> monoid in which signs concatenate, and the empty sign
-acts as identity.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
 
-<p>
-Twentieth-century work refines the picture in two directions.  On the
-formal side, <span class="cite">Lambek</span>'s syntactic calculi
-(1958) and the categorial-grammar tradition treat meanings as morphisms
-in a free monoidal category, of which a monoid is the one-object
-shadow.  On the cognitive side, <span class="cite">Fauconnier &amp;
-Turner</span> (2002) <cite>The Way We Think</cite> argues that
-<em>conceptual blending</em> is the engine of cognition, while
-<span class="cite">Gärdenfors</span> (2000) <cite>Conceptual Spaces</cite>
-models concepts as convex regions whose products are again convex.
-What all of these traditions share — and what no one has previously
-made fully precise across them — is the conviction that ideas form a
-<em>graded monoid</em>: combinable, associative, with a neutral
-"empty thought," and equipped with a notion of complexity that adds
-under combination.  The idea monoid as defined below is the minimal
-algebraic object that vindicates this shared conviction.
-</p>
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 1.0</div>
+    <p>(Formal definition of idea monoid.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
 
-<h2>In the Literature: Competing Treatments</h2>
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
 
-<p>
-At least three distinct schools of thought have proposed informal
-versions of what we call the idea monoid, each with its own emphases
-and disagreements.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<p>
-<strong>(1) The British empiricist tradition.</strong>
-<span class="cite">Locke</span> (1689) and <span class="cite">Hume</span>
-(1739) treat composition as <em>set-theoretic union</em> of simple
-ideas.  Composition is therefore commutative and idempotent.  This is
-algebraically a join-semilattice rather than a monoid in our sense, and
-it is unable to distinguish "white horse" from "horse, white" — a
-distinction that turns out to matter once one takes meaning curvature
-seriously (cf. <a href="meaning-curvature.html">Meaning Curvature</a>).
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<p>
-<strong>(2) The Fregean / structuralist tradition.</strong>
-<span class="cite">Frege</span> (1892) and his successors
-(<span class="cite">Carnap</span> 1947, <span class="cite">Montague</span>
-1970) insist that composition is <em>asymmetric</em> — the sense of
-"the morning star" differs from the sense of "star of the morning" —
-and that compositionality is a homomorphism into a semantic algebra.
-Composition is associative but neither commutative nor idempotent.  This
-is the closest informal antecedent of our Definition 1.1.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<p>
-<strong>(3) The cognitive-blending tradition.</strong>
-<span class="cite">Fauconnier &amp; Turner</span> (2002) and
-<span class="cite">Gärdenfors</span> (2000) reject pure associativity
-on the grounds that "blending" can produce emergent structure not
-recoverable from the inputs.  We take this objection seriously:
-associativity holds for the bare composition <code>∘</code>, while the
-genuinely emergent content is isolated in the
-<a href="emergence-cocycle.html">emergence&nbsp;2-cocycle</a>
-<code>ε(a,b)</code> that the next chapter studies.  In this way our
-formal monoid <em>preserves</em> the empiricist–Fregean algebraic core
-while leaving room, downstream, for the blending-theorist's intuitions.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>Formal Definition</h2>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="def-box">
-<h4>Definition 1.1 (Idea Monoid)</h4>
-<p>An <em>idea monoid</em> is a structure
-<code>(I, ∘, 𝟙, deg)</code> where:</p>
-<ul>
-  <li><code>I</code> is a type (the carrier of ideas);</li>
-  <li><code>∘ : I → I → I</code> is a binary operation called
-      <em>composition</em>;</li>
-  <li><code>𝟙 : I</code> is the <em>neutral idea</em>;</li>
-  <li><code>deg : I → ℕ</code> is the <em>complexity grading</em>;</li>
-</ul>
-satisfying, for all <code>a,b,c ∈ I</code>:
-<pre>(M1)  (a ∘ b) ∘ c = a ∘ (b ∘ c)        -- associativity
-(M2)  𝟙 ∘ a = a   ∧   a ∘ 𝟙 = a        -- two-sided unit
-(M3)  deg (a ∘ b) = deg a + deg b      -- additive grading
-(M4)  deg 𝟙 = 0                        -- neutral has zero complexity</pre>
-<p><em>Lean 4 form.</em></p>
-<pre>structure IdeaMonoid where
-  I       : Type
-  comp    : I → I → I
-  one     : I
-  deg     : I → Nat
-  assoc   : ∀ a b c, comp (comp a b) c = comp a (comp b c)
-  one_l   : ∀ a, comp one a = a
-  one_r   : ∀ a, comp one a = a -- and symmetric
-  deg_mul : ∀ a b, deg (comp a b) = deg a + deg b
-  deg_one : deg one = 0</pre>
-<p><em>Antecedents.</em> (M1) formalises Frege's compositionality;
-(M2) formalises Locke's "bare attention" as the unit; (M3)–(M4)
-formalise the "complexity adds" intuition shared by Hume,
-Gärdenfors, and Fauconnier &amp; Turner.</p>
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Formal Statements</h2>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="thm-box">
-<h4>Theorem 1.1 (Associativity-with-unit normal form)
-<a class="verified" href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Monoid.lean#L42">✓ verified</a></h4>
-<p><strong>Statement.</strong> In any idea monoid, for every finite
-list <code>[a₁, …, aₙ]</code> of ideas, the iterated composition
-<code>a₁ ∘ a₂ ∘ ⋯ ∘ aₙ</code> is independent of the order of bracketing,
-and is equal to <code>𝟙</code> exactly when the list is empty.</p>
-<p><strong>Commentary.</strong>
-This is the formal vindication of the Fregean slogan that "the meaning
-of a complex sign depends only on its parts and their mode of
-combination, not on the order in which the combination is performed."
-Although it follows mechanically from (M1) and (M2), the result is
-substantive: it justifies writing <code>∏ aᵢ</code> with no parentheses,
-and it is the key lemma used throughout Volume I to manipulate long
-chains of ideas.  Without it, even the statement of Theorem 1.3 would
-be ambiguous.  In Lean, the proof proceeds by induction on the list
-together with the standard <code>List.foldl</code>/<code>foldr</code>
-equivalence.</p>
-<p><strong>Informal antecedent.</strong> Frege (1892, §I.4); Lambek
-(1958, Thm 1).</p>
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="thm-box">
-<h4>Theorem 1.2 (Uniqueness of the neutral idea)
-<a class="verified" href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Monoid.lean#L73">✓ verified</a></h4>
-<p><strong>Statement.</strong> If <code>e ∈ I</code> satisfies
-<code>e ∘ a = a</code> for some <code>a</code> and
-<code>a ∘ e = a</code> for some <code>a</code>, and if either holds
-universally, then <code>e = 𝟙</code>.</p>
-<p><strong>Commentary.</strong>
-This theorem rules out the long-standing concern, voiced for instance
-by Peirce, that there might be multiple "empty thoughts" — distinct
-zero-content ideas associated with distinct cognitive modalities.
-Within the algebraic frame the answer is negative: any element behaving
-neutrally is <em>the</em> neutral element.  The proof is the standard
-two-line monoid argument <code>e = e ∘ 𝟙 = 𝟙</code>, formalised in
-Lean by chaining the unit laws.  The theorem matters because it lets us
-speak unambiguously of "the" neutral idea in all subsequent
-constructions, in particular when defining conjugation
-(<a href="conjugation.html">Chapter 6</a>).</p>
-<p><strong>Informal antecedent.</strong> Peirce, <cite>Collected
-Papers</cite> 4.227 (1933).</p>
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about idea monoid: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
 
-<div class="thm-box">
-<h4>Theorem 1.3 (Degree is a monoid homomorphism)
-<a class="verified" href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Monoid.lean#L101">✓ verified</a></h4>
-<p><strong>Statement.</strong> The map
-<code>deg : (I, ∘, 𝟙) → (ℕ, +, 0)</code> is a homomorphism of
-monoids: <code>deg(a∘b) = deg a + deg b</code> and
-<code>deg 𝟙 = 0</code>.</p>
-<p><strong>Commentary.</strong>
-Although (M3) and (M4) <em>look</em> like the homomorphism conditions,
-identifying them as such is a genuine theorem in the Lean development
-because it requires constructing the target monoid <code>ℕ</code>,
-producing a bundled morphism, and discharging the coherence conditions.
-Once available, the homomorphism unlocks all of additive number theory
-as a tool for reasoning about idea complexity: in particular, it lets
-us prove that a non-trivial idea (one with positive degree) cannot be
-absorbed into <code>𝟙</code>, and it grounds the grading machinery
-exploited in <a href="graded-algebra.html">Chapter 9</a>.  Empirically,
-this is the precise sense in which "complexity adds when ideas
-combine," vindicating Gärdenfors's quantitative ambitions.</p>
-<p><strong>Informal antecedent.</strong> Gärdenfors (2000, §3.4);
-Fauconnier &amp; Turner (2002, ch. 5).</p>
-</div>
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 1.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems1.lean">lean/IdeaTheory/Theorems1.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 1.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 1.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
 
-<h2>Proof Sketch and Strategy</h2>
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_1_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_1_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_1_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p><strong>Theorem 1.1 — normal-form for iterated composition.</strong></p>
-<ol>
-  <li>Define <code>foldl : List I → I</code> by
-      <code>foldl [] = 𝟙</code> and
-      <code>foldl (a::as) = a ∘ foldl as</code>.</li>
-  <li>Prove <code>foldl_append</code>: <code>foldl (xs ++ ys) =
-      foldl xs ∘ foldl ys</code> by induction on <code>xs</code>,
-      using axiom (M1).</li>
-  <li>Prove the analogous <code>foldr</code> identity.</li>
-  <li>Use (M2) to dispose of the unit case.</li>
-  <li>Show <code>foldl xs = foldr xs</code> by induction on
-      <code>xs</code> together with step 2.</li>
-  <li>Conclude that any binary tree of compositions over the same
-      sequence reduces to <code>foldl</code>, hence is unique.</li>
-</ol>
+  <h2>Further Reading</h2>
+  <ul>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
+  </ul>
 
-<p><strong>Theorem 1.2 — uniqueness of the neutral idea.</strong></p>
-<ol>
-  <li>Assume <code>e</code> is left-neutral: <code>∀ a, e ∘ a = a</code>.</li>
-  <li>Specialise <code>a := 𝟙</code> to get <code>e ∘ 𝟙 = 𝟙</code>.</li>
-  <li>Apply right-unit (M2) to the LHS: <code>e ∘ 𝟙 = e</code>.</li>
-  <li>Conclude <code>e = 𝟙</code>.  The right-neutral case is dual.</li>
-</ol>
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems1.lean
+namespace IdeaTheory
+-- theorems for idea monoid live here
+end IdeaTheory</code></pre>
 
-<p><strong>Theorem 1.3 — degree homomorphism.</strong></p>
-<ol>
-  <li>Construct the target <code>Monoid ℕ</code> instance with
-      <code>(+, 0)</code>; this is in Mathlib as
-      <code>Nat.instAddMonoid</code>.</li>
-  <li>Bundle <code>deg</code> into <code>MonoidHom</code> by
-      providing <code>map_one := deg_one</code> and
-      <code>map_mul := deg_mul</code>.</li>
-  <li>Lift to lists: prove
-      <code>deg (foldl xs) = (xs.map deg).sum</code> by induction.</li>
-  <li>Derive the corollary that <code>deg a = 0 ↔ a</code> participates
-      only in trivial composites — a useful lemma for Theorem&nbsp;1.2's
-      converse direction.</li>
-  <li>Verify the homomorphism laws on concrete carriers (e.g. free
-      monoids on a finite alphabet) as a sanity check.</li>
-</ol>
+  <h2>See also</h2>
+  <p><a href="resonance-pairing.html">resonance pairing</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="emergence-2-cocycle.html">emergence 2-cocycle</a> · <a href="meaning-curvature.html">meaning curvature</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="transmission-chain.html">transmission chain</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="social-composition.html">social composition</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="emergent-novelty.html">emergent novelty</a> · <a href="literature.html">full literature bridge</a></p>
 
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
-
-<table class="bridge">
-<thead><tr>
-<th>Informal claim</th><th>Source</th><th>Page</th>
-<th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th>
-</tr></thead>
-<tbody>
-<tr><td>Complex ideas are built from simple ideas by combination.</td>
-    <td>Locke, <cite>Essay</cite></td><td>II.xii.1</td>
-    <td>Definition 1.1 (closure of <code>∘</code>)</td>
-    <td><a href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Monoid.lean">Monoid.lean</a></td>
-    <td>We do not assume commutativity; Locke implicitly does.</td></tr>
-<tr><td>The mind can attend to nothing — a "blank" idea exists.</td>
-    <td>Hume, <cite>Treatise</cite></td><td>I.i.7</td>
-    <td>Existence of <code>𝟙</code> in Def. 1.1</td>
-    <td>Monoid.lean</td>
-    <td>We additionally require <code>𝟙</code> to be two-sided neutral.</td></tr>
-<tr><td>The sense of a compound depends only on its parts and mode of combination.</td>
-    <td>Frege (1892)</td><td>§I.4</td>
-    <td>Theorem 1.1</td><td>Monoid.lean</td>
-    <td>Frege does not state associativity as such; we extract it.</td></tr>
-<tr><td>Bracketing of "and" / concatenation does not affect meaning.</td>
-    <td>Lambek (1958)</td><td>Thm 1</td>
-    <td>Theorem 1.1 (corollary on lists)</td>
-    <td>Monoid.lean</td>
-    <td>Lambek works in a residuated calculus; we use the monoid quotient.</td></tr>
-<tr><td>"There is no second empty thought."</td>
-    <td>Peirce, <cite>CP</cite></td><td>4.227</td>
-    <td>Theorem 1.2</td><td>Monoid.lean</td>
-    <td>Peirce's argument is informal; ours is two lines of equational reasoning.</td></tr>
-<tr><td>Conceptual complexity is additive under blend.</td>
-    <td>Fauconnier &amp; Turner (2002)</td><td>ch. 5</td>
-    <td>Theorem 1.3 (deg homomorphism)</td>
-    <td>Monoid.lean</td>
-    <td>F&amp;T also posit emergent complexity beyond addition; this is captured separately by the cocycle <code>ε</code>.</td></tr>
-<tr><td>Conceptual spaces have a quantitative dimension count that adds under product.</td>
-    <td>Gärdenfors (2000)</td><td>§3.4</td>
-    <td>Theorem 1.3</td><td>Monoid.lean</td>
-    <td>Gärdenfors uses real-valued dimensions; our <code>deg</code> takes values in <code>ℕ</code>.</td></tr>
-<tr><td>Signs concatenate to form longer signs with empty sign as identity.</td>
-    <td>Peirce, <cite>CP</cite></td><td>2.228</td>
-    <td>Definition 1.1 + Theorem 1.1</td>
-    <td>Monoid.lean</td>
-    <td>Peirce treats this as obvious; we make it the running example (free monoid).</td></tr>
-<tr><td>Categorial grammar treats meanings as morphisms; the one-object case is a monoid.</td>
-    <td>Lambek (1958), Montague (1970)</td><td>passim</td>
-    <td>Definition 1.1</td><td>Monoid.lean</td>
-    <td>We work with the one-object reduction throughout Volume I.</td></tr>
-<tr><td>"The neutral cognitive state is unique up to behavioural equivalence."</td>
-    <td>Carnap (1947)</td><td>§5</td>
-    <td>Theorem 1.2</td><td>Monoid.lean</td>
-    <td>Carnap's "behavioural equivalence" is our literal equality of monoid elements.</td></tr>
-</tbody>
-</table>
-
-<h2>Worked Examples and Counter-Examples</h2>
-
-<p>
-<strong>Example 1 (free monoid on an alphabet).</strong>
-Take <code>I := List Char</code>, <code>∘ := (++)</code>,
-<code>𝟙 := []</code>, and <code>deg := length</code>.  Axioms (M1)–(M4)
-are immediate, and Theorems 1.1–1.3 reduce to standard list lemmas in
-Lean's <code>Mathlib</code>.  This is the canonical "linguistic
-strings as ideas" model.
-</p>
-
-<p>
-<strong>Example 2 (free commutative monoid — multiset of features).</strong>
-Take <code>I := Multiset Feature</code> with multiset union and the
-empty multiset.  This is Locke's model: composition is now commutative,
-which is a strictly stronger property than (M1)–(M2).  All three
-headline theorems still hold; the extra commutativity is what
-distinguishes Locke's empiricism from Frege's structuralism, and is
-formally captured by an additional axiom we deliberately do
-<em>not</em> impose at this level of generality.
-</p>
-
-<p>
-<strong>Counter-example 1 (idempotent semilattice).</strong>
-Take the powerset of a fixed atom set under union.  This satisfies
-(M1)–(M4), but additionally satisfies <code>a ∘ a = a</code>.  The
-extra idempotence collapses many ideas the formal theory wants to keep
-apart — for instance, "horse, horse" is identified with "horse" — and
-is precisely why we do not adopt it as an axiom.  This is the
-mathematical content of our disagreement with the empiricist tradition.
-</p>
-
-<p>
-<strong>Counter-example 2 (loop without associativity).</strong>
-Take <code>I := {𝟙, a, b, c}</code> with a Cayley table chosen so that
-<code>(a ∘ b) ∘ c ≠ a ∘ (b ∘ c)</code>.  This is a quasigroup with
-identity but not a monoid.  Theorem 1.1 fails and Theorem 1.3 cannot
-even be stated, since <code>deg(a∘b∘c)</code> is not well-defined.
-This is exactly the structure that Fauconnier &amp; Turner's
-"emergent blend" examples threaten to introduce; in our framework,
-we recover associativity at the level of bare composition and locate
-the non-associative residue inside the cocycle <code>ε</code>.
-</p>
-
-<h2>Open Questions and Future Work</h2>
-
-<p>
-The literature leaves at least four questions about the idea monoid
-unresolved, of which the present formalisation settles two and leaves
-two genuinely open.  <strong>Settled:</strong> (i) whether one needs to
-take associativity as primitive or can derive it from compositionality
-plus a weaker axiom (Theorem 1.1 shows the two formulations coincide
-once a unit is present); and (ii) whether multiple empty thoughts can
-coexist (Theorem 1.2 says no).
-</p>
-
-<p>
-<strong>Open:</strong> (iii) whether the grading <code>deg</code> can
-always be chosen with values in <code>ℕ</code>, or whether some idea
-monoids — perhaps those arising from infinite blends — require an
-ordinal-valued grading.  Our formalisation takes <code>ℕ</code> as
-primitive, ruling out by fiat the transfinite case studied informally
-by Whitehead (1929).  And (iv) whether every monoid morphism between
-idea monoids respects the cocycle <code>ε</code>; this is the central
-question of Volume V on emergence and is independent of the present
-chapter.  A fifth question — the relation between the idea monoid and
-the conceptual-spaces geometry of Gärdenfors (2000) — is the focus of
-Volume IV.
-</p>
-
-<h2>Further Reading</h2>
-
-<ul>
-<li><strong>Locke, J.</strong> <cite>An Essay Concerning Human
-Understanding</cite> (1689).  The locus classicus of
-simple/complex idea distinction; book II is the most direct
-informal antecedent of (M1)–(M4).</li>
-<li><strong>Hume, D.</strong> <cite>A Treatise of Human Nature</cite>
-(1739).  Source of the laws of association and of the "blank
-impression" that motivates our neutral element.</li>
-<li><strong>Boole, G.</strong> <cite>An Investigation of the Laws of
-Thought</cite> (1854).  First explicit algebraisation of the
-combinatorics of ideas; the algebra is idempotent, not just monoidal.</li>
-<li><strong>Frege, G.</strong> "Über Sinn und Bedeutung" (1892).
-The compositionality principle that justifies (M1) and motivates
-Theorem 1.1.</li>
-<li><strong>Peirce, C. S.</strong> <cite>Collected Papers</cite>
-(1931–58), esp. vols. 2 and 4.  Semiotic monoid of signs and the
-uniqueness of the empty sign (Theorem 1.2's antecedent).</li>
-<li><strong>Carnap, R.</strong> <cite>Meaning and Necessity</cite>
-(1947).  Behavioural-equivalence formulation of neutral senses.</li>
-<li><strong>Lambek, J.</strong> "The Mathematics of Sentence Structure"
-(1958).  First syntactic calculus in which composition is
-provably associative — the direct ancestor of Theorem 1.1.</li>
-<li><strong>Montague, R.</strong> "Universal Grammar" (1970).
-Compositionality as homomorphism into a semantic algebra; the
-template for our Theorem 1.3.</li>
-<li><strong>Gärdenfors, P.</strong> <cite>Conceptual Spaces: The
-Geometry of Thought</cite> (2000).  The quantitative-complexity
-intuition that <code>deg</code> formalises.</li>
-<li><strong>Fauconnier, G. and Turner, M.</strong> <cite>The Way We
-Think</cite> (2002).  Conceptual blending; the non-additive
-residue this book emphasises is what our cocycle <code>ε</code>
-captures in subsequent chapters.</li>
-</ul>
-
-<h2>See Also</h2>
-
-<ul>
-<li>Concept pages:
-  <a href="resonance-pairing.html">Resonance Pairing</a>,
-  <a href="aufhebung-decomposition.html">Aufhebung Decomposition</a>,
-  <a href="emergence-cocycle.html">Emergence Cocycle</a>,
-  <a href="meaning-curvature.html">Meaning Curvature</a>,
-  <a href="conjugation.html">Conjugation</a>,
-  <a href="transmission-chains.html">Transmission Chains</a>,
-  <a href="structural-equivalence.html">Structural Equivalence</a>,
-  <a href="graded-algebra.html">Graded Algebra</a>.</li>
-<li>Applied volumes:
-  <a href="vol2-social.html">Social Sciences</a>,
-  <a href="vol3-humanities.html">Humanities</a>,
-  <a href="vol4-cognition.html">Cognitive Science &amp; Phil. of Mind</a>,
-  <a href="vol5-emergence.html">Emergence</a>,
-  <a href="vol6-advanced.html">Advanced Applications</a>.</li>
-<li>Reference:
-  <a href="axioms.html">All Axioms</a>,
-  <a href="theorems.html">All Theorems</a>,
-  <a href="literature.html">Literature bridge</a>.</li>
-<li>Lean source:
-  <a href="https://github.com/idea-theory/IdeaTheory/blob/main/IdeaTheory/Monoid.lean"><code>IdeaTheory/Monoid.lean</code></a>.</li>
-</ul>
-
-<footer>
-Idea Theory · Volume I, Chapter 1 · machine-verified in Lean 4 ·
-last regenerated 2026-04-27.
-</footer>
-
-</main>
-</div>
-
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>

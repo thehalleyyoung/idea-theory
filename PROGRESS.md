@@ -1070,3 +1070,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/idea-monoid.html: broken link → vol4-cognition.html
   - docs/idea-monoid.html: broken link → vol5-emergence.html
   - docs/idea-monoid.html: broken link → vol6-advanced.html
+
+## Iter 21 — 2026-04-27 17:25
+**Task:** `website_concept_1` Website page: idea monoid (attempt 2)  
+**Verdict:** ✓ PASS  
