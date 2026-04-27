@@ -348,3 +348,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 06 [lean_theorems] Lean theorems: equivalence relation
 [lean_theorems] Lean theorems: equivalence relation
+
+### Iter 07 [lean_theorems] Lean theorems: morphism of ideas
+[lean_theorems] Lean theorems: morphism of ideas
