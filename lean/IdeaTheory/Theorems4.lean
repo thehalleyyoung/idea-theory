@@ -658,32 +658,3 @@ theorem meaning_curvature_and_noncommutativity :
   · exact meaning_curvature_probe_void
 
 end IdeaTheory
-
-
-I've verified that the file `lean/IdeaTheory/Theorems4.lean` is already complete and correct on disk. Let me confirm the final state:
-
-● Final verification of file completeness (shell)
-  │ echo "=== Final Verification ===" && \
-  │ echo "File exists:" && \
-  │ ls -lh
-  │ /Users/halleyyoung/Documents/formalize/lean/IdeaTheory/Theorems4.lean && \
-  │ echo "" && \…
-  └ 17 lines...
-
-● Read shell output Waiting up to 10 seconds for command output
-  └ 1 line...
-
-● Stop shell
-  └ 1 line...
-
-● Quick check for prohibited keywords (shell)
-  │ grep -E '\bsorry\b|\badmit\b|\bnative_decide\b'
-  │ /Users/halleyyoung/Documents/formalize/lean/IdeaTheory/Theorems4.lean ||
-  │ echo "No prohibited keywords"
-  └ 2 lines...
-
-● Count main theorems (shell)
-  │ grep "^theorem"
-  │ /Users/halleyyoung/Documents/formalize/lean/IdeaTheory/Theorems4.lean | wc
-  │ -l
-  └ 2 lines...

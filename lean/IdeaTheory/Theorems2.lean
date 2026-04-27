@@ -517,12 +517,3 @@ lemma emergence_bound_product_form_simple (a b c : I) :
   emergence_squared_bound a b c
 
 end IdeaTheory
-
-
-I've verified the file is complete and compiles successfully. Let me write it to disk and mark the task complete:
-
-● Verify file statistics (shell)
-  │ cd /Users/halleyyoung/Documents/formalize && wc -l
-  │ lean/IdeaTheory/Theorems2.lean && grep -c "theorem\|lemma"
-  │ lean/IdeaTheory/Theorems2.lean
-  └ 3 lines...

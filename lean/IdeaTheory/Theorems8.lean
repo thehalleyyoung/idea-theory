@@ -239,11 +239,3 @@ lemma left_neutral_unique (x : α) (h : ∀ a, op x a = a) : x = ident :=
   left_ident_eq_ident x h
 
 end IdeaTheory
-
-
-● Verify no sorries (shell)
-  │ cd /Users/halleyyoung/Documents/formalize/lean && grep -c "sorry\|admit"
-  │ IdeaTheory/Theorems8.lean; head -3 IdeaTheory/Theorems8.lean
-  └ 5 lines...
-
-File on disk is correct, compiles without errors, has the namespace declaration the reviewer requested, and contains zero sorries.
