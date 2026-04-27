@@ -471,3 +471,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 07 [lean_theorems] Lean theorems: meaning curvature form
 [lean_theorems] Lean theorems: meaning curvature form
+
+### Iter 08 [lean_theorems] Lean theorems: conjugation action
+[lean_theorems] Lean theorems: conjugation action
