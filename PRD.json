@@ -38,7 +38,7 @@
       "id": "theorems_1",
       "type": "lean_theorems",
       "title": "Lean theorems: Idea Structures",
-      "description": "Create lean/IdeaTheory/Theorems1.lean for 'Idea Structures'. Import Foundations. Prove theorems 1.1, 1.2, 1.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 1 context.",
+      "description": "Create lean/IdeaTheory/Theorems1.lean for 'Idea Structures'. Import Foundations. Prove theorems 1.1, 1.2, 1.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 1 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems1.lean"
       ],
@@ -46,119 +46,119 @@
         "foundations"
       ],
       "passes": true,
-      "attempts": 3,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems1.lean"
+      "attempts": 1,
+      "reviewer_notes": "wrote: "
     },
     {
       "id": "theorems_2",
       "type": "lean_theorems",
       "title": "Lean theorems: Basic Theorems",
-      "description": "Create lean/IdeaTheory/Theorems2.lean for 'Basic Theorems'. Import Foundations. Prove theorems 2.1, 2.2, 2.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 1 context.",
+      "description": "Create lean/IdeaTheory/Theorems2.lean for 'Basic Theorems'. Import Foundations. Prove theorems 2.1, 2.2, 2.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 1 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems2.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 18,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems2.lean"
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_3",
       "type": "lean_theorems",
       "title": "Lean theorems: Composition and Identity",
-      "description": "Create lean/IdeaTheory/Theorems3.lean for 'Composition and Identity'. Import Foundations. Prove theorems 3.1, 3.2, 3.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 2 context.",
+      "description": "Create lean/IdeaTheory/Theorems3.lean for 'Composition and Identity'. Import Foundations. Prove theorems 3.1, 3.2, 3.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 2 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems3.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 4,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems3.lean"
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_4",
       "type": "lean_theorems",
       "title": "Lean theorems: Advanced Properties",
-      "description": "Create lean/IdeaTheory/Theorems4.lean for 'Advanced Properties'. Import Foundations. Prove theorems 4.1, 4.2, 4.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 2 context.",
+      "description": "Create lean/IdeaTheory/Theorems4.lean for 'Advanced Properties'. Import Foundations. Prove theorems 4.1, 4.2, 4.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 2 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems4.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 16,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems4.lean"
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_5",
       "type": "lean_theorems",
       "title": "Lean theorems: Idea Structures",
-      "description": "Create lean/IdeaTheory/Theorems5.lean for 'Idea Structures'. Import Foundations. Prove theorems 5.1, 5.2, 5.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 3 context.",
+      "description": "Create lean/IdeaTheory/Theorems5.lean for 'Idea Structures'. Import Foundations. Prove theorems 5.1, 5.2, 5.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 3 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems5.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 18,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems5.lean"
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_6",
       "type": "lean_theorems",
       "title": "Lean theorems: Basic Theorems",
-      "description": "Create lean/IdeaTheory/Theorems6.lean for 'Basic Theorems'. Import Foundations. Prove theorems 6.1, 6.2, 6.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 3 context.",
+      "description": "Create lean/IdeaTheory/Theorems6.lean for 'Basic Theorems'. Import Foundations. Prove theorems 6.1, 6.2, 6.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 3 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems6.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 10,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems6.lean"
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_7",
       "type": "lean_theorems",
       "title": "Lean theorems: Composition and Identity",
-      "description": "Create lean/IdeaTheory/Theorems7.lean for 'Composition and Identity'. Import Foundations. Prove theorems 7.1, 7.2, 7.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 4 context.",
+      "description": "Create lean/IdeaTheory/Theorems7.lean for 'Composition and Identity'. Import Foundations. Prove theorems 7.1, 7.2, 7.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 4 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems7.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 9,
-      "reviewer_notes": "wrote: lean/IdeaTheory/Theorems7.lean"
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_8",
       "type": "lean_theorems",
       "title": "Lean theorems: Advanced Properties",
-      "description": "Create lean/IdeaTheory/Theorems8.lean for 'Advanced Properties'. Import Foundations. Prove theorems 8.1, 8.2, 8.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 4 context.",
+      "description": "Create lean/IdeaTheory/Theorems8.lean for 'Advanced Properties'. Import Foundations. Prove theorems 8.1, 8.2, 8.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 4 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems8.lean"
       ],
       "deps": [
         "foundations"
       ],
-      "passes": true,
-      "attempts": 5,
-      "reviewer_notes": "wrote: "
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
     },
     {
       "id": "theorems_9",
       "type": "lean_theorems",
       "title": "Lean theorems: Idea Structures",
-      "description": "Create lean/IdeaTheory/Theorems9.lean for 'Idea Structures'. Import Foundations. Prove theorems 9.1, 9.2, 9.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 5 context.",
+      "description": "Create lean/IdeaTheory/Theorems9.lean for 'Idea Structures'. Import Foundations. Prove theorems 9.1, 9.2, 9.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 5 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems9.lean"
       ],
@@ -173,7 +173,7 @@
       "id": "theorems_10",
       "type": "lean_theorems",
       "title": "Lean theorems: Basic Theorems",
-      "description": "Create lean/IdeaTheory/Theorems10.lean for 'Basic Theorems'. Import Foundations. Prove theorems 10.1, 10.2, 10.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 5 context.",
+      "description": "Create lean/IdeaTheory/Theorems10.lean for 'Basic Theorems'. Import Foundations. Prove theorems 10.1, 10.2, 10.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 5 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems10.lean"
       ],
@@ -188,7 +188,7 @@
       "id": "theorems_11",
       "type": "lean_theorems",
       "title": "Lean theorems: Composition and Identity",
-      "description": "Create lean/IdeaTheory/Theorems11.lean for 'Composition and Identity'. Import Foundations. Prove theorems 11.1, 11.2, 11.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 6 context.",
+      "description": "Create lean/IdeaTheory/Theorems11.lean for 'Composition and Identity'. Import Foundations. Prove theorems 11.1, 11.2, 11.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 6 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems11.lean"
       ],
@@ -203,7 +203,7 @@
       "id": "theorems_12",
       "type": "lean_theorems",
       "title": "Lean theorems: Advanced Properties",
-      "description": "Create lean/IdeaTheory/Theorems12.lean for 'Advanced Properties'. Import Foundations. Prove theorems 12.1, 12.2, 12.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.Volume 6 context.",
+      "description": "Create lean/IdeaTheory/Theorems12.lean for 'Advanced Properties'. Import Foundations. Prove theorems 12.1, 12.2, 12.3. Zero sorries. Make them substantial theorems which use tens to hundreds of helper lemmas.  They can also import any of the other lean files in the lean folder.  Write incrementally to disk after every two lemmas/theorems, lean compile, and continue.  CORE REQUIREMENT \u2014 literature bridge: each top-level theorem MUST carry a Lean docstring (`/-- \u2026 -/`) that (a) names the informal claim from the existing non-formalized literature on '--idea theory' that this theorem formalizes, (b) cites the source (Author, Year, work), and (c) notes any place the formal statement sharpens, generalizes, or contradicts the informal version. Volume 6 context.",
       "output_files": [
         "lean/IdeaTheory/Theorems12.lean"
       ],
@@ -255,7 +255,7 @@
       "id": "website_concept_1",
       "type": "website_concept",
       "title": "Website page: Idea Structures",
-      "description": "Create docs/idea-structures.html for 'Idea Structures'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/idea-structures.html for 'Idea Structures'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Idea Structures: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/idea-structures.html"
       ],
@@ -270,7 +270,7 @@
       "id": "website_concept_2",
       "type": "website_concept",
       "title": "Website page: Basic Theorems",
-      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Basic Theorems: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/basic-theorems.html"
       ],
@@ -285,7 +285,7 @@
       "id": "website_concept_3",
       "type": "website_concept",
       "title": "Website page: Composition and Identity",
-      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Composition and Identity: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/composition-and-identity.html"
       ],
@@ -300,7 +300,7 @@
       "id": "website_concept_4",
       "type": "website_concept",
       "title": "Website page: Advanced Properties",
-      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Advanced Properties: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/advanced-properties.html"
       ],
@@ -315,7 +315,7 @@
       "id": "website_concept_5",
       "type": "website_concept",
       "title": "Website page: Idea Structures",
-      "description": "Create docs/idea-structures.html for 'Idea Structures'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/idea-structures.html for 'Idea Structures'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Idea Structures: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/idea-structures.html"
       ],
@@ -330,7 +330,7 @@
       "id": "website_concept_6",
       "type": "website_concept",
       "title": "Website page: Basic Theorems",
-      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Basic Theorems: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/basic-theorems.html"
       ],
@@ -345,7 +345,7 @@
       "id": "website_concept_7",
       "type": "website_concept",
       "title": "Website page: Composition and Identity",
-      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Composition and Identity: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/composition-and-identity.html"
       ],
@@ -360,7 +360,7 @@
       "id": "website_concept_8",
       "type": "website_concept",
       "title": "Website page: Advanced Properties",
-      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Advanced Properties: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/advanced-properties.html"
       ],
@@ -375,7 +375,7 @@
       "id": "website_concept_9",
       "type": "website_concept",
       "title": "Website page: Idea Structures",
-      "description": "Create docs/idea-structures.html for 'Idea Structures'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/idea-structures.html for 'Idea Structures'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Idea Structures: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/idea-structures.html"
       ],
@@ -390,7 +390,7 @@
       "id": "website_concept_10",
       "type": "website_concept",
       "title": "Website page: Basic Theorems",
-      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/basic-theorems.html for 'Basic Theorems'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Basic Theorems: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/basic-theorems.html"
       ],
@@ -405,7 +405,7 @@
       "id": "website_concept_11",
       "type": "website_concept",
       "title": "Website page: Composition and Identity",
-      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/composition-and-identity.html for 'Composition and Identity'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Composition and Identity: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/composition-and-identity.html"
       ],
@@ -420,9 +420,24 @@
       "id": "website_concept_12",
       "type": "website_concept",
       "title": "Website page: Advanced Properties",
-      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Link ALL other concept pages, axioms.html, theorems.html, Lean source. Include definition box, 3 theorem boxes with \u2713 verified badges.",
+      "description": "Create docs/advanced-properties.html for 'Advanced Properties'. Cross-link to ALL other concept pages, axioms.html, theorems.html, literature.html, and the corresponding Lean source.  REQUIRED structure (in order):\n  1. Definition box.\n  2. 'In the Literature' \u2014 150\u2013300 word substantive narrative on what the existing non-formalized literature on '--idea theory' says about Advanced Properties: which authors introduced it, competing definitions, central informal claims, open questions, folklore.  Reference 3\u20136 named works.\n  3. Three theorem boxes with \u2713 verified badges; each cites the informal claim it formalizes.\n  4. 'Bridge: Informal Claim \u2192 Formal Theorem' \u2014 a table whose rows are (Informal claim, Formal theorem, Source).\n  5. 'Further Reading' \u2014 bulleted list of 4+ real references.",
       "output_files": [
         "docs/advanced-properties.html"
+      ],
+      "deps": [
+        "website_index"
+      ],
+      "passes": false,
+      "attempts": 0,
+      "reviewer_notes": ""
+    },
+    {
+      "id": "website_literature",
+      "type": "website_literature",
+      "title": "Website: literature bridge index",
+      "description": "Create docs/literature.html: the master index connecting the existing non-formalized literature on '--idea theory' to the machine-verified theorems in this project.  REQUIRED:\n  * Narrative introduction (200\u2013400 words) on why bridging matters.\n  * 'Why Bridge?' section: which long-standing claims become testable, which definitions sharpen, where the literature disagrees.\n  * Long cross-walk table: rows are informal sources/claims; columns are (Author/Year, Informal claim, Formal theorem, Lean file, Concept page).\n  * 'References, Grouped by Sub-Topic' section (Foundational works, Recent developments, Surveys).\n  * Sidebar/topbar navigation must link this page from every other page; this page must link back to all concept pages, axioms.html, theorems.html.",
+      "output_files": [
+        "docs/literature.html"
       ],
       "deps": [
         "website_index"
@@ -448,7 +463,7 @@
       "id": "tex_bib",
       "type": "tex_bibliography",
       "title": "BibTeX bibliography",
-      "description": "Create tex/references.bib with verified entries for Lean 4/Mathlib and 4-6 real domain references for '--idea theory'.",
+      "description": "Create tex/references.bib with 15\u201340 REAL bibliography entries.  REQUIRED:\n  * Lean 4 / Mathlib core references (Theorem Proving in Lean 4, Mathlib).\n  * 12+ real domain references for '--idea theory' \u2014 actual authors, real years, real titles of published works (papers, books, monographs, theses).  No invented citations.  These are the works the chapters and concept pages will cite when bridging informal literature to formal theorems.",
       "output_files": [
         "tex/references.bib"
       ],
@@ -463,7 +478,7 @@
       "id": "tex_chapter_v1c1",
       "type": "tex_chapter",
       "title": "TeX ch (V1): Foundations and Axioms",
-      "description": "Create tex/vol1/ch1.tex for 'Foundations and Axioms' (Volume 1: Foundations). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol1/ch.tex for 'Foundations and Axioms' (Volume 1: Foundations). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Foundations and Axioms; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol1/ch1.tex"
       ],
@@ -478,7 +493,7 @@
       "id": "tex_chapter_v1c2",
       "type": "tex_chapter",
       "title": "TeX ch (V1): Core Definitions",
-      "description": "Create tex/vol1/ch2.tex for 'Core Definitions' (Volume 1: Foundations). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol1/ch.tex for 'Core Definitions' (Volume 1: Foundations). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Core Definitions; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol1/ch2.tex"
       ],
@@ -508,7 +523,7 @@
       "id": "tex_chapter_v2c3",
       "type": "tex_chapter",
       "title": "TeX ch (V2): Foundations and Axioms",
-      "description": "Create tex/vol2/ch3.tex for 'Foundations and Axioms' (Volume 2: Core Theory). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol2/ch.tex for 'Foundations and Axioms' (Volume 2: Core Theory). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Foundations and Axioms; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol2/ch3.tex"
       ],
@@ -523,7 +538,7 @@
       "id": "tex_chapter_v2c4",
       "type": "tex_chapter",
       "title": "TeX ch (V2): Core Definitions",
-      "description": "Create tex/vol2/ch4.tex for 'Core Definitions' (Volume 2: Core Theory). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol2/ch.tex for 'Core Definitions' (Volume 2: Core Theory). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Core Definitions; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol2/ch4.tex"
       ],
@@ -553,7 +568,7 @@
       "id": "tex_chapter_v3c5",
       "type": "tex_chapter",
       "title": "TeX ch (V3): Foundations and Axioms",
-      "description": "Create tex/vol3/ch5.tex for 'Foundations and Axioms' (Volume 3: Applications). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol3/ch.tex for 'Foundations and Axioms' (Volume 3: Applications). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Foundations and Axioms; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol3/ch5.tex"
       ],
@@ -568,7 +583,7 @@
       "id": "tex_chapter_v3c6",
       "type": "tex_chapter",
       "title": "TeX ch (V3): Core Definitions",
-      "description": "Create tex/vol3/ch6.tex for 'Core Definitions' (Volume 3: Applications). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol3/ch.tex for 'Core Definitions' (Volume 3: Applications). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Core Definitions; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol3/ch6.tex"
       ],
@@ -598,7 +613,7 @@
       "id": "tex_chapter_v4c7",
       "type": "tex_chapter",
       "title": "TeX ch (V4): Foundations and Axioms",
-      "description": "Create tex/vol4/ch7.tex for 'Foundations and Axioms' (Volume 4: Advanced Topics). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol4/ch.tex for 'Foundations and Axioms' (Volume 4: Advanced Topics). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Foundations and Axioms; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol4/ch7.tex"
       ],
@@ -613,7 +628,7 @@
       "id": "tex_chapter_v4c8",
       "type": "tex_chapter",
       "title": "TeX ch (V4): Core Definitions",
-      "description": "Create tex/vol4/ch8.tex for 'Core Definitions' (Volume 4: Advanced Topics). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol4/ch.tex for 'Core Definitions' (Volume 4: Advanced Topics). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Core Definitions; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol4/ch8.tex"
       ],
@@ -643,7 +658,7 @@
       "id": "tex_chapter_v5c9",
       "type": "tex_chapter",
       "title": "TeX ch (V5): Foundations and Axioms",
-      "description": "Create tex/vol5/ch9.tex for 'Foundations and Axioms' (Volume 5: Extensions). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol5/ch.tex for 'Foundations and Axioms' (Volume 5: Extensions). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Foundations and Axioms; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol5/ch9.tex"
       ],
@@ -658,7 +673,7 @@
       "id": "tex_chapter_v5c10",
       "type": "tex_chapter",
       "title": "TeX ch (V5): Core Definitions",
-      "description": "Create tex/vol5/ch10.tex for 'Core Definitions' (Volume 5: Extensions). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol5/ch.tex for 'Core Definitions' (Volume 5: Extensions). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Core Definitions; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol5/ch10.tex"
       ],
@@ -688,7 +703,7 @@
       "id": "tex_chapter_v6c11",
       "type": "tex_chapter",
       "title": "TeX ch (V6): Foundations and Axioms",
-      "description": "Create tex/vol6/ch11.tex for 'Foundations and Axioms' (Volume 6: Connections). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol6/ch.tex for 'Foundations and Axioms' (Volume 6: Connections). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Foundations and Axioms; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol6/ch11.tex"
       ],
@@ -703,7 +718,7 @@
       "id": "tex_chapter_v6c12",
       "type": "tex_chapter",
       "title": "TeX ch (V6): Core Definitions",
-      "description": "Create tex/vol6/ch12.tex for 'Core Definitions' (Volume 6: Connections). \\chapter, \\section{Definitions}, \\section{Main Results} with theorem+proof environments, \\section{Lean 4 Verification} with lstlisting, \\cref cross-references.",
+      "description": "Create tex/vol6/ch.tex for 'Core Definitions' (Volume 6: Connections). REQUIRED 7-section structure (in order):\n  \\section{Background from the Literature} \u2014 300\u2013600 word narrative on what existing non-formalized writing on '--idea theory' says about Core Definitions; cite 4\u20138 real works from references.bib.\n  \\section{From Informal Claims to Formal Statements} \u2014 translation table mapping informal claims \u2192 Lean theorems with citations.\n  \\section{Definitions} \u2014 formal definitions, each citing its informal antecedent.\n  \\section{Main Results} \u2014 theorem+proof environments.\n  \\section{Lean 4 Verification} \u2014 lstlisting with the actual Lean theorem names.\n  \\section{Discussion: What the Formalization Reveals} \u2014 reflect on what the formal proofs sharpen, simplify, or refute about the literature.\n  \\section{Notes and References}.\nUse \\cref cross-references throughout.",
       "output_files": [
         "tex/vol6/ch12.tex"
       ],
