@@ -736,3 +736,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 11 — 2026-04-27 13:35
 **Task:** `theorems_9` Lean theorems: graded idea algebra (attempt 1)  
 **Verdict:** ✓ PASS  
+
+## Iter 12 — 2026-04-27 13:39
+**Task:** `theorems_10` Lean theorems: semantic weight (attempt 1)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - missing file: lean/IdeaTheory/Theorems10.lean
