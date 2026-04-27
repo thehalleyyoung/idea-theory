@@ -600,3 +600,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 35 [website_concept] Website page: structural equivalence
 [website_concept] Website page: structural equivalence
+
+### Iter 36 [website_concept] Website page: graded idea algebra
+[website_concept] Website page: graded idea algebra — bounced: docs/graded-idea-algebra.html: broken link → vol1-foundations.html; docs/graded-idea-algebra.html: broken link → vol2-social.html

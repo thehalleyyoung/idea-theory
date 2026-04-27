@@ -1206,3 +1206,21 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 35 — 2026-04-27 17:55
 **Task:** `website_concept_8` Website page: structural equivalence (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 36 — 2026-04-27 17:58
+**Task:** `website_concept_9` Website page: graded idea algebra (attempt 1)  
+**Verdict:** ✗ BOUNCE (13 issues)  
+**Issues:**
+  - docs/graded-idea-algebra.html: broken link → vol1-foundations.html
+  - docs/graded-idea-algebra.html: broken link → vol2-social.html
+  - docs/graded-idea-algebra.html: broken link → vol3-humanities.html
+  - docs/graded-idea-algebra.html: broken link → vol4-cogsci.html
+  - docs/graded-idea-algebra.html: broken link → vol5-emergence.html
+  - docs/graded-idea-algebra.html: broken link → vol6-advanced.html
+  - docs/graded-idea-algebra.html: broken link → idea-composition-monoid.html
+  - docs/graded-idea-algebra.html: broken link → transmission-chains.html
+  - docs/graded-idea-algebra.html: broken link → idea-composition-monoid.html
+  - docs/graded-idea-algebra.html: broken link → transmission-chains.html
+  - docs/graded-idea-algebra.html: broken link → vol1-foundations.html
+  - docs/graded-idea-algebra.html: broken link → vol5-emergence.html
+  - docs/graded-idea-algebra.html: broken link → vol6-advanced.html

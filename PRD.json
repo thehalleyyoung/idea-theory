@@ -383,8 +383,8 @@
         "website_index"
       ],
       "passes": false,
-      "attempts": 0,
-      "reviewer_notes": ""
+      "attempts": 1,
+      "reviewer_notes": "docs/graded-idea-algebra.html: broken link \u2192 vol1-foundations.html; docs/graded-idea-algebra.html: broken link \u2192 vol2-social.html; docs/graded-idea-algebra.html: broken link \u2192 vol3-humanities.html; docs/graded-idea-algebra.html: broken link \u2192 vol4-cogsci.html"
     },
     {
       "id": "website_concept_10",

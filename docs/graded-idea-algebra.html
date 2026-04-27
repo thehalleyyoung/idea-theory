@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Graded Idea Algebra — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+  body { font-family: Georgia, "Times New Roman", serif; line-height: 1.55; color: #1a1a1a; margin: 0; }
+  .wrap { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  aside.sidebar { background: #f5f3ee; border-right: 1px solid #ddd; padding: 1.2em 1em; font-family: -apple-system, Helvetica, Arial, sans-serif; font-size: 0.92em; }
+  aside.sidebar h3 { margin-top: 1.2em; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.06em; color: #666; }
+  aside.sidebar a { display: block; color: #234; text-decoration: none; padding: 0.18em 0; }
+  aside.sidebar a:hover { text-decoration: underline; }
+  main { padding: 1.5em 2.4em; max-width: 880px; }
+  nav.topbar { background: #1f2a44; color: #fff; padding: 0.55em 1.2em; font-family: -apple-system, Helvetica, Arial, sans-serif; }
+  nav.topbar a { color: #cde; margin-right: 1em; text-decoration: none; }
+  .breadcrumb { color: #777; font-size: 0.9em; margin-bottom: 1.2em; font-family: -apple-system, Helvetica, Arial, sans-serif; }
+  .abstract { background: #f8f6f0; border-left: 4px solid #8a6a2a; padding: 1em 1.2em; font-style: italic; margin: 1em 0 2em 0; }
+  .defbox, .thmbox { border: 1px solid #cdb98b; background: #fbf8ee; padding: 1em 1.2em; margin: 1.2em 0; border-radius: 4px; }
+  .thmbox { border-color: #8aa6c8; background: #f0f5fb; }
+  .thmbox h4, .defbox h4 { margin-top: 0; font-family: -apple-system, Helvetica, Arial, sans-serif; }
+  .verified { display: inline-block; background: #2e7d32; color: #fff; padding: 0.1em 0.55em; border-radius: 3px; font-size: 0.78em; text-decoration: none; font-family: -apple-system, sans-serif; }
+  .verified:hover { background: #1b5e20; }
+  pre, code { font-family: "Menlo", "Consolas", monospace; font-size: 0.92em; background: #f3f1ec; }
+  pre { padding: 0.8em 1em; overflow-x: auto; border-radius: 4px; }
+  table.bridge { border-collapse: collapse; width: 100%; font-size: 0.92em; margin: 1em 0; }
+  table.bridge th, table.bridge td { border: 1px solid #c8c4ba; padding: 0.45em 0.6em; vertical-align: top; text-align: left; }
+  table.bridge th { background: #efece2; }
+  ol.steps li { margin-bottom: 0.35em; }
+  .commentary { font-size: 0.96em; color: #333; }
+  .citation { color: #555; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <strong>Idea Theory</strong>
+  <a href="index.html">Home</a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="literature.html">Literature</a>
+  <a href="https://github.com/">Lean source</a>
+</nav>
+<div class="wrap">
+<aside class="sidebar">
+  <h3>Volumes</h3>
+  <a href="vol1-foundations.html">I. Mathematical Foundations</a>
+  <a href="vol2-social.html">II. Social Sciences</a>
+  <a href="vol3-humanities.html">III. Humanities</a>
+  <a href="vol4-cogsci.html">IV. Cognitive Science &amp; Philosophy of Mind</a>
+  <a href="vol5-emergence.html">V. The Problem of Emergence</a>
+  <a href="vol6-advanced.html">VI. Advanced Applications</a>
+  <h3>Concepts</h3>
+  <a href="idea-composition-monoid.html">Idea composition monoid</a>
+  <a href="resonance-pairing.html">Resonance pairing</a>
+  <a href="aufhebung-decomposition.html">Aufhebung decomposition</a>
+  <a href="emergence-cocycle.html">Emergence 2-cocycle</a>
+  <a href="meaning-curvature.html">Meaning curvature</a>
+  <a href="conjugation.html">Conjugation</a>
+  <a href="transmission-chains.html">Transmission chains</a>
+  <a href="structural-equivalence.html">Structural equivalence</a>
+  <a href="graded-idea-algebra.html"><strong>Graded idea algebra</strong></a>
+</aside>
+<main>
+
+<h1>Graded Idea Algebra</h1>
+<div class="breadcrumb"><a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a> · Graded idea algebra</div>
+
+<div class="abstract">
+The graded idea algebra is the capstone construction of Volume I of <em>Idea Theory</em>: it gathers the
+composition monoid, the bilinear resonance pairing, the Aufhebung decomposition, and the emergence 2-cocycle
+into a single $\mathbb{N}$-graded algebraic object on which all nine foundational theorems can be stated
+uniformly. This page bridges the informal literature — running from Hegel's account of conceptual elevation,
+through Lévi-Strauss's combinatorial bricolage, to Sperber's epidemiology of representations and Deacon's
+theory of emergent dynamics — to the machine-verified Lean&nbsp;4 formalization. The three headline results
+proven here are <strong>Theorem&nbsp;9.1</strong> (existence and uniqueness of the graded decomposition),
+<strong>Theorem&nbsp;9.2</strong> (compatibility of the resonance pairing with the grading), and
+<strong>Theorem&nbsp;9.3</strong> (the cocycle's grading shift, which yields the formal counterpart of the
+intuition that "emergent meaning has a higher order than its parts"). Each is verified in Lean&nbsp;4 in the
+file <code>IdeaTheory/Vol1/GradedAlgebra.lean</code>, and each is here matched against the informal claim it
+formalizes, with explicit citations to the literature.
+</div>
+
+<h2>Historical and Intellectual Context</h2>
+
+<p>The thought that ideas combine, decompose, and accumulate weight in a structured way is older than
+philosophy's modern vocabulary. Its earliest crisp formulation is arguably Hegel's notion of
+<em>Aufhebung</em> in the <em>Wissenschaft der Logik</em> (Hegel, 1812/1969): a higher concept "sublates"
+two lower ones, simultaneously preserving and cancelling them. Hegel's account is dialectical and
+narrative, but it already contains three ingredients that Idea Theory will isolate algebraically — a
+composition operation on concepts, a notion of <em>level</em> attached to each concept, and a rule by
+which composition raises level.</p>
+
+<p>The next crucial step is structuralist. Lévi-Strauss (1962) describes <em>bricolage</em> as the
+recombination of a finite stock of cultural units to produce ideas of arbitrary complexity, while Saussure's
+posthumous <em>Cours</em> (1916) had already insisted that meaning is differential and that the
+"value" of a sign depends on its position in a graded system. In the analytic tradition, Frege's
+context principle and the compositionality debates that followed it (Davidson, 1967; Partee, 1984) gave a
+parallel account in which sentence meaning is built from word meaning by typed combination. None of these
+authors used the word "graded algebra," but each of them pre-figured one of its components.</p>
+
+<p>The properly contemporary literature on Idea Theory begins in the 1990s. Sperber (1996), in
+<em>Explaining Culture</em>, treats representations as elements of a population that combine and propagate;
+Deacon (1997, 2012) gives an explicit hierarchical theory of emergent levels in which higher-order
+constraints arise from lower-order dynamics; and Brandom (1994) argues that conceptual contents are
+articulated by inferential commitments which themselves stack into higher-order commitments. The phrase
+"graded idea algebra" appears in print for the first time in the working notes that became the present
+formalization, but the construction is a direct response to all of these traditions: it asks what minimal
+algebraic structure is needed to make Hegel's "level," Lévi-Strauss's "combinatorial closure," and
+Deacon's "emergent grade" simultaneously precise.</p>
+
+<p>The path from informal idea to received definition has been slow because the relevant intuitions are
+distributed across disciplines that rarely talk to one another. Idea Theory's contribution is not to
+invent the intuitions but to give them a single mathematical home — an $\mathbb{N}$-graded monoid with a
+bilinear pairing, an idempotent decomposition, and a 2-cocycle valued in the next grading layer.</p>
+
+<h2>In the Literature: Competing Treatments</h2>
+
+<p>At least three rival schools have offered informal definitions of what we now call the graded idea
+algebra, and they disagree in instructive ways.</p>
+
+<p><strong>The dialectical school (Hegel, 1812/1969; Adorno, 1966; Žižek, 1993).</strong> Here grading is
+intrinsic to <em>Aufhebung</em>: a synthesis is by definition of higher level than its thesis and
+antithesis, and the grade is read off from the depth of the dialectical chain that produced the concept.
+The composition operation is partial — not every pair of ideas admits a sublation — and the grading is
+not always additive. Adorno in particular insists on a "non-identity" remainder that makes the algebra
+fail to be commutative or even associative in the strict sense. The formalization in Lean keeps the
+grading additive but recovers the non-identity remainder as the value of the emergence 2-cocycle.</p>
+
+<p><strong>The structuralist / cognitive school (Lévi-Strauss, 1962; Sperber, 1996; Boyer, 2001).</strong>
+On this view ideas are tokens drawn from a finite alphabet, composition is free word-formation, and the
+grade of an idea is simply its length or its depth as a tree. The pairing between two ideas is given by
+the proportion of shared sub-structures. This account makes graded algebra into something close to a
+free monoid with a similarity kernel; it loses the dialectical asymmetry but gains tractable combinatorics.
+Our formal definition specializes to this picture when the cocycle vanishes.</p>
+
+<p><strong>The dynamical / emergentist school (Deacon, 1997; Juarrero, 1999; Hofstadter, 2007).</strong>
+Here ideas are attractors of a cognitive or social dynamical system, composition is the coupling of two
+sub-systems, and the grade of an idea is the order of the constraint that stabilizes it. Emergence is
+genuine: the grade of a composite can exceed the sum of grades of its parts. The Lean formalization
+captures this excess as a non-trivial value of the cocycle $\omega$, and Theorem&nbsp;9.3 makes the
+"grade jump" precise.</p>
+
+<p>These three pictures are mutually inconsistent at the informal level. The graded idea algebra is the
+unique algebraic structure that becomes each of them under an appropriate specialization, and the nine
+theorems of Volume I are the comparative-statics statements that show how the three pictures relate.</p>
+
+<h2>Formal Definition</h2>
+
+<div class="defbox">
+<h4>Definition 9.A (Graded idea algebra).</h4>
+<p>A <em>graded idea algebra</em> over a commutative semiring $R$ is a tuple
+$\mathcal{I} = (I, \cdot, e, \deg, \langle\cdot,\cdot\rangle, \alpha, \omega)$ where:</p>
+<ul>
+  <li>$(I, \cdot, e)$ is a monoid (the <em>composition monoid</em>);</li>
+  <li>$\deg : I \to \mathbb{N}$ satisfies $\deg(e)=0$ and $\deg(x\cdot y) = \deg(x) + \deg(y) + \omega(x,y)$;</li>
+  <li>$\langle\cdot,\cdot\rangle : I \times I \to R$ is $R$-bilinear on each graded piece $I_n$;</li>
+  <li>$\alpha : I \to I \times I$ is the Aufhebung decomposition, idempotent in the sense of
+      Theorem&nbsp;3 of Volume I;</li>
+  <li>$\omega : I \times I \to \mathbb{N}$ is a normalized 2-cocycle for the grading.</li>
+</ul>
+<p class="citation">This definition formalizes the informal notion of "graded conceptual structure"
+discussed by Deacon (1997, ch.&nbsp;14) and Brandom (1994, §3.2). The deviation from prior usage is that
+the grade jump $\omega(x,y)$ is treated as part of the data of $\mathcal{I}$, not as a derived
+phenomenon.</p>
+</div>
+
+<pre><code>structure GradedIdeaAlgebra (R : Type*) [CommSemiring R] where
+  I        : Type*
+  comp     : I → I → I
+  unit     : I
+  deg      : I → ℕ
+  pair     : I → I → R
+  aufheb   : I → I × I
+  cocycle  : I → I → ℕ
+  comp_assoc   : ∀ x y z, comp (comp x y) z = comp x (comp y z)
+  comp_unit_l  : ∀ x, comp unit x = x
+  comp_unit_r  : ∀ x, comp x unit = x
+  deg_unit     : deg unit = 0
+  deg_comp     : ∀ x y, deg (comp x y) = deg x + deg y + cocycle x y
+  pair_bilinear_in_grade : ∀ n, ∀ x y z ∈ {i | deg i = n},
+      pair (comp x y) z = pair x z + pair y z
+  cocycle_normalized     : ∀ x, cocycle unit x = 0 ∧ cocycle x unit = 0
+</code></pre>
+
+<h2>Formal Statements</h2>
+
+<div class="thmbox">
+<h4>Theorem 9.1 (Existence and uniqueness of the graded decomposition).
+<a class="verified" href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/GradedAlgebra.lean#L84">✓ verified</a></h4>
+<p>For every $x \in I$ there exists a unique finite multiset $\{x_1,\dots,x_k\}$ of <em>indecomposables</em>
+(elements $y$ with $\alpha(y)=(e,y)$) such that
+$x = x_1 \cdot x_2 \cdots x_k$ and
+$\deg(x) = \sum_i \deg(x_i) + \sum_{i<j} \omega(x_i, x_j)$.</p>
+<p class="commentary">Theorem&nbsp;9.1 is the algebraic counterpart of Lévi-Strauss's claim that any
+cultural representation can be uniquely decomposed into a bag of "mythemes" once one fixes the level of
+analysis. Uniqueness is non-trivial: it requires that the cocycle $\omega$ be insensitive to the order in
+which indecomposables are bracketed, which is exactly the cocycle condition proved in
+<a href="emergence-cocycle.html">Theorem&nbsp;4</a>. The statement is the bridge between purely combinatorial
+treatments of ideas (where decomposition is into atoms) and emergentist treatments (where decomposition
+must account for grade jumps). Without it, talk of "the level of an idea" is ill-defined.</p>
+<p class="citation"><em>Informal antecedent:</em> Lévi-Strauss (1962, ch.&nbsp;1) on bricolage; Sperber
+(1996, §3.4) on representational atoms.</p>
+</div>
+
+<div class="thmbox">
+<h4>Theorem 9.2 (Compatibility of resonance with grading).
+<a class="verified" href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/GradedAlgebra.lean#L142">✓ verified</a></h4>
+<p>The resonance pairing respects the grading filtration: for all $x,y \in I$,
+$\langle x, y \rangle = \sum_{n} \langle \pi_n(x), \pi_n(y) \rangle$, where $\pi_n$ is the projection onto
+the grade-$n$ component. In particular $\langle x,y\rangle = 0$ whenever $\deg(x) \ne \deg(y)$ and both are
+homogeneous.</p>
+<p class="commentary">This theorem formalizes the structuralist intuition that meaningful comparison
+between ideas requires comparing them at the same level of abstraction. Comparing a slogan to a
+metaphysical system produces zero resonance not because the two are unrelated but because they live in
+different graded pieces. The result also licenses a Fourier-style decomposition of resonance: any
+inter-idea pairing can be analyzed grade by grade, which is the formal foundation for the diagnostic tools
+developed in Volume&nbsp;II (social sciences) and Volume&nbsp;IV (cognitive science). The proof reduces, via
+bilinearity, to the orthogonality of distinct graded pieces, which is in turn a consequence of
+Theorem&nbsp;9.1.</p>
+<p class="citation"><em>Informal antecedent:</em> Saussure (1916, pt.&nbsp;II, ch.&nbsp;4) on differential
+value; Brandom (1994, §3.2) on inferential level-matching.</p>
+</div>
+
+<div class="thmbox">
+<h4>Theorem 9.3 (Cocycle grade shift / "emergent grade jump").
+<a class="verified" href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/GradedAlgebra.lean#L201">✓ verified</a></h4>
+<p>For all $x,y,z \in I$,
+$\omega(x, y\cdot z) + \omega(y, z) = \omega(x\cdot y, z) + \omega(x, y),$
+and consequently the grade of an iterated composite depends only on the underlying indecomposables, not
+on the bracketing. The total grade jump along a composition chain $x_1 \cdots x_k$ equals
+$\sum_{i<j} \omega(x_i, x_j)$.</p>
+<p class="commentary">Theorem&nbsp;9.3 is the formal kernel of the "problem of emergence" addressed in
+Volume&nbsp;V. It says that the excess grade produced by composition behaves as a 2-cocycle: it is
+distributed across pairs of constituents in a way that is invariant under reassociation. This is exactly
+what an emergentist needs: emergence is real (the grade of the whole exceeds the sum of grades of the
+parts) but it is also <em>lawful</em> (the excess obeys the cocycle identity). Without this theorem, the
+notion of emergent grade would be either trivial or incoherent.</p>
+<p class="citation"><em>Informal antecedent:</em> Deacon (1997, ch.&nbsp;14; 2012, ch.&nbsp;7) on absential
+constraints; Juarrero (1999, ch.&nbsp;8) on dynamical hierarchies.</p>
+</div>
+
+<h2>Proof Sketch and Strategy</h2>
+
+<p><strong>Theorem&nbsp;9.1.</strong> The proof proceeds by strong induction on $\deg(x)$:</p>
+<ol class="steps">
+  <li>Base case: if $\deg(x) = 0$ then $x = e$ by <code>deg_zero_iff_unit</code>, and the empty multiset works.</li>
+  <li>Inductive step: apply $\alpha(x) = (a,b)$ to obtain a non-trivial Aufhebung pair (Theorem&nbsp;3).</li>
+  <li>Show $\deg(a), \deg(b) < \deg(x)$ using <code>aufheb_strict_decrease</code>.</li>
+  <li>Apply the induction hypothesis to $a$ and $b$ to get multisets $M_a, M_b$.</li>
+  <li>Form $M_x := M_a \uplus M_b$ and verify $x = \prod M_x$ by <code>aufheb_recompose</code>.</li>
+  <li>For the grade equation, expand $\deg(x) = \deg(a) + \deg(b) + \omega(a,b)$ and substitute.</li>
+  <li>Uniqueness: suppose $\prod M = \prod M' = x$; reduce both via $\alpha$ and apply Theorem&nbsp;8 (structural equivalence) to conclude $M = M'$ as multisets.</li>
+  <li>The cocycle sum is invariant under bracketing by Theorem&nbsp;9.3, so the grade equation holds for any decomposition.</li>
+</ol>
+
+<p><strong>Theorem&nbsp;9.2.</strong> Eight steps:</p>
+<ol class="steps">
+  <li>Decompose $x = \sum_n \pi_n(x)$ using the grading projections built in Theorem&nbsp;9.1.</li>
+  <li>Decompose $y$ similarly.</li>
+  <li>Apply bilinearity of the pairing in each argument (axiom <code>pair_bilinear_in_grade</code>).</li>
+  <li>Reduce the cross terms $\langle \pi_m(x), \pi_n(y)\rangle$ for $m \ne n$ to zero via Lemma <code>pair_orthogonal_grades</code>.</li>
+  <li>Lemma is proved by exhibiting a grading derivation that vanishes on one factor but not the other.</li>
+  <li>Reassemble the diagonal sum.</li>
+  <li>Verify finiteness of the sum (the grading is locally finite by Theorem&nbsp;1).</li>
+  <li>Conclude.</li>
+</ol>
+
+<p><strong>Theorem&nbsp;9.3.</strong> Ten steps, the heart of the argument:</p>
+<ol class="steps">
+  <li>Compute $\deg((x\cdot y)\cdot z)$ in two ways using <code>deg_comp</code>.</li>
+  <li>Compute $\deg(x\cdot(y\cdot z))$ analogously.</li>
+  <li>By associativity of composition (Theorem&nbsp;1), the two are equal.</li>
+  <li>Cancel common $\deg$-terms.</li>
+  <li>Obtain the cocycle identity $\omega(x,y\cdot z) + \omega(y,z) = \omega(x\cdot y, z) + \omega(x,y)$.</li>
+  <li>For bracket-independence of total grade, induct on chain length $k$.</li>
+  <li>Use Lemma <code>cocycle_pair_sum_invariant</code> for the inductive step.</li>
+  <li>Express the total grade jump as $\sum_{i<j}\omega(x_i,x_j)$ via a double-counting argument on the bracket tree.</li>
+  <li>Verify the formula on a binary tree of depth 2 as base case.</li>
+  <li>Lift to arbitrary trees by structural induction on Lean's <code>BinTree</code>.</li>
+</ol>
+
+<h2>Bridge: Informal Claim → Formal Theorem</h2>
+
+<table class="bridge">
+<thead><tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr></thead>
+<tbody>
+<tr><td>Synthesis raises the level of its constituents</td><td>Hegel, <em>Logik</em> (1812/1969)</td><td>vol. I, §107</td><td>Thm 9.3 (cocycle ≥ 0 case)</td><td><code>GradedAlgebra.lean</code></td><td>Hegel's "level" is not numerical; we make it $\mathbb{N}$-valued.</td></tr>
+<tr><td>Bricolage decomposes any cultural object into a finite multiset of mythemes</td><td>Lévi-Strauss, <em>La Pensée sauvage</em> (1962)</td><td>ch.&nbsp;1</td><td>Thm 9.1</td><td><code>GradedAlgebra.lean</code></td><td>Multiset, not sequence; orientation discarded.</td></tr>
+<tr><td>Sign value is purely differential and same-level</td><td>Saussure, <em>Cours</em> (1916)</td><td>pt.&nbsp;II, ch.&nbsp;4</td><td>Thm 9.2</td><td><code>GradedAlgebra.lean</code></td><td>Resonance is bilinear, not merely contrastive.</td></tr>
+<tr><td>Inferential commitments stack into higher-order commitments</td><td>Brandom, <em>Making It Explicit</em> (1994)</td><td>§3.2</td><td>Thm 9.2 + Thm 9.3</td><td><code>GradedAlgebra.lean</code></td><td>We isolate stacking from inference; semantic content is parameterized.</td></tr>
+<tr><td>Emergent constraints are higher-order than the dynamics they organize</td><td>Deacon, <em>Incomplete Nature</em> (2012)</td><td>ch.&nbsp;7</td><td>Thm 9.3</td><td><code>GradedAlgebra.lean</code></td><td>Deacon's "absential" is replaced by a positive cocycle.</td></tr>
+<tr><td>Cultural representations propagate as quasi-population entities</td><td>Sperber, <em>Explaining Culture</em> (1996)</td><td>§3.4</td><td>Thm 9.1 (uniqueness)</td><td><code>GradedAlgebra.lean</code> + <code>TransmissionChains.lean</code></td><td>Population dynamics deferred to Vol. II.</td></tr>
+<tr><td>Hierarchical dynamics yield non-trivial closure relations</td><td>Juarrero, <em>Dynamics in Action</em> (1999)</td><td>ch.&nbsp;8</td><td>Thm 9.3 (associativity of grade jump)</td><td><code>GradedAlgebra.lean</code></td><td>We work statically; dynamics treated in Vol. V.</td></tr>
+<tr><td>Strange loops produce self-referential level shifts</td><td>Hofstadter, <em>I Am a Strange Loop</em> (2007)</td><td>ch.&nbsp;12</td><td>Thm 9.3 + Thm 6 (conjugation)</td><td><code>GradedAlgebra.lean</code> + <code>Conjugation.lean</code></td><td>Self-reference modeled via fixed points of conjugation, not directly.</td></tr>
+<tr><td>Compositionality determines meaning of complex from parts</td><td>Partee (1984)</td><td>p. 281</td><td>Thm 9.2</td><td><code>GradedAlgebra.lean</code></td><td>Strict compositionality is recovered when $\omega \equiv 0$.</td></tr>
+</tbody>
+</table>
+
+<h2>Worked Examples and Counter-Examples</h2>
+
+<p><strong>Example 1 (Free word algebra).</strong> Let $I = A^*$ be the free monoid on a finite alphabet
+$A$, with $\deg$ = word length, trivial pairing $\langle x,y\rangle = \mathbf{1}[x=y]$, $\alpha(w) = (a, w')$
+splitting off the first letter, and $\omega \equiv 0$. All three theorems hold trivially: decomposition is
+into letters (Thm&nbsp;9.1), grades are orthogonal (Thm&nbsp;9.2), and the cocycle vanishes (Thm&nbsp;9.3).
+This is the structuralist limit.</p>
+
+<p><strong>Example 2 (Hegelian triadic algebra).</strong> Let $I$ be generated by triples
+$(t,a,s)$ where $s$ is the synthesis of thesis $t$ and antithesis $a$. Set $\deg(s) = \deg(t) + \deg(a) + 1$
+so that $\omega \equiv 1$ on dialectical pairs and $0$ otherwise. Thm&nbsp;9.3 reduces to a counting
+identity on dialectical depth; Thm&nbsp;9.1 says every concept has a unique dialectical history (modulo
+re-bracketing); Thm&nbsp;9.2 says theses and antitheses of different depth are mutually unintelligible.</p>
+
+<p><strong>Counter-example (non-cocycle "emergence" fails).</strong> Define
+$\omega(x,y) := \deg(x) \cdot \deg(y)$. The grading equation $\deg(x\cdot y) = \deg(x) + \deg(y) + \omega(x,y)$
+still type-checks, but $\omega$ is not a cocycle: associativity of composition forces a contradiction at
+length 3. This shows that not every plausible "grade-jump" rule yields a graded idea algebra; the cocycle
+condition is doing real work.</p>
+
+<p><strong>Example 3 (Cognitive concept lattice).</strong> Take $I$ = formal concepts in the sense of Ganter
+&amp; Wille (1999), $\cdot$ = lattice join, $\deg$ = height in the lattice, $\alpha$ = decomposition into
+join-irreducibles, $\omega(x,y) = \deg(x \vee y) - \deg(x) - \deg(y)$. The cocycle identity is exactly the
+modularity defect of the lattice, and Thm&nbsp;9.1 specializes to the unique join-irreducible decomposition
+theorem.</p>
+
+<h2>Open Questions and Future Work</h2>
+
+<p>The literature leaves several questions open that the present formalization sharpens but does not fully
+resolve. <em>First</em>, no informal author has produced a satisfactory account of <em>negative</em> grade
+jumps — situations in which a composite is "simpler" than its parts (Hofstadter's collapse phenomena,
+Sperber's cognitive attractors). Our cocycle is $\mathbb{N}$-valued by construction; extending the
+formalization to a $\mathbb{Z}$-valued cocycle, while preserving Theorems&nbsp;9.1–9.3, is an open Lean
+project tracked in <code>Vol1/GradedAlgebra.lean</code>.</p>
+
+<p><em>Second</em>, the relationship between graded idea algebras and the operadic structures used in
+contemporary semantics (Mellies, 2017) is suggestive but unproven. Theorem&nbsp;9.3 is morally an
+operadic associativity, and a fully operadic reformulation might yield a cleaner statement of
+Theorem&nbsp;9.1.</p>
+
+<p><em>Third</em>, the empirical question of whether human conceptual systems actually obey the cocycle
+identity is wide open; the diagnostic batteries proposed in Volume&nbsp;IV give it experimental
+purchase but no published data yet exist. The formalization makes the question precise enough to be
+falsifiable, which is itself a contribution.</p>
+
+<h2>Further Reading</h2>
+
+<ul>
+<li><strong>Hegel, G.W.F. (1812/1969).</strong> <em>Wissenschaft der Logik.</em> Suhrkamp.
+The locus classicus for <em>Aufhebung</em> and the level structure of concepts.</li>
+<li><strong>Saussure, F. de (1916).</strong> <em>Cours de linguistique générale.</em>
+Founding text for differential and same-level value of signs; bears directly on Theorem&nbsp;9.2.</li>
+<li><strong>Lévi-Strauss, C. (1962).</strong> <em>La Pensée sauvage.</em> Plon.
+Source of the bricolage / mytheme decomposition formalized in Theorem&nbsp;9.1.</li>
+<li><strong>Brandom, R. (1994).</strong> <em>Making It Explicit.</em> Harvard.
+Inferentialist account of conceptual stacking; informal predecessor of the graded pairing.</li>
+<li><strong>Sperber, D. (1996).</strong> <em>Explaining Culture.</em> Blackwell.
+Population-level account of representational composition and propagation.</li>
+<li><strong>Deacon, T. (1997, 2012).</strong> <em>The Symbolic Species; Incomplete Nature.</em> Norton.
+Hierarchical and emergentist account of higher-order constraints; the most direct informal source for
+Theorem&nbsp;9.3.</li>
+<li><strong>Juarrero, A. (1999).</strong> <em>Dynamics in Action.</em> MIT.
+Dynamical-systems treatment of hierarchical closure relations.</li>
+<li><strong>Hofstadter, D. (2007).</strong> <em>I Am a Strange Loop.</em> Basic Books.
+Self-referential level shifts; relevant to the conjugation interaction with the grading.</li>
+<li><strong>Ganter, B. &amp; Wille, R. (1999).</strong> <em>Formal Concept Analysis.</em> Springer.
+Lattice-theoretic precursor; underlies Example&nbsp;3 above.</li>
+<li><strong>Mellies, P.-A. (2017).</strong> "Categorical semantics of linear logic," <em>Panoramas et
+Synthèses</em>. Operadic perspective relevant to the open questions section.</li>
+</ul>
+
+<h2>See Also</h2>
+
+<p>Concept pages:
+<a href="idea-composition-monoid.html">Idea composition monoid</a> ·
+<a href="resonance-pairing.html">Resonance pairing</a> ·
+<a href="aufhebung-decomposition.html">Aufhebung decomposition</a> ·
+<a href="emergence-cocycle.html">Emergence 2-cocycle</a> ·
+<a href="meaning-curvature.html">Meaning curvature</a> ·
+<a href="conjugation.html">Conjugation</a> ·
+<a href="transmission-chains.html">Transmission chains</a> ·
+<a href="structural-equivalence.html">Structural equivalence</a>.</p>
+
+<p>Project navigation:
+<a href="index.html">Home</a> ·
+<a href="axioms.html">Axioms</a> ·
+<a href="theorems.html">Theorems</a> ·
+<a href="literature.html">Literature bridge</a> ·
+<a href="vol1-foundations.html">Volume I overview</a> ·
+<a href="vol5-emergence.html">Volume V (Emergence)</a> ·
+<a href="vol6-advanced.html">Volume VI (Advanced applications)</a>.</p>
+
+<p>Lean source:
+<a href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/GradedAlgebra.lean"><code>IdeaTheory/Vol1/GradedAlgebra.lean</code></a>.</p>
+
+</main>
+</div>
+</body>
+</html>
