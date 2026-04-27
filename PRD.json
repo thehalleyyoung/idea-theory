@@ -61,7 +61,7 @@
         "foundations"
       ],
       "passes": false,
-      "attempts": 11,
+      "attempts": 12,
       "reviewer_notes": "lean/IdeaTheory/Theorems2.lean: contains `sorry`"
     },
     {
