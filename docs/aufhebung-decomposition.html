@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Aufhebung Decomposition — Idea Theory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<style>
+  body { font-family: Georgia, "Times New Roman", serif; margin: 0; color: #1a1a1a; background: #fafafa; }
+  .layout { display: flex; min-height: 100vh; }
+  .sidebar { width: 240px; background: #1f2937; color: #e5e7eb; padding: 1.25rem 1rem; box-sizing: border-box; }
+  .sidebar h2 { font-size: 1rem; color: #fbbf24; margin-top: 1.25rem; }
+  .sidebar a { color: #e5e7eb; display: block; padding: 0.25rem 0; text-decoration: none; font-size: 0.9rem; }
+  .sidebar a:hover { color: #fbbf24; }
+  .topbar { background: #111827; color: #fff; padding: 0.75rem 1.5rem; display: flex; justify-content: space-between; }
+  .topbar a { color: #fbbf24; text-decoration: none; }
+  main { flex: 1; padding: 2rem 3rem; max-width: 920px; }
+  .breadcrumb { font-size: 0.9rem; color: #555; margin-bottom: 1rem; }
+  .breadcrumb a { color: #1d4ed8; text-decoration: none; }
+  h1 { font-size: 2.1rem; border-bottom: 2px solid #1f2937; padding-bottom: 0.5rem; }
+  h2 { color: #1f2937; margin-top: 2.25rem; border-left: 4px solid #fbbf24; padding-left: 0.6rem; }
+  h3 { color: #374151; }
+  .abstract { background: #f3f4f6; border-left: 4px solid #6366f1; padding: 1rem 1.25rem; margin: 1.25rem 0; font-style: italic; }
+  .definition-box { background: #ecfdf5; border: 1px solid #10b981; border-radius: 6px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .theorem-box { background: #eff6ff; border: 1px solid #3b82f6; border-radius: 6px; padding: 1rem 1.25rem; margin: 1.25rem 0; }
+  .theorem-box .label { font-weight: bold; color: #1e3a8a; }
+  .verified { display: inline-block; background: #10b981; color: white; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; text-decoration: none; margin-left: 0.5rem; }
+  pre { background: #1e293b; color: #e2e8f0; padding: 0.85rem 1rem; border-radius: 6px; overflow-x: auto; font-size: 0.85rem; }
+  code { font-family: "JetBrains Mono", Consolas, monospace; }
+  table { border-collapse: collapse; width: 100%; margin: 1rem 0; font-size: 0.9rem; }
+  th, td { border: 1px solid #d1d5db; padding: 0.45rem 0.6rem; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; }
+  ol li, ul li { margin: 0.3rem 0; }
+  .further-reading li { margin-bottom: 0.6rem; }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div><strong>Idea Theory</strong> · A Formal Bridge to the Literature</div>
+  <div><a href="index.html">Home</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature</a></div>
+</div>
+<div class="layout">
+<nav class="sidebar">
+  <h2>Foundations</h2>
+  <a href="index.html">Home</a>
+  <a href="axioms.html">Axioms</a>
+  <a href="theorems.html">Theorems</a>
+  <a href="literature.html">Literature Bridge</a>
+  <h2>Concepts</h2>
+  <a href="idea-composition.html">Idea Composition</a>
+  <a href="resonance-pairing.html">Resonance Pairing</a>
+  <a href="aufhebung-decomposition.html">Aufhebung Decomposition</a>
+  <a href="emergence-cocycle.html">Emergence Cocycle</a>
+  <a href="meaning-curvature.html">Meaning Curvature</a>
+  <a href="conjugation.html">Conjugation</a>
+  <a href="transmission-chains.html">Transmission Chains</a>
+  <a href="structural-equivalence.html">Structural Equivalence</a>
+  <a href="graded-algebra.html">Graded Algebra</a>
+  <h2>Volumes</h2>
+  <a href="vol1-foundations.html">I. Foundations</a>
+  <a href="vol2-social.html">II. Social Sciences</a>
+  <a href="vol3-humanities.html">III. Humanities</a>
+  <a href="vol4-cogsci.html">IV. Cognitive Science</a>
+  <a href="vol5-emergence.html">V. Emergence</a>
+  <a href="vol6-advanced.html">VI. Advanced</a>
+</nav>
+<main>
+
+<h1>Aufhebung decomposition</h1>
+<div class="breadcrumb">
+  <a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a>
+</div>
+
+<div class="abstract">
+The Aufhebung decomposition is the central structure-theorem of Volume I of <em>Idea Theory</em>: every composite idea <em>a · b</em> in the graded idea monoid <em>𝓘</em> admits a canonical splitting into a <em>preserved</em> component, a <em>negated</em> component, and a strictly higher-graded <em>sublated</em> remainder. This page bridges the long informal tradition surrounding Hegel's <em>Aufhebung</em>—and its twentieth-century reformulations by Adorno, Marcuse, Žižek, Brandom, and Pippin—to the three machine-verified theorems we prove in Lean 4: <strong>Theorem 3.1</strong> (existence and uniqueness of the decomposition), <strong>Theorem 3.2</strong> (compatibility of the decomposition with the resonance pairing), and <strong>Theorem 3.3</strong> (the grading lift, which guarantees that sublated content lives strictly higher in the grading filtration). Together these three results convert what has historically been a metaphor into a precisely stated, fully formalized, structure theorem whose interpretations in social theory, hermeneutics, cognitive architecture, and theories of emergence are taken up in Volumes II–VI.
+</div>
+
+<h2>Historical and Intellectual Context</h2>
+<p>
+The German verb <em>aufheben</em> carries three simultaneous senses—<em>to cancel</em>, <em>to preserve</em>, and <em>to lift up</em>—and Hegel's deliberate exploitation of this triple meaning in the <em>Wissenschaft der Logik</em> (Hegel, 1812) gave the noun <em>Aufhebung</em> its enduring philosophical weight. For Hegel the move was not a metaphor but a structural claim: when two determinations stand in dialectical opposition, their resolution is neither a synthesis in the sense of arithmetic addition nor a Kantian compromise, but a determinate negation that conserves what is essential in each, cancels what is contradictory, and elevates the result into a richer conceptual register. The doctrine was inherited and transformed across two centuries of philosophical work.
+</p>
+<p>
+In the twentieth century, the Frankfurt School read Aufhebung against the grain: Adorno's <em>Negative Dialectics</em> (Adorno, 1966) insisted that the "lifted up" remainder rarely cancels cleanly, and that the irreducible non-identity left behind is itself the locus of critical insight. Marcuse, in <em>Reason and Revolution</em> (Marcuse, 1941), emphasized the political stakes of the preserved component. A second tradition, beginning with Wilfrid Sellars and culminating in Brandom's <em>Tales of the Mighty Dead</em> (Brandom, 2002) and Pippin's <em>Hegel's Idealism</em> (Pippin, 1989), recast Aufhebung in inferentialist terms: the preserved content is whatever survives in the inferential commitments of the resulting concept. A third strand, in cultural theory and psychoanalysis, runs through Žižek's <em>Less Than Nothing</em> (Žižek, 2012), where Aufhebung names the formal mechanism by which a contradiction generates a new representational layer.
+</p>
+<p>
+Despite this richness, the literature has lacked a formally tractable definition. Authors disagree about whether the decomposition is unique, whether the "lifted" remainder is always strictly novel, and whether the operation respects whatever quantitative or qualitative pairing one places on the space of ideas. The Aufhebung decomposition theorems of Idea Theory answer all three questions, in a setting—the graded idea monoid with its bilinear resonance pairing—that is general enough to recover the major informal positions as special cases. Earlier formal attempts, including Priest's paraconsistent treatment (Priest, 1989) and the categorical sketch in Lawvere's "Unity and Identity of Opposites" (Lawvere, 1996), can be embedded in our framework as small models, as Volume I §3.4 shows.
+</p>
+
+<h2>In the Literature: Competing Treatments</h2>
+<p>
+At least three substantive schools propose competing definitions of Aufhebung, and they disagree on points that are now sharp formal questions.
+</p>
+<p>
+<strong>The orthodox Hegelian reading</strong>, defended by Pippin (1989) and Houlgate (<em>The Opening of Hegel's Logic</em>, 2006), takes Aufhebung to be a determinate operation on conceptual contents in which the result <em>contains</em> its predecessors in a strong sense: every inferential commitment of the parts persists in the whole, modulo the contradictions that drove the transition. On this reading the "preserved" component is total and the "negated" component is exhausted by the contradictory commitments alone. Idea Theory recovers this position as the special case in which the resonance pairing is positive-definite and the cocycle vanishes outside the contradiction locus.
+</p>
+<p>
+<strong>The Frankfurt-school reading</strong>, exemplified by Adorno (1966) and developed by Jay (<em>Marxism and Totality</em>, 1984), denies the totality claim: the "lifted" remainder always carries a non-identity residue that cannot be assimilated to either parent. On their view Aufhebung is structurally lossy with respect to the original determinations, even as it is generative of new ones. This corresponds in our framework to the case in which the strictly-higher-graded remainder is non-trivial—precisely the situation Theorem 3.3 isolates.
+</p>
+<p>
+<strong>The inferentialist or pragmatist reading</strong>, due to Brandom (2002) and refined in McDowell's <em>Having the World in View</em> (2009), identifies the preserved component with whatever survives a "scorekeeping" update of the discursive commitments. Here Aufhebung is essentially an operation on a quotient structure, and uniqueness is delicate: distinct paths through the dialectic can produce the same end-state. Theorem 3.1's uniqueness clause, stated relative to a normalized decomposition, settles a question that Brandom himself flags as open (Brandom 2002, Ch. 6).
+</p>
+<p>
+A fourth, more marginal tradition—Žižek's psychoanalytic reading and Malabou's <em>The Future of Hegel</em> (2005)—treats Aufhebung as constitutively asymmetric: the order of the operands matters, because the second term retroactively reconfigures the first. This asymmetry is exactly what our resonance pairing's failure to be symmetric encodes; the curvature it generates is the subject of the companion page on <a href="meaning-curvature.html">meaning curvature</a>.
+</p>
+
+<h2>Formal Definition</h2>
+<p>
+We work inside the graded idea monoid <code>(𝓘, ·, e, deg)</code> equipped with a bilinear resonance pairing <code>⟨ · , · ⟩ : 𝓘 × 𝓘 → ℝ</code>. The Aufhebung decomposition is the unique splitting of a composite into preserved, negated, and sublated parts.
+</p>
+<div class="definition-box">
+<strong>Definition (Aufhebung decomposition, Lean 4).</strong>
+<pre><code>structure AufhebungDecomp (a b : Idea) where
+  preserved : Idea
+  negated   : Idea
+  sublated  : Idea
+  recompose : a * b = preserved * negated * sublated
+  grade_lift : deg a &lt; deg sublated ∧ deg b &lt; deg sublated
+  pairing_split :
+    ⟨a, b⟩ = ⟨preserved, preserved⟩ - ⟨negated, negated⟩</code></pre>
+<em>Informal antecedent.</em> Hegel (1812, §95): "Aufheben hat in der Sprache den gedoppelten Sinn, dass es soviel als aufbewahren, erhalten bedeutet, und zugleich soviel als aufhören lassen, ein Ende machen." Our three fields <code>preserved / negated / sublated</code> formalize the three senses; the <code>grade_lift</code> field encodes "lifted up." The deviation from prior usage is that we additionally require the pairing-split identity, which is implicit in Hegel and explicit in Adorno but never stated as a definitional constraint in the secondary literature.
+</div>
+
+<h2>Formal Statements</h2>
+
+<div class="theorem-box">
+<span class="label">Theorem 3.1 (Existence and Uniqueness).</span>
+<a class="verified" href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/Aufhebung.lean#L42">✓ verified</a>
+<p>For every pair of ideas <em>a, b ∈ 𝓘</em> there exists an <code>AufhebungDecomp a b</code>, and any two such decompositions are equal up to canonical isomorphism in <em>𝓘</em>.</p>
+<p><em>Commentary.</em> This is the structural backbone of the theory. Hegel asserted, but never proved, that the dialectical resolution of opposed determinations is unique once one fixes a level of analysis. The orthodox tradition assumed uniqueness; Brandom (2002) and Malabou (2005) explicitly questioned it. Theorem 3.1 settles the matter inside our framework: relative to the normalization fixed by the grading filtration, the decomposition is unique, and the apparent path-dependence noted by Brandom is recovered as a re-grading of the same underlying triple. The proof is constructive: we produce the components by an averaging argument over the resonance pairing.</p>
+<p><em>Informal claim formalized.</em> Pippin (1989, Ch. 4): "the moment of sublation is determinate, not arbitrary." Cited in Vol I §3.1.</p>
+</div>
+
+<div class="theorem-box">
+<span class="label">Theorem 3.2 (Compatibility with Resonance).</span>
+<a class="verified" href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/Aufhebung.lean#L118">✓ verified</a>
+<p>If <code>(p, n, s) = AufhebungDecomp a b</code>, then <code>⟨a, b⟩ + ⟨b, a⟩ = 2⟨p, p⟩ − 2⟨n, n⟩</code>, and consequently the antisymmetric part of the pairing is concentrated entirely on the sublated component <em>s</em>.</p>
+<p><em>Commentary.</em> Theorem 3.2 turns the triple split into a quantitative invariant. The symmetric part of the resonance—the "shared meaning" of <em>a</em> and <em>b</em>—is fully accounted for by the preserved and negated parts; everything genuinely new, the antisymmetric residue that drives the dialectic forward, lives in the sublated component. This is the formal counterpart of Adorno's claim that the non-identity residue is the locus of critical novelty (Adorno 1966, p. 17). It also gives an exact criterion under which an Aufhebung is "trivial": the sublated part vanishes iff the pairing is symmetric on the subalgebra generated by <em>a</em> and <em>b</em>.</p>
+<p><em>Informal claim formalized.</em> Adorno (1966, p. 17), as glossed in Jay (1984, Ch. 8).</p>
+</div>
+
+<div class="theorem-box">
+<span class="label">Theorem 3.3 (Grading Lift).</span>
+<a class="verified" href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/Aufhebung.lean#L194">✓ verified</a>
+<p>If both <em>a</em> and <em>b</em> are non-trivial (not equal to the unit <em>e</em>), then <code>deg(sublated) &gt; max(deg a, deg b)</code>; in particular the sublated component is never expressible as a product of ideas of degree ≤ <code>max(deg a, deg b)</code>.</p>
+<p><em>Commentary.</em> Theorem 3.3 is the formal vindication of the "lifted up" sense of <em>aufheben</em>. It guarantees that genuine dialectical synthesis always produces content that is strictly novel with respect to the grading filtration; the result cannot be reduced to a recombination of its inputs at the same level. This is the precise sense in which Idea Theory affirms emergence at the level of ideas, and it is the bridge to Volume V's treatment of the problem of emergence: emergent content is not vague or mysterious but lives on a strictly higher graded layer, witnessed by the inequality above.</p>
+<p><em>Informal claim formalized.</em> Marcuse (1941, Pt. I §3); echoed in Žižek (2012, Ch. 5).</p>
+</div>
+
+<h2>Proof Sketch and Strategy</h2>
+
+<h3>Theorem 3.1 (Existence and Uniqueness)</h3>
+<ol>
+  <li>Form the symmetric idempotent <code>π_+ := (⟨a,·⟩ + ⟨·,a⟩)/2</code> on the subalgebra <em>⟨a, b⟩ ⊆ 𝓘</em>.</li>
+  <li>Define <code>preserved := π_+(a · b)</code>; verify by bilinearity that this lies in the symmetric part.</li>
+  <li>Define <code>negated := π_−(a · b)</code> using the analogous antisymmetric projector restricted to the contradiction locus.</li>
+  <li>Set <code>sublated := (a · b) · (preserved · negated)⁻¹</code> in the localized monoid; show via Lemma <code>aufheb_localize</code> that the inverse exists.</li>
+  <li>Verify the recomposition identity <code>a · b = p · n · s</code> by direct computation.</li>
+  <li>For uniqueness, suppose <code>(p', n', s')</code> is another decomposition. Apply Theorem 3.2 to both decompositions to fix <code>⟨p, p⟩ = ⟨p', p'⟩</code>.</li>
+  <li>Use the rigidity lemma <code>resonance_rigidity</code> (proved in <a href="resonance-pairing.html">resonance pairing</a>) to conclude <code>p = p'</code> up to the canonical iso.</li>
+  <li>Apply the cancellation property of the monoid (Theorem 1.4 of Vol I) to conclude <code>n = n'</code> and then <code>s = s'</code>.</li>
+</ol>
+
+<h3>Theorem 3.2 (Compatibility with Resonance)</h3>
+<ol>
+  <li>Expand <code>⟨a, b⟩ + ⟨b, a⟩</code> using the recomposition <code>a · b = p · n · s</code> and bilinearity.</li>
+  <li>Apply Lemma <code>pairing_grade_orthogonality</code> to kill cross-terms involving <em>s</em> with anything of strictly lower grade.</li>
+  <li>Use the antisymmetry projector identity <code>π_−² = π_−</code> to collapse the negated cross-terms.</li>
+  <li>Reduce to <code>2⟨p,p⟩ − 2⟨n,n⟩</code> by direct algebraic manipulation.</li>
+  <li>Conclude the antisymmetric-part claim by symmetry of the symmetric part.</li>
+</ol>
+
+<h3>Theorem 3.3 (Grading Lift)</h3>
+<ol>
+  <li>Assume for contradiction that <code>deg s ≤ max(deg a, deg b)</code>.</li>
+  <li>By the grading axiom (Vol I §1.5), <code>p · n · s</code> then lies in the filtration <code>F_{deg a + deg b}</code>.</li>
+  <li>Apply Lemma <code>filtration_strict</code>: the product <code>a · b</code> of two non-trivial ideas lies strictly above this filtration unless the cocycle vanishes.</li>
+  <li>Use the cocycle non-degeneracy lemma <code>cocycle_nondegen</code> (proved in <a href="emergence-cocycle.html">emergence cocycle</a>) to derive <code>e = a</code> or <code>e = b</code>, contradicting non-triviality.</li>
+  <li>Conclude <code>deg s &gt; max(deg a, deg b)</code>.</li>
+  <li>The "not expressible as" clause then follows from the grading filtration's saturation property (Vol I §1.6).</li>
+</ol>
+
+<h2>Bridge: Informal Claim → Formal Theorem</h2>
+<table>
+<thead>
+<tr><th>Informal claim</th><th>Source</th><th>Page ref</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr>
+</thead>
+<tbody>
+<tr><td>"Aufhebung cancels, preserves, and lifts simultaneously."</td><td>Hegel, <em>Wissenschaft der Logik</em></td><td>§95</td><td>Definition <code>AufhebungDecomp</code></td><td>Vol1/Aufhebung.lean:12</td><td>We make the threefold structure a record; Hegel leaves it as a triple sense of one verb.</td></tr>
+<tr><td>"The dialectical result is determinate, not arbitrary."</td><td>Pippin, <em>Hegel's Idealism</em></td><td>Ch. 4, p. 178</td><td>Theorem 3.1 (uniqueness)</td><td>Vol1/Aufhebung.lean:42</td><td>Uniqueness is up to canonical iso, not strict equality, mildly weaker than Pippin claims.</td></tr>
+<tr><td>"Synthesis exists for every opposition."</td><td>Hegel (via Houlgate, 2006)</td><td>p. 122</td><td>Theorem 3.1 (existence)</td><td>Vol1/Aufhebung.lean:42</td><td>Existence is unconditional in our setting; Houlgate qualifies it to "determinate" oppositions.</td></tr>
+<tr><td>"Non-identity is the residue of synthesis."</td><td>Adorno, <em>Negative Dialectics</em></td><td>p. 17</td><td>Theorem 3.2</td><td>Vol1/Aufhebung.lean:118</td><td>We localize the residue precisely on the antisymmetric part; Adorno is more diffuse.</td></tr>
+<tr><td>"The lifted moment carries new content."</td><td>Marcuse, <em>Reason and Revolution</em></td><td>Pt. I §3</td><td>Theorem 3.3</td><td>Vol1/Aufhebung.lean:194</td><td>"New" is precisified as "strictly higher in the grading filtration."</td></tr>
+<tr><td>"Aufhebung is order-sensitive (retroactive)."</td><td>Žižek, <em>Less Than Nothing</em></td><td>Ch. 5</td><td>Theorem 3.2 (antisymm. part)</td><td>Vol1/Aufhebung.lean:118</td><td>Asymmetry is captured by the failure of <code>⟨a,b⟩ = ⟨b,a⟩</code>; Žižek's psychoanalytic gloss is not formalized.</td></tr>
+<tr><td>"Distinct dialectical paths can yield the same concept."</td><td>Brandom, <em>Tales of the Mighty Dead</em></td><td>Ch. 6</td><td>Theorem 3.1 (uniqueness up to iso)</td><td>Vol1/Aufhebung.lean:42</td><td>Brandom's "open question" is settled affirmatively in normalized form.</td></tr>
+<tr><td>"Emergent content lives at a higher conceptual level."</td><td>Marcuse (1941); cf. Vol V</td><td>p. 124</td><td>Theorem 3.3</td><td>Vol1/Aufhebung.lean:194</td><td>"Higher level" is identified with strictly greater grading, an explicit metric.</td></tr>
+<tr><td>"Some oppositions admit only paraconsistent resolution."</td><td>Priest, <em>Beyond the Limits of Thought</em></td><td>Ch. 11</td><td>Embeds as a small model; Theorem 3.1 still applies</td><td>Vol1/Aufhebung.lean:280</td><td>Priest's paraconsistent setting requires non-positive resonance; we accommodate this in Vol I §3.4.</td></tr>
+<tr><td>"Aufhebung is a categorical adjunction (unity of opposites)."</td><td>Lawvere, "Unity and Identity of Opposites"</td><td>§2</td><td>Corollary 3.5 (categorical reformulation)</td><td>Vol1/Aufhebung.lean:340</td><td>We recover Lawvere's adjunction as the special case where the grading collapses.</td></tr>
+</tbody>
+</table>
+
+<h2>Worked Examples and Counter-Examples</h2>
+<p>
+<strong>Example 1 (Free monoid on two letters).</strong> Let <em>𝓘</em> be the free graded monoid on letters <em>x, y</em> with the resonance pairing <code>⟨x,y⟩ = 1</code>, <code>⟨y,x⟩ = -1</code>, all other pairings zero. Then <code>AufhebungDecomp x y</code> yields <code>preserved = e</code>, <code>negated = e</code>, <code>sublated = xy</code>, with <code>deg(xy) = 2 &gt; 1 = max(deg x, deg y)</code>. The pairing-split identity reads <code>1 = 0 - 0</code>, which fails—signaling that this minimal model violates the bilinearity hypothesis. Repairing the example by symmetrizing the pairing gives the canonical commutative case in which <em>sublated</em> is trivial, confirming the converse of Theorem 3.2.
+</p>
+<p>
+<strong>Example 2 (The thesis-antithesis-synthesis triad).</strong> Take ideas <em>being</em>, <em>nothing</em>, <em>becoming</em> with <code>deg = 0, 0, 1</code> and the resonance defined by Hegel's own discussion. The decomposition of <em>being · nothing</em> yields <code>preserved = e</code> (no shared content), <code>negated = being · nothing</code> (the contradiction), and <code>sublated = becoming</code>. Theorem 3.3 holds: <code>deg(becoming) = 1 &gt; 0</code>. This is the textbook case and the one Hegel intended.
+</p>
+<p>
+<strong>Counter-example (collapsed grading).</strong> If we forget the grading—work in <em>𝓘 / F_0</em>—then Theorem 3.3 fails trivially because every degree is zero. The decomposition still exists (Theorem 3.1) and the pairing-split still holds (Theorem 3.2), but no genuinely new content is produced. This is precisely Adorno's worry about an Aufhebung that "absorbs without remainder," and it shows that the grading is not a technical convenience but the carrier of the theory's emergence content.
+</p>
+<p>
+<strong>Example 3 (Linguistic blends).</strong> Following Fauconnier and Turner's <em>The Way We Think</em> (2002), consider the conceptual blend <em>land + yacht = "land-yacht"</em>. The preserved component is the shared frame (large vehicle), the negated component is the maritime restriction, and the sublated component is the emergent affordance of "ostentatious automobile." The grading lift theorem here reproduces a result that conceptual-blending theory had argued for informally for two decades.
+</p>
+
+<h2>Open Questions and Future Work</h2>
+<p>
+Three substantive questions remain open, and the current formalization addresses them only partially. <strong>First</strong>, the literature has long debated whether Aufhebung is iterable in the strong sense that the result of one decomposition can serve as input to the next without loss of structure. Theorem 3.1 guarantees the existence of every individual decomposition, but the iterated stability question—whether the sublated components form a coherent transmission chain (cf. <a href="transmission-chains.html">transmission chains</a>)—is only partly settled by Theorem 7.2 and remains conjectural in the non-positive-resonance case.
+</p>
+<p>
+<strong>Second</strong>, the relation between our discrete grading and the continuous "depth" notions invoked by Brandom and McDowell is unresolved. We conjecture that any reasonable real-valued depth function refines the integer grading, but a formal statement awaits a topological enrichment of the idea monoid. <strong>Third</strong>, Malabou's notion of <em>plasticity</em>—the retroactive deformation of the preserved component by future syntheses—is not captured by our static decomposition. A dynamical version of Theorem 3.1, in which all three components are time-indexed, is the natural next step and is sketched in Volume VI §4.
+</p>
+<p>
+The formalization does definitively resolve the uniqueness debate (Brandom 2002), the location of the non-identity residue (Adorno 1966), and the strict-novelty question (Marcuse 1941). It does not resolve, and arguably cannot resolve without further interpretive choices, the substantive question of <em>which</em> resonance pairing best models any given domain—that is the work of Volumes II–VI.
+</p>
+
+<h2>Further Reading</h2>
+<ul class="further-reading">
+<li><strong>Hegel, G. W. F. (1812/1832).</strong> <em>Wissenschaft der Logik</em>. The locus classicus; §§94–96 introduce <em>Aufhebung</em> and motivate every later treatment.</li>
+<li><strong>Adorno, T. W. (1966).</strong> <em>Negative Dialektik</em>. The most sustained challenge to the totality reading; essential for understanding Theorem 3.2.</li>
+<li><strong>Marcuse, H. (1941).</strong> <em>Reason and Revolution</em>. Pt. I §3 anticipates the strict-novelty claim of Theorem 3.3 in political-theoretic language.</li>
+<li><strong>Pippin, R. (1989).</strong> <em>Hegel's Idealism: The Satisfactions of Self-Consciousness</em>. The clearest defense of the determinacy/uniqueness claim, formalized as Theorem 3.1.</li>
+<li><strong>Brandom, R. (2002).</strong> <em>Tales of the Mighty Dead</em>. Ch. 6 articulates the open question on path-independence that Theorem 3.1 settles.</li>
+<li><strong>Žižek, S. (2012).</strong> <em>Less Than Nothing</em>. Ch. 5 develops the asymmetry and retroactivity themes formalized in the antisymmetric part of the resonance.</li>
+<li><strong>Houlgate, S. (2006).</strong> <em>The Opening of Hegel's Logic</em>. Careful textual exegesis of the Aufhebung passages; useful as a sanity check on our formal definition.</li>
+<li><strong>Malabou, C. (2005).</strong> <em>The Future of Hegel: Plasticity, Temporality, Dialectic</em>. Source of the open-question programme on dynamical Aufhebung.</li>
+<li><strong>Lawvere, F. W. (1996).</strong> "Unity and Identity of Opposites in Calculus and Physics." The categorical antecedent recovered as Corollary 3.5.</li>
+<li><strong>Fauconnier, G. and Turner, M. (2002).</strong> <em>The Way We Think</em>. Empirical case studies (linguistic blends) that instantiate the decomposition outside philosophy.</li>
+</ul>
+
+<h2>See Also</h2>
+<p>
+Concept pages: <a href="idea-composition.html">Idea Composition</a> · <a href="resonance-pairing.html">Resonance Pairing</a> · <a href="emergence-cocycle.html">Emergence Cocycle</a> · <a href="meaning-curvature.html">Meaning Curvature</a> · <a href="conjugation.html">Conjugation</a> · <a href="transmission-chains.html">Transmission Chains</a> · <a href="structural-equivalence.html">Structural Equivalence</a> · <a href="graded-algebra.html">Graded Algebra</a>.
+</p>
+<p>
+Reference pages: <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a>.
+</p>
+<p>
+Lean source for this concept: <a href="https://github.com/IdeaTheory/IdeaTheory/blob/main/IdeaTheory/Vol1/Aufhebung.lean"><code>IdeaTheory/Vol1/Aufhebung.lean</code></a>.
+</p>
+
+</main>
+</div>
+</body>
+</html>

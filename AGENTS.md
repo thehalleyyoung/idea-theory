@@ -564,3 +564,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 23 [website_concept] Website page: resonance pairing
 [website_concept] Website page: resonance pairing
+
+### Iter 24 [website_concept] Website page: Aufhebung decomposition
+[website_concept] Website page: Aufhebung decomposition — bounced: docs/aufhebung-decomposition.html: broken link → transmission-chains.html; docs/aufhebung-decomposition.html: broken link → graded-algebra.html

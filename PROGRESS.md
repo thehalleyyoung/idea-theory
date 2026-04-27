@@ -1094,3 +1094,19 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 23 — 2026-04-27 17:31
 **Task:** `website_concept_2` Website page: resonance pairing (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 24 — 2026-04-27 17:34
+**Task:** `website_concept_3` Website page: Aufhebung decomposition (attempt 1)  
+**Verdict:** ✗ BOUNCE (11 issues)  
+**Issues:**
+  - docs/aufhebung-decomposition.html: broken link → transmission-chains.html
+  - docs/aufhebung-decomposition.html: broken link → graded-algebra.html
+  - docs/aufhebung-decomposition.html: broken link → vol1-foundations.html
+  - docs/aufhebung-decomposition.html: broken link → vol2-social.html
+  - docs/aufhebung-decomposition.html: broken link → vol3-humanities.html
+  - docs/aufhebung-decomposition.html: broken link → vol4-cogsci.html
+  - docs/aufhebung-decomposition.html: broken link → vol5-emergence.html
+  - docs/aufhebung-decomposition.html: broken link → vol6-advanced.html
+  - docs/aufhebung-decomposition.html: broken link → transmission-chains.html
+  - docs/aufhebung-decomposition.html: broken link → transmission-chains.html
+  - docs/aufhebung-decomposition.html: broken link → graded-algebra.html
