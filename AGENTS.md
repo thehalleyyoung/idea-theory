@@ -360,3 +360,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 10 [lean_theorems] Lean theorems: hermeneutic interpretation
 [lean_theorems] Lean theorems: hermeneutic interpretation
+
+### Iter 11 [lean_theorems] Lean theorems: philosophical reference
+[lean_theorems] Lean theorems: philosophical reference
