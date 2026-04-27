@@ -61,7 +61,7 @@
         "foundations"
       ],
       "passes": false,
-      "attempts": 2,
+      "attempts": 3,
       "reviewer_notes": "missing file: lean/IdeaTheory/Theorems2.lean"
     },
     {
