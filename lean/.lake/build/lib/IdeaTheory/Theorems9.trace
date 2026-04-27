@@ -1,0 +1,17 @@
+{"log":
+ [{"message":
+   ".> LEAN_PATH=././.lake/packages/Cli/.lake/build/lib:././.lake/packages/batteries/.lake/build/lib:././.lake/packages/Qq/.lake/build/lib:././.lake/packages/aesop/.lake/build/lib:././.lake/packages/proofwidgets/.lake/build/lib:././.lake/packages/importGraph/.lake/build/lib:././.lake/packages/LeanSearchClient/.lake/build/lib:././.lake/packages/plausible/.lake/build/lib:././.lake/packages/mathlib/.lake/build/lib:././.lake/build/lib DYLD_LIBRARY_PATH= /Users/halleyyoung/.elan/toolchains/leanprover--lean4---v4.15.0/bin/lean -Dpp.unicode.fun=true -DautoImplicit=false -Dlinter.unusedVariables=false ././././IdeaTheory/Theorems9.lean -R ./././. -o ././.lake/build/lib/IdeaTheory/Theorems9.olean -i ././.lake/build/lib/IdeaTheory/Theorems9.ilean -c ././.lake/build/ir/IdeaTheory/Theorems9.c --json",
+   "level": "trace"},
+  {"message":
+   "././././IdeaTheory/Theorems9.lean:268:0: automatically included section variable(s) unused in theorem 'IdeaTheory.IdeaPair.swap_swap':\n  inst\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit inst in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems9.lean:661:0: automatically included section variable(s) unused in theorem 'IdeaTheory.IdeaPair.swap_involutive':\n  inst\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit inst in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems9.lean:665:0: automatically included section variable(s) unused in theorem 'IdeaTheory.IdeaPair.swap_fst':\n  inst\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit inst in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"},
+  {"message":
+   "././././IdeaTheory/Theorems9.lean:669:0: automatically included section variable(s) unused in theorem 'IdeaTheory.IdeaPair.swap_snd':\n  inst\nconsider restructuring your `variable` declarations so that the variables are not in scope or explicitly omit them:\n  omit inst in theorem ...\nnote: this linter can be disabled with `set_option linter.unusedSectionVars false`",
+   "level": "warning"}],
+ "depHash": "7662330429859292875"}
