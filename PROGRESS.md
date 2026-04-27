@@ -636,3 +636,9 @@ Ralph++ Formalization Orchestrator — iteration journal.
 **Verdict:** ✗ BOUNCE (1 issues)  
 **Issues:**
   - missing file: lean/IdeaTheory/Theorems9.lean
+
+## Iter 16 — 2026-04-27 12:25
+**Task:** `theorems_9` Lean theorems: Idea Structures (attempt 13)  
+**Verdict:** ✗ BOUNCE (1 issues)  
+**Issues:**
+  - lean/IdeaTheory/Theorems9.lean: missing namespace declaration
