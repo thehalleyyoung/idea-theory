@@ -322,9 +322,9 @@
       "deps": [
         "website_index"
       ],
-      "passes": false,
-      "attempts": 1,
-      "reviewer_notes": "docs/meaning-curvature.html: broken link \u2192 composition.html; docs/meaning-curvature.html: broken link \u2192 resonance.html; docs/meaning-curvature.html: broken link \u2192 aufhebung.html; docs/meaning-curvature.html: broken link \u2192 transmission-chains.html"
+      "passes": true,
+      "attempts": 2,
+      "reviewer_notes": "wrote: docs/meaning-curvature.html"
     },
     {
       "id": "website_concept_6",

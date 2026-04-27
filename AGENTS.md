@@ -579,3 +579,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 28 [website_concept] Website page: meaning curvature
 [website_concept] Website page: meaning curvature — bounced: docs/meaning-curvature.html: broken link → composition.html; docs/meaning-curvature.html: broken link → resonance.html
+
+### Iter 29 [website_concept] Website page: meaning curvature
+[website_concept] Website page: meaning curvature

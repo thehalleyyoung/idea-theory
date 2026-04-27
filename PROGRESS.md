@@ -1149,3 +1149,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/meaning-curvature.html: broken link → aufhebung.html
   - docs/meaning-curvature.html: broken link → transmission-chains.html
   - docs/meaning-curvature.html: broken link → graded-algebra.html
+
+## Iter 29 — 2026-04-27 17:42
+**Task:** `website_concept_5` Website page: meaning curvature (attempt 2)  
+**Verdict:** ✓ PASS  

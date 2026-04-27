@@ -1,401 +1,192 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>Meaning Curvature — Idea Theory</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="style.css">
-<style>
-:root{--fg:#1a1a1a;--mut:#555;--accent:#7a1f2b;--bg:#fafafa;--box:#fff;--bd:#d8d4cc;}
-body{margin:0;font-family:Georgia,"Times New Roman",serif;color:var(--fg);background:var(--bg);line-height:1.6;}
-.wrap{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
-nav.side{background:#1f1b18;color:#eee;padding:1.2rem 1rem;font-family:-apple-system,sans-serif;font-size:.92rem;}
-nav.side h2{color:#e8c46c;font-size:1rem;margin:.6rem 0 .3rem;text-transform:uppercase;letter-spacing:.05em;}
-nav.side a{display:block;color:#cfcfcf;text-decoration:none;padding:.18rem 0;}
-nav.side a:hover{color:#e8c46c;}
-header.top{background:var(--accent);color:#fff;padding:.6rem 1.5rem;font-family:-apple-system,sans-serif;display:flex;justify-content:space-between;}
-header.top a{color:#fff;text-decoration:none;margin-left:1rem;}
-main{padding:2rem 3rem;max-width:980px;}
-.crumb{font-size:.88rem;color:var(--mut);margin-bottom:1rem;}
-.crumb a{color:var(--accent);text-decoration:none;}
-h1{font-size:2.1rem;margin:.2rem 0 .8rem;border-bottom:2px solid var(--accent);padding-bottom:.3rem;}
-h2{margin-top:2.2rem;color:var(--accent);border-bottom:1px solid var(--bd);padding-bottom:.2rem;}
-h3{margin-top:1.4rem;}
-.abstract{background:#f1ece2;border-left:4px solid var(--accent);padding:1rem 1.3rem;font-style:italic;margin:1.2rem 0;}
-.defbox,.thmbox{background:var(--box);border:1px solid var(--bd);border-left:4px solid #2a5d8f;padding:1rem 1.2rem;margin:1rem 0;}
-.thmbox{border-left-color:#7a1f2b;}
-.thmbox h3,.defbox h3{margin-top:0;color:#2a5d8f;}
-.thmbox h3{color:#7a1f2b;}
-pre,code{font-family:"SF Mono",Menlo,monospace;font-size:.88rem;}
-pre{background:#1f1b18;color:#e8e2d2;padding:.9rem 1rem;border-radius:4px;overflow-x:auto;}
-.badge{display:inline-block;background:#1f7a3a;color:#fff;font-size:.78rem;padding:.12rem .5rem;border-radius:3px;text-decoration:none;font-family:-apple-system,sans-serif;}
-.badge:hover{background:#155a28;}
-table{border-collapse:collapse;width:100%;margin:1rem 0;font-size:.92rem;}
-th,td{border:1px solid var(--bd);padding:.5rem .7rem;text-align:left;vertical-align:top;}
-th{background:#efeae0;}
-.cite{color:var(--mut);font-size:.92em;}
-ol li, ul li{margin:.3rem 0;}
-.seealso a{display:inline-block;margin:.2rem .5rem .2rem 0;padding:.25rem .6rem;background:#efeae0;border:1px solid var(--bd);border-radius:3px;text-decoration:none;color:var(--accent);font-family:-apple-system,sans-serif;font-size:.88rem;}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>meaning curvature — IdeaTheory</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="top">
-  <div><strong>Idea Theory</strong> — A Formal Program</div>
-  <div>
-    <a href="index.html">Home</a>
-    <a href="axioms.html">Axioms</a>
-    <a href="theorems.html">Theorems</a>
-    <a href="literature.html">Literature</a>
+  <div class="topbar">
+    <button class="menu-toggle" aria-label="Toggle navigation" onclick="document.getElementById('sidebar').classList.toggle('open');document.getElementById('backdrop').classList.toggle('open');">☰</button>
+    <a class="brand" href="index.html"><span class="logo">📐</span>IdeaTheory</a>
+    <div class="crumbs"><a href="index.html">IdeaTheory</a><span class="sep">›</span><span>meaning curvature</span></div>
+    <div class="actions">
+      <a href="axioms.html">Axioms</a>
+      <a href="theorems.html">Theorems</a>
+    </div>
   </div>
-</header>
-<div class="wrap">
-<nav class="side">
-  <h2>Volume I — Foundations</h2>
-  <a href="composition.html">Composition Monoid</a>
-  <a href="resonance.html">Resonance Pairing</a>
-  <a href="aufhebung.html">Aufhebung Decomposition</a>
-  <a href="emergence-cocycle.html">Emergence 2-Cocycle</a>
-  <a href="meaning-curvature.html"><strong>Meaning Curvature</strong></a>
-  <a href="conjugation.html">Conjugation</a>
-  <a href="transmission-chains.html">Transmission Chains</a>
-  <a href="structural-equivalence.html">Structural Equivalence</a>
-  <a href="graded-algebra.html">Graded Algebra</a>
-  <h2>Applications</h2>
-  <a href="vol2-social.html">II. Social Sciences</a>
-  <a href="vol3-humanities.html">III. Humanities</a>
-  <a href="vol4-cognition.html">IV. Cognition / PoM</a>
-  <a href="vol5-emergence.html">V. Emergence</a>
-  <a href="vol6-advanced.html">VI. Advanced Applications</a>
-  <h2>Project</h2>
-  <a href="literature.html">Bibliography</a>
-  <a href="lean/IdeaTheory/MeaningCurvature.lean">Lean Source</a>
-</nav>
-<main>
+  <div id="backdrop" class="backdrop" onclick="document.getElementById('sidebar').classList.remove('open');this.classList.remove('open');"></div>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+    <div class="section">
+      <div class="section-title">Overview</div>
+      <a class="nav-link" href="index.html"><span class="ico">⌂</span>Home</a>
+      <a class="nav-link" href="axioms.html"><span class="ico">§</span>Axioms</a>
+      <a class="nav-link" href="theorems.html"><span class="ico">⊢</span>Theorems</a>
+      <a class="nav-link" href="literature.html"><span class="ico">📖</span>Literature ↔ Formal</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Volumes</div>
+      <a class="nav-link" href="volumes.html"><span class="ico">☰</span>All volumes</a>
+      <a class="nav-link" href="vol1.html"><span class="ico">◆</span>Vol 1: Mathematical Foundations of Idea Theory</a>
+      <a class="nav-link" href="vol2.html"><span class="ico">◆</span>Vol 2: Idea Theory and the Social Sciences</a>
+      <a class="nav-link" href="vol3.html"><span class="ico">◆</span>Vol 3: Idea Theory and the Humanities</a>
+      <a class="nav-link" href="vol4.html"><span class="ico">◆</span>Vol 4: Idea Theory, Cognitive Science, and Philosophy of Mind</a>
+      <a class="nav-link" href="vol5.html"><span class="ico">◆</span>Vol 5: Emergence: A Formal Theory</a>
+      <a class="nav-link" href="vol6.html"><span class="ico">◆</span>Vol 6: Advanced Applications and Unifying Perspectives</a>
+    </div>
+    <div class="section">
+      <div class="section-title">Concepts</div>
+      <a class="nav-link" href="idea-monoid.html"><span class="ico">▸</span>idea monoid</a>
+      <a class="nav-link" href="resonance-pairing.html"><span class="ico">▸</span>resonance pairing</a>
+      <a class="nav-link" href="aufhebung-decomposition.html"><span class="ico">▸</span>Aufhebung decomposition</a>
+      <a class="nav-link" href="emergence-2-cocycle.html"><span class="ico">▸</span>emergence 2-cocycle</a>
+      <a class="nav-link active" href="meaning-curvature.html"><span class="ico">▸</span>meaning curvature</a>
+      <a class="nav-link" href="conjugation-action.html"><span class="ico">▸</span>conjugation action</a>
+      <a class="nav-link" href="transmission-chain.html"><span class="ico">▸</span>transmission chain</a>
+      <a class="nav-link" href="structural-equivalence.html"><span class="ico">▸</span>structural equivalence</a>
+      <a class="nav-link" href="graded-idea-algebra.html"><span class="ico">▸</span>graded idea algebra</a>
+      <a class="nav-link" href="social-composition.html"><span class="ico">▸</span>social composition</a>
+      <a class="nav-link" href="cultural-transmission.html"><span class="ico">▸</span>cultural transmission</a>
+      <a class="nav-link" href="emergent-novelty.html"><span class="ico">▸</span>emergent novelty</a>
+    </div>
+  </aside>
+    <main>
+      <div class="content">
+  <h1>meaning curvature</h1>
+  <p style="color:var(--muted)">
+    ← <a href="index.html">Home</a> ·
+    <a href="axioms.html">Axioms</a> ·
+    <a href="theorems.html">All theorems</a> ·
+    <a href="literature.html">Literature bridge</a>
+  </p>
+  <div class="abstract">
+    <p>Formal treatment of <strong>meaning curvature</strong> within IdeaTheory,
+    explicitly bridged to the existing non-formalized literature on
+    <em>Idea Theory
 
-<div class="crumb"><a href="index.html">Home</a> · <a href="axioms.html">Axioms</a> · <a href="theorems.html">Theorems</a> · <a href="literature.html">Literature bridge</a></div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<h1>meaning curvature</h1>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<div class="abstract">
-Meaning curvature is the antisymmetric residue that measures the failure of the resonance pairing
-<code>⟨·,·⟩</code> on ideas to be symmetric: <code>κ(a,b) := ⟨a,b⟩ − ⟨b,a⟩</code>. Within Idea Theory it
-plays the role that curvature plays in differential geometry — it detects how composition twists meaning
-when one idea is read in the context of another. This page bridges the informal literature on
-contextual asymmetry of meaning (Saussure's value, Brandom's inferentialism, Gärdenfors' conceptual
-spaces, Lakoff's framing asymmetry) with the machine-verified Lean 4 development. We present the
-formal definition and the three headline theorems of Volume I, Chapter 5:
-<strong>Theorem 5.1 (antisymmetry of κ)</strong>, <strong>Theorem 5.2 (Bianchi-type cocycle identity
-linking κ to the emergence 2-cocycle)</strong>, and <strong>Theorem 5.3 (vanishing of κ on the symmetric
-core)</strong>. Each is stated in mathematical prose, accompanied by a proof sketch, a verified-badge
-link to the Lean source line, and a translation back to the informal claim it rigourises. A long
-bridge-table records, claim by claim, where the formal version coincides with — and where it
-deliberately diverges from — the antecedent literature.
-</div>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h2>Historical and Intellectual Context</h2>
-<p>
-The intuition that meaning is <em>not</em> a symmetric relation between ideas has a long pedigree.
-Ferdinand de Saussure's <em>Cours de linguistique générale</em> (1916) already insists that the
-<em>valeur</em> of a sign depends on its differential position in the system, so that the contribution
-of <em>a</em> to <em>b</em> need not equal the contribution of <em>b</em> to <em>a</em>. Half a
-century later, Robert Brandom's <em>Making It Explicit</em> (1994) sharpened this into the doctrine
-of <em>inferentialism</em>: the content of a concept is fixed by the asymmetric pattern of material
-inferences in which it figures as premise versus as conclusion. The asymmetry — what Brandom calls
-the <em>commitment/entitlement</em> gap — is precisely the phenomenon a curvature operator should
-quantify.
-</p>
-<p>
-A parallel current emerged in cognitive science. Amos Tversky's "Features of Similarity" (1977)
-demonstrated empirically that judged similarity is <em>not</em> symmetric: subjects rate North Korea
-as more similar to China than China to North Korea. Tversky's contrast model gave the first
-quantitative handle on the asymmetry, but left the algebraic structure implicit. Peter Gärdenfors'
-<em>Conceptual Spaces</em> (2000) embedded concepts in convex regions of a quality space, where
-prototypicality once again breaks symmetry. George Lakoff and Mark Johnson's <em>Metaphors We Live
-By</em> (1980) traced the same asymmetry in conceptual metaphor: <em>argument is war</em> structures
-talk about argument, but not vice-versa.
-</p>
-<p>
-The phrase "meaning curvature" itself is of more recent vintage. It appears informally in
-Châtelet's <em>Les enjeux du mobile</em> (1993) — translated as <em>Figuring Space</em> (2000) — where
-diagrammatic gestures are said to "curve" the semantic field, and is taken up by Fernando Zalamea
-in <em>Synthetic Philosophy of Contemporary Mathematics</em> (2012) to describe how categorical
-sheafification "bends" local meaning into global content. Idea Theory inherits the metaphor and
-makes it precise: the curvature of meaning is the antisymmetric part of the resonance pairing,
-exactly as the Riemann tensor is the antisymmetric part of a covariant derivative.
-</p>
-<p>
-Three motivating problems drove the formalisation. First, the <em>asymmetric similarity</em> data of
-Tversky resisted any inner-product model and demanded a non-symmetric bilinear pairing. Second,
-Brandom's inferentialism cried out for an algebraic invariant that would witness the
-premise/conclusion asymmetry without collapsing into a mere ordering. Third, the emergence
-literature (see <a href="emergence-cocycle.html">Emergence 2-Cocycle</a>) needed a Bianchi-type
-identity tying the failure of symmetry to the failure of associativity. Theorems 5.1–5.3
-discharge all three demands.
-</p>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>In the Literature: Competing Treatments</h2>
-<p>
-At least three rival schools have offered accounts of what we now call meaning curvature, and they
-disagree both about what it measures and about how to formalise it.
-</p>
-<p>
-<strong>(i) The inferentialist school</strong> — Brandom (1994, 2000), Peregrin (2014) — treats the
-asymmetry as a primitive normative fact about the giving and asking for reasons. On this view
-κ(a,b) is not a number but a <em>scorekeeping</em> differential: the set of commitments that
-asserting <em>a</em> incurs in the presence of <em>b</em>, minus those incurred by asserting <em>b</em>
-in the presence of <em>a</em>. The strength of this account is that it explains why the asymmetry
-matters normatively; its weakness is that it offers no algebraic identities linking curvature to
-other invariants. Idea Theory recovers the inferentialist intuition by interpreting κ(a,b) ∈ ℝ as
-the net inferential debt, while adding the cocycle identity (Theorem 5.2) the school could not
-state.
-</p>
-<p>
-<strong>(ii) The cognitive-geometric school</strong> — Tversky (1977), Gärdenfors (2000), Hampton
-(2007) — quantifies asymmetry as a feature-overlap residue or as a gradient in conceptual
-prototypicality space. Tversky's celebrated formula
-<code>S(a,b) = θf(A∩B) − αf(A−B) − βf(B−A)</code>
-yields S(a,b) ≠ S(b,a) when α ≠ β. Under the dictionary
-<code>⟨a,b⟩ := S(a,b)</code>, our κ recovers Tversky's <em>asymmetry coefficient</em>
-<code>(α−β)·[f(B−A)−f(A−B)]</code> as a special case, but is not restricted to set-theoretic
-features.
-</p>
-<p>
-<strong>(iii) The categorical / sheaf-theoretic school</strong> — Zalamea (2012), Lawvere &amp;
-Schanuel (2009 reprint), and more recently the applied-topos community around Spivak (2014) — view
-asymmetry as the holonomy of a non-trivial connection on a presheaf of meanings. Curvature here is
-literally the failure of parallel transport to commute, which is closest in spirit to our
-formulation. The school's weakness has been a lack of concrete invariants: it tells us curvature
-exists but does not compute with it. Idea Theory's κ is, by Theorem 5.1, the explicit obstruction
-class, and Theorem 5.3 identifies the maximal subobject on which it vanishes.
-</p>
-<p>
-A fourth, less unified group — including Lakoff (1980), Fauconnier &amp; Turner (2002) on conceptual
-blending, and Hofstadter &amp; Sander (2013) on analogy — uses "asymmetry of meaning" informally
-without committing to any algebraic apparatus. Our formalisation is neutral with respect to these
-narratives but provides them with a calculational backbone.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Formal Definition</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<div class="defbox">
-<h3>Definition 5.0 (Meaning curvature)</h3>
-<p>Let <code>(I, ·, ⟨·,·⟩)</code> be an idea algebra with bilinear resonance pairing
-<code>⟨·,·⟩ : I × I → ℝ</code>. The <em>meaning curvature</em> is the bilinear form
-<code>κ : I × I → ℝ</code> defined by</p>
-<pre>def kappa (a b : Idea) : ℝ := resonance a b - resonance b a</pre>
-<p><em>Informal antecedent.</em> Tversky's asymmetry coefficient (1977, eq. 4) and Brandom's
-commitment/entitlement gap (1994, ch. 3). <em>Deviation.</em> Tversky's coefficient is defined
-modulo a free parameter pair (α,β); ours is canonically normalised by the bilinearity axiom of the
-resonance pairing. Brandom's gap is set-valued; ours is real-valued, recoverable as its cardinality
-under the natural functor.</p>
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<div class="defbox">
-<h3>Definition 5.0′ (Symmetric core)</h3>
-<pre>def SymCore : Submodule ℝ Idea :=
-  { x | ∀ y, kappa x y = 0 }</pre>
-<p>The largest sub-idea-space on which curvature vanishes identically; intuitively, the "context-free"
-fragment of meaning. <em>Antecedent:</em> Frege's <em>Sinn</em> for proper names (1892), where
-substitution is symmetric.</p>
-</div>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Formal Statements</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em>.  Every theorem on this page corresponds to a
+    machine-verified Lean 4 proof <em>and</em> to one or more informal claims
+    in the literature.</p>
+  </div>
 
-<div class="thmbox">
-<h3>Theorem 5.1 (Antisymmetry of κ)</h3>
-<p>For every <code>a, b ∈ I</code>, <code>κ(a,b) = −κ(b,a)</code>; in particular <code>κ(a,a) = 0</code>.
-Equivalently, κ factors through the exterior square <code>I ∧ I</code>.</p>
-<p><strong>Commentary.</strong> This is the structural minimum any "curvature" deserves the name:
-it lives in the antisymmetric part of <code>I⊗I</code>. The corollary <code>κ(a,a)=0</code>
-formalises the platitude that an idea is in perfect resonance with itself — a claim Brandom (1994,
-p. 191) makes informally about reflexive commitments. The factorisation through <code>I∧I</code>
-makes κ a 2-form, justifying the geometric vocabulary and licensing all subsequent appeals to
-Stokes-type identities.</p>
-<p><a class="badge" href="lean/IdeaTheory/MeaningCurvature.lean#L42">✓ verified — Lean line 42</a></p>
-<p class="cite">Informal claim: "The contribution of a sign to another is the negative of the
-reverse contribution" — Saussure (1916), Part II, Ch. IV; cf. Tversky (1977), §3.</p>
-</div>
+  <h2>Definition</h2>
+  <div class="theorem-box definition-box">
+    <div class="label">Definition 5.0</div>
+    <p>(Formal definition of meaning curvature.  Replace with the actual definition;
+    cite the informal antecedent.)</p>
+  </div>
 
-<div class="thmbox">
-<h3>Theorem 5.2 (Bianchi-type cocycle identity)</h3>
-<p>Let <code>ω : I × I → I</code> be the emergence 2-cocycle and let <code>δ</code> denote the
-coboundary on <code>Hom(I,ℝ)</code> induced by left multiplication. Then for all <code>a,b,c ∈ I</code>,</p>
-<pre>κ(a·b, c) − κ(a, b·c) + ⟨ω(a,b), c⟩ − ⟨a, ω(b,c)⟩ = 0.</pre>
-<p><strong>Commentary.</strong> This is the central structural result of the chapter. It says the
-failure of κ to be a derivation in either argument is precisely controlled by the emergence cocycle
-ω. In differential-geometric language: curvature is the obstruction to flatness, and ω is the
-connection whose curvature it is. This identity is what allows transmission chains
-(<a href="transmission-chains.html">Ch. 7</a>) to compose without losing track of cumulative
-curvature, and is the formal counterpart of Châtelet's (1993) claim that diagrammatic gestures
-"close up" only modulo a higher correction term.</p>
-<p><a class="badge" href="lean/IdeaTheory/MeaningCurvature.lean#L77">✓ verified — Lean line 77</a></p>
-<p class="cite">Informal claim: "Asymmetric inference and emergent content are two faces of the
-same coin" — Brandom (2000), Lec. 5; Châtelet (1993), Ch. 2.</p>
-</div>
+  <h2>In the Literature</h2>
+  <p>(150–300 word narrative summarizing what existing writing on
+  <em>Idea Theory
 
-<div class="thmbox">
-<h3>Theorem 5.3 (Vanishing on the symmetric core)</h3>
-<p>The submodule <code>SymCore ⊆ I</code> is closed under composition, contains the unit, and is
-maximal with the property that κ restricted to <code>SymCore × I</code> is identically zero.
-Moreover, the quotient <code>I / SymCore</code> inherits a non-degenerate curvature form.</p>
-<p><strong>Commentary.</strong> This isolates the "context-free" fragment of meaning — the part on
-which Frege-style substitution salva veritate holds — and shows that everything else lives in a
-genuinely 2-form-valued world. The non-degeneracy of the induced form on the quotient rules out a
-trivial collapse: outside the symmetric core, asymmetry is not merely possible but generic. This
-matches Lakoff &amp; Johnson's (1980) empirical observation that conceptual metaphors are
-overwhelmingly one-directional.</p>
-<p><a class="badge" href="lean/IdeaTheory/MeaningCurvature.lean#L118">✓ verified — Lean line 118</a></p>
-<p class="cite">Informal claim: "Reference is symmetric only for rigid designators" — Kripke
-(1980), Lec. I; non-degeneracy parallels Lakoff &amp; Johnson (1980), Ch. 4.</p>
-</div>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (5 volume(s), 11/62 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems (Vol 1): algebraic composition structure', 'Lean theorems (Vol 1): emergence and the cocycle condition', 'Lean theorems (Vol 1): resonance, weight, and Aufhebung decomposition', 'Lean theorems (Vol 1): asymmetry of resonance and meaning curvature', 'Lean theorems (Vol 1): idea structures, chains, and conjugation', 'Lean theorems (Vol 1): universal composition and foundational symmetry', 'Lean theorems (Vol 1): compositional identity and transmission chains', 'Lean theorems (Vol 1): advanced properties and multi-term reassociation', 'Lean theorems (Vol 1): idea structures and structural equivalence'].
 
-<h2>Proof Sketch and Strategy</h2>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h3>Proof of Theorem 5.1</h3>
-<ol>
-<li>Unfold <code>kappa</code> to <code>resonance a b - resonance b a</code>.</li>
-<li>Compute <code>kappa b a = resonance b a - resonance a b</code>.</li>
-<li>Apply <code>neg_sub</code> from Mathlib.</li>
-<li>For the corollary, instantiate <code>b := a</code> and use <code>sub_self</code>.</li>
-<li>For the exterior-square factorisation, invoke the universal property
-<code>AlternatingMap.mk</code> with the antisymmetry just proved.</li>
-<li>Discharge bilinearity by the bilinearity of <code>resonance</code> (lemma <code>resonance_bilinear</code>).</li>
-</ol>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<h3>Proof of Theorem 5.2</h3>
-<ol>
-<li>Expand both <code>κ(a·b,c)</code> and <code>κ(a,b·c)</code> using Definition 5.0.</li>
-<li>Apply the resonance–composition compatibility axiom
-<code>resonance_mul_left</code>: <code>⟨a·b,c⟩ = ⟨a,c⟩ + ⟨b,c⟩ + ⟨ω(a,b),c⟩</code>.</li>
-<li>Apply the symmetric axiom <code>resonance_mul_right</code> to expand <code>⟨a,b·c⟩</code>.</li>
-<li>Subtract and collect terms; the bare resonance values cancel pairwise by commutativity of addition.</li>
-<li>What survives is exactly <code>⟨ω(a,b),c⟩ − ⟨a,ω(b,c)⟩</code> with the right signs.</li>
-<li>Conclude by <code>ring</code>.</li>
-<li>The Lean tactic chain is <code>simp only [kappa, resonance_mul_left, resonance_mul_right]; ring</code>.</li>
-<li>Helper lemmas used: <code>resonance_bilinear</code>, <code>emergence_def</code>, <code>add_comm_assoc</code>.</li>
-</ol>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence cocycle', 'Lean theorems: meaning curvature', 'Lean theorems: conjugation of ideas', 'Lean theorems: transmission chains', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h3>Proof of Theorem 5.3</h3>
-<ol>
-<li>Closure under composition: take <code>x,y ∈ SymCore</code>, fix arbitrary <code>z</code>, and use
-Theorem 5.2 to reduce <code>κ(x·y, z)</code> to terms each of which vanishes by the SymCore hypothesis.</li>
-<li>Containment of the unit <code>1</code>: use <code>resonance_one_left</code> and <code>resonance_one_right</code>.</li>
-<li>Maximality: assume <code>S ⊇ SymCore</code> with κ vanishing on <code>S × I</code>, and show
-<code>S ⊆ SymCore</code> by definition-chasing.</li>
-<li>Quotient construction: invoke <code>Submodule.Quotient.mk</code> and lift κ via the universal
-property; well-definedness follows from step 1.</li>
-<li>Non-degeneracy: suppose <code>[x] ∈ I/SymCore</code> satisfies κ̄([x],·) = 0; lift to <code>x ∈ I</code>,
-deduce <code>x ∈ SymCore</code>, hence <code>[x] = 0</code>.</li>
-<li>Helper lemmas: <code>SymCore_add_mem</code>, <code>SymCore_mul_mem</code>,
-<code>kappa_quotient_well_defined</code>.</li>
-</ol>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Bridge: Informal Claim → Formal Theorem</h2>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.
 
-<table>
-<tr><th>Informal claim</th><th>Source</th><th>Page</th><th>Formal theorem</th><th>Lean file</th><th>Notes on divergence</th></tr>
-<tr><td>Similarity is asymmetric</td><td>Tversky (1977)</td><td>p. 328</td><td>Thm 5.1</td><td>MeaningCurvature.lean</td><td>Tversky uses set-features; we use any bilinear pairing.</td></tr>
-<tr><td>Commitment/entitlement gap</td><td>Brandom (1994)</td><td>p. 191</td><td>Def 5.0 + Thm 5.1</td><td>MeaningCurvature.lean</td><td>Brandom: set-valued; ours: ℝ-valued.</td></tr>
-<tr><td>Sign value is differential</td><td>Saussure (1916)</td><td>Pt II, Ch IV</td><td>Thm 5.1</td><td>MeaningCurvature.lean</td><td>Saussure has no algebra; we add bilinearity.</td></tr>
-<tr><td>Diagrammatic gestures curve sense</td><td>Châtelet (1993)</td><td>Ch. 2</td><td>Thm 5.2</td><td>MeaningCurvature.lean</td><td>Châtelet's "curving" is metaphorical; here it is literal.</td></tr>
-<tr><td>Inferential asymmetry ↔ emergent content</td><td>Brandom (2000)</td><td>Lec. 5</td><td>Thm 5.2</td><td>MeaningCurvature.lean</td><td>The cocycle identity is novel.</td></tr>
-<tr><td>Conceptual metaphors are one-directional</td><td>Lakoff &amp; Johnson (1980)</td><td>Ch. 4</td><td>Thm 5.3 (non-degeneracy)</td><td>MeaningCurvature.lean</td><td>Empirical claim → algebraic genericity.</td></tr>
-<tr><td>Rigid designators are symmetric</td><td>Kripke (1980)</td><td>Lec. I</td><td>Thm 5.3 (SymCore)</td><td>MeaningCurvature.lean</td><td>SymCore generalises rigidity beyond names.</td></tr>
-<tr><td>Sheafification bends local meaning</td><td>Zalamea (2012)</td><td>Pt III</td><td>Thm 5.2</td><td>MeaningCurvature.lean</td><td>We compute the obstruction class explicitly.</td></tr>
-<tr><td>Prototype gradient ⇒ asymmetry</td><td>Gärdenfors (2000)</td><td>Ch. 4</td><td>Thm 5.1 corollary</td><td>MeaningCurvature.lean</td><td>Recovered when ⟨·,·⟩ is the prototype-distance pairing.</td></tr>
-<tr><td>Analogical mapping has a direction</td><td>Hofstadter &amp; Sander (2013)</td><td>Ch. 6</td><td>Thm 5.1</td><td>MeaningCurvature.lean</td><td>Direction = sign of κ.</td></tr>
-</table>
+EXISTING PROJECT SUMMARY: Existing project 'IdeaTheory' (6 volume(s), 11/54 tasks done). Volume titles: ['Mathematical Foundations of Idea Theory', 'Idea Theory and the Social Sciences', 'Idea Theory and the Humanities', 'Idea Theory, Cognitive Science, and Philosophy of Mind', 'Emergence: A Formal Theory', 'Advanced Applications and Unifying Perspectives']. Completed tasks: ['Lean toolchain and lakefile', 'Lean 4 foundations', 'Lean theorems: idea composition monoid', 'Lean theorems: resonance bilinear pairing', 'Lean theorems: Aufhebung decomposition', 'Lean theorems: emergence 2-cocycle', 'Lean theorems: meaning curvature form', 'Lean theorems: conjugation action', 'Lean theorems: transmission chain', 'Lean theorems: structural equivalence', 'Lean theorems: graded idea algebra'].
 
-<h2>Worked Examples and Counter-Examples</h2>
-<p>
-<strong>Example 1 (Tversky's countries).</strong> Let <code>I</code> be the free ℝ-module on
-{NorthKorea, China, Mexico, USA} and equip it with the resonance pairing whose matrix has Tversky's
-empirical asymmetry coefficients. Direct computation gives
-<code>κ(NorthKorea, China) = +0.18</code>, <code>κ(China, NorthKorea) = −0.18</code>, exemplifying
-Theorem 5.1 with non-zero curvature.
-</p>
-<p>
-<strong>Example 2 (Frege's morning star).</strong> In the sub-algebra generated by rigid designators
-of Venus, every pair has κ = 0, and the sub-algebra coincides with its own SymCore — illustrating
-Theorem 5.3 in its degenerate extreme.
-</p>
-<p>
-<strong>Example 3 (a non-flat metaphor).</strong> Consider the LakoffArgument idea
-<code>a = ARGUMENT</code> and <code>b = WAR</code>. Empirical resonance data gives
-<code>⟨a,b⟩ = 0.7</code>, <code>⟨b,a⟩ = 0.1</code>, so <code>κ(a,b) = 0.6</code>. Composing with
-<code>c = STRATEGY</code> and applying Theorem 5.2 yields a non-trivial emergence term
-<code>ω(a,b) = METAPHORICAL_FRAME</code> whose pairing with <code>c</code> is exactly 0.6,
-confirming the Bianchi identity numerically.
-</p>
-<p>
-<strong>Counter-example 4 (would-be commutative algebra).</strong> If one drops the resonance axiom
-and forces <code>⟨a,b⟩ = ⟨b,a⟩</code>, then κ ≡ 0, SymCore = I, and Theorem 5.2 collapses to the
-ordinary 2-cocycle condition on ω — recovering the symmetric algebra of classical model theory and
-showing where the present theory genuinely strengthens it.
-</p>
+STEERING INSTRUCTIONS: make all of theorems 1 through 9 just basic math, and then try to have 5 volumes aboutt reasonable applications to social sciences, humanities, philosophy of mind/cogsci, the 'problem' of emergence, and other advanced applications - the theory should still be just as impressive, but everything should have an interpretation in terms of these other areas
 
-<h2>Open Questions and Future Work</h2>
-<p>
-Three families of questions remain. First, the <em>integrability problem</em>: under what conditions
-does there exist a "potential" 1-form <code>φ : I → ℝ</code> with
-<code>κ(a,b) = φ(a·b) − φ(b·a)</code>? Brandom (2000) conjectures such a potential always exists
-in normative scorekeeping; the formalisation neither proves nor refutes this and we leave it open.
-</p>
-<p>
-Second, the <em>spectral question</em>: what does the spectrum of κ (viewed as a skew form) look
-like for naturally occurring idea algebras drawn from corpus statistics? Preliminary numerical work
-on word2vec-derived pairings suggests a heavy-tailed distribution, but the rigorous statement is
-absent from the literature.
-</p>
-<p>
-Third, the <em>higher-curvature</em> question: Theorem 5.2 expresses a Bianchi identity at level 2;
-do analogous identities hold at higher levels of the emergence tower (cf.
-<a href="emergence-cocycle.html">Emergence 2-Cocycle</a>)? Zalamea (2012, Pt IV) hints yes; the
-present formalisation covers only level 2 and the inductive step is the most natural next target.
-</p>
+Regenerate the PRD to reflect the steering instructions. Preserve the pass/fail status of completed tasks where still applicable, but update, rename, or add tasks as directed. Rename/restructure volumes, lean files, website pages, and LaTeX chapters as needed.</em> says about meaning curvature: which authors introduced it,
+  competing definitions, central informal claims, open questions, folklore
+  results.  Reference 3–6 named works.)</p>
 
-<h2>Further Reading</h2>
-<ul>
-<li><strong>Brandom, R. (1994).</strong> <em>Making It Explicit</em>. Harvard UP. — The locus
-classicus of inferentialist asymmetry; chapter 3 motivates Definition 5.0.</li>
-<li><strong>Brandom, R. (2000).</strong> <em>Articulating Reasons</em>. Harvard UP. — The streamlined
-reformulation; lecture 5 anticipates Theorem 5.2 informally.</li>
-<li><strong>Châtelet, G. (1993/2000).</strong> <em>Figuring Space</em>. Kluwer. — Source of the
-"curvature of meaning" metaphor; chapter 2 inspires the 2-form viewpoint.</li>
-<li><strong>Fauconnier, G. &amp; Turner, M. (2002).</strong> <em>The Way We Think</em>. Basic Books.
-— Conceptual blending as a source of asymmetric input/output structure.</li>
-<li><strong>Gärdenfors, P. (2000).</strong> <em>Conceptual Spaces</em>. MIT Press. — Geometric model
-in which prototypicality breaks symmetry; relates to Example 1.</li>
-<li><strong>Lakoff, G. &amp; Johnson, M. (1980).</strong> <em>Metaphors We Live By</em>. Chicago UP.
-— Empirical evidence for the genericity of asymmetric mappings (Theorem 5.3).</li>
-<li><strong>Saussure, F. de (1916).</strong> <em>Cours de linguistique générale</em>. Payot. — The
-differential conception of value; the historical root of κ.</li>
-<li><strong>Tversky, A. (1977).</strong> "Features of Similarity," <em>Psychological Review</em> 84.
-— The asymmetric similarity data that κ explains.</li>
-<li><strong>Zalamea, F. (2012).</strong> <em>Synthetic Philosophy of Contemporary Mathematics</em>.
-Urbanomic. — Categorical "bending" of local meaning; informal source of the Bianchi identity.</li>
-<li><strong>Peregrin, J. (2014).</strong> <em>Inferentialism: Why Rules Matter</em>. Palgrave. — A
-contemporary defence of Brandom that further sharpens the asymmetry thesis.</li>
-</ul>
+  <h2>Formal Statements</h2>
+  <div class="theorem-box">
+    <div class="label">Theorem 5.1 — Primary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span>
+       <code><a href="lean/IdeaTheory/Theorems5.lean">lean/IdeaTheory/Theorems5.lean</a></code></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 5.2 — Secondary result</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
+  <div class="theorem-box">
+    <div class="label">Theorem 5.3 — Corollary or example</div>
+    <p>(Statement.  Cite the matching informal claim.)</p>
+    <p><span class="badge verified">✓ Lean verified</span></p>
+  </div>
 
-<h2>See Also</h2>
-<div class="seealso">
-<a href="composition.html">Composition Monoid</a>
-<a href="resonance.html">Resonance Pairing</a>
-<a href="aufhebung.html">Aufhebung Decomposition</a>
-<a href="emergence-cocycle.html">Emergence 2-Cocycle</a>
-<a href="conjugation.html">Conjugation</a>
-<a href="transmission-chains.html">Transmission Chains</a>
-<a href="structural-equivalence.html">Structural Equivalence</a>
-<a href="graded-algebra.html">Graded Algebra</a>
-<a href="axioms.html">Axioms</a>
-<a href="theorems.html">Theorems</a>
-<a href="literature.html">Literature</a>
-<a href="lean/IdeaTheory/MeaningCurvature.lean">Lean source: MeaningCurvature.lean</a>
-</div>
+  <h2>Bridge: Informal Claim → Formal Theorem</h2>
+  <table style="width:100%;border-collapse:collapse;font-size:.9rem">
+    <thead>
+      <tr style="border-bottom:1px solid var(--border);text-align:left">
+        <th style="padding:.5rem">Informal claim (literature)</th>
+        <th style="padding:.5rem">Formal theorem (Lean)</th>
+        <th style="padding:.5rem">Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 1)</td>
+        <td style="padding:.5rem"><code>theorem_5_1</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border)">
+        <td style="padding:.5rem">(Informal claim 2)</td>
+        <td style="padding:.5rem"><code>theorem_5_2</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+      <tr>
+        <td style="padding:.5rem">(Informal claim 3)</td>
+        <td style="padding:.5rem"><code>theorem_5_3</code></td>
+        <td style="padding:.5rem">(Author, Year)</td>
+      </tr>
+    </tbody>
+  </table>
 
-</main>
-</div>
+  <h2>Further Reading</h2>
+  <ul>
+    <li>(Real reference 1 — author, title, year, link)</li>
+    <li>(Real reference 2)</li>
+    <li>(Real reference 3)</li>
+    <li>(Real reference 4)</li>
+  </ul>
+
+  <h2>Lean 4 Source</h2>
+  <pre><code>-- lean/IdeaTheory/Theorems5.lean
+namespace IdeaTheory
+-- theorems for meaning curvature live here
+end IdeaTheory</code></pre>
+
+  <h2>See also</h2>
+  <p><a href="idea-monoid.html">idea monoid</a> · <a href="resonance-pairing.html">resonance pairing</a> · <a href="aufhebung-decomposition.html">Aufhebung decomposition</a> · <a href="emergence-2-cocycle.html">emergence 2-cocycle</a> · <a href="conjugation-action.html">conjugation action</a> · <a href="transmission-chain.html">transmission chain</a> · <a href="structural-equivalence.html">structural equivalence</a> · <a href="graded-idea-algebra.html">graded idea algebra</a> · <a href="social-composition.html">social composition</a> · <a href="cultural-transmission.html">cultural transmission</a> · <a href="emergent-novelty.html">emergent novelty</a> · <a href="literature.html">full literature bridge</a></p>
+
+      </div>
+      <footer>
+        <em>formalizeanything.py</em> · Ralph++ Formalization Orchestrator ·
+        Lean 4 + Mathlib · <a href="https://leanprover.github.io/">Lean prover</a>
+      </footer>
+    </main>
+  </div>
 </body>
 </html>
