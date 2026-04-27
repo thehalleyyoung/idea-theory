@@ -267,3 +267,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - lean/IdeaTheory/Theorems4.lean: contains `sorry`
   - lean/IdeaTheory/Theorems4.lean: contains `admit`
   - lean/IdeaTheory/Theorems4.lean: contains `native_decide`
+
+## Iter 35 — 2026-04-27 02:54
+**Task:** `theorems_4` Lean theorems: Advanced Properties (attempt 16)  
+**Verdict:** ✓ PASS  
