@@ -597,3 +597,6 @@ Memory persists via: git history · PROGRESS.md · PRD.json · this file.
 
 ### Iter 34 [website_concept] Website page: structural equivalence
 [website_concept] Website page: structural equivalence — bounced: docs/structural-equivalence.html: broken link → composition.html; docs/structural-equivalence.html: broken link → resonance.html
+
+### Iter 35 [website_concept] Website page: structural equivalence
+[website_concept] Website page: structural equivalence

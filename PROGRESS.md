@@ -1202,3 +1202,7 @@ Ralph++ Formalization Orchestrator — iteration journal.
   - docs/structural-equivalence.html: broken link → chains.html
   - docs/structural-equivalence.html: broken link → grading.html
   - docs/structural-equivalence.html: broken link → lean/StructuralEquivalence.html
+
+## Iter 35 — 2026-04-27 17:55
+**Task:** `website_concept_8` Website page: structural equivalence (attempt 2)  
+**Verdict:** ✓ PASS  
