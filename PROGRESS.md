@@ -1128,3 +1128,24 @@ Ralph++ Formalization Orchestrator — iteration journal.
 ## Iter 27 — 2026-04-27 17:39
 **Task:** `website_concept_4` Website page: emergence 2-cocycle (attempt 2)  
 **Verdict:** ✓ PASS  
+
+## Iter 28 — 2026-04-27 17:42
+**Task:** `website_concept_5` Website page: meaning curvature (attempt 1)  
+**Verdict:** ✗ BOUNCE (16 issues)  
+**Issues:**
+  - docs/meaning-curvature.html: broken link → composition.html
+  - docs/meaning-curvature.html: broken link → resonance.html
+  - docs/meaning-curvature.html: broken link → aufhebung.html
+  - docs/meaning-curvature.html: broken link → transmission-chains.html
+  - docs/meaning-curvature.html: broken link → graded-algebra.html
+  - docs/meaning-curvature.html: broken link → vol2-social.html
+  - docs/meaning-curvature.html: broken link → vol3-humanities.html
+  - docs/meaning-curvature.html: broken link → vol4-cognition.html
+  - docs/meaning-curvature.html: broken link → vol5-emergence.html
+  - docs/meaning-curvature.html: broken link → vol6-advanced.html
+  - docs/meaning-curvature.html: broken link → transmission-chains.html
+  - docs/meaning-curvature.html: broken link → composition.html
+  - docs/meaning-curvature.html: broken link → resonance.html
+  - docs/meaning-curvature.html: broken link → aufhebung.html
+  - docs/meaning-curvature.html: broken link → transmission-chains.html
+  - docs/meaning-curvature.html: broken link → graded-algebra.html
