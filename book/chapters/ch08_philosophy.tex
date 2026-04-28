@@ -1,0 +1,1242 @@
+\chapter{The Philosophy of Ideas, Reformalized}\label{ch:philosophy}
+
+\epigraph{The history of philosophy is to a great extent that of a certain
+clash of human temperaments.}{William James}
+
+The philosophical record on \emph{ideas} is a zoo, and its inhabitants are
+typically described in mutually incompatible idioms: Forms, universals,
+\emph{species intelligibilis}, monads, schemata, sense, picture, family
+resemblance, rigid designator. The thesis of this chapter is that the
+formalism of \cref{ch:foundations}---the tuple
+$(\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$ together with
+Theorems~1--9---supplies a single language in which all of these positions
+can be stated, compared, and adjudicated.
+
+The format of each section is fixed. We give a faithful reading of the
+position with citations, restate it in the formalism, and then end with a
+\emph{precise formal status}: which of the nine foundational theorems (or
+which corollary derived in earlier chapters) makes the position true,
+contingent, or false in the algebra. Where a small new lemma is required
+beyond the theorems already in hand, we prove it in math prose; the new
+lemmas are confined to \S\S\ref{sec:kant}, \ref{sec:frege},
+\ref{sec:wittgensteinII}, and \ref{sec:quine}.
+
+We adopt a uniform translation key. ``A theory $T$ \emph{is true in Idea
+Theory}'' means that the formal restatement of $T$ is provable from
+Theorems~1--9 (with no extra hypothesis on the algebra). ``$T$ \emph{is
+contingent}'' means it picks out a non-empty proper subclass of idea
+algebras: it holds in some, fails in others. ``$T$ \emph{is false}'' means
+it is inconsistent with Theorems~1--9, i.e.\ no idea algebra realizes it.
+
+A few caveats are in order before we begin. First, the historical
+positions surveyed are not philosophical poses to be ranked: they are
+\emph{empirical hypotheses about the structure of the algebra in which
+human cognition operates}. Whether the cocycle $\omega$ is exact, whether
+$\rho$ is symmetric, whether $\deg$ admits multiplicative sections ---
+these are not matters of taste but of structural fact, and the great
+philosophical disputes can profitably be re-read as disputes over which
+structural condition obtains. Second, the formalization is intentionally
+\emph{lossless of structure but lossy of rhetoric}. Plato's eros for the
+Good and Hegel's drama of \emph{Geist} survive translation as
+mathematical content but lose their literary register; we accept this as
+the price of comparison. Third, the reader who finds a translation
+forced is invited to test it against Theorems~1--9: a forced translation
+should manifest itself as a structural condition that no idea algebra
+satisfies, hence a position that is formally \emph{false}. As we shall
+see, no such case arises in this chapter; every classical position
+projects onto the formalism either as a theorem, as a clause of one,
+or as a non-empty subclass of algebras.
+
+%======================================================================
+\section{Plato: Forms as fixed points of $\compose$}\label{sec:plato}
+%======================================================================
+
+\thinker{Original claim.} In the \emph{Republic}~\cite{PlatoRepublic} and
+the late dialogues~\cite{PlatoParmenides} a Form is what an object
+``participates in'': a stable, self-identical paradigm whose presence
+guarantees the predicate. Conjugation by any particular instance leaves
+the Form what it is.
+
+\formalclaim Let $\IdMon$ be the underlying monoid of $(\Ideas, \compose,
+\unit)$. Call $F\in\Ideas$ a \emph{Form} when, for every invertible
+$g\in\Ideas$, $\conj{g}{F}\defeq g\compose F\compose g^{-1}=F$, i.e.\ $F$
+lies in the fixed-point set of the conjugation action of the unit group
+$\Ideas^{\times}$. Equivalently, the orbit of $F$ under conjugation is the
+singleton $\{F\}$. Theorem~6 (Conjugation) makes inner automorphisms a
+well-defined action, so the fixed-point set is a submonoid; we denote it
+$\mathrm{Fix}_{\compose}(\Ideas)$ and call its elements \emph{Forms}.
+
+\formalstatus \emph{Existence is contingent} on the algebra. The unit
+$\unit$ is always a Form, hence $\mathrm{Fix}_{\compose}(\Ideas) \neq
+\emptyset$ in every algebra. Whether non-trivial Forms exist depends on
+the centre of the monoid: in a commutative algebra every idea is a Form
+(``everything is participable''), in a free non-commutative algebra only
+$\unit$ is. Plato's strong claim---that there is a Form for every general
+predicate---requires the centre to map surjectively onto the quotient
+$\Ideas/\equivIdea$, which is a real condition on the algebra and is
+ruled out by Theorem~6 in any non-trivial non-commutative case.
+
+\litcomment Iterated composition $F^{\compose n}=F$ for the special Forms
+gives back the Platonic insistence that participation does not multiply
+the Form. The Third Man Argument in \cite{PlatoParmenides} becomes
+visible: if $F\in\mathrm{Fix}$ but the participating object $x$ is
+\emph{also} treated as a participated Form, the conjugation action lifts,
+and a regress in $\deg$ ensues unless we declare a maximum grade---the
+Idea Theory analogue of Plato's ``one over many.'' In any algebra with
+unbounded $\deg$ the regress is real, exhibiting the original argument as
+a graded phenomenon rather than a fallacy.
+
+We can be more precise. Define the \emph{Form ladder} of an algebra by
+$F_0 \defeq \mathrm{Fix}_{\compose}(\Ideas)$, $F_{n+1}\defeq
+\mathrm{Fix}_{\compose}(F_n)$, where the inner conjugation acts on $F_n$
+through itself. Each level inherits the structure of a sub-monoid by
+Theorem~6, and the ladder stabilizes if and only if the sequence
+$\deg F_n$ is bounded in $G$. Plato's instinct in the
+\emph{Parmenides}---that the postulation of a Form for every concept
+threatens regress---is exactly the failure of stabilization. Idea
+Theory's verdict is that the ``one over many'' principle is consistent
+in algebras with bounded $\deg$ and inconsistent in unbounded ones; the
+historical Plato did not have the language to draw the distinction, but
+Theorem~9 supplies it. The reading also clarifies why Plato in the
+\emph{Sophist} retreats from Forms-as-separate to Forms-as-blendable
+(\emph{symploke ton eidon}): blending is precisely the closure of $F_0$
+under $\compose$, and Theorem~6 guarantees this closure is a
+sub-monoid.
+
+%======================================================================
+\section{Aristotle: universals as $\sigma$-invariants}\label{sec:aristotle}
+%======================================================================
+
+\thinker{Original claim.} Aristotle's \emph{Metaphysics}
+$\mathrm{Z}$~\cite{AristotleMetaphysics} repudiates separate Forms in
+favour of universals \emph{in re}: the universal is what is preserved
+across the predications it licenses. The species ``human'' is what is
+common to Socrates and Callias once their accidents are removed.
+
+\formalclaim Let $a\compose b=\sigma(a,b)+\nu(a,b)+\eta(a,b)$ be the
+Aufhebung decomposition of \cref{ch:foundations}. Define the \emph{Aristotelian
+universal of $a$} to be the set
+\[
+  U(a) \defeq \{\,b\in\Ideas \mid \sigma(a,b)=a\,\},
+\]
+i.e.\ those $b$ whose composition with $a$ leaves $a$'s
+\emph{preservation component} unchanged: predication picks out exactly
+the $b$ that ``share the form of $a$'' in the Aufhebung sense. A
+universal in Aristotle's strong sense is then an idea $a$ for which $U(a)$
+is closed under $\compose$ and contains $\unit$.
+
+\formalstatus \emph{True} as a corollary of Theorem~3 (Aufhebung
+Decomposition) together with Theorem~6 (Conjugation). By Theorem~3, the
+$\sigma$-component is well defined modulo $\ker\rho$; by Theorem~6, inner
+automorphisms preserve $\sigma$, so $U(a)$ is conjugation-stable and
+$\unit\in U(a)$ trivially. Closure under $\compose$ is automatic when
+$\sigma$ is associative on $U(a)$, which Theorem~3 guarantees on the
+quotient $\Ideas/\ker\rho$. Thus universals \emph{exist as
+$\sigma$-invariant submonoids} in every idea algebra; their non-emptiness
+beyond $\{\unit\}$ is, however, equivalent to non-degeneracy of $\rho$
+(Theorem~2): a meaningless universe has only the trivial universal.
+
+\litcomment This explains why Aristotle's universals are ``in things'':
+they are not separate ideas but a \emph{component} of every composition,
+exactly the $\sigma$-piece. The Categories' four-fold scheme is recovered
+by partitioning $\Ideas$ by the rank of $\sigma$ in its action on the
+free vector space.
+
+The contrast with Plato is now sharp: Plato locates universals in
+$\mathrm{Fix}_{\compose}$, the global fixed-point set; Aristotle
+locates them in $\sigma$-stability, a local property of each
+composition. The two coincide on commutative subalgebras and diverge
+elsewhere. In particular, in any non-commutative algebra there are
+$\sigma$-stable submonoids that are not Forms, and Forms that are not
+$\sigma$-stable submonoids; this is the algebraic residue of the
+millennial dispute. Note also that the \emph{tode ti} of
+\emph{Metaphysics} $\mathrm{Z}$---the ``this-something''---becomes the
+generator of $U(a)$: the particular through which the universal is
+accessible. Aristotle's hylomorphism, which treats every substance as a
+union of form and matter, falls out as the Aufhebung itself: the form
+is $\sigma$, the matter is $\nu$, and the substance is the elevated
+$\eta$ that integrates them. Far from being a relic, hylomorphism is
+the simplest conceptual scheme that the formalism's three Aufhebung
+slots can support.
+
+%======================================================================
+\section{Augustine and Aquinas: divine ideas and species
+intelligibilis}\label{sec:medieval}
+%======================================================================
+
+\thinker{Original claim.} Augustine's \emph{De Trinitate}
+\cite{AugustineDeTrinitate} locates ideas in the divine mind, eternal and
+unchanging. Aquinas in \emph{Summa Theologiae} I, q.~84--85
+\cite{AquinasST} interposes \emph{species intelligibilis}, finite mental
+representations through which the intellect knows divine archetypes.
+
+\formalclaim The Augustinian divine ideas are the equivalence class
+$[\unit]_{\sim_{\mathrm{conj}}}$, where $\sim_{\mathrm{conj}}$ is
+conjugation equivalence: $a\sim b$ iff there exists invertible $g$ with
+$b=\conj{g}{a}$. Theorem~6 implies $[\unit]=\{\unit\}$, so this class is
+the singleton archetype. The Thomistic \emph{species intelligibilis} are
+graded representatives: for each grade $n\in G$, choose a section
+$s_n\colon \Ideas/\equivIdea\to\Ideas$ with $\deg s_n([a])=n$, witnessing
+the universal at that level. Existence of such sections at every grade
+is Aquinas's claim that the intellect can ``abstract'' species at
+arbitrary levels of generality.
+
+\formalstatus Augustine's claim that the divine ideas form a unique
+archetype is \emph{true} by Theorem~6, which makes $\unit$ the only
+self-conjugate up to equivalence in any algebra: the unit is its own
+orbit. Aquinas's claim that graded sections exist is \emph{contingent}:
+by Theorem~9 (Grading), the grading is a homomorphism into $G$, but the
+existence of \emph{set-theoretic sections} is the axiom of choice for
+$\deg$-fibres. Concretely, the species exist whenever the short exact
+sequence
+\[
+  0 \to \ker\deg \to \Ideas \xrightarrow{\deg} G \to 0
+\]
+admits a multiplicative section, which by Theorem~4 fails iff
+$\omega$ has nontrivial cohomology class in $H^2(G,\ker\deg)$.
+
+\litcomment Cohomological obstruction is exactly what the medieval
+tradition gestured at when distinguishing ``infused'' from ``acquired''
+species: the latter exist whenever the obstruction vanishes; the former
+correspond to a \emph{splitting witnessed by an external act}.
+
+Aquinas's notorious distinction between the \emph{intellectus agens}
+and the \emph{intellectus possibilis} also lands in the formalism. The
+agent intellect is the operator that produces the section $s_n$ at each
+grade --- in modern language, an algebraic procedure for choosing
+representatives in $\Ideas/\equivIdea$. The possible intellect is the
+codomain, $\Ideas/\equivIdea$ itself, awaiting its inhabitants. The
+controversy in the late medieval period over whether the agent
+intellect is one for all humans (Averroes) or one per individual
+(Aquinas) becomes the question whether the section $s_n$ is global on
+$\Ideas$ or only locally defined per individual sub-algebra. Both
+options are mathematically coherent and the dispute reduces to an
+empirical question about the structure of distributed cognition. The
+formalism does not arbitrate, but it makes the dispute precise. The
+cohomological obstruction also clarifies why Augustine's
+\emph{illumination} doctrine is logically indispensable: in any algebra
+where $[\omega]\neq 0$, no purely internal procedure can produce a
+splitting, so the splitting that is in fact present must be \emph{given
+from outside}, exactly as illumination requires.
+
+%======================================================================
+\section{Descartes: innate, adventitious, factitious}\label{sec:descartes}
+%======================================================================
+
+\thinker{Original claim.} In Meditation~III \cite{Descartes1641},
+Descartes partitions ideas into \emph{innate} (born with the mind),
+\emph{adventitious} (caused by external things), and \emph{factitious}
+(invented by the mind through composition).
+
+\formalclaim Use the grading $\deg$ to define
+\begin{align*}
+  \Ideas_{\mathrm{innate}}    &\defeq \deg^{-1}(0_G), \\
+  \Ideas_{\mathrm{adventitious}} &\defeq \{a\in\Ideas \mid a=g\compose
+       \unit, \deg g \neq 0\}, \\
+  \Ideas_{\mathrm{factitious}} &\defeq \{a \mid a = a_1\compose\dots\compose
+       a_k,\ k\ge 2,\ a_i \in \Ideas_{\mathrm{adventitious}}\cup
+       \Ideas_{\mathrm{innate}}\}.
+\end{align*}
+The innate ideas are the grade-zero sub-algebra; the adventitious are the
+``imported'' generators of nonzero grade; the factitious are the monoid
+closure.
+
+\formalstatus This partition is \emph{contingent}: it is a tripartition
+iff the three classes are pairwise disjoint and cover $\Ideas$, which by
+Theorem~9 holds iff (i) $\deg$ is surjective with $\ker\deg$ a sub-monoid
+and (ii) $\Ideas$ is generated by $\Ideas_{\mathrm{innate}}\cup
+\Ideas_{\mathrm{adventitious}}$ as a monoid. Both are real conditions,
+and Descartes's metaphysics asserts both. Theorems~1 and 9 together
+guarantee that \emph{whenever} the conditions hold the partition is
+unique.
+
+\litcomment Descartes's argument that the idea of God must be innate
+because no finite mind could compose it becomes a \emph{degree
+argument}: $\deg(\mathrm{God}) = \infty$ in $G$ is impossible if $G$ is
+$\NN$-graded and the innate generators are finite, hence the idea must
+sit at $\deg = 0$ already. Idea Theory thus reproduces, but does not
+endorse, the Cartesian inference.
+
+The Cartesian \emph{cogito} also receives a structural reading.
+``\emph{Cogito ergo sum}'' is the inference from the existence of
+\emph{any} idea to the existence of $\unit$: every $a$ factors as
+$\unit\compose a$, so wherever there is an idea there is the identity.
+Theorem~1 is, in this exact sense, the formal core of the cogito. What
+Descartes adds is the further claim that $\unit$ is the
+\emph{thinker}---an extra-algebraic gloss on the algebraic identity.
+The Idea Theoretic verdict is that the cogito's logical content
+(``thinking presupposes the unit'') is true, while its metaphysical
+content (``the unit is a substance'') is contingent. The clear-and-
+distinct criterion of Meditation~III then translates into a constraint
+on $\rho$: an idea $a$ is clear and distinct iff $\rho(a,a)$ is
+maximally separated from $\rho(a, b)$ for all $b\neq a$, i.e.\ $a$ is
+an \emph{isolated point} in the spectrum of $\rho$. The criterion is
+operationally meaningful but rare; isolated spectra are the exception.
+
+%======================================================================
+\section{Locke: simple/complex as monoid generators}\label{sec:locke}
+%======================================================================
+
+\thinker{Original claim.} Locke's \emph{Essay} II.ii--xii
+\cite{Locke1690} divides ideas into simple (received passively from
+sensation or reflection) and complex (formed by the mind's combining,
+comparing, and abstracting). All complex ideas are constructed from
+simples.
+
+\formalclaim Take a generating set $\Sigma\subset\Ideas$. The simple
+ideas are $\Sigma\cup\{\unit\}$; the complex are
+$\langle\Sigma\rangle_{\compose}\setminus\Sigma$, the monoid generated.
+Locke's two faculties --- sensation and reflection --- are realized as
+two sub-monoids $\Ideas_S, \Ideas_R$, with
+$\Ideas_S\cap\Ideas_R = \{\unit\}$ and $\Ideas =
+\Ideas_S\compose\Ideas_R$ as a free product modulo a small set of
+relations (the ``mixed-mode'' ideas).
+
+\formalstatus This is \emph{true} as a direct consequence of Theorem~1
+(Composition): every monoid is generated by some set of generators, and
+the choice of $\Sigma$ realizes the simple/complex distinction. The
+specific claim that $\Ideas$ is the \emph{free} product
+$\Ideas_S * \Ideas_R$ is contingent and equivalent, by Theorem~8
+(Structural Equivalence), to the cocycle $\omega$ being trivial across
+the boundary, i.e.\ $\omega(s, r) = 0$ for all $s\in\Ideas_S, r\in
+\Ideas_R$.
+
+\litcomment Hume's later criticism that no idea is genuinely simple
+because every reception is conditioned by prior reflection corresponds
+to insisting that $\omega(\Ideas_S,\Ideas_R)\neq 0$. Idea Theory
+discriminates the two views by a single cohomological condition.
+
+Locke's account of \emph{abstraction} also slots cleanly into the
+formalism. To abstract from a complex idea is to project onto a
+$\sigma$-component: the abstract idea of triangle is
+$\sigma(\Delta_{\mathrm{equilateral}}, \Delta_{\mathrm{scalene}})$, the
+preserved part of any pair of triangle-instances. Berkeley's well-known
+attack on abstraction in his Introduction \cite{Berkeley1710}
+(``no man can have an idea of triangle that is neither equilateral nor
+scalene'') is the empirical denial that $\sigma$ projects to a non-zero
+representative in the algebra of empirical ideas. Idea Theory makes
+both Locke's procedure and Berkeley's denial formally precise: the
+procedure is well-defined by Theorem~3, and its non-degeneracy is
+contingent. Locke's \emph{mixed modes} are the elements
+$s\compose r$ with $s\in\Ideas_S$ and $r\in\Ideas_R$ that fail
+$\omega(s,r)=0$: their meaning exceeds the sum of their parts, exactly
+because they are cocycle-active.
+
+%======================================================================
+\section{Berkeley: \emph{esse est percipi}}\label{sec:berkeley}
+%======================================================================
+
+\thinker{Original claim.} Berkeley's \emph{Principles}
+\cite{Berkeley1710} announces that for ideas (and the sensible objects
+that are nothing but bundles of ideas) to exist is to be perceived. There
+is no idea apart from a perceiver registering it.
+
+\formalclaim Let $\rho$ be the resonance pairing. The Berkeleian thesis
+is that, for every $a\in\Ideas\setminus\{0\}$, there exists $b\in\Ideas$
+with $\rho(b,a)\neq 0$. In words: every nonzero idea is perceived by
+\emph{some} idea (with the perceiver itself an idea, hence the
+``mind-as-idea'' immaterialism). This is the \emph{left non-degeneracy}
+of $\rho$.
+
+\formalstatus \emph{True} on the side of the formalism in any algebra
+satisfying the second clause of Theorem~2 (Resonance Pairing): the
+non-degeneracy of $\rho$ is preserved by composition and inheritable to
+sub-algebras. Berkeley's stronger metaphysical claim ---
+that the perceiving witness is itself an idea, not an extra-idealistic
+substance --- is equivalent to the bilinear form $\rho$ being induced by
+an inner product on the free vector space, an extra structural condition
+not implied by Theorem~2. So Berkeley's \emph{logical} thesis is true,
+his \emph{metaphysical} thesis is contingent.
+
+\litcomment ``Esse est percipi'' becomes a non-degeneracy statement, and
+the famous query about the unobserved tree in the quad reduces to
+asking whether $\rho$ has a non-trivial right kernel. Idea Theory's
+answer is: in a non-degenerate algebra, no; in a degenerate one, yes ---
+and the degeneracy is empirically detectable as failure of the
+transmission chain (Theorem~7).
+
+Berkeley's role for God---as the perceiver that secures the existence
+of objects when no finite mind attends---is the postulate of a
+\emph{maximal perceiver}: an idea $\Omega\in\Ideas$ such that
+$\rho(\Omega, a)\neq 0$ for every $a\neq 0$. The existence of $\Omega$
+is contingent and stronger than non-degeneracy: it requires that the
+non-degeneracy be witnessed \emph{by a single element}, not merely
+existentially. Idea Theory observes that this is precisely the
+condition that the dual space $\Ideas^*$ contain the constant
+non-vanishing functional, which is generic in finite dimension and
+fails generically in infinite dimension. Whether ``God'' (in
+Berkeley's sense) exists is, on this reading, a structural question
+about the dimension of the algebra of empirical ideas. The young
+Berkeley's polemic against materialism is at root a claim of
+finite-dimensionality.
+
+%======================================================================
+\section{Hume: association as resonance, missing shade as
+coboundary}\label{sec:hume}
+%======================================================================
+
+\thinker{Original claim.} Hume's \emph{Treatise} I.i \cite{Hume1739}
+identifies three principles of association --- resemblance, contiguity,
+cause --- and contrasts \emph{impressions} (lively, original) with
+\emph{ideas} (faint copies). The famous missing shade of blue is an
+admission that not every idea need derive from a corresponding
+impression.
+
+\formalclaim Resemblance and contiguity are both \emph{symmetric}
+contributions to $\rho$; cause is the \emph{antisymmetric} curvature
+$\kappa$ from Theorem~5. Impressions and ideas form a graded pair
+$(\Ideas_1, \Ideas_0)$ with $\deg=1$ and $\deg=0$ respectively, related
+by a ``copy'' map $\pi: \Ideas_1\to\Ideas_0$ which is an
+$\compose$-homomorphism modulo $\omega$. The missing shade of blue is an
+element $b_*\in\Ideas_0$ that is \emph{not} in the image of $\pi$ but is
+in the closure under $\compose$: a coboundary that is not exact.
+
+\formalstatus The associationist thesis is \emph{true} as Theorems~2 and
+5 make the resonance pairing decompose into symmetric and antisymmetric
+parts. The graded copy map is \emph{contingent} on the algebra; it
+exists when $\deg$ is $\NN$-valued. The missing-shade-of-blue
+phenomenon is \emph{true and even forced} whenever
+$H^1(\compose, \mathrm{im}\,\pi) \neq 0$, by the long exact sequence
+attached to $0\to\mathrm{im}\,\pi\to\Ideas_0\to\mathrm{coker}\,\pi\to
+0$. The shade exists as a coboundary class, not as the image of an
+impression.
+
+\litcomment The cohomological framing makes Hume's empiricist scruple a
+calculation, not a confession of inconsistency: \emph{some} ideas are
+necessarily acoboundary, and the missing shade is the simplest example.
+
+Hume's notorious problem of induction also receives a structural
+gloss. Inductive inference is the assumption that the resonance
+pairing extends from observed pairs $(a, b)$ with $a, b\in\Ideas_1$ to
+unobserved pairs by analytic continuation in the free vector space.
+The Humean skeptical argument is that no finite sample of $\rho$
+determines its extension; in algebraic terms, the symmetric part of
+$\rho$ on a finite generating set does not in general extend uniquely
+to the closure under $\compose$. Theorem~5 (Curvature) makes this
+precise: the closure exists, but its specific form depends on the
+class of $\kappa$ in the relevant cohomology. Hume's psychological
+solution---custom and habit---is the empirical claim that human
+cognition tacitly assumes $\kappa = 0$ in the absence of contrary
+evidence, i.e.\ a default trivialization of curvature. Idea Theory
+agrees that this is a default; it is also a falsifiable one.
+
+%======================================================================
+\section{Spinoza: adequate ideas and conatus}\label{sec:spinoza}
+%======================================================================
+
+\thinker{Original claim.} In the \emph{Ethics} II--III
+\cite{Spinoza1677} an idea is \emph{adequate} when it possesses the
+intrinsic marks of a true idea ``without relation to its object'';
+\emph{conatus} is the striving by which each thing perseveres in its
+being.
+
+\formalclaim An idea $a$ is \emph{adequate} when $\sigma(a, a) = a$ and
+$\nu(a,a) = 0$: composition with itself is pure preservation, no
+negation. Equivalently, $a$ is a $\sigma$-idempotent in the kernel of
+$\nu$. \emph{Conatus} is positivity of $\rho$: $\rho(a,a)>0$ for every
+non-null $a$, so each idea has positive self-resonance and ``persists''
+in the algebraic sense that its iterated composition $a^{\compose n}$
+remains nonzero in the free vector space.
+
+\formalstatus Adequacy is \emph{contingent}: by Theorem~3 the
+$\sigma$-component is uniquely defined modulo $\ker\rho$, so the set of
+adequate ideas is a sub-algebra, but its non-triviality requires a
+non-trivial idempotent structure on $\sigma$, which is not implied by
+Theorems~1--9. Conatus is \emph{true} in any algebra whose $\rho$ is
+positive-definite, which is a strict strengthening of the non-degeneracy
+in Theorem~2 and which is contingent.
+
+\litcomment Spinoza's parallelism (idea and ideatum are one and the same
+thing under two attributes) becomes the assertion that the canonical map
+$\Ideas\to\Ideas^*$ from Theorem~2 is an \emph{isometry}, not just an
+isomorphism. The two-attribute reading is the same algebra under two
+labels for $\rho$.
+
+Spinoza's third kind of knowledge---\emph{scientia intuitiva}, the
+intuition that proceeds from an adequate idea of the formal essence of
+attributes to an adequate idea of the essence of things---is the
+operation of moving between $\sigma$-stable sub-algebras via the
+canonical isometry. Such moves are well-defined whenever the algebra
+is $\sigma$-rigid: any two $\sigma$-stable submonoids are connected by
+a unique iso preserving $\rho$. This is a non-trivial structural
+condition: it is the algebraic analogue of \emph{deus sive natura},
+the identification of the global structure with its self-referential
+section. Spinoza's geometrical method is then the systematic
+exploration of this rigidity. The conatus principle, formalized as
+positivity of $\rho$, also yields a quantitative reading of the
+\emph{affects}: an affect is a perturbation $\delta a$ such that
+$\rho(a + \delta a, a + \delta a) > \rho(a, a)$ (joy) or
+$< \rho(a,a)$ (sadness). The Ethics' typology of affects is a typology
+of perturbations of self-resonance.
+
+%======================================================================
+\section{Leibniz: monads as graded atoms}\label{sec:leibniz}
+%======================================================================
+
+\thinker{Original claim.} The \emph{Monadology} \cite{Leibniz1714}
+declares the monads to be the simple substances, ``windowless,''
+mirroring the universe each in its own perspective; their harmony is
+\emph{pre-established} by God.
+
+\formalclaim Monads are the graded atoms: the elements $m\in\Ideas$ with
+$\deg(m)$ minimal in the positive cone of $G$ and which are
+$\compose$-irreducible, i.e.\ $m=a\compose b$ implies $a=\unit$ or
+$b=\unit$. The ``windowlessness'' is the requirement that
+$\rho(m, m')$ for distinct atoms $m,m'$ is encoded \emph{not} by direct
+pairing but by their common image under a global map $\Phi:\Ideas\to A$
+satisfying $\Phi(a\compose b) = \Phi(a)+\Phi(b)+\omega(a,b)$. The
+pre-established harmony is the existence of $\Phi$ as a global section,
+i.e.\ a global Aufhebung trivializing $\omega$.
+
+\formalstatus Existence of monads (graded atoms) is \emph{contingent}:
+in any algebra with $G$ well-ordered they exist, by Theorem~9. Their
+\emph{windowlessness} (no nonzero $\rho(m,m')$) is contingent; in
+typical algebras it fails. The pre-established harmony --- a global
+trivialization of $\omega$ --- is \emph{false} as a universal claim
+because, by Theorem~4, $\omega$ may have nontrivial cohomology class.
+Leibniz's God is the postulate that this class always vanishes; Idea
+Theory shows this is a \emph{theological} commitment, not a theorem.
+
+\litcomment Pre-established harmony is the hypothesis $[\omega]=0\in
+H^2(\Ideas, A)$. Compare \cref{sec:medieval}: it is the \emph{same}
+cohomological obstruction the Thomists encountered, now phrased
+positively (its vanishing is harmony) rather than negatively (its
+nonvanishing requires infusion).
+
+Leibniz's principle of the identity of indiscernibles also acquires
+an algebraic statement. Two ideas $a, b$ are \emph{indiscernible} when
+they have the same images under every parametric idea (in the sense of
+\cref{sec:russell}); they are \emph{identical} when $a = b$. The
+principle asserts that indiscernibility implies identity. By Theorem~2
+(non-degeneracy of $\rho$) this holds iff the parametric ideas
+generate a separating family for $\Ideas$, which is contingent. The
+principle of sufficient reason becomes the requirement that for every
+$a\in\Ideas$ there exists a chain $\unit = a_0, a_1, \dots, a_n = a$
+with each $a_{i+1}$ obtained from $a_i$ by a single composition; this
+is non-trivial in non-finitely-generated algebras. The continuity
+principle (\emph{natura non facit saltus}) is the requirement that the
+grading $\deg$ takes values in a dense subgroup of $\RR$; with $G =
+\ZZ$ it fails, with $G = \QQ$ or $\RR$ it holds. Each of Leibniz's
+metaphysical principles thus translates into a structural condition
+that an algebra may or may not satisfy.
+
+%======================================================================
+\section{Kant: schemata, apperception, regulative
+Ideas}\label{sec:kant}
+%======================================================================
+
+\thinker{Original claim.} The \emph{Critique of Pure Reason}
+\cite{Kant1781} treats the categories as rules of synthesis applied to
+intuitions via the schemata of the imagination; the transcendental unity
+of apperception is the ``I think'' that must be able to accompany all my
+representations; the regulative Ideas (soul, world, God) are limits to
+which experience tends without ever attaining.
+
+\formalclaim Categories are operators $C:\Ideas\to\Ideas$ that respect
+$\compose$ up to $\omega$: $C(a\compose b) = C(a)\compose C(b) +
+\omega_C(a,b)$ for some category-specific cocycle. The schematism of
+imagination is the choice of \emph{normalization} that makes $\omega_C$
+explicit. The transcendental unity of apperception is precisely the
+identity element $\unit$ ``accompanying'' every idea via $a = \unit
+\compose a$. Regulative Ideas are nontrivial cohomology classes
+$[\xi]\in H^1(\compose, A)$ that organize $\Ideas$ but are not
+themselves elements of $\Ideas$.
+
+We need a small lemma to make the third equation precise.
+
+\begin{lemma}[Regulative ideas as cohomology classes]\label{lem:regulative}
+Let $(\Ideas,\compose,\unit,\omega)$ be an idea algebra with abelian
+emergence group $A$. Define the chain complex
+\[
+  C^0 = \mathrm{Maps}(\Ideas, A),\quad
+  C^1 = \mathrm{Maps}(\Ideas\times\Ideas, A),
+\]
+with $\dcoc f(a,b) = f(a\compose b) - f(a) - f(b)$ for $f\in C^0$. Then
+the kernel of $\dcoc:C^0\to C^1$ classifies the homomorphisms
+$\Ideas\to A$, and the quotient $C^0/\ker\dcoc$ injects into $C^1$ with
+image equal to the trivial cocycles. The cohomology $H^1\defeq
+C^1/(\dcoc C^0)$ contains $\omega$, and any class $[\xi]\in H^1$ that is
+\emph{not} in the image of $\dcoc$ defines a regulative Idea: a
+prescription on $\Ideas$ that no idea instantiates.
+\end{lemma}
+
+\begin{proof}
+Direct verification of the cochain conditions of Theorem~4. The cocycle
+identity $\dcoc^2=0$ follows from associativity, which is part of
+Theorem~1. The kernel of $\dcoc$ on $C^0$ is by definition the set of
+$f$ with $f(a\compose b)=f(a)+f(b)$, the homomorphisms. The quotient
+injects into $C^1$ because $\dcoc$ is then injective on
+$C^0/\ker\dcoc$. The class of $\omega$ lies in $H^1$ by Theorem~4. A
+class not in the image of $\dcoc$ corresponds to a constraint on
+$\Ideas$ that cannot be witnessed by any single function $f$; this is
+the formal correlate of Kant's ``Idee, der kein Gegenstand entspricht.''
+\end{proof}
+
+\formalstatus Categories as $\omega$-twisted operators are
+\emph{contingent}: their existence requires extra structural data not
+implied by Theorems~1--9, namely a class of \emph{morphisms} on
+$\Ideas$ closed under composition. The transcendental unity of
+apperception is \emph{true} by Theorem~1: $\unit$ exists and is unique.
+The regulative status of $H^1$-classes is \emph{true} as
+\cref{lem:regulative}.
+
+\litcomment The schematism is the obstruction theory; the dialectic of
+the regulative Ideas is exactly $H^1$ being non-trivially populated. The
+``transcendental illusion'' of the antinomies is the temptation to read
+a cohomology class as if it were a chain.
+
+The Kantian distinction between \emph{intuition} and \emph{concept}
+also fits. Intuitions are elements of a generating subset of $\Ideas$
+at low grade ($\deg = 1$ in the natural normalization); concepts are
+$\sigma$-stable submonoids in the sense of \cref{sec:aristotle}. The
+schematism is the bridge: a procedure for restricting a concept (a
+sub-monoid) to its intersection with the intuition's generating set.
+Theorem~3 supplies the restriction whenever the relevant
+$\sigma$-decomposition exists. The synthetic \emph{a priori}---which
+exercised Kant most---is then the assertion that some equations of
+the form $v(a\compose b) = v(a) + v(b) + \omega(a,b)$ hold with
+$\omega \neq 0$ that is nonetheless determinate \emph{a priori}, i.e.\
+fixed by the structure rather than by experience. Idea Theory's
+verdict is that such cocycles exist (Theorem~4) and that the synthetic
+a priori is the cohomology class of the structurally determined
+$\omega$; the classical examples (geometry, arithmetic) are two
+specific representatives.
+
+%======================================================================
+\section{Hegel: Aufhebung literally}\label{sec:hegel}
+%======================================================================
+
+\thinker{Original claim.} Hegel's \emph{Phenomenology}
+\cite{Hegel1807} and \emph{Science of Logic} \cite{Hegel1812} make
+\emph{Aufhebung} (sublation) the engine of conceptual development: a
+content is preserved, negated, and elevated.
+
+\formalclaim This is taken \emph{literally}: the Aufhebung
+decomposition $a\compose b = \sigma(a,b)+\nu(a,b)+\eta(a,b)$ of
+Theorem~3 is the formal version of Hegel's three moments. Preservation
+is $\sigma$, negation $\nu$, elevation $\eta$. The unique-mod-$\ker\rho$
+qualifier is the Hegelian disclaimer that the moments are
+\emph{distinguishable in concept but interpenetrating in actuality}.
+
+\formalstatus \emph{True} as Theorem~3, in every idea algebra.
+
+\litcomment That Hegel's thesis is the unique theorem we did not have to
+qualify says less about Hegel than about the choice of formalism:
+Theorem~3 \emph{was named} the Aufhebung decomposition in homage. The
+content of the homage is the observation that any reasonable algebra of
+ideas \emph{must} support such a decomposition or fail to support
+non-trivial composition at all. The dialectic is not a quirk of
+\emph{Geist}; it is an algebraic identity. The slogan ``the rational is
+the actual'' becomes: $\sigma + \nu + \eta = \compose$.
+
+A few of Hegel's more contested moves now also become assessable.
+The \emph{cunning of reason}---history's tendency to use individual
+passions to attain universal ends---is the empirical claim that the
+$\eta$-component grows over iterated composition while $\nu$ remains
+bounded; this is an asymptotic property of the algebra, not a
+metaphysical guarantee. The triadic shape of the Logic
+(being/nothing/becoming, for instance) is the universal pattern of
+Theorem~3 applied to a maximally degenerate input pair: $\sigma(b,
+\bar b) = 0$ (preservation collapses), $\nu(b, \bar b) = -b$
+(negation), and $\eta(b, \bar b) = $ the synthetic ``becoming.''
+Hegel's ladder of categories is then a sequence of compositions that
+exhibit the Aufhebung at each level. Idea Theory makes Hegel
+\emph{tractable}: where the original prose is opaque, the algebra is
+explicit. This is not a vindication of Hegelianism but a translation
+of its claims into a verifiable register.
+
+%======================================================================
+\section{Schopenhauer: Platonic Ideas as $\rho$-eigenvectors}\label{sec:schopenhauer}
+%======================================================================
+
+\thinker{Original claim.} Schopenhauer's \emph{World as Will and
+Representation} \cite{Schopenhauer1819} reinterprets Plato's Forms as the
+adequate objectifications of the Will at fixed grades. Aesthetic
+contemplation is the apprehension of an Idea liberated from the
+principium individuationis.
+
+\formalclaim Let $L_a:b\mapsto \rho(a, b)$ be the linear functional
+attached to $a$ via $\rho$. Schopenhauer's Platonic Ideas are the
+\emph{eigenvectors} of $L_a$ as $a$ ranges over the Will's degrees: an
+Idea $I$ is one for which there exists $\lambda\in\RR^{\times}$ with
+$L_a(I) = \lambda\cdot v(I)$ for some valuation $v$, all $a$ in a
+$\deg$-fibre. The grades $\deg$ recapitulate Schopenhauer's hierarchy
+(inorganic, plant, animal, human).
+
+\formalstatus \emph{Contingent}: by Theorem~2 (Resonance Pairing), the
+extended bilinear form has a well-defined spectrum whenever it is
+non-degenerate; existence of eigenvectors with the prescribed grading is
+a real condition on the spectrum. The hierarchy of grades exists
+whenever $G$ has a non-trivial total order (Theorem~9). Aesthetic
+liberation from individuation is the assertion that for the Idea $I$,
+the curvature $\kappa(I, \cdot)$ vanishes --- the Idea has no
+asymmetric, will-driven component. This is contingent and rare.
+
+\litcomment Schopenhauer's pessimism --- that ordinary representation is
+permeated by Will --- becomes the empirical claim that $\kappa$ is
+generically nonzero. The aesthetic moment is a $\kappa=0$ subspace.
+
+Schopenhauer's appropriation of the principium individuationis from
+Kant likewise has a clean reading. Individuation is the failure of
+$\rho$ to be invariant under conjugation: distinct individuals are
+distinct because their inner-automorphism orbits do not coincide.
+Aesthetic contemplation suspends this by passing to a
+conjugation-invariant representative, which by Theorem~6 lives in the
+fixed-point set of \cref{sec:plato}. The convergence with Plato is not
+accidental: Schopenhauer reads himself as a Platonist, and the
+formalism confirms the reading. Music's privileged status in his
+hierarchy of arts---music as direct objectification of the Will---is
+the algebraic observation that musical structure is a graded sequence
+of $\kappa$-eigenvectors, with $\kappa$ encoding melodic motion. The
+``timeless'' character of contemplated Ideas is then the formal
+property that conjugation by any chain leaves them invariant: the
+Idea is a chain-invariant vector, and the contemplation is the
+projection onto the chain-invariant subspace.
+
+%======================================================================
+\section{Frege: sense, reference, compositionality}\label{sec:frege}
+%======================================================================
+
+\thinker{Original claim.} ``\"Uber Sinn und Bedeutung''
+\cite{Frege1892} distinguishes \emph{Sinn} (sense, the mode of
+presentation) from \emph{Bedeutung} (reference). Compositionality: the
+sense of a complex expression is determined by the senses of its
+parts and their mode of combination.
+
+\formalclaim Senses are elements of $\Ideas$; references are values
+$v(a)\in A$ for some valuation $v$. The principle of compositionality is
+\emph{additivity of $v$ modulo $\omega$}:
+\[
+  v(a\compose b) = v(a) + v(b) + \omega(a,b).
+\]
+Strict compositionality is the special case $\omega = 0$.
+
+\begin{lemma}[Compositionality is exact mod $\omega$]\label{lem:frege}
+For any valuation $v$ on $\IdMon$ with values in an abelian group $A$,
+the function $\omega_v(a,b)\defeq v(a\compose b) - v(a) - v(b)$ is a
+2-cocycle on $\Ideas$ with values in $A$. Its cohomology class
+$[\omega_v]\in H^2(\Ideas, A)$ is independent of $v$ within its
+homotopy class of valuations and equals the class of $\omega$ from
+Theorem~4 when $v$ is induced by the standard valuation.
+\end{lemma}
+
+\begin{proof}
+Apply $\dcoc$ to $\omega_v$:
+\[
+  (\dcoc\omega_v)(a,b,c) = \omega_v(b,c) - \omega_v(a\compose b, c)
+   + \omega_v(a, b\compose c) - \omega_v(a, b).
+\]
+Substitute the definition and expand using associativity of $\compose$
+(Theorem~1):
+\[
+  = (v(b\compose c) - v(b) - v(c)) - (v(a\compose b\compose c) -
+     v(a\compose b) - v(c)) + \dots
+\]
+all $v$-terms cancel pairwise. Hence $\dcoc\omega_v = 0$, so $\omega_v$
+is a cocycle. Replacing $v$ by $v+\dcoc f$ for $f:\Ideas\to A$ adds
+$(\dcoc^2 f) = 0$ to $\omega_v$, hence the class is invariant. Equality
+with $\omega$ from Theorem~4 follows from the universal property in
+Theorem~4.
+\end{proof}
+
+\formalstatus The sense/reference distinction is \emph{true and forced}
+by Theorems~1 and 4. Compositionality is \emph{true modulo $\omega$};
+strict compositionality (the linguist's idealization) is contingent and
+equivalent to $[\omega] = 0$.
+
+\litcomment Frege's puzzles --- ``Hesperus is Phosphorus,'' substitution
+failure in opaque contexts --- are exactly the failure of $\omega$ to
+vanish on the relevant pair. The cocycle measures, quantitatively, the
+information that ``Hesperus = Phosphorus'' adds beyond the references.
+
+Frege's third realm---the platonic abode of senses, distinct from the
+empirical world and the inner mental world---becomes, in Idea Theory,
+the graded sub-algebra
+$\Ideas/\equivIdea \times A$ of (sense, reference) pairs. The third
+realm is neither an extra ontology nor a category mistake: it is the
+fibre product of the algebra and its valuation. Frege's resistance to
+psychologism is then the requirement that the projection from
+$\Ideas$ to senses factor through $\equivIdea$, i.e.\ that senses be
+intersubjectively shareable. This is contingent and equivalent to
+$\equivIdea$ being a public, not private, equivalence---a matter that
+exercised the Wittgensteins of both phases. The thought that a thought
+itself is grasped, not constructed, by individual minds becomes the
+claim that $\Ideas/\equivIdea$ has \emph{global} elements, not merely
+local representatives. Theorem~8 (Structural Equivalence) ensures
+that a global element, once posited, is unique up to canonical
+isomorphism.
+
+%======================================================================
+\section{Russell: propositional functions as parametric
+ideas}\label{sec:russell}
+%======================================================================
+
+\thinker{Original claim.} \emph{The Principles of Mathematics}
+\cite{Russell1903} treats a propositional function $\phi(x)$ as an
+incomplete entity that becomes a proposition upon assignment of $x$.
+The theory of types prevents self-application and resolves the
+paradoxes.
+
+\formalclaim A propositional function is a \emph{parametric idea}: a
+map $\phi:\Ideas \to \Ideas$ that respects $\compose$ in the parameter:
+$\phi(a\compose b) = \phi(a)\compose\phi(b)$ when $\phi$ is type-strict,
+or up to $\omega$ otherwise. The grading $\deg$ implements Russell's
+type theory: $\deg\phi(a) = \deg\phi + \deg a$, and the no-self-
+application rule is $\deg\phi \neq 0$ for $\phi$ acting on its own
+type.
+
+\formalstatus \emph{True} by Theorem~9: the grading is a homomorphism
+into $G$, so the additive law $\deg\phi(a) = \deg\phi + \deg a$ holds,
+and $\phi(\phi)$ is well-defined only if $\deg\phi + \deg\phi = \deg\phi$,
+i.e.\ $\deg\phi=0$. Outlawing self-application is the Russellian gloss
+on this. Compositional respect for $\compose$ is contingent and
+equivalent to the parametric idea being a \emph{morphism} of idea
+algebras, an extra structural assumption.
+
+\litcomment The vicious-circle principle is a grading constraint, not a
+metaphysical taboo. It dissolves once one accepts $\deg$ as a structural
+feature of $\Ideas$, which Theorem~9 supplies.
+
+Russell's paradox of the class of all classes that are not members of
+themselves becomes, in Idea Theory, the attempt to construct an
+$a\in\Ideas$ with $\deg a = -\deg a$, i.e.\ $2\deg a = 0$. In a
+torsion-free $G$ this forces $\deg a = 0$, hence $a = \unit$, and the
+paradox dissolves: the only ``self-membering non-self-membering'' idea
+is the unit, which membering itself or not is degenerate. In a $G$
+with 2-torsion the paradox returns, but only inside that
+torsion. Russell's ramified hierarchy, with its branchings of orders
+and types, is the categorification of the grading: one grades not just
+the elements but the parametric ideas themselves, then grades those
+parametrics over them, and so on. Theorem~9 supplies the base; the
+hierarchy is what one builds on top of it. Whitehead and Russell's
+\emph{Principia Mathematica} program is, in retrospect, an attempt to
+state Theorems~1 and 9 for the algebra of mathematical ideas; the
+formalism in this book is its descendant, with the philosophical
+overburden lifted.
+
+%======================================================================
+\section{Wittgenstein I: the picture theory}\label{sec:wittgensteinI}
+%======================================================================
+
+\thinker{Original claim.} The \emph{Tractatus} \cite{Wittgenstein1922}
+proposes that propositions are \emph{pictures} of facts: a
+\emph{Sachverhalt} (state of affairs) and a \emph{Satz} (proposition)
+share a \emph{logical form} that allows the latter to depict the
+former.
+
+\formalclaim Sachverhalte and S\"atze form two sub-algebras
+$\Ideas_W,\Ideas_S\subset\Ideas$. The picture theory asserts the
+existence of a $\rho$-isomorphism $\pi:\Ideas_W\to\Ideas_S$:
+$\rho(\pi(a),\pi(b)) = \rho(a,b)$ for all $a,b\in\Ideas_W$. Logical
+form is the pull-back of the resonance pairing.
+
+\formalstatus \emph{Contingent}: by Theorem~8 (Structural Equivalence)
+two sub-algebras are isomorphic iff there is a graded monoid iso
+preserving $\rho, \sigma, \nu, \omega$. The picture theory \emph{adds}
+the existence of such a $\pi$, which is non-trivial and exhibits
+specific Tractarian metaphysics. Theorem~2 (Resonance) implies that
+\emph{if} $\pi$ exists it is uniquely determined on the support of
+$\rho$, so the picture is unique up to $\ker\rho$.
+
+\litcomment Wittgenstein's later rejection of the picture theory is the
+empirical claim that no such $\pi$ exists in natural-language algebras;
+the formal theorem is silent on the empirical question but exact about
+the structural conditions.
+
+The Tractarian dictum ``the limits of my language are the limits of my
+world'' translates into the structural observation that the Sachverhalt
+sub-algebra is the image of the Satz sub-algebra under the inverse of
+$\pi$ (when $\pi$ exists), so the world is what is in the image of the
+language under the picturing isomorphism. The mystical---``what cannot
+be said but only shown''---is then the kernel of $\pi$: the part of the
+world not captured by any Satz. Idea Theory sees no contradiction here:
+kernels of homomorphisms are well-defined objects of study, and there
+is no formal embarrassment in saying that some structure of the world
+is encoded only in the kernel. The famous ladder at the end of the
+Tractatus---to climb up and then throw away---is the methodological
+dual: one uses the picture-isomorphism to see, then drops it because
+its existence cannot itself be pictured. Idea Theory's verdict is that
+the existence of $\pi$ is meta-structural, hence outside the picturing
+relation; Wittgenstein's ladder reflects, accurately, this categorial
+shift.
+
+%======================================================================
+\section{Wittgenstein II: family resemblance}\label{sec:wittgensteinII}
+%======================================================================
+
+\thinker{Original claim.} \emph{Philosophical Investigations}
+\cite{Wittgenstein1953} replaces shared essences with overlapping
+similarities: members of a family resemble one another in different
+ways without any single feature being common.
+
+\formalclaim Family resemblance is the equivalence relation
+$\equivIdea$ generated by ``shares a $\sigma$-component above
+threshold $\theta$'': $a\sim_\theta b$ iff $\rho(\sigma(a,b),\unit)\ge
+\theta$. The resulting equivalence classes form the quotient
+$\Ideas/\equivIdea$. We supply a small lemma specific to this section.
+
+\begin{lemma}[Family-resemblance partition]\label{lem:fam}
+Let $\sim_\theta$ be the binary relation $a\sim_\theta b$ iff
+$\rho(\sigma(a,b),\unit)\ge\theta$, and let $\equivIdea$ be its
+transitive closure. Then $\equivIdea$ is an equivalence relation, and
+the projection $\Ideas\to\Ideas/\equivIdea$ is compatible with
+$\compose$ if and only if $\sigma$ is sub-multiplicative in
+$\rho$-norm, i.e.\
+\[
+  \rho(\sigma(a\compose c, b\compose c),\unit) \geq
+  \min\bigl(\rho(\sigma(a,b),\unit),\rho(\sigma(c,c),\unit)\bigr)
+  -\|\omega(a,b)\|.
+\]
+\end{lemma}
+
+\begin{proof}
+Reflexivity and symmetry of $\sim_\theta$ are immediate from the
+symmetry of the symmetric part of $\rho$ (Theorem~5). Transitivity is
+forced by definition of $\equivIdea$. Compatibility with $\compose$
+follows from Theorem~3 (the Aufhebung is a $\compose$-bilinear
+operation modulo $\ker\rho$) together with Theorem~4 ($\omega$
+controls the failure of additivity), giving the displayed inequality
+upon expansion. The condition is necessary because, in its absence,
+multiplication by $c$ can drop a pair below threshold and break
+transitivity of the closure.
+\end{proof}
+
+\formalstatus \emph{True} as \cref{lem:fam}, conditional on the
+displayed sub-multiplicativity (which is contingent on the algebra).
+``Essences'' (which the Investigations rejected) correspond to
+classes that are \emph{singletons} in $\Ideas/\equivIdea$; family
+resemblance is the assertion that classes are typically large.
+
+\litcomment The threshold $\theta$ parametrizes the strictness of the
+resemblance criterion. As $\theta\to 0$ the partition collapses to a
+single class (everything resembles everything weakly); as $\theta\to
+\infty$ it shatters into singletons (the essence theory). Wittgenstein's
+diagnosis is that natural-language concepts sit at intermediate
+$\theta$.
+
+Wittgenstein II's celebrated rejection of private language likewise
+falls out of the formalism: a language is private if its $\equivIdea$
+is supported on a single individual's sub-algebra, which precludes
+intersubjective $\rho$-pairings and so degenerates the resonance.
+Theorem~2's non-degeneracy clause, applied to the global algebra,
+implies the impossibility of a non-trivial private language: any
+genuinely private idea has zero pairing with all public ideas, hence
+is in the kernel of $\rho$, hence is identified with $0$ modulo
+$\equivIdea$. The argument is not a sociological observation but a
+structural inference. Rule-following considerations also acquire a
+gloss: a rule is a parametric idea (\cref{sec:russell}); to follow a
+rule is to apply the parametric to a sequence of inputs while
+preserving its $\sigma$-component. The skeptical paradox---that no
+finite trajectory determines a unique rule---is the indeterminacy of
+parametric extension from finite data, which is generic and
+quantitatively measured by the curvature $\kappa$ of \cref{sec:hume}.
+
+%======================================================================
+\section{Quine: indeterminacy as cocycle section}\label{sec:quine}
+%======================================================================
+
+\thinker{Original claim.} \emph{Word and Object} \cite{Quine1960}
+argues that translation is underdetermined: incompatible manuals can be
+equally compatible with the totality of speech dispositions. There is
+no fact of the matter as to which is correct.
+
+\formalclaim Translation is a section of the projection
+$\Ideas\twoheadrightarrow\Ideas/\equivIdea$. The indeterminacy thesis
+asserts that there are inequivalent sections, i.e.\ the projection has
+nontrivial automorphism group fixing its image. Equivalently, the
+cocycle $\omega$ is non-trivial in $H^2(\Ideas/\equivIdea, A)$.
+
+\begin{lemma}[Sections and indeterminacy]\label{lem:quine}
+Let $p:\Ideas\to\Ideas/\equivIdea$ be the quotient. Sections $s$ of $p$
+form a torsor over the abelian group $C^1_{\mathrm{nor}}$ of normalized
+1-cochains valued in the kernel $\ker p$. The orbits under the action
+of inner automorphisms (Theorem~6) collapse iff $\omega = \dcoc f$ for
+some $f$, i.e.\ $[\omega] = 0$.
+\end{lemma}
+
+\begin{proof}
+Two sections $s, s'$ differ by $s' - s = \delta : \Ideas/\equivIdea\to
+\ker p$, a 1-cochain. Normalization $s(\unit) = \unit$ enforces
+$\delta(\unit)=0$. The inner automorphism action on sections is
+$g\cdot s : a \mapsto g\compose s(a)\compose g^{-1}$, which by
+Theorem~6 preserves $\rho, \sigma, \nu, \omega$. Two sections lie in
+the same orbit iff their difference is the coboundary of an inner
+automorphism; the obstruction is exactly the class $[\omega]$.
+\end{proof}
+
+\formalstatus Indeterminacy is \emph{true} whenever $[\omega]\neq 0$,
+\emph{false} when $[\omega]=0$. Both possibilities are realized by
+Theorem~4. Thus indeterminacy is a \emph{property of the algebra}, not
+a metaphysical universal: Quine's empirical bet is that
+natural-language algebras have $[\omega]\neq 0$.
+
+\litcomment ``Gavagai'' is the existence of two sections agreeing on
+all observation sentences and differing on theoretical ones. The
+formalism makes the bet calculable rather than rhetorical.
+
+Quine's web of belief, with its periphery of observation sentences and
+its core of logic and mathematics, becomes the filtration of $\Ideas$
+by graded resonance: peripheral ideas have high $\rho$-pairing with
+sensory inputs, central ideas have low pairing but high
+$\sigma$-stability across compositions. Quine's confirmation holism
+(``no statement faces the tribunal of experience alone'') is the
+algebraic claim that $\rho$ is not coordinate-wise: revising a single
+$a$ in response to evidence requires re-balancing the entire algebra,
+because $\rho$ couples $a$ to every other element through composition
+chains (Theorem~7). Idea Theory therefore makes Quine's holism a
+\emph{theorem}, not a slogan: any change to a single idea propagates,
+via the cocycle, throughout its composition orbit. The choice of
+which ideas to keep fixed and which to revise is the choice of
+section, and the indeterminacy of that choice is exactly the
+indeterminacy of \cref{lem:quine}.
+
+%======================================================================
+\section{Putnam: Twin Earth and externalism}\label{sec:putnam}
+%======================================================================
+
+\thinker{Original claim.} ``The Meaning of `Meaning'\,''
+\cite{Putnam1975} argues that meanings ``ain't in the head'': molecule-
+for-molecule duplicates can entertain ideas with different references
+because of different surrounding environments.
+
+\formalclaim Let $E$ be the environment, modelled as an invertible
+idea $g_E\in\Ideas^{\times}$. Two thinkers in environments $E, E'$ host
+``the same idea'' $a$ as the conjugate $\conj{g_E}{a}$ and
+$\conj{g_{E'}}{a}$ respectively. By Theorem~6, conjugation preserves
+the structural data, but the value $v(\conj{g_E}{a}) = v(a) +
+\omega(g_E, a) + \omega(g_E\compose a, g_E^{-1})$ generally differs
+between environments because $\omega$ does. Externalism is the claim
+that $\omega(\cdot, \cdot)$ does not vanish on environment-idea
+pairs.
+
+\formalstatus Twin Earth is \emph{contingent}: by Theorem~6,
+conjugation is a structural automorphism and so preserves the algebra
+up to isomorphism; but values can differ because the cocycle moves the
+absolute reading. The externalist thesis is precisely $\omega(g_E, a)
+\neq \omega(g_{E'}, a)$ for some $a$ when $E \neq E'$.
+
+\litcomment Putnam's slogan rephrases as: \emph{meaning is a
+trivialization of $\omega$ depending on the environment}. Internalism
+is the bet that the environment factor cancels; externalism is the bet
+that it does not.
+
+Putnam's later \emph{internal realism} is then the proposal that one
+fix a particular environment $g_E$---the standard scientific one---and
+read $\omega$ relative to it, recovering an ``internal'' notion of
+truth that is contingent on the choice but determinate within it. Idea
+Theory observes that this is a \emph{gauge choice}, and the various
+realisms of late twentieth-century philosophy of science are competing
+gauge fixings. The gauge-invariant content---what is true in every
+environment---is exactly what is fixed by conjugation: again, the
+fixed-point set of \cref{sec:plato}. The structural convergence
+between Plato, Kripke, and the gauge-invariant residue of Putnam is
+therefore a single algebraic object, exhibiting the unity of three
+philosophical positions traditionally read as antagonists. The
+linguistic division of labor---``not every speaker need know the
+extension of every term''---becomes the assertion that the section
+$s : \Ideas/\equivIdea\to\Ideas$ is defined only locally per speaker
+and assembled globally by social mechanisms; this is a sociological
+fact about cognition, not a theorem.
+
+%======================================================================
+\section{Kripke: rigid designators}\label{sec:kripke}
+%======================================================================
+
+\thinker{Original claim.} \emph{Naming and Necessity}
+\cite{Kripke1980} introduces rigid designators: terms that pick out the
+same object in every possible world in which the object exists.
+
+\formalclaim A rigid designator is an idea $r\in\Ideas$ unaffected by
+conjugation: $\conj{g}{r} = r$ for all invertible $g$. Possible worlds
+are environments $g\in\Ideas^{\times}$, and the designator's
+indifference to environment is its rigidity. Equivalently, $r$ lies in
+the centralizer of $\Ideas^{\times}$ in $\Ideas$, hence in the
+fixed-point set of \cref{sec:plato}.
+
+\formalstatus \emph{True} as a corollary of Theorem~6 and the analysis
+of \cref{sec:plato}: rigid designators are exactly Plato's Forms.
+That is a substantive equivalence: Kripke's modal apparatus and
+Plato's metaphysical one converge on the same algebraic locus,
+$\mathrm{Fix}_{\compose}(\Ideas)$.
+
+\litcomment That a Saul-Kripkean rigid designator is a Plato Form is a
+formal observation, not a historical thesis. It does explain why
+Kripke's objections to descriptivism feel \emph{Platonic}: he is
+arguing that natural-language proper names denote $\sigma$-invariant
+elements, not $\omega$-twisted descriptions.
+
+Kripke's notion of \emph{a posteriori necessity}---``Hesperus is
+Phosphorus'' is necessary but discovered empirically---also lands
+naturally. The necessity is the conjugation-invariance: Hesperus and
+Phosphorus name the same fixed point of conjugation, hence are
+identical in every environment, hence necessarily identical. The
+\emph{a posteriori} character is the empirical labor required to
+\emph{detect} that two presentations name the same fixed point: the
+labor of computing whether $\conj{g_E}{a} = a$ for the relevant $g_E$,
+which is in general undecidable in finite time. Theorem~6 makes the
+necessity a structural fact; the a-posteriori character is an
+epistemic fact about access to the structure. Kripkean essentialism
+about natural kinds---that gold is necessarily the element with atomic
+number 79---is then the empirical claim that natural-kind terms are
+rigid in the same conjugation-invariant sense. The formalism does not
+adjudicate the empirical question, but it makes the metaphysical claim
+mathematically transparent.
+
+%======================================================================
+\section{Brandom: inferential commitments}\label{sec:brandom}
+%======================================================================
+
+\thinker{Original claim.} \emph{Making It Explicit}
+\cite{Brandom1994} develops an inferential semantics: the content of a
+concept is the set of inferential moves --- entitlements and
+commitments --- that mastery of the concept licenses. Meaning is
+articulated by the use of expressions in giving and asking for
+reasons.
+
+\formalclaim For each $a\in\Ideas$, define the \emph{commitment set}
+$K(a) \defeq \{ b \mid \rho(a, b) > 0\}$ and the \emph{entitlement
+set} $E(a)\defeq \{b\mid \rho(b,a)>0\}$. The asymmetry is the
+curvature $\kappa$. The inferential content of $a$ is the pair $(K(a),
+E(a))$. Brandom's thesis that ``the propositional is the inferential''
+is the claim that every $a$ is determined, up to $\equivIdea$, by
+$(K(a),E(a))$.
+
+\formalstatus \emph{True} on the side of structure by Theorem~2: $\rho$
+non-degenerate means the map $a\mapsto (K(a), E(a))$ is injective
+modulo $\ker\rho$. Brandom's stronger claim --- that this injection is
+also \emph{surjective onto consistent commitment-entitlement pairs} ---
+is contingent and equivalent to a genericity condition on $\rho$.
+
+\litcomment The asymmetry between commitment and entitlement is the
+\emph{curvature} of \cref{sec:hume}: cause/inference is antisymmetric in
+$\rho$. Brandom's normative pragmatics is, formally, the bet that
+$\kappa\neq 0$ generically and that this asymmetry is what carries
+inferential force. Idea Theory thus underwrites the project: the right
+algebraic invariant for ``inference'' is exactly the antisymmetric part
+of $\rho$, whose cohomology class is structural by Theorem~5.
+
+Brandom's distinction between \emph{material} and \emph{formal}
+inference also clarifies. A formal inference is a parametric idea
+$\phi$ with $\phi(\rho(a, b)) = \rho(\phi(a), \phi(b))$, i.e.\ a
+$\rho$-equivariant operation; a material inference is one that fails
+equivariance but succeeds for the specific $a, b$ at issue. Theorem~5
+implies that material inferences carry information not captured by
+formal ones: their $\kappa$-content does not factor through any
+universal scheme. This is the formal echo of Brandom's central
+empirical claim that semantic content is irreducible to formal
+syntax. The expressive role of logical vocabulary---to make explicit
+the inferential commitments implicit in non-logical use---becomes the
+construction of a pull-back along the parametric idea ``...is a
+commitment of...,'' which makes $K(\cdot)$ visible as a relation in
+$\Ideas$ itself rather than as a meta-relation. Idea Theory's verdict
+is that the construction is well-defined and Brandom's expressivism
+is structurally coherent.
+
+The score-keeping model of discursive practice, in which interlocutors
+track each other's commitments and entitlements, becomes a
+\emph{groupoid action} on $\Ideas$: each speaker carries a state
+$(K_i, E_i)$, and conversational moves act by composition with
+specified ideas, updating the states. The well-foundedness of
+score-keeping---that scores can be reconciled across speakers---is
+equivalent to the existence of a global section of the resulting
+fibration, hence again a cohomological condition on $\omega$. The
+empirical bet of Brandom's program---that human conversation does
+support such a global section in the limit of indefinite
+deliberation---is, on this reading, a normative ideal rather than a
+structural guarantee, and Idea Theory clarifies why: nothing in the
+algebra forces $[\omega] = 0$, so no purely formal warrant for global
+score-reconciliation can be expected. The expressivist project is
+well-posed but not self-vindicating.
+
+%======================================================================
+\section*{Coda}
+%======================================================================
+
+The chapter has been a tour of twenty positions and a demonstration that
+each one fits, without contortion, in the formalism of
+$(\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$. The
+distribution of \emph{statuses} is itself instructive: of the twenty
+restatements, three (Aristotle, Hegel, the unity of apperception) are
+\emph{theorems} of Idea Theory; eight (Berkeley's logical core, Hume,
+Frege's distinction, Russell, Wittgenstein I's \emph{conditional},
+Putnam, Kripke, Brandom's structural core) reduce to specific clauses of
+Theorems~2--9; the remainder (Plato, the medievals, Descartes, Locke,
+Spinoza, Leibniz, Kant's categories, Schopenhauer, Wittgenstein II,
+Quine) are \emph{contingent properties} of particular algebras and
+correspond, in each case, to a specific cohomological or
+spectral condition. None are formally \emph{false}.
+
+That the philosophical zoo collapses, under the formalism, to a small
+catalogue of cohomology classes and spectral conditions is the central
+claim of this monograph re-encountered in its philosophical clothing.
+The reader skeptical of the procedure is invited to check the converse:
+take a position not surveyed here, locate its central claim in the
+algebra, and note that its formal status is determinate. The exercise
+is generative; the formalism is not a Procrustean bed but a system of
+coordinates.
+
+A final summary table may help the reader navigate. The categories
+``theorem,'' ``clause,'' and ``contingent'' index the formal status;
+the parenthetical numerals refer to the foundational theorems invoked.
+Forms (T6), universals (T3+T6), divine archetypes (T6), Cartesian
+partition (T1+T9), Lockean generators (T1), Berkeleyan non-degeneracy
+(T2), Humean association (T2+T5), missing shade (T4 cohomology),
+Spinozistic adequacy (T3), conatus (T2 strengthened), Leibnizian
+monads (T9), pre-established harmony (T4 trivial), schematism (T4
+twisted), apperception (T1), regulative Ideas (T4 nontrivial),
+Aufhebung (T3), Schopenhauerian Ideas (T2 spectrum), sense/reference
+(T1+T4), propositional functions (T9), picturing (T2+T8), family
+resemblance (T3+T4 conditional), Quinean indeterminacy (T4 nontrivial),
+Twin Earth (T6+T4), rigid designation (T6), inferential semantics
+(T2+T5). Each entry is a precise structural condition; each condition
+is checkable, in principle, in any concrete realization of an idea
+algebra.
+
+The remaining chapters work out the consequences in cognitive science
+(\cref{ch:philosophy}+1), connectionism, cultural evolution, and the
+sociology of ideas. The translation procedure perfected in this
+chapter on philosophy will recur with every new zoo entry: state the
+position, formalize it, locate the structural condition, decide
+status. We will see that some of the most influential modern
+positions---prototype theory, classical AI symbol grounding, modern
+deep-learning representations---fall into the same small inventory of
+algebraic types as their classical philosophical predecessors. The
+zoo is large; the algebra of the cages is small. That is the working
+hypothesis of the book, and the philosophical chapter has been its
+first systematic test.
+
+A methodological remark closes the chapter. The procedure exemplified
+above---faithful original claim, formal restatement, status check---is
+not unique to philosophy. The same template will structure the
+chapters on cognitive science, connectionism, cultural evolution, and
+sociology. What differs across domains is not the procedure but the
+\emph{empirical bets} that the various traditions are willing to
+make about which structural conditions hold. The Platonist bets that
+fixed-point sets are non-trivial; the Humean bets that $\kappa\neq 0$;
+the Quinean bets that $[\omega]\neq 0$; the connectionist will bet
+that $\Ideas$ is a graded vector space with continuous $\compose$.
+The bets are testable, at least in principle: each corresponds to a
+finite battery of structural observations on a concrete idea algebra,
+and each is in principle falsifiable by a counter-example. The merit
+of the formalism is to make these competing wagers \emph{commensurable},
+so that what looked like irreconcilable metaphysical pictures appears
+as a small, finitely parametrized family of algebraic conditions over
+a single structure. That commensurability, and not the resolution of
+the ancient disputes themselves, is the project of Idea Theory; the
+chapters that follow will press the program into successively more
+empirical territory.
+
+It is worth re-emphasizing what the chapter has \emph{not} claimed.
+We have not argued that philosophical disputes about ideas are merely
+verbal, or that they reduce without remainder to disputes about
+algebraic conditions. Nor have we offered, by way of the formalism,
+any verdict on which empirical bet is the right one. The substantive
+disagreements among Plato, Aristotle, Kant, Hegel, Wittgenstein, and
+Quine remain after translation; what changes is that they become
+disagreements one can in principle adjudicate---by inspecting an
+algebra, computing a cohomology class, or measuring a curvature. The
+adjudicator is mathematics, not metaphysics. To call this a
+\emph{reformalization} of the philosophy of ideas is therefore not to
+liquidate philosophy in favor of formalism, but to give philosophy the
+courtesy of a precise vocabulary in which its claims can be heard,
+checked, and---when the algebra and the data so demand---revised.

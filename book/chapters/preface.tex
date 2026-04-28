@@ -1,0 +1,57 @@
+\section*{What this book is}
+
+\emph{Idea Theory} is the proposal that there is a single mathematical
+structure underlying the very many things human beings have wanted to call
+``ideas'' --- the noemata of phenomenology, the units of conceptual
+history, the strategies of evolutionary game theory, the tokens of cultural
+transmission, the latent vectors of a transformer, the categories of Kant,
+the Aufhebung of Hegel, the memes of Dawkins, the nonrival goods of Romer,
+and the emergent qualities of the British emergentists. The structure is
+modest --- a graded monoid equipped with a bilinear pairing, a triadic
+decomposition of composition, and a 2-cocycle measuring the failure of
+valuations to be additive --- yet it suffices to formalise an astonishing
+fraction of what those traditions assert.
+
+The book proceeds in two interleaved registers. The first is the
+\emph{formalism}: the nine foundational theorems, machine-checked in
+Lean~4 under the namespace \texttt{IdeaTheory}, are stated and proved here
+as ordinary mathematics, with no Lean code in the body. The second is the
+\emph{zoo}: each chapter populates the formalism with concrete entries
+from the literature on ideas. Plato's Forms reappear as fixed points of
+composition, Hegel's Aufhebung as the triadic decomposition itself,
+Hume's association as a bilinear pairing, Anderson's ``more is different''
+as a non-trivial cocycle class, Romer's nonrival ideas as a combinatorial
+closure, Mikolov's word embeddings as a learned resonance form, and so
+on. The intent is not to claim that the formal restatement \emph{exhausts}
+any of these positions --- it does not --- but to expose the shared
+algebraic skeleton that makes them mutually translatable.
+
+\section*{How to read it}
+
+Chapters \ref{ch:monoid}--\ref{ch:grading} develop the formalism. They are
+ordered so that each new piece of structure is introduced, axiomatised,
+and worked out in mathematical detail before its zoo is opened. A reader
+willing to take the foundational theorems on faith may skim the
+math-prose proofs and concentrate on the zoo entries, which are
+self-contained.
+
+Chapters~\ref{ch:philosophy}--\ref{ch:econ} are dedicated zoos: the
+philosophy of ideas, the cognitive science of concepts, and the
+game-theoretic and economic theories of innovation are each reformalised
+as a long sequence of zoo entries. These chapters cite the formalism
+heavily but do not introduce new mathematical structure.
+
+The appendix lists every Lean module on which the book depends, with a
+one-paragraph description. The bibliography lists real, verifiable
+publications. Every claim attributed to a thinker is cited.
+
+\section*{What is new}
+
+The novelty is not in any individual theorem --- monoids, bilinear pairings,
+group cohomology, and cocycle conditions are old --- but in the claim that
+\emph{this particular bundle of structure}, with these particular
+compatibility axioms, suffices to translate so much of the literature on
+ideas into a single algebraic object. The book exists to test that claim.
+We invite the reader to look for a position in their own area that
+\emph{cannot} be reformalised within the framework. Where such cases
+arise, they are the most interesting.

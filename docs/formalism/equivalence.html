@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Structural Equivalence — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Structural Equivalence</h1>
+<p>Two idea algebras are <em>structurally equivalent</em> if there is a bijection between their carriers that preserves every piece of structure.</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> A <em>morphism</em> of idea algebras \(\Phi:\mathcal{I}\to\mathcal{I}'\) is a graded monoid homomorphism such that \(\rho'(\Phi a,\Phi b)=\rho(a,b)\), \(\sigma'(\Phi a,\Phi b)=\Phi\sigma(a,b)\), \(\nu'(\Phi a,\Phi b)=\Phi\nu(a,b)\), and \(\omega'(\Phi a,\Phi b)=\omega(a,b)\). An <em>isomorphism</em> is a bijective morphism.</div>
+
+<p>Theorem 8 says that a graded monoid isomorphism that preserves \(\rho,\sigma,\nu,\omega\) automatically preserves \(\eta\), \(\kappa\), and the cohomology class of \(\omega\) — i.e. the Aufhebung and curvature data.</p>
+
+<h2>Why this matters</h2>
+<p>It tells us when two seemingly different theories of ideas — say, a Smolensky tensor-binding model and a Plate HRR model — are <em>the same</em> theory dressed differently. Conversely, if two algebras have different curvature classes, no relabeling can make them agree.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/structural-equivalence.html">Theorem 8</a></li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

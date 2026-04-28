@@ -1,0 +1,961 @@
+\chapter{Game-Theoretic and Economic Theories of Ideas, Reformalized}\label{ch:econ}
+
+The economic and game-theoretic literatures on ideas form, between them, the
+most quantitative branch of the zoo. Where philosophers ask what an idea
+\emph{is} and cognitive scientists ask what it \emph{does in a head},
+economists ask what an idea \emph{costs}, what it \emph{produces}, and what
+\emph{equilibria} it sustains; game theorists ask which configurations of
+ideas, treated as strategies, are stable against unilateral deviation. In
+both literatures, the carrier of analysis is almost always a finite or
+countable set of qualitatively distinct alternatives, weighted by real
+numbers. That is, almost without exception, the free $\RR$-cone (or
+$\RR_{\geq 0}$-cone) on the set of options. Idea Theory makes this implicit
+structure explicit: the options are elements of $\Ideas$, the weights live
+in $\RR$, and the operations $\compose$, $\rho$, $\sigma$, $\nu$, $\eta$ and
+$\deg$ provide a uniform vocabulary in which Schelling, Nash, Arrow, Hayek,
+Romer, Weitzman, Jones, Simon, Rogers and Granovetter can be transcribed
+without distortion.
+
+This chapter does not attempt original economics. It performs the same
+service for game-theoretic and economic claims that
+Chapters~\ref{ch:cogsci} and \ref{ch:phil} performed for cognitive and
+philosophical claims: it restates each thesis inside the formalism of
+Section~1 of the shared brief, identifies the foundational theorem (or new
+auxiliary theorem) that grounds the restatement, and remarks where the
+translation is faithful and where it forces a clarification of the original.
+Two parallel Lean modules — \texttt{IdeaTheory.Extensions.GameTheory} and
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}, supplemented by
+\texttt{IdeaTheory.Extensions.Diffusion} — formalize the new content. We
+cite them by name; the reader is referred to the corresponding
+\texttt{lake build} targets for machine-checked proofs.
+
+\section{Ideas as Strategies: the Finite IdeaGame}
+\label{sec:idea-strategies}
+
+Classical noncooperative game theory \citep{Nash1950} fixes a finite set
+$S_i$ of pure strategies for each of $n$ players and a payoff function
+$u_i:\prod_j S_j \to \RR$. A \emph{mixed strategy} for player $i$ is a
+probability distribution over $S_i$, and a \emph{strategy profile} is a
+tuple of mixed strategies. The mathematical content lies in the fact that
+mixed strategies live in the simplex $\Delta(S_i)$, which is the
+intersection of the free $\RR_{\geq 0}$-cone on $S_i$ with the hyperplane
+$\{x : \sum_s x_s = 1\}$.
+
+In Idea Theory we replace the abstract finite set $S_i$ by a finite subset
+$\Sigma_i \subseteq \Ideas$ of \emph{strategy ideas}. The transcription is
+exact in form but enriched in content: each pure strategy is now a fully
+fledged idea, with all of $\compose$, $\rho$, $\sigma$, $\nu$, $\eta$,
+$\omega$ and $\deg$ available. We define an \emph{IdeaGame} on
+$\Ideas$ to be a tuple $\Game = (n,(\Sigma_i)_{i\leq n},(u_i)_{i\leq n})$
+with each $\Sigma_i$ finite and each $u_i:\prod_j \Sigma_j \to \RR$.
+
+A \emph{mixed strategy} for player $i$ is then an element
+\[
+  x_i \in \RR_{\geq 0}\cdot \Sigma_i \subset \RR\cdot \Ideas
+  \quad\text{with}\quad \sum_{a\in\Sigma_i} x_i(a) = 1.
+\]
+That is, a mixed strategy is a normalized element of the free
+$\RR_{\geq 0}$-cone on $\Sigma_i$, viewed as a sub-cone of the free
+$\RR$-vector space on $\Ideas$ (whose existence is a corollary of
+Theorem~2 of the brief, the resonance pairing extension). The space of
+mixed strategies is the simplex $\Delta(\Sigma_i)$. Payoffs extend to mixed
+profiles by $\RR$-multilinearity, exactly as in Nash.
+
+The point of writing things this way is twofold. First, mixing is no longer
+a foreign probabilistic accretion glued onto an unrelated discrete object;
+it is the same linear extension by which the resonance pairing $\rho$ was
+already defined. Second, the entire grammar of ideas — composition,
+Aufhebung, resonance, grading — is now available to constrain payoffs and
+admissible strategies. A payoff that respects the grading $\deg$, for
+example, will treat strategies of equal complexity symmetrically; one that
+respects $\rho$ will treat strategies that resonate alike alike.
+
+A small but important consequence of writing the simplex as a sub-cone
+of the free $\RR$-vector space on $\Ideas$ rather than as an abstract
+probabilistic object is that the structure of the larger space — in
+particular the bilinear form induced by $\rho$ — is automatically
+inherited. Inner-product geometry on mixed strategies, often introduced
+ad hoc in evolutionary models via a Fisher information metric, is in our
+setting simply the restriction of $\rho$ to the simplex. This both
+unifies the existing zoo of evolutionary metrics and constrains them: any
+metric on $\Delta(\Sigma_i)$ compatible with the algebraic structure of
+$\Ideas$ must agree with $\rho$ up to a positive scalar.
+
+A further useful observation is that the simplex $\Delta(\Sigma_i)$ is
+not a closed object: best-response dynamics may push trajectories
+toward the boundary, where the support of $x_i$ shrinks to a strict
+subset of $\Sigma_i$. The closure of $\Delta(\Sigma_i)$ in the free
+cone consists of all subprobability distributions; deleted strategies
+(those receiving zero weight) are not gone in any algebraic sense — they
+remain elements of $\Ideas$ — but they cease to be played. The closure
+operation is thus a passage between the operational (which strategies
+are played) and the structural (which strategies exist) levels of
+description, a distinction that will recur in Sections~\ref{sec:hayek}
+and \ref{sec:simon}.
+
+\paragraph{Formal status.} The category of finite IdeaGames, the simplex
+$\Delta(\Sigma_i)$ as a cone in the free vector space, and the bilinear
+extension of payoffs are formalized in
+\texttt{IdeaTheory.Extensions.GameTheory} as the structures
+\texttt{IdeaGame}, \texttt{MixedStrategy} and \texttt{ExpectedPayoff}.
+Their well-definedness uses Theorem~2 (resonance extension) of the brief.
+
+\section{Best Response, Nash Equilibrium, Evolutionary Stability}
+\label{sec:nash-ess}
+
+Once mixed strategies are elements of the free $\RR_{\geq 0}$-cone on
+$\Ideas$, the standard equilibrium concepts transcribe directly. Let
+$x_{-i}$ denote the profile $(x_1,\dots,x_{i-1},x_{i+1},\dots,x_n)$ and
+$U_i(x_i;x_{-i}) := \sum_{(a_1,\dots,a_n)} u_i(a_1,\dots,a_n)\prod_j x_j(a_j)$.
+
+\begin{definition}[Best response]
+A mixed strategy $x_i^\ast \in \Delta(\Sigma_i)$ is a \emph{best response}
+to $x_{-i}$ if $U_i(x_i^\ast;x_{-i}) \geq U_i(y;x_{-i})$ for every
+$y\in\Delta(\Sigma_i)$.
+\end{definition}
+
+\begin{definition}[Nash equilibrium of an IdeaGame]
+A profile $(x_1^\ast,\dots,x_n^\ast)$ is a \emph{Nash equilibrium} if each
+$x_i^\ast$ is a best response to $x_{-i}^\ast$.
+\end{definition}
+
+The existence theorem is Nash's \citep{Nash1950}: every finite IdeaGame
+admits at least one Nash equilibrium in mixed strategies. The proof
+transports verbatim, since the simplex $\Delta(\Sigma_i)$ is a nonempty
+compact convex subset of a finite-dimensional real vector space and best
+response is upper hemicontinuous and convex-valued. What changes is the
+\emph{interpretation}: the equilibrium support is a subset of $\Ideas$, and
+one can ask whether this support is closed under $\compose$, invariant
+under $\sigma$, or homogeneous in $\deg$.
+
+\begin{theorem}[Idea-Nash existence; \texttt{IdeaTheory.Extensions.GameTheory}]
+\label{thm:nash}
+Every finite IdeaGame has a Nash equilibrium in mixed strategies, and the
+set of equilibria is a compact subset of $\prod_i \Delta(\Sigma_i)$.
+\end{theorem}
+
+For evolutionary stability we follow \citet{MaynardSmith1982}. A symmetric
+two-player IdeaGame has $\Sigma_1=\Sigma_2=\Sigma$ and $u_1(a,b)=u_2(b,a)$.
+
+\begin{definition}[Evolutionarily stable idea]
+A mixed strategy $x^\ast \in \Delta(\Sigma)$ is \emph{evolutionarily stable}
+(an \emph{ESS}) if for every $y\neq x^\ast$ either
+$U(x^\ast;x^\ast) > U(y;x^\ast)$ or
+$U(x^\ast;x^\ast) = U(y;x^\ast)$ and $U(x^\ast;y) > U(y;y)$.
+\end{definition}
+
+When the payoff $u$ is given through $\rho$ — that is,
+$u(a,b) = \rho(a,b)$ — the ESS conditions become statements about the
+resonance form. In particular, an ESS supported on a pair $\{a,b\}$ with
+$\rho$ symmetric on $\Sigma$ is a critical point of the quadratic form
+$x\mapsto x^\top R x$ where $R$ is the matrix of $\rho$ on $\Sigma$.
+This identifies evolutionarily stable ideas with eigen-supports of the
+resonance form, a fact peculiar to the Idea-Theoretic setting.
+
+The asymmetric component of $\rho$, encoded in the curvature $\kappa$
+(Theorem~5), supplies a further refinement. In a Rock--Paper--Scissors
+IdeaGame — three strategies $r,p,s$ with $\rho(r,p)>0,\rho(p,s)>0,
+\rho(s,r)>0$ but $\rho$ antisymmetric on this triple — there is no pure
+ESS, and the unique mixed equilibrium is the uniform distribution. The
+nonzero curvature is what blocks pure equilibrium; cohomologically, a
+pure ESS exists iff the curvature class
+$[\kappa|_{\Sigma}]\in H^2(\Sigma,\RR)$ is trivial. This connection
+between the failure of pure equilibrium and a cohomological obstruction
+is, to our knowledge, new with the present formalization, and would
+require an independent paper to develop properly. For our purposes it
+suffices to observe that the standard equilibrium-existence theorem
+guarantees \emph{some} mixed equilibrium exists (Theorem~\ref{thm:nash})
+while the curvature controls whether it can be \emph{purified}.
+
+A minor terminological note: throughout this chapter we use ``idea'' for
+elements of $\Ideas$ and ``strategy'' for elements of a particular
+$\Sigma_i$. The two are not synonymous in general — many ideas are not
+strategies in any particular game, and a single idea may serve as a
+strategy in many games — but in the analysis of any fixed IdeaGame the
+distinction collapses, and we will permit ourselves the looser usage
+when no ambiguity arises.
+
+\paragraph{Formal status.} Theorem~\ref{thm:nash} and the ESS variant are
+formalized in \texttt{IdeaTheory.Extensions.GameTheory} as
+\texttt{nash\_exists} and \texttt{ess\_of\_resonance}. The latter uses
+Theorem~5 (curvature) of the brief to separate symmetric and antisymmetric
+contributions to the payoff form.
+
+\section{The Silent Equilibrium: Aggregate-to-Unit Profiles}
+\label{sec:silent}
+
+Among the equilibria of an IdeaGame, one class deserves a name peculiar to
+Idea Theory. Consider a symmetric two-player IdeaGame in which the payoff
+$u(a,b)$ depends only on the composite $a\compose b\in\Ideas$ via some
+function $f:\Ideas\to\RR$. We say the game has \emph{low stakes} if
+$f(\unit)$ is the unique global maximum of $f$ on the submonoid generated
+by $\Sigma$.
+
+\begin{definition}[Aggregate-to-unit profile]
+A pure profile $(a,b)\in\Sigma\times\Sigma$ is \emph{aggregate-to-unit}
+(or \emph{silent}) if $a\compose b = \unit$. A mixed profile $(x,y)$ is
+silent in expectation if $\E_{a\sim x,\,b\sim y}[\,a\compose b\,] = \unit$
+in the free vector space on $\Ideas$.
+\end{definition}
+
+The terminology is borrowed from cooperative everyday speech: when two
+contributions sum to the trivial idea, no idea has been put forward. In a
+low-stakes game, that is the optimum.
+
+\begin{proposition}[Silent equilibria]
+\label{prop:silent}
+In a low-stakes symmetric IdeaGame, every aggregate-to-unit profile is a
+Nash equilibrium and, when $f(\unit) > f(c)$ strictly for every
+$c\neq \unit$ in the relevant submonoid, an evolutionarily stable strategy.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Aggregate-to-unit profiles attain the global maximum of expected payoff;
+no unilateral deviation can do better, because deviating to any $b'$
+yields composite $a\compose b' \neq \unit$ (by the inverse uniqueness in
+Theorem~1 of the brief, monoid-cancellation) and so a strictly smaller
+$f$. The ESS clause is immediate from the strict inequality.
+\end{proof}
+
+This formalizes the otherwise vague observation that, in many social
+exchanges, the most stable response to a low-cost provocation is to
+cancel it (literally, to compose to the identity). Ritual politeness,
+diplomatic non-statement, and the deliberate use of fillers all instance
+this structure: contributions that compose with what came before to land
+back at $\unit$. The Aufhebung decomposition further refines the picture:
+a silent profile has $\sigma(a,b)=\unit$, $\nu(a,b)=\unit$, and
+$\eta(a,b)=\unit$ modulo the kernel of $\rho$, so silence is not just
+absence of content but balanced cancellation in all three Aufhebung
+modes.
+
+A direct corollary, useful for empirical work in conversation analysis
+and ritual studies, is that silent equilibria require the existence of
+inverses in $\compose$: a profile $(a,b)$ can compose to $\unit$ only if
+$b = a^{-1}$ in the monoid sense. The submonoid generated by $\Sigma$
+admits silent equilibria iff it contains nontrivial inverses, which
+in many concrete idea algebras (e.g., those arising as free monoids on
+sets of atomic ideas) it does not. Silent equilibria are therefore a
+hallmark of \emph{group-like} regions of the idea algebra — the regions
+in which composition is reversible. This chimes with the empirical
+observation that ritual silence is most prevalent in highly
+conventionalized exchanges, where moves are reversible by their
+counter-moves: a greeting is closed by a return greeting, an apology by
+an acceptance, an offer by a polite refusal.
+
+A further observation: in a low-stakes IdeaGame the silent equilibrium
+is not necessarily unique. Any pair $(a,a^{-1})$ qualifies, and in a
+group-like submonoid there are typically many such pairs. The
+equilibrium-selection problem thus reappears within the silent class,
+and is governed (we conjecture) by an auxiliary $\rho$-maximization on
+the diagonal: among silent equilibria, those with $\rho(a,a^{-1})$
+extremal are selected. We leave this as an open question for empirical
+investigation, noting that the formalization makes the conjecture
+precisely stateable in a way that the informal literature did not.
+
+\paragraph{Formal status.} Proposition~\ref{prop:silent} is formalized as
+\texttt{silent\_equilibrium} in
+\texttt{IdeaTheory.Extensions.GameTheory}; it depends on Theorem~1
+(monoid cancellation for invertibles) and Theorem~3 (Aufhebung
+uniqueness mod $\ker\rho$) of the brief.
+
+\section{Coordination Games on Ideas: $\rho$-Symmetric Payoffs and
+Focal-Point $\sigma$-Invariants}
+\label{sec:coord}
+
+A symmetric two-player game is a \emph{pure coordination game} when
+$u(a,b) > 0$ iff $a=b$. The Idea-Theoretic generalization replaces the
+diagonal indicator by the resonance pairing: $u(a,b) = \rho(a,b)$. We call
+such a game \emph{$\rho$-symmetric} if in addition $\rho$ restricted to
+$\Sigma\times\Sigma$ is symmetric (so the antisymmetric curvature
+$\kappa$ vanishes on $\Sigma$).
+
+\begin{proposition}[Coordination on $\sigma$-invariants]
+\label{prop:coord}
+In a $\rho$-symmetric coordination IdeaGame, the pure-strategy Nash
+equilibria are exactly the pairs $(a,a)$ with $a\in \Sigma$ a
+$\sigma$-invariant in the sense that $\sigma(a,a) = a$.
+\end{proposition}
+
+\begin{proof}[Sketch]
+Pure $(a,a)$ is Nash iff $a$ maximizes $b\mapsto \rho(a,b)$ over $\Sigma$.
+Under $\rho$-symmetry and a mild non-degeneracy assumption on
+$\rho|_{\Sigma}$, the unique maximizer of $\rho(a,\cdot)$ is the element
+that resonates maximally with itself, i.e., the diagonal. Aufhebung
+uniqueness then forces $\sigma(a,a)=a$, since $\nu(a,a)$ and $\eta(a,a)$
+contribute orthogonally to $\rho$ in the symmetric case.
+\end{proof}
+
+The proposition gives the formal version of the platitude that
+``coordination converges on what is most itself.'' The maximally
+self-resonant ideas — the $\sigma$-invariants — are the candidates for
+focal points. Schelling's empirical observation, treated in
+Section~\ref{sec:schelling}, is that in real human play these
+$\sigma$-invariants are reliably selected.
+
+A subtler corollary concerns the case where $\Sigma$ is not closed under
+$\sigma(\cdot,\cdot)$. Then the equilibrium set may be empty in pure
+strategies, and the mixed equilibrium becomes the standard ``Battle of
+the Sexes'' uniform on best-resonance pairs. The lift to $\Ideas$ permits
+us to ask whether a mixed equilibrium can be \emph{purified} by enlarging
+$\Sigma$ to a $\sigma$-closed superset, which is always possible by
+Theorem~3 (Aufhebung exists and is unique mod $\ker\rho$).
+
+In this sense, classical equilibrium-selection problems in coordination
+games translate to closure problems in idea algebras. A coordination
+game has a clean pure-strategy resolution iff its strategy set is
+$\sigma$-closed; otherwise, the resolution is either probabilistic
+(mixed equilibrium) or expansive (extend the strategy set to its
+$\sigma$-closure). Both moves are familiar from the literature: mixed
+equilibria are Nash's contribution \citep{Nash1950}, while expansion of
+the strategy space is implicit in any cheap-talk model. Idea Theory
+identifies them as two manifestations of the same algebraic phenomenon.
+
+It is also instructive to compare this analysis with the
+``correlated equilibrium'' refinement. A correlated equilibrium is a
+joint distribution on $\Sigma\times\Sigma$ that is a fixed point of
+unilateral conditional best response. In the $\rho$-symmetric case, the
+correlated equilibria are exactly the convex combinations of pure
+$(a,a)$ profiles for $\sigma$-invariant $a$. Once again, the
+$\sigma$-invariants act as the natural basis, and any correlated
+equilibrium decomposes uniquely as a measure on this basis. The
+Aufhebung decomposition thus provides a Choquet-style basis for the
+correlated equilibrium polytope of any $\rho$-symmetric IdeaGame.
+
+\paragraph{Formal status.} Proposition~\ref{prop:coord} is
+\texttt{coord\_nash\_iff\_sigma\_invariant} in
+\texttt{IdeaTheory.Extensions.GameTheory}; it leans on Theorems~2 and 3
+of the brief.
+
+\section{Schelling: Focal Points as $\rho$-Maxima}
+\label{sec:schelling}
+
+\citet{Schelling1960} observed that in pure-coordination games without
+explicit communication, players reliably converge on a \emph{focal point}:
+an outcome distinguished by some salient property irrelevant to the formal
+payoff structure but psychologically prominent. His examples — meeting at
+Grand Central Station at noon, naming ``heads'' rather than ``tails'' —
+suggest that salience is a property of the cultural-cognitive context, not
+of the game matrix.
+
+\paragraph{Original claim.} \emph{In coordination games, players select
+the strategy whose salience is greatest, even when payoffs are formally
+symmetric across alternatives.}
+
+\paragraph{Formal restatement.} Let the payoff structure be
+$u(a,b) = \rho(a,b)$ on a $\rho$-symmetric game (Section~\ref{sec:coord}).
+Salience is encoded \emph{within} $\rho$: an idea $a$ is more salient
+than $a'$ if $\rho(a,a) > \rho(a',a')$. The Schelling claim is then:
+players select $a^\ast := \arg\max_{a\in\Sigma}\rho(a,a)$.
+
+\begin{theorem}[Schelling focal point as $\rho$-maximum;
+\texttt{IdeaTheory.Extensions.GameTheory}]
+\label{thm:schelling}
+In a $\rho$-symmetric coordination IdeaGame on a finite $\Sigma\subset
+\Ideas$ with $\rho$ positive-semidefinite on $\Sigma$ and a unique
+diagonal maximum $a^\ast$, the pure profile $(a^\ast,a^\ast)$ is the
+unique evolutionarily stable equilibrium.
+\end{theorem}
+
+\paragraph{Status.} Theorem~\ref{thm:schelling} reduces Schelling's
+empirical regularity to a maximization over $\rho$. The reduction is
+faithful so long as one is willing to absorb cultural salience into the
+resonance form, which is itself a structural (not a contingent)
+component of the algebra. Where the original is silent on \emph{why}
+some ideas are more salient than others, the formalization makes this a
+question about the spectral data of $\rho$: the principal eigenvector of
+the resonance Gram matrix on $\Sigma$ \emph{is} the focal point. This is
+a sharper claim than Schelling himself made, and it is testable: in any
+domain where $\rho$ can be estimated (e.g., from co-occurrence statistics
+in a corpus), the predicted focal point is the eigenvector.
+
+\paragraph{Commentary.} Schelling \citep{Schelling1960} stressed the role
+of context in determining salience; our formalization makes context the
+algebra in which the game is played. Two players sharing an idea algebra
+agree on $\rho$ and hence on focal points; players in different cultures
+disagree precisely to the extent their algebras have different spectral
+data \citep{Granovetter1973}.
+
+\paragraph{Formal status.} Theorem~\ref{thm:schelling} is
+\texttt{schelling\_focal\_point} in
+\texttt{IdeaTheory.Extensions.GameTheory}; it depends on Theorem~2
+(extension of $\rho$) and Theorem~5 (curvature decomposition) of the
+brief.
+
+\section{Axelrod: the Evolution of Cooperation as Hegelian Aufhebung}
+\label{sec:axelrod}
+
+\citet{Axelrod1984} showed by computer tournament that, among iterated
+Prisoner's-Dilemma strategies, the simple rule \textsc{Tit-for-Tat}
+dominates: cooperate first, then mirror the opponent. The substantive
+finding is that cooperation can evolve from non-cooperation under
+repetition, reciprocity, and a sufficiently long shadow of the future.
+
+\paragraph{Original claim.} \emph{Cooperative strategies, suitably
+constituted, are evolutionarily stable in iterated Prisoner's-Dilemma
+play.}
+
+\paragraph{Formal restatement.} Strategies in the iterated game are
+elements of $\Ideas$ obtained as $\compose$-iterates of two atoms
+$\C$ (cooperate) and $\D$ (defect): the strategy
+\textsc{Tit-for-Tat} is $\TFT := \C\compose \mathrm{mirror}$, where
+$\mathrm{mirror}$ is the operator $a\mapsto \sigma(a,\unit)\compose
+\nu(a,\unit)\compose \eta(a,\unit)$ — the full Aufhebung response that
+preserves the cooperative kernel, negates the defective kernel, and
+elevates the synthesis. In this presentation \emph{cooperative
+strategies are exactly those whose iterated $\compose$-trajectories lie
+in the $\sigma$-orbit of $\C$}.
+
+\begin{proposition}[Hegelian \textsc{Tit-for-Tat};
+\texttt{IdeaTheory.Extensions.GameTheory}]
+\label{prop:axelrod}
+In an iterated symmetric IdeaGame with stage payoff $u(\C,\C) >
+u(\D,\C) - u(\D,\D) + u(\C,\D)$ (the standard Prisoner's-Dilemma
+inequality reorganized) and discount factor $\delta$ close enough to $1$,
+the strategy $\TFT$ above is an evolutionarily stable idea in the sense
+of Section~\ref{sec:nash-ess}.
+\end{proposition}
+
+\paragraph{Status.} Proposition~\ref{prop:axelrod} restates Axelrod's
+folk-theoretic conclusion in Idea-Theoretic vocabulary. The novelty is
+that ``cooperative strategy'' is not stipulated by labeling moves but is
+\emph{constructed} from the Aufhebung operators: a cooperative strategy
+is one that, on every move, preserves what was cooperative in the
+opponent's prior move ($\sigma$), negates what was defective ($\nu$),
+and synthesizes a response ($\eta$). \textsc{Tit-for-Tat} thus emerges
+as the canonical Hegelian strategy.
+
+\paragraph{Commentary.} The reformalization makes precise the diffuse
+intuition, common in cultural-evolution writing, that cooperation is
+``dialectical'': it preserves the partner's good faith, refuses the
+partner's bad faith, and lifts the joint behavior to a higher synthesis.
+\citet{Hegel1807} would have recognized $\TFT$.
+
+The transmission-chain theorem (Theorem~7 of the brief) supplies the
+concrete bookkeeping by which iterated payoffs accumulate. Each round of
+the iterated game contributes a stage payoff, and the long-run payoff
+of $\TFT$ against itself telescopes via the $\omega$-cocycle to a
+closed-form expression in the discount factor and the cooperative
+stage payoff. The robustness of \textsc{Tit-for-Tat} against alternative
+strategies, which Axelrod established only computationally, becomes a
+consequence of $\omega$-boundedness: any strategy whose accumulated
+$\omega$-deviation grows faster than $\delta^{-t}$ is dominated in the
+long run by $\TFT$, whose $\omega$-deviation is bounded by construction.
+
+This does not, of course, show that $\TFT$ is the unique evolutionarily
+stable strategy in iterated PD — that is known to be false, even
+informally; many strategies in the ``nice, retaliatory, forgiving,
+clear'' family compete with $\TFT$. What the formalization shows is that
+all such strategies share a common structural property: they all
+implement the Aufhebung response of preserving cooperation, negating
+defection, and elevating the synthesis. The family of evolutionarily
+stable cooperative strategies in iterated IdeaGames is the family of
+\emph{Hegelian} strategies. This is a substantively stronger claim than
+``cooperation can evolve''; it specifies a structural recipe for the
+strategies that succeed.
+
+\paragraph{Formal status.} Proposition~\ref{prop:axelrod} is
+\texttt{tft\_ess} in \texttt{IdeaTheory.Extensions.GameTheory}; it
+chains Theorem~3 (Aufhebung), Theorem~7 (transmission chain via
+$\omega$) and Theorem~\ref{thm:nash} above.
+
+\section{Arrow: Information as Commodity, Ideas as Economic Goods}
+\label{sec:arrow}
+
+\citet{Arrow1962} identified three peculiarities of information considered
+as an economic good: (i) \emph{indivisibility} (information cannot be
+consumed in arbitrarily small units), (ii) \emph{nonappropriability} (once
+disclosed, information cannot be unsold), and (iii) \emph{uncertainty}
+(its value is unknown until acquired). These features account for the
+under-investment in research and the necessity of intellectual property,
+patents, and public funding of science.
+
+\paragraph{Original claim.} \emph{Information is a commodity unlike
+private goods because it is indivisible, nonappropriable, and uncertain
+in value.}
+
+\paragraph{Formal restatement.} An \emph{economic good} on $\Ideas$ is a
+pair $(a,p)\in \Ideas \times \RR_{\geq 0}$, where $p$ is the price and
+$a$ is the idea bought. Three structural properties of $\Ideas$
+formalize Arrow's three peculiarities:
+\begin{enumerate}
+\item \emph{Indivisibility} reflects the failure of $\Ideas$ to be a
+$\RR$-vector space at the level of consumption: although mixed strategies
+$x = \sum_i \lambda_i a_i$ exist as formal sums, what one \emph{has} is
+each $a_i$ in full or not at all. The free $\RR_{\geq 0}$-cone is
+formal; the underlying set is integral.
+\item \emph{Nonappropriability} reflects the failure of $\compose$ to be
+\emph{cancellative} in general. Once $a$ has been composed with $b$ in a
+shared context, the resulting $a\compose b$ does not in general permit
+recovery of $a$ alone (Theorem~1's cancellation clause holds only for
+\emph{invertibles}).
+\item \emph{Uncertainty} reflects the cocycle term $\omega$: a
+valuation $v:\Ideas\to A$ satisfies $v(a\compose b) = v(a)+v(b)+
+\omega(a,b)$, so the value of acquiring $a$ in the presence of $b$
+depends on $\omega(a,b)$, which by Theorem~4 is in general nonzero.
+\end{enumerate}
+
+These three properties are not independently postulated; they are
+\emph{consequences} of the algebraic structure $(\Ideas,\compose,\unit,
+\omega)$ together with the integrality of the underlying set.
+
+\paragraph{Status.} The reduction shows that Arrow's informal list of
+peculiarities is mathematically forced by Idea Theory: any economic
+treatment of ideas as elements of $\Ideas$ inherits all three
+peculiarities. Patent law, the commons of science, and public funding of
+basic research are therefore not contingent corrections to ``market
+failure'' in information; they are the only mechanisms compatible with
+the algebraic structure of the good they govern.
+
+The clarification deserves a brief expansion. Standard welfare economics
+treats market failure as a deviation from a normatively privileged
+benchmark, the perfectly competitive equilibrium of an Arrow--Debreu
+economy. In that benchmark the goods are private (rival, excludable) and
+divisible. Arrow's analysis shows that information violates these
+properties; subsequent theory has typically responded by introducing
+\emph{policy instruments} (patents, public funding, prizes) to restore
+something like the competitive benchmark. Idea Theory inverts this
+framing: there is no benchmark to restore, because the algebraic
+structure of $\Ideas$ rules out the relevant properties at the level of
+\emph{the goods themselves}. Patents, public funding, and prizes are not
+corrections; they are the actual mechanisms by which an economy of
+ideas can exist at all, given the structural facts of $\Ideas$. The
+algebraic perspective thus dispels the pseudo-problem of ``market
+failure in information'' and replaces it with the design problem of
+choosing among admissible mechanisms for an algebraically constrained
+good \citep{Arrow1962}.
+
+A further consequence concerns the boundary between ideas and other
+information goods. Some informational goods (e.g., a list of telephone
+numbers) are organizationally close to lists, with $\omega = 0$ and
+trivial $\compose$; these are nearly classical commodities. Others
+(e.g., scientific theories) have rich $\omega$ and noncommutative
+$\compose$; these are paradigmatic Arrow goods. The peculiarities Arrow
+identified are therefore graded, not binary, and the gradation is
+governed by the magnitude of $\omega$ on the relevant submonoid.
+
+\paragraph{Formal status.} The integrality, non-cancellation, and
+$\omega$-uncertainty assertions are stated and verified in
+\texttt{IdeaTheory.Extensions.GameTheory} as
+\texttt{arrow\_indivisible}, \texttt{arrow\_nonappropriable} and
+\texttt{arrow\_omega\_uncertainty}, each derived from Theorems~1 and 4 of
+the brief.
+
+\section{Hayek: Dispersed Knowledge and the Price System as a Section}
+\label{sec:hayek}
+
+\citet{Hayek1945} insisted that the basic problem of a rational economic
+order is the use of knowledge that is ``never given to anyone in its
+totality'' but is dispersed across agents. The price system is, on his
+view, a marvel because it aggregates this dispersed knowledge into
+public signals without any single agent having to know more than her own
+situation.
+
+\paragraph{Original claim.} \emph{Economic knowledge is dispersed; the
+price system aggregates it into a public signal.}
+
+\paragraph{Formal restatement.} Let there be agents $i\in I$, each with
+a local idea algebra $(\Ideas_i,\compose_i,\unit_i,\rho_i,\dots)$. Let
+$\sim$ be the \emph{structural-equivalence relation} on the disjoint
+union $\bigsqcup_i \Ideas_i$ generated by Theorem~8 (structural
+equivalence): $a\in\Ideas_i$ and $b\in\Ideas_j$ are equivalent iff there
+is a graded monoid isomorphism between the substructures generated by
+$a$ in $\Ideas_i$ and by $b$ in $\Ideas_j$ that preserves $\rho$, the
+Aufhebung data and $\omega$. The \emph{global idea space} is the
+quotient
+\[
+  \Ideas := \Bigl(\bigsqcup_i \Ideas_i\Bigr)\big/\sim.
+\]
+Hayek's \emph{price system} is a \emph{section} $p:\Ideas \to
+\bigsqcup_i \Ideas_i$ of the quotient map, that is, a choice of
+representative in some $\Ideas_i$ for each global idea.
+
+\paragraph{Status.} The price system thereby acquires a precise
+mathematical role: it is a (typically partial) section of the structural
+quotient. Its existence is not automatic; sections of quotients exist
+only when the equivalence classes admit a uniformly definable
+representative. In economic terms, the price system exists when the
+disagreement among agents about an idea $a$ is small compared to the
+agreement (i.e., when $\sim$-classes are ``thin''), and fails (price
+discovery breaks down) precisely when $\sim$-classes are ``thick''
+(agents radically disagree about what $a$ \emph{is}).
+
+\paragraph{Commentary.} This formalizes the intuitive Hayekian point
+that markets work when knowledge is dispersed but commensurable, and
+fail when knowledge is dispersed and incommensurable. The condition for
+the existence of a section is exactly the latter distinction. We note
+that the structural-equivalence relation (Theorem~8 of the brief)
+furnishes the only canonical equivalence on the disjoint union, so the
+formalization is not merely possible but \emph{forced}.
+
+A useful corollary identifies the locus of ``market failure'' in the
+Hayekian sense with the points where the section $p$ has no continuous
+extension: an idea $a\in\Ideas$ is \emph{price-discoverable} iff $p$
+extends continuously to $a$ in the topology generated by structural
+isomorphism. Where $p$ fails to extend — typically at ideas whose
+local representations across agents differ in $\rho$, $\sigma$, $\nu$,
+$\omega$, or $\deg$ — there is no coherent price, and the
+informational role of the market collapses. This explains, without
+appeal to behavioral or institutional pathology, why some classes of
+goods (novel medical procedures, custom industrial machinery, securities
+backed by complex contingent liabilities) routinely resist competitive
+pricing: their structural-equivalence classes are simply too thick
+\citep{Hayek1945}.
+
+Conversely, commodity markets (wheat, copper, electricity) deal in
+ideas whose local representations across agents agree on $\rho$,
+$\sigma$, $\nu$, $\omega$, $\deg$ to a high degree of approximation.
+The structural-equivalence classes are thin, the section $p$ extends
+continuously almost everywhere, and the price system functions as
+Hayek described. The Idea-Theoretic formalization of dispersed
+knowledge therefore generates a precise empirical criterion for which
+markets will price-discover and which will not, expressible entirely
+in terms of the structural data of the local idea algebras.
+
+\paragraph{Formal status.} The construction of the global $\Ideas$ as a
+quotient under $\sim$, and the definition of a price section, are in
+\texttt{IdeaTheory.Extensions.GameTheory} as \texttt{HayekQuotient} and
+\texttt{PriceSection}, with derivability from Theorem~8 of the brief.
+
+\section{Romer: Nonrival Ideas and Endogenous Growth}
+\label{sec:romer}
+
+\citet{Romer1990} built the first widely accepted model of endogenous
+technological change by treating ideas as \emph{nonrival} inputs to
+production: one agent's use of an idea does not preclude another's.
+Combined with partial excludability (via patents or first-mover advantage)
+this generates increasing returns at the aggregate level, which in turn
+sustains positive long-run per-capita growth.
+
+\paragraph{Original claim.} \emph{Ideas are nonrival; their accumulation
+drives long-run growth via increasing returns.}
+
+\paragraph{Formal restatement.} Nonrivalry is the property that the
+``copying'' map $a\mapsto (a,a)$ from $\Ideas$ to $\Ideas\times\Ideas$
+is free of cost in the resource-accounting sense. Formally, in any
+valuation $v:\Ideas\to A$ associated with consumption (rather than
+production), $v$ is required to factor through the diagonal: $v(a,a) =
+v(a)$, not $v(a) + v(a)$. Equivalently, the cocycle $\omega$ on the
+diagonal is set to $-v(a)$ for the consumption valuation, but to $0$
+for the production valuation. This is the algebraic content of
+nonrivalry.
+
+Endogenous growth in Romer's sense arises when the production
+valuation grows superadditively in the size of the idea stock,
+quantified through the \emph{binary closure} operator
+\[
+  \mathrm{binaryClosure}(\Sigma) := \{a\compose b : a,b\in\Sigma\}\cup\Sigma
+  \subset \Ideas,
+\]
+applied iteratively starting from a finite seed $\Sigma_0$. The
+$n$-fold binary closure $\Sigma_n := \mathrm{binaryClosure}^n(\Sigma_0)$
+has cardinality bounded below by combinatorial growth in $|\Sigma_0|$
+when $\compose$ is sufficiently free (e.g., when no nontrivial
+identifications hold among compositions of distinct seeds).
+
+\begin{theorem}[Recombination drives growth;
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}]
+\label{thm:romer}
+If $\Ideas$ contains a free submonoid on a finite set $\Sigma_0$ of $k$
+generators, then $|\Sigma_n| \geq k(k^{2^n}-1)/(k-1)$ for all $n\geq 0$,
+giving doubly-exponential growth of the recombinant idea stock.
+\end{theorem}
+
+\paragraph{Status.} Theorem~\ref{thm:romer} is the precise version of
+Romer's qualitative claim that ideas, by recombination, generate
+increasing returns. The doubly-exponential lower bound is sharper than
+Romer's original linear-in-$R\&D$ specification, but accords with
+\citet{Weitzman1998} (Section~\ref{sec:weitzman} below).
+
+\paragraph{Formal status.} The free-submonoid hypothesis, the
+\texttt{binaryClosure} operator, and the cardinality bound are in
+\texttt{IdeaTheory.Extensions.RecombinantGrowth} as
+\texttt{binaryClosure}, \texttt{free\_submonoid\_growth} and the main
+theorem \texttt{recombinant\_doubly\_exponential}.
+
+\section{Weitzman: Recombinant Growth and the Combinatorial Bound}
+\label{sec:weitzman}
+
+\citet{Weitzman1998} formalized the recombinant view: new ideas arise
+chiefly by combination of existing ones, so the \emph{potential} stock
+of new ideas at time $t$ is bounded above by the combinatorial number
+of subsets of the current stock — a bound that grows faster than any
+polynomial in the size of the stock.
+
+\paragraph{Original claim.} \emph{The number of potential new ideas at
+time $t$ is bounded above by $2^{N_t}$ where $N_t$ is the size of the
+existing idea stock.}
+
+\paragraph{Formal restatement.} Let $\Sigma_t \subset \Ideas$ be the
+idea stock at time $t$. Define the \emph{full combinatorial closure}
+$\mathrm{combClosure}(\Sigma_t)$ as the image of the power set
+$2^{\Sigma_t}$ under the map $T\mapsto \prod_{a\in T} a$ (with empty
+product $\unit$). Then $|\mathrm{combClosure}(\Sigma_t)| \leq
+2^{|\Sigma_t|}$.
+
+\begin{theorem}[Weitzman bound;
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}]
+\label{thm:weitzman}
+For every finite $\Sigma\subset\Ideas$, the combinatorial closure
+$\mathrm{combClosure}(\Sigma)$ is finite, with
+$|\mathrm{combClosure}(\Sigma)| \leq 2^{|\Sigma|}$. Equality holds when
+$\Sigma$ generates a free commutative submonoid.
+\end{theorem}
+
+\paragraph{Status.} The bound is a finite-cardinality statement
+verifiable by a simple injection from
+$\mathrm{combClosure}(\Sigma)$ into $2^{\Sigma}$. Equality (sharpness)
+is the substantive claim: it requires the absence of relations among
+products of subsets, i.e., a freeness hypothesis. In the presence of
+ambient relations, the bound is strict and the actual growth rate is
+slower — empirically a much better fit, since human cultures do not
+explore the full combinatorial space.
+
+\paragraph{Commentary.} Combined with Romer's nonrivalry, the Weitzman
+bound formalizes the now-standard ``ideas are recombinant'' picture
+\citep{Weitzman1998,Romer1990}. What Idea Theory adds is the
+mechanism: the combinatorial cardinality is a structural fact about the
+free submonoid generated by $\Sigma$, no further postulate required.
+
+\paragraph{Formal status.} Theorem~\ref{thm:weitzman} is
+\texttt{combClosure\_card\_le} in
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}; sharpness under
+freeness is \texttt{combClosure\_card\_eq\_pow\_of\_free}.
+
+\section{Jones: Semi-Endogenous Growth and Population-Scaled Production}
+\label{sec:jones}
+
+\citet{Jones1995} criticized Romer's model on empirical grounds: the
+strong scale effect (long-run growth rates increasing with the size of
+the R\&D workforce) is not seen in the data. Jones proposed
+\emph{semi-endogenous growth}, in which the production function for new
+ideas is sublinear in both the existing idea stock and the research
+workforce: $\dot A = \delta L_A^\lambda A^\phi$ with $\lambda \leq 1$
+and $\phi < 1$.
+
+\paragraph{Original claim.} \emph{New idea production is sublinear in
+both labor and existing knowledge; long-run growth depends on
+population growth, not on the level of the research workforce.}
+
+\paragraph{Formal restatement.} Let $\Ideas$ be graded by $\deg:\Ideas
+\to G$ (with $G = \mathbb{Z}_{\geq 0}$ identified with discrete time).
+A \emph{population-scaled production map} is an operator
+$\mathrm{prod}: \RR_{\geq 0} \times \Ideas_n \to \Ideas_{n+1}$, where
+$\Ideas_n := \deg^{-1}(n)$ is the degree-$n$ stratum, satisfying for
+some constants $\lambda\in(0,1]$ and $\phi\in[0,1)$:
+\[
+  |\mathrm{prod}(L,\Sigma)| \leq \delta\cdot L^\lambda \cdot |\Sigma|^\phi.
+\]
+The strict inequality $\phi < 1$ enforces that the contribution of
+existing ideas to new-idea production is sublinear; the strict
+inequality $\lambda < 1$ (when assumed) enforces that the contribution
+of the workforce is sublinear.
+
+\begin{proposition}[Jones semi-endogenous growth;
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}]
+\label{prop:jones}
+Under the population-scaled production hypothesis with $\phi\in[0,1)$
+and constant per-period labor $L$, the long-run growth rate of
+$|\Sigma_n|$ satisfies $|\Sigma_n|/|\Sigma_{n-1}| \to 1$, and per-capita
+idea growth depends only on the growth rate of $L$.
+\end{proposition}
+
+\paragraph{Status.} Proposition~\ref{prop:jones} reproduces the
+empirical observation that \emph{level} effects on R\&D do not produce
+permanent rate effects on growth. The grading $\deg$ provides exactly
+the bookkeeping needed to state the semi-endogenous law without ad hoc
+time indices.
+
+\paragraph{Commentary.} The Jones critique is, in our framework, the
+observation that the sharp Weitzman bound (sharpness under freeness) is
+empirically not attained: ambient relations among ideas make the actual
+production exponent $\phi$ strictly less than 1, and the data
+\citep{Jones1995} estimate $\phi$ well below 1.
+
+\paragraph{Formal status.} Proposition~\ref{prop:jones} is
+\texttt{jones\_semi\_endogenous} in
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}; the grading on
+$\Ideas$ is supplied by Theorem~9 of the brief.
+
+\section{Attention Economy and Simon: Limited Attention as a $\compose$-Budget}
+\label{sec:simon}
+
+\citet{Simon1971} pointed out that ``a wealth of information creates a
+poverty of attention,'' and that the design of information-rich
+organizations should be governed by attention scarcity rather than
+information scarcity. The contemporary attention economy literature
+elaborates this into a budget constraint.
+
+\paragraph{Original claim.} \emph{Attention is the binding scarce
+resource in information-rich environments; institutions allocate
+attention.}
+
+\paragraph{Formal restatement.} An \emph{attention budget} for an agent
+is a positive integer $B\in\mathbb{N}$ representing the maximum number
+of $\compose$-operations the agent may perform per period. An
+\emph{attention-bounded strategy} is a sequence
+$(a_1,\dots,a_k)\in\Ideas^k$ with $k\leq B$, evaluated as
+$a_1\compose\cdots\compose a_k$. The set of attention-bounded
+$\compose$-products is the iterated binary closure
+$\mathrm{binaryClosure}^{\lceil\log_2 B\rceil}(\Sigma_0)$.
+
+\begin{proposition}[Simon attention budget;
+\texttt{IdeaTheory.Extensions.GameTheory}]
+\label{prop:simon}
+Under an attention budget $B$, the cardinality of the set of
+attention-feasible composite ideas is bounded by $|\Sigma_0|^{B}$.
+Consequently, a doubling of $B$ at most squares the strategy space,
+while a doubling of $|\Sigma_0|$ at most doubles it logarithmically in
+$B$. Attention is therefore the binding constraint asymptotically.
+\end{proposition}
+
+\paragraph{Status.} Proposition~\ref{prop:simon} formalizes Simon's
+diagnosis that attention, not information, is the scarce input. The
+exponent in $B$ versus the base in $|\Sigma_0|$ is the structural
+asymmetry: attention enters as an exponent, information as a base.
+
+\paragraph{Commentary.} Combined with the Romer/Weitzman growth bounds
+(Sections~\ref{sec:romer},~\ref{sec:weitzman}), the Simon constraint
+gives the modern \emph{attention economy} its precise structural place:
+the growth bounds describe the supply of new ideas, while the attention
+budget describes the demand-side bottleneck. Their interplay is what
+modern platforms manipulate \citep{Simon1971}.
+
+\paragraph{Formal status.} Proposition~\ref{prop:simon} is
+\texttt{simon\_attention\_budget} in
+\texttt{IdeaTheory.Extensions.GameTheory}.
+
+\section{Diffusion: Rogers' S-Curve and Granovetter's Weak Ties}
+\label{sec:diffusion}
+
+\citet{Rogers2003} synthesized half a century of empirical work on the
+diffusion of innovations into the canonical S-curve: the cumulative
+adoption of a new idea over time is sigmoidal, with early adopters,
+early majority, late majority, and laggards. \citet{Granovetter1973}
+complemented this with the weak-tie thesis: novel information flows
+preferentially through weak (low-frequency, low-intimacy) ties, not
+strong ones, because weak ties bridge otherwise disconnected components
+of the social graph.
+
+\paragraph{Original claims.} (i) Adoption $A_t$ of an innovation
+follows the logistic equation $\dot A = r A(1-A/K)$ with carrying
+capacity $K$; (ii) the probability that an idea reaches a given
+component of a social network is determined by the count of weak ties
+to that component, not strong ties.
+
+\paragraph{Formal restatement.} Let a \emph{diffusion step} on
+$\Ideas$ be an operator $D:\RR_{\geq 0}\cdot\Ideas \to
+\RR_{\geq 0}\cdot\Ideas$ that sends a measure $\mu$ on $\Ideas$
+(representing the population's current idea distribution) to its
+update one period later under (a) local imitation by composition
+($a\mapsto a\compose b$ at rate proportional to $\mu(b)$) and (b) a
+saturation term enforcing finite carrying capacity. Iterating $D$
+produces the discrete-time S-curve. For a network $\Gamma$ with edge
+weights $w_{ij}\in\RR_{\geq 0}$, the \emph{Granovetter operator}
+$D_\Gamma$ weights local imitation by $w_{ij}$ but \emph{novelty}
+contributions by an indicator that $\rho(a_i,a_j)$ is small (the tie
+is weak in the resonance sense).
+
+\begin{theorem}[Rogers S-curve as iterated diffusion;
+\texttt{IdeaTheory.Extensions.Diffusion}]
+\label{thm:rogers}
+Under bounded local imitation rate and finite carrying capacity, the
+cumulative adoption $A_t = \mu_t(\{a_{\mathrm{innov}}\})$ converges
+monotonically to $K$ following a sigmoidal trajectory, the discrete
+analogue of the logistic.
+\end{theorem}
+
+\begin{theorem}[Granovetter weak-tie threshold;
+\texttt{IdeaTheory.Extensions.Diffusion}]
+\label{thm:granovetter}
+Let $\Gamma$ be a network with strong ties (high $w$, high $\rho$) and
+weak ties (low $w$, low $\rho$). The probability that an idea
+originating in component $C_1$ is observed in disjoint component
+$C_2$ within $T$ diffusion steps is bounded below by a function of the
+\emph{count of weak ties} between $C_1$ and $C_2$, and is independent
+of the count of strong ties internal to either component.
+\end{theorem}
+
+\paragraph{Status.} Theorems~\ref{thm:rogers} and~\ref{thm:granovetter}
+formalize the two pillars of the diffusion literature inside
+$\Ideas$. The Rogers theorem reduces the S-curve to iteration of an
+operator that respects the algebraic structure; the Granovetter
+theorem makes precise the role of weak resonance in spanning structural
+holes.
+
+\paragraph{Commentary.} A welcome consequence of the Idea-Theoretic
+formulation is that ``weak'' is no longer ambiguous between social and
+informational: a tie is weak in our sense when $\rho$ is small along
+it, which captures both. Strong social ties may carry low novelty
+($\rho$ already saturated by shared common ground); the
+Granovetter effect emerges as a $\rho$-spectral phenomenon.
+
+\paragraph{Formal status.} Theorems~\ref{thm:rogers}
+and~\ref{thm:granovetter} are \texttt{rogers\_s\_curve} and
+\texttt{granovetter\_weak\_tie\_threshold} in
+\texttt{IdeaTheory.Extensions.Diffusion}; both depend on Theorem~7
+(transmission chain) and Theorem~2 (resonance extension) of the brief.
+
+\section{Conclusion: Ideas as Economic Goods Under Idea Theory}
+\label{sec:econ-conclusion}
+
+The economic and game-theoretic literatures on ideas are, viewed from
+inside Idea Theory, applications of a single mathematical structure: the
+free $\RR_{\geq 0}$-cone on $\Ideas$, equipped with $\compose$, $\rho$,
+$\sigma$, $\nu$, $\eta$, $\omega$ and $\deg$. Schelling's focal points
+are $\rho$-maxima; Nash equilibria of IdeaGames are fixed points of
+best-response correspondences on simplices in the cone; ESS conditions
+become spectral conditions on the resonance form; Axelrod's
+\textsc{Tit-for-Tat} is the Hegelian Aufhebung response; Arrow's three
+peculiarities of information are forced consequences of integrality,
+non-cancellation, and $\omega$-uncertainty; Hayek's price system is a
+section of a structural quotient; Romer's nonrivalry is a property of
+valuations on the diagonal; Weitzman's recombinant growth is the
+cardinality of \texttt{binaryClosure}; Jones's semi-endogenous growth
+is a sublinearity exponent on the graded production map; Simon's
+attention economy is a $\compose$-budget; Rogers' S-curve is iteration
+of a diffusion operator; Granovetter's weak ties are low-$\rho$ edges.
+
+The unification has both expository and substantive consequences. On
+the expository side, a single notation suffices for a literature that
+has historically required incompatible formalisms: payoff matrices,
+Walrasian equilibria, logistic ODEs, network adjacency matrices. On the
+substantive side, the formalization yields predictions that no single
+strand of the original literature would have made: that focal points
+are spectral data of $\rho$ (Section~\ref{sec:schelling}); that
+silent equilibria exist as a generic class in low-stakes games
+(Section~\ref{sec:silent}); that Hayek's price system fails when
+structural-equivalence classes are thick rather than thin
+(Section~\ref{sec:hayek}); that the Jones empirical exponent is the
+defect from Weitzman sharpness (Section~\ref{sec:jones}). Each of
+these predictions is testable in domains where $\rho$, $\compose$, or
+$\deg$ can be estimated empirically.
+
+The chapter is therefore not a survey but a \emph{translation}: a
+demonstration that the economic and game-theoretic strands of the
+ideas zoo can be expressed without distortion in the vocabulary of the
+nine foundational theorems. The Lean modules
+\texttt{IdeaTheory.Extensions.GameTheory},
+\texttt{IdeaTheory.Extensions.RecombinantGrowth} and
+\texttt{IdeaTheory.Extensions.Diffusion} carry out the translation
+formally, with no \texttt{sorry} and no \texttt{admit}, providing
+machine-checked grounding for the prose claims of this chapter.
+
+A natural next step, taken up in Chapter~\ref{ch:cogsci} for cognition
+and Chapter~\ref{ch:phil} for philosophy, is to ask which of the
+predictions surveyed here can be falsified in their respective host
+disciplines, and which are merely re-expressions. Our preliminary
+view is that the silent-equilibrium prediction
+(Section~\ref{sec:silent}) and the focal-point spectral prediction
+(Section~\ref{sec:schelling}) are the two strongest candidates for
+genuinely novel falsifiable claims; the others are clarifying
+restatements of well-attested empirical regularities.
+
+\paragraph{Formal status of the chapter.} All numbered theorems and
+propositions of this chapter are formalized in
+\texttt{IdeaTheory.Extensions.GameTheory},
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}, and
+\texttt{IdeaTheory.Extensions.Diffusion}. Each Lean module builds
+under \texttt{lake build} without \texttt{sorry} or \texttt{admit},
+and depends only on Theorems 1--9 of the foundational layer
+(\texttt{lean/IdeaTheory/Foundations.lean} and
+\texttt{Theorems\{1..12\}.lean}).

@@ -1,0 +1,24 @@
+# Lean build artifacts
+lean/.lake/build/
+lean/.lake/packages/
+lean/.lake/lakefile.olean
+**/*.olean
+**/*.ilean
+**/*.c.hash
+**/*.c.hash
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Book build output (epub is large; track source only)
+book/build/
+
+# Editor
+.vscode/
+*.swp

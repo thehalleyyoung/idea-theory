@@ -1,0 +1,54 @@
+% =====================================================================
+%  IdeaTheory --- master book.tex
+%  Source for both the Kindle EPUB (via pandoc) and the optional PDF.
+%  Kindle build:
+%    pandoc book.tex -o build/IdeaTheory.epub \
+%         --from=latex --to=epub3 \
+%         --metadata-file=metadata.yaml \
+%         --bibliography=references.bib --citeproc \
+%         --mathml --toc --toc-depth=2 \
+%         --epub-cover-image=cover.png \
+%         --css=epub.css
+% =====================================================================
+\documentclass[11pt]{book}
+\input{preamble-kindle.tex}
+
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage[colorlinks=true,linkcolor=blue!55!black,citecolor=teal!60!black,urlcolor=blue!55!black]{hyperref}
+
+\title{Idea Theory\\[0.3em]\large A Mathematical Formalism for the Zoo of Ideas About Ideas}
+\author{The IdeaTheory Project}
+\date{2026}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+\input{chapters/preface.tex}
+
+\mainmatter
+
+\input{chapters/ch01_monoid.tex}
+\input{chapters/ch02_coalitions.tex}
+\input{chapters/ch03_aufhebung.tex}
+\input{chapters/ch04_resonance.tex}
+\input{chapters/ch05_emergence.tex}
+\input{chapters/ch06_conjugation.tex}
+\input{chapters/ch07_grading.tex}
+\input{chapters/ch08_philosophy.tex}
+\input{chapters/ch09_cogsci.tex}
+\input{chapters/ch10_meaning_games.tex}
+
+\backmatter
+\input{chapters/appendix_lean.tex}
+
+\bibliographystyle{alpha}
+\bibliography{references}
+
+\end{document}

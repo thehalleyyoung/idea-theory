@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 8: Structural Equivalence — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorem 8: Structural Equivalence</h1>
+<div class="thm"><span class="thm-label">Theorem 8.</span> Let \((\mathcal{I},\ldots)\) and \((\mathcal{I}',\ldots)\) be idea algebras. They are isomorphic as idea algebras if and only if there is a bijection \(\Phi:\mathcal{I}\to\mathcal{I}'\) such that \(\Phi\) is a graded monoid isomorphism and \(\Phi\) intertwines \(\rho,\sigma,\nu,\omega\).</div>
+
+<h2>Proof sketch</h2>
+<p>The forward direction is by definition. For the converse, observe that \(\eta = a\circ b - \sigma(a,b)-\nu(a,b)\) is then automatically preserved, and \(\kappa\) is determined by \(\rho\). Hence \(\Phi\) preserves all structure.</p>
+
+<p>Verified as <code>IdeaTheory.Theorems8.structural_equivalence</code>.</p>
+<p><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

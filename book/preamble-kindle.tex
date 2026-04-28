@@ -1,0 +1,87 @@
+% =====================================================================
+%  IdeaTheory monograph --- Kindle/EPUB-friendly preamble
+%  Designed for pandoc → epub3 → AZW3/MOBI on Kindle.
+%  Only constructs pandoc handles cleanly are used.
+% =====================================================================
+
+%% Math
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+
+%% Theorem environments — pandoc maps these to <div class="theorem"> etc.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{axiom}[theorem]{Axiom}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interpretation}[theorem]{Interpretation}
+
+%% IdeaTheory notation (text-mode-safe; pandoc passes through to MathML).
+\newcommand{\Ideas}{\mathcal{I}}
+\newcommand{\IdeaAlg}{\mathbb{I}}
+\newcommand{\compose}{\mathbin{\diamond}}
+\newcommand{\unit}{\mathbf{1}}
+\newcommand{\IdMon}{(\Ideas,\compose,\unit)}
+
+\newcommand{\res}[2]{\langle #1 \mathbin{\Vert} #2 \rangle}
+\newcommand{\Res}{\mathsf{R}}
+
+\newcommand{\Auf}{\mathfrak{A}}
+\newcommand{\preserve}{\sigma}
+\newcommand{\negate}{\nu}
+\newcommand{\elevate}{\eta}
+
+\newcommand{\emerg}{\omega}
+\newcommand{\dcoc}{\partial}
+\newcommand{\curv}{\kappa}
+
+\newcommand{\conj}[2]{{}^{#1}\!#2}
+\newcommand{\chain}[1]{\mathsf{Ch}(#1)}
+\newcommand{\equivIdea}{\sim_{\Ideas}}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\eqdef}{\mathrel{:=}}
+\newcommand{\defeq}{\mathrel{:=}}
+
+%% Zoo macros — text-mode only, pandoc-safe.
+\newenvironment{zooentry}[2]{%
+  \par\medskip\noindent\textbf{Zoo entry: #1.}\
+  \emph{Source:} \cite{#2}.\par\smallskip
+}{\par\medskip}
+
+\newcommand{\thinker}[1]{\textbf{#1}}
+\newcommand{\formalclaim}{\par\medskip\noindent\textbf{Formal restatement.}\ }
+\newcommand{\formalstatus}{\par\medskip\noindent\textbf{Status in Idea Theory.}\ }
+\newcommand{\litcomment}{\par\medskip\noindent\textbf{Commentary.}\ }
+
+%% Additional macros used by chapter agents
+\newcommand{\npow}{\mathsf{npow}}
+\newcommand{\bigdiamond}{\diamond}
+
+% Chapter 2 (coalitions) macros
+\newcommand{\aggregate}{\mathsf{aggregate}}
+\newcommand{\Coalition}{\mathsf{Coalition}}
+\newcommand{\insertAt}{\mathsf{insertAt}}
+\newcommand{\chair}{\mathsf{chair}}
+\newcommand{\members}{\mathsf{members}}
+\newcommand{\collective}{\mathsf{collective}}
+\newcommand{\Comm}{\mathfrak{C}}
+\newcommand{\Asm}{\mathfrak{A}_{\mathrm{sm}}}
+\newcommand{\List}{\mathsf{List}}
+\newcommand{\replicate}{\mathsf{replicate}}
+\newcommand{\xs}{\mathbf{x}}
+\newcommand{\ys}{\mathbf{y}}
+\newcommand{\zs}{\mathbf{z}}

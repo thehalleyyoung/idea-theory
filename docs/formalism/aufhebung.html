@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aufhebung Decomposition — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Aufhebung Decomposition</h1>
+<p>Hegel's term <em>Aufhebung</em> — sublation — names the operation that simultaneously preserves, negates, and elevates. The Aufhebung decomposition formalizes this as a triple decomposition of every composite.</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> An <em>Aufhebung decomposition</em> on \((\mathcal{I},\circ)\) is a triple of functions \(\sigma,\nu,\eta:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\langle\mathcal{I}\rangle\) such that for every \(a,b\in\mathcal{I}\),
+\[ a\circ b \;=\; \sigma(a,b) + \nu(a,b) + \eta(a,b), \]
+where \(\sigma(a,b)\) lies in the span of common content of \(a\) and \(b\) (preservation), \(\nu(a,b)\) lies in the span of mutually negating content (negation), and \(\eta(a,b)\) is orthogonal to both under \(\rho\) (elevation).</div>
+
+<p>The decomposition is unique modulo \(\ker\rho\) (Theorem 3).</p>
+
+<h2>Worked example: Fauconnier–Turner blending</h2>
+<p>The blend "computer virus" composes <em>computer</em> and <em>biological virus</em>. The preserved content \(\sigma\) is "thing that infects and replicates"; the negated content \(\nu\) is "biological versus electronic"; the elevated content \(\eta\) is the new concept of self-replicating malicious code, present in neither input. Idea Theory predicts that any productive blend has nonzero \(\eta\) — otherwise the composition is purely additive.</p>
+
+<h2>Worked example: Hegel's master/slave</h2>
+<p>The composition <em>master</em> \(\circ\) <em>slave</em> in the Phenomenology has \(\sigma\) = mutual recognition; \(\nu\) = the negation of the master's independence by his dependence on the slave's labor; \(\eta\) = the dialectical insight that consciousness becomes self-conscious only through the other.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/aufhebung-decomposition.html">Theorem 3 (Aufhebung)</a></li>
+<li><a href="../theorems/structural-equivalence.html">Theorem 8</a> — the decomposition is preserved by isomorphisms.</li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

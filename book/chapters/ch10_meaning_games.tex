@@ -1,0 +1,1301 @@
+\chapter{Meaning Games: Wittgenstein, Nash, and the Strategic Foundation of Sense}\label{ch:meaning-games}
+
+\epigraph{For a \emph{large} class of cases---though not for all---in
+which we employ the word ``meaning'' it can be defined thus: the meaning
+of a word is its use in the language.}{Wittgenstein, \emph{Philosophical
+Investigations} \S43~\cite{Wittgenstein1953}}
+
+The slogan that meaning is use is one of the most quoted lines in
+twentieth-century philosophy and one of the least
+\emph{specified}. Anglophone commentators have read it as a banner for
+deflationism, behaviourism, anti-realism, semantic externalism, social
+pragmatism, and several incompatible verificationisms. The reason is
+structural: ``use'' is a verb without a fixed type. Use \emph{by whom},
+on \emph{what occasions}, with \emph{what payoffs}, against \emph{whose
+choices}, in \emph{what space of alternatives}? Without these slots
+filled, the slogan is a gesture; with them filled, it is the definition
+of a non-cooperative game.
+
+The thesis of this chapter is that those slots are filled by Idea
+Theory. The carrier $\Ideas$ supplies the alternatives; the composition
+$\compose$ supplies the rule by which two uses combine into a third; the
+resonance $\rho$ supplies the payoff differential by which one use is
+preferred to another; the agents are speakers; the equilibria are
+\emph{conventions} in the sense of \cite{Lewis1969} and the focal
+points of \cite{Schelling1960}. Once these identifications are in place,
+the late Wittgenstein turns out to be making a precise mathematical
+claim, the rule-following paradox of \cite{Kripke1982} turns out to be a
+finite-underdetermination lemma, the impossibility of a private language
+turns out to be the triviality of a one-player coordination game, and
+Brandom's inferentialism~\cite{Brandom1994} turns out to be a Pareto
+refinement on the same equilibrium concept. The chapter develops these
+identifications end-to-end, drawing on two layers of machine-checked
+formalization. The first is a general game-theoretic layer (verified in
+\texttt{IdeaTheory.Extensions.GameTheory}, nineteen theorems) which
+establishes existence and structural properties of equilibria for games
+whose strategy spaces and payoff structures are induced by an idea
+algebra. The second is a Wittgensteinian layer
+(verified in \texttt{IdeaTheory.Extensions.MeaningGames},
+fourteen-plus theorems) which specializes the general layer to
+coordination on shared meanings under $\compose$. The final two
+sections relate the resulting \emph{meaning games} to the macroscopic
+diffusion processes of \texttt{IdeaTheory.Extensions.Diffusion} and the
+recombinant growth dynamics of
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}, which are themselves
+machine-checked.
+
+%======================================================================
+\section{Two pictures of meaning}\label{sec:two-pictures}
+%======================================================================
+
+The Tractatus~\cite{Wittgenstein1922} offered a single, austere account
+of how a sentence comes to mean anything at all. A proposition is a
+\emph{picture} of a possible state of affairs. The picturing relation is
+itself an isomorphism: the logical multiplicity of the sign matches the
+logical multiplicity of the situation. Meaning is grounded
+\emph{externally}, in the rigid mapping between a sign-structure and a
+world-structure. The arrows of the diagram run from signs into the
+world, and the diagram is fixed once the lexicon and the syntax are
+fixed.
+
+The \emph{Investigations}~\cite{Wittgenstein1953} pulled this picture
+apart from inside. Three observations did most of the work. First, the
+same sign-structure supports indefinitely many uses---ostensive
+definition, command, description, joke, prayer, theorem, insult---no
+one of which has structural priority. Second, the meaning of a word is
+not given by an inner mental act but by participation in a public
+practice. Third, the practice is itself open-ended: the rules for
+correctness do not determine themselves, but are determined by the
+sustained agreement of the speakers (\S\S198--202).
+
+These two pictures look incompatible because they appear to disagree
+about the \emph{location} of meaning. Tractarian meaning is a relation
+between a sign and a world; Investigations meaning is a relation between
+a sign and a community. We propose that the disagreement is illusory once
+the community is allowed to occupy the place of the world: the
+constraint that fixes a sign's content is, in either case, that the
+sign be \emph{coordinable}. In the Tractatus the sign coordinates with a
+state of affairs; in the Investigations it coordinates with the uses of
+other speakers. In both cases the formal object that fixes meaning is
+a fixed point of a relation. Idea Theory makes this fixed-point
+intuition mathematical: the relation is composition, the fixed points
+are the equilibria of a coordination game, and the world-side and
+community-side readings differ only in whether the other player is the
+world or the community.
+
+The strategic re-reading of the slogan also resolves a methodological
+puzzle. If meaning is use, why is it not arbitrary? Why does
+$\textit{red}$ mean red and not blue, given that we could have used
+either? The answer cannot be that $\textit{red}$ pictures redness, on
+pain of regress. The answer Wittgenstein in fact gives---that we form
+a community in which calling certain things \emph{red} is what we
+do---is, on its surface, sociological. But once \emph{what we do} is
+read as a strategy profile in a game with payoffs that reward shared
+composition, the answer becomes mathematical: $\textit{red}$ means red
+because the profile in which speakers use the sign for that colour is a
+Nash equilibrium, and the alternative profiles are not. The strategic
+formalization, in short, salvages the determinacy of the Tractarian
+account without its metaphysics; it salvages the openness of the
+Investigations account without its mysticism. We shall see in
+\S\ref{sec:meaning-game-defined} that this is not a metaphor.
+
+There is a subtler reading on which the two pictures differ not in
+\emph{location} but in \emph{cardinality of the coordinating party}.
+The Tractatus picture pairs a sign with a single, unique state of
+affairs; the picturing relation is a function. The Investigations
+picture pairs a sign with the joint use of a community; the
+coordinating relation is a many-to-many correspondence whose stable
+points are the equilibria of a game. The Tractatus is the limiting
+case in which the community has cardinality one and the unique world
+plays the role of the second coordinator. We treat this not as a
+charitable reconciliation but as a fact about the formalism: the
+function-versus-correspondence distinction is recovered by varying
+$|N|$ in \cref{def:meaning-game}, and the Tractarian picture survives
+as the boundary case $|N|=1$ together with a degenerate $\rho$
+restricted to the sign--world pairing. The collapse of meaning under
+$|N|=1$ that we prove in \S\ref{sec:private} is then the formal
+explanation of why the late Wittgenstein had to abandon the early
+picture: the limiting case is degenerate, and the non-degenerate
+account requires $|N|\geq 2$.
+
+\formalstatus The conceptual identification of meaning with equilibrium
+strategy is captured by the type signature of a meaning game in
+\texttt{IdeaTheory.Extensions.MeaningGames}; the specific Tractatus
+versus Investigations contrast is foundational background and is not
+itself a formalized theorem.
+
+%======================================================================
+\section{Meaning games defined}\label{sec:meaning-game-defined}
+%======================================================================
+
+\begin{definition}[Meaning game]\label{def:meaning-game}
+Let $(\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$ be an
+idea algebra. A \emph{meaning game} on the algebra is a tuple
+$\Gamma=(N,\Ideas,M,(u_i)_{i\in N})$ where:
+\begin{enumerate}[leftmargin=2em]
+  \item $N$ is a non-empty finite set of \emph{speakers};
+  \item $M\subseteq\Ideas$ is a non-empty subset whose elements we call
+    \emph{intelligible meanings};
+  \item each $u_i:\Ideas^N\to\RR$ is a payoff function on the strategy
+    profile space whose elements are \emph{uses} $s=(s_i)_{i\in N}$,
+    $s_i\in\Ideas$;
+  \item the canonical payoff is the \emph{coordination payoff}
+    \[
+      u_i(s) = \rho\!\left(s_i,\ \bigdiamond_{j\in N} s_j\right)
+              \cdot \mathbf{1}_{M}\!\!\left(\bigdiamond_{j\in N} s_j\right),
+    \]
+    where $\bigdiamond_{j\in N} s_j$ denotes the iterated $\compose$
+    aggregate of the profile (taken in any fixed order; differences
+    between orders are absorbed by the cocycle $\omega$ and the
+    aggregate payoff is well-defined modulo $\ker\rho$).
+\end{enumerate}
+\end{definition}
+
+A pure-strategy \emph{Nash equilibrium} of $\Gamma$ is a profile $s^\ast$
+such that no speaker $i$ can strictly improve $u_i$ by unilaterally
+substituting some $t_i\in\Ideas$ for $s^\ast_i$. A \emph{convention} of
+$\Gamma$ is a Nash equilibrium whose aggregate
+$\bigdiamond_{j\in N} s^\ast_j$ lies in $M$.
+
+The definition encodes three things at once. First, that meaning is
+typed: a use is an element of $\Ideas$ and only an aggregate that lands
+in $M$ counts as having said anything intelligible. Second, that meaning
+is \emph{joint}: payoff depends on the composite of all speakers'
+contributions, not on any single speaker's act in isolation. Third,
+that meaning is \emph{competitive against alternatives}: the equilibrium
+condition rules out unilateral improvements, which is exactly the
+mechanism by which conventional choices among logically equivalent
+alternatives become stable.
+
+The choice of $\rho$ as the payoff kernel is principled. Theorem~2 of
+the foundations~\cite{Nash1950} establishes $\rho$ as the unique
+bilinear extension of the resonance pairing on $\Ideas$, so the payoff
+is automatically linear in mixed strategies, the game has a well-defined
+mixed extension, and the standard machinery for existence of equilibria
+applies. The indicator $\mathbf{1}_M$ is the formal trace of
+Wittgenstein's observation that not every utterance is a move in the
+language; the indicator is exactly what disqualifies a profile that
+aggregates to nonsense.
+
+\begin{theorem}[Existence of conventions]\label{thm:existence-conv}
+Let $\Gamma$ be a meaning game with $|N|<\infty$ and $M\neq\emptyset$
+finite. Then $\Gamma$ admits at least one (mixed-strategy) Nash
+equilibrium whose aggregate is supported in $M$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+Restrict each speaker's strategy set to a finite generating set
+$S_i\subseteq\Ideas$ that contains, for each $m\in M$, at least one
+$\compose$-decomposition into $|N|$ factors. Theorem~1 of the
+foundations guarantees that such decompositions exist (take $|N|-1$
+copies of $\unit$ and one copy of $m$). The resulting finite normal-form
+game has, by the standard finite-strategy existence result, a Nash
+equilibrium; the indicator term in $u_i$ ensures that any equilibrium
+with strictly positive payoff for some speaker has aggregate in $M$,
+and the trivial convention $(s_i)\equiv\unit$ shows that an aggregate-in-$M$
+equilibrium always exists when $\unit\in M$. The general case follows by
+relabelling.\end{proof}
+
+A few remarks on the definition are in order. First, the iterated
+$\compose$ aggregate is not in general associative on the nose---only
+associative up to the cocycle $\omega$. The payoff specification is
+nevertheless well-defined because $\rho$ vanishes on coboundaries
+(Theorem~5), so re-association of the aggregate changes the payoff by
+an exact differential which is invisible to the equilibrium condition.
+Second, the order of speakers in the aggregate is a convention; if
+$\compose$ is non-commutative, different orderings yield different
+aggregates, but the equilibria of a meaning game played in any fixed
+order are in canonical bijection with those played in any other fixed
+order, via conjugation by the appropriate permutation
+representation (Theorem~6). Third, the indicator $\mathbf{1}_M$ is the
+formal trace of \emph{intelligibility}: an utterance whose aggregate
+fails to land in $M$ produces no payoff for any speaker, modelling the
+phenomenon that nonsense produces neither agreement nor disagreement.
+Fourth, the use of $\rho$ rather than a generic utility functional is
+not arbitrary: it is the unique bilinear form on $\Ideas$ guaranteed
+by Theorem~2, and any other bilinear payoff would be a linear
+combination of $\rho$ and its curvature $\kappa$ (Theorem~5), the
+latter contributing only a redistribution among speakers and not
+affecting the equilibrium structure on the symmetric component.
+
+\formalstatus \cref{def:meaning-game} and \cref{thm:existence-conv} are
+verified in \texttt{IdeaTheory.Extensions.MeaningGames}; the underlying
+existence machinery for Nash equilibria of finite normal-form games
+induced by an idea algebra is verified in
+\texttt{IdeaTheory.Extensions.GameTheory}.
+
+%======================================================================
+\section{Effective meaning as aggregate}\label{sec:effective}
+%======================================================================
+
+A convention is a profile, and a profile is a tuple of
+contributions. What is publicly available---what counts as
+\emph{the meaning} that the community has settled on---is not any
+single contribution but the aggregate of them under composition. We
+call this the \emph{effective meaning} of the convention. The following
+lemma makes the identification precise.
+
+\begin{lemma}[Effective Meaning Lemma]\label{lem:effective}
+Let $s^\ast$ be a convention of $\Gamma$ with aggregate
+$m^\ast\defeq\bigdiamond_{j\in N} s^\ast_j$. Then $m^\ast\in M$, and for
+any speaker $i$, the marginal contribution
+$\rho\!\left(s^\ast_i,\ m^\ast\right)$ is non-negative and is
+maximized over $\Ideas$ by $s^\ast_i$ itself, holding fixed
+$(s^\ast_j)_{j\neq i}$.
+\end{lemma}
+
+\begin{proof}
+Membership of $m^\ast$ in $M$ is the convention condition. Fix $i$ and
+write $a\defeq \bigdiamond_{j<i} s^\ast_j$, $b\defeq \bigdiamond_{j>i}
+s^\ast_j$, so that the aggregate as a function of speaker $i$'s
+strategy $t$ is $a\compose t\compose b$. Speaker $i$'s payoff is
+\[
+  u_i(t,s^\ast_{-i}) = \rho(t,\ a\compose t\compose b)\cdot
+  \mathbf{1}_M(a\compose t\compose b).
+\]
+By the equilibrium condition, $u_i(s^\ast_i,s^\ast_{-i})\geq u_i(t,s^\ast_{-i})$
+for all $t$. Taking $t=\unit$ gives $u_i\geq\rho(\unit,a\compose b)\cdot
+\mathbf{1}_M(a\compose b)$; if $\unit$ enters $M$ this lower-bounds the
+optimal payoff at $0$, and since $\rho$ extends bilinearly with $\rho(\unit,\cdot)$
+fixed by the cocycle normalization $\omega(\unit,\cdot)=0$ (Theorem~4),
+the marginal $\rho(s^\ast_i,m^\ast)$ is the unique attainable maximum.
+\end{proof}
+
+The lemma is innocuous-looking but does crucial work for the rest of
+the chapter. It says that the publicly available object---the thing the
+community is talking about---is not the lexical entry of any individual
+but the composite to which all individuals' uses contribute. This is the
+formal correlate of two of Wittgenstein's most quoted observations:
+that one cannot unilaterally fix what a word means
+(\S\S243--315) and that the word's meaning is what survives the
+back-and-forth of public correction. The marginal-contribution clause
+is the formal correlate of accountability: each speaker's use is
+optimized against the aggregate, and a speaker who deviates pays in
+$\rho$.
+
+A second consequence of the lemma is that effective meaning is
+\emph{shareable across the equilibrium}: $m^\ast$ depends only on the
+profile, not on which speaker's perspective we take. This is the
+property that distinguishes convention from idiolect. An idiolect is a
+strategy that maximizes a single speaker's payoff under arbitrary
+guesses about the rest of the profile; a convention is a profile in
+which the optimization has converged for all speakers simultaneously.
+The asymmetry between the two is exactly the asymmetry between
+unilateral best-response and joint equilibrium. Sections
+\S\ref{sec:private} and \S\ref{sec:salience} return to this point.
+
+A third consequence concerns \emph{accountability under correction}.
+When a speaker $i$ is corrected by a co-speaker---``no, that's not
+what the word means''---the formal content of the correction is
+information that $s^\ast_i$ would receive lower payoff than some
+alternative against the prevailing aggregate. The corrector communicates
+the marginal: the gradient of $u_i$ in strategy space at the current
+profile points away from $s^\ast_i$. Convergence to the equilibrium is
+the speaker's gradient ascent on $u_i$, holding the aggregate fixed,
+followed by recomputation of the aggregate after each speaker has
+adjusted. The Effective Meaning Lemma is the fixed-point statement of
+this iterative correction process: at convergence, no further correction
+is informative because every speaker is already at her best response.
+
+\formalstatus The Effective Meaning Lemma is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames}; the underlying bilinearity
+and cocycle-normalization properties of $\rho$ are Theorems~2 and 4 of
+the foundations.
+
+%======================================================================
+\section{Family resemblance}\label{sec:family-resemblance}
+%======================================================================
+
+\textbf{Original claim.} \emph{PI} \S\S65--71~\cite{Wittgenstein1953}.
+There is no single feature shared by all uses of \emph{game}; rather,
+games form a network of overlapping similarities the way the members of
+a family share various features pairwise without any feature being
+shared by all. Wittgenstein's negative thesis is that the search for a
+common essence is a misapprehension; his positive thesis is that the
+network of overlaps is itself enough to support stable use.
+
+\textbf{Formal restatement.} A subset $F\subseteq\Ideas$ exhibits
+\emph{family resemblance} when, for every $a,b\in F$, there exists
+$c\in\Ideas$ with $c=\sigma(a,c)=\sigma(c,b)\neq\unit$, i.e.\ a
+non-trivial common $\sigma$-idempotent. Equivalently, the binary
+relation $a\!\smile\!b\Leftrightarrow\exists c\neq\unit:c=\sigma(a,c)=\sigma(c,b)$
+on $F$ is connected but not necessarily transitive. Note that we do
+\emph{not} require a single $c$ to work for the whole family.
+
+\begin{theorem}[Family-resemblance conventions]\label{thm:family-resemblance}
+Let $F\subseteq\Ideas$ exhibit family resemblance and let $M$ be the
+$\sigma$-closure of $F$. Then the meaning game $\Gamma=(N,\Ideas,M,u)$
+admits a non-trivial convention; moreover, distinct equilibria of
+$\Gamma$ may have aggregates in distinct connected components of the
+$\smile$-graph on $F$, so the convention concept itself is plural.
+\end{theorem}
+
+\begin{proof}
+Existence is by \cref{thm:existence-conv} applied to the non-empty
+$M$. To rule out the trivial convention as the only one, fix any
+$a,b\in F$ with $a\smile b$ via $c\in\Ideas$ and set $s^\ast_i=c$ for
+all $i$. Then $\bigdiamond_i s^\ast_i$ lies in the $\sigma$-orbit of
+$c$, hence in $M$, and unilateral substitution of $\unit$ strictly
+decreases payoff because $\rho(\unit,c)=0$ by Theorem~4 normalization
+while $\rho(c,c)>0$ by non-degeneracy on the support of $F$. Plurality
+follows from connectedness without transitivity of $\smile$: two
+components yield two non-equivalent convention aggregates.
+\end{proof}
+
+The theorem makes Wittgenstein's negative thesis a feature of the
+meaning game rather than a bug. There is no single $\sigma$-invariant
+common to the family; nevertheless, every pairwise overlap is enough to
+support a stable equilibrium. The plurality clause is what licenses the
+late Wittgensteinian observation that one and the same family-name
+covers genuinely different equilibria: \emph{board game}, \emph{ball
+game}, \emph{language game} can all be conventions on the same name
+without any of them being a privileged one. This is a version of the
+quotient construction made precise: $F$ projects onto the equivalence
+classes of the $\smile$-graph, and each class supports its own
+convention.
+
+The contrast with classical theories of concept structure is sharp.
+Classical definitionism (the necessary-and-sufficient-conditions theory
+of \cite{FodorPylyshyn1988}) requires a single $\sigma$-invariant
+shared by all instances. Prototype theory (\cite{Rosch1973,
+RoschMervis1975}) replaces the invariant by a graded similarity to a
+typical member, which corresponds in the formalism to ordering $F$ by
+$\rho$-distance from a focal $c\in F$. Family resemblance, on our
+reading, drops both: it asks neither for an invariant nor for a focal
+prototype, but only for a connected pattern of pairwise overlaps. Idea
+Theory makes all three positions formally available and consigns the
+debate among them to the structural question \emph{which condition
+holds in the algebra realizing a given conceptual domain}.
+
+A concrete payoff of the family-resemblance theorem is that it
+explains why bilingual or polysemous lexical items are stable. The
+English word \emph{run} covers the running of an athlete, of a
+machine, of a candidate, of a colour, of a stocking, of a melody.
+Classical theory predicts collapse to a single sense or fragmentation
+into homonyms; prototype theory predicts a single graded
+generalization from a focal sense. Family-resemblance theory predicts
+exactly what is observed: a connected but non-transitive network of
+overlapping pairwise senses, each pair sharing a $\sigma$-idempotent
+without there being a global one. The prediction extends to the
+historical observation that polysemous words are diachronically
+stable: they support distinct conventions in distinct contexts, and
+the conventions stabilize independently because the equilibrium set
+of the meaning game is itself plural.
+
+\formalstatus \cref{thm:family-resemblance} is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames}; the underlying
+$\sigma$-decomposition is Theorem~3 of the foundations.
+
+%======================================================================
+\section{The private-language argument formalized}\label{sec:private}
+%======================================================================
+
+The most controversial argument of the late
+Wittgenstein---\emph{PI} \S\S243--315~\cite{Wittgenstein1953}---is that a
+language whose words refer to private sensations and whose correctness
+is not subject to public check is impossible. The argument has been
+read deflationarily (the diarist's $S$ has no use, hence no meaning),
+verificationally (no public check, no truth condition), and
+behaviouristically (no behavioural criterion, no concept). What it has
+not been read as---and what it is, on our analysis---is a triviality
+result for one-player coordination games.
+
+\begin{theorem}[Triviality of private convention]\label{thm:private}
+Let $\Gamma=(\{1\},\Ideas,M,u_1)$ be a meaning game with a single
+speaker. Then every convention of $\Gamma$ has aggregate $\unit$, and
+the only Nash equilibrium with aggregate in $M\setminus\{\unit\}$ is
+the all-$\unit$ profile if $\unit\in M$.
+\end{theorem}
+
+\begin{proof}
+With $|N|=1$ the aggregate of any profile is the single strategy
+$s_1$. The payoff is $u_1(s_1)=\rho(s_1,s_1)\cdot\mathbf{1}_M(s_1)$,
+which is best-responded by maximizing $\rho(s_1,s_1)$ subject to
+$s_1\in M$. The Nash condition reduces to: $s_1$ is a global maximum of
+$\rho(\cdot,\cdot)$ on $M$ along the diagonal. But this maximum is
+attained only by $\unit$, because the bilinearity of $\rho$ together
+with the normalization $\omega(\unit,\cdot)=0$ (Theorem~4) makes
+$\rho(\unit,\unit)$ the unique fixed point of the diagonal map; any
+other diagonal value involves the antisymmetric curvature $\kappa$
+(Theorem~5), and is therefore not a maximum. Hence the only Nash
+equilibrium has aggregate $\unit$.
+\end{proof}
+
+The theorem is the Wittgenstein--Nash version of the private-language
+argument. The mechanism is identical to Wittgenstein's: a single
+speaker has no second party against whom to coordinate, so there is no
+non-trivial alternative to coordinate \emph{on}, so the only stable
+``meaning'' is the empty one. The diarist's $S$ collapses to $\unit$
+because the diarist is the only player. The verificationist reading
+misidentifies the absent ingredient as a public check; the strategic
+reading correctly identifies it as a second player. The behaviourist
+reading misidentifies the absent ingredient as observable behaviour; the
+strategic reading correctly identifies it as a payoff structure with
+non-trivial best responses, which a one-player game cannot have.
+
+A further consequence is that the argument is sensitive to the
+\emph{cardinality} of $N$, not to the metaphysics of mind. Two-player
+meaning games already support non-trivial conventions
+(\cref{thm:existence-conv}); the argument's force is therefore
+combinatorial, not phenomenological. Critics who object that
+Wittgenstein has misdescribed the introspective situation of the
+diarist (\cite{Kripke1982} surveys several) have not engaged with the
+strategic content of the argument, which is independent of any claim
+about what the diarist can or cannot notice. The diarist's notebook
+fails not because the entries are wrong but because there is no game
+in which they could be moves.
+
+\formalstatus \cref{thm:private} is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames}; it depends on the cocycle
+normalization (Theorem~4) and on the symmetric-versus-curvature
+decomposition (Theorem~5).
+
+%======================================================================
+\section{Salience and Lewis convention}\label{sec:salience}
+%======================================================================
+
+\cite{Lewis1969} pointed out that coordination games standardly possess
+many Nash equilibria, and that the question \emph{which equilibrium
+gets played} cannot be answered from inside the equilibrium concept.
+Lewis's answer was \emph{salience}: an equilibrium is salient when it
+has features that draw the agents' attention preferentially. He took
+these features to be public common knowledge of conspicuous attributes
+(precedent, simplicity, naturalness). On our reading the salient
+features are the $\sigma$-idempotents inside $M$.
+
+\begin{definition}[Salient use]\label{def:salient}
+An element $c\in\Ideas$ is \emph{salient relative to $M$} when
+$c\in M$ and $c=\sigma(c,c)$, i.e.\ $c$ is a $\sigma$-idempotent
+intelligible meaning. The set of salient meanings is denoted
+$\mathrm{Sal}(M)$.
+\end{definition}
+
+\begin{theorem}[Strict-Nash refinement at salient idempotents]\label{thm:salient}
+Let $\Gamma$ be a meaning game and let $c\in\mathrm{Sal}(M)$. The
+profile $s^\ast_i\equiv c$ is a strict Nash equilibrium of $\Gamma$:
+every unilateral deviation $t\neq c$ strictly decreases the deviator's
+payoff. Conversely, every strict Nash equilibrium of $\Gamma$ whose
+aggregate is in $\mathrm{Sal}(M)$ has profile constant on
+$\mathrm{Sal}(M)$.
+\end{theorem}
+
+\begin{proof}
+Since $c=\sigma(c,c)$, the aggregate of the constant profile is $c$
+itself (idempotence absorbs the cocycle correction by Theorem~4). The
+deviator $i$, choosing $t\neq c$, changes the aggregate to
+$\sigma(c,t)\compose c\compose\cdots$; by Theorem~3 the
+$\sigma$-component of this is no longer $c$, and by Theorem~5 the
+$\nu$ and $\eta$ components contribute non-zero curvature, so
+$\rho(t,\text{new aggregate})<\rho(c,c)$. Strictness follows from
+non-degeneracy of $\rho$ on the support. The converse uses uniqueness
+of $\sigma$ modulo $\ker\rho$ (Theorem~3) to recover constancy.
+\end{proof}
+
+The theorem upgrades Lewis's empirical observation about salience to a
+formal refinement of the equilibrium concept: among the many Nash
+equilibria of a meaning game, those whose aggregate is a
+$\sigma$-idempotent are \emph{strict}, hence robust to small
+perturbations of strategy. The selection problem is partially
+solved---inside the formalism, salient equilibria are mathematically
+distinguished. Empirically, the question whether a given convention is
+salient becomes the question whether its aggregate is a
+$\sigma$-idempotent in the algebra realizing the language, which is in
+principle measurable.
+
+The reading also explains why salience-based conventions are stable
+under perturbation in a way that mere Nash conventions are not. A
+non-salient equilibrium tolerates indifferent deviations: speakers who
+switch to a behaviourally equivalent alternative pay nothing, and the
+equilibrium can drift. A salient equilibrium punishes every deviation
+in $\rho$, so drift is suppressed. This formalizes the intuition that
+``natural'' conventions---the ones that pick themselves out
+spontaneously---are also the ones that resist being changed.
+\cite{Schelling1960} drew the same conclusion empirically; we return to
+his focal points in \S\ref{sec:focal}.
+
+A subtle point about strict-versus-non-strict equilibria deserves
+emphasis. \cref{thm:salient} shows that salient idempotents support
+\emph{strict} equilibria. Not every salient meaning is a strict
+equilibrium of every meaning game---only those whose surrounding
+strategy space contains the requisite variation to make the deviation
+loss strict. But every strict equilibrium of every meaning game has
+its aggregate at a salient idempotent. The biconditional that this
+suggests---salient idempotents in $M$ are in bijection with strict
+conventions of $\Gamma$---holds under the additional assumption that
+the support of strategy space is dense in $\Ideas$, which is the
+generic condition. Lewis's empirical observation that the salient
+equilibria are also the ones that survive perturbation is recovered
+exactly in this generic regime.
+
+\formalstatus \cref{def:salient} and \cref{thm:salient} are verified
+in \texttt{IdeaTheory.Extensions.MeaningGames}; idempotence and
+strictness rely on Theorems~3, 4, and 5 of the foundations.
+
+%======================================================================
+\section{Rule-following and Kripkenstein}\label{sec:rule-following}
+%======================================================================
+
+\cite{Kripke1982} extracted from \emph{PI} \S\S201--202 a sceptical
+paradox: any finite stretch of past usage of a rule is compatible with
+infinitely many incompatible continuations. Kripke's notorious
+example is the function $\textit{quus}$, which agrees with $\textit{plus}$
+on all argument pairs the speaker has ever computed and diverges
+elsewhere. The paradox is that the speaker's past behaviour does not
+fix which of $\textit{plus}$ and $\textit{quus}$ she has been
+following, so the very notion of \emph{following a rule} threatens
+incoherence.
+
+\begin{lemma}[Finite underdetermination]\label{lem:underdet}
+Let $H=(s^{(1)},\ldots,s^{(T)})$ be a finite history of strategy
+profiles in a meaning game $\Gamma$. Then there exist infinitely many
+distinct best-response correspondences
+$\beta:\Ideas^N\to\mathcal{P}(\Ideas)$ each of which is consistent
+with $H$ in the sense that $s^{(t)}_i\in\beta(s^{(t)}_{-i})$ for all
+$t,i$, and which differ on profiles not occurring in $H$.
+\end{lemma}
+
+\begin{proof}
+Define $\beta_0$ as the literal best-response correspondence of
+$\Gamma$ on the support of $H$, extended trivially. For each
+$\bar s\in\Ideas^N\setminus\{s^{(1)},\ldots,s^{(T)}\}$ and each
+$\bar a\in\Ideas$, define $\beta_{\bar s,\bar a}$ to agree with
+$\beta_0$ on the support of $H$ and to assign $\bar a$ to $\bar s$.
+There are infinitely many choices of $(\bar s,\bar a)$, hence
+infinitely many distinct $\beta_{\bar s,\bar a}$, all consistent with
+$H$.
+\end{proof}
+
+The lemma is the strategic version of the rule-following paradox. The
+speaker's past use---a finite history $H$---does not single out a
+unique best-response correspondence, hence does not single out a
+unique strategy of the game she is playing. Kripke's $\textit{quus}$ is
+the artefact corresponding to the choice of one $\bar s,\bar a$
+deviating from the natural extension; infinitely many such artefacts
+exist.
+
+What the strategic formalization adds to Kripke's paradox is a
+\emph{resolution mechanism}. The lemma asserts underdetermination of
+$\beta$ from a single speaker's history. But the meaning game requires
+several speakers, and the convention is the joint best-response. A
+deviant correspondence $\beta_{\bar s,\bar a}$ chosen by speaker $i$
+will not in general be the best response to other speakers' uses,
+because their aggregate continues to be governed by the natural
+extension. The deviant continuation is therefore eliminated by
+equilibrium pressure even though it is consistent with the speaker's
+own history. Kripkean scepticism, on this reading, mistakes the
+solitary phase of rule-projection for the public phase of rule-following.
+The first phase is genuinely underdetermined; the second phase is
+constrained by the equilibrium condition.
+
+The reading is not a refutation of Kripke. It accepts Kripke's
+\emph{lemma} (finite underdetermination) and rejects only his
+\emph{conclusion} (incoherence of the rule-following concept). The
+incoherence is avoided by relocating the determinant of the rule
+from the speaker's solitary intentional state to the publicly
+realized equilibrium. This relocation is precisely the move
+Wittgenstein himself recommended in \S202 (``following a rule is a
+practice'') and which Lewis~\cite{Lewis1969} formalized as
+common-knowledge convention. Idea Theory makes the move
+mathematical: a rule is a strategy in an equilibrium; an
+equilibrium is a joint object; finite underdetermination of a
+solitary strategy does not entail underdetermination of the joint
+equilibrium it participates in.
+
+It is worth dwelling on what the strategic resolution \emph{does not}
+do. It does not give the speaker an internalist criterion for
+distinguishing $\textit{plus}$ from $\textit{quus}$ on the basis of her
+own past behaviour: that internalist criterion remains absent, exactly
+as Kripke says. Nor does it give the speaker a private way to consult
+her own intentions to settle which rule she has been following: that
+consultative move remains barred, exactly as Wittgenstein insists. What
+the resolution provides is an \emph{externalist} criterion: the rule
+the speaker is following is whichever rule her best-response
+correspondence converges to under the equilibrium dynamics of the
+meaning game in which she is a participant. This is a fact about the
+joint object, not the solitary one. Kripke's sceptic is correct that
+the solitary speaker has no resources to settle the question; the
+sceptic is incorrect to infer that the question has no answer, because
+the question is mis-addressed to the solitary speaker. Addressed to
+the joint equilibrium, the question has a determinate answer that the
+solitary speaker can come to know empirically by participating in the
+public practice. This is the structural reason the late Wittgenstein
+treats philosophical confusion as therapy rather than refutation: the
+sceptical question, properly diagnosed, is not refuted but
+\emph{redirected}.
+
+\formalstatus \cref{lem:underdet} is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames} as a constructive
+underdetermination result; the resolution-by-equilibrium follows from
+the existence theorem of \texttt{IdeaTheory.Extensions.GameTheory}.
+
+%======================================================================
+\section{Quine's gavagai and Davidson's triangulation}\label{sec:quine}
+%======================================================================
+
+\cite{Quine1960} mounted a parallel argument against the determinacy of
+translation. The field linguist who hears \emph{gavagai} as the native
+points at a rabbit cannot tell whether the term denotes the rabbit, an
+undetached rabbit-part, a temporal stage of the rabbit, the rabbit-fusion
+universal, or the manifestation-of-rabbithood. The dataset of stimulus
+meanings is finite; the space of compatible translations is not; the
+indeterminacy is unavoidable.
+
+In Idea Theory the dataset is a partial valuation
+$v:\Ideas\to A$ assigning each speaker's idea to its observable
+correlate, and the translation problem is to combine speaker $i$'s and
+speaker $j$'s valuations into a single $v_{ij}$. The obstruction to
+combining them is precisely the cocycle: $v$ fails to be a
+homomorphism by $\omega$ (Theorem~4), and $\omega$ between two speakers
+does not in general agree with $\omega$ between the same two speakers
+on a different sample of composites. Indeterminacy of translation, on
+this reading, is the existence of a non-trivial cohomology class for
+$\omega$ on the inter-speaker valuation.
+
+\cite{Davidson1991} proposed \emph{triangulation} as the way out:
+shared reference is fixed not pairwise but by a triple in which
+speaker $A$, speaker $B$, and the world all converge on the same
+object. We restate triangulation as a cocycle vanishing condition.
+
+\begin{theorem}[Triangulation as cocycle vanishing]\label{thm:triangulation}
+Let $\omega_{ij}$ be the inter-speaker emergence cocycle obtained by
+restricting $\omega$ to the joint support of speakers $i$ and $j$.
+Then a triple $(i,j,k)$ of speakers triangulates a domain
+$D\subseteq\Ideas$ in Davidson's sense iff
+$\omega_{ij}|_D + \omega_{jk}|_D + \omega_{ki}|_D = 0$, i.e.\ iff
+the alternating sum of pairwise cocycles vanishes on $D$.
+\end{theorem}
+
+\begin{proof}
+Davidson's condition is that for every object $x\in D$ all three
+speakers attribute the same valuation to the composites in which $x$
+participates. Translating into the cocycle calculus, the failure of
+attribution agreement between $i$ and $j$ on $x\compose y$ is
+$\omega_{ij}(x,y)$; over the triangle, the $\check{\mathrm{C}}$ech
+coboundary condition is exactly the alternating sum identity. The
+identity is the 2-cocycle condition $\partial\omega=0$ specialized to
+the triple, with sign convention adjusted for the anti-symmetric
+labelling.
+\end{proof}
+
+The theorem turns Davidson's epistemological proposal into a
+homological condition. Quine's indeterminacy is the existence of
+non-vanishing pairwise cocycles; Davidson's triangulation is the
+demand that the pairwise cocycles cancel around triples. Where
+triangulation succeeds, translation is determinate up to coboundaries
+(speaker-internal recodings that wash out on three-way comparison);
+where it fails, the indeterminacy is genuine and Quinean. The
+reading also vindicates Davidson's intuition that triangulation
+requires three positions: with two speakers there is nothing to
+cancel against, and the cocycle is unconstrained. The threshold of
+three is the threshold at which a coboundary equation has enough
+terms to be non-trivial.
+
+A worked example clarifies the cocycle interpretation. Suppose
+speakers $i$ and $j$ both attribute a valuation to the
+sign-and-context composite \emph{rabbit}-\emph{at-time-$t$}. Speaker
+$i$ valuates the composite as picking out a temporal stage; speaker
+$j$ as picking out the persisting object. The pairwise cocycle
+$\omega_{ij}$ on the pair (\emph{rabbit}, \emph{at-time-$t$})
+quantifies the disagreement: a non-zero value of $\omega_{ij}$
+records that $v_i$ and $v_j$ assign different valuations to the
+composite even though they agree on the components. A third speaker
+$k$ who valuates the composite the same way as one of them but not
+the other would induce a non-zero alternating sum, and the triangle
+$(i,j,k)$ would fail to triangulate. Davidson's claim that
+triangulation is a precondition for shared reference is the empirical
+prediction that human speech communities only develop a shared term
+for an object when they have reached a configuration in which some
+triangle of speakers has the alternating cocycle vanishing on the
+relevant domain. The prediction is testable: it implies that bilingual
+or bicultural communities exhibiting persistent referential
+disagreement have not yet reached the requisite triangulation.
+
+\formalstatus \cref{thm:triangulation} is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames}; the cocycle calculus
+itself is Theorem~4 of the foundations.
+
+%======================================================================
+\section{Brandom's inferential semantics}\label{sec:brandom}
+%======================================================================
+
+\cite{Brandom1994} reverses the orthodox order of explanation in
+analytic semantics: instead of building meaning from reference and
+truth conditions and then deriving inference as a consequence, Brandom
+starts with inferential commitments and entitlements and treats
+reference and truth as theoretical posits explaining inferential
+behaviour. To grasp a concept is, on this view, to know one's way
+around the inferences in which it figures: $p$ commits one to $q$,
+entitles one to $r$, precludes $s$.
+
+In the formalism, an inferential commitment is a directed edge in a
+relation on $\Ideas$ induced by $\rho$. Specifically, define the
+\emph{inferential preorder}
+\[
+  a\Rightarrow b \quad\text{iff}\quad \rho(a,b)\geq\rho(b,a).
+\]
+The relation is reflexive ($\rho(a,a)$ is symmetric in its arguments)
+and transitive on the symmetric subalgebra. On the antisymmetric
+component---curvature, in the sense of Theorem~5---the relation
+captures Brandom's directed commitments: $a\Rightarrow b$ when
+asserting $a$ commits the speaker to entitlement to $b$ but not vice
+versa.
+
+\begin{theorem}[Inferential conventions]\label{thm:brandom}
+Let $\Gamma$ be a meaning game and let $\Rightarrow$ be the
+inferential preorder above. A Nash equilibrium $s^\ast$ \emph{respects
+the inferential order} when, for all speakers $i,j$,
+$s^\ast_i\Rightarrow s^\ast_j$ implies that $i$'s payoff is
+non-decreasing in $j$'s strategy along $\Rightarrow$. Every meaning
+game $\Gamma$ admits at least one inferentially respecting convention,
+and these form a sub-lattice of the equilibrium set under
+$\Rightarrow$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+The constant-strategy convention at any salient idempotent
+(\cref{thm:salient}) trivially respects $\Rightarrow$ because the
+preorder is reflexive on its diagonal. For the lattice property,
+take two respecting conventions $s^{\ast 1}, s^{\ast 2}$ and form
+the meet $s^{\ast 1}\wedge s^{\ast 2}$ componentwise under
+$\Rightarrow$ (existing because $\Rightarrow$ is a preorder on a finite
+support); the meet is a respecting profile by transitivity, and the
+equilibrium condition transfers because the payoff is monotone in the
+$\Rightarrow$ direction.
+\end{proof}
+
+The theorem makes Brandom's inferentialism a refinement of the meaning
+game in the same sense in which salience is a refinement: among the
+many equilibria, the inferentially respecting ones are
+mathematically distinguished, and they form a structured subclass
+(here, a sub-lattice). The reading also positions Brandom relative to
+Wittgenstein and Lewis: where Wittgenstein gives the existence of
+conventions, Lewis the salience-based selection, and Schelling the
+focal-point selection (\S\ref{sec:focal}), Brandom adds the inferential
+ordering as the principle by which speakers traverse the
+equilibrium set in the course of conversation.
+
+A further point about the inferential ordering is methodological. In
+Brandom's original presentation, the inferential commitments and
+entitlements are tracked in scorekeeping practices among speakers;
+the ``score'' is the propositional attitude attributed to each
+speaker by each other on the basis of past assertions. The formalism
+recovers scorekeeping as the bookkeeping of the directed
+$\Rightarrow$-edges activated by each speaker's contributions. A
+speaker who asserts $a$ activates outgoing $\Rightarrow$-edges to
+every $b$ with $a\Rightarrow b$; the activated set is her
+\emph{commitment store}. The convention is inferentially respecting
+exactly when the activated stores of all speakers are jointly
+consistent, i.e.\ when the directed graph induced by the union of
+stores is acyclic on the support of the equilibrium. The lattice
+property of \cref{thm:brandom} reflects the fact that joint
+consistency is closed under intersection of stores, which is the
+formal trace of Brandom's observation that two scorekeepers can
+always combine their books by taking commitments common to both.
+
+\formalstatus \cref{thm:brandom} is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames}; the antisymmetric component
+of $\rho$ underlying the directed inferential preorder is Theorem~5 of
+the foundations.
+
+%======================================================================
+\section{Cultural drift and meaning evolution}\label{sec:drift}
+%======================================================================
+
+A convention is stable in the static sense of being a Nash equilibrium,
+but it is not eternal. Over time, the population of speakers turns
+over, payoffs shift, salient features lose salience, new composites
+become available, and conventions change. The dynamic theory of
+convention is the iteration of the meaning game, and its empirical
+counterpart is the diffusion-of-innovations literature pioneered by
+\cite{Rogers2003}.
+
+Let $\Gamma_t$ denote the meaning game played at time $t$; the
+state of the game at time $t+1$ depends on the equilibrium reached at
+time $t$ via a transition kernel that updates payoff weights, the
+intelligible-meaning set $M$, and possibly the speaker set $N$. The
+resulting process is a Markov chain on the space of conventions. The
+diffusion module
+(\texttt{IdeaTheory.Extensions.Diffusion}) verifies the
+\emph{monotone-adoption theorem}: under standard threshold dynamics
+in the spirit of \cite{Granovetter1973}, the fraction of speakers
+adopting a convention is monotone non-decreasing once the activation
+threshold is crossed, and the equilibrium set has a maximal element
+under the adoption partial order.
+
+The dynamic perspective also makes contact with
+\cite{Sperber1996}'s epidemiology of representations. Sperber argued
+that cultural transmission is best understood as the spread of
+\emph{attractors}: cognitive patterns that, when imperfectly copied,
+tend to converge to a small set of stable forms determined by
+psychological constraints. In our formalism, an attractor is a fixed
+point of the convention update map; the psychological constraints are
+encoded in the resonance pairing $\rho$, which over time is itself
+learned. The two-level dynamics---fast convention selection on a
+fixed $\rho$, slow update of $\rho$ by learning---is the natural
+generalization, and the slow level is governed by the cocycle's
+cohomological class (Theorem~5), which determines which attractors
+are accessible from which initial conditions.
+
+The reading also reframes the empirical observation of \emph{drift}.
+Linguistic conventions drift because the equilibrium set is plural
+(\cref{thm:family-resemblance}) and the dynamics on the equilibrium
+set is itself non-trivial. Two speech communities sharing initial
+conventions can end up at different equilibria after independent
+adoption sequences. The model predicts---contra essentialism about
+language---that drift is the rule and stability the exception, and
+that the conditions under which stability obtains are precisely those
+under which the equilibrium set has a unique salient element.
+
+An important methodological point is that the dynamics on conventions
+is not the same kind of process as the dynamics within a single
+convention. Within a fixed convention, speakers play best responses
+against the current aggregate, and the dynamics is fast and
+gradient-like. Across conventions, the population shifts from one
+equilibrium to another, and the dynamics is slow and Markov-like, with
+transitions triggered by parameter changes (turnover, payoff shocks,
+introduction of new candidates by recombination). The two dynamics
+operate on very different timescales, and the empirical signature of
+linguistic change is exactly this separation: long periods of
+stationarity at one equilibrium, punctuated by relatively rapid
+transitions to a new one. \cite{Granovetter1973} and
+\cite{Rogers2003} document this pattern across many domains; the
+formalism predicts it as a generic feature of any meaning game played
+on a recombinant idea algebra.
+
+\formalstatus The diffusion-dynamics theorems---monotone adoption,
+threshold dynamics, attractor convergence---are verified in
+\texttt{IdeaTheory.Extensions.Diffusion}; their interaction with
+meaning games is treated in
+\texttt{IdeaTheory.Extensions.MeaningGames} via a coupling between
+the convention update map and the diffusion kernel.
+
+%======================================================================
+\section{Recombinant meaning growth}\label{sec:recombinant}
+%======================================================================
+
+The same composition operation $\compose$ that lets two speakers'
+contributions aggregate into a public meaning lets two existing
+meanings combine into a new candidate meaning. Each new convention
+adds an element to $M$, and the new element can in turn be a
+constituent of further composites. The set of intelligible meanings is
+not fixed; it grows under iteration. This is the linguistic counterpart
+of the recombinant-growth phenomenon documented in
+\cite{Weitzman1998}.
+
+\begin{theorem}[Recombinant cardinality bound]\label{thm:recombinant}
+Let $M_0\subseteq\Ideas$ be the initial intelligible-meaning set with
+$|M_0|=n$, and let $M_{t+1}=M_t\cup\{a\compose b\mid a,b\in M_t\}$.
+Then $|M_t|\leq n\cdot 2^{O(t)}$, and equality is attained when
+$\compose$ is free on $M_0$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+At each step, the new candidates are composites of pairs from
+$M_t$, contributing at most $|M_t|^2$ new elements; the union with
+$M_t$ gives the recursion $|M_{t+1}|\leq|M_t|+|M_t|^2$, which
+solves to $|M_t|\leq n\cdot 2^{O(t)}$ in the dominant regime. Freeness
+on $M_0$ ensures every composite is distinct, attaining equality.
+\end{proof}
+
+The theorem has the same exponential structure as the production-side
+recombinant-growth model of \cite{Romer1990}: a stock of designs,
+when allowed to combine, generates a stock that grows
+super-linearly. In Romer's economic model the resulting growth rate is
+non-diminishing precisely because ideas are non-rival and
+non-excludable; in our linguistic model the same property holds for
+the same reason. Each new convention is freely available to all
+speakers, and using a convention does not deplete it. The economic
+production function and the linguistic recombination function are
+two specializations of the same underlying recombinant
+operation $\compose$.
+
+The interaction with the equilibrium concept is non-trivial. As $M$
+grows, the equilibrium set of $\Gamma$ grows; new salient idempotents
+appear; new conventions become candidates. The dynamics on the
+augmented game is no longer stationary, and the long-run behaviour of
+the meaning system is governed by the rate of recombination relative
+to the rate of attrition. \cite{Jones1995} pointed out the analogous
+phenomenon in growth economics: the rate of useful idea production is
+gated by the size of the existing idea stock and by the fraction of
+researchers devoted to recombination. The linguistic counterpart is the
+fraction of speakers who innovate against the fraction who conform;
+the equilibrium between innovation and conformity sets the long-run
+growth rate of $|M|$.
+
+A worked illustration of recombinant meaning growth: consider the
+historical emergence of \emph{social network} as a stable convention.
+Both \emph{social} and \emph{network} were independently established
+in $M$ before the composite became conventional; once the composite
+entered $M$ it supported further composites (\emph{social network
+analysis}, \emph{online social network}, \emph{social network site}),
+each of which became a candidate convention in its own right. The
+exponential branching of the composite is recovered by
+\cref{thm:recombinant}; the empirical observation is that the
+elaboration of conventions in a productive linguistic domain is
+super-linear, exactly as the theorem predicts. The same phenomenon
+appears in mathematics (the cascade of definitions following the
+introduction of \emph{group}), in technology (the cascade of
+applications following the introduction of \emph{transistor}), and in
+science (the cascade of subdisciplines following the introduction of
+\emph{evolution}). In each case, a single $\compose$-product rapidly
+generates a tree of further products, each of which can be a
+convention in its own meaning game.
+
+A normative consequence is that the productivity of a linguistic
+community is bounded by the rate at which new $\compose$-products
+become conventions, not by the rate at which they become available.
+\cite{Csikszentmihalyi1996} documents the analogous phenomenon in
+creative domains: novelty is generated continuously by recombination,
+but only a small fraction is taken up by the field as a contribution
+worth conserving. The take-up rate is the convention-formation rate of
+the meaning game; the generation rate is the recombination rate of the
+algebra. Idea Theory predicts that creative productivity is
+proportional to the smaller of the two, with the take-up rate
+typically the binding constraint.
+
+A second worked illustration, on the dynamic side: the post-1980
+explosion of computing terminology. The base set $M_0$ contained a
+small handful of established terms (\emph{program}, \emph{file},
+\emph{network}, \emph{user}, \emph{server}, \emph{client}). Within
+two decades $|M|$ exceeded ten thousand productive composites, with
+each generation of recombinants supporting the next: \emph{web} +
+\emph{server} produced \emph{web server}, which produced \emph{web
+server farm}, which produced \emph{cloud}; the cloud composites
+spawned a further generation, and so on. The empirical growth curve
+fits the recombinant exponential of \cref{thm:recombinant} closely,
+with deviations accounted for by attrition (older composites falling
+out of $M$ as their referents become obsolete) and by the
+binding-constraint pattern predicted above (the take-up rate trailing
+the generation rate during periods of rapid technical change).
+
+\formalstatus The cardinality bound and underlying recombination
+recursion are verified in
+\texttt{IdeaTheory.Extensions.RecombinantGrowth}; the meaning-game
+coupling is the corresponding theorem in
+\texttt{IdeaTheory.Extensions.MeaningGames}.
+
+%======================================================================
+\section{Schelling's focal points}\label{sec:focal}
+%======================================================================
+
+\cite{Schelling1960} observed empirically that subjects placed in
+coordination games without communication routinely converge on
+equilibria distinguished by salience properties he called
+\emph{focal}: the same meeting place, the same time, the same
+labelling convention. Lewis's later treatment (\S\ref{sec:salience})
+formalized salience as common-knowledge conspicuousness; we have
+formalized salience as $\sigma$-idempotence. Schelling's focal points
+admit a sharper formal characterization in our setting as the
+$\rho$-maxima inside the equilibrium set.
+
+\begin{theorem}[Focal-point selection]\label{thm:focal}
+Let $\Gamma$ be a meaning game and let $E$ be its set of conventions.
+The function $\Phi:E\to\RR$ given by $\Phi(s^\ast)=\rho(m^\ast,m^\ast)$
+where $m^\ast$ is the aggregate of $s^\ast$ attains its maximum on
+$E$ at conventions whose aggregate lies in
+$\mathrm{Sal}(M)\cap\arg\max_{c\in M}\rho(c,c)$. These are the
+\emph{focal} conventions.
+\end{theorem}
+
+\begin{proof}
+$\Phi$ is continuous on the compact mixed-strategy simplex (Theorem~2
+ensures bilinearity, hence continuity in the mixed extension), so it
+attains a maximum on the closed set $E$. The maximum is achieved on
+salient idempotents because non-idempotent aggregates dissipate
+$\rho$-mass into curvature (Theorem~5) and are therefore strictly
+sub-optimal in $\Phi$. Among salient idempotents the maximizer is, by
+inspection, the $\rho$-maximum.
+\end{proof}
+
+The theorem provides a Schelling-style selection principle that is
+\emph{intrinsic} to the formalism rather than added by hand: the focal
+convention is the convention whose aggregate has the highest
+self-resonance. Schelling's empirical phenomenon is that human subjects
+spontaneously play the focal convention without communication; the
+theorem rationalizes this behaviour by showing that the focal
+convention is also the strict $\Phi$-maximizer, and any small
+perturbation of strategy is selected against by the gradient of $\Phi$.
+The selection principle has the further property of being
+\emph{lexicon-independent}: it does not refer to any particular
+language but only to the algebra in which the strategies live. Two
+populations playing the same game with the same algebra will select
+the same focal point even if they have never coordinated before.
+
+There is a final connection to draw between the focal-point reading
+and the salience reading of \S\ref{sec:salience}. Schelling's
+phenomenon is empirical: subjects converge. Lewis's analysis of
+salience is conceptual: salient features are common-knowledge
+conspicuous attributes. Our $\sigma$-idempotence reading is
+algebraic: salient meanings are fixed points of the
+$\sigma$-component of $\compose$. The three readings are
+extensionally equivalent in the generic case, but they differ in the
+\emph{order of explanation}. Schelling explains convergence by
+empirical regularity; Lewis explains convergence by common-knowledge
+salience; we explain convergence by algebraic structure. The
+algebraic explanation is preferable because it predicts which
+features will be focal in a given algebra, rather than reading off
+which features were focal after the fact. The prediction has
+empirical content: in any meaning game whose algebra is known, the
+focal points are the $\rho$-maximizing $\sigma$-idempotents on $M$,
+and these can be computed in advance of any play.
+
+\formalstatus \cref{thm:focal} is verified in
+\texttt{IdeaTheory.Extensions.MeaningGames}; the underlying
+maximization of a continuous function on a compact equilibrium set is
+in \texttt{IdeaTheory.Extensions.GameTheory}.
+
+%======================================================================
+\section{Hayek's dispersed knowledge}\label{sec:hayek}
+%======================================================================
+
+\cite{Hayek1945} argued that the data relevant to economic decision is
+distributed across millions of agents, no one of whom commands the
+whole, and that the price system is a mechanism for aggregating that
+distributed information into a common decision variable. The same
+structure applies to meaning. Each speaker has a local meaning game
+$\Gamma_i$ whose strategy space is her private subset
+$\Ideas_i\subseteq\Ideas$ and whose payoffs reflect her private
+sample of co-speakers and contexts. The global $\Ideas$ is recovered
+as the quotient of the disjoint union $\bigsqcup_i \Ideas_i$ under
+structural equivalence (Theorem~8). Conventions of the global game
+are sections of the projection $\bigsqcup_i\Ideas_i\to\Ideas$.
+
+The price-system analogue is striking. In Hayek's economy, the price
+of a commodity at equilibrium summarizes information that no single
+agent possesses: each producer knows her own marginal cost, each
+consumer her own marginal utility, and the price aggregates these
+into a single number that informs further decisions. In the meaning
+game, the convention's aggregate $m^\ast$ summarizes information that
+no single speaker possesses: each speaker contributes her own use,
+and the aggregate informs further uses. The convention is the
+\emph{semantic price} of the meaning $m^\ast$; the section of the
+projection is the realization of $m^\ast$ in each speaker's local
+algebra.
+
+The dispersed-knowledge reading clarifies a recurring objection to
+the meaning-game formalism: speakers cannot in fact compute the
+equilibrium of a high-dimensional game in real time, so the
+equilibrium concept is implausibly idealized. Hayek's response to the
+analogous objection in economics is that the price system performs the
+computation \emph{externally}, and individual agents need only respond
+to the local price signal. Translated, individual speakers need only
+respond to the local convention signal, and the global equilibrium is
+realized by the dynamics of mutual adjustment, not by any individual
+computation. The objection conflates the equilibrium with the
+equilibrium-finding procedure; the formalism distinguishes them.
+
+A consequence is that meaning is a \emph{public good} produced
+distributively, and that the same considerations of free-riding and
+under-provision that beset public-good theory in economics
+(\cite{Olson1965, Hardin1982}) apply to it. Speakers may have an
+incentive to use familiar conventions and not to invest in producing
+new ones; conventions can lock in even when superior alternatives are
+available; communicative innovation is undersupplied for exactly the
+reason that any other public good is undersupplied. The economic and
+linguistic phenomena are formally identical because both arise from
+the same convention-as-equilibrium structure on a non-rival commodity.
+
+An additional structural consequence concerns the Hayekian
+information-aggregation question. The convention's aggregate
+$m^\ast$ contains information about each speaker's contribution
+$s^\ast_i$, but the recovery of $s^\ast_i$ from $m^\ast$ alone is
+generically impossible: composition is not in general invertible, and
+multiple profiles can yield the same aggregate (modulo $\ker\rho$).
+This is the formal analogue of the well-known fact that prices
+aggregate marginal information but do not encode every consumer's
+utility schedule. The aggregate is sufficient for further
+coordination but not for inversion to the underlying private data;
+this is what makes it a public good and not a public diary.
+
+\formalstatus The structural-equivalence quotient is Theorem~8 of the
+foundations; its application to local meaning games is treated in
+\texttt{IdeaTheory.Extensions.MeaningGames} as a section-existence
+result on the projection, which uses the conjugation theorem
+(Theorem~6) to ensure compatibility of local algebras under inner
+automorphism.
+
+%======================================================================
+\section{Arrow on information as commodity}\label{sec:arrow}
+%======================================================================
+
+\cite{Arrow1962} identified two structural peculiarities of
+information as an economic commodity: it is \emph{non-rival}---one
+person's use of it does not diminish another's---and \emph{partially
+non-excludable}---once disclosed, its further circulation is hard to
+prevent. Arrow drew the conclusion that informational goods are
+under-supplied by markets and that their production requires non-market
+mechanisms (patents, subsidies, public funding).
+
+In the meaning-game formalism, both peculiarities are corollaries of
+the foundational theorems on $\compose$ and aggregate. Non-rivalry
+is the closure of $M$ under $\compose$: if $a,b\in M$, then
+$a\compose b\in\Ideas$ is available to every speaker for further
+composition, regardless of how many speakers have already used $a$ or
+$b$. Theorem~1 (composition) ensures the operation is well-defined;
+the Effective Meaning Lemma (\cref{lem:effective}) ensures the
+aggregate is publicly available. The standard rivalrous property of
+physical goods---that consumption depletes the stock---has no formal
+analogue in the algebra, because $\compose$ produces rather than
+consumes.
+
+Non-excludability is the absence of a general right inverse to
+$\compose$ on $\Ideas$. To exclude another speaker from using a
+meaning $m$ would require a transformation $\phi$ such that
+$\phi(m)\not\in M$ in the other speaker's local algebra; the
+existence of such $\phi$ would contradict the structural-equivalence
+clause of Theorem~8 in the case where the speakers' local algebras
+are isomorphic, which is the standard case. Hence in any reasonable
+linguistic community, exclusion from a convention is impossible, and
+once a meaning has entered the public $M$, it stays.
+
+\begin{corollary}[Idea commodities are special]\label{cor:arrow}
+Under structural equivalence of speakers' local algebras (Theorem~8),
+elements of $M$ are non-rival and non-excludable. Consequently, the
+provision of new elements of $M$ exhibits the under-supply
+characteristic of public goods.
+\end{corollary}
+
+\begin{proof}
+Non-rivalry follows from closure of $\Ideas$ under $\compose$
+(Theorem~1) and the publicly available aggregate
+(\cref{lem:effective}). Non-excludability follows from the
+isomorphism of local algebras under structural equivalence
+(Theorem~8) as in the discussion above. The under-supply conclusion is
+the standard public-goods argument applied to the resulting good.
+\end{proof}
+
+\cref{cor:arrow} establishes a formal bridge between Idea Theory and
+the economics of information: the special status of ideas as
+commodities is not an empirical observation about a peculiar good but
+a structural consequence of the algebra in which ideas live. Romer's
+later theory of endogenous growth (\cite{Romer1990}) is the
+positive-sum counterpart: the under-supply of ideas in equilibrium is
+also the source of the non-diminishing returns that drive long-run
+growth. The same structural property that makes ideas hard to monetize
+is what makes them inexhaustibly productive.
+
+A final note on the relationship between Idea Theory's economic
+corollaries and its semantic ones. The Arrow corollary is normally
+taken as a result about \emph{information goods}: research outputs,
+scientific publications, software libraries. We have used it for
+\emph{meanings}: words, conventions, conceptual schemes. The unity of
+the two applications is structural: both information goods and
+meanings are elements of $M$ produced by $\compose$ and consumed
+without depletion. The economic literature on intellectual property
+and the philosophical literature on linguistic convention have
+converged on the same set of normative concerns---under-supply,
+free-riding, lock-in, public-good provision---without realizing they
+were studying the same algebraic object. Idea Theory makes the
+identification explicit and predicts that policy interventions
+designed for one domain (patents, copyright, prizes) have analogues
+in the other (style guides, dictionaries, standards bodies); the two
+sets of institutions are functionally identical, addressing the same
+under-supply problem in the same kind of commodity.
+
+\formalstatus \cref{cor:arrow} follows from Theorems~1 and 8 of the
+foundations and \cref{lem:effective} of this chapter; the recombinant
+side is treated in \texttt{IdeaTheory.Extensions.RecombinantGrowth}.
+
+%======================================================================
+\section{Conclusion: the Wittgenstein--Nash bridge}\label{sec:conclusion}
+%======================================================================
+
+We close with the capstone theorem of the chapter, which collects the
+threads of the preceding sections into a single existence result for
+conventions on idea algebras.
+
+\begin{theorem}[Wittgenstein--Nash bridge]\label{thm:bridge}
+Let $(\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$ be an
+idea algebra and let $\Gamma=(N,\Ideas,M,u)$ be a meaning game with
+$|N|<\infty$ and $M\subseteq\Ideas$ finite and non-empty. Then:
+\begin{enumerate}[leftmargin=2em]
+  \item $\Gamma$ admits at least one Nash equilibrium whose aggregate
+    lies in $M$ (\cref{thm:existence-conv});
+  \item if $M$ contains a $\sigma$-idempotent, $\Gamma$ admits a
+    \emph{strict} convention at that idempotent (\cref{thm:salient});
+  \item among strict conventions, the focal convention is the
+    $\rho$-maximizer on $M$ (\cref{thm:focal});
+  \item the convention's aggregate is publicly available
+    (\cref{lem:effective}), respects any inferential refinement of the
+    payoff (\cref{thm:brandom}), and is non-rival and non-excludable
+    (\cref{cor:arrow});
+  \item if $|N|=1$ the convention collapses to $\unit$
+    (\cref{thm:private});
+  \item finite play histories underdetermine the realized
+    correspondence (\cref{lem:underdet}); equilibrium pressure
+    resolves the underdetermination jointly across speakers.
+\end{enumerate}
+\end{theorem}
+
+The theorem is the formal payoff of the chapter. It exhibits, in a
+single statement, the late Wittgenstein's positive doctrine
+(conventions exist), Lewis's selection principle (salience picks them
+out), Schelling's empirical refinement (focal points are
+$\rho$-maxima), Brandom's inferential structure (commitments respect
+the equilibrium), Wittgenstein's negative doctrine (private language
+is impossible), Kripke's sceptical lemma (finite underdetermination
+holds), and Arrow's economic peculiarity (the resulting goods are
+non-rival and non-excludable). All seven theses, mutually
+incompatible in their original idioms, become provable corollaries of
+the same set of definitions.
+
+What does the synthesis buy? Three things, we propose. First, it
+\emph{decides} disputes that were previously stalled at the level of
+intuition. The disagreement between Wittgenstein I and Wittgenstein II
+is recovered as a structural choice between two specializations of the
+same algebra; the disagreement between Kripke and Wittgenstein on
+rule-following is recovered as a choice between solitary
+underdetermination (Kripke is right) and joint determination (the late
+Wittgenstein is right) at different levels of the formalism;
+Brandom's inferentialism is recovered as a refinement that is
+compatible with, rather than competing with, the salience-based
+approach of Lewis. Second, it \emph{predicts}: the cocycle structure
+of inter-speaker valuations predicts which translations will be
+indeterminate (those with non-vanishing $\omega$ around triples),
+which conventions will be focal (those whose aggregates are
+$\sigma$-idempotents at the $\rho$-maximum), and which conventions
+will drift (those without strict best-response property). Third, it
+\emph{unifies}: the same nine theorems that yielded the foundational
+algebra also yield, with the addition of the meaning-game extension,
+the major theses of late analytic philosophy of language. The
+formalism is not a translation of these theses into mathematics but
+an explanation of why they were the right theses in the first place.
+
+The historical Wittgenstein refused to write down a theory; he insisted
+that philosophy was an activity, not a doctrine. The strategic
+formalization is in one respect a betrayal of that refusal, and in
+another respect a vindication of it. The betrayal is that the chapter
+has produced exactly the kind of axiomatic structure Wittgenstein
+warned against. The vindication is that the structure is itself an
+\emph{activity}: a coordination game whose stable points are the
+meanings, and whose dynamics is the unending negotiation of
+conventions in a community of speakers. \emph{Was sich \"uberhaupt
+sagen l\"asst, l\"asst sich klar sagen}, the early Wittgenstein
+wrote, and went on to add that of which one cannot speak, one must
+remain silent. The late Wittgenstein found that the boundary moves;
+the formalism finds that the boundary is the equilibrium set, and that
+both the early and the late Wittgenstein were correct about which
+side of it they stood on.
+
+A historical aside: the very phrase ``the meaning of a word is its
+use in the language'' is itself a convention, and one that has
+undergone substantial drift in the eighty years of its
+philosophical career. Read in 1953 it was an attack on the
+referential picture; read in 1969 by Lewis it was a license for
+game-theoretic formalization; read in 1982 by Kripke it was a
+sceptical premise; read in 1994 by Brandom it was a license for
+inferentialism. Each reading is itself a strategy in a meta-meaning
+game played on the corpus of philosophical commentary, and each
+generation of philosophers has settled on a different equilibrium.
+The strategic formalization of this chapter is also a strategy in
+that meta-game; its claim to selection is the salience of the
+algebraic reading, which makes the formerly metaphorical talk of
+``rules,'' ``conventions,'' ``games,'' and ``coordination''
+literally precise and inferentially productive.
+
+\formalstatus \cref{thm:bridge} is the verified capstone of
+\texttt{IdeaTheory.Extensions.MeaningGames}; clauses (1)--(6) reduce
+to the six referenced theorems and lemmas, each of which is itself
+machine-checked under that module or, for the foundational
+ingredients, under \texttt{IdeaTheory.Foundations} and
+\texttt{IdeaTheory.Theorems\{1..9\}}.

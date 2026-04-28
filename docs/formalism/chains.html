@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transmission Chains — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Transmission Chains</h1>
+<p>An iterated composition \(a_1\circ a_2\circ\cdots\circ a_n\) is a <em>transmission chain</em>. The cumulative emergence telescopes by the cocycle identity.</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> A <em>chain</em> in \(\mathcal{I}\) is a finite sequence \(a_1,\ldots,a_n\); its <em>composite</em> is \(a_1\circ\cdots\circ a_n\). For a valuation \(v:\mathcal{I}\to A\), the <em>cumulative cocycle</em> is
+\[ \Omega(a_1,\ldots,a_n) := v(a_1\circ\cdots\circ a_n) - \sum_{i} v(a_i). \]</div>
+
+<p>By Theorem 7, \(\Omega = \sum_{i<j} \omega(a_i, a_{i+1}\circ\cdots\circ a_j)\) up to a coboundary; in particular, \(\Omega\) is well-defined modulo bracketing.</p>
+
+<h2>Worked example: cultural transmission</h2>
+<p>Boyd & Richerson model cultural inheritance as a transmission chain in which each generation composes received material with novel input. The cumulative emergence \(\Omega\) is what distinguishes a ratchet (\(\Omega\) strictly accumulating) from drift (\(\Omega\) bounded). See <a href="../zoo/cultural/boyd-richerson-dual-inheritance.html">Boyd–Richerson</a>, <a href="../zoo/cultural/henrich-ratchet.html">Henrich</a>.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/transmission-chain.html">Theorem 7</a></li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

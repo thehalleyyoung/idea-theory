@@ -1,0 +1,1366 @@
+\chapter{The Idea Monoid}\label{ch:monoid}
+
+\emph{In which the bare combinatorial skeleton of Idea Theory is laid down.
+We isolate three axioms --- associativity and a two-sided unit --- which we
+defend on independent philosophical grounds; we show that they suffice to
+derive a full apparatus of powers, chains, sub-ideas, idempotents,
+cancellation, and invertibility; and we prove the three headline theorems
+(\ref{thm:1-1}--\ref{thm:1-3}) and four corollaries
+(\ref{cor:1-1}--\ref{cor:1-4}) that organize the rest of the volume.  Every
+result of this chapter is machine-verified in the Lean~4 module
+\texttt{IdeaTheory.Theorems1}; we cite the verified identifier in
+parentheses.  The chapter closes by showing that the bare monoid already
+suffices to host four classical positions on the nature of ideas: those of
+\cite{Locke1690}, \cite{Hume1739}, \cite{Frege1892}, and the later
+\cite{Wittgenstein1953}.}
+
+\section{The axioms of an idea algebra}\label{sec:axioms}
+
+The whole edifice of Idea Theory rests on three axioms.  We isolate them
+here, before introducing any further analytic structure, in order to make
+clear which results require nothing more than the bare monoid skeleton.
+
+\begin{definition}[Idea algebra; bare layer]\label{def:idea-algebra}
+A \emph{bare idea algebra} is a triple $\IdMon$ in which $\Ideas$ is a set
+(the set of \emph{ideas}), $\compose : \Ideas \times \Ideas \to \Ideas$ is
+a binary operation (\emph{composition}), and $\unit \in \Ideas$ is a
+distinguished element (the \emph{void idea}, or unit), subject to the
+following three axioms.
+\begin{description}
+\item[(A1)\ Associativity.]
+$(a \compose b) \compose c \;=\; a \compose (b \compose c)$ for all
+$a,b,c \in \Ideas$.
+\item[(A2)\ Left unit.]
+$\unit \compose a \;=\; a$ for all $a \in \Ideas$.
+\item[(A3)\ Right unit.]
+$a \compose \unit \;=\; a$ for all $a \in \Ideas$.
+\end{description}
+\end{definition}
+
+The mathematical content of Definition~\ref{def:idea-algebra} is exactly that
+of a monoid in the sense of \cite{MacLane1998} or \cite{Bourbaki1989}; what
+is new is the interpretation we attach to it.  A few words on each axiom
+are in order, since the philosophical literature on ideas is the only
+arena in which we must be prepared to defend any of them.
+
+\paragraph{Why associativity (A1).}
+Associativity is the algebraic shadow of \emph{bracket-independence of
+content}.  When two ideas $a$ and $b$ combine, the result $a \compose b$ is
+itself an idea; if a third idea $c$ is then brought into contact, we obtain
+an idea $(a \compose b) \compose c$.  Yet the same three ideas could
+equally have been combined in the order $a$, then $b \compose c$,
+producing $a \compose (b \compose c)$.  Axiom (A1) declares that these two
+ideas are identical, not merely equivalent.
+
+The empirical pull behind (A1) is strong.  Hume's principle of
+association (\cite{Hume1739}, Bk.~I, Pt.~I, \S IV) is most naturally read
+as a non-bracketed enumeration: ``A succeeded by B succeeded by C''.
+Frege's compositionality (\cite{Frege1892}) requires that the sense of a
+complex expression depend only on the senses of its parts and their
+arrangement; bracketing is not part of the arrangement once the linear
+order has been fixed.  Whitehead's process metaphysics, Hegel's repeated
+\emph{Aufhebungen}, and Sperber's chains of cultural attractors all
+presuppose that bracketing is invisible at the level of content.  We
+therefore include (A1) without further justification, treating it as a
+\emph{minimal} commitment that any honest theory of combinable ideas must
+make.
+
+We do \emph{not} assume commutativity.  ``Newtonian mechanics composed
+with quantum mechanics'' is a different idea from ``quantum mechanics
+composed with Newtonian mechanics'', and the burden of evidence is on the
+philosopher who would equate them.  This non-commutativity will be
+sharpened in Chapter~2, where the antisymmetric part of the resonance
+pairing measures exactly the failure of $\compose$ to be commutative.
+
+\paragraph{Why a two-sided unit (A2--A3).}
+The void idea $\unit$ models the \emph{empty thought} --- the contentless
+idea that, when prepended or appended to any other, leaves it unchanged.
+Several distinct philosophical considerations converge on the existence of
+$\unit$.
+
+First, every model we shall consider possesses a natural ``do nothing''
+element: in Locke's combinatorial picture (\cite{Locke1690}, Bk.~II,
+Ch.~XII), it is the trivial complex idea built from no simple ideas at
+all; in modern semantic-vector models it is the zero context vector; in
+narrative theory it is the empty episode.  Second, technical considerations
+favor the unit: without it the powers $\compose^n$ have no natural value
+at $n=0$, the empty chain has no natural composite, and the cohomology
+class of the emergence cocycle in Chapter~5 is no longer well defined.
+Third, the unit is harmless: if a candidate carrier $\Ideas'$ has no unit
+we may freely adjoin one, defining $\Ideas \defeq \Ideas' \sqcup \{\unit\}$
+with $\unit \compose a \defeq a$ and $a \compose \unit \defeq a$.
+
+We split the unit axiom into a left and a right form (A2, A3).  Either
+half could in principle hold without the other, and we shall see in
+\S\ref{sec:uniqueness} that requiring both is strictly stronger than
+requiring either one in isolation.
+
+\paragraph{What we are \emph{not} assuming.}
+It is worth dwelling on the negative content of
+Definition~\ref{def:idea-algebra}.  We do not assume that $\compose$ is
+\emph{commutative}: as already remarked, the order in which two ideas
+combine is in general semantically loaded.  We do not assume that
+$\compose$ has \emph{absorbing} elements: there is no a~priori candidate
+for a ``zero idea'' that swallows every composition (although particular
+models, such as the saturation algebra of Example~\ref{ex:two-atom}
+below, may exhibit one).  We do not assume \emph{idempotency} of any idea
+other than $\unit$ (and indeed the idempotency of $\unit$ is itself a
+\emph{theorem}, Lemma~\ref{lem:unit-self}, not an axiom).  We do not
+assume that ideas can be \emph{cancelled} (we do not require $a \compose
+b = a \compose c \Rightarrow b = c$); whether a given idea is
+cancellative is a definable property treated in
+\S\ref{sec:cancellation}, not a structural commitment.  Finally, we do
+not assume any \emph{order}, \emph{topology}, or \emph{measure} on
+$\Ideas$; the bare layer is purely combinatorial.
+
+This austerity is deliberate.  Every additional axiom one builds in is an
+exegetical decision that prejudges some debate in the literature.  The
+philosophical purchase of Idea Theory comes from \emph{deriving} as much
+as possible from the minimal axiom set, and reserving the right to add
+further structure only when the empirical question being modelled
+demands it.  Chapters 2--9 of Volume~I will progressively layer more
+structure onto $\IdMon$; the discipline of starting from three axioms
+guarantees that, when those layers do their work, we know exactly which
+of our conclusions depend on which structural assumptions.
+
+\begin{remark}[Why \emph{three} axioms, not more]
+We deliberately resist the temptation to package commutativity, idempotency,
+or cancellation into the bare definition.  Each of these is a substantive
+claim about a specific class of ideas (cf.\ \S\ref{sec:idempotents}--%
+\ref{sec:cancellation}), and conflating them with the structural skeleton
+would force the formalism to take sides on disputed questions before the
+relevant phenomena have been described.  Three axioms are exactly what is
+needed to organize the literature, no more.
+\end{remark}
+
+\begin{remark}[On the choice of name ``idea algebra'']
+We refer to the structure $\IdMon$ as an idea \emph{algebra} rather than
+an idea \emph{monoid} for two reasons.  The first is anticipatory: the
+later chapters extend $\IdMon$ with additional algebraic data --- a
+bilinear pairing, a graded decomposition, a 2-cocycle, a grading --- and
+the resulting object is no longer a monoid in any standard sense.  The
+second is exegetical: the philosophical literature uses the word
+``algebra'' loosely, and our use is intended to evoke the entire stack
+of structure that culminates in the full Definition of an idea algebra
+in the introduction (\S 1 of the brief).  In this chapter the word
+``algebra'' should be read as ``algebra-with-only-the-bare-monoid-layer''.
+The risk of confusion is small in practice because every chapter declares
+which layers are in scope at the start.
+\end{remark}
+
+\begin{notation}[Operator conventions]
+Throughout this chapter the symbols $a, b, c, x, y, z, p, q$ denote
+arbitrary elements of $\Ideas$; $m, n, k$ denote natural numbers;
+$\unit$ is always the unit of $\IdMon$.  We write $a \compose b \compose c$
+for $(a \compose b) \compose c$ (which equals $a \compose (b \compose c)$
+by (A1)), and we write $a^n$ for the $n$-fold composition $\npow(n,a)$
+defined in \S\ref{sec:powers}.  Functions and relations introduced in this
+chapter are summarized in the table at the end of \S\ref{sec:cancellation}.
+\end{notation}
+
+\section{Uniqueness of the unit and basic congruence lemmas}\label{sec:uniqueness}
+
+The first non-trivial fact about $\IdMon$ is that the void idea is
+\emph{unique} as a two-sided unit.  This is the standard monoid argument,
+included here both for completeness and because it is the prototype for
+many uniqueness arguments in the chapters that follow.
+
+\begin{lemma}[Uniqueness of two-sided units]\label{lem:unit-unique-twosided}
+Let $e \in \Ideas$ satisfy $e \compose a = a$ and $a \compose e = a$ for
+every $a \in \Ideas$.  Then $e = \unit$.
+\end{lemma}
+
+\begin{proof}
+By the left-unit hypothesis applied at $a = \unit$ we have
+$e \compose \unit = \unit$.  By (A3) applied to $e$ we have
+$e \compose \unit = e$.  Equating the two right-hand sides yields
+$e = \unit$.  (Verified as
+\texttt{IdeaTheory.ident\_unique\_two\_sided}.)
+\end{proof}
+
+The same argument can be sharpened: a one-sided unit is already enough,
+provided one accepts the corresponding axiom on the other side.
+
+\begin{lemma}[Left units are units]\label{lem:left-unit}
+If $e \in \Ideas$ satisfies $e \compose a = a$ for every $a$, then
+$e = \unit$.  Symmetrically, if $a \compose e = a$ for every $a$, then
+$e = \unit$.
+\end{lemma}
+
+\begin{proof}
+For the first claim, take $a = \unit$ in the hypothesis to get
+$e \compose \unit = \unit$.  By (A3), $e \compose \unit = e$, so $e = \unit$.
+The second claim is dual: take $a = \unit$ to get $\unit \compose e = \unit$,
+hence by (A2) $e = \unit$.  (Verified as
+\texttt{IdeaTheory.left\_ident\_eq\_ident} and
+\texttt{IdeaTheory.right\_ident\_eq\_ident}.)
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:left-unit} shows that the apparent redundancy of axioms
+(A2) and (A3) is only apparent: each of them, \emph{together with the
+other}, suffices to pin down $\unit$ uniquely.  Without one of the two,
+there can be many one-sided units (e.g.\ in a left-zero band every element
+is a left unit).
+\end{remark}
+
+We next collect three congruence lemmas which formalize the principle
+that composition respects equality of arguments.  These are completely
+trivial mathematically but they will be invoked dozens of times throughout
+the book, and naming them once spares us repetition later.
+
+\begin{lemma}[Left congruence]\label{lem:left-cong}
+If $b = c$, then $a \compose b = a \compose c$ for every $a$.
+\end{lemma}
+
+\begin{lemma}[Right congruence]\label{lem:right-cong}
+If $b = c$, then $b \compose a = c \compose a$ for every $a$.
+\end{lemma}
+
+\begin{lemma}[Bilinear congruence]\label{lem:bilin-cong}
+If $a = c$ and $b = d$, then $a \compose b = c \compose d$.
+\end{lemma}
+
+\begin{proof}
+All three lemmas are immediate from the substitution principle: if two
+arguments are equal, replacing one by the other inside any expression
+preserves the value.  (Verified as \texttt{IdeaTheory.op\_left\_congr},
+\texttt{op\_right\_congr}, \texttt{op\_congr}.)
+\end{proof}
+
+The role of these elementary lemmas is foundational: every later
+manipulation of equations involving $\compose$ implicitly uses one of
+them.  In a setting where $\compose$ were a partial operation, or where
+equality of ideas were not assumed to be a congruence, one of the three
+congruence lemmas would fail and the entire algebraic apparatus would
+collapse.  We record them now so that the reader can verify, when in
+doubt, that no further hidden axiom is being smuggled in.
+
+\begin{lemma}[Stability of $\unit$ under self-composition]\label{lem:unit-self}
+$\unit \compose \unit = \unit$.
+\end{lemma}
+
+\begin{proof}
+Take $a = \unit$ in (A2).  (Verified as
+\texttt{IdeaTheory.op\_ident\_ident}.)
+\end{proof}
+
+Lemma~\ref{lem:unit-self} foreshadows the more general fact, proved in
+\S\ref{sec:idempotents}, that $\unit$ is the canonical example of an
+\emph{idempotent} idea --- one which is unaffected by being composed with
+itself.
+
+\section{Powers of an idea}\label{sec:powers}
+
+The first construction made possible by the bare monoid axioms is
+\emph{iteration}.  Informally, we wish to make precise what it means to
+``invoke the same idea $n$ times in succession''.  This is the formal
+correlate of repeated metaphor (\cite{Hume1739}, on the strengthening of
+association by repetition), liturgical recitation, repeated theorem
+application, or repeated activation of a neural ensemble.
+
+\begin{definition}[Iterated composition]\label{def:npow}
+The \emph{$n$-th power} of an idea $a \in \Ideas$, written $a^n$ or
+$\npow(n,a)$, is defined by recursion on $n$:
+\begin{equation}\label{eq:npow-def}
+a^0 \defeq \unit,
+\qquad
+a^{n+1} \defeq a \compose a^n.
+\end{equation}
+\end{definition}
+
+\begin{remark}
+The convention $a^0 = \unit$ is forced upon us once we accept the unit
+axiom and the additive law (Lemma~\ref{lem:npow-add} below).  Without
+$\unit$ the value of $a^0$ would be undefined and the additive law would
+acquire ugly side conditions.
+\end{remark}
+
+\begin{lemma}[Elementary identities for $\npow$]\label{lem:npow-elem}
+For every $a \in \Ideas$ and $n \in \NN$,
+\begin{align}
+a^0 &= \unit,
+\label{eq:npow-zero} \\
+a^{n+1} &= a \compose a^n,
+\label{eq:npow-succ-left} \\
+a^1 &= a,
+\label{eq:npow-one} \\
+\unit^n &= \unit.
+\label{eq:npow-unit}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\eqref{eq:npow-zero} and \eqref{eq:npow-succ-left} are immediate from
+Definition~\ref{def:npow}.  For \eqref{eq:npow-one}, expand:
+$a^1 = a \compose a^0 = a \compose \unit = a$ by (A3).  For
+\eqref{eq:npow-unit}, induct on $n$: the base case $n = 0$ is
+\eqref{eq:npow-zero}; for the inductive step, $\unit^{n+1} = \unit \compose
+\unit^n = \unit$ by (A2) and the inductive hypothesis.
+(Verified as \texttt{IdeaTheory.npow\_zero}, \texttt{npow\_succ},
+\texttt{npow\_one}, \texttt{npow\_ident}.)
+\end{proof}
+
+The recursive definition \eqref{eq:npow-def} unwraps the new factor on
+the \emph{left}.  The next lemma is the dual: the new factor can equally
+be unwrapped on the right.
+
+\begin{lemma}[Right-unwinding of powers]\label{lem:npow-succ-right}
+$a^{n+1} = a^n \compose a$ for every $a \in \Ideas$ and $n \in \NN$.
+\end{lemma}
+
+\begin{proof}
+We argue by induction on $n$.  For $n = 0$,
+\[
+a^1 \;=\; a \compose a^0 \;=\; a \compose \unit \;=\; a
+\;=\; \unit \compose a \;=\; a^0 \compose a.
+\]
+For the inductive step, assume the claim for $n = k$.  Then
+\[
+a^{k+2}
+\;=\; a \compose a^{k+1}
+\;=\; a \compose (a^k \compose a)
+\;=\; (a \compose a^k) \compose a
+\;=\; a^{k+1} \compose a,
+\]
+where the second equality is the inductive hypothesis and the third is
+(A1).  (Verified as \texttt{IdeaTheory.npow\_succ'}.)
+\end{proof}
+
+\begin{lemma}[Self-commutativity of powers]\label{lem:npow-self-commute}
+For every $a$ and $k$, $a \compose a^k = a^k \compose a$.
+\end{lemma}
+
+\begin{proof}
+Both expressions equal $a^{k+1}$: the left-hand side by definition, the
+right-hand side by Lemma~\ref{lem:npow-succ-right}.  (Verified as
+\texttt{IdeaTheory.npow\_comm\_self}.)
+\end{proof}
+
+The two main arithmetic laws of iteration --- additivity in the exponent
+and multiplicativity in the exponent --- now follow.
+
+\begin{lemma}[Additivity in the exponent]\label{lem:npow-add}
+For every $a \in \Ideas$ and every $m, n \in \NN$,
+\begin{equation}\label{eq:npow-add}
+a^{m+n} \;=\; a^m \compose a^n.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Induct on $m$.  For $m = 0$ both sides equal $a^n$: the left-hand side
+by \eqref{eq:npow-zero}'s consequence $0+n = n$, the right-hand side by
+\eqref{eq:npow-zero} and (A2).  Assume the claim for $m = k$.  Then
+\begin{align*}
+a^{(k+1)+n}
+&= a^{(k+n)+1}
+= a \compose a^{k+n} \\
+&= a \compose (a^k \compose a^n)
+= (a \compose a^k) \compose a^n
+= a^{k+1} \compose a^n,
+\end{align*}
+using the inductive hypothesis at the third step and (A1) at the fourth.
+(Verified as \texttt{IdeaTheory.npow\_add}.)
+\end{proof}
+
+\begin{lemma}[Multiplicativity in the exponent]\label{lem:npow-mul}
+For every $a \in \Ideas$ and every $m, n \in \NN$,
+\begin{equation}\label{eq:npow-mul}
+a^{mn} \;=\; (a^n)^m.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Induct on $m$.  For $m = 0$: $(a^n)^0 = \unit = a^0 = a^{0\cdot n}$.  Assume
+the claim at $m = k$.  Then $(k+1)n = n + kn$, so
+\begin{align*}
+a^{(k+1)n}
+&= a^{n + kn}
+= a^n \compose a^{kn} \\
+&= a^n \compose (a^n)^k
+= (a^n)^{k+1},
+\end{align*}
+using Lemma~\ref{lem:npow-add} at the second step, the inductive
+hypothesis at the third, and Definition~\ref{def:npow} at the fourth.
+(Verified as \texttt{IdeaTheory.npow\_mul}.)
+\end{proof}
+
+Together, Lemmas~\ref{lem:npow-add} and~\ref{lem:npow-mul} say that, for
+each fixed idea $a$, the function $n \mapsto a^n$ is a homomorphism from
+the additive monoid $(\NN, +, 0)$ into $\IdMon$, and the function
+$(m,n) \mapsto a^{mn}$ factors through this homomorphism in the
+expected way.  These two facts will be re-stated and packaged as
+Theorem~\ref{thm:1-3} below.
+
+\begin{lemma}[Small powers]\label{lem:npow-small}
+$a^2 = a \compose a$ and $a^3 = a \compose (a \compose a)$.
+\end{lemma}
+
+\begin{proof}
+$a^2 = a \compose a^1 = a \compose a$ by Lemma~\ref{lem:npow-elem};
+$a^3 = a \compose a^2 = a \compose (a \compose a)$.  (Verified as
+\texttt{IdeaTheory.npow\_two}, \texttt{npow\_three}.)
+\end{proof}
+
+\section{Chains}\label{sec:chains}
+
+Iteration treats the same idea applied $n$ times.  More generally we wish
+to compose a finite sequence of (possibly distinct) ideas.  The resulting
+construction --- the \emph{chain} of a list of ideas --- is the bridge
+between the algebraic apparatus and the empirical phenomena of discourse,
+narrative, and cultural transmission.
+
+\begin{definition}[Chain composite]\label{def:chain}
+For a finite list $L = [a_1, a_2, \dots, a_k]$ of ideas, the
+\emph{chain composite} $\chain{L}$ is defined recursively by
+\begin{equation}\label{eq:chain-def}
+\chain{[\,]} \defeq \unit,
+\qquad
+\chain{a :: L} \defeq a \compose \chain{L}.
+\end{equation}
+The \emph{length} of $L$, written $|L|$, is its number of entries.  The
+\emph{void chain} of length $n$ is the list $\unit^{::n}$ consisting of
+$n$ copies of $\unit$.
+\end{definition}
+
+The chain construction reduces to the more familiar operations as
+expected: a chain of length zero is the void idea, a chain of length one
+is the single idea itself, and a chain consisting entirely of repeated
+copies of $a$ is the corresponding power.
+
+\begin{lemma}[Singleton and constant chains]\label{lem:chain-basic}
+For every $a \in \Ideas$ and $n \in \NN$:
+\begin{align}
+\chain{[a]} &= a,
+\label{eq:chain-singleton} \\
+\chain{[\underbrace{a,\dots,a}_{n}]} &= a^n,
+\label{eq:chain-replicate} \\
+\chain{[\underbrace{\unit,\dots,\unit}_{n}]} &= \unit.
+\label{eq:chain-void}
+\end{align}
+\end{lemma}
+
+\begin{proof}
+\eqref{eq:chain-singleton}: by Definition~\ref{def:chain},
+$\chain{[a]} = a \compose \chain{[\,]} = a \compose \unit = a$ by (A3).
+\eqref{eq:chain-replicate}: induct on $n$.  Base case $n=0$: both sides
+equal $\unit$.  Inductive step: the chain on the left expands to
+$a \compose \chain{[a,\dots,a]_{n}} = a \compose a^n = a^{n+1}$ by
+the inductive hypothesis and Definition~\ref{def:npow}.
+\eqref{eq:chain-void}: a special case of \eqref{eq:chain-replicate} with
+$a = \unit$, combined with Lemma~\ref{lem:npow-elem}\eqref{eq:npow-unit}.
+(Verified as \texttt{IdeaTheory.chain\_singleton},
+\texttt{chain\_replicate}, \texttt{chain\_replicate\_ident}.)
+\end{proof}
+
+The most useful structural fact about chains is the following splitting
+identity, which exhibits $\chain{\,\cdot\,}$ as a homomorphism from the
+free monoid of lists into $\IdMon$.
+
+\begin{lemma}[Concatenation of chains]\label{lem:chain-append}
+For any two finite lists $L_1, L_2$ of ideas,
+\begin{equation}\label{eq:chain-append}
+\chain{L_1 \mathbin{+\!+} L_2} \;=\; \chain{L_1} \compose \chain{L_2}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+By induction on $L_1$.  If $L_1 = [\,]$, both sides equal $\chain{L_2}$:
+the left by definition of list concatenation, the right by (A2) and
+$\chain{[\,]} = \unit$.  Suppose the identity holds for $L_1 = L$, and let
+$L_1 = a :: L$.  Then
+\begin{align*}
+\chain{(a :: L) \mathbin{+\!+} L_2}
+&= \chain{a :: (L \mathbin{+\!+} L_2)} \\
+&= a \compose \chain{L \mathbin{+\!+} L_2} \\
+&= a \compose (\chain{L} \compose \chain{L_2}) \\
+&= (a \compose \chain{L}) \compose \chain{L_2}
+ = \chain{a :: L} \compose \chain{L_2},
+\end{align*}
+using the inductive hypothesis at the third step and (A1) at the fourth.
+(Verified as \texttt{IdeaTheory.chain\_append}.)
+\end{proof}
+
+\begin{lemma}[Splitting at an arbitrary index]\label{lem:chain-split}
+For every list $L$ and every $n \in \NN$,
+\begin{equation}\label{eq:chain-split}
+\chain{L} \;=\; \chain{\mathrm{take}_n L} \compose \chain{\mathrm{drop}_n L},
+\end{equation}
+where $\mathrm{take}_n L$ is the prefix of length $\min(n, |L|)$ and
+$\mathrm{drop}_n L$ is the corresponding suffix.
+\end{lemma}
+
+\begin{proof}
+We have $L = (\mathrm{take}_n L) \mathbin{+\!+} (\mathrm{drop}_n L)$ by the
+defining property of \texttt{take} and \texttt{drop} for lists.
+Substituting into Lemma~\ref{lem:chain-append} yields the claim.
+(Verified as \texttt{IdeaTheory.chain\_split}; this is the engine of
+Theorem~\ref{thm:1-1} below.)
+\end{proof}
+
+\begin{lemma}[Identity-padding]\label{lem:chain-pad}
+Let $L$ be any list and let $L'$ be obtained from $L$ by inserting one
+copy of $\unit$ at any position.  Then $\chain{L'} = \chain{L}$.
+\end{lemma}
+
+\begin{proof}
+Write $L = L_1 \mathbin{+\!+} L_2$ where the insertion happens at the
+boundary, so $L' = L_1 \mathbin{+\!+} [\unit] \mathbin{+\!+} L_2$.  Apply
+Lemma~\ref{lem:chain-append} twice:
+\[
+\chain{L'} = \chain{L_1} \compose \chain{[\unit]} \compose \chain{L_2}
+= \chain{L_1} \compose \unit \compose \chain{L_2}
+= \chain{L_1} \compose \chain{L_2} = \chain{L}.
+\]
+The last but one equality uses (A3) (and (A2) for the symmetric case
+where the inserted unit is at the head).  An inductive argument on the
+number of inserted units extends the conclusion to inserting any finite
+void chain, recovering Corollary~\ref{cor:1-2} below.  (Verified as
+\texttt{IdeaTheory.chain\_concat\_ident} together with
+\texttt{chain\_cons\_ident}.)
+\end{proof}
+
+\begin{lemma}[Length is additive]\label{lem:chain-length}
+$|L_1 \mathbin{+\!+} L_2| = |L_1| + |L_2|$, $|[\,]| = 0$, and
+$|a :: L| = |L| + 1$.
+\end{lemma}
+
+\begin{proof}
+Standard properties of list length, restated for the record.  (Verified as
+\texttt{IdeaTheory.chainLength\_append}, \texttt{chainLength\_nil},
+\texttt{chainLength\_cons}.)
+\end{proof}
+
+\begin{remark}[Chains as discourses]\label{rem:chains-discourse}
+The chain construction is the formal correlate of any phenomenon in
+which ideas are arranged in a temporal or syntactic sequence.  Hume's
+``trains of thought'' (\cite{Hume1739}, Bk.~I, Pt.~I, \S IV) are chains;
+so are the cultural attractor sequences of Sperber, the inferential
+chains of Brandom, the syntactic compositions of Frege, and the
+narrative episodes of Ricoeur.  The bracket-independence guaranteed by
+Lemma~\ref{lem:chain-split} is what entitles all of these authors to
+treat their primary unit of analysis as a sequence rather than a tree.
+\end{remark}
+
+\begin{remark}[Three notions of ``the same'' chain]
+The chain construction induces three natural equivalence relations on
+finite lists of ideas, of decreasing strictness.  \emph{Literal equality}
+demands that the lists agree term by term.  \emph{Composite equality}
+identifies $L_1$ and $L_2$ whenever $\chain{L_1} = \chain{L_2}$; by
+Lemma~\ref{lem:chain-pad} this collapses any difference produced by
+inserting or deleting copies of $\unit$, and by
+Lemma~\ref{lem:chain-append} it also collapses bracketing distinctions
+already absorbed by (A1).  \emph{Resonance equality}, introduced in
+Chapter~2, will further identify chains whose composites differ only by
+elements of the radical of $\rho$.  The bare monoid sees only the first
+two; the third requires the analytic structure of the next chapter.  This
+hierarchy of equivalences is, in our view, the clearest single benefit of
+the formal approach: it makes precise the otherwise vague claim that two
+discourses ``mean the same thing''.
+\end{remark}
+
+\section{Sub-ideals and idempotents}\label{sec:idempotents}
+
+Two derived notions occupy an intermediate position between the bare
+algebra and the analytic structure of later chapters.  The first is the
+\emph{sub-ideal} relation, which formalizes ``$a$ is contained in $b$''.
+The second is the property of \emph{idempotency}, which formalizes ``$a$
+absorbs itself''.
+
+\begin{definition}[Left and right sub-ideals]\label{def:subideal}
+We say that $a$ is a \emph{left sub-ideal} of $b$, and write
+$a \le_L b$, if there exists $c \in \Ideas$ with $b = a \compose c$.
+Symmetrically, $a$ is a \emph{right sub-ideal} of $b$, written
+$a \le_R b$, if there exists $c$ with $b = c \compose a$.
+\end{definition}
+
+\begin{lemma}[Order properties of $\le_L$ and $\le_R$]\label{lem:subideal-order}
+The relations $\le_L$ and $\le_R$ are reflexive and transitive.  The void
+idea $\unit$ is below every idea: $\unit \le_L a$ and $\unit \le_R a$ for
+all $a$.  In particular, $a \le_L a \compose b$ and $b \le_R a \compose b$
+for all $a, b$.
+\end{lemma}
+
+\begin{proof}
+Reflexivity: $a = a \compose \unit$ by (A3), so $a \le_L a$ with witness
+$c = \unit$.  Symmetric for $\le_R$ via (A2).  Transitivity: if
+$b = a \compose x$ and $c = b \compose y$, then
+$c = (a \compose x) \compose y = a \compose (x \compose y)$ by (A1), so
+$a \le_L c$ with witness $x \compose y$.  Symmetric for $\le_R$.
+$\unit \le_L a$ with witness $c = a$ since $a = \unit \compose a$ by (A2);
+symmetric for $\le_R$.  The final two claims are immediate from the
+definitions: $a \compose b = a \compose b$ exhibits $a$ as a left factor,
+and dually for the right.  (Verified as \texttt{IdeaTheory.subideal\_refl},
+\texttt{subideal\_trans}, \texttt{subideal\_ident},
+\texttt{subideal\_self\_op\_right}, and the symmetric \texttt{rsubideal\_*}
+versions.)
+\end{proof}
+
+\begin{remark}
+The relations $\le_L$ and $\le_R$ are not in general antisymmetric: in a
+group every element is both a left and a right sub-ideal of every other.
+Antisymmetry holds in \emph{conical} idea algebras, a special case to
+which we shall return in Volume~II.
+\end{remark}
+
+\begin{definition}[Idempotent and commuting ideas]\label{def:idempotent}
+An idea $a \in \Ideas$ is \emph{idempotent} if $a \compose a = a$.  Two
+ideas $a$ and $b$ \emph{commute} if $a \compose b = b \compose a$; we
+write $a \mathrel{\#} b$ for this relation.  The \emph{centralizer} of $a$
+is the set $Z(a) \defeq \{ b \in \Ideas \mid a \mathrel{\#} b \}$.
+\end{definition}
+
+\begin{lemma}[Basic facts about idempotents]\label{lem:idem-basic}
+The following hold for every $a \in \Ideas$.
+\begin{enumerate}
+\item $\unit$ is idempotent.
+\item If $a$ is idempotent and $n \ge 1$, then $a^n = a$ (and so $a^n$ is
+itself idempotent).
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Lemma~\ref{lem:unit-self}.  (2) Induct on $n$.  Base case $n = 1$:
+$a^1 = a$ by Lemma~\ref{lem:npow-elem}.  Inductive step: suppose $a^k = a$
+with $k \ge 1$.  Then $a^{k+1} = a \compose a^k = a \compose a = a$ by the
+idempotency of $a$.  Idempotency of $a^n$ follows since $a^n \compose a^n
+= a \compose a = a = a^n$.  (Verified as
+\texttt{IdeaTheory.ident\_idempotent} and
+\texttt{IdeaTheory.npow\_idempotent}, \texttt{idempotent\_npow}.)
+\end{proof}
+
+\begin{lemma}[Basic facts about commutation]\label{lem:commute-basic}
+The relation $\mathrel{\#}$ is reflexive and symmetric; the void idea
+commutes with everything; in particular $\unit \in Z(a)$ and $a \in Z(a)$
+for every $a$.
+\end{lemma}
+
+\begin{proof}
+Reflexivity is immediate.  Symmetry: if $a \compose b = b \compose a$,
+then equality is symmetric, so $b \compose a = a \compose b$.
+$\unit$ commutes with $a$: $\unit \compose a = a = a \compose \unit$ by
+(A2)--(A3).  The membership claims follow.  (Verified as
+\texttt{IdeaTheory.commute\_refl}, \texttt{commute\_symm},
+\texttt{commute\_ident\_left}, \texttt{commute\_ident\_right},
+\texttt{centralizer\_ident}, \texttt{centralizer\_self}.)
+\end{proof}
+
+The relation $\mathrel{\#}$ is \emph{not} in general transitive: $a$ and
+$b$ may both commute with $c$ without commuting with each other.  This
+failure is one of the algebraic shadows of the non-commutativity of
+$\compose$ and reappears in Chapter~5 as the curvature of the resonance
+pairing.
+
+\section{Cancellation and invertibility}\label{sec:cancellation}
+
+We now turn to two properties that distinguish ``rich'' ideas (whose
+content is sufficient to be cancelled in equations or even reversed) from
+generic ones.
+
+\begin{definition}[Cancellative ideas]\label{def:cancellative}
+An idea $a \in \Ideas$ is
+\begin{itemize}
+\item \emph{left-cancellative} if for all $b, c$, the equation
+$a \compose b = a \compose c$ implies $b = c$;
+\item \emph{right-cancellative} if for all $b, c$, the equation
+$b \compose a = c \compose a$ implies $b = c$;
+\item \emph{cancellative} if both.
+\end{itemize}
+\end{definition}
+
+\begin{lemma}[$\unit$ is cancellative]\label{lem:unit-cancel}
+$\unit$ is both left- and right-cancellative.
+\end{lemma}
+
+\begin{proof}
+If $\unit \compose b = \unit \compose c$, then by (A2) $b = c$.
+Symmetric on the right.  (Verified as \texttt{IdeaTheory.ident\_left\_cancel},
+\texttt{ident\_right\_cancel}, \texttt{ident\_cancellative}.)
+\end{proof}
+
+\begin{lemma}[Composition of cancellative ideas]\label{lem:cancel-compose}
+If $a$ and $b$ are left-cancellative, so is $a \compose b$.  Symmetrically
+for right cancellation, and hence for two-sided cancellation.
+\end{lemma}
+
+\begin{proof}
+Suppose $(a \compose b) \compose x = (a \compose b) \compose y$.  By (A1)
+this is $a \compose (b \compose x) = a \compose (b \compose y)$.  Left
+cancellation by $a$ gives $b \compose x = b \compose y$, then left
+cancellation by $b$ gives $x = y$.  The dual argument handles the right
+case.  (Verified as \texttt{IdeaTheory.left\_cancel\_op},
+\texttt{right\_cancel\_op}.)
+\end{proof}
+
+The property of \emph{invertibility} is sharper still: an idea is
+invertible if it has a two-sided ``undoing'' --- an inverse that, composed
+on either side, returns the void.
+
+\begin{definition}[Invertible ideas]\label{def:invertible}
+An idea $a \in \Ideas$ is \emph{invertible} if there exists $b \in \Ideas$
+with $a \compose b = \unit$ and $b \compose a = \unit$.  In that case $b$
+is called an \emph{inverse} of $a$.
+\end{definition}
+
+\begin{lemma}[$\unit$ is invertible]\label{lem:unit-inv}
+$\unit$ is invertible, with inverse $\unit$.
+\end{lemma}
+
+\begin{proof}
+$\unit \compose \unit = \unit$ by Lemma~\ref{lem:unit-self}.
+(Verified as \texttt{IdeaTheory.ident\_invertible}.)
+\end{proof}
+
+\begin{lemma}[Inverses are unique]\label{lem:inv-unique}
+If $b_1$ and $b_2$ are both inverses of $a$, then $b_1 = b_2$.
+\end{lemma}
+
+\begin{proof}
+We have $a \compose b_2 = \unit$ and $b_1 \compose a = \unit$.  Compute
+\[
+b_1 \;=\; b_1 \compose \unit
+     \;=\; b_1 \compose (a \compose b_2)
+     \;=\; (b_1 \compose a) \compose b_2
+     \;=\; \unit \compose b_2
+     \;=\; b_2,
+\]
+using (A3), the right-inverse property of $b_2$, (A1), the left-inverse
+property of $b_1$, and (A2) in turn.  (Verified as
+\texttt{IdeaTheory.invertible\_inv\_unique}.)
+\end{proof}
+
+\begin{lemma}[Invertible ideas are closed under composition]\label{lem:inv-compose}
+If $a$ and $b$ are invertible, with inverses $a'$ and $b'$ respectively,
+then $a \compose b$ is invertible with inverse $b' \compose a'$.
+\end{lemma}
+
+\begin{proof}
+Compute the two required identities.  For the right-inverse property,
+\[
+(a \compose b) \compose (b' \compose a')
+= a \compose (b \compose (b' \compose a'))
+= a \compose ((b \compose b') \compose a')
+= a \compose (\unit \compose a')
+= a \compose a'
+= \unit,
+\]
+using (A1) twice, the right-inverse property of $b'$, (A2), and the
+right-inverse property of $a'$.  The left-inverse property is symmetric:
+\[
+(b' \compose a') \compose (a \compose b)
+= b' \compose ((a' \compose a) \compose b)
+= b' \compose (\unit \compose b)
+= b' \compose b
+= \unit.
+\]
+(Verified as \texttt{IdeaTheory.invertible\_op}.)
+\end{proof}
+
+The set $\Ideas^{\times} \defeq \{ a \in \Ideas : a \text{ is invertible}\}$
+is therefore closed under composition and contains $\unit$; it is, by
+construction, a \emph{group}.  We single this out as a definition for
+later reference.
+
+\begin{definition}[The group of units]\label{def:units}
+The \emph{group of units} of an idea algebra $\IdMon$ is the subset
+$\Ideas^{\times}$ of invertible ideas, equipped with the restriction of
+$\compose$, the unit $\unit$, and the inversion map $a \mapsto a^{-1}$
+(well defined by Lemma~\ref{lem:inv-unique}).
+\end{definition}
+
+\begin{remark}
+The group $\Ideas^{\times}$ measures the \emph{reversibility budget} of
+the algebra.  In a free monoid (Locke's atomistic picture, see
+\S\ref{sec:zoo}) we shall see that $\Ideas^{\times} = \{\unit\}$: nothing
+is reversible.  At the opposite extreme, in a group every idea is
+invertible.  Realistic models of cognition lie in between, and the size of
+$\Ideas^{\times}$ is then a measurable structural invariant.
+\end{remark}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\hline
+Symbol & Meaning \\
+\hline
+$\compose$ & Composition of ideas \\
+$\unit$ & Void idea (unit) \\
+$a^n$ & Iterated composition $\npow(n, a)$ \\
+$\chain{L}$ & Composition of a list of ideas \\
+$|L|$ & Length of a chain \\
+$a \le_L b$ / $a \le_R b$ & Left / right sub-ideal \\
+$a \mathrel{\#} b$ & Commutation \\
+$Z(a)$ & Centralizer of $a$ \\
+$\Ideas^{\times}$ & Group of invertible ideas \\
+\hline
+\end{tabular}
+\caption{Notation introduced in Chapter~\ref{ch:monoid}.}
+\label{tab:notation-ch1}
+\end{table}
+
+\section{Theorems 1.1--1.3 and corollaries 1.1--1.4}\label{sec:headline}
+
+We now consolidate the structural payload of the chapter into three
+theorems and four corollaries.  All seven results are formally verified
+in the Lean module \texttt{IdeaTheory.Theorems1}; we cite the exact
+identifier in each proof.
+
+\begin{theorem}[Bracketing-independence of chain composition]\label{thm:1-1}
+For every finite list $L$ of ideas and every $n \in \NN$,
+\begin{equation}\label{eq:thm-1-1}
+\chain{L}
+\;=\; \chain{\mathrm{take}_n L} \compose \chain{\mathrm{drop}_n L}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Write $L = L_1 \mathbin{+\!+} L_2$ with $L_1 = \mathrm{take}_n L$ and
+$L_2 = \mathrm{drop}_n L$.  Apply Lemma~\ref{lem:chain-append} to obtain
+$\chain{L_1 \mathbin{+\!+} L_2} = \chain{L_1} \compose \chain{L_2}$, which
+is the right-hand side of \eqref{eq:thm-1-1}.  Substituting back yields
+the left-hand side.  (Verified as \texttt{IdeaTheory.theorem\_1\_1}.)
+\end{proof}
+
+Theorem~\ref{thm:1-1} is the algebraic guarantee that the composite
+content of a discourse, narrative, or transmission chain depends only on
+the linear order of its parts and not on any prior decision about how to
+bracket them.  This is the formal version of the informal principle,
+common to authors as different as \cite{Hume1739} and Sperber, that ``the
+order in which we group the units does not affect the result''.
+
+\begin{theorem}[Uniqueness of the void; closure of the units; uniqueness of inverses]\label{thm:1-2}
+Let $\IdMon$ be a bare idea algebra.  Then:
+\begin{enumerate}
+\item If $e \in \Ideas$ is a two-sided unit, then $e = \unit$.
+\item If $a, b \in \Ideas$ are invertible, then so is $a \compose b$.
+\item If $b_1, b_2$ are inverses of the same idea $a$, then $b_1 = b_2$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) Lemma~\ref{lem:unit-unique-twosided}.  (2)
+Lemma~\ref{lem:inv-compose}.  (3) Lemma~\ref{lem:inv-unique}.  Each
+clause has been proved separately above; bundling them is a matter of
+notation.  (Verified as \texttt{IdeaTheory.theorem\_1\_2}.)
+\end{proof}
+
+\begin{theorem}[Iteration is a monoid homomorphism]\label{thm:1-3}
+For every fixed $a \in \Ideas$ the function $n \mapsto a^n$ from $\NN$ to
+$\Ideas$ satisfies
+\begin{equation}\label{eq:thm-1-3-zero}
+a^0 = \unit
+\end{equation}
+and
+\begin{equation}\label{eq:thm-1-3-add}
+a^{m+n} = a^m \compose a^n,
+\quad
+a^{m+n+k} = (a^m \compose a^n) \compose a^k,
+\end{equation}
+for all $m, n, k \in \NN$.  Equivalently, $n \mapsto a^n$ is a monoid
+homomorphism $(\NN, +, 0) \to \IdMon$.
+\end{theorem}
+
+\begin{proof}
+Equation~\eqref{eq:thm-1-3-zero} is Definition~\ref{def:npow}.  The first
+identity in \eqref{eq:thm-1-3-add} is Lemma~\ref{lem:npow-add}.  For the
+second, apply Lemma~\ref{lem:npow-add} twice:
+\[
+a^{m+n+k} = a^{(m+n)} \compose a^k
+        = (a^m \compose a^n) \compose a^k.
+\]
+Together with Lemma~\ref{lem:unit-self}, these identities are exactly the
+defining properties of a monoid homomorphism.  (Verified as
+\texttt{IdeaTheory.theorem\_1\_3}.)
+\end{proof}
+
+\begin{remark}[Why we package these specific results]
+Theorems \ref{thm:1-1}, \ref{thm:1-2}, \ref{thm:1-3} are not the only
+non-trivial facts derivable from the axioms; they are the three that are
+\emph{used} in every later chapter.  Theorem~\ref{thm:1-1} licenses
+manipulation of chain composites; Theorem~\ref{thm:1-2} guarantees that
+the unit and inverses behave canonically; Theorem~\ref{thm:1-3} is the
+input to every later argument involving iteration of an idea, and in
+particular feeds directly into the cocycle calculations of Chapter~5.
+\end{remark}
+
+The four corollaries below connect the three theorems to specific
+applications taken up in later volumes.
+
+\begin{corollary}[Reorganization of cultural transmission chains]\label{cor:1-1}
+For any finite lists $L_1, L_2, L_3$ of ideas,
+\begin{equation}\label{eq:cor-1-1}
+\chain{L_1 \mathbin{+\!+} L_2 \mathbin{+\!+} L_3}
+\;=\; \chain{L_1 \mathbin{+\!+} (L_2 \mathbin{+\!+} L_3)}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+List concatenation is associative on the nose: $L_1 \mathbin{+\!+} L_2
+\mathbin{+\!+} L_3 = L_1 \mathbin{+\!+} (L_2 \mathbin{+\!+} L_3)$.  Apply
+$\chain{\,\cdot\,}$.  (Verified as \texttt{IdeaTheory.corollary\_1\_1}.)
+This corollary will be invoked in Volume~II to prove that diffusion of an
+idea through a population is independent of the choice of intermediate
+broadcast points.
+\end{proof}
+
+\begin{corollary}[Insertion of empty episodes]\label{cor:1-2}
+For any finite lists $L_1, L_2$ and any $n \in \NN$,
+\begin{equation}\label{eq:cor-1-2}
+\chain{L_1 \mathbin{+\!+} \unit^{::n} \mathbin{+\!+} L_2}
+\;=\; \chain{L_1 \mathbin{+\!+} L_2}.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+By Lemma~\ref{lem:chain-append} applied twice and
+Lemma~\ref{lem:chain-basic}\eqref{eq:chain-void},
+\begin{align*}
+\chain{L_1 \mathbin{+\!+} \unit^{::n} \mathbin{+\!+} L_2}
+&= \chain{L_1 \mathbin{+\!+} \unit^{::n}} \compose \chain{L_2} \\
+&= (\chain{L_1} \compose \unit) \compose \chain{L_2}
+= \chain{L_1} \compose \chain{L_2}
+= \chain{L_1 \mathbin{+\!+} L_2},
+\end{align*}
+using (A3) at the third step.  (Verified as
+\texttt{IdeaTheory.corollary\_1\_2}.)  The corollary will be used in
+Volume~III to prove that two narratives differing only by the insertion
+of empty interludes have the same total content.
+\end{proof}
+
+\begin{corollary}[Closure of reversible operations]\label{cor:1-3}
+The set $\Ideas^{\times}$ of invertible ideas is closed under
+composition.  In particular, if $a$ and $b$ are invertible, so is
+$a \compose b$.
+\end{corollary}
+
+\begin{proof}
+Lemma~\ref{lem:inv-compose}, repackaged.  (Verified as
+\texttt{IdeaTheory.corollary\_1\_3}.)  The intended application in
+Volume~IV is to mental operations equipped with an undo: that the
+composition of two undoable operations is itself undoable is what
+licenses backtracking and counterfactual reasoning.
+\end{proof}
+
+\begin{corollary}[Idempotents are exhausted by themselves]\label{cor:1-4}
+If $a \in \Ideas$ is idempotent, then $a^n = a$ for every $n \ge 1$.
+\end{corollary}
+
+\begin{proof}
+Lemma~\ref{lem:idem-basic}(2).  (Verified as
+\texttt{IdeaTheory.corollary\_1\_4}.)  The corollary expresses an
+emergence-theoretic fact taken up in Volume~V: an absorbed cultural item
+does not grow under repetition; whatever surplus emergence might have
+contributed has already been delivered after a single application.
+\end{proof}
+
+\section{Three concrete examples}\label{sec:examples}
+
+Before turning to the historical zoo, we exhibit three concrete idea
+algebras to ground the formalism.  Each is verified in the Lean module as
+an instance of \texttt{IdeaTheoryStructure}; here we describe them
+mathematically.
+
+\begin{example}[The natural numbers under addition]\label{ex:nat}
+Take $\Ideas = \NN$, $\compose = +$, and $\unit = 0$.  Axioms (A1)--(A3)
+are the standard properties of addition.  In this model a chain of
+``ideas'' $[n_1, \dots, n_k]$ has composite $n_1 + \cdots + n_k$, and the
+$n$-th power of $a$ is $na$.  Idempotents are exhausted by $0$;
+invertible elements are again exhausted by $0$.  This trivial-looking
+example is in fact a sharp test case: it shows that the bare monoid axioms
+are consistent and that none of (A1)--(A3) is vacuous (each axiom can be
+exhibited independently in this model).  More substantively, the model
+demonstrates that the formalism does not by itself force any non-trivial
+group of units --- $\Ideas^{\times}$ may consist of $\unit$ alone.
+\end{example}
+
+\begin{example}[Free idea algebra on a generating set $S$]\label{ex:free}
+Let $S$ be any non-empty set and let $\Ideas = S^{*}$ denote the set of
+finite words on $S$.  Define $\compose$ as concatenation and $\unit$ as
+the empty word.  This is the free monoid on $S$, and it is the
+fundamental object underlying the Lockean reading of
+\S\ref{zoo:locke}.  Two facts about this model are worth stating
+explicitly.  First, the chain composite of a list $[w_1, \dots, w_k]$ of
+words is the concatenation $w_1 w_2 \cdots w_k$, recovering the intuition
+that ``adding more ideas'' literally lengthens the resulting expression.
+Second, the only idempotent is $\unit$, and the only invertible element
+is again $\unit$: in the free idea algebra nothing absorbs and nothing is
+reversible.  These properties are the algebraic shadow of Locke's
+``inability to invent a new simple idea'': there is no internal mechanism
+for the algebra to collapse two distinct combinations of generators into
+the same element.
+\end{example}
+
+\begin{example}[A two-atom finite world]\label{ex:two-atom}
+Let $\Ideas = \{ \unit, a, b, c \}$ with multiplication table given by
+$a \compose a = a$, $b \compose b = b$, $a \compose b = b \compose a = c$,
+$c \compose x = c$ for $x \in \{a, b, c\}$, and $\unit$ acting as the
+two-sided unit.  One verifies directly that this is associative and so
+constitutes a bare idea algebra.  Both $a$ and $b$ are idempotent;
+$c$ is the ``saturated'' idea that absorbs everything.  This toy model
+has no non-trivial invertibles, but it has multiple idempotents, making it
+a useful playground for the lemmas of \S\ref{sec:idempotents}.  The model
+also illustrates how the bare monoid can encode the informal idea of
+``saturation by absorption'': once $c$ is reached, no further composition
+moves the system.  In the language of Volume~V, $c$ is a fixed point of
+the cultural-attractor dynamics.
+\end{example}
+
+These three models bracket the spectrum of bare idea algebras: the
+arithmetic model (commutative, no non-trivial idempotents, no
+non-trivial invertibles), the free model (non-commutative, no
+idempotents, no invertibles), and the saturation model (non-commutative,
+many idempotents, an absorbing element).  Every later chapter will return
+to these examples to illustrate the additional structure being introduced.
+
+\begin{remark}[On the role of examples]
+The role of examples in a structural theory is to certify that the
+abstract definitions are not accidentally inconsistent and that the
+theorems we prove from them have non-trivial content.  The three examples
+above suffice for both purposes.  Example~\ref{ex:nat} shows
+Theorem~\ref{thm:1-3} is non-trivial (the multiplicative law $a^{m+n} =
+a^m + a^n$ becomes the familiar identity $(m+n)a = ma + na$).
+Example~\ref{ex:free} shows that Theorem~\ref{thm:1-1} is
+non-trivial (different positions of split give different intermediate
+words, but their concatenation always reconstructs the original).
+Example~\ref{ex:two-atom} shows that Corollary~\ref{cor:1-4} has bite
+($c$ is idempotent and indeed $c^n = c$ for all $n \ge 1$).
+\end{remark}
+
+\begin{remark}[A note on cardinality]
+The bare monoid axioms place no constraints on the cardinality of
+$\Ideas$.  All three of our examples have countable carriers:
+Example~\ref{ex:nat} has $|\Ideas| = \aleph_0$, Example~\ref{ex:free}
+has $|\Ideas| = \aleph_0$ when $S$ is countable, and Example~\ref{ex:two-atom}
+has $|\Ideas| = 4$.  Realistic models of natural-language semantics or
+of cultural transmission typically demand uncountable carriers (often
+the underlying set is, or contains, a topological space such as a
+function space or a manifold).  None of the results of this chapter
+depend on cardinality assumptions, and we shall freely apply them to
+uncountable models when the need arises in later volumes.  The cost of
+this generality is paid in the analytic structure of Chapter~2, where
+the resonance pairing must be defined coherently on infinite-dimensional
+free vector spaces.
+\end{remark}
+
+\section{The zoo: four classical positions accommodated by the bare monoid}\label{sec:zoo}
+
+We now show that the bare monoid structure already suffices to host four
+canonical positions in the philosophy of ideas: the atomistic combinatorics
+of \cite{Locke1690}, the associationist chains of \cite{Hume1739}, the
+sense-composition of \cite{Frege1892}, and the family-resemblance picture
+of the later \cite{Wittgenstein1953}.  Each entry follows the
+brief-mandated template (\emph{Original Claim} / \emph{Formal Restatement}
+/ \emph{Status} / \emph{Commentary}) and contains at least two citations.
+
+\subsection*{Locke (1690): simple and complex ideas as monoid generators}\label{zoo:locke}
+
+\paragraph{Original claim.}
+Locke divides ideas into the \emph{simple} and the \emph{complex}
+(\cite{Locke1690}, Bk.~II, Ch.~II--XII).  Simple ideas are received
+passively from sensation or reflection; the mind cannot manufacture them.
+Complex ideas, by contrast, are produced by acts of \emph{combination},
+\emph{comparison}, and \emph{abstraction} performed on simple ideas (and
+on previously formed complex ideas).  The mind's productive power is
+exhausted by these operations: ``it being not in the power of the most
+exalted wit, or enlarged understanding, by any quickness or variety of
+thought, to invent or frame one new simple idea in the mind'' (Bk.~II,
+Ch.~II, \S 2).  Locke is here explicit about a closure principle: every
+idea in the mind is either simple or generated from simples by finitely
+many combinations.  See also \cite{Hume1739}, Bk.~I, Pt.~I, \S I, where
+Hume's distinction between impressions and ideas inherits Locke's
+combinatorial picture and sharpens the closure principle into the
+``copy principle''.
+
+\paragraph{Formal restatement.}
+Let $S \subseteq \Ideas$ be the set of simple ideas.  Locke's claim is
+that $\Ideas$ is the smallest sub-monoid of itself containing $S$ and
+closed under $\compose$.  Equivalently, the inclusion $S \hookrightarrow
+\Ideas$ extends to a unique surjective monoid homomorphism from the free
+monoid $S^{*}$ onto $\Ideas$.  Concretely, every $a \in \Ideas$ is of the
+form $\chain{[s_1, \dots, s_k]}$ for some $s_1, \dots, s_k \in S \cup
+\{\unit\}$ and some $k \ge 0$.
+
+\paragraph{Status.}
+\textbf{True for any choice of generators $S$.}  By
+Lemma~\ref{lem:chain-append}, the set of chain composites of finite
+sequences from $S \cup \{\unit\}$ is closed under $\compose$ and contains
+$\unit = \chain{[\,]}$, hence is a sub-monoid; and Lemma~\ref{lem:chain-basic}
+shows that it contains every singleton.  The non-trivial content of
+Locke's claim --- that $\Ideas$ \emph{equals} the smallest such sub-monoid
+for some philosophically meaningful $S$ --- is then a question about the
+existence of a generating set, not about the algebra.
+
+\paragraph{Commentary.}
+The bare monoid is faithful to Locke at the structural level but silent on
+two points where Locke himself is silent: it does not say \emph{which}
+ideas count as simple, and it does not predict whether the generation map
+$S^{*} \to \Ideas$ is injective (i.e.\ whether different bracketed
+combinations give different complex ideas).  The latter question is
+addressed in Volume~I, Chapter~4, where the kernel of the generation map
+is computed in terms of the resonance pairing.  An empirically charged
+prediction follows: in a model where $S^{*} \to \Ideas$ is injective,
+Lockean atomism is exactly correct; in a model where it is not, two
+distinct combinations of simples can produce the same complex idea --- the
+algebraic shadow of \emph{Aufhebung}, taken up systematically in
+Chapter~3.  A second point of departure from Locke is the status of
+\emph{abstraction}: Locke treats abstraction as a third primitive
+operation alongside combination and comparison, but the formalism
+recovers abstraction as the passage from $\Ideas$ to a quotient
+sub-monoid (cf.\ \S\ref{zoo:witt}), making it derivative rather than
+primitive.  This is a substantive divergence whose empirical content will
+be tested in Volume~IV against developmental data on concept formation.
+
+\subsection*{Hume (1739): chains as principles of association}\label{zoo:hume}
+
+\paragraph{Original claim.}
+\cite{Hume1739} (Bk.~I, Pt.~I, \S IV) holds that ideas combine in the
+mind by three universal principles of association: resemblance,
+contiguity in time and place, and cause and effect.  These principles
+operate on \emph{trains} of ideas --- sequences in which each new term is
+recruited by association with its predecessor.  The content of any
+complex thought is then the result of running such a train of associations
+to its end.  Hume's claim is doubly strong: first, that all complex
+thinking is sequential association; second, that the principles
+producing the sequence are exhausted by the three he names.  Hume's
+treatment is sharpened by \cite{Locke1690} (Bk.~II, Ch.~XXXIII), whose
+own discussion of the ``association of ideas'' is Hume's immediate source.
+
+\paragraph{Formal restatement.}
+Identify a Humean train of ideas with a finite list $L = [a_1, \dots,
+a_k]$ of elements of $\Ideas$.  The content of the train is its chain
+composite $\chain{L}$.  Hume's first claim, in this notation, is that
+every complex idea is of this form.  Hume's second claim --- that the
+sequence of $a_i$ is generated by a fixed associative process --- is the
+demand that there be a (partial) function $\alpha : \Ideas \to \Ideas$
+with $a_{i+1} = \alpha(a_i)$ for every $i$, where $\alpha$ encodes the
+three association principles.
+
+\paragraph{Status.}
+\textbf{Hume's first claim is true on the bare monoid.}  By
+Lemma~\ref{lem:chain-basic} every idea $a$ is itself a chain
+($\chain{[a]} = a$), and by Lemma~\ref{lem:chain-append} every composite
+of a finite collection of ideas is a chain.  The claim that complex
+ideas \emph{are} chains is therefore vacuous given (A1)--(A3).
+\textbf{Hume's second claim is contingent.}  It can be made to hold or
+fail by appropriate choice of $\alpha$ on the underlying carrier $\Ideas$.
+The bare monoid is silent on the dynamics; this silence is a feature, not
+a bug, since later volumes equip $\Ideas$ with the resonance pairing
+$\rho$ that makes ``association by resemblance'' formally tractable as a
+proximity in the resonance metric.
+
+\paragraph{Commentary.}
+Hume's chain principle is one of the most under-defended assumptions in
+the early-modern theory of mind, and the formalization makes clear why:
+on the bare monoid it is mathematically empty.  The substantive content
+of associationism only becomes visible once one fixes (i) a generating
+set and (ii) a dynamics on it; both are deferred to later chapters.
+The empirical prediction unique to the formal version is
+Lemma~\ref{lem:chain-pad}: empty episodes inserted into a Humean train
+do not change its content.  This prediction is testable: any
+psychological theory in which inserting a contentless interval changes
+the train's outcome is incompatible with axioms (A1)--(A3) and so
+demands a richer underlying algebra.
+
+\subsection*{Frege (1892): composition of senses}\label{zoo:frege}
+
+\paragraph{Original claim.}
+\cite{Frege1892} introduces the distinction between \emph{Sinn} (sense)
+and \emph{Bedeutung} (reference) for linguistic expressions.  The sense of
+a complex expression is determined by the senses of its parts and their
+mode of combination --- the principle of \emph{compositionality}.  Frege's
+own examples (the morning star and the evening star, the king of France)
+emphasize that two expressions can share their reference without sharing
+their sense, and that sense composes systematically as one builds up
+complex expressions from simple ones.  The principle is reaffirmed in
+\cite{Wittgenstein1922}, \S 3.318, which treats the proposition as a
+function of its constituent expressions.
+
+\paragraph{Formal restatement.}
+Let $\Ideas$ be the set of senses, and let $\compose$ be the operation
+``the sense of $a$-applied-to-$b$'' (in Frege's setting, the saturation
+of a function-sense by an argument-sense).  Compositionality is the
+demand that $\compose$ be a \emph{function} of its inputs: the sense of
+the whole is fully determined by the senses of the parts.  Together with
+the natural unit (the sense of the empty context), this yields exactly
+the bare idea algebra $\IdMon$.
+
+\paragraph{Status.}
+\textbf{True, but the substantive content is associativity.}  Frege's
+compositionality principle is, on its face, only the assertion that
+$\compose$ is well defined as a function.  Axiom (A1) is what makes the
+principle useful: it guarantees that the sense of a complex expression
+does not depend on the order in which its sub-expressions are saturated.
+Without (A1), Fregean composition would collapse into a tree-structured
+operation in which every re-bracketing produces a different sense.
+
+\paragraph{Commentary.}
+The bare monoid is faithful to Frege provided one is willing to read
+Frege's notion of ``mode of combination'' as itself encoded inside the
+operation $\compose$ (rather than as additional structure).  The
+formalization sharpens a tension in Frege's text: Frege's own
+\emph{Function and Concept} treats functional application as
+non-commutative, and the formal apparatus inherits this and is
+philosophically faithful to it.  A genuine prediction of the formalization
+that goes beyond Frege is Theorem~\ref{thm:1-1}: the sense of a complex
+expression is invariant under any contiguous re-grouping of its
+constituents, not merely under binary re-association.  The role of the
+emergence cocycle $\omega$ (Chapter~5) is to measure exactly the
+non-Fregean residue of composition --- the portion of meaning that is
+\emph{not} a function of the senses of the parts.
+
+\subsection*{Wittgenstein (1953): family resemblance as a quotient monoid}\label{zoo:witt}
+
+\paragraph{Original claim.}
+The later \cite{Wittgenstein1953} (\S 65--67) rejects the Lockean--Fregean
+picture of concepts as having essential content.  Instead, the extension
+of a concept --- Wittgenstein's example is ``game'' --- is held together
+by a network of overlapping similarities, ``a complicated network of
+similarities overlapping and criss-crossing'', which Wittgenstein labels
+\emph{family resemblance} (\emph{Familien\"ahnlichkeit}).  Members of a
+family-resemblance class need share no single feature; what binds them is
+that any two are connected by a chain of pairwise similarities.  The
+position is anticipated by Hume's discussion of resemblance as one of the
+three principles of association (\cite{Hume1739}, Bk.~I, Pt.~I, \S IV).
+
+\paragraph{Formal restatement.}
+Fix an equivalence relation $\equivIdea$ on $\Ideas$ generated by a
+symmetric ``resemblance'' relation $\sim$.  The family-resemblance class
+of $a$ is then $[a] \defeq \{ b : a \equivIdea b \}$.  Wittgenstein's
+claim is that the natural object of conceptual analysis is not $\Ideas$
+but the quotient $\Ideas / {\equivIdea}$.  The bare monoid hosts this
+construction provided $\equivIdea$ is a \emph{congruence} for $\compose$:
+that is, $a_1 \equivIdea a_2$ and $b_1 \equivIdea b_2$ imply
+$a_1 \compose b_1 \equivIdea a_2 \compose b_2$.
+
+\paragraph{Status.}
+\textbf{Contingent on $\equivIdea$ being a congruence.}  When this holds,
+the quotient $\Ideas / {\equivIdea}$ inherits a well-defined operation
+$[a] \compose [b] \defeq [a \compose b]$ and the quotient $(\Ideas /
+{\equivIdea}, \compose, [\unit])$ is itself a bare idea algebra; the
+quotient map is a surjective homomorphism.  This is the universal
+property of quotient monoids (\cite{MacLane1998}, Ch.~I, \S 4;
+\cite{Bourbaki1989}, Ch.~I, \S 4, no.~9).  When $\equivIdea$ is not a
+congruence --- which is the typical case for genuine family resemblance,
+since composing two ``games'' need not yield something resembling a
+``game'' --- the bare monoid structure does \emph{not} descend to the
+quotient.  In that case Wittgenstein's class is not closed under any
+algebraic operation derived from $\compose$, and what survives at the
+quotient is only a relation of resemblance, not a monoid.
+
+\paragraph{Commentary.}
+The formalization sharply discriminates two readings of family
+resemblance.  On the \emph{algebraic} reading, family resemblance is a
+congruence and Wittgenstein's classes are quotient ideas: this is
+faithful to those passages where Wittgenstein speaks of concepts as
+determining patterns of use.  On the \emph{relational} reading, family
+resemblance is a mere relation that need not respect composition: this
+is faithful to those passages where Wittgenstein insists that the
+boundaries of a concept are open and inferentially uncontrolled.  The
+choice between the two readings is forced once a candidate $\equivIdea$
+is specified, by the testable question of whether it is a congruence.
+The bare monoid is what makes the question testable.  This is exactly the
+diagnostic role we expect the formalism to play throughout the zoo: not
+to settle exegetical disputes by fiat but to make the empirical
+consequences of each reading explicit.
+
+\medskip
+
+\noindent
+With these four entries the bare monoid has accommodated, without further
+structure, a recognizably wide swath of the classical literature on
+ideas.  Subsequent chapters add the resonance pairing
+(Chapter~\ref{ch:monoid}+1), the Aufhebung decomposition, the emergence
+cocycle, and finally the grading; each of these layers will host further
+zoo entries, and each layer remains anchored to the present chapter
+through the underlying monoid axioms (A1)--(A3).
+
+\section{Synopsis and what comes next}\label{sec:synopsis}
+
+We close the chapter by stepping back from the technical apparatus and
+recording, in a single page, what has been accomplished and what remains
+to be done.
+
+\paragraph{Accomplishments.}
+We have isolated three axioms (A1)--(A3) and shown that they suffice to
+derive: the uniqueness of the void idea (Lemma~\ref{lem:unit-unique-twosided});
+the basic arithmetic of iteration $a^n$ (Lemmas~\ref{lem:npow-elem}--%
+\ref{lem:npow-mul}); the homomorphism property of chain composition
+(Lemmas~\ref{lem:chain-append}--\ref{lem:chain-pad}); the order
+properties of the sub-ideal relations (Lemma~\ref{lem:subideal-order});
+the closure of idempotents and commuting pairs under the appropriate
+constructions (Lemmas~\ref{lem:idem-basic}--\ref{lem:commute-basic}); the
+uniqueness of inverses and closure of $\Ideas^{\times}$ under composition
+(Lemmas~\ref{lem:inv-unique}--\ref{lem:inv-compose}); and the three
+headline theorems (\ref{thm:1-1}--\ref{thm:1-3}) with their four
+corollaries (\ref{cor:1-1}--\ref{cor:1-4}).  Every result is verified in
+the Lean module \texttt{IdeaTheory.Theorems1}.
+
+\paragraph{Limitations of the bare monoid.}
+The structure $\IdMon$ is silent on three questions of immediate
+philosophical interest.  First, it cannot distinguish two ideas that
+behave identically under composition; the algebra has no internal
+mechanism for ``intentional'' or ``content-level'' difference.  Second,
+it provides no measure of \emph{distance} or \emph{similarity} between
+ideas; the family-resemblance reading of \cite{Wittgenstein1953} has to
+be encoded by an externally specified equivalence
+(\S\ref{zoo:witt}).  Third, it has no notion of \emph{weight} or
+\emph{magnitude}: a chain consisting of a single dominant idea and many
+trivial ones is treated identically with a chain whose ideas all
+contribute equally.  Each of these limitations is an opening for the
+chapters to come.
+
+\paragraph{Roadmap.}
+The next chapter introduces the resonance pairing $\rho$ that supplies
+the missing notion of distance, and shows that it extends bilinearly to
+the free vector space on $\Ideas$.  Chapter~3 develops the Aufhebung
+decomposition $a \compose b = \sigma(a,b) + \nu(a,b) + \eta(a,b)$ and
+proves its uniqueness modulo $\ker \rho$.  Chapter~5 introduces the
+emergence cocycle $\omega$ that measures the failure of any
+content-valuation $v : \Ideas \to A$ to be a monoid homomorphism, and
+shows that its cohomology class is a structural invariant of $\IdMon$.
+Chapters 6--9 add conjugation, transmission chains, structural
+equivalence, and grading respectively.  Each of these chapters will
+re-prove, on its richer carrier, an analogue of one of the headline
+results of the present chapter; in every case the proof reduces, after
+the new structure has been peeled away, to one of the lemmas established
+here.
+
+\paragraph{The zoo, continued.}
+The four zoo entries of \S\ref{sec:zoo} were chosen to demonstrate that
+the bare monoid is already philosophically expressive.  In subsequent
+chapters the same template (\emph{Original Claim} / \emph{Formal
+Restatement} / \emph{Status} / \emph{Commentary}) will host entries on
+Plato (Forms as fixed points of composition; Chapter~3), Hegel
+(\emph{Aufhebung} as the elevation component $\eta$; Chapter~4), Kant
+(categories as schematic operators acting by conjugation; Chapter~6),
+Husserl (noemata as elements of the resonance dual; Chapter~2),
+Deleuze (virtual problems as cohomology classes; Chapter~5), Quine
+(translation indeterminacy as non-uniqueness of the structural
+isomorphism; Chapter~8), Fodor (LOT atoms as monoid generators of a
+graded algebra; Chapter~9), Sperber (cultural attractors as fixed
+points of $\compose$ followed by truncation in the resonance norm;
+Chapter~7), and many others, including the modern cognitive-science
+literature on prototypes, frames, conceptual spaces, and conceptual
+blending.  In each case, the bare monoid of the present chapter remains
+the algebraic skeleton on which the additional structure hangs, and the
+diagnostic questions raised by each zoo entry are formulated in the
+language of monoid homomorphisms, congruences, and quotients exactly as
+they are in \S\ref{zoo:witt}.
+
+\paragraph{A methodological closing remark.}
+The conviction underlying the entire monograph is that the abundance of
+informal claims about ``what ideas are'' and ``how they combine'' has
+created, over centuries, a substantial body of \emph{tacit algebra}.
+Untangling this tacit algebra and pinning down its minimal axiomatic
+core is the task of Idea Theory.  The bare monoid of this chapter is the
+first unit of that effort.  It is small, but it is non-trivial: every
+position in the zoo had to be \emph{interpreted}, not merely cited, and
+the interpretation in each case made testable predictions that go
+beyond the original informal claim.  The next eight chapters will repeat
+this exercise on richer structure, and Volume~II will repeat it on
+sociological and cultural data.  Throughout, the discipline imposed by
+working in a fully verified setting --- the Lean module
+\texttt{IdeaTheory} contains no \texttt{sorry} and no \texttt{admit}
+--- guarantees that the formal content of every claim is exactly what
+the prose says it is.
+

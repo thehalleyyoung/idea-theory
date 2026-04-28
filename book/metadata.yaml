@@ -1,0 +1,33 @@
+---
+title: "Idea Theory"
+subtitle: "A Mathematical Formalism for the Zoo of Ideas About Ideas"
+author:
+  - The IdeaTheory Project
+date: 2026
+language: en-US
+publisher: IdeaTheory Press
+rights: "Copyright © 2026"
+description: |
+  A book-length development of Idea Theory: a mathematical formalism in
+  which ideas form a graded monoid equipped with a resonance pairing,
+  an Aufhebung decomposition, an emergence cocycle, and a meaning
+  curvature 2-form. The nine foundational theorems, machine-checked in
+  Lean 4, are stated and proved here as ordinary mathematics; each is
+  contextualized through dozens of historical and scientific positions
+  about ideas — from Plato to transformers — formalized within the
+  framework.
+subject:
+  - Mathematics
+  - Philosophy
+  - Cognitive Science
+  - Formal Methods
+ibooks:
+  version: 1.0
+cover-image: cover.png
+stylesheet: epub.css
+toc-title: Contents
+toc: true
+toc-depth: 2
+links-as-notes: true
+mathml: true
+...

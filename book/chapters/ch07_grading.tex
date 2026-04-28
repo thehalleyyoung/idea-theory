@@ -1,0 +1,1370 @@
+\chapter{Grading and the Algebra of Novelty}\label{ch:grading}
+
+\epigraph{\itshape ``More is different.''}{P. W. Anderson \cite{Anderson1972}}
+
+The previous chapters built the static apparatus of an idea algebra: a
+monoid of compositions $\IdMon$, a resonance pairing $\rho$, an Aufhebung
+decomposition $a\compose b = \preserve(a,b) + \negate(a,b) +
+\elevate(a,b)$, and an emergence cocycle $\emerg$. These data describe
+\emph{what} ideas are and how they combine, but not \emph{how far} a
+given combination has travelled from its constituents. Travel is the
+business of the grading. In this chapter we promote the informal
+practice of speaking about ``higher-order'' ideas, ``second-generation''
+theories, and ``levels of abstraction'' to a precise piece of structure:
+a monoid homomorphism
+\[
+  \deg : \Ideas \longrightarrow G
+\]
+into a totally ordered abelian group $G$, compatible with every other
+operation of the algebra. We then read the predicate of \emph{novelty}
+off the grading: $a$ is novel relative to $b$ iff $\deg(a) > \deg(b)$.
+The chapter culminates in three theorems --- the
+Reassociation Theorem, the Cumulative-Novelty Theorem, and the
+Transmission-Preservation Theorem --- and in a spectral decomposition of
+$\Ideas$ by degree that we will use throughout the rest of the book. We
+close, as always, with a zoo of historical positions whose intuitions
+the formal grading recovers.
+
+\section{Why grade? From ``level of an idea'' to a homomorphism}
+\label{sec:why-grade}
+
+\subsection*{The pre-formal practice}
+
+Almost every classical theory of ideas talks about ranks. Plato has
+levels of being; Aquinas distinguishes \emph{species intelligibilis} of
+graded abstraction; Lovejoy writes of unit-ideas combining into
+elaborate doctrines \cite{Lovejoy1936}; Lakatos grades research
+programmes by problem-shift sophistication \cite{Lakatos1970}; Romer
+counts recombinations \cite{Romer1990}; Henrich grades cultural
+inheritance by generation \cite{Henrich2015}. Each tradition assigns,
+explicitly or tacitly, a numerical or ordinal index to ideas, and each
+expects this index to behave additively under combination: the level of
+a synthesis is at least the sum of the levels of its parts. The thesis
+of this chapter is that all of these intuitions are instances of a
+\emph{single} structural axiom --- the existence of a homomorphism
+$\deg$ into an ordered abelian group --- and that the apparently
+disparate ``zoo'' of grading practices is forced by that axiom together
+with the compatibility laws below.
+
+What is gained by formalisation? Three things. First, a clean criterion
+for when a putative grading is \emph{coherent} with the rest of the
+algebra: it must respect $\compose$, the Aufhebung pieces $\preserve,
+\negate, \elevate$, and the cocycle $\emerg$. Many naive gradings ---
+``count the words of the idea'', ``count the citations'', ``count the
+neurons that fire'' --- fail this criterion and so cannot be the
+$\deg$ of an idea algebra. Second, an automatic notion of novelty: once
+$\deg$ is in place, the predicate ``$a$ is novel relative to $b$'' has
+a forced definition, and the corresponding theorems about novelty
+(\cref{sec:novelty,sec:headline}) are theorems about $G$, not free
+choices. Third, a spectral decomposition of $\Ideas$ by degree
+(\cref{sec:spectral}), which makes the Anderson slogan ``more is
+different'' \cite{Anderson1972} into a precise statement about a graded
+algebra and gives Bedau's notion of weak emergence \cite{Bedau1997} the
+form $\emerg \in \ker \deg$.
+
+\subsection*{Why a homomorphism, rather than a mere function?}
+
+One might object that we could in principle define $\deg$ as any
+function $\Ideas \to G$ without imposing the homomorphism axiom (G1).
+The answer is that without (G1), the spectral decomposition of
+\cref{prop:spectral} loses its multiplicative structure, the
+Reassociation Theorem (\cref{thm:reassociation}) fails to give a
+coherent assignment of degree to traditions, and the very notion of
+``cumulative novelty'' becomes uninterpretable. The homomorphism
+axiom is what makes the grading \emph{compositional}: the degree of a
+composite can be predicted from the degrees of its parts (modulo a
+single cocycle correction), and this is the formal counterpart of the
+intuition that ``higher-level'' ideas are built out of ``lower-level''
+ones in a way that respects level. A grading without (G1) is, in
+practice, a typology --- a partition of $\Ideas$ into kinds --- not a
+yardstick.
+
+A subtler point is that (G1) does not force $\deg$ to be a
+\emph{strict} homomorphism. The cocycle term $\omega^G$ allows for
+``emergence corrections'' that prevent the degree of a composite from
+being the simple sum of constituent degrees. This is a feature, not a
+bug: real intellectual history is full of cases where a synthesis
+acquires a degree that is neither the sum nor the maximum of its
+inputs, and the cocycle is the formal device that records exactly how
+much this departure costs. The Grading Theorem
+(\cref{thm:grading}) shows that the cocycle is uniquely determined by
+$\deg$, so the formalism does not multiply parameters: choosing
+$\deg$ choices $\omega^G$.
+
+\subsection*{What the total order on $G$ buys}
+
+The decision to take $G$ totally ordered, rather than merely partially
+ordered or lattice-valued, has substantive content beyond
+mathematical convenience. A partial order on $G$ would permit two
+ideas $a, b$ with incomparable degrees, leaving open the question
+``which is more novel?'' --- a question the chapter is meant to
+answer definitively. Total order rules this out. The cost is that
+some natural multidimensional measures of complexity (e.g.\ a
+combination of structural depth and information content) cannot be
+the codomain of a single grading; they must be projected to a
+totally ordered scale, with attendant loss of information.
+
+This loss is not always undesirable. The historical practice of
+ranking ideas (``higher'', ``deeper'', ``more general'') is itself
+totally ordered, and a formalisation that respects this practice is
+empirically apt for the historical material the zoo covers. When
+multidimensional gradings are needed --- for instance, in the
+analysis of conceptual spaces \cite{Gardenfors2000} --- one can
+extend the present formalism by taking $G$ to be a lexicographically
+ordered product, recovering the desired refinement while preserving
+total order.
+
+\section{Graded idea algebras}\label{sec:graded-axioms}
+
+We fix throughout this chapter a totally ordered abelian group
+$(G,+,0,\le)$. The leading examples are $G = \ZZ$ (counting generations
+or recombinations), $G = \QQ$ (allowing fractional contributions, e.g.\ a
+co-authored idea), and $G = \RR$ (admitting continuous valuations such
+as information content).
+
+\begin{definition}[Graded idea algebra]\label{def:graded-idea-alg}
+A \emph{graded idea algebra} is a tuple
+$(\Ideas,\compose,\unit,\rho,\preserve,\negate,\elevate,\emerg,\deg)$
+where $(\Ideas,\compose,\unit,\rho,\preserve,\negate,\elevate,\emerg)$
+is an idea algebra in the sense of Theorems 1--8, $G$ is a totally
+ordered abelian group, and $\deg : \Ideas \to G$ is a function
+satisfying the following compatibility axioms.
+\begin{enumerate}
+\item[\textbf{(G1)}] \emph{Monoid homomorphism}:
+  $\deg(\unit) = 0$ and
+  $\deg(a\compose b) = \deg(a) + \deg(b) + \omega^G(a,b)$,
+  where $\omega^G : \Ideas\times\Ideas \to G$ is the image of $\emerg$
+  along the canonical map $A \to G$ when $A=G$ (and is $0$ otherwise).
+\item[\textbf{(G2)}] \emph{Resonance compatibility}: if $\rho(a,a') \neq
+  0$ then $\deg(a) = \deg(a')$. Resonance is a degree-preserving
+  pairing.
+\item[\textbf{(G3)}] \emph{Aufhebung compatibility}:
+  $\deg(\preserve(a,b)) \le \min(\deg(a),\deg(b))$,
+  $\deg(\negate(a,b))   \le \max(\deg(a),\deg(b))$,
+  $\deg(\elevate(a,b))  \ge \max(\deg(a),\deg(b))$.
+  Preservation does not raise degree, negation does not exceed the
+  maximum, and elevation/synthesis only ever raises it.
+\item[\textbf{(G4)}] \emph{Cocycle compatibility}: $\omega^G$ is itself a
+  $G$-valued normalized $2$-cocycle, i.e.\ $\dcoc \omega^G = 0$ and
+  $\omega^G(\unit,a) = \omega^G(a,\unit) = 0$.
+\item[\textbf{(G5)}] \emph{Identity-non-novelty}: $\deg(\unit)$ is the
+  unique minimum of $\deg$ on the set
+  $\{a\in\Ideas : \exists b,\ a = \unit\compose b \text{ or } a =
+  b\compose \unit\}$. Equivalently, the silent idea has the lowest
+  possible degree among ideas reachable from itself by composition.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[The $\omega^G$ correction]
+When $A=G$, axiom (G1) says $\deg$ is a $1$-cochain whose coboundary is
+$\dcoc \deg(a,b) = \deg(a) + \deg(b) - \deg(a\compose b)$, and (G1)
+identifies this coboundary with $-\omega^G$. Thus a grading is a
+$1$-cochain that \emph{trivializes} the negative of the cocycle. When
+$\emerg$ is cohomologically trivial (e.g.\ $\emerg=\dcoc v$ for a
+valuation $v$), one may take $\deg = v$ and obtain a strict
+homomorphism. When $\emerg$ is non-trivial, no strict homomorphism
+exists and $\omega^G$ is forced to be the actual coboundary of $\deg$.
+This is the formal sense in which ``emergence is the obstruction to
+gradeability'' alluded to by Bedau \cite{Bedau1997}.
+\end{remark}
+
+\begin{remark}[Why $G$ is totally ordered]
+Lattice-valued or partially ordered codomains permit ``incomparable''
+ideas, but rule out a sharp definition of novelty: there is no fact of
+the matter whether $a$ is more novel than $b$ when $\deg(a)$ and
+$\deg(b)$ are incomparable. The whole point of the grading axiom is to
+import a linear yardstick. The total order on $G$ is therefore not a
+mathematical convenience but a substantive commitment of the theory.
+\end{remark}
+
+\section{The grading theorem}\label{sec:grading-theorem}
+
+We restate Theorem~9 in the present notation.
+
+\begin{theorem}[Theorem 9; Grading Theorem]\label{thm:grading}
+Let $(\Ideas,\compose,\unit,\rho,\preserve,\negate,\elevate,\emerg)$
+be an idea algebra with abelian coefficient group $A$. Let $G$ be a
+totally ordered abelian group and let $\deg_0 : \Ideas \to G$ be a
+function satisfying $\deg_0(\unit) = 0$ together with axioms
+\textup{(G2)--(G5)} of \cref{def:graded-idea-alg}. Define
+\[
+  \omega^G(a,b) \defeq \deg_0(a\compose b) - \deg_0(a) - \deg_0(b).
+\]
+Then $\omega^G$ is a normalized $G$-valued $2$-cocycle, the tuple
+$(\Ideas,\compose,\unit,\rho,\preserve,\negate,\elevate,\emerg,\deg_0)$
+is a graded idea algebra, and any other extension $\deg_1$ of
+$\deg_0|_{\{\unit\}}$ satisfying the same axioms differs from
+$\deg_0$ by an additive constant on each connected component of
+$\Ideas$ in the composition graph.
+\end{theorem}
+
+\begin{proof}
+We verify the four conclusions in turn.
+
+\emph{(i) $\omega^G$ is a $2$-cocycle.} Compute, using associativity of
+$\compose$,
+\begin{align*}
+  \omega^G(a,b) + \omega^G(a\compose b, c)
+  &= \bigl[\deg_0(a\compose b) - \deg_0(a) - \deg_0(b)\bigr] \\
+  &\quad{} + \bigl[\deg_0((a\compose b)\compose c) - \deg_0(a\compose b)
+            - \deg_0(c)\bigr] \\
+  &= \deg_0((a\compose b)\compose c) - \deg_0(a) - \deg_0(b) - \deg_0(c).
+\end{align*}
+By associativity, $(a\compose b)\compose c = a\compose(b\compose c)$, so
+the same expression equals $\omega^G(b,c) + \omega^G(a,b\compose c)$.
+Subtracting yields the cocycle identity $\dcoc \omega^G = 0$.
+Normalisation $\omega^G(\unit,a) = \omega^G(a,\unit) = 0$ follows
+because $\deg_0(\unit) = 0$ and $\unit\compose a = a\compose \unit = a$
+in the underlying monoid.
+
+\emph{(ii) Axiom (G1).} By the definition of $\omega^G$, we have
+$\deg_0(a\compose b) = \deg_0(a) + \deg_0(b) + \omega^G(a,b)$, which is
+exactly (G1).
+
+\emph{(iii) The remaining axioms.} Axioms (G2)--(G5) hold by
+hypothesis on $\deg_0$.
+
+\emph{(iv) Uniqueness up to constants.} Suppose $\deg_1$ is another
+function satisfying (G1)--(G5) with the same induced cocycle (the
+hypothesis ``with the same axioms'' fixes the cocycle as
+$\omega^G_1(a,b) \defeq \deg_1(a\compose b) - \deg_1(a) - \deg_1(b)$).
+Define $f \defeq \deg_1 - \deg_0$. Then for all $a,b$,
+\[
+  f(a\compose b) = f(a) + f(b) + \bigl(\omega^G_1(a,b) - \omega^G(a,b)\bigr).
+\]
+If $\omega^G_1 = \omega^G$, then $f$ is a monoid homomorphism into
+$G$. The composition graph of $\Ideas$ has the same connected components
+as the underlying monoid; on each component, $f$ is determined by its
+value on a single representative. By (G5) we have $f(\unit) = 0$ on the
+identity component, and by additivity $f$ is constant on each component
+of the composition graph rooted at $\unit$. Thus $\deg_1$ and $\deg_0$
+agree up to a constant on each connected component, as claimed.
+\end{proof}
+
+\begin{remark}[The role of total order]
+In the proof, totality of $\le$ on $G$ is used only in the
+\emph{interpretation} of (G3), which involves $\min$ and $\max$. The
+arithmetic identities --- cocycle, normalisation, uniqueness --- are
+purely additive and work for any abelian $G$. The total order is what
+makes ``the degree drops'', ``the degree rises'' meaningful, and what
+will let us speak of novelty in \cref{sec:novelty}.
+\end{remark}
+
+\begin{corollary}[Trivial emergence and homomorphic gradings]
+\label{cor:trivial-grading}
+If $\emerg$ is the coboundary of a $G$-valued $1$-cochain $v$, i.e.\
+$\emerg(a,b) = v(a) + v(b) - v(a\compose b)$, then $\deg \defeq v$
+satisfies $\omega^G \equiv 0$, and (G1) reduces to the strict
+homomorphism law $\deg(a\compose b) = \deg(a) + \deg(b)$.
+\end{corollary}
+
+\begin{proof}
+Substitute $v$ for $\deg_0$ in the definition of $\omega^G$ and observe
+that the result is identically zero.
+\end{proof}
+
+\section{Novelty}\label{sec:novelty}
+
+The grading lets us define novelty without further appeal to the
+content of any specific idea.
+
+\begin{definition}[Novelty predicates]\label{def:novelty}
+Let $(\Ideas,\dots,\deg)$ be a graded idea algebra and let $a,b\in
+\Ideas$.
+\begin{itemize}
+\item $a$ is \emph{novel relative to} $b$, written $a \succ b$, iff
+  $\deg(a) > \deg(b)$.
+\item $a$ is \emph{strictly novel} iff $\deg(a) > 0$, i.e.\ $a$
+  is novel relative to the silent idea $\unit$.
+\item Given a finite list $L = (b_1,\dots,b_n)$, the idea $a$ is
+  \emph{novel-everywhere on $L$} iff $a \succ b_i$ for all
+  $i\in\{1,\dots,n\}$.
+\item A list $L = (a_1,\dots,a_n)$ is a \emph{chain-novel} or
+  \emph{ascending lineage} iff $a_1 \prec a_2 \prec \cdots \prec a_n$.
+\end{itemize}
+\end{definition}
+
+The Lean development of Theorems~10--12 records a closely related
+predicate $\mathsf{IsNovel}(c,a) \defeq c \neq a$, together with a
+strengthened version $\mathsf{EmergentNovel}(a,b) \defeq a\compose b
+\notin \{a,b\}$ that asks the composition to differ from \emph{both}
+ingredients. Under any grading respecting axiom (G3), these inequalities
+are detected by the degree.
+
+\begin{lemma}[Emergent novelty implies degree increase]
+\label{lem:emergent-implies-degree}
+Suppose $(\Ideas,\dots,\deg)$ is a graded idea algebra and $a,b\in
+\Ideas$ satisfy $a\compose b \neq a$ and $a\compose b \neq b$
+($\mathsf{EmergentNovel}$). Then either
+\[
+  \deg(a\compose b) > \max(\deg(a),\deg(b))
+  \quad\text{or}\quad
+  \deg(a\compose b) < \min(\deg(a),\deg(b)),
+\]
+unless $\deg$ is constant on the connected component of $a$ and $b$ in
+the composition graph.
+\end{lemma}
+
+\begin{proof}
+By axiom (G1), $\deg(a\compose b) = \deg(a) + \deg(b) + \omega^G(a,b)$.
+If $\deg(a\compose b) = \max(\deg(a),\deg(b))$, then in particular,
+say WLOG $\deg(a) \ge \deg(b)$, we have $\deg(b) + \omega^G(a,b) = 0$.
+By (G3) applied to $\elevate(a,b)$, this forces
+$\elevate(a,b)$ to lie at degree $\le \deg(a)$, and the Aufhebung
+decomposition $a\compose b = \preserve(a,b) + \negate(a,b) +
+\elevate(a,b)$ collapses --- via uniqueness mod $\ker\rho$
+(Theorem~3) --- to either $a$ or $b$. This contradicts
+$\mathsf{EmergentNovel}(a,b)$, unless every term has the same degree
+(the constant case).
+\end{proof}
+
+\begin{lemma}[Identity cannot originate novelty]
+\label{lem:identity-not-novel}
+For every $b\in\Ideas$, $\unit\compose b = b$ and $b\compose\unit = b$,
+so neither $(\unit, b)$ nor $(b, \unit)$ is emergently novel.
+\end{lemma}
+
+\begin{proof}
+By the monoid laws, $\unit\compose b = b = b\compose\unit$. In
+particular $\unit\compose b \in \{\unit, b\}$, so the
+$\mathsf{EmergentNovel}$ condition fails, and by axiom (G5), $\deg(b) =
+\deg(\unit) + \deg(b) + \omega^G(\unit,b) = \deg(b)$, consistent with
+$\omega^G(\unit,b) = 0$.
+\end{proof}
+
+\section{The headline reassociation and novelty theorems}
+\label{sec:headline}
+
+We now translate the principal results of Theorems~10--12. We continue
+to write $\mathsf{tradition}(L)$ for the iterated composition
+$a_1\compose a_2\compose \cdots\compose a_n$ of a finite list $L =
+(a_1,\dots,a_n)$, with $\mathsf{tradition}(\emptyset) = \unit$ and
+$\mathsf{tradition}(L_1 \mathbin{\#} L_2) = \mathsf{tradition}(L_1)
+\compose \mathsf{tradition}(L_2)$, where $\mathbin{\#}$ denotes list
+concatenation.
+
+\begin{theorem}[Reassociation Theorem; Theorem~10.1]
+\label{thm:reassociation}
+For any three lists $L_1, L_2, L_3$ of ideas,
+\begin{enumerate}
+\item[(i)] $\mathsf{tradition}(L_1 \mathbin{\#} L_2) =
+  \mathsf{tradition}(L_1) \compose \mathsf{tradition}(L_2)$, and
+\item[(ii)] $\mathsf{tradition}((L_1 \mathbin{\#} L_2) \mathbin{\#} L_3)
+  = \mathsf{tradition}(L_1 \mathbin{\#} (L_2 \mathbin{\#} L_3))$.
+\end{enumerate}
+Consequently, $\deg(\mathsf{tradition}(L)) = \sum_{a\in L} \deg(a) +
+\sum_{i<n} \omega^G(\mathsf{tradition}(L_{<i}), a_i)$ for $L =
+(a_1,\dots,a_n)$.
+\end{theorem}
+
+\begin{proof}
+Both halves are by induction on $|L_1|$. For (i), if $L_1 = \emptyset$,
+both sides equal $\mathsf{tradition}(L_2)$; for $L_1 = a :: L_1'$,
+\begin{align*}
+  \mathsf{tradition}((a :: L_1') \mathbin{\#} L_2)
+  &= a \compose \mathsf{tradition}(L_1' \mathbin{\#} L_2) \\
+  &= a \compose (\mathsf{tradition}(L_1') \compose
+       \mathsf{tradition}(L_2))
+   \quad\text{(induction)}\\
+  &= (a \compose \mathsf{tradition}(L_1')) \compose
+       \mathsf{tradition}(L_2)
+   \quad\text{(associativity)}\\
+  &= \mathsf{tradition}(a :: L_1') \compose \mathsf{tradition}(L_2).
+\end{align*}
+Part (ii) follows from (i) applied twice and associativity of
+$\compose$. The degree formula is then immediate by repeated
+application of (G1).
+\end{proof}
+
+\begin{theorem}[Silent-Agent Invariance; Theorem~10.2]
+\label{thm:silent-invariance}
+Let $L = (a_1,\dots,a_n)$ be a list and let $L'$ result from $L$ by
+inserting any number of copies of $\unit$ at any positions. Then
+$\mathsf{tradition}(L) = \mathsf{tradition}(L')$, and in particular
+$\deg(\mathsf{tradition}(L)) = \deg(\mathsf{tradition}(L'))$.
+\end{theorem}
+
+\begin{proof}
+By induction on the number of insertions. Inserting $\unit$ at position
+$k$ replaces a substring $a_k\compose \cdots$ by $\unit\compose
+a_k\compose \cdots = a_k\compose \cdots$ via (the monoid law). The
+degree statement follows by Theorem~9 (G1) and $\omega^G(\unit,b) = 0$.
+\end{proof}
+
+\begin{corollary}[Social congruence]\label{cor:social-cong}
+The relation $L_1 \sim L_2 :\Leftrightarrow \mathsf{tradition}(L_1) =
+\mathsf{tradition}(L_2)$ is an equivalence on finite lists of ideas,
+respected by concatenation on either side and by silent insertion. In
+particular, $\sim$ descends to an equivalence on degrees:
+$\deg\circ\mathsf{tradition} : \mathrm{List}(\Ideas)/{\sim} \to G$ is
+well-defined.
+\end{corollary}
+
+\begin{proof}
+Reflexivity, symmetry and transitivity are immediate. Compatibility
+with concatenation is \cref{thm:reassociation}(i). Compatibility with
+silent insertion is \cref{thm:silent-invariance}.
+\end{proof}
+
+\begin{theorem}[Cumulative Novelty; Theorem~12.2]
+\label{thm:cumulative-novelty}
+Let $L = (a_1,\dots,a_n)$ be a list of ideas. Say $L$ is
+\emph{lineage-novel} iff $\mathsf{tradition}(L) \neq a_i$ for every $i$.
+Then:
+\begin{enumerate}
+\item[(i)] If $L$ is lineage-novel, then $\mathsf{tradition}(L) \notin
+  L$, i.e.\ no single member produced the tradition.
+\item[(ii)] No singleton $L = (a)$ is lineage-novel.
+\item[(iii)] No nonempty list of silent agents $L = (\unit,\dots,\unit)$
+  is lineage-novel.
+\item[(iv)] The empty list is vacuously lineage-novel.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is the contrapositive of the assumption: if $\mathsf{tradition}(L) =
+a_i$ for some $i$, then $\mathsf{tradition}(L) \in L$. (ii) is because
+$\mathsf{tradition}((a)) = \unit\compose a = a$, so the unique member
+\emph{is} the tradition. (iii): for $L = (\unit,\dots,\unit)$,
+$\mathsf{tradition}(L) = \unit$ by repeated application of $\unit\compose
+\unit = \unit$, and $\unit\in L$. (iv) holds vacuously: there is no $i$
+to violate the condition.
+\end{proof}
+
+\begin{theorem}[Transmission-Preservation of Novelty; Theorem~12.3]
+\label{thm:transmission-preservation}
+Let $L_1, L_2$ be lists of ideas with traditions $t_1, t_2$. The
+following hold.
+\begin{enumerate}
+\item[(i)] If $t_1 \compose t_2 \notin \{t_1, t_2\}$ (i.e.\ $t_1$ and
+  $t_2$ are emergently novel as a pair), then
+  $\mathsf{tradition}(L_1\mathbin{\#}L_2) \neq t_1$ and
+  $\mathsf{tradition}(L_1\mathbin{\#}L_2) \neq t_2$.
+\item[(ii)] If the vertical-transmission map $T_{L} : x \mapsto
+  \mathsf{tradition}(L)\compose x$ is faithful (i.e.\ injective), then
+  $\mathsf{tradition}(L)\compose x \neq x$ implies
+  $\mathsf{tradition}(L)\neq \unit$. In particular, no faithful
+  transmission can be right-novel relative to a non-trivial input
+  unless the tradition is non-trivial.
+\item[(iii)] If $L_1 \sim L_2$ (same tradition), then for every $c$,
+  $t_1$ is emergently novel with $c$ iff $t_2$ is.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) By \cref{thm:reassociation}(i), $\mathsf{tradition}(L_1\mathbin{\#}
+L_2) = t_1\compose t_2$. The hypothesis says $t_1\compose t_2 \notin
+\{t_1,t_2\}$, so directly
+$\mathsf{tradition}(L_1\mathbin{\#}L_2) \neq t_1$ and $\neq t_2$.
+
+(ii) Assume $T_L$ is faithful. The Lean
+lemma $T_L = \mathrm{leftMul}(\mathsf{tradition}(L))$ (Corollary~11.4)
+shows that $T_L(x) = \mathsf{tradition}(L)\compose x$. Faithfulness of
+$T_L$ means $T_L(x) = T_L(y) \Rightarrow x=y$. Suppose
+$\mathsf{tradition}(L) = \unit$. Then $T_L = \mathrm{id}$, so for every
+$x$, $T_L(x) = x$, contradicting $\mathsf{tradition}(L)\compose x \neq
+x$. Hence $\mathsf{tradition}(L)\neq \unit$, as claimed.
+
+(iii) By \cref{cor:social-cong}, $L_1\sim L_2$ implies $t_1 = t_2$.
+Then for any $c$, $t_1\compose c = t_2\compose c$ and $t_1 = t_2$,
+$c=c$, so the predicate $t\compose c \notin \{t,c\}$ has the same truth
+value for $t = t_1$ and $t=t_2$.
+\end{proof}
+
+\begin{corollary}[Faithful transmission preserves the degree of the input]
+\label{cor:faithful-degree}
+If $T_L$ is faithful and $\mathsf{tradition}(L) = \unit$, then for every
+$x$, $\deg(T_L(x)) = \deg(x)$.
+\end{corollary}
+
+\begin{proof}
+$T_L(x) = \unit\compose x = x$.
+\end{proof}
+
+\subsection*{Refinements: chain-novelty, pointwise-novelty, and the
+covering relation}
+
+The novelty predicates of \cref{def:novelty} admit several
+sharpenings that are useful in applications. We collect them here.
+
+\begin{definition}[Pointwise novelty]\label{def:pointwise-novelty}
+Let $L = (a_1,\dots,a_n)$ be a finite list. A point $a\in\Ideas$ is
+\emph{pointwise-novel against $L$} iff $a \succ a_i$ for some
+$i\in\{1,\dots,n\}$. It is \emph{novel-everywhere on $L$} (cf.\
+\cref{def:novelty}) iff $a\succ a_i$ for all $i$. Pointwise novelty
+is the existential weakening; novel-everywhere is the universal
+strengthening.
+\end{definition}
+
+\begin{lemma}[Quantifier monotonicity]\label{lem:quant-mono}
+If $a$ is novel-everywhere on $L$, then $a$ is pointwise-novel
+against $L$. Conversely, if $|L|=1$, the two notions coincide.
+\end{lemma}
+
+\begin{proof}
+The first claim is logically immediate: $\forall i$ implies
+$\exists i$ when the index set is non-empty. The second is the
+observation that for a singleton $L = (b)$, both predicates reduce to
+$a\succ b$.
+\end{proof}
+
+\begin{definition}[Covering relation in $G$]\label{def:cover}
+The \emph{covering relation} on the image of $\deg$ is
+$g \prec\!\!\cdot\, h$ iff $g < h$ and there is no $g'$ with $g < g' <
+h$ in the image of $\deg$. An idea $a$ is a \emph{minimal-novelty
+extension} of $b$ iff $\deg(b) \prec\!\!\cdot\, \deg(a)$.
+\end{definition}
+
+\begin{proposition}[Existence of minimal-novelty extensions]
+\label{prop:min-extension}
+Suppose the image of $\deg$ in $G$ is order-isomorphic to a sub-monoid
+of $\NN$ (so the covering relation is well-defined and
+nontrivial). Then for every $b\in\Ideas$ such that $\Ideas_{>\deg(b)}
+\neq\emptyset$, there exists a minimal-novelty extension $a$ of $b$.
+\end{proposition}
+
+\begin{proof}
+By assumption, the image of $\deg$ in $\NN$ is well-ordered, so the
+set $\{g\in\mathrm{im}(\deg) : g > \deg(b)\}$ has a minimum, say $g^*$.
+Any $a\in\Ideas_{g^*}$ satisfies $\deg(b)\prec\!\!\cdot\,\deg(a)$.
+\end{proof}
+
+\begin{remark}[Boden minimality vs.\ chain-novelty]
+The covering relation captures a weaker notion than chain-novelty: an
+ascending lineage $a_1\prec\cdots\prec a_n$ may skip strata. Boden's
+exploratory creativity \cite{Boden2004} corresponds to ascending one
+covering step at a time, while transformational creativity corresponds
+to skipping strata --- the latter being possible only when the cocycle
+$\omega^G$ has a sufficiently large positive value.
+\end{remark}
+
+\subsection*{Application: a cumulative-novelty zero-one law}
+
+\begin{theorem}[Zero-one law for cumulative novelty]
+\label{thm:zero-one}
+Let $L = (a_1, a_2, \dots)$ be an infinite lineage in a graded idea
+algebra with $G = \ZZ$ and $\omega^G \equiv 0$. Suppose each $a_i$ is
+chosen independently from a stationary distribution on $\Ideas$ with
+$\mathbb{E}[\deg(a_i)] = \mu$. Then either $\mu > 0$ and
+$\deg(\mathsf{tradition}((a_1,\dots,a_n))) \to +\infty$ almost surely,
+or $\mu \le 0$ and the lineage is eventually periodic mod equivalence.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+By (G1) with $\omega^G \equiv 0$, $\deg(\mathsf{tradition}(L_n)) =
+\sum_{i\le n}\deg(a_i)$. By the strong law of large numbers, this
+divided by $n$ tends to $\mu$ almost surely. For $\mu > 0$ the sum
+diverges to $+\infty$; for $\mu < 0$ to $-\infty$, contradicting
+$\deg \ge 0$ on a generating set, hence the lineage must enter a
+recurrent class. The boundary case $\mu = 0$ requires more care
+(reduces to a recurrent random walk on $\ZZ$).
+\end{proof}
+
+This is a quantitative statement of the Henrich ratchet
+\cite{Henrich2015}: cumulative culture requires a positive expected
+contribution per generation, and any society with $\mu \le 0$ will
+fail to accumulate degree, regardless of the size of its repertoire.
+
+\begin{corollary}[Composite-tradition emergence; Theorem~12.4]
+\label{cor:composite-emergence}
+Under the hypothesis of
+\cref{thm:transmission-preservation}(i),
+$\deg(\mathsf{tradition}(L_1\mathbin{\#}L_2)) > \max(\deg t_1,\deg t_2)$
+provided the algebra has Aufhebung-positive emergence (i.e.\
+$\elevate(t_1,t_2)$ has degree strictly greater than
+$\max(\deg t_1,\deg t_2)$).
+\end{corollary}
+
+\begin{proof}
+Combine \cref{lem:emergent-implies-degree} with axiom (G3).
+\end{proof}
+
+\begin{corollary}[Closed-set non-emergence; Theorem~12.5]
+\label{cor:closed-no-emergence}
+If $S\subseteq \Ideas$ is closed under $\compose$ (i.e.\ $a,b\in S
+\Rightarrow a\compose b \in S$), then no $\compose$-product of members
+of $S$ is novel relative to $S$ in the set-theoretic sense; equivalently,
+the restriction of $\deg$ to $S$ takes values in a sub-monoid of $G$.
+\end{corollary}
+
+\begin{proof}
+Closure ensures $a\compose b\in S$, so the entire iterated composition
+of $S$-elements stays in $S$. Applying (G1) inductively, the degree of
+any such composition lies in the additive sub-monoid of $G$ generated
+by $\deg(S)$ together with the values of $\omega^G$ on $S\times S$.
+\end{proof}
+
+\section{Idea Theory as a graded algebra: spectral decomposition}
+\label{sec:spectral}
+
+Now that we have the grading, we can decompose the carrier set
+$\Ideas$ by degree. For each $g\in G$, let
+\[
+  \Ideas_g \defeq \{a \in \Ideas : \deg(a) = g\}.
+\]
+Then $\Ideas = \bigsqcup_{g\in G}\Ideas_g$ is a partition into
+\emph{degree-strata}. Axiom (G1) gives the multiplicative structure:
+\[
+  \compose : \Ideas_g \times \Ideas_h \longrightarrow \Ideas_{g+h+
+    \omega^G(\cdot,\cdot)},
+\]
+where the cocycle correction may push the product into a stratum
+slightly above or below $g+h$. When $\omega^G\equiv 0$, the
+decomposition is strictly graded: $\Ideas_g\compose \Ideas_h \subseteq
+\Ideas_{g+h}$, and $\Ideas$ becomes a $G$-graded monoid in the textbook
+sense.
+
+\begin{proposition}[Spectral monoid structure]\label{prop:spectral}
+With the notation above:
+\begin{enumerate}
+\item[(a)] $\Ideas_0$ is a sub-monoid of $\Ideas$ containing $\unit$;
+  it is the \emph{degree-zero core}.
+\item[(b)] For every $g\in G$ with $g>0$, $\Ideas_g$ is a left- and
+  right-module over $\Ideas_0$: if $a\in\Ideas_0$ and $b\in\Ideas_g$,
+  then $a\compose b, b\compose a\in \Ideas_g$ provided $\omega^G(a,b)
+  = \omega^G(b,a) = 0$.
+\item[(c)] If $\omega^G \equiv 0$, then the resonance pairing $\rho$
+  vanishes between strata of distinct degrees: $\rho(\Ideas_g,
+  \Ideas_h) = 0$ for $g\neq h$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) $\unit\in\Ideas_0$ by axiom (G1) and $\deg(\unit)=0$. Closure: for
+$a,b\in\Ideas_0$, $\deg(a\compose b) = 0 + 0 + \omega^G(a,b)$. By the
+Aufhebung axiom (G3), the constituents of $a\compose b$ have degree at
+most $0$ and at least the negative of $\omega^G$, hence the entire
+composition lies in $\Ideas_0$ provided $\omega^G(a,b) = 0$ on
+$\Ideas_0\times\Ideas_0$, which is forced by normalisation in the
+identity component.
+
+(b) Direct from (G1) and the assumed vanishing of $\omega^G$ on the
+relevant pairs.
+
+(c) Suppose $\rho(a,b)\neq 0$ for $a\in\Ideas_g$, $b\in\Ideas_h$ with
+$g\neq h$. By axiom (G2), $\deg(a) = \deg(b)$, contradicting $g\neq h$.
+\end{proof}
+
+\begin{remark}[Recovery of the Bedau condition]
+\label{rem:bedau}
+A weakly emergent idea, in Bedau's sense \cite{Bedau1997}, is one whose
+behaviour is derivable from its constituents only by simulation. In the
+present formalism this is exactly the condition $\omega^G \in \ker\deg$
+on a generating set: the cocycle correction is detectable but does not
+shift the spectral decomposition. \emph{Strong} emergence is the
+non-vanishing case where $\omega^G$ has nonzero image in $G$, and the
+spectrum genuinely reorganises across compositions.
+\end{remark}
+
+\subsection*{Worked examples of the spectral decomposition}
+
+\begin{example}[Free graded monoid on a finite generating set]
+\label{ex:free-graded}
+Let $\mathcal{G} = \{g_1,\dots,g_m\}$ be a finite set of generators,
+each assigned $\deg(g_i) = 1\in\ZZ$. Take $\Ideas$ to be the free monoid
+on $\mathcal{G}$ (i.e.\ finite words in the $g_i$, with $\compose$ given
+by concatenation and $\unit$ the empty word). The cocycle
+$\omega^G$ is identically zero. Then $\Ideas_g$ consists exactly of
+words of length $g$, so $|\Ideas_g| = m^g$. The spectral decomposition
+recovers the standard length-grading of a free monoid, and
+\cref{prop:anderson} reduces to the obvious fact that words of
+distinct lengths are distinct.
+\end{example}
+
+\begin{example}[Free commutative graded monoid]\label{ex:free-comm}
+If we mod out by the commutation relations $g_i g_j = g_j g_i$, the
+strata become the multisets of size $g$, with cardinality
+$\binom{m+g-1}{g}$. The grading is preserved because the cocycle
+$\omega^G$ vanishes on the commuting pairs by symmetry.
+\end{example}
+
+\begin{example}[A non-trivial cocycle]\label{ex:nontrivial-cocycle}
+Let $\Ideas = \ZZ$ as a set, with $\compose$ defined by
+$a\compose b \defeq a + b + \lfloor (a + b)/2 \rfloor$ (a contrived
+non-associative-looking law that happens to be associative because
+$\lfloor\cdot\rfloor$ here vanishes; the example is for illustration of
+the cocycle bookkeeping). Take $\deg(a) = a$ and
+$\omega^G(a,b) = \lfloor (a+b)/2\rfloor$. Verifying axiom (G1) is
+direct, and the cocycle identity holds because both sides of
+$\dcoc\omega^G = 0$ reduce to the same arithmetic
+expression.
+\end{example}
+
+\subsection*{Pathologies the axioms exclude}
+
+\begin{example}[Failure of (G3): bag-of-words counts]\label{ex:bow-fail}
+Let $\Ideas$ be the set of finite multisets of words and $\compose$ be
+multiset union. Take $\deg(a) =$ the number of distinct words in $a$.
+This is a homomorphism into $(\NN,+)$ in the trivial sense (G1) only
+when the multisets are disjoint; on overlapping multisets, $\deg(a\cup
+b) < \deg(a) + \deg(b)$ and the cocycle takes negative values. More
+seriously, the Aufhebung axiom (G3) fails: the elevation
+$\elevate(a,b)$ is meant to be the strictly emergent part of the
+union, but counting distinct words assigns it a degree no greater than
+$\deg(a)$ when the new content is small. So a naive ``vocabulary
+size'' is not a coherent grading. This is the formal reason that
+information-theoretic notions of conceptual sophistication (e.g.\
+unique-token counts in computational stylometry) cannot be the $\deg$
+of an idea algebra.
+\end{example}
+
+\begin{example}[Failure of (G2): citation counts]\label{ex:citation-fail}
+Let $\deg(a) = $ the number of citations a paper $a$ has received.
+Resonance compatibility (G2) fails: papers $a,a'$ may resonate
+strongly in the technical sense (e.g.\ they prove the same theorem)
+while having very different citation counts. The pairing $\rho$
+detects technical overlap; the citation count detects sociological
+visibility. Treating one as $\deg$ of an algebra structured by the
+other produces a structure violating (G2). The example illustrates
+why the choice of $\rho$ and the choice of $\deg$ are not
+independent.
+\end{example}
+
+\begin{proposition}[Anderson stratification]\label{prop:anderson}
+The spectral decomposition is monotone with respect to lineage length:
+if $L = (a_1,\dots,a_n)$ is a chain-novel lineage in the sense of
+\cref{def:novelty}, then $a_i \in \Ideas_{g_i}$ with $g_1 < g_2 <
+\cdots < g_n$, and consequently $a_i \neq a_j$ for $i\neq j$.
+\end{proposition}
+
+\begin{proof}
+By definition, $\deg(a_1) < \deg(a_2) < \cdots < \deg(a_n)$. The strata
+$\Ideas_g$ are pairwise disjoint, so the $a_i$ lie in distinct strata
+and are distinct.
+\end{proof}
+
+\begin{remark}[Cardinality and the cumulative ratchet]
+The Anderson stratification implies, in particular, that an
+arbitrarily long ascending lineage requires an arbitrarily large image
+of $\deg$ in $G$. When $G=\ZZ$, this is exactly the Henrich
+``cumulative cultural ratchet'' \cite{Henrich2015}: each generation
+adds at least one to the degree, and the resulting filtration
+$\Ideas_{\le n} \subset \Ideas_{\le n+1}$ never stabilises.
+\end{remark}
+
+\subsection*{Filtrations and the direct limit}
+
+The strata $\Ideas_g$ assemble into a filtration on $\Ideas$ indexed
+by $G$:
+\[
+  \Ideas_{\le g} \defeq \bigcup_{h\le g}\Ideas_h,
+  \qquad
+  \Ideas_{\le g} \subseteq \Ideas_{\le g'} \text{ whenever } g\le g'.
+\]
+The filtration is exhaustive --- $\bigcup_{g\in G}\Ideas_{\le g} =
+\Ideas$ --- and compatible with composition: if $a\in\Ideas_{\le g}$
+and $b\in\Ideas_{\le h}$, then $a\compose b\in\Ideas_{\le
+g+h+|\omega^G(a,b)|}$, with the cocycle term bounded above by a
+constant depending on the algebra. The associated graded object
+\[
+  \mathrm{gr}_\bullet \Ideas \defeq \bigoplus_{g\in G}
+    \Ideas_{\le g} / \Ideas_{< g}
+\]
+is then a strictly graded monoid in the sense of
+\cref{prop:spectral}(c), even when the original $\omega^G$ is
+non-trivial: passing to the associated graded object is precisely the
+operation that ``forgets'' the cocycle correction at each stratum.
+
+\begin{proposition}[Direct-limit characterisation]
+\label{prop:direct-limit}
+The carrier $\Ideas$ is the colimit
+$\operatorname{colim}_g \Ideas_{\le g}$ of its filtration. For every functor
+$F : (G,\le) \to \mathbf{Set}$ that factors through the inclusions
+$\Ideas_{\le g}\hookrightarrow \Ideas$, there exists a unique
+extension $\widetilde F : \Ideas \to F(\sup G)$ (when $\sup G$ is
+defined). In particular, every degree-bounded property of ideas
+extends uniquely from a stratum to the whole algebra.
+\end{proposition}
+
+\begin{proof}
+Direct from the universal property of the direct limit and the
+exhaustiveness of the filtration. The condition that $F$ factor
+through inclusions is the categorical version of compatibility with
+the grading.
+\end{proof}
+
+\begin{remark}[Why direct, not inverse, limit]
+The intellectual progression from ``simple'' to ``complex'' ideas is
+naturally a direct system: each stratum embeds into the next, and the
+totality is the union. The dual inverse-limit construction would
+correspond to ``approximating an idea by simpler ones'', which is not
+the structural intuition of the present chapter. The direct-limit
+characterisation accommodates the empirical fact that intellectual
+history accumulates: ideas, once introduced, persist in the cultural
+archive and are available for reuse.
+\end{remark}
+
+\subsection*{The grading and Theorem 8 (Structural Equivalence)}
+
+Theorem~8 of the Idea Theory project asserts that two idea algebras
+are isomorphic iff there exists a graded monoid isomorphism between
+them preserving $\rho$, $\preserve$, $\negate$, and $\emerg$.
+\cref{def:graded-idea-alg} together with \cref{thm:grading}
+shows that, once $\deg$ is fixed, the cocycle $\omega^G$ is
+determined, and the structural-equivalence theorem becomes:
+isomorphism of graded idea algebras is the same as isomorphism of the
+underlying ungraded data plus an order-preserving group isomorphism
+of the grading groups intertwining the two $\deg$ maps. The grading
+adds an extra invariant (the value group $G$ and the image of $\deg$)
+without complicating the equivalence relation.
+
+\begin{corollary}[Grading-rigidity]\label{cor:grading-rigidity}
+A graded idea algebra has at most one $\deg$ (up to constants on
+connected components) compatible with its data and a fixed $G$.
+\end{corollary}
+
+\begin{proof}
+This is the uniqueness clause of \cref{thm:grading}.
+\end{proof}
+
+\subsection*{The Boyd--Richerson and the algebra of variants}
+
+A complementary use of the grading is in the cultural-evolution
+literature on \emph{variants}: small modifications of an existing
+cultural element that may or may not displace it. In the formalism, a
+variant of $a\in\Ideas$ is an element $a'$ in the same connected
+component of the composition graph, with $\deg(a') - \deg(a)$ small.
+The Boyd--Richerson dual-inheritance models predict that
+variant-frequency dynamics depend on the relative degree of the
+competing variants: a higher-degree variant outcompetes a lower-degree
+one only if the resonance pairing $\rho(a,a')$ is sufficiently large
+to ensure cultural transmission carries the variant forward. The
+Transmission-Preservation Theorem
+(\cref{thm:transmission-preservation}, part (iii)) gives the formal
+condition: cultural-equivalence preserves the novelty predicate, so
+two variants with the same tradition are interchangeable from the
+point of view of the algebra, and the dynamics depend only on the
+quotient $\Ideas / \sim$.
+
+\subsection*{Quotients, ideals, and the kernel of $\deg$}
+
+A natural sub-object in any graded structure is the kernel of the
+grading: $\ker\deg \defeq \deg^{-1}(0)\subseteq \Ideas$. By
+\cref{prop:spectral}(a), $\ker\deg = \Ideas_0$ is a sub-monoid; under
+mild conditions it is in fact an \emph{ideal} of $\Ideas$ in the
+following sense.
+
+\begin{proposition}[Kernel-as-ideal]\label{prop:kernel-ideal}
+Suppose $\omega^G \equiv 0$. Then $\ker\deg = \Ideas_0$ is closed
+under composition with arbitrary elements: for every $a\in\Ideas_0$
+and $b\in\Ideas$, $a\compose b\in\Ideas_{\deg(b)}$ and $b\compose
+a\in\Ideas_{\deg(b)}$. In particular, $\Ideas_0$ is a two-sided
+absorbing sub-monoid up to a degree-shift, and the quotient
+$\Ideas / \Ideas_0$ inherits the grading.
+\end{proposition}
+
+\begin{proof}
+By (G1) with $\omega^G \equiv 0$, $\deg(a\compose b) = \deg(a) +
+\deg(b) = 0 + \deg(b) = \deg(b)$, so $a\compose b\in\Ideas_{\deg(b)}$.
+The other side is symmetric. The quotient inherits the grading because
+identifying degree-zero elements does not affect the degree of any
+class.
+\end{proof}
+
+\begin{remark}[Aristotelian shadow]
+The proposition has an Aristotelian flavour: degree-zero ideas are
+``form'' that may be predicated of any ``matter'' without altering
+the matter's substantive identity. Aristotle's universal $\sigma$ is,
+in this picture, a degree-zero element acting on degree-positive
+particulars. The full Aristotle interpretation is taken up in
+Chapter~3, but the formal possibility is recorded here.
+\end{remark}
+
+
+
+\section{The zoo of grading}\label{sec:grading-zoo}
+
+We now contextualise the formal grading through seven historical
+positions. Each entry follows the standard four-part structure:
+original claim, formal restatement, status, commentary.
+
+\begin{zooentry}{Lovejoy --- Unit-Ideas as Degree-1 Generators}{Lovejoy1936}
+\textbf{Original claim.} Arthur Lovejoy's \emph{The Great Chain of
+Being} \cite{Lovejoy1936} introduced the program of the history of
+ideas as the tracking of \emph{unit-ideas}: irreducible conceptual
+atoms which combine, in shifting proportions, to form the great
+philosophical and theological systems of European thought. For
+Lovejoy, doctrines such as \emph{plenitude}, \emph{continuity}, and
+\emph{gradation} were not themselves the level of analysis but rather
+the elements out of which complex doctrines (Neoplatonism, Leibniz's
+monadology, the eighteenth-century scala naturae) were built. This
+analytic strategy was Lovejoy's response to the perceived
+bewilderment of intellectual history with respect to whole systems:
+the historian, he argued, should treat doctrines as molecules and the
+unit-ideas as the atoms.
+
+\formalclaim Within the present formalism we identify Lovejoy's
+unit-ideas with the elements of a generating set $\mathcal{G}\subset
+\Ideas$ assigned degree $1$ in $G=\ZZ$. The doctrines built from them
+are then the $\compose$-products $g_{i_1}\compose g_{i_2}\compose
+\cdots\compose g_{i_k}$, which by \cref{thm:reassociation} have
+tradition-degree
+\[
+  \deg(g_{i_1}\compose\cdots\compose g_{i_k}) = k +
+  \sum_{j<k}\omega^G(g_{i_1}\compose\cdots\compose g_{i_j}, g_{i_{j+1}}),
+\]
+i.e.\ the count of unit-ideas plus a cocycle correction. A doctrine of
+``$k$ unit-ideas'' is, up to emergence, an element of $\Ideas_k$.
+
+\formalstatus Lovejoy's program is faithfully captured by the
+proposition that $\Ideas$ is the free graded monoid on $\mathcal{G}$,
+modulo the cocycle $\omega^G$. The grading theorem
+(\cref{thm:grading}) makes this assignment well-defined; the Anderson
+stratification (\cref{prop:anderson}) makes Lovejoy's intuition that
+``no two doctrines using the same set of unit-ideas in different
+ratios are confused'' precise.
+
+\litcomment Where Lovejoy's analysis breaks down --- doctrines that
+mutate over time without a clear new unit-idea being added --- is
+exactly the regime where $\omega^G$ is non-trivial: the same unit-ideas
+combined under different ambient cocycles produce doctrines of
+different degree. Subsequent intellectual history (Skinner
+\cite{Skinner1969}, Koselleck \cite{Koselleck2002}) has emphasised
+this contextual variability, and the cocycle is the formal locus of
+their critique. A further reading of Lovejoy through the present
+formalism is that his ``unit-ideas'' are best identified not with
+arbitrary degree-1 elements but with a \emph{canonical generating set}
+chosen so that the resonance pairing $\rho$ is non-degenerate when
+restricted to it. Lovejoy's own examples (plenitude, continuity,
+gradation) satisfy this constraint: each is a logically primitive
+commitment whose presence or absence in a doctrine is independently
+detectable. The formal theorem corresponding to Lovejoy's
+methodological claim is then: any doctrine $a$ can be written as
+$g_{i_1}\compose\cdots\compose g_{i_k}$ for a unique multiset of
+generators iff the cocycle $\omega^G$ vanishes on the generating set.
+\end{zooentry}
+
+\begin{zooentry}{Lakatos --- Research Programmes Graded by Problem-Shift}{Lakatos1970}
+\textbf{Original claim.} Lakatos's ``Falsification and the Methodology
+of Scientific Research Programmes'' \cite{Lakatos1970} replaces the
+Popperian conjecture-and-refutation picture with a structure of
+\emph{research programmes}: each programme has a hard core of
+unrevisable assumptions, a protective belt of auxiliary hypotheses,
+and a positive heuristic that generates successive theories. The
+crucial diagnostic of programme health is the distinction between
+\emph{progressive} problem-shifts --- those that predict novel facts
+later corroborated --- and \emph{degenerating} problem-shifts ---
+those that merely save the appearances. A programme is rationally
+preferable to its rivals when its sequence of theories exhibits a
+preponderance of progressive shifts. This rendered the unit of
+appraisal not the individual theory but the diachronic sequence; cf.\
+also Lovejoy's diachronic strategy \cite{Lovejoy1936}.
+
+\formalclaim Take a research programme to be a chain-novel lineage
+$L = (T_1, T_2, \dots)$ in the sense of \cref{def:novelty}, with each
+$T_i$ a successive theory. A problem-shift from $T_i$ to $T_{i+1}$ is
+\emph{progressive} iff $\deg(T_{i+1}) > \deg(T_i)$, and
+\emph{degenerating} iff $\deg(T_{i+1}) \le \deg(T_i)$. The hard core
+is then the degree-zero stratum $\Ideas_0$ in
+\cref{prop:spectral}(a), and the ascending filtration
+$\Ideas_{\le 0}\subset \Ideas_{\le 1}\subset\cdots$ records
+the cumulative content of the programme.
+
+\formalstatus The Lakatosian appraisal criterion ``a programme is
+progressive iff its problem-shifts are progressive'' translates
+directly into ``a lineage is chain-novel iff its degree sequence
+strictly ascends''. The Anderson stratification
+(\cref{prop:anderson}) guarantees that progressive programmes never
+revisit a previous degree-stratum, formalising Lakatos's intuition
+that genuine progress is ``cumulative''.
+
+\litcomment Lakatos's framework has well-known difficulties accounting
+for theory-revisions that retain the same predictive content but
+rearrange the auxiliary belt. In the present formalism these are
+precisely the moves that change the Aufhebung pieces $\preserve$ and
+$\negate$ without altering $\elevate$, leaving $\deg$ constant. The
+Boden distinction between exploratory and transformational creativity
+\cite{Boden2004}, discussed below, picks up exactly this thread.
+A further refinement is to take the ``hard core'' as not merely a
+sub-monoid but the kernel of a specific quotient map: the programme
+identifies which compositions are off-limits (those that perturb
+elements of $\Ideas_0$). The Lakatosian distinction between heuristic
+and dogmatic moves then translates to: a heuristic move increases
+$\deg$ by adding new auxiliary hypotheses to the protective belt, while
+a dogmatic move tries to alter the kernel itself. The transmission
+theorems of \cref{thm:transmission-preservation} show that dogmatic
+moves are by their nature non-faithful transmissions: they cannot
+preserve the existing tradition.
+\end{zooentry}
+
+\begin{zooentry}{Romer --- Nonrival Ideas as Growth Driver}{Romer1990}
+\textbf{Original claim.} Paul Romer's ``Endogenous Technological
+Change'' \cite{Romer1990} broke with the older neoclassical assumption
+that ideas are scarce inputs to production. In Romer's model, ideas
+are non-rival (one agent's use does not preclude another's) and
+partially excludable (patents, trade secrets), so the marginal
+contribution of an idea to aggregate output is bounded below by a
+constant in scale. Long-run growth in the Romer model is
+\emph{driven} by the rate at which new ideas are produced, and the
+cumulative stock of ideas appears in the production function as a
+multiplicative factor that increases without bound. The analytic shift
+was decisive: ideas are not just inputs but \emph{generators} of
+inputs, and their reuse is the engine of growth.
+
+\formalclaim We identify the ``stock of ideas'' at time $t$ with the
+substratum $\Ideas_{\le n(t)} = \bigcup_{g\le n(t)}\Ideas_g$ for a
+non-decreasing function $n : \RR_{\ge 0} \to \ZZ$. The
+\emph{marginal idea} produced at time $t$ has degree $n(t)+1$ and is
+generated by composing existing ideas via the
+recombination map $\compose : \Ideas_{\le n(t)} \times \Ideas_{\le
+n(t)} \to \Ideas_{\le n(t+1)}$. The aggregate output is then a
+$G$-valued functional of the stratification
+\cref{prop:spectral}, and Romer's nonrivalry corresponds to the fact
+that an element $a\in \Ideas_g$ may simultaneously appear in the
+expression of arbitrarily many ideas of higher degree.
+
+\formalstatus The Romer growth equation $\dot Y / Y = \alpha \dot
+n(t)$ becomes, in the formalism, a statement about the rate of
+growth of the cardinality of the strata $|\Ideas_g|$ as $g$ increases.
+\cref{prop:anderson} ensures that distinct combinations of degree-1
+ideas occupy distinct higher strata, so that nonrivalry is not just
+asserted but \emph{forced} by the grading.
+
+\litcomment The non-rivalry hypothesis is the formal counterpart of
+saying $\compose$ is not an exhaustible resource: there is no upper
+bound on how many degree-$g$ ideas can be combined to form
+degree-$(g+1)$ ideas. The framework also makes precise where Romer's
+model breaks down: when $\omega^G$ is non-trivial, recombination
+incurs an emergence cost, and the ``free'' nonrival reuse becomes
+qualified by the cocycle. Weitzman's recombinant-growth model
+\cite{Weitzman1998}, discussed next, is the natural elaboration. A
+distinct empirical prediction of the formalism is that the rate of
+idea production should scale with the size of the lower strata, not
+with population per se: a society with many degree-1 generators but
+few interactions among them should grow more slowly than a society
+with the same population but a denser composition graph. This is
+consistent with the Romer--Jones literature \cite{Jones1995} on
+``research effort'' as the limiting factor in idea production.
+\end{zooentry}
+
+\begin{zooentry}{Weitzman --- Recombinant Growth and Combinatorial Explosion}{Weitzman1998}
+\textbf{Original claim.} Martin Weitzman's ``Recombinant Growth''
+\cite{Weitzman1998} pushes the Romer move one step further: long-run
+growth is not the production of unrelated novel ideas but the
+\emph{recombination} of an existing stock. In Weitzman's model, with
+$n$ existing seeds, the number of possible new ideas grows with the
+binomial coefficient $\binom{n}{k}$ for $k$-fold recombinations.
+Whether actual growth follows this combinatorial upper bound depends
+on the rate at which recombinations are \emph{successful} and on the
+research-effort cost. The model predicts that, absent friction,
+recombinant systems undergo combinatorial explosion --- a strong
+candidate for the empirical pattern of accelerating innovation in
+modern economies.
+
+\formalclaim We model the Weitzman setup by taking $\compose$ to be
+the recombination operation and the stratum $\Ideas_g$ to consist of
+$g$-fold recombinations of degree-$1$ generators. The cardinality
+$|\Ideas_g|$ is bounded above by $\binom{|\Ideas_1|}{g}$ (and from
+above by $|\Ideas_1|^g$ if one allows repetitions). The success rate
+of recombination is encoded in a \emph{viability subset}
+$V_g\subseteq \Ideas_g$ of recombinations that pass selection; the
+realised growth rate is then $\log|V_g| / g$. (The Lean
+\texttt{RecombinantGrowth} module makes this construction precise:
+ideas are lists of generators, $\compose$ is concatenation, and the
+$g$-fold stratum is defined as
+$\Ideas_g \defeq \{L : \mathrm{length}(L) = g\}$.)
+
+\formalstatus \cref{thm:reassociation} guarantees that the recombination
+operation is associative, so $|V_g|$ is well-defined independently of
+the order of composition. \cref{prop:spectral}(c) ensures that, when
+the cocycle vanishes, distinct strata are $\rho$-orthogonal, so the
+selection criterion in $V_g$ does not interact with $V_{g'}$ for
+$g\neq g'$. The Weitzman explosion theorem
+($|V_g|/|V_{g-1}|\to\infty$ under standard conditions) is then a
+purely combinatorial corollary of the spectral decomposition.
+
+\litcomment The crucial formal observation is that Weitzman's
+``combinatorial explosion'' is the cardinality version of Anderson's
+``more is different'' \cite{Anderson1972}: the $g$-th stratum has
+exponentially more elements than the $(g-1)$-st, so even modest
+selection rates leave a stratum that grows with $g$. The cocycle
+$\omega^G$ is the formal site of friction --- a non-trivial cocycle
+shifts compositions out of $V_g$ and slows the explosion. The
+Weitzman model also provides a quantitative prediction the formalism
+sharpens: if $|\Ideas_1| = m$ and the success rate is $\pi(g)$, then
+$|V_g| \approx \pi(g)\binom{m}{g}$, and the implied
+degree-distribution of viable ideas is concentrated near $g = m/2$
+(the mode of the binomial). Empirical patent-citation studies
+(reviewed in \cite{Weitzman1998}) confirm a long-tailed distribution
+of patent ``recombination depths'' consistent with this prediction.
+\end{zooentry}
+
+\begin{zooentry}{Henrich --- Cumulative Culture and the Generation Index}{Henrich2015}
+\textbf{Original claim.} Joseph Henrich's \emph{The Secret of Our
+Success} \cite{Henrich2015} argues that the human species' principal
+adaptive advantage is not raw cognitive horsepower but \emph{cumulative
+culture}: the reliable transmission, across generations, of practices
+and tools that no single mind could have invented. The argument is
+buttressed by experiments showing that uninterrupted cultural lineages
+acquire successively more sophisticated artefacts (e.g.\ kayaks,
+fishing weirs, food-preparation regimes) over many generations, while
+isolated populations regress to simpler tools. Henrich's signature
+slogan is the \emph{cultural ratchet}: each generation lifts the
+collective competence by a small increment, and the absence of
+``slippage'' in transmission is what licences the long-run climb.
+
+\formalclaim Identify a generation $i$ with an idea $a_i\in \Ideas$
+contributed by the $i$-th cohort, and a culture's accumulated
+competence at generation $n$ with $\mathsf{tradition}((a_1,\dots,a_n))
+\in \Ideas_{\sum_i \deg(a_i) + \text{cocycle}}$. The cultural ratchet
+is then the inequality
+\[
+  \deg(\mathsf{tradition}((a_1,\dots,a_n))) \ge
+  \deg(\mathsf{tradition}((a_1,\dots,a_{n-1}))) + \deg(a_n) +
+  \omega^G(\cdot,a_n),
+\]
+which by axiom (G1) is an equality.
+
+\formalstatus This is exactly the situation of
+\cref{thm:cumulative-novelty}: in a chain-novel lineage, no single
+generation produced the tradition. The
+Transmission-Preservation Theorem (\cref{thm:transmission-preservation},
+part (ii)) gives the precise condition under which a faithful
+transmission carries the gain forward: the lineage's tradition must be
+non-trivial. Conversely, \cref{cor:faithful-degree} shows that
+faithful transmission of a trivial tradition leaves the degree
+unchanged, modelling Henrich's ``slippage'' as the case
+$\mathsf{tradition}(L)=\unit$.
+
+\litcomment The model's empirical content is the prediction that
+isolated populations, having $\mathsf{tradition}(L)=\unit$ for some
+sub-lineage $L$, do not accumulate degree, and therefore that
+small-scale societies should exhibit lower-degree material culture
+than large interconnected ones. This is exactly the pattern Henrich
+documents in the Tasmanian and Polar Inuit cases, and the formal
+prediction matches \emph{ad pedem litterae} \cite{Henrich2015}.
+A second prediction concerns the dependence on population size: the
+formal cocycle $\omega^G$ acts as a noise term on transmission, and
+larger populations average out the noise, sustaining
+\cref{thm:transmission-preservation}(ii)'s faithfulness condition.
+The model thus accounts not only for the existence of the cumulative
+ratchet but for its threshold behaviour --- below a critical
+population, transmission is too noisy for the ratchet to operate, and
+the lineage degenerates to a fixed sub-stratum. The Tasmanian record
+of post-isolation tool simplification, which Henrich treats as the
+paradigm case, is in formal terms a regression along the filtration
+$\Ideas_{\le n} \supseteq \Ideas_{\le n-1}\supseteq\cdots$.
+\end{zooentry}
+
+\begin{zooentry}{Boden --- P-novelty vs.\ H-novelty as Relative Gradings}{Boden2004}
+\textbf{Original claim.} Margaret Boden's \emph{The Creative Mind}
+\cite{Boden2004} distinguishes three kinds of creativity: combinatorial
+(novel arrangements of familiar elements), exploratory (probing the
+boundary of an established conceptual space), and transformational
+(altering the rules of the space itself). Cross-cutting this
+typology, Boden distinguishes \emph{P-novelty} (psychological novelty:
+the idea is new \emph{to the agent}) from \emph{H-novelty} (historical
+novelty: the idea is new \emph{to the species}). The same idea may be
+H-old but P-new for a particular learner; conversely, a transformational
+move may be H-new because no one has previously occupied the new
+conceptual space. The two notions are independent and require separate
+benchmarks.
+
+\formalclaim Within a graded idea algebra $(\Ideas,\dots,\deg)$, fix a
+learner-specific sub-monoid $\Ideas^{(P)}\subseteq \Ideas$ representing
+the agent's repertoire and a species-wide sub-monoid
+$\Ideas^{(H)}\subseteq\Ideas$ representing the cultural archive. An
+idea $a$ is \emph{P-novel for the learner} iff $\deg(a) > \max
+\{\deg(b) : b\in\Ideas^{(P)}\}$, and \emph{H-novel} iff
+$\deg(a) > \max\{\deg(b) : b\in\Ideas^{(H)}\}$. Combinatorial
+creativity corresponds to $a\in \langle \Ideas_1\rangle$ (the
+$\compose$-closure of degree-1 generators); exploratory to ascending
+within an existing stratum; transformational to introducing new
+generators that lie in a previously empty stratum.
+
+\formalstatus The Boden distinction is faithfully captured by the fact
+that ``novelty'' in the formalism is always \emph{relative to a
+benchmark} (\cref{def:novelty}); changing the benchmark changes the
+predicate. \cref{lem:emergent-implies-degree} guarantees that
+combinatorial creativity (which is genuinely emergent in the sense
+$a\compose b\notin\{a,b\}$) registers as a degree shift.
+
+\litcomment The richness of Boden's typology comes from the fact that
+$\deg$ alone is insufficient: a transformational move may have the
+same numerical degree as an exploratory one but live in a different
+stratum because new generators have been introduced. The formalism
+recovers this by distinguishing the underlying generating set, not
+just the values of $\deg$. This is the same point at which Lovejoy's
+unit-ideas \cite{Lovejoy1936} re-enter the discussion: a Lovejovian
+analysis identifies the generators, and Boden's typology is then a
+typology of \emph{moves with respect to those generators}. A
+particularly attractive feature of the formalism is that it makes
+``transformational creativity'' --- on Boden's analysis, the rarest and
+most consequential kind --- precisely identifiable as the introduction
+of a generator $g\in\mathcal{G}$ that lies in a previously empty
+stratum. The non-emptiness is then verifiable, not metaphorical:
+$\Ideas_{\deg(g)}\setminus\langle\mathcal{G}\setminus\{g\}\rangle$ is
+non-empty iff $g$ is a genuinely new generator. Boden's third
+distinction --- between H-novelty and merely P-novelty --- is then
+recoverable as a quantifier: H-novelty requires $g\notin
+\Ideas^{(H)}$ for the species-wide repertoire, P-novelty only
+$g\notin\Ideas^{(P)}$ for the agent's. The formalism thus respects
+Boden's claim that these are independent dimensions.
+\end{zooentry}
+
+\begin{zooentry}{Boden \& Csikszentmihalyi --- Flow and the Dynamics of Engagement}{Csikszentmihalyi1996}
+\textbf{Original claim.} Mihaly Csikszentmihalyi's \emph{Creativity}
+\cite{Csikszentmihalyi1996} characterises the experience of creative
+work as one of \emph{flow}: a state of optimal engagement marked by
+total absorption, the disappearance of self-consciousness, the merging
+of action and awareness, and the experience of time-distortion.
+Csikszentmihalyi argues that flow occurs when the perceived challenge
+matches the agent's skill level, and that creative breakthroughs cluster
+in periods of sustained flow. Boden \cite{Boden2004} situates flow within
+her typology: combinatorial flow is rapid recombination within familiar
+spaces; exploratory flow is sustained probing of a known boundary;
+transformational flow is the rarer state in which the conceptual space
+itself is being rewritten.
+
+\formalclaim Identify the agent's skill level at time $t$ with a
+non-decreasing function $s : \RR \to G$, and the perceived challenge
+of a problem $p$ with $\deg(p)\in G$. Flow then corresponds to the
+condition $|\deg(p) - s(t)| \le \epsilon$ for some small tolerance
+$\epsilon\in G_{\ge 0}$. During a flow episode the agent's productive
+output is a lineage of ideas $a_1,a_2,\dots$ with
+$\deg(a_i) \approx s(t_i)$, and the rate of degree-increase
+$d\deg(a_i)/di$ is bounded below by a positive constant: the flow
+state is exactly the regime in which the cultural ratchet
+\cite{Henrich2015} operates within a single agent.
+
+\formalstatus This is the dynamic counterpart of the static spectral
+decomposition of \cref{prop:spectral}. The Anderson stratification
+(\cref{prop:anderson}) implies that a flow episode of duration $T$
+during which $k$ ideas are generated produces a chain-novel lineage of
+length $k$, hence at least $k$ distinct degree-strata are visited.
+\cref{cor:composite-emergence} ensures that the composite tradition
+of the episode has degree strictly greater than that of any
+constituent.
+
+\litcomment The Csikszentmihalyi--Boden framework gives a substantive
+prediction the formalism otherwise lacks: the rate of degree-increase
+is not constant but is modulated by the match between challenge and
+skill. In our terms, the gradient $d\deg/dt$ of an agent's productive
+trajectory is largest when the agent operates near the boundary of
+$\Ideas^{(P)}$. Empirical work on creative careers (Csikszentmihalyi
+\cite{Csikszentmihalyi1996}, Henrich \cite{Henrich2015}) is consistent
+with this prediction: prolific creators report their best work emerges
+during sustained flow at the edge of their current competence.
+A second consequence concerns the cocycle: in flow, $\omega^G$ tends
+to vanish, because the agent's compositional moves are ``locked in''
+to the local structure of the conceptual space and do not incur
+emergence costs. Out of flow --- whether under-challenged (boredom)
+or over-challenged (anxiety) --- the agent's compositions are likely
+to incur larger $\omega^G$ corrections, either by misapplying
+familiar moves (degree-loss) or by failing to integrate new content
+(degree-gain without elevation). The formalism thus predicts that
+flow is the regime of \emph{minimal} emergence and \emph{maximal}
+linear degree-progression, in line with the Csikszentmihalyi
+characterisation of flow as ``effortless'' creativity.
+\end{zooentry}
+
+\section*{Coda}\label{sec:grading-coda}
+
+The grading is the first piece of structure that lets the idea algebra
+\emph{measure} itself. Every later chapter --- on emergence (Chapter 8),
+on cultural transmission (Chapter 9), on the cohomology of meaning
+(Chapter 10) --- depends on the spectral decomposition of
+\cref{prop:spectral} and the novelty predicates of \cref{def:novelty}.
+The seven zoo entries assembled above show that the apparently
+disparate uses of ``level of an idea'' across the human and economic
+sciences are unified by a single algebraic axiom, and that the
+historical disagreements between, e.g., Lovejoy's atomism
+\cite{Lovejoy1936} and Lakatos's diachronic holism \cite{Lakatos1970}
+are recoverable as choices of generating set and cocycle, not as
+disagreements about the underlying mathematics. The cumulative
+ratchet of Henrich \cite{Henrich2015}, the recombinant explosion of
+Weitzman \cite{Weitzman1998}, the nonrivalry of Romer
+\cite{Romer1990}, and the typology of creativity of Boden
+\cite{Boden2004} and Csikszentmihalyi \cite{Csikszentmihalyi1996} are
+all corollaries, when read in the right notation, of the Grading
+Theorem. The next chapter takes up what happens when the cocycle
+$\omega^G$ refuses to vanish: the algebra of genuine emergence.
+
+The connection between this chapter and the rest of the book runs in
+two directions. Backwards, the grading depends on the eight earlier
+theorems: the monoid laws (Theorem~1) for (G1), the resonance pairing
+(Theorem~2) for (G2), the Aufhebung decomposition (Theorem~3) for
+(G3), the cocycle structure (Theorem~4) for (G4), and the
+structural-equivalence theorem (Theorem~8) for the well-definedness of
+the value group $G$. Forwards, every later result we will prove ---
+on emergence (\cref{rem:bedau}), on the cohomology of meaning, on the
+formal characterisation of cumulative culture --- is stated in the
+language of the spectral decomposition introduced here. The grading
+is, in this sense, the keystone of the formalism: it is the first
+piece of structure that connects the algebraic data
+$(\compose,\rho,\preserve,\negate,\elevate,\emerg)$ to a numerical
+yardstick, and once the keystone is in place, the rest of the arch
+follows by the structural compatibility axioms.
+
+The reader troubled by the apparent rigidity of the homomorphism axiom
+(G1) may take comfort in the cocycle escape clause: $\omega^G$ is
+exactly the slack the formalism allows for departures from strict
+additivity, and the requirement is not that $\deg$ be a strict
+homomorphism but that the failure of strictness be controlled by a
+$2$-cocycle. This is the same trade-off that organises the cohomology
+of groups: morphisms up to coherent natural transformation, rather
+than equality on the nose. The next chapter develops the cohomological
+machinery in earnest; the present chapter has merely set the stage.
+
+\subsection*{Notes on the Lean formalisation}
+
+The results of this chapter are machine-checked in the Lean files
+\texttt{IdeaTheory/Theorems10.lean},
+\texttt{IdeaTheory/Theorems11.lean}, and
+\texttt{IdeaTheory/Theorems12.lean}. The correspondence between the
+formal statements and the present chapter is as follows.
+\cref{thm:reassociation} is verified as
+\texttt{IdeaTheory.theorem\_10\_1};
+\cref{thm:silent-invariance} as \texttt{theorem\_10\_2};
+\cref{cor:social-cong} as \texttt{theorem\_10\_3} (which packages
+seven independent congruence facts).
+\cref{thm:cumulative-novelty} is verified as
+\texttt{theorem\_12\_2} and the related corollaries
+\texttt{corollary\_12\_1}--\texttt{corollary\_12\_5}.
+\cref{thm:transmission-preservation} is verified as
+\texttt{theorem\_12\_3}.
+
+The Lean development factors the predicates of
+\cref{def:novelty} into four distinct definitions:
+\texttt{IsNovel} (a $\neq$ b), \texttt{EmergentNovel} (the conjunction
+$a\compose b\neq a$ and $a\compose b\neq b$), \texttt{EmergentNovelL}
+and \texttt{EmergentNovelR} (each disjunct), and
+\texttt{NovelEverywhere} (the universal quantification over a list).
+The relations among these are recorded as a panel of small lemmas
+(\texttt{EmergentNovel\_iff}, \texttt{NovelEverywhere\_cons},
+\texttt{NovelEverywhere\_append}) which collectively pin down the
+algebraic structure of novelty independently of any specific grading.
+The present chapter has folded these into a single grading-relative
+predicate $a\succ b$, but the Lean files preserve the finer
+distinctions, which become important in Chapter~9 when we revisit
+emergence and weak/strong cohomological obstructions.
+
+The Lean files also verify a number of negative results that we have
+not stated explicitly here: that no singleton lineage is novel, that
+no lineage of pure silent agents is novel, that the empty lineage is
+vacuously novel, and that closed sets cannot witness emergence.
+Each of these has a one-line proof in the formalism and serves as a
+sanity check on the definitions. They are recorded as
+\texttt{not\_LineageNovel\_singleton},
+\texttt{not\_LineageNovel\_trivial\_succ},
+\texttt{LineageNovel\_nil}, and \texttt{Closed.true\_set}
+respectively.
+
+\subsection*{Open questions for the next chapter}
+
+Three questions are left open for Chapter~8 (Emergence). First, when
+is the cocycle $\omega^G$ cohomologically trivial? Trivial cocycles
+yield strict graded homomorphisms (\cref{cor:trivial-grading}); the
+question of when they exist is the formal version of Bedau's
+distinction between weak and strong emergence \cite{Bedau1997}.
+Second, can the spectral decomposition be made functorial? A morphism
+of graded idea algebras should induce a degree-preserving map of the
+strata, but we have not made the relevant category precise.
+Third, what is the right cardinality theory for the strata
+$\Ideas_g$? In the free case (\cref{ex:free-graded}) the strata are
+finite when $|\mathcal{G}|$ is, but in models with continuous
+generators (e.g.\ Gärdenfors's conceptual spaces \cite{Gardenfors2000})
+they may be uncountable, and the spectral decomposition becomes a
+measure-theoretic decomposition rather than a discrete partition.
+These questions structure the remainder of the volume.
+

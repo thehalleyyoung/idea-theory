@@ -29,7 +29,7 @@ import IdeaTheory.Theorems2
 import Mathlib.Data.Real.Basic
 import Mathlib.Data.Real.Sqrt
 import Mathlib.Algebra.Order.Ring.Defs
-import Mathlib.Data.Nat.Basic
+import Mathlib.Tactic
 import Mathlib.Data.List.Basic
 import Mathlib.Tactic
 

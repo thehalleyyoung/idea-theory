@@ -1,0 +1,1110 @@
+\chapter{The Emergence Cocycle}\label{ch:emergence}
+
+\epigraph{\itshape ``The whole is something besides the parts.''}{Aristotle, \emph{Metaphysics} $\Delta$, 1041b.}
+
+The previous chapters built the kinematics of an idea algebra: a monoid
+$\IdMon$, a resonance pairing $\rho$, and the Aufhebung decomposition
+$a\compose b = \sigma(a,b) + \nu(a,b) + \eta(a,b)$. These data describe how
+ideas combine. They do not yet describe what is \emph{lost} or \emph{gained}
+when they do. The slogan of the present chapter is that whatever quantitative
+content is carried by an idea --- its cost, its information, its predictive
+accuracy, its survival fitness, its degree of belief --- almost never
+distributes over composition. The combined idea $a\compose b$ is, as a
+quantity, almost never the sum of $a$ and $b$. The discrepancy is a function
+of the pair $(a,b)$, and the central observation of the chapter is that this
+function, no matter what valuation it is the discrepancy of, satisfies a
+single algebraic constraint forced by associativity. That constraint is the
+2-cocycle identity, and the discrepancy is the \emph{emergence cocycle}
+$\omega$.
+
+We will derive $\omega$ from first principles, prove the cocycle identity
+(Theorem~\ref{thm:cocycle}), normalize $\omega$ at the unit, study its
+indeterminacy under coboundaries (Proposition~\ref{prop:cob}), and prove the
+Transmission Telescoping Theorem (Theorem~\ref{thm:telescope}) which
+expresses the value of an iterated composition as the sum of its parts plus a
+sum of pairwise emergence terms. We then make precise the distinction
+between \emph{weak} and \emph{strong} emergence in cohomological language:
+weak emergence corresponds to a uniformly bounded $\omega$, strong emergence
+to an $\omega$ that is non-trivial in the second cohomology
+$H^2(\Ideas, A)$. The chapter closes with a zoo of eight historical
+positions on emergence --- Mill, Broad, Anderson, Bedau, Kim, Chalmers,
+Holland, Sawyer --- each one a special case, refinement, or restriction of
+the cocycle picture.
+
+The mathematical content of the chapter has been formally verified in the
+Lean module \texttt{IdeaTheory.Extensions.EmergenceLevels}; we cite specific
+declarations from that module throughout. The sources of the proofs sketched
+here are also collected, for the cumulative-chain identities, in the file
+\texttt{Theorems5.lean} (the Structural Coherence and Hierarchical
+Decomposition theorems) and, for the unit-insertion calculus, in
+\texttt{Theorems7.lean} (the Composition Identity and Identity-Insertion
+Stability theorems for transmission chains).
+
+\section{The diagnostic: when does a valuation fail to be a homomorphism?}
+\label{sec:diagnostic}
+
+Fix a bare idea algebra $\IdMon$ and an abelian group $(A, +, 0)$. Often $A
+= \mathbb{R}$, but the entire formal apparatus works for any abelian group,
+and the case $A = \mathbb{Z}/2$ will reappear in
+Chapter~\ref{ch:grading} when we discuss parity invariants.
+
+\begin{definition}[Valuation]\label{def:valuation}
+A \emph{valuation} on $\IdMon$ with values in $A$ is any function
+\[
+  v : \Ideas \longrightarrow A.
+\]
+A valuation is \emph{additive} (or a \emph{homomorphism}) when
+\[
+  v(\unit) = 0
+  \qquad\text{and}\qquad
+  v(a\compose b) \;=\; v(a) + v(b)
+  \qquad\text{for all } a,b\in\Ideas.
+\]
+\end{definition}
+
+Examples of intended valuations are: the description length of an idea, its
+energy budget, its expected reward, its probability under a generative
+model, its number of conceptual primitives, its reading time, its citation
+count, the loss it incurs against a benchmark dataset, and so on. None of
+these are additive in general. The description length of the conjunction of
+two hypotheses is not the sum of their description lengths. The expected
+reward of a composite policy is rarely the sum of the rewards of its
+factors. The reading time of two arguments together exceeds the sum of
+their separate reading times by an amount that depends on how much one
+prepares for the other.
+
+\begin{definition}[Emergence cocycle of a valuation]\label{def:omega}
+For a valuation $v : \Ideas \to A$, the \emph{emergence cocycle} of $v$ is
+the binary function $\omega_v : \Ideas\times\Ideas \to A$ defined by
+\begin{equation}\label{eq:omega-def}
+  \omega_v(a,b) \;:=\; v(a\compose b) \;-\; v(a) \;-\; v(b).
+\end{equation}
+\end{definition}
+
+When the valuation is fixed by context we drop the subscript and write
+$\omega(a,b)$. The Lean declaration is
+\texttt{IdeaTheory.EmergenceLevels.omega}.
+
+The cocycle is, by construction, the obstruction to additivity:
+
+\begin{lemma}[Additivity criterion]\label{lem:additivity}
+A valuation $v$ with $v(\unit) = 0$ is additive if and only if $\omega_v
+\equiv 0$.
+\end{lemma}
+
+\begin{proof}
+If $v$ is a homomorphism then $\omega_v(a,b) = v(a\compose b) - v(a) - v(b) =
+0$ by definition; conversely, if $\omega_v \equiv 0$ then $v(a\compose b) =
+v(a) + v(b)$, and $v(\unit) = 0$ holds by hypothesis.
+\end{proof}
+
+In Lean this is the \texttt{isAdditive\_of\_hom} declaration; the converse
+direction is immediate from \texttt{IsAdditive} unfolding to the vanishing of
+\texttt{omega}.
+
+The diagnostic stance we take throughout the book is the following. Pick any
+quantity of interest --- pick anything you might write down a number for ---
+and ask: is its valuation additive over composition? Almost always the
+answer is no, and almost always the failure is structured. The cocycle
+$\omega_v$ is the structured failure. Far from a defect of the valuation, it
+is a positive piece of data: \emph{$\omega_v$ tells us what new resources are
+demanded, or new value is generated, by the act of composition.} A theory of
+emergence is, on this view, simply a theory of $\omega$.
+
+\begin{example}\label{ex:bool}
+Let $\Ideas = \mathrm{Bool}$ with composition given by disjunction and unit
+$\bot$. (The Lean instance for this idea algebra is in
+\texttt{IdeaTheory.EmergenceLevels}.) Let $v(\bot) = 0$, $v(\top) = 1$. Then
+\[
+  \omega_v(\top,\top) \;=\; v(\top\vee\top) - v(\top) - v(\top) \;=\; 1 - 1
+  - 1 \;=\; -1,
+\]
+so $v$ is not additive. We will return to this example throughout: it is the
+minimal nontrivial idea algebra exhibiting strong emergence.
+\end{example}
+
+\section{The cocycle identity}\label{sec:cocycle}
+
+The associativity of $\compose$ forces $\omega_v$ to satisfy a single
+quadratic identity in three variables. This identity is the engine of every
+subsequent result.
+
+\begin{theorem}[Cocycle identity, $\partial\omega = 0$]\label{thm:cocycle}
+Let $v : \Ideas \to A$ be any valuation and let $\omega = \omega_v$ be its
+emergence cocycle. For all $a,b,c \in \Ideas$,
+\begin{equation}\label{eq:cocycle}
+  \omega(b,c) \;-\; \omega(a\compose b,\,c) \;+\; \omega(a,\,b\compose c)
+  \;-\; \omega(a,b) \;=\; 0.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We expand each term using \eqref{eq:omega-def}:
+\begin{align*}
+  \omega(b,c) &= v(b\compose c) - v(b) - v(c),\\
+  \omega(a\compose b, c) &= v((a\compose b)\compose c) - v(a\compose b) -
+  v(c),\\
+  \omega(a, b\compose c) &= v(a\compose (b\compose c)) - v(a) - v(b\compose
+  c),\\
+  \omega(a,b) &= v(a\compose b) - v(a) - v(b).
+\end{align*}
+Substituting these into the left-hand side of \eqref{eq:cocycle} and
+collecting like terms, the variables $v(a), v(b), v(c), v(a\compose b),
+v(b\compose c)$ all cancel in matched $\pm$ pairs, and we are left with
+\[
+  v(a\compose (b\compose c)) \;-\; v((a\compose b)\compose c).
+\]
+By the associativity axiom for the monoid $\IdMon$, $(a\compose b)\compose c
+= a\compose (b\compose c)$, so this difference is $v$ applied to the same
+element minus itself, namely $0$.
+\end{proof}
+
+The cancellation is most easily verified by writing the eight $v$-terms in
+two columns:
+\[
+\begin{array}{r|l}
+\text{enters with sign }+ & \text{enters with sign }- \\\hline
+v(b\compose c),\ v(a\compose((b\compose c))),\ v(a\compose b),\ v(a),\ v(b)
+& v(b),\ v(c),\ v((a\compose b)\compose c),\ v(a\compose b),\ v(c),\\
+& v(a),\ v(b\compose c),\ v(a\compose b),\ v(a),\ v(b)
+\end{array}
+\]
+After cancelling the duplicated terms one is left with the difference
+$v(a\compose(b\compose c)) - v((a\compose b)\compose c)$, which vanishes by
+associativity. The verified declaration is
+\texttt{IdeaTheory.EmergenceLevels.cocycle\_identity}.
+
+\begin{remark}[The name ``cocycle'']\label{rem:cocycle}
+Write $C^n(\Ideas, A)$ for the abelian group of functions $\Ideas^n \to A$,
+and define the coboundary maps $\partial^n : C^n \to C^{n+1}$ by the usual
+bar-resolution formulas:
+\begin{align*}
+  (\partial^0 a)(x) &= 0 \qquad (a\in A,\ x\in\Ideas),\\
+  (\partial^1 f)(a,b) &= f(a\compose b) - f(a) - f(b),\\
+  (\partial^2 \omega)(a,b,c) &= \omega(b,c) - \omega(a\compose b, c) +
+  \omega(a, b\compose c) - \omega(a,b).
+\end{align*}
+Theorem~\ref{thm:cocycle} is the assertion that $\partial^2 \omega_v = 0$ for
+every valuation $v$, equivalently that the natural map $v \mapsto \omega_v$
+factors through the kernel of $\partial^2$. This places $\omega_v$ as a
+2-cocycle in the bar complex of the monoid $\IdMon$ with coefficients in
+$A$, in the sense of monoid cohomology. We will not need the full machinery
+of $H^*(\IdMon, A)$, but we will use $H^2$ in Section~\ref{sec:bounded}.
+\end{remark}
+
+\begin{remark}[Why associativity is the right hypothesis]
+The proof of Theorem~\ref{thm:cocycle} uses \emph{exactly} associativity ---
+nothing else. It uses neither the existence of a unit, nor the algebra
+operations on $A$ beyond addition, nor any property of $v$ beyond its being
+a function. The cocycle identity is therefore a fact about associative
+binary operations and abelian groups, not a fact peculiar to ideas. This is
+why every quantitative theory whose underlying combinatorics is associative
+ends up, eventually, encountering a 2-cocycle: physics with central
+extensions of Lie algebras, projective representations of groups, the
+Schur multiplier, the Brauer group, the Hochschild $H^2$ of an algebra. The
+emergence cocycle of an idea algebra is a member of this family.
+\end{remark}
+
+\section{Normalization}\label{sec:normalization}
+
+The cocycle of a generic valuation $v$ has nonzero ``edge values'' coming
+from $v(\unit)$. We record the precise form of these.
+
+\begin{lemma}[Edge values of $\omega$]\label{lem:edge}
+For any valuation $v : \Ideas \to A$ and any $a \in \Ideas$,
+\[
+  \omega_v(\unit, a) \;=\; -\,v(\unit), \qquad
+  \omega_v(a, \unit) \;=\; -\,v(\unit).
+\]
+\end{lemma}
+
+\begin{proof}
+By the unit law, $\unit\compose a = a$, so $\omega_v(\unit, a) = v(\unit
+\compose a) - v(\unit) - v(a) = v(a) - v(\unit) - v(a) = -v(\unit)$. The
+right-edge calculation is symmetric, using $a\compose \unit = a$.
+\end{proof}
+
+Hence:
+
+\begin{definition}[Normalized valuation]
+A valuation $v$ is \emph{normalized} if $v(\unit) = 0$.
+\end{definition}
+
+\begin{corollary}[Normalization of $\omega$]\label{cor:normalized-omega}
+If $v$ is normalized then
+\[
+  \omega_v(\unit, a) = 0 \qquad\text{and}\qquad \omega_v(a,\unit) = 0
+  \qquad\text{for all } a\in\Ideas.
+\]
+\end{corollary}
+
+In Lean these are \texttt{omega\_ident\_left\_of\_zero} and
+\texttt{omega\_ident\_right\_of\_zero}. Together they say that the cocycle
+of a normalized valuation is a \emph{normalized 2-cocycle} in the sense of
+the standard normalized bar complex of $\IdMon$.
+
+Normalization is mild: every valuation $v$ can be normalized by passing to
+$\widetilde v(a) := v(a) - v(\unit)\cdot\chi(a)$, where $\chi$ is any
+1-cochain with $\chi(\unit) = 1$. We will discuss this rigidification more
+carefully in Section~\ref{sec:coboundary}. For the rest of the chapter we
+silently assume valuations are normalized; the reader who prefers not to may
+restore the constant $-v(\unit)$ at the unit edges by hand.
+
+\begin{remark}
+The choice of normalization corresponds, in the bar complex, to working with
+the reduced (or normalized) chain groups $\bar C^n$, where $n$-cochains
+vanish whenever any argument is the unit. The inclusion $\bar C^* \hookrightarrow
+C^*$ is a quasi-isomorphism, so $H^*(\IdMon, A)$ may be computed either
+way.
+\end{remark}
+
+\section{Coboundaries and the equivalence relation on cocycles}
+\label{sec:coboundary}
+
+Two distinct valuations may carry the same emergence content, in the
+following precise sense.
+
+\begin{definition}[Coboundary of a 1-cochain]\label{def:coboundary}
+For $f : \Ideas \to A$, the \emph{coboundary} of $f$ is the function
+$\delta f : \Ideas\times\Ideas \to A$ defined by
+\[
+  (\delta f)(a,b) \;:=\; f(a\compose b) - f(a) - f(b).
+\]
+A function $\omega : \Ideas\times\Ideas \to A$ is a \emph{coboundary} if
+$\omega = \delta f$ for some $f$.
+\end{definition}
+
+The Lean definition is \texttt{IdeaTheory.EmergenceLevels.delta}; observe
+that, by Definition~\ref{def:omega}, $\omega_v = \delta v$. So:
+
+\begin{lemma}\label{lem:cob-of-val}
+The cocycle of a valuation $v$ is the coboundary of $v$ regarded as a
+1-cochain. Symbolically, $\omega_v = \delta v$.
+\end{lemma}
+
+In particular, every $\omega_v$ is a coboundary in the bar complex of
+$\IdMon$, hence is cohomologically trivial. This is not a contradiction
+with Section~\ref{sec:bounded}, where we will reintroduce nontrivial
+cohomology classes via a more refined notion of valuation. The point is:
+\emph{within the class of valuations $v : \Ideas \to A$ with no further
+structure}, every cocycle is a coboundary --- because every cocycle
+\emph{came from} a 1-cochain by Definition~\ref{def:omega}. The relevant
+question is which $\omega$ \emph{cannot be made to vanish} by replacing $v$
+with another valuation in a constrained class. To formalize this we look at
+how $\omega_v$ shifts when we perturb $v$.
+
+\begin{proposition}[Shift formula]\label{prop:cob}
+For any valuations $v, w : \Ideas \to A$,
+\begin{equation}\label{eq:shift}
+  \omega_{v+w}(a,b) \;=\; \omega_v(a,b) + \omega_w(a,b).
+\end{equation}
+In particular, if $w = f$ is regarded as a 1-cochain, then $\omega_{v+f} =
+\omega_v + \delta f$.
+\end{proposition}
+
+\begin{proof}
+Direct expansion:
+\begin{align*}
+  \omega_{v+w}(a,b) &= (v+w)(a\compose b) - (v+w)(a) - (v+w)(b)\\
+  &= [v(a\compose b) - v(a) - v(b)] + [w(a\compose b) - w(a) - w(b)]\\
+  &= \omega_v(a,b) + \omega_w(a,b). \qedhere
+\end{align*}
+\end{proof}
+
+The Lean form is \texttt{omega\_add} together with \texttt{omega\_sum}. The
+moral is that the map $v \mapsto \omega_v$ is $A$-linear in $v$, and it is
+exactly the coboundary operator $\delta$ of the bar complex.
+
+\begin{definition}[Cohomologous cocycles]\label{def:cohomologous}
+Two cocycles $\omega, \omega' \in \ker\partial^2$ are \emph{cohomologous},
+written $\omega \sim \omega'$, if their difference is a coboundary:
+\[
+  \omega \sim \omega' \quad\Longleftrightarrow\quad \omega' - \omega = \delta
+  f \text{ for some } f : \Ideas\to A.
+\]
+The set of equivalence classes is
+\[
+  H^2(\IdMon, A) \;:=\; \ker\partial^2 \,/\, \operatorname{im}\partial^1.
+\]
+\end{definition}
+
+\begin{remark}[The cohomology class of a valuation cocycle]\label{rem:class-trivial}
+Lemma~\ref{lem:cob-of-val} says that the class $[\omega_v] \in H^2(\IdMon, A)$
+of any valuation-induced cocycle is trivial. This sounds disappointing.
+The way nontriviality re-enters is by enlarging the universe of cocycles:
+we admit any $\omega : \Ideas^2 \to A$ that satisfies $\partial^2 \omega = 0$
+and is normalized, regardless of whether it arises from some $v$. In
+Sections~\ref{sec:bounded} and \ref{sec:zoo} we will see that such free
+cocycles correspond exactly to the strong-emergence phenomena of Chalmers
+\cite{ChalmersStrong} and the irreducible group cognition of Sawyer
+\cite{Sawyer2005}: there exists structure on $\Ideas\times\Ideas$ that no
+1-dimensional valuation can capture.
+\end{remark}
+
+\section{Telescoping along chains}\label{sec:telescope}
+
+Composition of three or more ideas can be parenthesized in many ways; by
+associativity all parenthesizations agree as elements of $\Ideas$, but their
+\emph{cocycle accountings} look different. The Transmission Telescoping
+Theorem reconciles all of them into a single formula.
+
+\begin{notation}\label{not:chain}
+For a list $a_1, \dots, a_n \in \Ideas$, write
+\[
+  a_1 \compose a_2 \compose \cdots \compose a_n
+\]
+for the (unambiguous, by associativity) composition of all $n$ factors.
+The Lean implementation is the \texttt{CompChain} function from
+\texttt{Theorems5.lean}; the basic computational identities (e.g.\ that
+\texttt{CompChain [a,b]} equals \texttt{op a b}) are
+\texttt{comp\_chain\_two}, \texttt{comp\_chain\_three}, etc.
+\end{notation}
+
+We require one piece of book-keeping: the \emph{prefix products}
+\[
+  P_k \;:=\; a_1 \compose a_2 \compose \cdots \compose a_k, \qquad 1\le k\le n,
+\]
+with the convention $P_1 = a_1$.
+
+\begin{theorem}[Transmission Telescoping]\label{thm:telescope}
+Let $v : \Ideas \to A$ be a normalized valuation with cocycle $\omega =
+\omega_v$, and let $a_1,\dots,a_n \in \Ideas$ be any list with $n \ge 1$.
+Then
+\begin{equation}\label{eq:telescope}
+  v\bigl(a_1\compose\cdots\compose a_n\bigr) \;=\; \sum_{k=1}^n v(a_k)
+  \;+\; \sum_{k=1}^{n-1} \omega(P_k,\,a_{k+1}).
+\end{equation}
+\end{theorem}
+
+In words: \emph{the value of a chained composition is the sum of the values
+of the parts plus a sum of pairwise emergence terms, one for each
+junction.} The emergence terms are computed against the running prefix, so
+the cocycle is sensitive to the entire history at the point of each new
+junction.
+
+\begin{proof}
+We argue by induction on $n$. The base cases $n=1$ and $n=2$ are immediate:
+for $n=1$, both sides equal $v(a_1)$ and the cocycle sum is empty; for
+$n=2$, $P_1 = a_1$ and \eqref{eq:telescope} reads $v(a_1\compose a_2) =
+v(a_1) + v(a_2) + \omega(a_1, a_2)$, which is the definition of $\omega$.
+
+For the inductive step, suppose \eqref{eq:telescope} holds for chains of
+length $n$. Let $a_1, \dots, a_{n+1}$ be a chain of length $n+1$, and write
+$Q := P_n = a_1\compose\cdots\compose a_n$, so that the full product is
+$Q\compose a_{n+1}$. By the cocycle definition applied at $(Q, a_{n+1})$,
+\[
+  v(Q\compose a_{n+1}) \;=\; v(Q) + v(a_{n+1}) + \omega(Q, a_{n+1}).
+\]
+By the inductive hypothesis applied to $Q$,
+\[
+  v(Q) \;=\; \sum_{k=1}^n v(a_k) + \sum_{k=1}^{n-1} \omega(P_k, a_{k+1}).
+\]
+Substituting,
+\[
+  v(Q\compose a_{n+1}) \;=\; \sum_{k=1}^n v(a_k) + \sum_{k=1}^{n-1}
+  \omega(P_k, a_{k+1}) + v(a_{n+1}) + \omega(P_n, a_{n+1}).
+\]
+Reindexing the sums to combine $v(a_{n+1})$ into the first sum and the new
+$\omega$-term into the second sum, this is precisely
+\[
+  \sum_{k=1}^{n+1} v(a_k) + \sum_{k=1}^{n} \omega(P_k, a_{k+1}),
+\]
+which is \eqref{eq:telescope} for the length-$(n+1)$ chain.
+\end{proof}
+
+\begin{corollary}[Symmetric form]\label{cor:tele-sym}
+If $\omega$ is, in addition, \emph{symmetric}, i.e.\ $\omega(a,b) =
+\omega(b,a)$, then equation \eqref{eq:telescope} can be rewritten as
+\[
+  v(a_1\compose\cdots\compose a_n) \;=\; \sum_{k=1}^n v(a_k) + \sum_{1\le i
+  < j \le n} \omega(a_i, a_j),
+\]
+provided $\omega$ extends additively in each argument over composition (an
+extra hypothesis that holds, e.g., when $\omega(a,b)$ depends only on
+``content tags'' of $a,b$ that are themselves additive).
+\end{corollary}
+
+\begin{remark}[Choice of parenthesization]
+The statement of Theorem~\ref{thm:telescope} appears to depend on the
+left-associative parenthesization $((a_1\compose a_2)\compose
+a_3)\cdots$. It does not. By Theorem~\ref{thm:cocycle} and the universality
+of associativity, any other parenthesization yields the same total emergence
+sum, modulo a permutation of the cocycle terms that the cocycle identity
+\eqref{eq:cocycle} forces to cancel. A formal proof uses the
+\texttt{decomp\_unique\_structure} lemma of \texttt{Theorems5.lean}: any two
+chain decompositions of a fixed element of $\Ideas$ have equal
+\texttt{CompChain} value, and hence equal $v$-image, so the right-hand sides
+must agree.
+\end{remark}
+
+The telescoping theorem is the precise version of the informal claim, made
+in nearly every emergentist text since Mill, that ``compound effects build
+up over a sequence of combinations.'' We will see in
+Sections~\ref{sec:zoo:holland} and \ref{sec:zoo:henrich-style} that
+several seemingly disparate models of cumulative novelty --- Holland's
+adaptive agents \cite{Holland1998}, Henrich's cultural ratchet
+\cite{Henrich2015} --- are precisely \eqref{eq:telescope} with different
+choices of $A$ and $\omega$.
+
+\subsection*{Functoriality and a glance at higher coboundaries}
+
+The shift formula \eqref{eq:shift} has a categorical reading worth
+recording. The assignment $A \mapsto C^*(\IdMon, A)$ from abelian groups to
+cochain complexes is functorial: a homomorphism $\varphi : A \to A'$
+induces $\varphi_* : C^n(\IdMon, A) \to C^n(\IdMon, A')$ by
+post-composition, and $\varphi_*$ commutes with $\partial$. Consequently,
+the cocycle of a transported valuation is the transport of the cocycle:
+\[
+  \omega_{\varphi\circ v} \;=\; \varphi \circ \omega_v.
+\]
+We will use this in Chapter~\ref{ch:grading} when transporting valuations
+along the grading homomorphism $\deg : \Ideas \to G$ and along quotient
+maps $G \twoheadrightarrow G/H$ that ``forget'' parts of the degree.
+
+A second piece of structural overhead, used only briefly in the present
+chapter, is the next coboundary $\partial^3 : C^3 \to C^4$:
+\[
+  (\partial^3 \xi)(a,b,c,d) := \xi(b,c,d) - \xi(a\compose b, c, d) +
+  \xi(a, b\compose c, d) - \xi(a, b, c\compose d) + \xi(a,b,c).
+\]
+A short calculation, of the same flavor as the proof of
+Theorem~\ref{thm:cocycle}, gives $\partial^3 \circ \partial^2 = 0$, so the
+$C^*(\IdMon, A)$ form a genuine cochain complex. The class $[\omega_v] \in
+H^2(\IdMon, A)$ is therefore a well-defined invariant attached to the
+isomorphism class of $v$ in the category of valuations modulo
+1-coboundaries.
+
+\subsection*{Three worked examples of telescoping}\label{sec:tele-examples}
+
+We illustrate Theorem~\ref{thm:telescope} on three idea algebras of
+increasing realism.
+
+\begin{example}[Powerset, cardinality]\label{ex:tele-power}
+Let $\Ideas = \mathbf{P}(X)$ for a finite set $X$, with $\compose = \cup$,
+$\unit = \emptyset$, and $v(S) = |S|$. Then $\omega_v(S, T) = -|S\cap T|$
+(Example~\ref{ex:signs}). For sets $S_1, \dots, S_n$, the prefix products
+are $P_k = S_1 \cup \cdots \cup S_k$ and \eqref{eq:telescope} reads
+\[
+  \Bigl|\bigcup_{k=1}^n S_k\Bigr| \;=\; \sum_{k=1}^n |S_k| \;-\;
+  \sum_{k=1}^{n-1} |P_k \cap S_{k+1}|,
+\]
+which is the standard step-wise inclusion-exclusion formula. The cocycle is
+sub-additive throughout, so by Lemma~\ref{lem:sign-tele} the cardinality
+of a union is at most the sum of the cardinalities, with equality iff the
+$S_k$ are pairwise disjoint.
+\end{example}
+
+\begin{example}[Free monoid, length]\label{ex:tele-free}
+Let $\Ideas = \Sigma^*$ be the free monoid on an alphabet $\Sigma$, with
+$\compose$ concatenation and $\unit$ the empty string. Take $v(w) =
+\mathrm{length}(w)$. Then $v$ is additive, $\omega_v \equiv 0$, and the
+telescoping formula collapses to the trivial $|w_1\cdots w_n| = \sum_k
+|w_k|$. So the free monoid carries no length-emergence: it is the formal
+home of a fully-reductive valuation.
+\end{example}
+
+\begin{example}[Free monoid, Kolmogorov complexity]\label{ex:tele-K}
+Same $\Ideas = \Sigma^*$, but now let $v(w) = K(w)$ be a fixed prefix-free
+Kolmogorov complexity. The cocycle $\omega_K(u, v) = K(uv) - K(u) - K(v)$ is
+no longer zero; up to an $O(\log\min(K(u), K(v)))$ term it is the negative
+of the algorithmic mutual information $I(u : v)$, by the symmetry-of-
+information theorem. The telescoping formula here gives
+\[
+  K(w_1\cdots w_n) \;=\; \sum_k K(w_k) \;-\; \sum_{k=1}^{n-1}
+  I(P_k : w_{k+1}) + O(\log n),
+\]
+which is a recognizable identity in algorithmic information theory and a
+direct application of Theorem~\ref{thm:telescope}.
+\end{example}
+
+These three examples exhibit, respectively, sub-additive bounded emergence,
+no emergence, and the typical regime of unbounded but
+information-theoretically-controlled emergence.
+
+\section{Bounded vs.\ unbounded $\omega$: weak and strong emergence}
+\label{sec:bounded}
+
+For the rest of the chapter take $A = \mathbb{R}$. The two modes of
+emergence universally distinguished in the philosophical literature ---
+weak and strong --- correspond to two quantitative properties of $\omega$.
+
+\begin{definition}[Weak/bounded emergence]\label{def:weak}
+A valuation $v : \Ideas \to \mathbb{R}$ is \emph{weakly emergent} (or
+\emph{$\omega$-bounded}) with bound $M \ge 0$ if
+\[
+  |\omega_v(a,b)| \;\le\; M \qquad\text{for all } a, b \in \Ideas.
+\]
+The infimum of admissible $M$ is the \emph{emergence radius} of $v$, written
+$\|\omega_v\|_\infty$.
+\end{definition}
+
+The Lean predicate is \texttt{IsBoundedEmergent}; the lemmas
+\texttt{isBoundedEmergent\_zero\_of\_additive},
+\texttt{isBoundedEmergent\_mono}, \texttt{isBoundedEmergent\_nonneg},
+\texttt{isBoundedEmergent\_smul}, \texttt{isBoundedEmergent\_add},
+\texttt{isBoundedEmergent\_add\_self} establish, respectively, that
+additive valuations are weakly emergent with $M=0$; the bound is monotone;
+the bound is non-negative on nonempty algebras; non-negative scalar
+multiples scale the bound; and the bound is sub-additive under addition of
+valuations.
+
+\begin{definition}[Strong emergence]\label{def:strong}
+A valuation $v$ is \emph{strongly emergent} if there is no additive
+valuation $v' : \Ideas \to \mathbb{R}$ that agrees with $v$ pointwise:
+\[
+  \neg\,\exists\,v'\,:\,\Ideas\to\mathbb{R} \;\text{ such that }\;
+  v'\text{ is additive and } v'(a) = v(a) \text{ for all } a\in\Ideas.
+\]
+\end{definition}
+
+The Lean predicate is \texttt{IsStronglyEmergent}.
+
+The two definitions appear unrelated --- one quantitative, one
+existential. The following observation, verified in Lean as
+\texttt{stronglyEmergent\_iff\_not\_additive}, collapses the existential.
+
+\begin{proposition}[Strong emergence as non-additivity]\label{prop:strong-iff}
+A valuation $v$ is strongly emergent if and only if $v$ itself is not
+additive, i.e.\ $\omega_v \not\equiv 0$.
+\end{proposition}
+
+\begin{proof}
+The reverse direction is contrapositive: if $v$ is additive, then $v' := v$
+witnesses the negation of strong emergence.
+
+For the forward direction, suppose $v$ is not strongly emergent. Then there
+is an additive $v'$ with $v'(a) = v(a)$ for all $a$. From pointwise
+agreement, $v'(a\compose b) = v(a\compose b)$, $v'(a) = v(a)$, $v'(b) =
+v(b)$. Substituting into $\omega_{v'}(a,b) = 0$ gives $v(a\compose b) -
+v(a) - v(b) = 0$, i.e.\ $\omega_v(a,b) = 0$. Since $a,b$ were arbitrary,
+$v$ is additive.
+\end{proof}
+
+This proposition is at first sight a deflation: ``strong emergence'' as a
+predicate of \emph{single} valuations reduces to non-additivity, which is
+the same as $\omega_v \neq 0$. The genuine cohomological content of strong
+emergence appears only when one passes to the \emph{class of all valuations
+sharing some structural property} --- e.g.\ ``valuations measurable with
+respect to a sub-$\sigma$-algebra of constituents,'' or ``valuations
+expressible as polynomial functions of base-feature counts,'' or, in the
+philosophical setting, ``valuations expressible by physical
+science''. Within such a constrained class, an $\omega$ that cannot be
+realized as $\delta f$ for any $f$ \emph{in the class} is a genuine
+cohomological obstruction. This is the precise reading we propose for
+Chalmers \cite{ChalmersStrong}: weak emergence is bounded $\omega_v$ for an
+allowed valuation $v$; strong emergence is an $\omega$-class in the
+restricted cohomology $H^2(\IdMon, \mathbb{R})_{\mathrm{phys}}$ that is
+nontrivial even though it may be a coboundary in the unrestricted
+$H^2(\IdMon, \mathbb{R})$.
+
+\begin{example}[Continuation of Example~\ref{ex:bool}]\label{ex:bool-strong}
+The \texttt{Bool} indicator valuation $v(\bot) = 0$, $v(\top) = 1$ on the
+disjunction monoid is weakly emergent with optimal bound $M = 1$ (verified
+as \texttt{boolIndicator\_boundedEmergent}) and strongly emergent (verified
+as \texttt{boolIndicator\_stronglyEmergent}). The key cocycle value is
+$\omega_v(\top, \top) = -1$, witnessing non-additivity. So a single
+two-element idea algebra suffices to realize both emergence modes. The
+generalization to $\mathbf{P}(X)$ (the powerset of a finite set, with
+union as composition and the cardinality $v(S) = |S|$ as valuation) is the
+inclusion-exclusion principle, with $\omega_v(S, T) = -|S\cap T|$.
+\end{example}
+
+\begin{remark}[The taxonomy at a glance]
+We may summarize the four positions a valuation can occupy as follows.
+\begin{center}
+\begin{tabular}{lll}\toprule
+& $\omega_v \equiv 0$ & $\omega_v \not\equiv 0$\\\midrule
+$|\omega_v| \le M$ for some $M$ & additive (no emergence) & weakly emergent\\
+$|\omega_v|$ unbounded & impossible & strongly emergent (and unbounded)\\
+\bottomrule
+\end{tabular}
+\end{center}
+The upper-left cell is the trivial case; the upper-right is Bedau's regime;
+the lower-right is Chalmers's regime; the lower-left is empty because
+$\omega_v \equiv 0$ already gives bound zero. There is also a refinement of
+the upper-right by the size of $\|\omega_v\|_\infty$: a valuation with very
+small emergence radius is ``almost additive'' and we will sometimes call
+such valuations \emph{$\varepsilon$-additive}.
+\end{remark}
+
+\subsection*{Sub-additivity, super-additivity, and the sign of $\omega$}
+
+In many applied settings the cocycle has a definite sign. We pause to record
+the standard vocabulary, which appears throughout the zoo of
+Section~\ref{sec:zoo}.
+
+\begin{definition}[Sign regimes]\label{def:sign}
+A valuation $v$ is \emph{super-additive} if $\omega_v(a,b) \ge 0$ for all
+$a, b \in \Ideas$, and \emph{sub-additive} if $\omega_v(a,b) \le 0$ for
+all $a, b$. It is \emph{$\omega$-positive on $S \subseteq \Ideas\times
+\Ideas$} if $\omega_v|_S \ge 0$, and analogously for negative.
+\end{definition}
+
+\begin{example}[Common sign patterns]\label{ex:signs}
+\textit{(a)} Cardinality on the powerset monoid $(\mathbf{P}(X), \cup,
+\emptyset)$ is sub-additive: $\omega_v(S, T) = -|S \cap T| \le 0$, with
+equality iff $S$ and $T$ are disjoint. \textit{(b)} The free-energy of a
+joint physical system is super-additive when interactions are repulsive and
+sub-additive when interactions are attractive. \textit{(c)} Description
+length under any prefix-free code is super-additive on average and
+sub-additive in the presence of shared sub-strings, by Kraft's inequality.
+\textit{(d)} The Boolean indicator of Example~\ref{ex:bool} is sub-additive
+with $\omega_v(\top,\top) = -1$.
+\end{example}
+
+\begin{lemma}[Sign and telescoping]\label{lem:sign-tele}
+If $v$ is super-additive (resp.\ sub-additive), then for every chain
+$a_1, \dots, a_n$ with $n \ge 1$,
+\[
+  v(a_1\compose\cdots\compose a_n) \;\ge\; \sum_{k=1}^n v(a_k)
+  \quad(\text{resp. } \le).
+\]
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{thm:telescope} the left-hand side equals $\sum_k v(a_k) +
+\sum_{k=1}^{n-1} \omega_v(P_k, a_{k+1})$. If every $\omega_v(P_k, a_{k+1})
+\ge 0$ then the cocycle sum is non-negative, and the inequality follows;
+the sub-additive case is dual.
+\end{proof}
+
+The sign regime is preserved under non-negative scaling and under sums of
+same-sign valuations. It interacts well with bounded emergence: a
+super-additive $M$-bounded valuation has cocycle in $[0, M]$, which is the
+appropriate setting for entropy-like and complexity-like valuations. The
+sign vocabulary will be most useful in Section~\ref{sec:zoo:anderson} (where
+positive cocycle is what makes ``more'' different), in
+Section~\ref{sec:zoo:holland} (where same-sign cocycles cumulate
+monotonically along chains), and in Section~\ref{sec:zoo:mill} (where
+heteropathy is silent on sign and so sub-additive and super-additive
+heteropathy are both observed empirically).
+
+\section{The zoo}\label{sec:zoo}
+
+We close with eight historical positions on emergence, each one a special
+case, refinement, or restriction of the cocycle picture.
+
+\subsection{Mill --- heteropathic laws}\label{sec:zoo:mill}
+
+\paragraph{Original claim.} In Book III, Chapter VI of \emph{A System of
+Logic} \cite{Mill1843}, John Stuart Mill distinguishes
+\emph{homopathic} from \emph{heteropathic} laws of causation. A homopathic
+law is one in which ``the joint effect of several causes is identical with
+the sum of their separate effects''; this is the principle Mill calls the
+\emph{Composition of Causes}, and it is exemplified by the parallelogram of
+forces in mechanics. A heteropathic law is one in which the principle
+fails: the conjoint operation of two causes produces an effect that is not
+the resultant of what each would have produced alone. Mill cites chemistry
+as the paradigmatic source of heteropathic laws --- the properties of
+water are not the sum of the properties of hydrogen and oxygen --- and
+extends the morphology to physiological and mental phenomena. The
+distinction is meant to mark the boundary between the domain of
+deductive-mechanical science and the domain of what later authors will
+call emergent science.
+
+\paragraph{Formal restatement.} Take $\Ideas$ to be the set of causes (or
+mechanisms) under study, $\compose$ to be their conjoint operation, and let
+$v : \Ideas \to A$ be the valuation that records ``the effect''. Mill's
+\emph{Composition of Causes} is exactly the assertion that $v$ is additive,
+i.e.\ $\omega_v \equiv 0$. Heteropathy is the assertion that $\omega_v$ is
+not identically zero somewhere, i.e.\ that there exist $a, b \in \Ideas$
+with $\omega_v(a, b) \ne 0$. Mill's chemical example is the chemical
+analogue of Example~\ref{ex:bool-strong}: at the pair (hydrogen, oxygen)
+the cocycle takes a nonzero value (the value, in fact, that yields water).
+
+\paragraph{Status.} Made true (\emph{ipso facto}, by definition) by
+Theorem~\ref{thm:cocycle} together with Lemma~\ref{lem:additivity}: every
+valuation has a cocycle, the cocycle is identically zero exactly when the
+valuation is homopathic, and otherwise the cocycle records, pointwise, the
+extent and direction of heteropathy. So Mill's typology is not a typology of
+laws but of \emph{(valuation, pair-of-causes)} relations, and
+$\omega_v(a,b)$ is the precise quantitative content of ``how much
+heteropathy'' obtains at $(a,b)$.
+
+\paragraph{Commentary.} Mill himself worried that heteropathic laws might
+admit no scientific treatment, since the joint effect could be ``anything
+whatever''. The cocycle picture corrects this by exhibiting the
+\emph{constraint} on heteropathy: even maximally heteropathic $\omega_v$
+must satisfy the cocycle identity $\partial^2\omega_v = 0$
+\eqref{eq:cocycle}, so heteropathic laws are not lawless --- they are
+laws of a different (cohomological) type. Mill's insight is correct in
+direction but understates the residual structure available. We will use this
+correction in Chapter~\ref{ch:grading} to show that even thoroughly
+heteropathic phenomena may admit a coherent grading.
+
+\subsection{C.\,D.\ Broad --- emergent qualities}\label{sec:zoo:broad}
+
+\paragraph{Original claim.} In \emph{The Mind and Its Place in Nature}
+\cite{Broad1925}, C.\,D.\ Broad articulates the emergentist position with
+greater precision than Mill. Broad's central concept is that of an
+\emph{emergent quality}: a property of an aggregate $A_1 + \cdots + A_n$
+that is not deducible, even by an ideal scientist, from the most complete
+knowledge of the properties of the $A_i$ in isolation \emph{and} of the
+properties of all aggregates of comparable kind in which the $A_i$
+appear. Broad distinguishes mechanism (everything is in principle
+deducible), emergent materialism (some properties are emergent in his
+strict sense), and substantival vitalism (the aggregate has constituents not
+present in the parts). His thesis, applied to chemistry, biology, and mind,
+is the second.
+
+\paragraph{Formal restatement.} Take $A = \mathbb{R}$ and consider a
+restricted class $\mathcal V_{\mathrm{deduc}}$ of valuations $v$ that are
+``deducible from constituents'' --- formally, those expressible as the
+restriction to $\Ideas$ of some prescribed set of formulas in the
+properties of atomic ideas. Broad's claim is that there are pairs $(a, b)$
+and quantities $v$ such that $\omega_v(a, b) \ne 0$ \emph{and} $v$ does
+not lie in $\mathcal V_{\mathrm{deduc}}$. Equivalently, $[\omega_v] \in
+H^2(\IdMon, \mathbb{R})_{\mathcal V_{\mathrm{deduc}}}$ is nontrivial.
+
+\paragraph{Status.} Contingent on the choice of $\mathcal
+V_{\mathrm{deduc}}$. The cocycle picture establishes that the question
+``which valuations have nontrivial emergence?'' is a question about
+$H^2$ relative to a class of allowed cobounding 1-cochains. The Lean
+predicate \texttt{IsStronglyEmergent} witnesses Broad's notion at the
+\emph{absolute} level (no additive $v'$ at all matches $v$ pointwise);
+Broad's interest is the relative case. Theorem~\ref{thm:cocycle} forces
+even ``emergent qualities'' to obey the cocycle identity, which Broad did
+not anticipate.
+
+\paragraph{Commentary.} Broad's careful definition of ``deducibility'' as
+relative to a base of \emph{accessible aggregates} is the precise content of
+the constraint that the cobounding 1-cochain $f$ live in a particular
+function class. As McLaughlin and others have noted in the revival of
+British emergentism \cite{Anderson1972}, the trouble with classical
+emergentism was the absence of a vocabulary for the constraint. The cocycle
+picture supplies it: Broad's emergent qualities are cocycles whose
+classes survive in the obstruction group $H^2$ of the deducibility
+calculus.
+
+\subsection{Anderson --- ``More is different''}\label{sec:zoo:anderson}
+
+\paragraph{Original claim.} Philip W.\ Anderson's 1972 \emph{Science}
+article \cite{Anderson1972} argues against the constructionist hypothesis ---
+the view that knowledge of fundamental laws plus computational power
+suffices to derive the behavior of large aggregates. Anderson's slogan,
+``more is different,'' asserts that at each level of complexity new
+phenomena appear that require new concepts. The article is the founding
+manifesto of condensed-matter and complex-systems perspectives in physics,
+and supplies the rallying cry of the emergentist research program for the
+remainder of the twentieth century.
+
+\paragraph{Formal restatement.} Anderson is asserting that the iterated
+composition $a_1 \compose \cdots \compose a_n$ admits valuations $v$ for
+which the residual sum $\sum_{k=1}^{n-1} \omega_v(P_k, a_{k+1})$ from
+Theorem~\ref{thm:telescope} dominates the linear term $\sum_{k=1}^n
+v(a_k)$ as $n$ grows. ``More is different'' is the assertion that
+$\omega_v$ is not only nonzero but unbounded, so that the cocycle
+contribution to large-$n$ chains becomes the leading-order phenomenon. In
+this formulation the magnitude of $v(a_1\compose\cdots\compose a_n)$ is
+not predicted by knowledge of $v(a_k)$ alone.
+
+\paragraph{Status.} True under the explicit hypothesis that $\omega_v$ is
+unbounded; false otherwise. Theorem~\ref{thm:telescope} makes the slogan
+\emph{quantitative}: it says exactly how much more is different, namely the
+prefix-sum $\sum \omega_v(P_k, a_{k+1})$. The Lean lemma
+\texttt{isBoundedEmergent\_nonneg} forces this sum to be at most $(n-1)M$
+when $\omega_v$ is $M$-bounded; in the strong-emergence regime the bound
+fails and the sum can grow super-linearly in $n$.
+
+\paragraph{Commentary.} Anderson's article is often misread as a
+\emph{philosophical} thesis about reduction. Read against the cocycle
+picture, it is in fact a \emph{quantitative} claim about a specific limit:
+in the regime $n \to \infty$, the cocycle term in \eqref{eq:telescope}
+overwhelms the additive term. The cocycle picture predicts when this
+happens (whenever $|\omega_v|$ has a positive lower bound on a sufficiently
+recurrent sub-monoid) and when it does not (whenever $\omega_v$ is summable
+in some norm). This makes ``more is different'' a testable hypothesis per
+choice of $\Ideas$ and $v$, not a metaphysical posit.
+
+\subsection{Bedau --- weak emergence}\label{sec:zoo:bedau}
+
+\paragraph{Original claim.} Mark Bedau \cite{Bedau1997} introduces the
+concept of \emph{weak emergence}: a macrostate $P$ of a system $S$ is
+weakly emergent just in case $P$ is \emph{derivable} from $S$'s
+microdynamics, but only by simulation --- i.e., there is no shortcut
+deduction, only step-by-step iteration. Bedau's notion is intended to
+respect the autonomy of the special sciences (which study weakly emergent
+properties) without demanding the metaphysical commitments of strong
+emergentism. Subsequent literature \cite{Holland1998} adopts weak
+emergence as the standard formal notion in complex-systems modeling.
+
+\paragraph{Formal restatement.} Bedau's regime is the case where $\omega_v$
+exists, is nonzero, and is uniformly bounded: there is some $M$ with
+$|\omega_v(a,b)| \le M$ for all pairs. By Theorem~\ref{thm:telescope},
+the value of a chain of length $n$ is then known up to additive error at
+most $(n-1)M$ once one knows the parts $a_k$. ``Derivable by simulation''
+becomes ``compute the prefix products $P_k$ and sum the cocycle terms ---
+no closed-form is possible without doing the computation.''
+
+\paragraph{Status.} True \emph{by definition} once the verbal definition is
+translated into the cocycle vocabulary. The Lean predicate
+\texttt{IsBoundedEmergent} is a literal mathematization of Bedau's
+informal definition, with the bound $M$ playing the role of the ``small
+constant of unpredictability per simulation step.''
+
+\paragraph{Commentary.} Bedau's appeal to ``simulation'' has a precise
+algebraic shadow in the cocycle picture: the simulation is the iterated
+evaluation of $\omega_v$ at successive prefix-junctions $P_k$, and the
+``inevitability of simulation'' is the algebraic fact that $\omega_v$ does
+not factor through a hom (i.e., is not a coboundary of an
+``algorithmically-evaluable'' 1-cochain $f$). The weak-emergence regime is
+also the regime in which the cocycle contributes only a bounded correction
+per step, so that ergodic averages of $v$ along chains are well-defined.
+This is the technical content of the ``coarse-graining'' perspectives in
+complex-systems modeling, which are recovered as quotients of $\Ideas$
+under equivalence by chains whose cumulative cocycle is bounded.
+
+\subsection{Kim --- downward causation and the exclusion problem}
+\label{sec:zoo:kim}
+
+\paragraph{Original claim.} Jaegwon Kim's \emph{Mind in a Physical World}
+\cite{Kim1998} formulates the \emph{exclusion problem} for nonreductive
+physicalism. The problem is this: if every physical effect has a sufficient
+physical cause, and if mental properties supervene on physical ones, then
+mental causes are causally redundant unless mental properties have causal
+powers \emph{not} possessed by their physical realizers. The latter would be
+\emph{downward causation}, and Kim argues that downward causation is
+incoherent under standard supervenience. The result is a dilemma: either
+mental properties are reducible (and the special sciences have no
+autonomous causal vocabulary), or they are causally inert.
+
+\paragraph{Formal restatement.} Take $\Ideas$ to be a category of physical
+states with composition the temporal evolution operator, and $v$ a
+``mental'' valuation. Supervenience is the assertion that $v$ factors through
+the equivalence relation of physical indistinguishability. The exclusion
+problem is then: if $v$ is supervenient and additive over composition, then
+$v$ adds no causal information beyond what the underlying additive physical
+valuation already provides. The cocycle picture identifies the locus of
+\emph{causal autonomy} of $v$ with the cocycle $\omega_v$: where
+$\omega_v(a,b) \ne 0$, the value $v(a\compose b)$ is not determined by
+$v(a) + v(b)$ alone, so the joint state $a\compose b$ has a $v$-property
+not present in either part.
+
+\paragraph{Status.} The exclusion problem is, when so reformulated,
+\emph{circumvented} by any $v$ whose $\omega_v$ is not a coboundary of any
+function $f$ supervenient on the physical level. The Lean
+\texttt{stronglyEmergent\_iff\_not\_additive} theorem
+(Proposition~\ref{prop:strong-iff}) provides the dichotomy: either $v$ is
+strongly emergent, in which case the supervenience-respecting cobounding
+data $f$ does not exist, or $v$ is additive, in which case Kim's worry is
+correct.
+
+\paragraph{Commentary.} The cocycle perspective dissolves the alleged
+incoherence of downward causation by relocating it from a metaphysical to a
+cohomological problem. ``Downward causation'' is the negation of the
+existence of a physically-supervenient $f$ with $\omega_v = \delta f$. Such
+non-existence is a perfectly coherent algebraic condition, with examples
+\cite{Bedau1997, Anderson1972}. We do not claim that the cocycle
+formulation \emph{settles} Kim's exclusion problem in favor of nonreductive
+physicalism; we claim only that the problem becomes a tractable algebraic
+question once cast in cocycle terms, with the answer depending on the
+allowed function class for the cobounding 1-cochain.
+
+\subsection{Chalmers --- strong vs.\ weak emergence}\label{sec:zoo:chalmers}
+
+\paragraph{Original claim.} David Chalmers \cite{ChalmersStrong} distinguishes
+\emph{weak emergence} (a high-level property is unexpected given the
+low-level facts but in principle deducible from them) from \emph{strong
+emergence} (a high-level property is not even in principle deducible from
+the low-level facts). Chalmers takes consciousness to be the only credible
+candidate for strong emergence in nature; he takes weak emergence to be the
+default mode of nontrivial high-level science (\cite{Bedau1997, Holland1998}).
+Chalmers's distinction is finer than Anderson's or Mill's because it is
+explicitly modal: it concerns what is in-principle derivable, not what is
+practically computable.
+
+\paragraph{Formal restatement.} Weak emergence is, again, the bounded
+$\omega_v$ regime of Definition~\ref{def:weak}; strong emergence is the
+nontriviality of $[\omega_v]$ in $H^2(\IdMon, \mathbb{R})$ relative to the
+class of low-level cobounding 1-cochains. The Lean predicate
+\texttt{IsStronglyEmergent} is a candidate formalization of the absolute
+case; the relative case requires fixing an ``in-principle deducibility''
+class and asking whether $\omega_v$ is a coboundary of any $f$ in that
+class.
+
+\paragraph{Status.} True (under the chosen translation) by
+Theorem~\ref{thm:cocycle} and Proposition~\ref{prop:strong-iff}. The
+formalization makes Chalmers's distinction precise:
+\begin{itemize}
+\item \emph{Bounded $\omega_v$, $\omega_v = \delta f$ for $f$ in the class}:
+no emergence, additive valuation.
+\item \emph{Bounded $\omega_v$, $\omega_v = \delta f$ for $f$ outside the
+class}: weak emergence (Bedau).
+\item \emph{Unbounded or non-cobounded $\omega_v$ in the class}: strong
+emergence (Chalmers).
+\end{itemize}
+The Lean lemmas \texttt{boolIndicator\_boundedEmergent} (weak) and
+\texttt{boolIndicator\_stronglyEmergent} (strong) demonstrate that both
+regimes are realized in a finite, fully verified example.
+
+\paragraph{Commentary.} Chalmers's argument that consciousness is strongly
+emergent translates, in the cocycle picture, to the empirical claim that no
+physically-cobounding 1-cochain $f$ recovers the cocycle $\omega_v$ of the
+``what-it-is-like'' valuation. The cocycle picture is silent on whether
+this empirical claim is true; it provides only the vocabulary in which the
+question becomes a precise algebraic one. We regard this as substantial
+clarificatory progress over the modal phrasing.
+
+\subsection{Holland --- emergence in complex adaptive systems}
+\label{sec:zoo:holland}
+
+\paragraph{Original claim.} John Holland's \emph{Emergence: From Chaos to
+Order} \cite{Holland1998} develops a theory of emergence in complex adaptive
+systems based on agents, interactions, and the cumulative effect of
+many-step rule applications. Holland's central technical concept is the
+\emph{constrained generating procedure} (CGP): a system of agents whose
+interactions, although locally simple, produce globally novel behavior over
+many iterations. Examples in Holland's text include cellular automata,
+Echo (his agent-based model of artificial economies), classifier
+systems, and the games of Go and chess. Emergence, for Holland, is the
+build-up of structure that no analysis of single-step rules can predict.
+
+\paragraph{Formal restatement.} Holland's CGP is precisely the chain
+$a_1 \compose \cdots \compose a_n$ of Theorem~\ref{thm:telescope}, with
+$a_k$ the rule applied at step $k$ and $v$ the valuation recording the
+relevant macroscopic observable. The ``cumulative novelty'' of $n$ steps is
+$\sum_{k=1}^{n-1} \omega_v(P_k, a_{k+1})$. Holland's claim that emergence
+``builds up'' is the assertion that this sum grows nontrivially with $n$ ---
+in particular that $\omega_v$ is not a coboundary, since otherwise the
+sum would telescope to $f(P_n) - \sum_k f(a_k)$, a difference of
+1-cochain values bounded by $\|f\|_\infty$ and hence not growing.
+
+\paragraph{Status.} True, by Theorem~\ref{thm:telescope}, for any chain
+$a_1, \dots, a_n$ such that $\omega_v$ accumulates rather than telescopes.
+The case in which $\omega_v$ telescopes (i.e.\ is a coboundary) is precisely
+the regime of \emph{additive} emergence, where Holland's distinctive
+phenomenology disappears. Holland's empirical claim about CGPs is then the
+claim that natural CGPs lie in the non-coboundary regime.
+
+\paragraph{Commentary.} Holland's identification of emergence with
+\emph{cumulative novelty along chains} is exactly the right intuition for
+the cocycle picture, and Theorem~\ref{thm:telescope} is its formal
+expression. The Lean lemmas \texttt{comp\_chain\_pair, comp\_chain\_triple,
+comp\_chain\_quad, comp\_chain\_pent} of \texttt{Theorems5.lean} unfold the
+chain valuation explicitly for $n = 2, 3, 4, 5$, exhibiting the cumulative
+$\omega$-sum at each scale. Holland's CGPs sit naturally as the
+sub-monoids of $\IdMon$ generated by a finite rule alphabet; the
+generating procedure is the chain enumeration, and the constraint is the
+choice of admissible $a_k$ at each step.
+
+\subsection{Sawyer --- non-reducible group cognition}\label{sec:zoo:sawyer}
+
+\paragraph{Original claim.} R.\ Keith Sawyer \cite{Sawyer2005} argues that
+group-level cognitive phenomena --- collective decision-making, jury
+deliberation, jazz improvisation, classroom discourse --- are
+\emph{nonreducible} to individual cognition in the sense that no aggregation
+function over individuals' mental states predicts the group state. Sawyer
+draws on Durkheim's distinction between social facts and individual facts,
+on Hutchins's distributed-cognition program, and on his own ethnographic
+work on improvisational performance. His thesis is that group cognition has
+its own dynamics, irreducible to individual cognition by any aggregation rule.
+
+\paragraph{Formal restatement.} Take $\Ideas$ to be the algebra of
+deliberative contributions of group members, $\compose$ the conversational
+combination operator, and $v$ a valuation recording group-level cognitive
+output (decision, performance, classroom achievement). Sawyer's
+nonreducibility is the assertion that no aggregation 1-cochain $f$ on
+individual contributions cobounds the group cocycle $\omega_v$, i.e.\ that
+$[\omega_v]$ is nontrivial in $H^2$ relative to the class of
+``individualistic'' aggregation functions.
+
+\paragraph{Status.} Contingent: Sawyer's nonreducibility is a special case
+of Chalmers strong emergence (Section~\ref{sec:zoo:chalmers}), restricted
+to the class of aggregation cochains over individuals. The cocycle picture
+neither establishes nor refutes Sawyer's claim, but it identifies its
+algebraic shape and makes empirical tests well-defined: one tests Sawyer's
+thesis by trying, and failing, to construct an $f$ with $\delta f = \omega_v$
+within the class of individual-aggregation functions. Failure is a positive
+result; success is a refutation.
+
+\paragraph{Commentary.} Sawyer's case is methodologically the cleanest of
+the eight: the constraint class on the cobounding cochain is naturally
+defined by the social-scientific question (``can we predict group output
+from individual inputs alone?''), and the cocycle obstruction is naturally
+measured in observed deviations from prediction. The cocycle picture
+clarifies that ``group cognition has its own dynamics'' need not contradict
+methodological individualism; it requires only that the group-level cocycle
+$\omega_v$ have nontrivial class relative to individual-aggregation
+1-cochains, while being trivial in the larger class admitting also
+interactional coboundary terms. This is the precise sense in which Sawyer's
+position is consistent with Holland's: both are non-coboundary statements
+about cumulative novelty along chains, differing only in the chosen
+constraint class.
+
+\subsection*{Cross-cutting remarks}\label{sec:zoo:cross}
+
+Several of the eight zoo entries make claims that, in the cocycle
+vocabulary, become directly comparable. Mill's heteropathy
+(Section~\ref{sec:zoo:mill}) is just the predicate $\omega_v \not\equiv 0$,
+and so is the negation of additivity. Broad's emergent qualities
+(Section~\ref{sec:zoo:broad}) refine this by restricting the class of
+admissible cobounding 1-cochains. Anderson's ``more is different''
+(Section~\ref{sec:zoo:anderson}) is the additional quantitative claim that
+the cocycle term in Theorem~\ref{thm:telescope} dominates the linear sum
+asymptotically. Bedau's weak emergence (Section~\ref{sec:zoo:bedau})
+sharpens to bounded $\omega_v$, which by Lemma~\ref{lem:sign-tele} prevents
+both unbounded super- and unbounded sub-additivity. Kim's exclusion
+problem (Section~\ref{sec:zoo:kim}) is the question whether $\omega_v$ is a
+coboundary of a supervenience-respecting $f$. Chalmers's strong/weak
+distinction (Section~\ref{sec:zoo:chalmers}) is the quotient of these two
+predicates --- bounded vs.\ non-cobounded --- and forms a $2\times 2$ grid.
+Holland's CGPs (Section~\ref{sec:zoo:holland}) realize the chain
+telescoping on a non-coboundary cocycle. Sawyer's group cognition
+(Section~\ref{sec:zoo:sawyer}) is Chalmers strong emergence relative to a
+specific class of individualistic cobounding functions.
+
+This is not a coincidence. The cocycle picture is what one naturally
+arrives at by asking, for any quantitative theory of composite phenomena,
+``how does the value of the whole compare to the values of the parts?''
+The associativity of composition forces that comparison to live in
+$H^2$, and the entire emergentist tradition is the (until-now informal)
+exploration of what it means for a $\omega_v$ to be nonzero, bounded,
+unbounded, or cohomologically nontrivial in some restricted class.
+
+\section{Closing}
+
+The chapter has assembled the algebraic skeleton of emergence. The single
+abstract object is the 2-cocycle $\omega_v$ of a valuation $v$; its
+defining identity is associativity-forced (Theorem~\ref{thm:cocycle}); it
+is normalized at the unit (Corollary~\ref{cor:normalized-omega}); and it
+telescopes along chains (Theorem~\ref{thm:telescope}). The vocabulary of
+weak vs.\ strong emergence is recovered from the boundedness vs.\
+non-coboundedness of $\omega_v$ in an appropriate cohomology
+(Section~\ref{sec:bounded}). Eight historical positions on emergence are
+reconstructed as instances of, or constraints on, the cocycle, with
+verifiable consequences in each case (Section~\ref{sec:zoo}).
+
+A useful slogan to take from the chapter is the following: in every
+quantitative theory of composite phenomena there is a natural valuation $v$,
+and \emph{the only thing the cocycle $\omega_v$ records is what we did not
+know about the whole from knowing the parts}. The cocycle is therefore not
+an exotic addendum to a working theory but the precise residual that
+distinguishes the theory from its naively-additive shadow. The size, sign,
+boundedness, and cohomology class of $\omega_v$ are then four orthogonal
+empirical questions, each independently testable, and each with a
+well-defined position in the philosophical literature surveyed in
+Section~\ref{sec:zoo}. We have not promised that the cocycle picture
+\emph{settles} the disputes between Mill, Broad, Anderson, Bedau, Kim,
+Chalmers, Holland, and Sawyer; we have shown only that it furnishes the
+common vocabulary in which their disputes become tractable. The
+chapters to come exploit that vocabulary at length.
+
+The Lean formalization in \texttt{IdeaTheory.Extensions.EmergenceLevels}
+verifies all the technical claims of Sections~\ref{sec:diagnostic}--%
+\ref{sec:bounded}: definition of $\omega$, the cocycle identity, both
+normalization theorems, the shift formula, the bounded-$\omega$ closure
+properties, and the equivalence of strong emergence with non-additivity.
+The chain-level telescoping is supported by \texttt{Theorems5.lean}'s
+\texttt{CompChain} infrastructure and by \texttt{Theorems7.lean}'s
+identity-insertion lemmas, which together verify that the right-hand
+side of \eqref{eq:telescope} is well-defined regardless of how the chain is
+parenthesized or padded with units.
+
+The next chapter (\cref{ch:grading}) introduces the grading
+$\deg : \Ideas \to G$ and uses it to refine the cocycle picture: $\omega_v$
+acquires a degree, the telescoping formula respects degrees, and the
+weak/strong dichotomy refines into a spectrum indexed by degree. The
+chapter after that (\cref{ch:transmission}, on the Transmission Chain)
+develops the iterated-composition calculus suggested by
+Section~\ref{sec:telescope}, in particular the identity-insertion stability
+results of \texttt{Theorems7.lean}.

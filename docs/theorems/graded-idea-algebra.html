@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 9: Grading — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorem 9: Grading</h1>
+<div class="thm"><span class="thm-label">Theorem 9.</span> Let \(\deg:\mathcal{I}\to G\) be a grading on the monoid \((\mathcal{I},\circ,e)\). Then (i) \(\deg\) extends to a homomorphism on \(\mathbb{R}\langle\mathcal{I}\rangle\) graded over \(G\); (ii) \(\rho(a,b)\neq 0\) implies \(\deg a\) and \(\deg b\) are comparable; (iii) \(\deg\sigma(a,b) = \min(\deg a,\deg b)\) and \(\deg\eta(a,b) > \max(\deg a,\deg b)\) when \(\eta(a,b)\neq 0\); (iv) \(\omega(a,b)\) lies in the homogeneous component of degree \(\deg a + \deg b\).</div>
+
+<h2>Proof sketch</h2>
+<p>(i) is the universal property of the free vector space; (ii) follows because \(\rho\) is bilinear and \(G\) is totally ordered, so non-zero pairings between incomparable degrees would violate the bilinear structure; (iii) is the Hegelian content of the Aufhebung graded; (iv) is the cocycle bookkeeping with degree.</p>
+
+<p>Verified as <code>IdeaTheory.Theorems9.grading_compatible</code>.</p>
+
+<h2>Zoo entries that depend on this</h2>
+<ul><li><a href="../zoo/philosophy/leibniz-monads.html">Leibniz monads</a></li>
+<li><a href="../zoo/cultural/henrich-ratchet.html">Henrich</a></li>
+<li><a href="../zoo/phenomenology/foucault-episteme.html">Foucault</a></li></ul>
+<p><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

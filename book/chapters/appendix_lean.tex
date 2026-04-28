@@ -1,0 +1,115 @@
+\chapter*{Appendix: The Lean~4 Formalisation}
+\addcontentsline{toc}{chapter}{Appendix: The Lean~4 Formalisation}
+\label{app:lean}
+
+Every formal claim made in this book has a machine-checked counterpart in
+the Lean~4 sources distributed with the project. The formalisation
+depends on Mathlib4 (release \texttt{v4.15.0}). The umbrella module
+\texttt{IdeaTheory} exposes the foundational layer; subsequent
+\texttt{Theorems\textsubscript{i}} files introduce the additional
+operators and theorems described in the corresponding chapters; the
+\texttt{Extensions} subdirectory contains the modules that ground the
+applied chapters of Part~II.
+
+\section*{Foundations}
+
+\paragraph{\texttt{IdeaTheory.Foundations}.}
+Defines the type class \texttt{IdeaTheoryStructure $\alpha$} bundling the
+binary operation \texttt{op}, the identity \texttt{ident}, and the three
+axioms (associativity, left identity, right identity). Proves
+\texttt{ident\_unique} and the basic cancellation lemma. This is the
+shared dependency of every other module.
+
+\section*{Core theorems}
+
+\paragraph{\texttt{IdeaTheory.Theorems1}.}
+The composition theorem and its derived lemmas: powers
+(\texttt{npow}), chains, sub-ideals, idempotents, cancellation, and
+invertibility. Approximately seventy named results.
+
+\paragraph{\texttt{IdeaTheory.Theorems2}.}
+Coalitions and aggregation: the algebra of finite lists of ideas under
+\texttt{aggregate}, committees, assemblies, the silent coalition,
+coalition-equivalence and delegation.
+
+\paragraph{\texttt{IdeaTheory.Theorems3}.}
+The Aufhebung structure: maps $\sigma$, $\nu$, the derived synthesis
+$\eta$, the predicates \texttt{IsPreserved}, \texttt{IsNegated},
+\texttt{Sedimented}, \texttt{Sublated}, \texttt{Stable}, \texttt{Hegelian},
+the triad, and the equivalence relation \texttt{aufhebianEquiv}.
+
+\paragraph{\texttt{IdeaTheory.Theorems4}.}
+The resonance pairing: the bilinear extension theorem, non-degeneracy,
+the antisymmetric decomposition.
+
+\paragraph{\texttt{IdeaTheory.Theorems5}.}
+The emergence cocycle: the cocycle identity, normalisation, and the
+2-cohomology classification.
+
+\paragraph{\texttt{IdeaTheory.Theorems6}.}
+The meaning curvature 2-form and its closedness; cohomology-class
+invariance under structural equivalence.
+
+\paragraph{\texttt{IdeaTheory.Theorems7}.}
+Conjugation: the inner-automorphism action of invertible ideas;
+preservation of $\rho$, $\sigma$, $\nu$, $\omega$.
+
+\paragraph{\texttt{IdeaTheory.Theorems8}.}
+Transmission chains: the iterated composition functor, the telescoping
+identity, the chain rule for $\omega$.
+
+\paragraph{\texttt{IdeaTheory.Theorems9}.}
+Structural equivalence: the isomorphism characterisation; uniqueness up
+to graded automorphism.
+
+\paragraph{\texttt{IdeaTheory.Theorems10}--\texttt{Theorems12}.}
+Graded idea algebras and the algebra of novelty: the grading theorem,
+the predicates \texttt{IsNovel} and \texttt{NovelEverywhere}, advanced
+reassociation lemmas, and the unifying corollaries.
+
+\section*{Extensions used by the applied chapters}
+
+\paragraph{\texttt{IdeaTheory.Extensions.GameTheory}.}
+The general game-theoretic ground over the carrier $\Ideas$: ideas as
+strategies, mixed strategies as $\RR_{\geq 0}$-cone elements summing
+to one, best response, Nash equilibrium, evolutionary stability, and
+the closure of equilibria under composition.
+
+\paragraph{\texttt{IdeaTheory.Extensions.MeaningGames}.}
+The Wittgenstein--Nash synthesis used by Chapter~\ref{ch:meaning-games}:
+meaning games whose strategies are \emph{uses} of ideas; conventions as
+Nash equilibria; effective meaning as the aggregate of a convention's
+profile; family resemblance as the existence of a common idempotent;
+the private-language argument as the collapse of single-speaker
+games to $\unit$; salient idempotents as Lewis-style focal points;
+the Kripkenstein finite-underdetermination lemma; cultural drift as
+iterated meaning games; and the capstone Wittgenstein--Nash existence
+theorem on finite non-empty meaning sets.
+
+\paragraph{\texttt{IdeaTheory.Extensions.Diffusion}.}
+Population-level dynamics for Chapter~\ref{ch:meaning-games} and the
+sociological zoo entries of Chapters~\ref{ch:coalitions},
+\ref{ch:conjugation}: the transmission step, iterated dynamics, the
+weak-tie lemma, and convergence on finite populations.
+
+\paragraph{\texttt{IdeaTheory.Extensions.RecombinantGrowth}.}
+The Romer/Weitzman ground for Chapter~\ref{ch:meaning-games} and the
+novelty-related zoo entries of Chapter~\ref{ch:grading}: the binary
+closure of an idea pool, the iterated closure, the cardinality bound,
+and the Romer non-rivalry lemma.
+
+\paragraph{\texttt{IdeaTheory.Extensions.EmergenceLevels}.}
+The emergence-cohomology ground for Chapter~\ref{ch:emergence}:
+valuations, their cocycles, weak (bounded) versus strong (cohomologically
+non-trivial) emergence, the coboundary lemma, and a concrete two-element
+example exhibiting strong emergence.
+
+\section*{Reproducing the build}
+
+The project ships a \texttt{lakefile.lean} pinning Mathlib at
+\texttt{v4.15.0}. After installing \texttt{elan}, the standard
+\texttt{lake exe cache get \&\& lake build} sequence re-checks every
+result. No \texttt{sorry} or \texttt{admit} appears in any of the
+Extensions modules; the older \texttt{Theorems\textsubscript{i}} files
+are imported piecewise to avoid name collisions arising from the
+historical evolution of the namespace.

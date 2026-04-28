@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Axioms of an Idea Algebra — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Axioms of an Idea Algebra</h1>
+<p>An <strong>idea algebra</strong> is a tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) consisting of a carrier set, a composition with identity, a resonance pairing, an Aufhebung decomposition, an emergence cocycle, and a grading. The bare idea algebra \((\mathcal{I},\circ,e)\) drops everything except composition.</p>
+
+<div class="defn"><span class="thm-label">Definition (idea algebra).</span>
+<p>An idea algebra is a tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) such that</p>
+<ol>
+<li>\((\mathcal{I},\circ,e)\) is a monoid: \(\circ\) is associative, \(e\circ a = a\circ e = a\) for all \(a\).</li>
+<li>\(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\) extends bilinearly to \(\mathbb{R}\langle\mathcal{I}\rangle\) and is non-degenerate after this extension.</li>
+<li>For each pair \((a,b)\) there exist \(\sigma(a,b),\nu(a,b),\eta(a,b)\in\mathbb{R}\langle\mathcal{I}\rangle\) with \(a\circ b=\sigma(a,b)+\nu(a,b)+\eta(a,b)\), unique modulo \(\ker\rho\).</li>
+<li>\(\omega:\mathcal{I}\times\mathcal{I}\to A\) (with \(A\) abelian) is a normalized 2-cocycle: \(\partial\omega=0\) and \(\omega(e,a)=\omega(a,e)=0\).</li>
+<li>\(\deg:\mathcal{I}\to G\) for some totally ordered abelian group \(G\), and \(\deg(a\circ b)=\deg a+\deg b\).</li>
+</ol></div>
+
+<h2>Worked example: free idea algebra on two generators</h2>
+<p>Let \(X=\{x,y\}\) and let \(\mathcal{I}=X^{*}\) be the free monoid (finite words). Compose by concatenation; \(e\) is the empty word. Define \(\rho(u,v)=\) the length of the longest common prefix; then \(\rho\) is non-symmetric in the obvious way once we extend it to \(\mathbb{R}\langle X^{*}\rangle\). Take \(\sigma(u,v)=\) common prefix, \(\nu(u,v)=\) the part of \(u\) past the common prefix, \(\eta(u,v)=\) the suffix of \(v\) after the common prefix. Set \(\omega(u,v) = |uv| - |u| - |v| = 0\) (an honest cocycle, trivial here). Let \(\deg(w) = |w|\) into \(G=\mathbb{Z}\). All axioms are satisfied; this is the smallest non-trivial idea algebra.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/composition.html">Theorem 1 (Composition)</a> shows the monoid axioms suffice to recover identity uniqueness and cancellation for invertibles.</li>
+<li><a href="../theorems/resonance-pairing.html">Theorem 2 (Resonance Pairing)</a> shows the bilinear extension is unique.</li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

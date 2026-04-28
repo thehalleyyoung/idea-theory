@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resonance Pairing — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Resonance Pairing</h1>
+<p>The resonance pairing is a function \(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\) measuring the degree to which two ideas fit together, support each other, or — when negative — interfere.</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> A <em>resonance pairing</em> on \(\mathcal{I}\) is a function \(\rho\) that extends to a bilinear form \(\tilde\rho:\mathbb{R}\langle\mathcal{I}\rangle\times\mathbb{R}\langle\mathcal{I}\rangle\to\mathbb{R}\), and such that \(\tilde\rho\) is non-degenerate.</div>
+
+<p>Crucially, \(\rho\) is <em>not</em> required to be symmetric. The decomposition \(\rho = \rho_{s}+\rho_{a}\) into symmetric and antisymmetric parts gives, on the antisymmetric side, the <em>meaning curvature</em> \(\kappa = \rho_{a}\) (see <a href="curvature.html">Curvature</a>).</p>
+
+<h2>Worked example</h2>
+<p>Take Mikolov-style word embeddings \(v:\text{words}\to\mathbb{R}^{n}\) and define \(\rho(a,b)=\langle v(a),v(b)\rangle\). This \(\rho\) is symmetric, so \(\kappa=0\). Now replace it with the <em>directed</em> co-occurrence count \(\rho(a,b)=\#\{a\;b\}\) (occurrences of \(a\) immediately followed by \(b\)) and \(\kappa\) becomes nontrivial: "salt and pepper" appears far more often than "pepper and salt".</p>
+
+<h2>Hume's association as resonance</h2>
+<p>Hume's three principles of association — resemblance, contiguity, cause-and-effect — each define a resonance pairing on the algebra of perceptions. Resemblance is symmetric; contiguity in time is antisymmetric; causation is asymmetric and partly antisymmetric. The full pairing is a sum of all three.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/resonance-pairing.html">Theorem 2</a></li>
+<li><a href="../theorems/curvature.html">Theorem 5 (Curvature)</a></li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

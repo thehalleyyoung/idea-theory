@@ -1,0 +1,241 @@
+/* =====================================================================
+   IdeaTheory — Kindle / EPUB3 stylesheet
+   Design philosophy:
+   • E-ink first: no background colours (they waste ink); borders only.
+   • Kindle overrides font-family & most font-size, so we provide
+     sensible fallbacks but don't fight the device.
+   • Math (MathML) is left at the body font size so it scales with
+     the reader's chosen text size.
+   • Every major structural element gets a visible but subtle box so
+     theorems, definitions, and zoo entries are immediately scannable.
+   • No JavaScript, no @font-face, no media queries, no flexbox —
+     all unsupported on the KF8/EPUB3 rendering stack.
+===================================================================== */
+
+@namespace epub "http://www.idpf.org/2007/ops";
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+body {
+  font-family: "Bookerly", Georgia, "Times New Roman", serif;
+  font-size: 1em;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0 0.5em;
+  text-align: justify;
+  -webkit-hyphens: auto;
+  adobe-hyphenate: auto;
+  hyphens: auto;
+  orphans: 2;
+  widows: 2;
+}
+
+/* ── Headings ─────────────────────────────────────────────────────── */
+h1 {
+  font-size: 1.55em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 1.2em 0;
+  padding-top: 1em;
+  page-break-before: always;
+  -webkit-column-break-before: always;
+}
+h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 1.4em 0 0.5em 0;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 1.05em;
+  font-weight: bold;
+  font-style: italic;
+  margin: 1.1em 0 0.3em 0;
+  page-break-after: avoid;
+}
+h4 {
+  font-size: 1em;
+  font-style: italic;
+  margin: 0.9em 0 0.2em 0;
+  page-break-after: avoid;
+}
+
+/* ── Paragraphs ───────────────────────────────────────────────────── */
+p {
+  margin: 0;
+  padding: 0;
+  text-indent: 1.3em;
+}
+/* No indent after headings, block-level envs, or at chapter start */
+h1 + p, h2 + p, h3 + p, h4 + p,
+div + p, blockquote + p,
+p:first-child {
+  text-indent: 0;
+}
+
+/* ── Theorem-like environments ────────────────────────────────────── */
+/*   pandoc wraps amsthm envs as <div class="ENVNAME"> on epub output  */
+div.theorem, div.lemma, div.proposition, div.corollary,
+div.definition, div.axiom, div.example, div.construction,
+div.remark, div.interpretation, div.notation {
+  margin: 1em 0;
+  padding: 0.45em 0.7em;
+  border-left: 4px solid #555;
+  page-break-inside: avoid;
+}
+
+/* Differentiate by border weight alone — works on greyscale e-ink */
+div.theorem, div.proposition  { border-left-width: 5px; }
+div.definition, div.axiom     { border-left-style: double; }
+div.lemma, div.corollary      { border-left-width: 3px; }
+div.remark, div.interpretation,
+div.notation                  { border-left-width: 2px; border-left-style: dashed; }
+
+div.theorem p, div.lemma p, div.proposition p,
+div.corollary p, div.definition p, div.axiom p,
+div.example p, div.remark p, div.notation p,
+div.interpretation p {
+  text-indent: 0;
+  margin-bottom: 0.3em;
+}
+
+/* Bold run-in label (e.g. "Theorem 3.1 (Cocycle Identity).") */
+div.theorem > p:first-child strong,
+div.lemma   > p:first-child strong,
+div.proposition > p:first-child strong,
+div.corollary   > p:first-child strong,
+div.definition  > p:first-child strong,
+div.axiom       > p:first-child strong {
+  font-weight: bold;
+}
+
+/* ── Zoo entries ──────────────────────────────────────────────────── */
+div.zooentry {
+  margin: 1.2em 0;
+  padding: 0.5em 0.8em;
+  border: 2px solid #333;
+  border-radius: 0;          /* Kindle ignores border-radius anyway */
+  page-break-inside: avoid;
+}
+div.zooentry p { text-indent: 0; margin-bottom: 0.3em; }
+div.zooentry > p:first-child { font-weight: bold; }
+
+/* ── Mathematics ──────────────────────────────────────────────────── */
+/* MathML: let it inherit the current font size so it scales with
+   the reader's chosen font size. Displayed equations get breathing room. */
+math          { font-size: 1em; }
+math[display="block"] {
+  display: block;
+  margin: 0.8em auto;
+  text-align: center;
+  overflow-x: auto;    /* wide equations scroll on small screens */
+}
+
+/* ── Inline code & identifiers ────────────────────────────────────── */
+code, tt, kbd, samp {
+  font-family: "Courier New", "Lucida Console", monospace;
+  font-size: 0.9em;
+}
+
+/* ── Block quotes / epigraphs ─────────────────────────────────────── */
+blockquote {
+  margin: 0.7em 1.5em;
+  padding-left: 0.8em;
+  border-left: 2px solid #888;
+  font-style: italic;
+}
+
+.epigraph {
+  font-style: italic;
+  margin: 0.5em 2em 1.5em 3em;
+  font-size: 0.95em;
+}
+.epigraph .attribution {
+  display: block;
+  text-align: right;
+  margin-top: 0.3em;
+  font-style: normal;
+  font-size: 0.9em;
+}
+
+/* ── Tables ───────────────────────────────────────────────────────── */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.93em;
+}
+th, td {
+  border: 1px solid #555;
+  padding: 0.3em 0.5em;
+  vertical-align: top;
+  text-align: left;
+}
+th {
+  font-weight: bold;
+  border-bottom: 2px solid #333;
+}
+
+/* ── Lists ────────────────────────────────────────────────────────── */
+ul, ol {
+  margin: 0.5em 0 0.5em 1.5em;
+  padding: 0;
+}
+li { margin-bottom: 0.2em; }
+
+/* ── Title page ───────────────────────────────────────────────────── */
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  margin: 2em 0 0.3em 0;
+  page-break-before: always;
+}
+.subtitle {
+  font-size: 1.15em;
+  text-align: center;
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+.author {
+  text-align: center;
+  margin-top: 0.8em;
+  font-size: 1.05em;
+}
+.date {
+  text-align: center;
+  margin-top: 0.3em;
+  font-size: 0.95em;
+}
+
+/* ── Bibliography ─────────────────────────────────────────────────── */
+#refs, .references {
+  font-size: 0.93em;
+}
+#refs p, .references p {
+  text-indent: 0;
+  padding-left: 1.5em;
+  margin-left: -1.5em; /* hanging indent */
+  margin-bottom: 0.5em;
+}
+
+/* ── Navigation aids (ToC, footnotes) ────────────────────────────── */
+nav#toc ol, nav#toc ul {
+  list-style: none;
+  padding-left: 1em;
+  margin: 0;
+}
+nav#toc a {
+  text-decoration: none;
+}
+nav#toc li { margin-bottom: 0.25em; }
+
+/* Footnotes rendered as sidenotes by Kindle */
+.footnote { font-size: 0.88em; }
+
+/* ── Horizontal rule (section breaks) ────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid #555;
+  margin: 1.5em auto;
+  width: 40%;
+}

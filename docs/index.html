@@ -1,73 +1,51 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Idea Theory</title>
-<style>
-body{font-family:Georgia,serif;max-width:880px;margin:2em auto;padding:0 1em;line-height:1.55;color:#222}
-nav{background:#f4f1ea;padding:.8em 1em;border:1px solid #d8d2c2;border-radius:6px;margin-bottom:1.5em}
-nav a{margin-right:.8em;color:#5a3a1a;text-decoration:none}
-nav a:hover{text-decoration:underline}
-h1,h2,h3{font-family:"Palatino",Georgia,serif;color:#3a2a10}
-table{border-collapse:collapse;margin:1em 0}
-td,th{border:1px solid #c8c2b2;padding:.4em .7em;vertical-align:top}
-th{background:#efeadd}
-code{background:#f4f1ea;padding:0 .25em;border-radius:3px}
-.box{background:#fbfaf6;border-left:4px solid #8a6a2a;padding:.7em 1em;margin:1em 0}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home — Idea Theory</title>
+<link rel="stylesheet" href="assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-<nav>
-  <a href="index.html">Home</a>
-  <a href="axioms.html">Axioms</a>
-  <a href="theorems.html">Theorems</a>
-  <a href="volumes.html">Volumes</a>
-  <a href="vol1.html">Vol I</a>
-  <a href="vol2.html">Vol II</a>
-  <a href="vol3.html">Vol III</a>
-  <a href="vol4.html">Vol IV</a>
-  <a href="vol5.html">Vol V</a>
-  <a href="vol6.html">Vol VI</a>
-</nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="index.html">Idea Theory</a><div class="nav-links"><a class="active" href="index.html">Home</a><a href="formalism/index.html">Formalism</a><a href="theorems/index.html">Theorems</a><a href="zoo/index.html">Zoo</a><a href="literature/index.html">Literature</a><a href="lean/index.html">Lean</a><a href="about.html">About</a></div></div></nav>
+<main class="content">
 
-<h1>Idea Theory</h1>
-<p><em>A machine-verified algebraic framework for ideas, their composition, resonance, decomposition, and emergence — with applications to the social sciences, humanities, philosophy of mind and cognitive science, the problem of emergence, and advanced unifying domains.</em></p>
+<section class="hero">
+  <h1>Idea Theory</h1>
+  <p class="lede">A mathematical formalism for ideas, in which composition, resonance, Aufhebung, emergence-cocycle and grading make sense as a single algebraic structure.</p>
+</section>
 
-<div class="box">
-<strong>Core mandate.</strong> This project is a literature bridge: every Lean theorem, LaTeX chapter, and HTML page carries an explicit translation from informal claims in the literature to machine-verified statements in the <code>IdeaTheory</code> Lean namespace.
+<div class="tiles">
+  <a class="tile" href="formalism/index.html"><h3>Formalism</h3><p>The nine pieces of an idea algebra: composition, resonance, Aufhebung, cocycle, curvature, grading, chains, equivalence.</p></a>
+  <a class="tile" href="theorems/index.html"><h3>Theorems</h3><p>Nine foundational results, each machine-checked in Lean 4.</p></a>
+  <a class="tile" href="zoo/index.html"><h3>Zoo</h3><p>Forty-plus historical and scientific positions about ideas, formalized.</p></a>
+  <a class="tile" href="literature/index.html"><h3>Literature</h3><p>An annotated bibliography across philosophy, cognitive science, sociology, economics, and emergence.</p></a>
 </div>
 
-<h2>Abstract</h2>
-<p>Idea Theory develops a rigorous algebraic framework in which <em>ideas</em> are elements of a graded monoid equipped with a bilinear resonance pairing, an Aufhebung decomposition, and an emergence 2-cocycle. <strong>Volume I</strong> establishes nine purely mathematical theorems — composition, pairing, decomposition, cocycle, curvature, conjugation, chains, equivalence, and grading. <strong>Volumes II–VI</strong> interpret this apparatus across the social sciences, the humanities, philosophy of mind and cognitive science, the problem of emergence, and further advanced applications.</p>
+<h2>What is an idea?</h2>
+<p>In ordinary speech an <em>idea</em> is whatever can be entertained, communicated, combined with other ideas, and judged for fit with the world or with other ideas. Philosophers, cognitive scientists, sociologists, and economists have all tried to make this notion precise; each tradition has captured a real feature of the practice while idealizing away from others. <strong>Idea Theory</strong> takes the view that the best place to start is not with a definition of what ideas <em>are</em> but with a list of what we always do <em>with</em> them, and to ask what minimal algebraic structure makes those operations consistent.</p>
 
-<h2>The six volumes</h2>
-<table>
-<tr><th>#</th><th>Volume</th><th>Scope</th></tr>
-<tr><td>I</td><td><a href="vol1.html">Mathematical Foundations of Idea Theory</a></td><td>The nine core theorems as basic mathematics.</td></tr>
-<tr><td>II</td><td><a href="vol2.html">Idea Theory and the Social Sciences</a></td><td>Norms, institutions, opinion dynamics, cultural transmission.</td></tr>
-<tr><td>III</td><td><a href="vol3.html">Idea Theory and the Humanities</a></td><td>Hermeneutics, intertextuality, dialectic, literary tradition.</td></tr>
-<tr><td>IV</td><td><a href="vol4.html">Idea Theory, Cognitive Science, and Philosophy of Mind</a></td><td>Concept composition, mental representations, intentionality.</td></tr>
-<tr><td>V</td><td><a href="vol5.html">Emergence: A Formal Theory</a></td><td>The emergence cocycle as a precise account of "more than the sum of parts".</td></tr>
-<tr><td>VI</td><td><a href="vol6.html">Advanced Applications and Unifying Perspectives</a></td><td>Category-theoretic, information-theoretic, and cross-domain syntheses.</td></tr>
-</table>
+<p>The answer turns out to be modest. An <em>idea algebra</em> is a monoid \((\mathcal{I},\circ,e)\) — there is a way of putting two ideas together, the operation is associative, and there is a trivial idea that does nothing — equipped with five further pieces of structure: a real-valued <em>resonance pairing</em> \(\rho\) measuring how well two ideas fit; a triple decomposition \(\sigma+\nu+\eta\) of every composite into preserved, negated and elevated parts (the <em>Aufhebung</em>); a 2-cocycle \(\omega\) tracking the irreducible novelty produced by composition; the antisymmetric part \(\kappa\) of \(\rho\), which we call the <em>meaning curvature</em>; and a grading \(\deg\) into a totally ordered abelian group recording the level or complexity of an idea.</p>
 
-<h2>The nine foundational theorems</h2>
-<p>See <a href="theorems.html">Theorems</a> for full statements; <a href="axioms.html">Axioms</a> for the underlying signature. All nine are formalised in Lean 4 under the namespace <code>IdeaTheory</code>.</p>
+<p>Together these axioms are strong enough to prove the nine foundational theorems below, and weak enough that almost every classical theory of ideas — from Plato's Forms to modern transformer embeddings — fits inside as a special case. The site shows how.</p>
+
+<h2>Highlights: the nine foundational theorems, in plain English</h2>
 <ol>
-<li>Idea composition monoid</li>
-<li>Resonance bilinear pairing</li>
-<li>Aufhebung decomposition</li>
-<li>Emergence 2-cocycle</li>
-<li>Meaning curvature form</li>
-<li>Conjugation action</li>
-<li>Transmission chain</li>
-<li>Structural equivalence</li>
-<li>Graded idea algebra</li>
+  <li><strong>Composition.</strong> Putting ideas together is associative, the trivial idea is genuinely trivial, and ideas with inverses can be cancelled. So the carrier is a monoid in the strict algebraic sense — not a metaphor.</li>
+  <li><strong>Resonance pairing.</strong> The score \(\rho(a,b)\) extends from individual ideas to all real linear combinations of them in a unique way, and non-degeneracy survives composition. Resonance is therefore a well-defined inner product on the free vector space of ideas.</li>
+  <li><strong>Aufhebung decomposition.</strong> Every composite \(a\circ b\) splits canonically into what was preserved \((\sigma)\), what was negated \((\nu)\), and what was elevated to a new synthesis \((\eta)\). The decomposition is unique up to the kernel of the resonance pairing.</li>
+  <li><strong>Emergence cocycle.</strong> The discrepancy \(\omega(a,b)\) between a valuation of a composite and the sum of valuations is a normalized 2-cocycle: \(\partial\omega=0\). This is the precise sense in which emergence is bookkeeping, not magic.</li>
+  <li><strong>Curvature.</strong> The antisymmetric part of \(\rho\) is closed; its cohomology class is invariant under change of basis. Two ideas can resonate asymmetrically — \(a\) more with \(b\) than \(b\) with \(a\) — and that asymmetry has a topology.</li>
+  <li><strong>Conjugation.</strong> Invertible ideas act by inner automorphisms that preserve every other piece of structure. Reframing an idea by another invertible idea changes nothing internally.</li>
+  <li><strong>Transmission chain.</strong> Iterating composition along a chain of carriers telescopes: the cumulative emergence is a sum of pairwise cocycle terms.</li>
+  <li><strong>Structural equivalence.</strong> Two idea algebras are isomorphic exactly when there is a graded monoid isomorphism preserving \(\rho,\sigma,\nu,\omega\). All structure is captured.</li>
+  <li><strong>Grading.</strong> The map \(\deg:\mathcal{I}\to G\) extends to a homomorphism into the totally ordered abelian group \(G\), and is compatible with the resonance pairing, the Aufhebung, and \(\omega\). Levels exist and stack.</li>
 </ol>
 
-<h2>Literature bridge</h2>
-<p>Each application volume opens with <em>Background from the Literature</em> and a <em>From Informal Claims to Formal Statements</em> translation table. References are drawn from <code>references.bib</code> (Hegel on Aufhebung; Lotman on cultural semiotics; Sperber on the epidemiology of representations; Fodor &amp; Pylyshyn on compositionality; Bedau &amp; Humphreys on emergence; Boyd &amp; Richerson on cultural transmission; among others).</p>
+<p>Each is proven in <code>lean/IdeaTheory/Theorems{1..9}.lean</code> and described in detail under <a href="theorems/index.html">Theorems</a>.</p>
 
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
 </body>
 </html>

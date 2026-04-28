@@ -1,0 +1,117 @@
+% =====================================================================
+%  IdeaTheory monograph --- shared preamble
+%  PDF target only; no exotic packages, EPUB-friendly subset.
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[english]{babel}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{parskip}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{stmaryrd}
+\usepackage{mathrsfs}
+\usepackage{bm}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{enumitem}
+\usepackage{epigraph}
+\usepackage{csquotes}
+
+\usepackage[colorlinks=true,
+  linkcolor=blue!55!black,
+  citecolor=teal!60!black,
+  urlcolor=blue!55!black]{hyperref}
+\usepackage{cleveref}
+
+%% ---------- Theorem environments -------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{construction}[theorem]{Construction}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{axiom}[theorem]{Axiom}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{interpretation}[theorem]{Interpretation}
+\newtheorem*{zooentry*}{Zoo Entry}
+
+%% ---------- IdeaTheory notation --------------------------------------
+\newcommand{\Ideas}{\mathcal{I}}
+\newcommand{\IdeaAlg}{\mathbb{I}}
+\newcommand{\compose}{\mathbin{\diamond}}
+\newcommand{\unit}{\mathbf{1}}
+\newcommand{\IdMon}{(\Ideas,\compose,\unit)}
+
+\newcommand{\res}[2]{\langle #1 \mathbin{\Vert} #2 \rangle}
+\newcommand{\Res}{\mathsf{R}}
+
+\newcommand{\Auf}{\mathfrak{A}}
+\newcommand{\preserve}{\sigma}
+\newcommand{\negate}{\nu}
+\newcommand{\elevate}{\eta}
+
+\newcommand{\emerg}{\omega}
+\newcommand{\dcoc}{\partial}
+\newcommand{\curv}{\kappa}
+
+\newcommand{\conj}[2]{{}^{#1}\!#2}
+\newcommand{\chain}[1]{\mathsf{Ch}(#1)}
+\newcommand{\equivIdea}{\sim_{\Ideas}}
+
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\eqdef}{\mathrel{\vcentcolon=}}
+\newcommand{\defeq}{\mathrel{\vcentcolon=}}
+
+%% ---------- Zoo macros -----------------------------------------------
+% Each "zoo entry" formalizes one informal theory of ideas.
+% Usage:
+%   \begin{zooentry}{Hegel: Aufhebung}{Hegel1812}
+%      Original claim ... \par
+%      \textbf{Formalization.} ... \par
+%      \textbf{Status.} Theorem~3.4 ...
+%   \end{zooentry}
+\newenvironment{zooentry}[2]{%
+  \par\medskip\noindent\textbf{Zoo entry: #1}\\
+  \emph{Source:} \cite{#2}.\par\smallskip
+}{\par\medskip}
+
+\newcommand{\thinker}[1]{\textbf{#1}}
+\newcommand{\formalclaim}{\par\textbf{Formal restatement.}\ }
+\newcommand{\formalstatus}{\par\textbf{Status in Idea Theory.}\ }
+\newcommand{\litcomment}{\par\textbf{Commentary.}\ }
+
+% Chapter 2 (coalitions) macros
+\newcommand{\aggregate}{\mathsf{aggregate}}
+\newcommand{\Coalition}{\mathsf{Coalition}}
+\newcommand{\insertAt}{\mathsf{insertAt}}
+\newcommand{\chair}{\mathsf{chair}}
+\newcommand{\members}{\mathsf{members}}
+\newcommand{\collective}{\mathsf{collective}}
+\newcommand{\Comm}{\mathfrak{C}}
+\newcommand{\Asm}{\mathfrak{A}_{\mathrm{sm}}}
+\newcommand{\List}{\mathsf{List}}
+\newcommand{\replicate}{\mathsf{replicate}}
+\newcommand{\xs}{\mathbf{x}}
+\newcommand{\ys}{\mathbf{y}}
+\newcommand{\zs}{\mathbf{z}}

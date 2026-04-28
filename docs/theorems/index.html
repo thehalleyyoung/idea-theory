@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorems — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorems</h1>
+<p>The nine foundational theorems of Idea Theory. Each is machine-checked under <code>lean/IdeaTheory/Theorems{1..12}.lean</code>.</p>
+<ul class='entry-list'>
+<li><a href='composition.html'>Theorem 1: Composition</a><span class='blurb'>\((\mathcal{I},\circ,e)\) is a monoid: identity is unique and elements with two-sided inverses are cancellative.</span></li>
+<li><a href='resonance-pairing.html'>Theorem 2: Resonance Pairing</a><span class='blurb'>\(\rho\) extends uniquely to a bilinear form on \(\mathbb{R}\langle\mathcal{I}\rangle\); non-degeneracy is preserved by composition.</span></li>
+<li><a href='aufhebung-decomposition.html'>Theorem 3: Aufhebung Decomposition</a><span class='blurb'>For every \(a,b\in\mathcal{I}\), the decomposition \(a\circ b = \sigma(a,b)+\nu(a,b)+\eta(a,b)\) exists and is unique modulo \(\ker\rho\).</span></li>
+<li><a href='emergence-2-cocycle.html'>Theorem 4: Emergence 2-Cocycle</a><span class='blurb'>\(\omega\) is a normalized 2-cocycle: \(\partial\omega=0\) and \(\omega(e,\cdot)=\omega(\cdot,e)=0\).</span></li>
+<li><a href='meaning-curvature.html'>Theorem 5: Meaning Curvature</a><span class='blurb'>The antisymmetric part \(\kappa\) of \(\rho\) is closed; its cohomology class is a structural invariant.</span></li>
+<li><a href='conjugation.html'>Theorem 6: Conjugation</a><span class='blurb'>For any invertible \(g\in\mathcal{I}\), the inner automorphism \(\mathrm{Ad}_g(a) = g\circ a\circ g^{-1}\) preserves \(\rho,\sigma,\nu,\omega\).</span></li>
+<li><a href='transmission-chain.html'>Theorem 7: Transmission Chain</a><span class='blurb'>For a chain \(a_1,\ldots,a_n\), the cumulative cocycle telescopes.</span></li>
+<li><a href='structural-equivalence.html'>Theorem 8: Structural Equivalence</a><span class='blurb'>Two idea algebras are isomorphic iff there is a graded monoid isomorphism preserving \(\rho,\sigma,\nu,\omega\).</span></li>
+<li><a href='graded-idea-algebra.html'>Theorem 9: Grading</a><span class='blurb'>\(\deg\) extends to a homomorphism into \(G\) compatible with \(\rho\), Aufhebung, and \(\omega\).</span></li>
+</ul>
+
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

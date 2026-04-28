@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composition — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Composition</h1>
+<p>Composition is the operation \(\circ:\mathcal{I}\times\mathcal{I}\to\mathcal{I}\). It is associative and has a two-sided identity \(e\).</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> A <em>composition</em> on \(\mathcal{I}\) is a function \(\circ\) such that for all \(a,b,c\in\mathcal{I}\), \((a\circ b)\circ c=a\circ(b\circ c)\), and there exists \(e\in\mathcal{I}\) with \(e\circ a=a\circ e=a\).</div>
+
+<p>Composition encodes the simplest fact about ideas: that they can be put together. Locke's <em>simple</em> versus <em>complex</em> ideas are exactly the generators and words of a free composition. Frege's principle of compositionality says that the meaning of a composite is determined by the meanings of the parts <em>and the way they are combined</em> — i.e. by the structure of \(\circ\).</p>
+
+<h2>Worked example</h2>
+<p>Let \(\mathcal{I}\) be the set of grammatical phrases of English, with concatenation as composition and the empty phrase as \(e\). The result is non-commutative — "white wedding" is not "wedding white" — but associative and unital. The free monoid on the alphabet of words is the <em>syntactic</em> idea algebra; it has no semantic structure yet. Resonance and Aufhebung add the semantics.</p>
+
+<h2>Why it is non-trivial</h2>
+<p>The monoid axioms are weak but not vacuous. They rule out the conflation \(a\circ a = a\) (idempotency, which would make every idea its own composite with itself, true in some semilattice models but false in general). They also rule out the strict commutativity \(a\circ b=b\circ a\), which makes the order in which ideas are combined invisible — patently false for narrative, argument, and most concept formation.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/composition.html">Theorem 1 (Composition)</a></li>
+<li><a href="../theorems/conjugation.html">Theorem 6 (Conjugation)</a> — invertible ideas act by inner automorphism.</li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

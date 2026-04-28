@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 4: Emergence 2-Cocycle — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorem 4: Emergence 2-Cocycle</h1>
+<div class="thm"><span class="thm-label">Theorem 4.</span> Let \(v:\mathcal{I}\to A\) be a function with \(v(e)=0\), and define \(\omega(a,b) := v(a\circ b)-v(a)-v(b)\). Then \(\omega\) is a normalized 2-cocycle: for all \(a,b,c\),
+\[ \omega(a,b)+\omega(a\circ b,c)=\omega(b,c)+\omega(a,b\circ c), \]
+and \(\omega(e,a)=\omega(a,e)=0\).</div>
+
+<h2>Proof sketch</h2>
+<p>Direct computation: both sides of the cocycle identity equal \(v(a\circ b\circ c) - v(a)-v(b)-v(c)\). Normalization at \(e\) follows from \(v(e)=0\) and \(e\circ a = a\). Verified as <code>IdeaTheory.Theorems4.emergence_cocycle</code>.</p>
+
+<h2>Zoo entries that depend on this</h2>
+<ul><li><a href="../zoo/emergence/anderson-more-different.html">Anderson</a></li>
+<li><a href="../zoo/emergence/bedau-weak.html">Bedau</a></li>
+<li><a href="../zoo/emergence/chalmers-strong-vs-weak.html">Chalmers</a></li></ul>
+<p><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

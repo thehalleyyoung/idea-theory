@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 7: Transmission Chain — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorem 7: Transmission Chain</h1>
+<div class="thm"><span class="thm-label">Theorem 7.</span> Let \(\omega\) be a normalized 2-cocycle. For any chain \(a_1,\ldots,a_n\),
+\[ v(a_1\circ\cdots\circ a_n) = \sum_i v(a_i) + \sum_{i=1}^{n-1}\omega(a_1\circ\cdots\circ a_i,\, a_{i+1}). \]</div>
+
+<h2>Proof sketch</h2>
+<p>Induction on \(n\). The base case \(n=2\) is the definition of \(\omega\). For the inductive step, apply the definition to \((a_1\circ\cdots\circ a_n)\circ a_{n+1}\) and use the inductive hypothesis on the prefix.</p>
+
+<p>Verified as <code>IdeaTheory.Theorems7.transmission_chain</code>.</p>
+
+<h2>Zoo entries that depend on this</h2>
+<ul><li><a href="../zoo/cultural/boyd-richerson-dual-inheritance.html">Boyd–Richerson</a></li>
+<li><a href="../zoo/cultural/henrich-ratchet.html">Henrich ratchet</a></li>
+<li><a href="../zoo/cultural/sperber-attractors.html">Sperber attractors</a></li></ul>
+<p><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

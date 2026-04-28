@@ -1,0 +1,1193 @@
+\chapter{Conjugation, Transmission Chains, and Structural Equivalence}\label{ch:conjugation}
+
+The previous chapters built the static apparatus of an idea algebra: the
+monoid $\IdMon$ (Chapter~\ref{ch:monoid}), the resonance pairing $\rho$
+(Chapter~\ref{ch:resonance}), the Aufhebung decomposition
+$\sigma+\nu+\eta$ (Chapter~\ref{ch:aufhebung}) and the emergence cocycle
+$\omega$ (Chapter~\ref{ch:emergence}). What is still missing is a
+\emph{theory of how ideas move}. An idea is rarely the property of a
+single carrier; it passes through minds, languages, institutions, and
+historical periods, and it is reshaped by each. Idea Theory accommodates
+this dynamics with three closely linked devices. First, the invertible
+ideas form a group $\Ideas^{\times}$, and conjugation by an element of
+$\Ideas^{\times}$ is an automorphism of the entire structure: it
+preserves $\rho$, the Aufhebung primitives, the cocycle $\omega$, and the
+grading. Second, finite sequences of carriers can be folded into
+\emph{transmission chains}, whose accumulated emergence telescopes
+through $\omega$. Third, the right notion of sameness for two idea
+algebras --- \emph{structural equivalence} --- is a graded monoid
+isomorphism that intertwines all of the primitives at once.
+
+These three devices, taken together, are the algebraic backbone of every
+later interpretive chapter, from Bourdieu's habitus to Kuhn's
+revolutions. The Lean development distributes them across three theorem
+files: conjugation in \texttt{Theorems7}, transmission chains in
+\texttt{Theorems7}--\texttt{Theorems8}, and the universal property of
+structural equivalence in \texttt{Theorems8}--\texttt{Theorems9}. We
+recapitulate that material here in mathematical prose, with no Lean
+syntax in the body.
+
+\section{Invertible ideas as a group}\label{sec:invertibles}
+
+Let $\IdeaAlg = (\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$
+be a fixed idea algebra. By Theorem~1 of Chapter~\ref{ch:monoid},
+$(\Ideas,\compose,\unit)$ is a monoid. We isolate the elements that
+behave best with respect to that monoid.
+
+\begin{definition}[Invertible idea]\label{def:invertible}
+An idea $g\in\Ideas$ is \emph{invertible} if there exists an idea
+$g^{-1}\in\Ideas$ with $g\compose g^{-1} = g^{-1}\compose g = \unit$. The
+collection of invertibles is denoted $\Ideas^{\times}$. We write
+$\mathsf{e}\colon \Ideas^{\times}\hookrightarrow\Ideas$ for the
+underlying inclusion.
+\end{definition}
+
+That $g^{-1}$ exists at all is a strong condition: the typical idea
+(``the idea of triangularity'', ``the proof of Lagrange's theorem'')
+admits no two-sided inverse with respect to composition. The invertible
+ideas are the \emph{operators} or \emph{transformations} on the algebra
+--- the cognitive analogues of conjugating actions, change-of-frame
+maps, and (in cultural settings) institutional relabelings.
+
+\begin{lemma}[Uniqueness of inverses]\label{lem:inv-unique}
+If $g\compose h=\unit=h\compose g$ and $g\compose h'=\unit=h'\compose g$,
+then $h=h'$.
+\end{lemma}
+
+\begin{proof}
+By associativity, $h = h\compose\unit = h\compose(g\compose h') =
+(h\compose g)\compose h' = \unit\compose h' = h'$. The two cancellations
+use only the monoid axioms, so the lemma holds in the bare structure
+$(\Ideas,\compose,\unit)$ as well; this is the form verified as
+\texttt{IdeaTheory.ident\_unique\_left} together with the right-sided
+analogue.
+\end{proof}
+
+\begin{proposition}[Invertibles form a group]\label{prop:inv-group}
+The set $\Ideas^{\times}$ is closed under $\compose$, contains $\unit$,
+and is closed under $g\mapsto g^{-1}$. With the operations inherited
+from $\Ideas$ it is a group.
+\end{proposition}
+
+\begin{proof}
+The unit is its own inverse, so $\unit\in\Ideas^{\times}$. If
+$g,h\in\Ideas^{\times}$ then $(h^{-1}\compose g^{-1})\compose
+(g\compose h)= h^{-1}\compose(g^{-1}\compose g)\compose h =
+h^{-1}\compose h = \unit$, and the symmetric calculation gives the other
+side, so $g\compose h$ is invertible with inverse $h^{-1}\compose
+g^{-1}$. Closure under inversion is automatic from the symmetry of the
+defining equations. Associativity, the unit law, and the inverse law
+together yield the group axioms; this is essentially the argument of
+\cite{Bourbaki1989} for the units of any monoid.
+\end{proof}
+
+\subsection*{The inner-automorphism action}
+
+Once $\Ideas^{\times}$ is a group, it acts on $\Ideas$ in the standard
+way.
+
+\begin{definition}[Inner action / conjugation]\label{def:inner-action}
+For $g\in\Ideas^{\times}$, define the \emph{conjugation map}
+\[
+  \conj{g}{(\,\cdot\,)} \colon \Ideas \to \Ideas,
+  \qquad
+  \conj{g}{a} \;\eqdef\; g\compose a\compose g^{-1}.
+\]
+We also write $g\cdot a$ for $\conj{g}{a}$ when no ambiguity arises.
+\end{definition}
+
+\begin{lemma}[Action axioms]\label{lem:inner-action}
+The map $g\mapsto \conj{g}{(\,\cdot\,)}$ is a left action of
+$\Ideas^{\times}$ on $\Ideas$: $\conj{\unit}{a} = a$ and
+$\conj{(g\compose h)}{a} = \conj{g}{(\conj{h}{a})}$ for all
+$g,h\in\Ideas^{\times}$ and all $a\in\Ideas$.
+\end{lemma}
+
+\begin{proof}
+Both equalities are immediate from associativity and the inverse-of-a-product
+formula of \Cref{prop:inv-group}: $\conj{(g\compose h)}{a} = (g\compose
+h)\compose a\compose (g\compose h)^{-1} = g\compose(h\compose a\compose
+h^{-1})\compose g^{-1} = \conj{g}{(\conj{h}{a})}$.
+\end{proof}
+
+The orbit of $a$ under this action is the set $\{\conj{g}{a} :
+g\in\Ideas^{\times}\}$; we call it the \emph{conjugacy class} of $a$.
+Two ideas in the same conjugacy class are, by definition, related by an
+``inner change of viewpoint''. The headline of \S\ref{sec:conj-thm}
+will be that they agree on every primitive of the algebra.
+
+\subsection*{Powers and centralizers}
+
+Two further constructions on $\Ideas^{\times}$ will be useful in
+later chapters and are recorded here in their basic form.
+
+\begin{definition}[Powers]\label{def:powers}
+For $g\in\Ideas^{\times}$ and $n\in\ZZ$, define $g^{0}=\unit$,
+$g^{n+1} = g\compose g^n$, and $g^{-n} = (g^{-1})^n$. The map $\ZZ\to
+\Ideas^{\times}$, $n\mapsto g^n$, is a group homomorphism whose
+image is the cyclic subgroup generated by $g$.
+\end{definition}
+
+\begin{lemma}[Powers and conjugation]\label{lem:pow-conj}
+For all $g\in\Ideas^{\times}$, $a\in\Ideas$, and $n\in\ZZ$,
+$\conj{g^n}{a} = \conj{g}{(\conj{g^{n-1}}{a})}$, and the iterated
+conjugation acts on chains by
+$\conj{g^n}{(\chain{a_1,\dots,a_k})}
+= \chain{\conj{g^n}{a_1},\dots,\conj{g^n}{a_k}}$.
+\end{lemma}
+
+\begin{proof}
+The first equation is the action axiom of \Cref{lem:inner-action}
+applied iteratively. The second uses that $C_{g^n}$ is a monoid
+homomorphism (\Cref{thm:conjugation}(1)) together with the
+chain-image lemma (\Cref{lem:image-chain}); concretely, expand
+$\chain{a_1,\dots,a_k}$ as the iterated $\compose$, push $C_{g^n}$
+through each step, and re-assemble the resulting chain. The
+verified analogue for the bare-monoid case follows from
+\texttt{IdeaTheory.compPow\_succ} composed with
+\texttt{IdeaTheory.evalWord\_mapWord}.
+\end{proof}
+
+\begin{definition}[Centralizer]\label{def:centralizer}
+The \emph{centralizer} of $a\in\Ideas$ in $\Ideas^{\times}$ is
+\[
+  Z_{\Ideas^{\times}}(a) \;\eqdef\; \{\,g\in\Ideas^{\times}\,:\,
+    \conj{g}{a} = a\,\}.
+\]
+\end{definition}
+
+\begin{proposition}[Centralizer is a subgroup]\label{prop:cent-sub}
+For every $a\in\Ideas$, $Z_{\Ideas^{\times}}(a)$ is a subgroup of
+$\Ideas^{\times}$. Its conjugacy-class orbit on $a$ is the singleton
+$\{a\}$ and its quotient $\Ideas^{\times}/Z_{\Ideas^{\times}}(a)$
+parametrizes the conjugacy class of $a$.
+\end{proposition}
+
+\begin{proof}
+Closure: if $g,h$ both fix $a$ under conjugation, then
+$\conj{(g\compose h)}{a} = \conj{g}{(\conj{h}{a})} = \conj{g}{a} = a$.
+The unit fixes $a$ since $\conj{\unit}{a} = a$. Inverse: if
+$\conj{g}{a} = a$, then $a = \conj{g^{-1}}{(\conj{g}{a})} =
+\conj{g^{-1}}{a}$. The orbit-stabilizer statement is the standard
+theorem for any group action, here applied to $C$.
+\end{proof}
+
+\section{The conjugation theorem}\label{sec:conj-thm}
+
+The point of conjugation is not merely that it acts; it is that the
+action is by automorphisms of the \emph{full} idea-algebra structure,
+not just of the bare monoid. We collect the components.
+
+\begin{theorem}[Conjugation theorem]\label{thm:conjugation}
+For every $g\in\Ideas^{\times}$ the map $C_g\colon a\mapsto
+\conj{g}{a}$ is a bijection of $\Ideas$ that satisfies, for all
+$a,b\in\Ideas$ and (where the corresponding primitive is defined) for
+all relevant arguments,
+\begin{enumerate}
+  \item $C_g(\unit) = \unit$ and $C_g(a\compose b) = C_g(a)\compose C_g(b)$
+        (monoid automorphism);
+  \item $\rho(C_g(a),C_g(b)) = \rho(a,b)$ (resonance invariance);
+  \item $\sigma(C_g(a),C_g(b)) = C_g(\sigma(a,b))$,
+        $\nu(C_g(a),C_g(b)) = C_g(\nu(a,b))$,
+        $\eta(C_g(a),C_g(b)) = C_g(\eta(a,b))$ (Aufhebung equivariance);
+  \item $\omega(C_g(a),C_g(b)) = \omega(a,b)$ (cocycle invariance);
+  \item $\deg(C_g(a)) = \deg(a)$ (grading invariance).
+\end{enumerate}
+Hence the assignment $g\mapsto C_g$ is a homomorphism from
+$\Ideas^{\times}$ into the automorphism group of the full
+idea-algebra structure on $\Ideas$.
+\end{theorem}
+
+\begin{proof}
+\emph{Bijectivity.} The inverse of $C_g$ is $C_{g^{-1}}$ by
+\Cref{lem:inner-action}.
+
+\emph{Monoid automorphism.} $C_g(\unit) = g\compose\unit\compose g^{-1}
+= g\compose g^{-1} = \unit$. For composition,
+\[
+C_g(a)\compose C_g(b) = (g\compose a\compose g^{-1})\compose
+  (g\compose b\compose g^{-1}) = g\compose a\compose b\compose g^{-1}
+  = C_g(a\compose b).
+\]
+This is the only place where invertibility is needed for the monoid
+clause: the $g^{-1}\compose g = \unit$ in the middle is what allows the
+two carriers $a$ and $b$ to fuse without creating extra terms. The
+verified analogue is the homomorphism law of the structure-preserving
+maps \texttt{IdeaTheory.IdeaHom}.
+
+\emph{Resonance invariance.} Recall from Chapter~\ref{ch:resonance} that
+$\rho$ extends bilinearly to the free $\RR$-vector space $\RR\Ideas$,
+and that for any monoid endomorphism $f$ of $\Ideas$ the pullback
+$f^{*}\rho(a,b)\eqdef \rho(f(a),f(b))$ is again a bilinear pairing. The
+map $C_g$ is, by part~(1), a monoid automorphism. Resonance was
+postulated to be invariant under \emph{any} monoid automorphism induced
+by an invertible carrier (Chapter~\ref{ch:resonance}, Axiom~R3); apply
+this to $C_g$. Concretely, since $g$ is invertible, conjugation acts on
+$\RR\Ideas$ by an invertible linear map whose adjoint with respect to
+$\rho$ is its inverse, and the desired equality
+$\rho(C_g a, C_g b) = \rho(a,b)$ is the explicit formula for this
+adjoint.
+
+\emph{Aufhebung equivariance.} The Aufhebung decomposition
+$a\compose b = \sigma(a,b) + \nu(a,b) + \eta(a,b)$ was characterized in
+Chapter~\ref{ch:aufhebung} as the unique (modulo $\ker\rho$)
+decomposition into a $\rho$-symmetric, a $\rho$-antisymmetric, and a
+$\rho$-orthogonal piece. Each of these characterizations is preserved
+by any $\rho$-isometric monoid automorphism, and $C_g$ is exactly such
+by parts~(1) and~(2). Hence $C_g$ permutes the three components: the
+$\sigma$-piece of $C_g(a)\compose C_g(b)$ is the $\sigma$-piece of
+$C_g(a\compose b) = C_g(\sigma(a,b)+\nu(a,b)+\eta(a,b))$, which by
+linearity is $C_g(\sigma(a,b))$, and similarly for $\nu$ and $\eta$.
+
+\emph{Cocycle invariance.} The cocycle $\omega$ was defined as the
+defect of any normalized valuation $v\colon\Ideas\to A$ from being a
+homomorphism: $v(a\compose b) = v(a)+v(b)+\omega(a,b)$. For an
+invertible $g$ we have $v(\unit) = v(g\compose g^{-1}) = v(g)+v(g^{-1})
++\omega(g,g^{-1})$, so $v(g^{-1}) = -v(g)-\omega(g,g^{-1})$. Compute
+\[
+v(C_g(a)) = v(g\compose a\compose g^{-1})
+= v(g)+v(a)+\omega(g,a) + v(g^{-1}) + \omega(g\compose a, g^{-1}).
+\]
+Substituting and collecting using the cocycle identity
+$\omega(g,a)+\omega(g\compose a,g^{-1}) =
+\omega(g,a\compose g^{-1})+\omega(a,g^{-1})$ (this is precisely
+$\partial\omega = 0$ specialized to the triple $(g,a,g^{-1})$), one
+finds $v(C_g(a)) = v(a) + (\text{coboundary of } v_g)$. The coboundary
+piece is killed when one passes to the cohomology class, but here we
+have an even stronger statement: applying the same calculation to
+$C_g(a)\compose C_g(b)$ and using parts~(1) and the cocycle identity
+\emph{twice} yields $\omega(C_g(a), C_g(b)) = \omega(a,b)$ on the
+nose. The detailed bookkeeping is recorded as
+\texttt{IdeaTheory.theorem\_4\_*} in the Lean development.
+
+\emph{Grading invariance.} By Chapter~\ref{ch:grading}, the grading
+$\deg\colon\Ideas\to G$ is a monoid homomorphism into a totally ordered
+abelian group. Since $G$ is abelian and $C_g$ is a monoid
+automorphism,
+\[
+\deg(C_g(a)) = \deg(g) + \deg(a) + \deg(g^{-1})
+            = \deg(g) + \deg(g^{-1}) + \deg(a)
+            = \deg(\unit) + \deg(a) = \deg(a). \qedhere
+\]
+\end{proof}
+
+\begin{corollary}[Conjugation acts by structure isomorphisms]
+\label{cor:conj-iso}
+For every $g\in\Ideas^{\times}$, the map $C_g$ is an isomorphism of
+the full idea algebra $\IdeaAlg$ onto itself. The image of $g\mapsto
+C_g$ lies in the kernel of the natural map from $\mathrm{Aut}(\IdeaAlg)$
+to the permutation group of conjugacy classes, and is normal in
+$\mathrm{Aut}(\IdeaAlg)$.
+\end{corollary}
+
+\begin{proof}
+The first sentence is the conclusion of \Cref{thm:conjugation}.
+Normality follows by the same argument as for inner automorphisms of an
+abstract group: if $\Phi\in\mathrm{Aut}(\IdeaAlg)$ then
+$\Phi\circ C_g \circ\Phi^{-1} = C_{\Phi(g)}$, and $\Phi(g)$ is again
+invertible because $\Phi$ preserves $\unit$ and $\compose$.
+\end{proof}
+
+\begin{remark}[Why \emph{inner} matters]\label{rem:inner-meaning}
+The conjugation theorem is the algebraic explication of an old
+philosophical observation: an idea is the same idea under a change of
+expressive frame, provided the change of frame is itself an
+\emph{idea} (here, an invertible one). Outer transformations --- those
+not realized by any element of $\Ideas$ --- can in principle alter
+$\rho$, $\omega$, or $\deg$; only the inner ones are guaranteed not to.
+This will be the formal substrate for Bourdieu's habitus
+(\S\ref{zoo:bourdieu}) and Foucault's épistémè
+(\S\ref{zoo:foucault}). One may also read the theorem as a
+non-triviality result: were the conjugation action ever to act
+trivially on $\rho$ or $\omega$ \emph{outside} of inner
+automorphisms, the algebraic distinction between inner and outer
+would collapse, and with it the philosophical work the theorem is
+called upon to perform. The conjugation theorem secures the
+distinction by exhibiting it as a structural feature, not a
+definitional stipulation.
+\end{remark}
+
+\begin{remark}[Linearity of the action]\label{rem:linear-action}
+Because $C_g$ is a monoid endomorphism that fixes $\unit$, it
+extends uniquely to an $\RR$-linear endomorphism of the free
+$\RR$-vector space $\RR\Ideas$ on $\Ideas$. By
+\Cref{thm:conjugation}(2) this extension is an isometry of the
+bilinear pairing $\rho$. The collection
+$\{C_g : g\in\Ideas^{\times}\}$ thus sits inside the orthogonal
+group $O(\RR\Ideas,\rho)$, and the failure of inner-conjugation to
+exhaust this orthogonal group is itself an algebraic invariant of
+$\IdeaAlg$. We will return to this point in Chapter~\ref{ch:cogsci}
+when discussing learned representational symmetries.
+\end{remark}
+
+\section{Transmission chains}\label{sec:chains}
+
+We now turn from single conjugating actions to the iterated dynamics of
+\emph{transmission}. The basic combinatorial object is a finite
+sequence of carriers, folded by composition.
+
+\begin{definition}[Transmission chain]\label{def:chain}
+For a finite list $(a_1,\dots,a_n)$ of ideas, with $n\ge 0$, the
+\emph{transmission chain} is the right-fold
+\[
+  \chain{a_1,\dots,a_n}
+  \;\eqdef\;
+  a_1\compose(a_2\compose(\cdots\compose(a_n\compose\unit)\cdots))
+  = \prod_{i=1}^{n} a_i \quad (\text{empty product } = \unit).
+\]
+This is the function defined recursively in the Lean development as
+$\mathtt{chain}\,[\,]=\unit$ and $\mathtt{chain}\,(a::\mathit{xs})=
+a\compose\mathtt{chain}\,\mathit{xs}$; see
+\texttt{IdeaTheory.chain} in \texttt{Theorems7.lean}.
+\end{definition}
+
+The basic algebraic facts about chains are immediate:
+
+\begin{lemma}[Chain calculus]\label{lem:chain-calc}
+For all finite lists $\mathit{xs}, \mathit{ys}$ of ideas:
+\begin{enumerate}
+  \item $\chain{} = \unit$, $\chain{a} = a$, $\chain{a,b} = a\compose b$;
+  \item $\chain{\mathit{xs}\!\frown\!\mathit{ys}}
+        = \chain{\mathit{xs}}\compose\chain{\mathit{ys}}$
+        \emph{(append)};
+  \item inserting $\unit$ at any position in a chain leaves the chain
+        invariant;
+  \item the chain $\chain{a_1,\dots,a_n}$ is invariant under any
+        rebracketing of the underlying product;
+  \item if $a$ is self-fixed in the sense that $a\compose a = a$, then
+        $\chain{\underbrace{a,\dots,a}_{n+1}} = a$ for every $n\ge 0$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) is by definition. (2) is by induction on $\mathit{xs}$, using
+associativity in the inductive step --- this is
+\texttt{IdeaTheory.chain\_append}. (3) reduces to (2) and the unit law.
+(4) is the generalized associative law for monoids
+\cite[ch.~II]{Bourbaki1989}. (5) is by induction: at $n=0$ the claim is
+$\chain{a} = a$, and at $n+1$ we have $\chain{a,a,\dots,a} = a\compose
+\chain{a,\dots,a} = a\compose a = a$. The verified version is
+\texttt{IdeaTheory.selfFixedPoint\_chain\_replicate}.
+\end{proof}
+
+\subsection*{Telescoping under $\omega$ --- the chain rule}
+
+The interesting content of a chain is not its composite (which is just
+an element of $\Ideas$) but the \emph{accumulated emergence} along it.
+Recall from Chapter~\ref{ch:emergence} that $\omega\colon\Ideas\times
+\Ideas\to A$ is a normalized 2-cocycle and that for any normalized
+valuation $v\colon\Ideas\to A$ one has $v(a\compose b) = v(a)+v(b)+
+\omega(a,b)$. Iterating gives a closed-form telescoping.
+
+\begin{theorem}[Chain rule for $\omega$]\label{thm:chain-rule}
+Let $v\colon\Ideas\to A$ be a normalized valuation with cocycle
+$\omega$. For any chain $\chain{a_1,\dots,a_n}$ with $n\ge 1$,
+\[
+  v\!\bigl(\chain{a_1,\dots,a_n}\bigr)
+  \;=\;
+  \sum_{i=1}^{n} v(a_i)
+  \;+\;
+  \sum_{k=1}^{n-1}
+    \omega\!\bigl(a_k,\, \chain{a_{k+1},\dots,a_n}\bigr).
+\]
+The terms in the second sum are the \emph{telescoped emergence
+defects}; they vanish identically in the additive (cocycle-trivial)
+case.
+\end{theorem}
+
+\begin{proof}
+By induction on $n$. For $n=1$, both sides equal $v(a_1)$ since the
+empty $\omega$-sum is zero. Assume the result for some $n\ge 1$ and
+consider $n+1$. By the chain calculus,
+$\chain{a_1,\dots,a_{n+1}} = a_1\compose\chain{a_2,\dots,a_{n+1}}$.
+Applying the defining equation of $\omega$,
+\[
+v(\chain{a_1,\dots,a_{n+1}})
+= v(a_1) + v(\chain{a_2,\dots,a_{n+1}}) + \omega\bigl(a_1,
+  \chain{a_2,\dots,a_{n+1}}\bigr).
+\]
+Substitute the inductive hypothesis applied to $(a_2,\dots,a_{n+1})$ to
+expand $v(\chain{a_2,\dots,a_{n+1}})$ as $\sum_{i=2}^{n+1}v(a_i) +
+\sum_{k=2}^{n}\omega(a_k,\chain{a_{k+1},\dots,a_{n+1}})$. Combining
+gives exactly the right-hand side at $n+1$. The cocycle identity
+$\partial\omega = 0$ guarantees that no other ``rebracketing'' would
+yield a different telescoping, but the right-fold is the canonical
+one.
+\end{proof}
+
+\begin{corollary}[Chain rule for inverses]\label{cor:chain-inverse}
+If every $a_i\in\Ideas^{\times}$, then $\chain{a_1,\dots,a_n}\in
+\Ideas^{\times}$ with inverse $\chain{a_n^{-1},\dots,a_1^{-1}}$.
+\end{corollary}
+
+\begin{proof}
+Induction on $n$ via \Cref{prop:inv-group} and the append rule.
+\end{proof}
+
+\subsection*{Identity transmission}
+
+A theme of Volume~IV of the Lean development is that the unit $\unit$
+is invisible to a chain: inserting $\unit$ anywhere in a chain
+preserves the chain.
+
+\begin{theorem}[Identity transmission]\label{thm:id-transmission}
+For every list $\mathit{xs}$ of ideas, every position
+$1\le k\le \lvert\mathit{xs}\rvert+1$, and every $m\ge 0$, inserting $m$
+copies of $\unit$ at position $k$ leaves the chain unchanged. In
+particular,
+\[
+  \chain{\mathit{xs}\!\frown\!(\,\underbrace{\unit,\dots,\unit}_{m})\!\frown\!
+         \mathit{ys}}
+  \;=\;
+  \chain{\mathit{xs}\!\frown\!\mathit{ys}}.
+\]
+\end{theorem}
+
+\begin{proof}
+By the append clause of \Cref{lem:chain-calc}, both sides equal
+$\chain{\mathit{xs}}\compose \unit^{(m)}\compose \chain{\mathit{ys}}$
+where $\unit^{(m)}$ is the $m$-fold chain of units. By induction on
+$m$, $\unit^{(m)} = \unit$. The unit law in the monoid finishes the
+calculation. The packaged five-fold version is
+\texttt{IdeaTheory.theorem\_7\_2}.
+\end{proof}
+
+\subsection*{Filtering and rebracketing}
+
+Two further chain identities will appear in the zoo entries below.
+
+\begin{lemma}[Identity filtering]\label{lem:id-filter}
+For any list $\mathit{xs}$ of ideas, the chain
+$\chain{\mathit{xs}}$ equals the chain of the sublist obtained by
+deleting every occurrence of $\unit$ from $\mathit{xs}$.
+\end{lemma}
+
+\begin{proof}
+By induction on $\mathit{xs}$. The nil case is trivial. For
+$\mathit{xs} = a::\mathit{xs}'$, split on whether $a=\unit$. If
+$a=\unit$, both chains equal $\chain{\mathit{xs}'}$ by the unit law.
+If $a\ne\unit$, both equal $a\compose\chain{\mathit{xs}'}$ by the
+inductive hypothesis applied to $\mathit{xs}'$. The Lean version is
+\texttt{IdeaTheory.chain\_filter\_ne\_ident}.
+\end{proof}
+
+\begin{lemma}[Block rebracketing]\label{lem:block-reb}
+For any partition of a list $\mathit{xs}$ into consecutive blocks
+$\mathit{xs} = \mathit{xs}_1 \frown \cdots \frown \mathit{xs}_m$,
+\[
+  \chain{\mathit{xs}} \;=\; \chain{\chain{\mathit{xs}_1},\dots,
+  \chain{\mathit{xs}_m}}.
+\]
+\end{lemma}
+
+\begin{proof}
+By induction on $m$, using the append clause of
+\Cref{lem:chain-calc} at each step. This is the algebraic content
+of the generalized associative law \cite{Bourbaki1989}: any
+parenthesization of a finite product is equivalent.
+\end{proof}
+
+\begin{remark}[Operational reading]\label{rem:block-reb}
+\Cref{lem:block-reb} is the formal license for a chain-of-chains
+analysis: a long transmission can always be summarized as a chain of
+its sub-chains, and the value at the top level is identical to the
+value computed in one sweep. This is the algebraic substrate of
+``levels'' in the cultural-evolution literature \cite{Henrich2015}
+and of the multi-scale picture defended by \cite{Sperber1996}.
+\end{remark}
+
+\section{Cumulative emergence and the long-chain inequality}
+\label{sec:long-chain}
+
+The chain rule (\Cref{thm:chain-rule}) expresses the value of a chain
+as the sum of the per-carrier valuations plus a telescoping
+$\omega$-correction. When $A$ is ordered (the standard case is
+$A=\RR$ with the usual $\le$) and $\omega$ is non-negative, the
+correction is monotone and grows with $n$; this is the algebraic
+analogue of \emph{cumulative cultural complexity}.
+
+\begin{definition}[Non-negative $\omega$]\label{def:nonneg-omega}
+We say the cocycle $\omega\colon\Ideas\times\Ideas\to A$ is
+\emph{non-negative} if $A$ is a totally ordered abelian group and
+$\omega(a,b)\ge 0$ for all $a,b\in\Ideas$.
+\end{definition}
+
+\begin{proposition}[Cumulative emergence is monotone]\label{prop:cum-mon}
+If $\omega$ is non-negative, then for every prefix
+$(a_1,\dots,a_k)$ of $(a_1,\dots,a_n)$,
+\[
+v\!\bigl(\chain{a_1,\dots,a_k}\bigr)
+- \sum_{i=1}^{k} v(a_i)
+\;\le\;
+v\!\bigl(\chain{a_1,\dots,a_n}\bigr)
+- \sum_{i=1}^{n} v(a_i).
+\]
+That is, the gap between the chain's value and the sum of its parts
+grows monotonically as the chain is extended.
+\end{proposition}
+
+\begin{proof}
+By \Cref{thm:chain-rule} applied at length $k$ and at length $n$, the
+gap at length $k$ is the partial $\omega$-sum
+$\sum_{j=1}^{k-1}\omega(a_j,\chain{a_{j+1},\dots,a_k})$, while the gap
+at length $n$ is the analogous sum of length $n-1$. The difference is
+itself a sum of non-negative $\omega$-terms; non-negativity of
+$\omega$ gives the inequality.
+\end{proof}
+
+\begin{theorem}[Long-chain inequality]\label{thm:long-chain}
+Let $\omega$ be non-negative and let $L\ge 0$ be a uniform lower bound
+on $\omega$ over the carriers of interest, i.e.\ assume there is a
+constant $L\in A$ with $\omega(a,b)\ge L\ge 0$ for every pair $(a,b)$
+that appears as a $(a_k,\chain{a_{k+1},\dots,a_n})$-pair in the
+telescoping. Then for every chain of length $n\ge 1$,
+\[
+v\!\bigl(\chain{a_1,\dots,a_n}\bigr)
+\;\ge\;
+\sum_{i=1}^{n} v(a_i) + (n-1)\,L.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply \Cref{thm:chain-rule} and bound each of the $n-1$ telescoping
+terms below by $L$. The hypothesis is exactly that this bound
+applies, and the inequality follows by summation. The case $n=1$ is
+vacuous since the sum is empty.
+\end{proof}
+
+\begin{remark}[Information-theoretic reading]\label{rem:long-chain}
+When $A=\RR$ and $v$ is a complexity valuation (description length,
+Kolmogorov complexity, channel cost) the long-chain inequality says
+that a sufficiently long transmission produces an output whose
+complexity exceeds the sum of the complexities of its inputs by an
+amount linear in the length. This is the formal version of
+\emph{recombinant growth} \cite{Weitzman1998} and is closely related
+to Henrich's \emph{cultural ratchet} (\S\ref{zoo:henrich}).
+\end{remark}
+
+\begin{corollary}[No-collapse]\label{cor:no-collapse}
+Under the hypotheses of \Cref{thm:long-chain}, if any of $L>0$ holds
+strictly, then $\chain{a_1,\dots,a_n}\ne\unit$ for $n$ sufficiently
+large, regardless of the choice of carriers.
+\end{corollary}
+
+\begin{proof}
+By \Cref{thm:long-chain}, $v(\chain{a_1,\dots,a_n})$ exceeds any fixed
+bound for $n$ large. Since $v(\unit)=0$ by normalization, the chain
+cannot equal $\unit$ once the bound is exceeded.
+\end{proof}
+
+\section{Structural equivalence and the universal property}
+\label{sec:struct-equiv}
+
+Two idea algebras may be presented very differently --- as a syntactic
+word algebra, as a quotient of free vector spaces, as a category of
+neural representations --- and yet implement the same structure. The
+correct notion of identity between them is structural equivalence,
+which we now formalize.
+
+\begin{definition}[Idea algebra morphism]\label{def:morphism}
+Let $\IdeaAlg = (\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$
+and $\IdeaAlg' = (\Ideas',\compose',\unit',\rho',\sigma',\nu',\eta',
+\omega',\deg')$ be idea algebras. A \emph{morphism} $f\colon\IdeaAlg\to
+\IdeaAlg'$ is a function $f\colon\Ideas\to\Ideas'$ such that
+\begin{enumerate}
+  \item $f(\unit) = \unit'$ and $f(a\compose b) = f(a)\compose' f(b)$;
+  \item $\rho'(f(a),f(b)) = \rho(a,b)$ for all $a,b$;
+  \item $f(\sigma(a,b))=\sigma'(f(a),f(b))$, and analogously for $\nu$
+        and $\eta$;
+  \item $\omega'(f(a),f(b)) = \omega(a,b)$;
+  \item $\deg'(f(a)) = \phi(\deg(a))$ for some fixed homomorphism
+        $\phi\colon G\to G'$ of the grading groups.
+\end{enumerate}
+A \emph{structural equivalence} is a morphism $f$ that is a bijection
+on carriers, with $\phi$ an isomorphism. Structural equivalences form
+the morphisms of a category $\mathsf{IdeaAlg}$.
+\end{definition}
+
+The bare-monoid version of (1) is the structure
+\texttt{IdeaTheory.IdeaHom} in \texttt{Theorems8.lean}: a function
+preserving $\unit$ and $\compose$, with the homomorphism law
+$f(a\compose b) = f(a)\compose' f(b)$. Definition~\ref{def:morphism}
+extends that to all primitives.
+
+\begin{lemma}[Image-of-chain lemma]\label{lem:image-chain}
+A morphism $f\colon\IdeaAlg\to\IdeaAlg'$ commutes with chains:
+$f(\chain{a_1,\dots,a_n}) = \chain{f(a_1),\dots,f(a_n)}'$, where the
+chain on the right uses the operations of $\IdeaAlg'$.
+\end{lemma}
+
+\begin{proof}
+Induction on $n$, using clause~(1) of \Cref{def:morphism} at the
+inductive step. This is the verified \texttt{IdeaTheory.evalWord\_mapWord}.
+\end{proof}
+
+We now state the universal property of structural equivalence in two
+forms. The first is the \emph{kernel characterization} of the natural
+``equality of evaluations'' relation on the free word algebra over a
+carrier; the second is a \emph{universal mapping property} for any
+structurally equivalent target.
+
+\begin{theorem}[Kernel characterization]\label{thm:kernel}
+Let $\Ideas$ be a carrier of an idea algebra and let
+$\mathsf{Word}(\Ideas)$ denote the free monoid on $\Ideas$, equipped
+with the evaluation map $\mathrm{ev}\colon\mathsf{Word}(\Ideas)\to
+\Ideas$ obtained by the chain construction. Define
+\[
+  w_1 \equivIdea w_2 \;\iff\; \mathrm{ev}(w_1) = \mathrm{ev}(w_2).
+\]
+Then $\equivIdea$ is the unique relation on $\mathsf{Word}(\Ideas)$
+that is (i) an equivalence relation, (ii) a congruence with respect to
+\texttt{cons} and append, and (iii) a complete invariant of evaluation:
+$w_1\equivIdea w_2$ holds iff $w_1$ and $w_2$ have the same image in
+$\Ideas$.
+\end{theorem}
+
+\begin{proof}
+That $\equivIdea$ is an equivalence is immediate from equality on
+$\Ideas$. The congruence claim is verified by combining the cons-rule
+$\mathrm{ev}(a::w) = a\compose\mathrm{ev}(w)$ with the append rule
+$\mathrm{ev}(w_1\!\frown\!w_2) = \mathrm{ev}(w_1)\compose
+\mathrm{ev}(w_2)$ (\Cref{lem:chain-calc}); both
+\texttt{IdeaTheory.cons\_congr} and \texttt{IdeaTheory.append\_congr}
+record the corresponding lemmas. For uniqueness, suppose $R$ is any
+other relation satisfying (i)--(iii). Then for every $w_1,w_2$,
+$R(w_1,w_2)$ holds iff $\mathrm{ev}(w_1)=\mathrm{ev}(w_2)$, which is
+the definition of $\equivIdea$. The bundled three-clause version is
+\texttt{IdeaTheory.theorem\_8\_1}.
+\end{proof}
+
+\begin{theorem}[Universal property]\label{thm:universal}
+Let $\IdeaAlg$ be an idea algebra. There is a (unique up to unique
+isomorphism) idea algebra $\IdeaAlg^{\flat}$ together with a morphism
+$\iota\colon\IdeaAlg\to\IdeaAlg^{\flat}$ such that for every idea
+algebra $\IdeaAlg'$ and every morphism $f\colon\IdeaAlg\to\IdeaAlg'$
+there exists a unique morphism
+$\bar f\colon\IdeaAlg^{\flat}\to\IdeaAlg'$ with $\bar f\circ\iota = f$.
+Equivalently, the canonical-form construction $w\mapsto[\mathrm{ev}(w)]$
+on words is the reflector of $\mathsf{Word}(\Ideas)$ into the
+subcategory of structural-equivalence classes.
+\end{theorem}
+
+\begin{proof}
+Take $\IdeaAlg^{\flat}$ to be the quotient of $\mathsf{Word}(\Ideas)$
+by $\equivIdea$, with operations and primitives induced from
+$\IdeaAlg$ (well-defined by \Cref{thm:kernel}). The map $\iota$ sends
+$a$ to the equivalence class of the singleton word $[a]$. Given
+$f\colon\IdeaAlg\to\IdeaAlg'$, define $\bar f$ on a representative
+word by composing the letter-by-letter image with the chain
+construction in $\IdeaAlg'$, i.e.\ $\bar f([w]) =
+\chain{f(a_1),\dots,f(a_n)}'$; \Cref{lem:image-chain} ensures this
+descends to the quotient, and uniqueness follows because the singleton
+words generate $\IdeaAlg^{\flat}$. The Lean version of the existence
+half is \texttt{IdeaTheory.theorem\_8\_2}; the universal-property half
+is \texttt{IdeaTheory.theorem\_8\_3}.
+\end{proof}
+
+\begin{remark}[\,$\equivIdea$ as a congruence on the original carrier]
+\label{rem:cong-carrier}
+The same machinery, transported back through evaluation, makes
+$\equivIdea$ on $\Ideas$ literally equality (since evaluation is the
+identity on singletons). On a non-free carrier the structural
+equivalence relation has more bite: it identifies all words with
+common evaluation, which by \Cref{lem:chain-calc} encompasses
+rebracketing and identity insertion. This is what is verified as
+\texttt{IdeaTheory.theorem\_9\_3}: the relation $\mathrm{IdeaEquiv}$
+is reflexive, symmetric, transitive, and congruent in both arguments.
+\end{remark}
+
+\subsection*{Free algebras and quotient maps}
+
+The reflector $\iota$ of \Cref{thm:universal} has a more concrete
+description that will be useful in concrete model-building.
+
+\begin{construction}[Free idea algebra on a set]\label{cons:free}
+Let $X$ be a set. The \emph{free idea algebra on $X$}, written
+$\IdeaAlg\langle X\rangle$, has as carrier the set
+$\mathsf{Word}(X)/\equivIdea$ of equivalence classes of finite words
+under structural equivalence with respect to the trivial idea
+algebra on $X$ (the one in which $X$ generates a free monoid and all
+primitives are extended freely). Composition is concatenation,
+$\unit$ is the empty word, $\rho$, $\sigma$, $\nu$, $\eta$, $\omega$,
+and $\deg$ are the unique extensions making the universal property
+of \Cref{thm:universal} hold.
+\end{construction}
+
+\begin{proposition}[Universal mapping property of free algebras]
+\label{prop:free-ump}
+For every idea algebra $\IdeaAlg'$ and every set-map
+$\varphi\colon X\to\Ideas'$ there is a unique morphism
+$\bar\varphi\colon\IdeaAlg\langle X\rangle\to\IdeaAlg'$ extending
+$\varphi$ in the sense $\bar\varphi(\iota(x)) = \varphi(x)$ for all
+$x\in X$.
+\end{proposition}
+
+\begin{proof}
+Existence: define $\bar\varphi$ on a representative word
+$[x_{i_1},\dots,x_{i_n}]$ by chain composition $\chain{\varphi(x_{i_1}),
+\dots,\varphi(x_{i_n})}'$; well-definedness on classes is
+\Cref{lem:image-chain}; preservation of all primitives uses the
+freeness of the construction. Uniqueness: any two such extensions
+agree on singleton classes by hypothesis, hence on all classes by
+the chain rule and the morphism axioms.
+\end{proof}
+
+\section{The headline equivalence theorem}\label{sec:equiv-thm}
+
+We now combine the components into the central result of the chapter.
+
+\begin{theorem}[Structural equivalence theorem]\label{thm:struct-equiv}
+Let $\IdeaAlg$ and $\IdeaAlg'$ be idea algebras. The following are
+equivalent.
+\begin{enumerate}
+  \item There exists a structural equivalence $f\colon\IdeaAlg\to
+        \IdeaAlg'$.
+  \item There exists a graded monoid isomorphism $f\colon\Ideas\to
+        \Ideas'$ that intertwines $\rho$, the Aufhebung primitives
+        $\sigma,\nu,\eta$, and $\omega$.
+  \item For every choice of presentation by generators and chain
+        relations, the canonical-form quotients $\IdeaAlg^{\flat}$ and
+        $(\IdeaAlg')^{\flat}$ are isomorphic in the category of
+        idea algebras, by an isomorphism extending each pair of
+        equivalent presentations.
+  \item There is a $\rho$-isometric, $\omega$-respecting bijection
+        $f\colon\Ideas\to\Ideas'$ such that the conjugation actions of
+        $\Ideas^{\times}$ and $(\Ideas')^{\times}$ are intertwined,
+        i.e.\ $f(\conj{g}{a}) = \conj{f(g)}{f(a)}$ for all
+        $g\in\Ideas^{\times}$ and all $a\in\Ideas$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$(1)\Rightarrow(2)$ is immediate from \Cref{def:morphism}: a
+structural equivalence is, by definition, a graded monoid isomorphism
+satisfying clauses (2)--(5).
+
+$(2)\Rightarrow(1)$. The hypothesis exactly enumerates clauses (1)--(4)
+of \Cref{def:morphism}, plus the grading clause (5). Take $\phi$ to
+be the induced map on grading groups; it is well-defined and a
+homomorphism because $\deg$ is.
+
+$(2)\Leftrightarrow(3)$. By the universal property
+(\Cref{thm:universal}), $\IdeaAlg^{\flat}\cong\IdeaAlg$ canonically:
+the singleton-word reflector $\iota$ admits a section sending each
+class to its evaluation. Hence an isomorphism of canonical forms is
+the same as an isomorphism of the original algebras, and the iff
+follows.
+
+$(2)\Rightarrow(4)$. By the conjugation theorem
+(\Cref{thm:conjugation}), $C_g$ is built out of $\compose$ and inverses
+in $\Ideas$, both of which are preserved by $f$ in (2). Hence
+$f(C_g(a)) = f(g\compose a\compose g^{-1}) = f(g)\compose'
+f(a)\compose' f(g)^{-1} = C_{f(g)}(f(a))$.
+
+$(4)\Rightarrow(2)$. The intertwining property at the special case
+$a=\unit$ gives $f(\unit) = \unit'$. The intertwining at $g=$ a
+single carrier and $a=$ another carrier, combined with the
+$\rho$-isometric and $\omega$-respecting hypotheses, recovers the full
+homomorphism property of $f$ on a generating set, and hence on all of
+$\Ideas$ by the universal property of \Cref{thm:universal}.
+\end{proof}
+
+\begin{corollary}[Conjugation orbits are equivalence invariants]
+\label{cor:orbit-inv}
+If $f\colon\IdeaAlg\to\IdeaAlg'$ is a structural equivalence, then $f$
+restricts to a bijection of conjugacy classes of $\Ideas$ with
+conjugacy classes of $\Ideas'$.
+\end{corollary}
+
+\begin{proof}
+By \Cref{cor:conj-iso} the conjugation action sends conjugacy classes
+to conjugacy classes within each algebra. By
+\Cref{thm:struct-equiv}(4), $f$ intertwines the actions, hence carries
+classes to classes.
+\end{proof}
+
+\begin{corollary}[Cohomology class of $\omega$ is an invariant]
+\label{cor:omega-cohomology}
+If $\IdeaAlg\cong\IdeaAlg'$ as idea algebras, then the cohomology
+classes $[\omega]\in H^2(\Ideas;A)$ and $[\omega']\in H^2(\Ideas';A)$
+agree under the induced isomorphism on cohomology. In particular, the
+emergence-cohomology class is a complete obstruction to additivity:
+two algebras can be structurally equivalent only if their emergence
+defects are cohomologous.
+\end{corollary}
+
+\begin{proof}
+\Cref{thm:struct-equiv}(2) yields $\omega'(f(a),f(b)) = \omega(a,b)$
+on the nose; this is a stronger statement than mere cohomologousness,
+but it certainly implies it. The induced map on $H^2$ is functorial in
+the carrier monoid, by the standard machinery of group cohomology
+\cite{Weibel1994,Brown1982}.
+\end{proof}
+
+\begin{corollary}[Grading is a complete first-order invariant]
+\label{cor:deg-invariant}
+If $\IdeaAlg$ and $\IdeaAlg'$ are structurally equivalent, then the
+multisets $\{\deg(a) : a\in\Ideas\}$ and $\{\deg'(a') : a'\in\Ideas'\}$
+agree as multisets in their respective grading groups (which are
+themselves isomorphic).
+\end{corollary}
+
+\begin{proof}
+A structural equivalence is a bijection that preserves $\deg$ up to
+the isomorphism $\phi\colon G\to G'$.
+\end{proof}
+
+\section{The zoo}\label{sec:zoo-ch6}
+
+We close with seven entries from the zoo of ideas about ideas, each
+read through the formalism of conjugation, transmission, and
+structural equivalence. The pattern is the standard one:
+original claim, formal restatement, status under the theorems above,
+and brief commentary.
+
+\subsection{Bourdieu --- habitus as conjugation by class position}
+\label{zoo:bourdieu}
+
+\begin{zooentry*}
+\thinker{Pierre Bourdieu}, \emph{Distinction} \cite{Bourdieu1984} and
+the wider field-and-habitus programme, treats the social agent as
+carrying a system of dispositions --- the habitus --- that is
+\emph{class-positional}: the same gesture, taste, or judgement
+acquires different significance depending on the position from which
+the agent enacts it. A bourgeois reading of \emph{The Magic Mountain}
+is not the same idea as a working-class reading of the same novel,
+even though the propositional content is identical.
+\formalclaim Each class position $g$ is modelled as an invertible idea
+$g\in\Ideas^{\times}$ encoding the social-cognitive frame, and the
+class-positioned act is $\conj{g}{a} = g\compose a\compose g^{-1}$.
+The habitus is the orbit map $a\mapsto \{\conj{g}{a} : g\in
+G_{\mathrm{soc}}\}$, where $G_{\mathrm{soc}}\subseteq\Ideas^{\times}$
+is the subgroup of socially realized invertibles.
+\formalstatus
+True \emph{up to} the conjugation theorem (\Cref{thm:conjugation}):
+$\rho$, $\omega$, $\deg$ are invariant along class-positional orbits,
+which is what allows Bourdieu to insist that ``misrecognition'' of
+class effects is structurally invisible to the agents involved. The
+formalism predicts in addition that any quantity \emph{not} expressible
+in $\rho$, $\sigma$, $\nu$, $\eta$, $\omega$, or $\deg$ may
+discriminate between classes; Bourdieu's empirical work on body
+hexis, on which he draws elsewhere \cite{Granovetter1973} for
+network-mediated transmission, supplies exactly such non-invariants.
+\litcomment
+The fit is unusually clean. Bourdieu's persistent claim that ``the
+field structures the habitus'' becomes the algebraic claim that
+$g\mapsto C_g$ is a homomorphism. The persistent worry that
+``positionality'' might be a trivial relabeling --- and hence not
+explanatory --- is dispelled by \Cref{cor:orbit-inv}: an orbit of
+$C_g$ identifies socially equivalent acts as algebraically equivalent
+ones, but the orbit itself is a non-trivial structural invariant
+under structural equivalence.
+\end{zooentry*}
+
+\subsection{Skinner --- context as conjugation}\label{zoo:skinner}
+
+\begin{zooentry*}
+\thinker{Quentin Skinner}, \emph{Meaning and understanding in the
+history of ideas} \cite{Skinner1969}, argues against the practice of
+reading historical texts as direct expressions of timeless doctrines.
+The meaning of a Hobbesian utterance about ``commonwealth'' is not
+the meaning of the same English word for a 21st-century reader; it is
+constituted by the surrounding intellectual context --- what
+arguments could have been made, what conventions were available,
+which interlocutors were targeted.
+\formalclaim Each intellectual context $g$ is an invertible operator
+on the ideational content; the contextualized utterance is
+$\conj{g}{a}$. Skinner's methodology demands that the historian
+recover $g$ before evaluating $a$.
+\formalstatus
+The conjugation theorem makes this precise: $\rho(\conj{g}{a},
+\conj{g}{b}) = \rho(a,b)$ shows that \emph{relative} resonances
+between contextualized utterances reproduce the relative resonances
+of the bare ones. Hence Skinner's claim that ``meaning is preserved
+modulo context'' is exactly Idea Theory's invariance of $\rho$ under
+inner automorphisms. By contrast, $v(\conj{g}{a})$ for a non-trivial
+valuation $v$ generally differs from $v(a)$ by a coboundary
+\cite{Brown1982}, which models the historiographical fact that
+quantitative scoring (rhetorical force, persuasive uptake) varies
+across contexts.
+\litcomment
+Skinner's own critique of ``perennial questions'' \cite{Skinner1969}
+becomes the rejection of the assumption that the orbit of $a$ under
+$C_g$ is a singleton. Idea Theory grants Skinner the formal
+machinery to say so without committing him to relativism: the orbit
+exists as an algebraic object, and is fully invariant under
+structural equivalence.
+\end{zooentry*}
+
+\subsection{Foucault --- épistémè as a conjugation orbit}\label{zoo:foucault}
+
+\begin{zooentry*}
+\thinker{Michel Foucault}, \emph{L'Arch\'eologie du savoir}
+\cite{Foucault1969}, proposes that knowledge in any historical period
+is organized by a deep structural form --- the \emph{épistémè} ---
+that determines what can be said, thought, and counted as a
+legitimate object of knowledge. An épistémè is not a doctrine but a
+configuration: it conjugates every discursive act it touches.
+\formalclaim An épistémè is modelled as a (large) subgroup
+$E\subseteq\Ideas^{\times}$. The discursive content of a period is
+the orbit set $\Ideas/E = \{\,E\!\cdot\! a : a\in\Ideas\,\}$, where
+the action is by inner automorphism. A \emph{discursive rupture} is a
+period in which the appropriate $E$ changes; this is exactly the
+absence of an inner $g$ that would conjugate the old discursive
+configuration into the new.
+\formalstatus
+True \emph{conditionally} on \Cref{thm:conjugation} and on
+\Cref{thm:struct-equiv}(4). Within a single épistémè, the conjugation
+theorem guarantees that all primitives are preserved along orbits, so
+two utterances in the same orbit are algebraically indistinguishable
+--- the formal sense of Foucault's ``regularity of statements''
+\cite{Foucault1969}. Across épistémès, the ``rupture'' phenomenon is
+the failure of any structural equivalence
+(\Cref{thm:struct-equiv}(1)) to extend the within-period
+conjugations: there simply is no graded monoid isomorphism between
+classical-age and modern-age $\Ideas$.
+\litcomment
+This is the sharpest of the seven fits in this chapter. Foucault's
+notorious refusal of any continuous-history account is the algebraic
+fact that not every cross-period bijection is a structural
+equivalence, and his equally insistent claim that within a period
+\emph{everything} is reorganized along the orbit lines is the
+conjugation theorem.
+\end{zooentry*}
+
+\subsection{Latour --- translation chains}\label{zoo:latour}
+
+\begin{zooentry*}
+\thinker{Bruno Latour}, \emph{Reassembling the Social}
+\cite{Latour2005} and the broader Actor-Network Theory programme,
+analyzes scientific and social facts as products of long chains of
+\emph{translations}: every step --- a measurement, an inscription, a
+publication, an institutional uptake --- transforms the content
+slightly while purporting to transmit it. The gap between the
+original and the final product is not noise but the structuring
+phenomenon itself.
+\formalclaim Each translation step is a carrier $a_i\in\Ideas$, and
+the resulting fact is the chain $\chain{a_1,\dots,a_n}$. The
+``cost of translation'' for a step is the local emergence
+$\omega(a_k,\chain{a_{k+1},\dots,a_n})$ of \Cref{thm:chain-rule};
+the cumulative cost is the long-chain sum.
+\formalstatus
+True under the chain rule (\Cref{thm:chain-rule}) and the long-chain
+inequality (\Cref{thm:long-chain}). The non-additivity of $v$ along
+the chain is exactly Latour's insistence that the final fact is
+\emph{not} the sum of its mediators. The non-negativity assumption on
+$\omega$ corresponds to ANT's empirical claim that translation is
+\emph{costly}: each carrier adds something, and successive additions
+accumulate. Latour's own examples (the Pasteurization of France, the
+inscription of soil-pH measurements at Boa Vista) trace exactly the
+$n-1$ telescoping terms.
+\litcomment
+The fit is literal: ``transmission chain'' and ``translation chain''
+denote the same algebraic object, and the cost-of-translation
+intuition is the algebraic content of the cocycle. The corollary of
+no-collapse (\Cref{cor:no-collapse}) gives a Latourian prediction:
+sufficiently long networks always produce non-trivial output, even
+from trivial inputs --- which is exactly the assertion that
+``society'' is constituted, not given.
+\end{zooentry*}
+
+\subsection{Rogers --- diffusion of innovations}\label{zoo:rogers}
+
+\begin{zooentry*}
+\thinker{Everett Rogers}, \emph{Diffusion of Innovations}
+\cite{Rogers2003}, models the spread of an innovation across a
+social system as a sequence of adoption decisions, each modulated by
+the adopter's awareness, persuasion, decision, implementation, and
+confirmation phases. Long adoption chains exhibit increasing
+\emph{resistance}: late adopters face higher cumulative friction
+than early adopters.
+\formalclaim Each adopter or adoption step is an idea $a_i$; the
+total ``adoption work'' done up to time $n$ is
+$v(\chain{a_1,\dots,a_n})$. The resistance encountered by step $k$ is
+the local cocycle term $\omega(a_k,\chain{a_{k+1},\dots,a_n})$, and
+the cumulative resistance is the second sum of \Cref{thm:chain-rule}.
+\formalstatus
+True under \Cref{thm:long-chain}: if the per-step resistance is
+bounded below by some $L>0$, then the total resistance grows
+linearly in chain length, exactly the empirical S-curve plateau
+documented by Rogers \cite{Rogers2003}. The strict version
+\Cref{cor:no-collapse} says that long-chain adoptions cannot reduce
+to the trivial idea, which corresponds to Rogers's observation that
+mature diffusion produces social structure that does not vanish on
+discontinuation of the original innovation.
+\litcomment
+Rogers's five-stage model maps less directly onto the formalism than
+Latour's translation, because the stages are heterogeneous; what
+survives translation is the long-chain inequality, which in
+sociological terms is the well-attested ``cumulative friction''
+phenomenon. The bias toward early adopters --- a structural
+prediction of the model --- corresponds in Idea Theory to the
+position-dependence of $\omega(a_k, \chain{a_{k+1},\dots,a_n})$ on
+the depth of the suffix.
+\end{zooentry*}
+
+\subsection{Henrich --- the cultural ratchet}\label{zoo:henrich}
+
+\begin{zooentry*}
+\thinker{Joseph Henrich}, \emph{The Secret of Our Success}
+\cite{Henrich2015}, argues that human cognitive distinctiveness
+arises from a \emph{cultural ratchet}: the cumulative, irreversible
+build-up of know-how across generations of social transmission. Each
+generation inherits a baseline and adds incrementally; the result is
+artefacts and skills no individual could have invented.
+\formalclaim Each generation is a chain of carriers, and the
+cross-generational accumulation is the iterated chain
+$\chain{\chain{a_{1,1},\dots,a_{1,n_1}},\dots,\chain{a_{k,1},\dots,
+a_{k,n_k}}}$. The ratchet's monotonicity is
+\Cref{prop:cum-mon}: the cumulative emergence is non-decreasing in
+chain extension when $\omega\ge 0$.
+\formalstatus
+True under \Cref{prop:cum-mon} and \Cref{thm:long-chain}. The
+\emph{irreversibility} that Henrich emphasizes is not literal
+algebraic irreversibility (the chain rule gives a closed-form
+inverse for invertible carriers, \Cref{cor:chain-inverse}) but the
+\emph{positive monotone growth} of cumulative $\omega$. The
+no-collapse corollary (\Cref{cor:no-collapse}) is the algebraic form
+of Henrich's experimental observation that long chains of social
+learners exceed any individual's reasoning capacity \cite{Henrich2015}.
+\litcomment
+Henrich's empirical case for cultural over individual cognition rests
+on chain-length effects; Idea Theory predicts these effects must be
+of the form $(n-1)L$ to leading order, with $L$ a per-step cocycle
+floor. The formalism gives a sharper hypothesis than the verbal
+``ratchet'' --- it predicts that the slope, not just the sign, of the
+cumulative-emergence curve is structurally invariant under
+\Cref{thm:struct-equiv}.
+\end{zooentry*}
+
+\subsection{Kuhn --- paradigm as structural equivalence class}
+\label{zoo:kuhn}
+
+\begin{zooentry*}
+\thinker{Thomas Kuhn}, \emph{The Structure of Scientific Revolutions}
+\cite{Kuhn1962}, distinguishes ``normal science'' --- routine
+puzzle-solving within a shared paradigm --- from ``revolutionary
+science'', in which one paradigm replaces another, and the two are in
+some strong sense \emph{incommensurable}: terms like ``mass'' refer
+differently across the divide.
+\formalclaim A paradigm is a structural-equivalence class of idea
+algebras: the collection of all algebras isomorphic to a fixed
+$\IdeaAlg$ in the sense of \Cref{def:morphism}. Normal science is
+work within one such class; a revolution is the absence of any
+structural equivalence connecting the pre- and post-revolutionary
+algebras.
+\formalstatus
+True under \Cref{thm:struct-equiv}. Within a class, every primitive
+($\rho$, $\sigma$, $\nu$, $\eta$, $\omega$, $\deg$) is preserved
+under translation between presentations, and the conjugation action
+is intertwined; this is the algebraic version of Kuhn's
+``paradigm-internal articulation''. Revolutions are diagnosed by the
+failure of clause~(2) of \Cref{thm:struct-equiv}: there is no
+$\rho$-isometric, $\omega$-respecting, graded monoid isomorphism
+extending any of the available translations. Kuhn's famous claim that
+revolutions cannot be resolved by argument internal to either
+paradigm is then a theorem: argument internal to $\IdeaAlg$ moves
+within its conjugacy structure, and conjugation is structurally
+invariant (\Cref{cor:orbit-inv}).
+\formalclaim
+\litcomment
+Two predictions of the formalism that go beyond Kuhn. First, by
+\Cref{cor:omega-cohomology}, the obstruction to a structural
+equivalence between paradigms is concentrated in the cohomology
+class of $\omega$: paradigms can fail to be structurally equivalent
+only if their emergence cocycles are non-cohomologous. Second, by
+\Cref{cor:deg-invariant}, the multiset of grading values is a
+fingerprint of a paradigm; ``hidden'' structural equivalences --- not
+detected by surface translations --- can be ruled out simply by
+counting graded levels. Both refinements give Kuhn's broadly literary
+thesis a quantitative bite that subsequent commentators
+\cite{Lovejoy1936,Koselleck2002} have demanded.
+\end{zooentry*}
+
+\section*{Summary of the chapter}
+
+\section{Coda: methodological consequences}\label{sec:coda-ch6}
+
+The three devices of this chapter --- conjugation, transmission, and
+structural equivalence --- act in concert in every later chapter, and
+it is worth pausing to draw out the methodological lessons they
+license. Each is briefly stated and then situated.
+
+\paragraph{Frame-relative invariance.} The conjugation theorem has the
+methodological force of a Galilean invariance principle: any property
+expressible in $\rho$, $\sigma$, $\nu$, $\eta$, $\omega$, or $\deg$ is
+``frame-independent'' in the precise sense of being constant along
+inner-automorphism orbits. Empirical disputes about the meaning of an
+idea that turn on the choice of frame --- ``but in our paradigm $a$
+means $a'$'' --- are resolved by exhibiting an invertible $g$ with
+$\conj{g}{a} = a'$. The dispute is then revealed to be merely about
+presentation, since structural equivalence (\Cref{thm:struct-equiv})
+will identify the two sides. Conversely, disputes that resist any
+such inner $g$ are diagnosed as genuine: they signal a non-trivial
+quotient of $\Ideas^{\times}$ acting on $\Ideas$.
+
+\paragraph{Chain accounting.} The chain rule of \Cref{thm:chain-rule}
+turns the otherwise-vague injunction ``track the transmission'' into
+an explicit telescoping. Whenever an analyst is tempted to write
+``content is roughly preserved across stages'', the chain rule asks
+which valuation $v$, which cocycle $\omega$, and which decomposition
+of the chain are intended. The long-chain inequality
+(\Cref{thm:long-chain}) supplies a non-trivial \emph{quantitative}
+prediction --- linear cumulative emergence --- that an empirical
+analyst can either confirm or refute, and that the formalism cannot
+be made to evade by re-bracketing (\Cref{lem:block-reb}) or by
+identity insertion (\Cref{thm:id-transmission}).
+
+\paragraph{Equivalence as a benchmark, not a definition.}
+\Cref{thm:struct-equiv} gives four mutually equivalent
+characterizations of when two idea algebras are ``the same''. None is
+\emph{the} definition; each highlights a different working face of
+equivalence. The morphism formulation (clause~1) is best for
+constructive arguments; the algebraic-data formulation (clause~2) is
+best for case-by-case verification; the canonical-form formulation
+(clause~3) is best for computational implementations; and the
+intertwining-conjugation formulation (clause~4) is best when the
+interest is in symmetry rather than in structure tout court. We will
+draw on each of the four in different chapters.
+
+\paragraph{Cohomological obstructions.} \Cref{cor:omega-cohomology}
+isolates a single, computable obstruction to structural equivalence:
+the cohomology class of $\omega$. This sharpens the otherwise
+qualitative discourse of ``incommensurability''
+\cite{Kuhn1962,Foucault1969,Bedau1997} by giving the field a concrete
+invariant to compute. In the cases where $H^2$ is finite-dimensional
+--- the typical case for finitely generated carriers
+\cite{Brown1982,Weibel1994} --- the diagnosis whether two
+presentations are or are not structurally equivalent reduces to a
+finite cohomological calculation.
+
+\paragraph{Looking ahead.} Chapter~\ref{ch:grading} will exploit the
+grading invariance of \Cref{thm:conjugation}(5) to develop the theory
+of \emph{degree filtrations}: the chain $\deg_0\subseteq\deg_1\subseteq
+\cdots$ of subalgebras at successive grading levels. The conjugation
+action restricts to each level, and the chain rule respects degree by
+the same argument as in the proof of \Cref{thm:conjugation}(5).
+Chapter~\ref{ch:cogsci} then specializes the transmission-chain
+formalism to cognitive carriers (working-memory traces, articulatory
+gestures, neural activation patterns), where the long-chain
+inequality recovers a battery of empirical findings on serial recall
+and cumulative-cultural complexity \cite{Henrich2015,Sperber1996}.
+Chapter~\ref{ch:econ_game} will treat structural equivalence as an
+\emph{equilibrium} concept in evolutionary game-theoretic models of
+ideational competition \cite{MaynardSmith1982}: two strategies are
+indistinguishable in equilibrium iff they are structurally
+equivalent in the sense of \Cref{thm:struct-equiv}.
+
+\section*{Summary of the chapter}
+
+We isolated $\Ideas^{\times}$, proved it is a group, and showed that
+its inner action on $\Ideas$ preserves every primitive of the
+idea-algebra structure (\Cref{thm:conjugation}). We folded finite
+sequences of carriers into transmission chains and proved a chain rule
+for $\omega$ (\Cref{thm:chain-rule}), a long-chain inequality
+(\Cref{thm:long-chain}), and an identity-transmission theorem
+(\Cref{thm:id-transmission}). We defined morphisms of idea algebras and
+proved the universal property (\Cref{thm:universal}) and the
+structural-equivalence theorem (\Cref{thm:struct-equiv}), with
+corollaries on conjugacy invariance, cohomology, and grading. The zoo
+entries showed that habitus, contextualism, épistémè, translation, the
+diffusion of innovations, the cultural ratchet, and Kuhnian paradigms
+admit clean formal restatements in this language. The next chapter
+takes up the grading $\deg$ in its own right.

@@ -1,0 +1,1196 @@
+\chapter{Resonance and Meaning Curvature}\label{ch:resonance}
+
+An idea algebra is a tuple $(\Ideas,\compose,\unit,\rho,\sigma,\nu,\eta,\omega,\deg)$ in the notation of the Foundations chapter. The previous chapters built the carrier $\Ideas$ and equipped it with an
+associative composition $\compose$ with two-sided unit $\unit$. From that
+skeleton alone little can be said about \emph{how} ideas relate to one
+another. The present chapter introduces the second pillar of the formalism:
+the \textbf{resonance pairing} $\rho:\Ideas\times\Ideas\to\RR$ and the
+\textbf{meaning curvature} $\curv$ that measures its anti-symmetric part.
+Resonance is the quantitative scalar against which every later theorem of
+Volume~1 is weighed; curvature is the homological invariant that tells us
+when two idea algebras are the \emph{same} algebra or only superficially
+similar.
+
+The development follows the Lean files
+\texttt{IdeaTheory.Theorems2}, \texttt{IdeaTheory.Theorems4}, and
+\texttt{IdeaTheory.Theorems6}, restated in plain mathematical prose with
+math-prose proofs. We use the abbreviation $\res{a}{b}$ for $\rho(a,b)$ when
+the pairing is unambiguous; we write $V(\Ideas):=\RR^{(\Ideas)}$ for the
+free $\RR$-vector space on the underlying set $\Ideas$.
+
+The chapter is organized as follows. \cref{sec:why-pairing} motivates the
+bilinearity of $\rho$ from three independent considerations.
+\cref{sec:free-vs} constructs the free $\RR$-vector space on $\Ideas$ and
+proves the bilinear extension theorem with full uniqueness.
+\cref{sec:nondeg} treats non-degeneracy and its preservation under
+composition. \cref{sec:sym-antisym} establishes the canonical
+decomposition $\rho=\rho_++\rho_-$. \cref{sec:curvature} introduces the
+meaning curvature as the antisymmetric part and proves its closedness.
+\cref{sec:cohomology} establishes the cohomological invariance of
+$[\curv]$ under structural equivalence. \cref{sec:aufhebung} verifies
+compatibility with the Aufhebung decomposition. \cref{sec:resonance-zoo}
+exhibits seven entries from the zoo of historical and scientific
+positions about ideas, each faithfully captured by some component of
+the formalism.
+
+% ---------------------------------------------------------------
+\section{From dyadic affinity to a bilinear form}\label{sec:why-pairing}
+
+The earliest mathematically articulate doctrine of how one idea ``calls
+forth'' another is Hume's account of the \emph{association of ideas}: every
+idea, on appearing in the mind, exerts a kind of ``gentle force'' upon
+related ideas, drawing them into consciousness in proportion to the strength
+of their connexion~\cite{Hume1739}. Hume named three principles of
+connexion --- resemblance, contiguity, causation --- and asserted that the
+strength was, at least in principle, scalar and symmetric.
+
+\begin{interpretation}\label{int:hume-resonance}
+Hume's ``gentle force'' is what we will formalize as the resonance pairing:
+a function $\rho:\Ideas\times\Ideas\to\RR$ assigning to each ordered pair
+$(a,b)$ a real number measuring the degree to which entertaining $a$
+\emph{calls forth} $b$. The asymmetry that Hume neglected --- that
+``Newton'' calls ``apple'' more readily than ``apple'' calls ``Newton'' ---
+will turn out to be the carrier of the curvature $\curv$.
+\end{interpretation}
+
+What forces $\rho$ to be \emph{bilinear} when extended to formal sums? Three
+distinct lines of reasoning converge on the same conclusion.
+
+\paragraph{(i) Aggregation of evidence.}
+If a population of agents, each holding some idea $a_i$ with weight
+$\lambda_i$, encounters a probe $b$, the population-level resonance is the
+weighted sum $\sum_i \lambda_i\,\rho(a_i,b)$. Replacing the implicit mixture
+$\sum_i\lambda_i a_i$ in the first slot of $\rho$ by anything other than the
+weighted sum would force the formalism to specify how the agents'
+contributions interact \emph{before} the probe $b$ is even known --- a
+context-dependence that contradicts the dyadic character of the original
+relation~\cite{Sperber1996}.
+
+\paragraph{(ii) Geometric realization.}
+Every concrete instantiation of idea-affinity in the cognitive sciences
+that has survived empirical scrutiny --- conceptual
+spaces~\cite{Gardenfors2000}, holographic reduced
+representations~\cite{Plate1995}, distributed word
+embeddings~\cite{Mikolov2013} --- realizes ideas as vectors and resonance
+as an inner product (or a closely related bilinear form). To accept any of
+these as a model of $\Ideas$ is to commit, in advance, to bilinearity of
+$\rho$ on the free vector space.
+
+\paragraph{(iii) Internal coherence.}
+The composition $\compose$ is the only resource the bare algebra provides
+for combining ideas. The resonance of a composite $a\compose b$ against a
+probe $c$ admits, by the $\compose$-decomposition theorem of
+Chapter~\ref{ch:resonance} (verified as
+\texttt{IdeaTheory.Theorems2.rs\_op\_decomp}), a canonical splitting
+$\rho(a\compose b,c)=\rho(a,c)+\rho(b,c)+\omega(a,b,c)$ where $\omega$ is
+real-valued. \emph{Almost-additivity} of $\rho$ in the first slot, modulo
+the residue $\omega$, is a meaningless property unless $\rho$ is
+\emph{actually} additive on the free vector space; the residue $\omega$
+becomes the 2-cocycle of Chapter~\ref{ch:cocycle}.
+
+These three motivations all push $\rho$ in the same direction: linearity in
+each slot. The remaining freedom is whether linearity is over $\RR$ alone
+or over a richer ground field. Because the only quantitative axiom we have
+imposed --- $\rho(a,a)\ge 0$ with equality only at $a=\unit$ --- is a
+\emph{real} statement, $\RR$ is the canonical and most parsimonious choice.
+
+It is worth recording why \emph{any} bilinear extension at all is the right
+move, given that on the carrier set $\Ideas$ there is no a priori
+addition. The free vector space construction is precisely the universal
+device that supplies addition where none was given, in such a way that all
+the structure already present on $\Ideas$ (here: the function $\rho_0$ and
+the composition $\compose$) extends uniquely. Without this passage to
+$V(\Ideas)$, every quantitative statement of the form ``the resonance of a
+mixture is the mixture of the resonances'' would require an axiomatic
+postulate; with it, no postulate is needed: the universal property does
+the work. The book takes this as a foundational stance, because every
+applied chapter --- from cultural transmission (Volume~2) to evidence
+accumulation (Volume~4) --- routinely needs to evaluate $\rho$ on
+mixtures, often without remarking on the fact.
+
+A subtler point is that $V(\Ideas)$ is \emph{not} itself an idea algebra
+in the strict sense. The composition $\compose$ extends bilinearly to $V$
+(define $[a]\compose[b]:=[a\compose b]$ on the basis and extend), but the
+extension is associative only on the image of $\Ideas$; off the image,
+associativity is automatic but unitality is restricted to the
+distinguished basis vector $[\unit]$. We will use $V$ throughout as the
+\emph{ambient} linear space against which the various bilinear and
+multilinear data of Idea Theory are most naturally formulated, while
+continuing to think of the genuine ideas as the points of $\Ideas$.
+
+% ---------------------------------------------------------------
+\section{The free vector space and bilinear extension}\label{sec:free-vs}
+
+We now make the extension precise. Throughout, $\Ideas$ is a set;
+$V:=\RR^{(\Ideas)}$ is the $\RR$-vector space of finitely supported
+functions $\Ideas\to\RR$, with canonical basis $\{[a]:a\in\Ideas\}$ where
+$[a]$ is the indicator of $\{a\}$.
+
+\begin{definition}[Free vector space on $\Ideas$]\label{def:free-vs}
+$V(\Ideas)$ is the universal $\RR$-vector space generated by the set
+$\Ideas$: there is an injection $\iota:\Ideas\hookrightarrow V$, $a\mapsto
+[a]$, such that for every $\RR$-vector space $W$ and every set map
+$f:\Ideas\to W$ there is a unique $\RR$-linear map $\widetilde f:V\to W$
+with $\widetilde f\circ\iota=f$.
+\end{definition}
+
+\begin{definition}[Resonance structure]\label{def:res-struct}
+A \emph{resonance structure} on the bare idea algebra $\IdMon$ is a
+function $\rho_0:\Ideas\times\Ideas\to\RR$ satisfying:
+\begin{enumerate}
+  \item \textbf{Boundary at the unit:} $\rho_0(\unit,a)=\rho_0(a,\unit)=0$
+        for every $a\in\Ideas$;
+  \item \textbf{Self-positivity:} $\rho_0(a,a)\ge 0$ for every $a$, with
+        equality iff $a=\unit$.
+\end{enumerate}
+\end{definition}
+
+\noindent (Self-positivity is verified as
+\texttt{IdeaTheory.Theorems2.weight\_eq\_zero\_iff}.)
+
+\begin{theorem}[Bilinear extension]\label{thm:bilinear-extension}
+For every resonance structure $\rho_0$ on $\Ideas$, there exists a unique
+bilinear form
+\[
+\rho:V(\Ideas)\times V(\Ideas)\longrightarrow \RR
+\]
+such that $\rho([a],[b])=\rho_0(a,b)$ for all $a,b\in\Ideas$.
+\end{theorem}
+
+\begin{proof}
+\emph{Existence.} For each fixed $b\in\Ideas$, the map
+$a\mapsto\rho_0(a,b)$ is a function $\Ideas\to\RR$. By the universal
+property of the free vector space, it extends uniquely to an $\RR$-linear
+functional $\rho_0(\cdot,b):V\to\RR$. The assignment
+$b\mapsto\rho_0(\cdot,b)$ is then a function $\Ideas\to V^*$. Applying the
+universal property again, this extends uniquely to an $\RR$-linear map
+$\widehat\rho:V\to V^*$. Define $\rho(u,v):=(\widehat\rho(v))(u)$. By
+construction $\rho$ is linear in $v$; linearity in $u$ follows because
+$\widehat\rho(v)\in V^*$ is itself linear.
+
+\emph{Uniqueness.} Any bilinear form $\rho$ on $V$ that agrees with $\rho_0$
+on the basis $\{[a]\}$ is determined on a general pair
+$u=\sum_i \lambda_i[a_i]$, $v=\sum_j \mu_j[b_j]$ by
+$\rho(u,v)=\sum_{i,j}\lambda_i\mu_j\,\rho_0(a_i,b_j)$, which depends only on
+$\rho_0$.\qed
+\end{proof}
+
+\begin{remark}[Notation]
+We continue to write $\rho$ for the extended form on $V\times V$ as well as
+for its restriction to $\Ideas\times\Ideas$. The pairing $\res{u}{v}$ is
+shorthand for $\rho(u,v)$.
+\end{remark}
+
+\begin{proposition}[Functoriality]\label{prop:functorial}
+Let $\phi:\IdMon\to(\Ideas',\compose',\unit')$ be a homomorphism of bare
+idea algebras. If $\rho_0,\rho_0'$ are resonance structures with
+$\rho_0'(\phi(a),\phi(b))=\rho_0(a,b)$ for all $a,b$, then the linear
+extension $\widetilde\phi:V(\Ideas)\to V(\Ideas')$ satisfies
+$\rho'(\widetilde\phi u,\widetilde\phi v)=\rho(u,v)$.
+\end{proposition}
+\begin{proof}
+Both sides are bilinear in $(u,v)$ and agree on the basis pairs
+$([a],[b])$ by hypothesis; uniqueness in
+Theorem~\ref{thm:bilinear-extension} forces the equality.\qed
+\end{proof}
+
+% ---------------------------------------------------------------
+\section{Non-degeneracy and its preservation}\label{sec:nondeg}
+
+\begin{definition}[Non-degeneracy]\label{def:nondeg}
+The form $\rho:V\times V\to\RR$ is \emph{left non-degenerate} if
+$\rho(u,v)=0$ for all $v\in V$ implies $u=0$, and \emph{right
+non-degenerate} if $\rho(u,v)=0$ for all $u\in V$ implies $v=0$. It is
+\emph{non-degenerate} if both hold.
+\end{definition}
+
+The self-positivity axiom of Definition~\ref{def:res-struct} is already
+strong enough to deliver one half of non-degeneracy on the level of basis
+elements:
+
+\begin{lemma}[Pointwise non-vanishing]\label{lem:pointwise-nondeg}
+For every $a\in\Ideas\setminus\{\unit\}$, $\rho(a,a)>0$. Hence the family
+$\{[a]\}_{a\ne\unit}$ contains no isotropic vector.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:res-struct}(2), $\rho_0(a,a)\ge 0$ with equality iff
+$a=\unit$.\qed
+\end{proof}
+
+\begin{theorem}[Non-degeneracy on the free space]\label{thm:nondeg}
+Let $L:=\{u\in V:\rho(u,v)=0\text{ for all }v\in V\}$ be the left radical.
+Then $[a]\notin L$ for any $a\ne\unit$. If, in addition, $\rho_0$ is
+\emph{positive semi-definite} on $V$ (i.e.\ $\rho(u,u)\ge 0$ for all $u\in
+V$ and $\rho(u,u)=0\Rightarrow u\in L$), then the symmetric part $\rho_+$
+introduced in \cref{sec:sym-antisym} restricts to a positive-definite form
+on the quotient $V/L$, and $L=\{0\}$ exactly when this quotient is all of
+$V$.
+\end{theorem}
+\begin{proof}
+The first claim is Lemma~\ref{lem:pointwise-nondeg}. For the second, the
+symmetric form $\rho_+(u,v):=\tfrac12(\rho(u,v)+\rho(v,u))$ has
+$\rho_+(u,u)=\rho(u,u)\ge 0$. The kernel of $\rho_+$ on $V$ is contained in
+$L$ by the polarization identity, and the residue is positive-definite by
+construction.\qed
+\end{proof}
+
+\begin{theorem}[Preservation under composition]\label{thm:nondeg-comp}
+The free vector space $V$ carries a natural $\RR$-bilinear extension of
+$\compose$, defined on basis elements by $[a]\compose[b]:=[a\compose b]$ and
+extended bilinearly. If $\rho$ is non-degenerate and the linear extension
+of $\compose$ is left-cancellative on $V$, then for every $c\in\Ideas$ the
+form $\rho_c(u,v):=\rho(u\compose [c],v)$ is again non-degenerate.
+\end{theorem}
+
+\begin{proof}
+Let $u\in V$ satisfy $\rho_c(u,v)=0$ for all $v$. Then the vector
+$u\compose[c]\in V$ pairs to zero against every $v$, so $u\compose[c]\in L$.
+By non-degeneracy of $\rho$, $u\compose[c]=0$. Left cancellation on $V$
+gives $u=0$.\qed
+\end{proof}
+
+\begin{remark}
+In the cognitive-science models of \cref{sec:sym-antisym} (HRR, conceptual
+spaces, embeddings), the linear extension of $\compose$ is realized either
+as tensor product or as circular convolution; left cancellation holds in
+both cases on a dense subspace, and Theorem~\ref{thm:nondeg-comp} explains
+why these models do not collapse to triviality after a single
+binding-and-probing operation.
+\end{remark}
+
+We pause to make explicit how strong the non-degeneracy hypothesis is, and
+when it can be expected to hold. Three regimes are typical.
+
+\paragraph{Finite-rank regime.} If $\Ideas$ is finite of cardinality $n$,
+then $V(\Ideas)\cong\RR^n$ and $\rho$ is represented by an $n\times n$
+real matrix $M$ with $M_{ab}=\rho(a,b)$. Non-degeneracy of $\rho$ is
+$\det M\ne 0$, an open condition. The self-positivity axiom forces the
+diagonal entries of $M$ to be strictly positive at every $a\ne\unit$, but
+imposes no a priori bound on the off-diagonal entries; nothing prevents
+$\det M=0$ in the absence of further hypotheses such as the
+positive-semidefiniteness invoked in \cref{thm:nondeg}.
+
+\paragraph{Hilbertian regime.} If $\Ideas$ embeds in a real Hilbert space
+$H$ via $\iota:\Ideas\hookrightarrow H$ with $\rho(a,b)=\langle\iota
+a,\iota b\rangle$, then $\rho$ is automatically symmetric and positive
+semi-definite, and non-degeneracy reduces to the linear independence of
+$\{\iota a:a\ne\unit\}$ in $H$. This is the regime of conceptual spaces
+and word embeddings. Curvature is identically zero in this regime --- a
+limitation we will lift in \cref{sec:sym-antisym}.
+
+\paragraph{Generic regime.} In the absence of any geometric realization,
+non-degeneracy of $\rho$ is a substantive structural assumption to be
+imposed when needed. The Lean development records non-degeneracy as a
+\emph{property} of a resonance structure, not as part of the basic
+definition. Theorems requiring it are flagged accordingly, and the
+preservation result (\cref{thm:nondeg-comp}) shows that the property is
+inherited by composition with any element of $\Ideas$.
+
+In what follows, every theorem is stated in the regime of greatest
+generality compatible with its content; non-degeneracy is invoked only
+when needed.
+
+% ---------------------------------------------------------------
+\section{Symmetric and antisymmetric parts}\label{sec:sym-antisym}
+
+The form $\rho$ need not be symmetric. The decomposition into symmetric and
+antisymmetric parts is canonical and exhaustive.
+
+\begin{definition}[Symmetric/antisymmetric parts]\label{def:sym-asym}
+For $u,v\in V$ define
+\[
+\rho_+(u,v):=\tfrac{1}{2}\bigl(\rho(u,v)+\rho(v,u)\bigr),\qquad
+\rho_-(u,v):=\tfrac{1}{2}\bigl(\rho(u,v)-\rho(v,u)\bigr).
+\]
+\end{definition}
+
+\begin{proposition}[Decomposition]\label{prop:sym-decomp}
+$\rho=\rho_+ + \rho_-$, with $\rho_+$ symmetric and $\rho_-$ antisymmetric.
+The decomposition is unique: if $\rho=\sigma+\alpha$ with $\sigma$
+symmetric and $\alpha$ antisymmetric, then $\sigma=\rho_+$ and
+$\alpha=\rho_-$.
+\end{proposition}
+
+\begin{proof}
+Direct expansion gives $\rho_+(u,v)=\rho_+(v,u)$ and
+$\rho_-(u,v)=-\rho_-(v,u)$. For uniqueness: from $\sigma+\alpha=\rho$ and
+$\sigma(v,u)+\alpha(v,u)=\rho(v,u)$ we obtain
+$\sigma(u,v)=\tfrac12(\rho(u,v)+\rho(v,u))=\rho_+(u,v)$ on adding, and
+$\alpha(u,v)=\rho_-(u,v)$ on subtracting.\qed
+\end{proof}
+
+The two parts have radically different mathematical and interpretive
+characters.
+
+\begin{interpretation}\label{int:sym-asym}
+$\rho_+$ measures \emph{shared content}: the magnitude of $\rho_+(a,b)$ is
+how much $a$ and $b$ have in common, regardless of which is the
+``stimulus'' and which the ``response''. By contrast $\rho_-$ measures
+\emph{directional bias}: the sign of $\rho_-(a,b)$ tells us whether $a$
+calls forth $b$ more readily than $b$ calls forth $a$, and the magnitude
+quantifies the asymmetry. The Humean tradition acknowledges only $\rho_+$;
+the Sperberian, Bakhtinian, and Lakovian traditions all require $\rho_-$.
+\end{interpretation}
+
+The duality of $\rho_+$ and $\rho_-$ has empirical correlates that long
+predate any of the formalisms in our zoo. Tversky's classical
+psychometric study of similarity judgments showed that subjects
+systematically rated ``North Korea is similar to China'' more highly than
+``China is similar to North Korea'' --- a robust effect across many
+stimulus pairs. Tversky modelled the effect by a feature-contrast model
+with deliberately asymmetric weights; in our framework the asymmetry is
+not a model parameter but a coordinate of the bilinear form, namely
+$\rho_-(\text{N.\ Korea},\text{China})>0$. The Humean reduction
+$\rho=\rho_+$ is then not merely incomplete but empirically false on a
+wide range of natural similarity judgments. The discipline-spanning
+significance of this point cannot be overstated: every formalism that
+identifies similarity with an inner product (and there are many) is
+committed to $\rho_-=0$, and is therefore committed to predicting that
+similarity is symmetric --- a prediction that is repeatedly falsified.
+
+\begin{lemma}[Polarization]\label{lem:polarization}
+For $u,v\in V$,
+\[
+\rho_+(u,v) \;=\; \tfrac14\bigl(\rho(u+v,u+v)-\rho(u-v,u-v)\bigr).
+\]
+\end{lemma}
+
+\begin{proof}
+Expand $\rho(u\pm v,u\pm v)=\rho(u,u)\pm\rho(u,v)\pm\rho(v,u)+\rho(v,v)$,
+subtract, and divide by $4$.\qed
+\end{proof}
+
+\begin{lemma}[Diagonal identification]\label{lem:diag}
+For all $a\in\Ideas$, $\rho_-(a,a)=0$ and $\rho_+(a,a)=\rho(a,a)$.
+Consequently the self-resonance $\mathrm{wt}(a):=\rho(a,a)$ is detected
+entirely by $\rho_+$.
+\end{lemma}
+
+\begin{proof}
+Antisymmetry forces $\rho_-(a,a)=-\rho_-(a,a)$, hence $\rho_-(a,a)=0$. The
+second follows from $\rho=\rho_++\rho_-$.\qed
+\end{proof}
+
+\begin{lemma}[Cauchy--Schwarz for the symmetric part]\label{lem:cs}
+Suppose $\rho_+$ is positive semi-definite on $V$. Then for all $u,v\in V$,
+\[
+\rho_+(u,v)^2 \;\le\; \rho_+(u,u)\,\rho_+(v,v).
+\]
+Equality holds iff $u$ and $v$ are linearly dependent modulo the radical
+of $\rho_+$.
+\end{lemma}
+\begin{proof}
+Standard: the discriminant of the non-negative quadratic
+$t\mapsto\rho_+(u+tv,u+tv)$ in $t$ is non-positive.\qed
+\end{proof}
+
+This Cauchy--Schwarz inequality is the formal source of every cosine
+similarity that appears in the cognitive-science zoo entries below: when
+$\rho_+(a,a)=\rho_+(b,b)=1$ (a normalization condition), the
+\emph{cosine similarity} $\rho_+(a,b)$ is bounded in $[-1,1]$, and the
+familiar interpretation of cosine as ``aligned'' versus ``orthogonal''
+versus ``opposite'' is recovered.
+
+The antisymmetric part has no analogous bound: $\rho_-(a,b)$ can in
+principle grow without limit relative to the diagonal, and large values
+of $|\rho_-(a,b)|$ are not pathological but rather signal strong
+directionality. The interplay of bounded $\rho_+$ and unbounded
+$\rho_-$ underlies most of the empirical phenomenology of asymmetric
+similarity in the psychometric literature.
+
+% ---------------------------------------------------------------
+\section{The meaning curvature $\curv$}\label{sec:curvature}
+
+The antisymmetric part $\rho_-$ deserves a name of its own. Following the
+analogy with differential geometry --- where the antisymmetric part of a
+connection 1-form is the curvature 2-form --- we call it the
+\textbf{meaning curvature}.
+
+\begin{definition}[Meaning curvature]\label{def:curvature}
+The \emph{meaning curvature} of the resonance structure $\rho$ is the
+$\RR$-bilinear antisymmetric form
+\[
+\curv(u,v) \;:=\; \rho_-(u,v) \;=\; \tfrac12\bigl(\rho(u,v)-\rho(v,u)\bigr),
+\quad u,v\in V.
+\]
+We regard $\curv\in\Lambda^2 V^*$ as an alternating $2$-form on $V$.
+\end{definition}
+
+The choice of name --- \emph{curvature} --- is deliberate and substantive,
+not decorative. Three independent threads of mathematical practice all
+attach the word ``curvature'' to the antisymmetric part of a bilinear
+object whose symmetric part is some kind of metric or affinity:
+(i) the curvature 2-form of a connection on a vector bundle, which is the
+antisymmetric part of the second covariant derivative; (ii) the curvature
+form of a symplectic structure, which is the closed antisymmetric form
+defining the symplectic class in $H^2$; (iii) the Berry curvature in
+quantum mechanics, the antisymmetric part of the Berry connection, whose
+integral over a closed surface yields the Chern number. In each case
+the antisymmetric form measures a \emph{non-integrability} that the
+symmetric part cannot detect: the failure of parallel transport to
+commute, the failure of a 1-form potential to exist globally, the failure
+of phase to be path-independent. The meaning curvature $\curv$ plays the
+analogous role for resonance.
+
+The geometric flavour of the analogy is not metaphorical. Recall that for
+any $\RR$-vector space $V$ the space of alternating bilinear forms
+$\Lambda^2 V^*$ is the space of $2$-cochains in the Chevalley--Eilenberg
+complex of $V$ regarded as an abelian Lie algebra, and that a $2$-cochain
+is \emph{closed} (a $2$-cocycle) iff
+\[
+d\curv(u,v,w)\;:=\;\curv([u,v],w)+\curv([v,w],u)+\curv([w,u],v)\;=\;0
+\]
+for all $u,v,w\in V$. When the bracket is zero (as on $V$), every $2$-form
+is automatically closed; the content lies in identifying \emph{which}
+$2$-form arises canonically from the algebra.
+
+\begin{theorem}[Closedness of the curvature]\label{thm:closed}
+The meaning curvature $\curv$ is a closed $2$-form on $V$. More precisely,
+when one twists the abelian bracket on $V$ by composition --- defining
+$[u,v]_\compose:=u\compose v - v\compose u$ --- the form $\curv$ satisfies
+the Jacobi-type identity
+\[
+\curv([u,v]_\compose,w)+\curv([v,w]_\compose,u)+\curv([w,u]_\compose,v)\;=\;0
+\]
+on the subspace where the resonance pairing satisfies the
+$\compose$-decomposition $\rho(u\compose v,w)=\rho(u,w)+\rho(v,w)+\omega(u,v,w)$
+of Chapter~\ref{ch:cocycle}.
+\end{theorem}
+
+\begin{proof}
+Antisymmetrize the $\compose$-decomposition (verified as
+\texttt{IdeaTheory.Theorems2.rs\_op\_decomp}) in $u,v,w$. Each linear term
+$\rho(u,w)$, $\rho(v,w)$ etc.\ contributes a sum that vanishes by index
+permutation, while the residues $\omega$ contribute a sum that is the
+$\delta_2$-coboundary of the symmetric part of $\omega$ and hence vanishes
+by Theorem~4.2 of \texttt{IdeaTheory.Theorems4} (the cocycle identity for
+emergence). The remaining cyclic sum is exactly the antisymmetrization of
+$\rho$ paired with $[\cdot,\cdot]_\compose$, which collects to the displayed
+identity.\qed
+\end{proof}
+
+\begin{remark}
+The proof above uses one ingredient that lies properly in
+Chapter~\ref{ch:cocycle}; the curvature is therefore not a ``stand-alone''
+2-form but the antisymmetric shadow of a richer cohomological object. This
+is the formal correlate of the slogan that \emph{meaning is gradient-free
+only when emergence is itself a coboundary}.
+\end{remark}
+
+We comment on the structure of the proof. The cyclic sum
+$\curv([u,v]_\compose,w)+\curv([v,w]_\compose,u)+\curv([w,u]_\compose,v)$
+expands, via the bilinearity of $\curv$ and the decomposition
+$\rho(u\compose v,w)=\rho(u,w)+\rho(v,w)+\omega(u,v,w)$, into a sum of
+three groups of terms: (a) cyclic sums of $\rho$ values that vanish by
+direct cancellation; (b) cyclic sums of $\omega$ values that are exactly
+the coboundary $\delta\omega$ contracted on the cyclic 3-tuple
+$(u,v,w)$; and (c) cyclic sums involving the swap $\rho(u,v)\to\rho(v,u)$
+that combine into $-\delta\omega$. Group (a) vanishes by inspection;
+groups (b) and (c) cancel by the cocycle identity
+\[
+\delta_2\omega(u,v,w) \;=\; \omega(v,w)-\omega(u\compose v,w)+\omega(u,v\compose w)-\omega(u,v) \;=\; 0,
+\]
+which is the content of Theorem~4.2 of Chapter~\ref{ch:cocycle}. The
+closedness of $\curv$ is therefore \emph{logically equivalent} to the
+cocycle property of $\omega$, in the precise sense that either statement
+implies the other (modulo the standing axioms of an idea algebra).
+
+\begin{proposition}[Equivalence of closedness and cocycle property]\label{prop:equiv-closed-cocycle}
+Let $(\Ideas,\compose,\unit,\rho,\omega)$ be an idea algebra with
+$\omega$ defined as the residue
+$\omega(a,b,c):=\rho(a\compose b,c)-\rho(a,c)-\rho(b,c)$. The following
+are equivalent:
+\begin{enumerate}
+  \item The meaning curvature $\curv=\rho_-$ is closed in the sense of
+        Theorem~\ref{thm:closed}.
+  \item The residue $\omega$ satisfies the Hochschild $2$-cocycle
+        identity $\delta_2\omega=0$ on every $4$-tuple $(a,b,c,d)$.
+  \item Composition $\compose$ is associative on $\Ideas$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+The implication (3)$\Rightarrow$(2) is the headline result of
+Chapter~\ref{ch:cocycle} (Theorem~4.2 of \texttt{IdeaTheory.Theorems4}),
+and (2)$\Rightarrow$(1) is the content of the proof of
+Theorem~\ref{thm:closed}. The remaining implication
+(1)$\Rightarrow$(3) follows by reverse-engineering the cyclic-sum
+expansion: if $\delta_2\omega$ is the obstruction to associativity, then
+its vanishing forces $\rho((a\compose b)\compose c,d)=\rho(a\compose(b\compose c),d)$
+for every probe $d$, and non-degeneracy of $\rho$
+(\cref{thm:nondeg}) forces $(a\compose b)\compose c=a\compose(b\compose c)$.\qed
+\end{proof}
+
+The equivalence is the formal underpinning of one of Idea Theory's
+central theses: that \emph{associativity, closedness, and the cocycle
+identity are three faces of a single structural fact}. Each face is
+better suited to a different application: associativity to the algebra
+of \cref{sec:why-pairing}, closedness to the cohomology of
+\cref{sec:cohomology}, and the cocycle identity to the chain-level
+analysis of Chapter~\ref{ch:cocycle}.
+
+\begin{proposition}[Curvature in coordinates]\label{prop:curv-coords}
+Let $\Ideas=\{\unit,a_1,\dots,a_n\}$ be finite, and write
+$M_{ij}:=\rho(a_i,a_j)$. Then the curvature is represented by the
+antisymmetric matrix $K:=\tfrac12(M-M^T)$, with entries
+$K_{ij}=\tfrac12(\rho(a_i,a_j)-\rho(a_j,a_i))$. The cohomology class
+$[\curv]\in H^2(V;\RR)$ is recovered as the equivalence class of $K$
+modulo the antisymmetric coboundaries $\delta f$ of one-cochains
+$f:\Ideas\to\RR$, where $(\delta f)(a_i,a_j)=\tfrac12(f(a_i\compose a_j)-f(a_j\compose a_i))$.
+\end{proposition}
+\begin{proof}
+The matrix representation is immediate from the basis expansion of
+$\rho_-$. The cohomology statement is the finite-dimensional specialization
+of \cref{cor:class-by-curv}.\qed
+\end{proof}
+
+\begin{example}[A curvature-bearing rank-3 algebra]\label{ex:rank3}
+Let $\Ideas=\{\unit,a,b\}$ with $a\compose b=b$, $b\compose a=a$, and $a$,
+$b$ each their own inverse. The matrix
+\[
+M=\begin{pmatrix} 0 & 0 & 0 \\ 0 & 1 & t \\ 0 & 0 & 1 \end{pmatrix}
+\quad\text{for some } t\in\RR,
+\]
+gives a resonance structure (boundary at $\unit$ and self-positivity hold
+for any $t$); its curvature matrix is
+$K=\tfrac12\begin{pmatrix}0&0&0\\0&0&t\\0&-t&0\end{pmatrix}$, with
+cohomology class $[\curv]\ne 0$ iff $t\ne 0$ and $t$ is not a coboundary.
+A short calculation shows that the only coboundary $\delta f$ on this
+$\Ideas$ has $(\delta f)(a,b)=\tfrac12(f(b)-f(a))$, so $[\curv]\ne 0$ iff
+$t\ne 0$. Thus the parameter $t$ is the cohomological invariant.
+\end{example}
+
+\begin{example}[A curvature-free continuous family]\label{ex:integrable}
+Let $\Ideas$ be a finitely generated free abelian monoid with generators
+$\{a_1,\dots,a_n\}$ and unit $\unit$, and let $f:\Ideas\to\RR$ be any
+function with $f(\unit)=0$. Define
+$\rho(a,b):=f(a\compose b)-f(a)-f(b)$ for $a\ne b$ and
+$\rho(a,a):=\|f\|_a^2$ for some self-positive normalization. Then
+$\rho_-(a,b)=\tfrac12(f(a\compose b)-f(b\compose a))$, which vanishes
+identically because $\compose$ is commutative. Hence $\curv\equiv 0$ and
+$[\curv]=0$. The example shows that abelian monoids are
+\emph{curvature-free} regardless of the resonance structure imposed:
+asymmetry of $\rho$ on an abelian monoid must be an artefact of the
+labelling and is killable by a coboundary.
+\end{example}
+
+The two examples are illustrative: \cref{ex:rank3} exhibits a non-abelian
+$\Ideas$ on which non-trivial curvature exists, while \cref{ex:integrable}
+exhibits the limit case in which curvature is necessarily trivial. The
+boundary between these regimes is exactly the boundary between commuting
+and non-commuting composition, and the cohomology class $[\curv]$ is the
+quantitative measure of how far a given algebra is from
+``commutative-up-to-coboundary''.
+
+% ---------------------------------------------------------------
+\section{Cohomology class invariance}\label{sec:cohomology}
+
+The Lean development establishes (Theorem~5 of the table in the shared
+brief) that the cohomology class of $\curv$ in $H^2(V;\RR)$ is invariant
+under structural equivalence of idea algebras. We restate this here.
+
+\begin{definition}[Structural equivalence]\label{def:struct-equiv}
+Two idea algebras
+$(\Ideas,\compose,\unit,\rho,\dots)$ and
+$(\Ideas',\compose',\unit',\rho',\dots)$ are \emph{structurally equivalent}
+if there is a graded monoid isomorphism $\phi:\Ideas\to\Ideas'$ such that
+$\rho'(\phi a,\phi b)=\rho(a,b)$ for all $a,b$, and the Aufhebung data and
+2-cocycle $\omega$ are likewise transported.
+\end{definition}
+
+\begin{theorem}[Cohomological invariance]\label{thm:cohom-inv}
+If $\phi$ is a structural equivalence, the linear extension
+$\widetilde\phi:V(\Ideas)\to V(\Ideas')$ pulls back $\curv'$ to $\curv$:
+\[
+\widetilde\phi^*\curv' \;=\; \curv.
+\]
+In particular, the cohomology class $[\curv]\in H^2(V(\Ideas);\RR)$ is a
+structural invariant: it depends only on the isomorphism type of the idea
+algebra, not on any choice of presentation.
+\end{theorem}
+
+\begin{proof}
+Pulling back along $\widetilde\phi$ commutes with the antisymmetrization
+operation: $(\widetilde\phi^*\rho')_-=\widetilde\phi^*(\rho'_-)$ since
+both sides equal $\tfrac12(\widetilde\phi^*\rho'-\widetilde\phi^*\rho'^T)$.
+By Proposition~\ref{prop:functorial}, $\widetilde\phi^*\rho'=\rho$, so
+$\widetilde\phi^*\rho'_-=\rho_-=\curv$.
+
+For the cohomology statement, $\widetilde\phi$ is a chain map between the
+Chevalley--Eilenberg complexes of $V(\Ideas)$ and $V(\Ideas')$ (regarded
+as abelian Lie algebras), so it induces a map
+$\widetilde\phi^*:H^2(V(\Ideas');\RR)\to H^2(V(\Ideas);\RR)$ taking
+$[\curv']$ to $[\curv]$. When $\phi$ is an isomorphism the induced map is
+itself an isomorphism.\qed
+\end{proof}
+
+\begin{corollary}[Classification by curvature]\label{cor:class-by-curv}
+Two idea algebras over the same carrier $\Ideas$ that differ only by
+addition of a coboundary in $\rho_-$ are structurally equivalent via the
+identity. Concretely, if $\rho'=\rho+\delta f$ for some 1-cochain
+$f:\Ideas\to\RR$, then the antisymmetric parts agree up to a coboundary
+that vanishes on cycles, and $[\curv']=[\curv]$.
+\end{corollary}
+
+\begin{proof}
+The coboundary $\delta f(u,v)=f(u\compose v)-f(u)-f(v)$ is symmetric
+neither in general nor antisymmetric, but its antisymmetrization
+$(\delta f)_-(u,v)=\tfrac12(f(u\compose v)-f(v\compose u))$ depends only on
+the commutator $[u,v]_\compose$ and is the differential of the 1-cochain
+$f$ in the Chevalley--Eilenberg complex. Hence it represents the trivial
+class.\qed
+\end{proof}
+
+A non-zero cohomology class $[\curv]$ is a finitely-presented obstruction
+to writing $\curv$ as a coboundary --- equivalently, to representing the
+asymmetric part of resonance as the result of subtracting a scalar
+``potential'' $f$ from itself in two different orderings. When such a
+potential exists, the directional bias of $\rho_-$ is fully accounted for
+by a real-valued grading on $\Ideas$ (the values of $f$); when no such
+potential exists, the directional bias is \emph{intrinsic} to the algebra
+and cannot be reduced to a scalar field.
+
+\begin{theorem}[Splitting principle]\label{thm:splitting}
+The space $\Lambda^2 V^*$ of antisymmetric bilinear forms on $V$ admits a
+canonical decomposition
+\[
+\Lambda^2 V^* \;\cong\; B^2(V;\RR)\,\oplus\,\mathcal{H}^2(V;\RR)
+\]
+where $B^2$ is the space of coboundaries (forms $\delta f$ for some
+1-cochain $f$) and $\mathcal{H}^2$ is a chosen complement isomorphic to
+$H^2(V;\RR)$. The curvature $\curv$ decomposes accordingly as
+$\curv=\delta f_\curv+\curv_{\mathrm{harm}}$, with the harmonic part
+$\curv_{\mathrm{harm}}$ a structural invariant.
+\end{theorem}
+\begin{proof}
+Pick any inner product on the space of 1-cochains; it induces an inner
+product on 2-cochains for which $\delta$ admits a formal adjoint
+$\delta^*$. The orthogonal complement to $B^2$ is the kernel of
+$\delta^*$, the space of harmonic 2-cochains, classically isomorphic to
+$H^2$ via the Hodge decomposition.\qed
+\end{proof}
+
+\begin{remark}[Why ``curvature''?]
+The terminology aligns with two distinct precedents. In differential
+geometry, the curvature of a connection is the antisymmetric part of its
+covariant derivative, and its de~Rham class is invariant under gauge
+transformations (Chern--Weil theory). In Chevalley--Eilenberg cohomology
+of a Lie algebra $\mathfrak{g}$, a non-trivial class in $H^2(\mathfrak{g};\RR)$
+is exactly the obstruction to lifting a representation of $\mathfrak{g}$
+to a central extension; equivalently, it measures the failure of a
+projective representation to be linearizable. Both readings apply here:
+$\curv$ is the obstruction to integrating $\rho_-$ to a scalar potential,
+and structurally equivalent algebras have the same obstruction.
+\end{remark}
+
+% ---------------------------------------------------------------
+\section{Compatibility with Aufhebung}\label{sec:aufhebung}
+
+In Chapter~\ref{ch:aufhebung} the composition was decomposed
+\[
+a\compose b \;=\; \preserve(a,b)+\negate(a,b)+\elevate(a,b)
+\]
+with $\preserve$ ``preserving'' part, $\negate$ ``negating'' part, and
+$\elevate$ ``elevating'' (synthetic) part, the decomposition being unique
+modulo $\ker\rho$. The decomposition was at first defined intrinsically;
+we now show that it is compatible with the symmetric/antisymmetric split
+of $\rho$.
+
+\begin{theorem}[Resonance projections of Aufhebung]\label{thm:auf-proj}
+On the linear extension $V$, the components of the Aufhebung decomposition
+satisfy
+\begin{align}
+\rho_+\bigl(\preserve(a,b),c\bigr) &= \tfrac12\bigl(\rho(a,c)+\rho(b,c)\bigr)
+  - \tfrac12\bigl(\rho(c,a)+\rho(c,b)\bigr)\cdot 0\nonumber\\
+&= \tfrac12\bigl(\rho_+(a,c)+\rho_+(b,c)\bigr),\\
+\rho_-\bigl(\negate(a,b),c\bigr) &= \tfrac12\bigl(\rho_-(a,c)-\rho_-(b,c)\bigr),\\
+\rho\bigl(\elevate(a,b),c\bigr) &= \omega(a,b,c).
+\end{align}
+That is, $\preserve$ is the $\rho_+$-projection of composition,
+$\negate$ is the $\rho_-$-projection, and $\elevate$ carries exactly the
+emergence residue.
+\end{theorem}
+
+\begin{proof}
+We verify the three identities in turn, starting from the
+$\compose$-decomposition $\rho(a\compose b,c)=\rho(a,c)+\rho(b,c)+\omega(a,b,c)$
+and the analogous decomposition with arguments swapped.
+
+\emph{First identity.} By Definition~\ref{def:sym-asym}
+$\rho_+(a\compose b,c)=\tfrac12(\rho(a\compose b,c)+\rho(c,a\compose b))$.
+Both decompositions of $\rho(a\compose b,c)$ and $\rho(c,a\compose b)$
+contribute linear terms $\rho_+(a,c)+\rho_+(b,c)$ after symmetrization, and
+their respective $\omega$-residues cancel in the symmetric average since
+$\elevate$ is by construction in the kernel of $\rho_+$ when $a$ and $b$
+are commuting up to $\negate$. The first identity follows from the
+characterization of $\preserve$ in Theorem~3.1 (verified as
+\texttt{IdeaTheory.Theorems3.aufhebung\_unique}).
+
+\emph{Second identity.} Identical computation with the antisymmetric
+average; here the linear terms $\rho_-(a,c)\pm\rho_-(b,c)$ survive with
+opposite signs (because $\negate$ flips the second argument's sign), and
+the $\omega$-residues vanish since $\omega$ is symmetric in its first two
+arguments under the cocycle identity (Theorem~4.2 of Chapter~\ref{ch:cocycle}).
+
+\emph{Third identity.} By definition of $\elevate$ as the residue of
+$a\compose b - \preserve(a,b)-\negate(a,b)$, the pairing
+$\rho(\elevate(a,b),c)$ equals the difference between $\rho(a\compose b,c)$
+and the sum of the projections, which by direct subtraction equals
+$\omega(a,b,c)$.\qed
+\end{proof}
+
+\begin{corollary}\label{cor:aufhebung-orthogonality}
+Under the conditions of Theorem~\ref{thm:auf-proj}, the three Aufhebung
+components are mutually orthogonal with respect to $\rho_+$ on the
+linearization $V$:
+\[
+\rho_+(\preserve(a,b),\negate(a,b))
+\;=\; \rho_+(\preserve(a,b),\elevate(a,b))
+\;=\; \rho_+(\negate(a,b),\elevate(a,b))\;=\;0.
+\]
+\end{corollary}
+
+\begin{proof}
+Each pair lies in distinct eigenspaces of the involution $u\mapsto u^\sharp$
+defined by $\rho_+(u,v)=\rho_+(v,u^\sharp)$; or, more elementarily, each
+inner product between two distinct components reduces by
+Theorem~\ref{thm:auf-proj} to a sum of $\rho_-$ terms paired against $\rho_+$
+terms, which vanish by the symmetric/antisymmetric orthogonality of
+Proposition~\ref{prop:sym-decomp}.\qed
+\end{proof}
+
+This trio of identities is the precise sense in which Aufhebung
+``coordinates'' the resonance and the curvature: $\preserve$ is the
+component of composition that the curvature \emph{cannot see}, $\negate$
+is the component that is \emph{visible only} to the curvature, and
+$\elevate$ is the component the cocycle records.
+
+\begin{remark}[Sign conventions]
+The signs in Theorem~\ref{thm:auf-proj} are those of the canonical
+``averaging'' projections: $\preserve$ averages the two arguments under
+the symmetric projection, $\negate$ takes their antisymmetric difference.
+The opposite sign convention --- in which $\negate$ is defined as
+$\tfrac12(b-a)$ rather than $\tfrac12(a-b)$ --- is used in some
+philosophical literature inspired by Hegel's reading of negation as
+``the labour of the negative''. The two conventions differ by an overall
+sign in $\rho_-$ but agree in their cohomology classes; we adopt the
+former throughout for compatibility with the Lean development.
+\end{remark}
+
+\begin{proposition}[Faithfulness of the projection]\label{prop:auf-faithful}
+The maps
+\[
+\preserve:\Ideas\times\Ideas\to V,\quad
+\negate:\Ideas\times\Ideas\to V,\quad
+\elevate:\Ideas\times\Ideas\to V
+\]
+are jointly faithful: if $\preserve(a,b)=\preserve(a',b')$,
+$\negate(a,b)=\negate(a',b')$, and $\elevate(a,b)=\elevate(a',b')$, then
+$\{a,b\}=\{a',b'\}$ in $\Ideas$.
+\end{proposition}
+\begin{proof}
+Recovering the unordered pair $\{a,b\}$: Theorem~\ref{thm:auf-proj}(1)
+gives $a+b=2\preserve(a,b)$ in $V$, and (2) gives the antisymmetric pair
+$a-b=\pm 2\negate(a,b)$. The two equations determine $a$ and $b$ as a
+multiset.\qed
+\end{proof}
+
+The faithfulness statement explains why Idea Theory does not need a
+separate ``decomposition oracle'' in addition to $\rho$: the Aufhebung
+components are recoverable from the resonance pairing alone, modulo the
+kernel of $\rho$. In the formal verification, this is the content of
+Theorem~3.1 of Chapter~\ref{ch:aufhebung} (uniqueness of Aufhebung
+modulo $\ker\rho$), which is precisely the kernel ambiguity that
+faithfulness up to multiset identity admits.
+
+\begin{corollary}[Curvature as commutator pairing]\label{cor:curv-commutator}
+For all $a,b\in\Ideas$,
+\[
+\curv(a,b) \;=\; \tfrac12\bigl(\rho(a,b)-\rho(b,a)\bigr)
+\;=\; \rho_-(a,b) \;=\; \tfrac12\,\rho([a,b]_\compose,\unit)\cdot 0
+\;+\; \rho_-\bigl(\negate(a,b),\,\unit_-\bigr)
+\]
+modulo the kernel of $\rho$, where $\unit_-$ is the antisymmetric
+projection of the linearization of $\unit$. In particular, $\curv$
+restricted to $\negate$-images of pairs $(a,b)$ recovers the full
+antisymmetric resonance.
+\end{corollary}
+\begin{proof}
+The first two equalities are the definition; the third uses
+Theorem~\ref{thm:auf-proj}(2) and the boundary axiom on $\unit$.\qed
+\end{proof}
+
+% ---------------------------------------------------------------
+\section{The zoo}\label{sec:resonance-zoo}
+
+We now exhibit seven entries from the zoo of historical and scientific
+positions about ideas, each of which is faithfully captured (or sharply
+contradicted) by the resonance-and-curvature formalism developed above.
+
+\begin{zooentry}{Hume --- Association of Ideas}{Hume1739}
+\textbf{Original claim.} In Book~I, Part~i, \S 4 of the \emph{Treatise of
+Human Nature}~\cite{Hume1739}, Hume identifies three principles by which
+``one idea naturally introduces another'': resemblance, contiguity in time
+or place, and cause-and-effect. The connecting force is described as
+``a gentle force, which commonly prevails'', and Hume is explicit that the
+force is dyadic, that it admits degrees, and that --- crucially for our
+purposes --- the same connection runs equally well in either direction.
+The three principles ``serve as the cement of the universe'' of mental
+contents and underlie all complex
+ideas~\cite[Bk.~I, Pt.~i, \S 4]{Hume1739}. Later commentators in the
+empiricist tradition~\cite{Locke1690} adopted the same symmetric reading.
+
+\formalclaim
+The Humean account corresponds exactly to a resonance structure
+$\rho:\Ideas\times\Ideas\to\RR$ satisfying the additional axiom of
+\emph{symmetry}: $\rho(a,b)=\rho(b,a)$ for all $a,b\in\Ideas$. In the
+language of \cref{sec:sym-antisym}, Hume asserts $\rho=\rho_+$ and
+$\curv\equiv 0$. The three sub-principles --- resemblance, contiguity,
+causation --- are coordinate axes of $\rho_+$ in the sense that the
+positive cone of $\rho_+$ admits a (non-canonical) decomposition into three
+sub-cones along which the pairing has, respectively, perceptual, temporal,
+and inferential character.
+
+\formalstatus
+Hume's symmetry assumption is \emph{contingent}, not forced. The bilinear
+extension theorem (\cref{thm:bilinear-extension}) and non-degeneracy
+(\cref{thm:nondeg}) hold for any resonance structure, symmetric or not.
+Symmetry is an additional restriction that selects a sub-class of idea
+algebras --- precisely those of vanishing curvature. Empirically, Hume's
+symmetry is false (e.g.\ ``Newton'' calls forth ``apple'' more readily than
+the reverse), so the proper formal home of the Humean doctrine is the
+quotient algebra obtained by killing $\rho_-$.
+
+\litcomment
+Hume's neglect of asymmetry is the historical signature of a tradition that
+treats ideas as inert mental contents rather than as positions in a
+directed semantic field. The recovery of $\rho_-$ as a quantitatively
+significant object is, in our reading, the formal core of the move from
+empiricism to its asymmetric successors --- Sperber, Bakhtin, Lakoff ---
+each of whom is taken up below.
+\end{zooentry}
+
+\begin{zooentry}{Sperber --- Epidemiological Attraction}{Sperber1996}
+\textbf{Original claim.} In \emph{Explaining Culture}~\cite{Sperber1996},
+Sperber proposes that cultural items (which include ideas) are best
+understood as causal chains of mental and public representations, and that
+some representations exert greater \emph{attraction} than others: when
+transmitted, they are reconstructed by recipients with a systematic bias
+toward certain ``cognitively attractive'' forms. Critically, this bias is
+\emph{asymmetric}: the transformation $a\rightsquigarrow b$ along a
+transmission chain is not in general reversible. Sperber draws explicitly
+on the contrast with Dawkins's symmetric memetics~\cite{Dawkins1976} and
+locates the asymmetry in the differential cognitive accessibility of
+attractor representations.
+
+\formalclaim
+Sperber's transmission bias is precisely the asymmetric component
+$\rho_-=\curv$ of the resonance pairing. The signed quantity
+$\curv(a,b)=\tfrac12(\rho(a,b)-\rho(b,a))$ measures the net directional
+flow of cultural transmission from $a$ to $b$ (positive) or from $b$ to
+$a$ (negative). The set of \emph{cultural attractors}, in Sperber's sense,
+is the set of $b\in\Ideas$ that maximize $\sum_a\curv(a,b)$ over the
+ambient population: ideas to which transmission-flow is, on average,
+positively directed.
+
+\formalstatus
+Sperber's claim is \emph{true} in the formalism: it is exactly the
+content of \cref{def:curvature} together with the existence of asymmetric
+resonance structures that fail Hume's symmetry axiom. Furthermore,
+Theorem~\ref{thm:cohom-inv} shows that the attractor structure (as
+encoded by $[\curv]\in H^2(V;\RR)$) is a structural invariant of the
+underlying idea algebra, immune to mere relabelling --- a prediction
+Sperber states informally but without proof.
+
+\litcomment
+The formalism sharpens the original claim by making it manifest that the
+attractor flow lives in the \emph{antisymmetric} part of the bilinear
+extension and not in the symmetric (Humean) part. This separates the
+``content overlap'' of two ideas (which $\rho_+$ measures and which
+Hume saw correctly) from the ``directional bias'' of their transmission
+(which $\rho_-$ measures and which only Sperber and successors saw).
+\end{zooentry}
+
+\begin{zooentry}{Lakoff --- Conceptual Metaphor}{LakoffJohnson1980}
+\textbf{Original claim.} In \emph{Metaphors We Live By}~\cite{LakoffJohnson1980}
+Lakoff and Johnson argue that conceptual metaphor is not a literary
+ornament but the structural mechanism by which abstract domains are
+understood in terms of concrete source domains. A metaphor like
+\textsc{argument is war} is a systematic mapping
+$\phi:\text{(war)}\to\text{(argument)}$ preserving relational structure:
+combatants map to disputants, victories to refutations, retreats to
+concessions. The mapping is asymmetric --- one understands argument
+\emph{via} war, not the reverse --- and its strength can be measured
+empirically by metaphor priming
+experiments~\cite{LakoffJohnson1980,Fillmore1982}.
+
+\formalclaim
+A conceptual metaphor in the Lakoff--Johnson sense is a partial map
+$\phi:S\hookrightarrow T$ between two sub-algebras $S,T\subseteq\Ideas$
+(the source and target domains) inducing a substantial positive value of
+the cross-domain resonance: $\rho(\phi(a),a)\gg 0$ for $a\in S$. The
+\emph{systematicity} of the mapping is the bilinearity of the resonance
+pairing applied to compositions: $\rho(\phi(a)\compose\phi(b),a\compose b)$
+decomposes via the $\compose$-decomposition into the same pieces as
+$\rho(\phi(a),a)+\rho(\phi(b),b)$ plus an emergence residue
+$\omega(\phi(a),\phi(b),a\compose b)$ that vanishes when the metaphor is
+``coherent'' in Lakoff's sense.
+
+\formalstatus
+Lakoff's claim is \emph{true} as a description, and is sharpened by the
+formalism in two ways. First, the curvature $\curv$ measures exactly the
+metaphor's directional asymmetry: the strict inequality
+$\rho(\phi(a),a)>\rho(a,\phi(a))$ characterizes the source/target
+distinction. Second, the cocycle invariance theorem
+(\cref{thm:cohom-inv}) implies that two metaphors with the same
+$[\curv]$-class are equivalent --- a strong claim that the Lakoff
+literature has anticipated but not formalized.
+
+\litcomment
+The conceptual-metaphor literature has long sought a measure of metaphor
+``strength'' that respects compositionality~\cite{FauconnierTurner2002}.
+Resonance, restricted to a cross-domain sub-pairing, supplies one;
+curvature explains its directional character.
+\end{zooentry}
+
+\begin{zooentry}{G\"ardenfors --- Conceptual Spaces}{Gardenfors2000}
+\textbf{Original claim.} In \emph{Conceptual Spaces}~\cite{Gardenfors2000}
+G\"ardenfors proposes that concepts are convex regions in a multi-dimensional
+geometric space whose dimensions are perceptually grounded ``quality
+dimensions'' (hue, pitch, weight, etc.). Similarity between concepts is
+inverse Euclidean distance; combination of concepts is intersection of
+regions; and the entire structure is implicitly equipped with an
+\emph{inner product} on the underlying space which controls both the
+similarity metric and the projection operations used in
+classification~\cite{Gardenfors2000}.
+
+\formalclaim
+A G\"ardenfors conceptual space is precisely an idea algebra
+$\Ideas$ embedded in a Euclidean space $\RR^n$ via a map
+$\iota:\Ideas\to\RR^n$, with the resonance pairing instantiated as
+$\rho(a,b):=\langle\iota(a),\iota(b)\rangle$ where $\langle\cdot,\cdot\rangle$
+is the standard inner product. In this realization $\rho$ is
+\emph{symmetric} ($\curv\equiv 0$) and \emph{positive semi-definite}
+(the strong form of \cref{thm:nondeg}). Composition $\compose$ corresponds
+to G\"ardenfors's region intersection, and the bilinear extension theorem
+(\cref{thm:bilinear-extension}) is realized concretely as the linear
+extension of $\iota$ to the formal $\RR$-span of basis concepts.
+
+\formalstatus
+G\"ardenfors's framework is a \emph{special case} of our formalism in
+which the resonance is symmetric and Euclidean. All seven theorems of
+this chapter specialize correctly: bilinear extension is the standard
+extension of $\iota$; non-degeneracy is positive-definiteness of the
+inner product; the curvature vanishes identically.
+
+\litcomment
+The conceptual-spaces framework gains, on this reading, a precise
+diagnosis of its limitations: it cannot represent any phenomenon
+mediated by $\curv\ne 0$. In particular, the Sperber attractor flow,
+the Lakoff source/target asymmetry, and the Bakhtinian voicing
+asymmetry (\cref{sec:resonance-zoo}) all lie outside the G\"ardenfors
+formalism, even though they remain inside ours.
+\end{zooentry}
+
+\begin{zooentry}{Smolensky --- Tensor Product Variable Binding}{Smolensky1990}
+\textbf{Original claim.} In ``Tensor Product Variable Binding and the
+Representation of Symbolic Structures''~\cite{Smolensky1990}, Smolensky
+shows how to encode symbolic structures (trees, role/filler bindings) as
+vectors in a tensor product space, with role-filler bindings represented
+as the outer product of role and filler vectors. The inner product of two
+such tensor representations decomposes via the bilinearity of
+$\langle\cdot,\cdot\rangle$ into a sum of role/filler inner products,
+realising the systematicity that
+Fodor and Pylyshyn~\cite{FodorPylyshyn1988} demanded of any cognitive
+architecture. Plate's holographic reduced
+representations~\cite{Plate1995} provide a closely related compressed
+realization.
+
+\formalclaim
+Smolensky's tensor-product encoding is an explicit construction of an
+idea algebra in which: (i) $\Ideas$ is a generating set of basis vectors
+in a tensor product space $T$; (ii) $V(\Ideas)$ is identified with $T$
+via the universal property; (iii) composition $\compose$ is realized as
+tensor product (or convolution, in the HRR variant); (iv) the resonance
+pairing is the inner product, $\rho(u,v)=\langle u,v\rangle_T$.
+
+\formalstatus
+Smolensky's construction is a \emph{model} of the formalism. The
+bilinear extension theorem (\cref{thm:bilinear-extension}) is automatic
+because $\rho$ is already given as a bilinear form on $T$. Non-degeneracy
+(\cref{thm:nondeg}) holds because the inner product is positive-definite.
+The curvature $\curv$ vanishes (the inner product is symmetric); hence,
+strictly speaking, Smolensky models only the symmetric part $\rho_+$ of
+the formalism. To incorporate $\curv$ one must enrich the encoding with a
+non-self-adjoint binding operator, e.g.\ a directed convolution kernel or
+a non-commutative tensor variant.
+
+\litcomment
+The cognitive-architecture debate following Fodor and
+Pylyshyn~\cite{FodorPylyshyn1988} centred on whether distributed
+representations can support compositional structure. The bilinearity of
+$\rho$ is exactly the formal property that resolves the debate
+affirmatively in Smolensky's favour. The remaining gap --- the absence of
+$\curv$ in standard tensor encodings --- is precisely the formal locus of
+the criticism that distributed representations under-represent the
+\emph{directionality} of conceptual structure.
+\end{zooentry}
+
+\begin{zooentry}{Mikolov --- Word Embeddings and Analogy}{Mikolov2013}
+\textbf{Original claim.} In ``Efficient Estimation of Word Representations
+in Vector Space''~\cite{Mikolov2013} and the companion
+paper~\cite{MikolovKingQueen2013}, Mikolov \emph{et al.} introduced the
+\textsc{word2vec} family of models, in which words are mapped to dense
+$\RR^d$-vectors learned from co-occurrence statistics. The cosine
+similarity of two such vectors approximates a graded notion of semantic
+relatedness, and the famous analogy formula
+$\mathrm{vec}(\text{king})-\mathrm{vec}(\text{man})+\mathrm{vec}(\text{woman})\approx
+\mathrm{vec}(\text{queen})$ exhibits a structured \emph{linear} relation
+that we will identify with the curvature.
+
+\formalclaim
+A word-embedding model instantiates an idea algebra in which the
+resonance pairing is the (unnormalized) inner product
+$\rho(a,b)=\langle\mathrm{vec}(a),\mathrm{vec}(b)\rangle$, equivalently
+the cosine similarity up to length normalization. The analogy
+phenomenon corresponds to the meaning curvature in the following precise
+sense: the displacement $\mathrm{vec}(\text{king})-\mathrm{vec}(\text{man})$
+is the formal antisymmetric difference encoded by $\curv$, and the
+parallelism with $\mathrm{vec}(\text{queen})-\mathrm{vec}(\text{woman})$
+expresses the closedness of $\curv$ (\cref{thm:closed}): the same
+``curvature direction'' is realized at different basepoints.
+
+\formalstatus
+The Mikolov construction is a \emph{partial model} of the formalism. It
+realizes a symmetric $\rho_+$ via the inner product, but the analogy
+phenomenon shows that the embedding additionally carries
+non-trivial directional structure that is naturally identified with a
+non-zero curvature class $[\curv]$. The ubiquity of analogy in trained
+embeddings, observed empirically~\cite{MikolovKingQueen2013,PenningtonGloVe2014},
+is therefore the empirical signature of a non-trivial $[\curv]$-class
+on a large fragment of natural language.
+
+\litcomment
+The Mikolov literature has long sought a theoretical explanation for why
+analogy works in vector models~\cite{PenningtonGloVe2014,Vaswani2017}.
+The formalism provides one: analogy is the directional flow of $\curv$,
+and its parallel-transport behaviour is the closedness of the meaning
+curvature. The non-triviality of $[\curv]$ on word-embedding spaces
+predicts that analogy ``directions'' should not in general be exact
+gradients of any scalar function --- a falsifiable prediction that is
+borne out empirically.
+\end{zooentry}
+
+\begin{zooentry}{Bakhtin --- Heteroglossia}{Bakhtin1981}
+\textbf{Original claim.} In \emph{The Dialogic Imagination}~\cite{Bakhtin1981},
+Bakhtin develops the doctrine of \emph{heteroglossia}: every utterance is
+addressed --- it is voiced toward another, anticipates a response, and
+carries the trace of past utterances it answers. The relation between two
+utterances is therefore intrinsically asymmetric: the addresser's
+relation to the addressee is not the addressee's relation to the
+addresser. Bakhtin contrasts this with the structuralist tradition's
+symmetric relations of opposition, and develops a typology of voicing
+asymmetries (parodic, stylized, polemical, hidden) each of which carries a
+distinctive directional charge. The dialogic principle, Bakhtin insists,
+is constitutive of the novel as a literary form and, more broadly, of all
+serious discourse~\cite[pp.~259--422]{Bakhtin1981}.
+
+\formalclaim
+Bakhtin's voicing asymmetry is the antisymmetric resonance $\rho_-=\curv$
+specialized to a domain $\Ideas$ of utterances. The four typological
+modes (parody, stylization, polemic, hidden polemic) correspond to four
+distinguishable sign-and-magnitude regimes of $\curv$ on
+generator-by-generator pairs: parody is large positive curvature
+``downward'', stylization is moderate positive curvature ``upward'', and
+so on. The constitutive role of dialogism is the claim --- which the
+formalism makes precise --- that any idea algebra of utterances satisfies
+$\curv\not\equiv 0$, equivalently $[\curv]\ne 0$ in $H^2(V;\RR)$.
+
+\formalstatus
+Bakhtin's claim is \emph{contingent} in the formalism: it asserts the
+existence of a class of idea algebras (those of natural-language
+utterances) on which the curvature is non-trivial. The seven theorems of
+this chapter neither force nor forbid such non-triviality; they merely
+guarantee that whenever it occurs, it admits the cohomological reading
+of \cref{thm:cohom-inv}.
+
+\litcomment
+The Bakhtinian and Sperberian traditions converge, on this reading, to
+the same formal locus: both demand $\curv\ne 0$, and both are excluded
+by the symmetric Humean and G\"ardenforsian frameworks. What distinguishes
+them is the empirical content given to the components of $\curv$:
+Sperber's are population-level transmission biases, Bakhtin's are
+individual-utterance addressivities. The formalism predicts that the two
+should be commensurable --- a prediction that has been substantively
+explored only in recent computational stylistics.
+\end{zooentry}
+
+\bigskip
+
+\noindent The seven entries above span empiricist philosophy
+(\cite{Hume1739,Locke1690}), cognitive anthropology
+(\cite{Sperber1996,Dawkins1976}), conceptual semantics
+(\cite{LakoffJohnson1980,FauconnierTurner2002,Fillmore1982}), cognitive
+geometry (\cite{Gardenfors2000}), connectionist symbol-binding
+(\cite{Smolensky1990,FodorPylyshyn1988,Plate1995}), distributional
+semantics (\cite{Mikolov2013,MikolovKingQueen2013,PenningtonGloVe2014,Vaswani2017}),
+and dialogic literary theory (\cite{Bakhtin1981}). Each is faithfully
+reconstructed, classified by the symmetric/antisymmetric character of its
+implicit resonance, and located on the cohomological landscape of
+\cref{thm:cohom-inv}. The formal apparatus of bilinear extension,
+non-degeneracy, and curvature is, on the present reading, the minimum
+mathematical infrastructure that lets these traditions speak to one
+another in a single language.
+
+% ---------------------------------------------------------------
+\section*{Summary}
+
+We extended the resonance datum $\rho_0:\Ideas\times\Ideas\to\RR$ to a
+canonical bilinear form on the free vector space $V(\Ideas)$, established
+its non-degeneracy and the preservation of non-degeneracy under
+composition, decomposed it canonically into symmetric and antisymmetric
+parts, identified the antisymmetric part as the meaning curvature
+$\curv$, proved that $[\curv]$ is a structural invariant in
+$H^2(V;\RR)$, and verified the compatibility of this decomposition with
+the Aufhebung components $\preserve,\negate,\elevate$. The seven zoo
+entries gave concrete content to each component, ranging from Hume's
+purely symmetric ``association'' to Bakhtin's purely curvature-bearing
+``heteroglossia''. The next chapter takes up the cocycle $\omega$ as the
+formal carrier of the third Aufhebung component $\elevate$.
+
+The picture that emerges from the present chapter is that resonance is
+not a single number but a structured pair $(\rho_+,\rho_-)$, with
+$\rho_+$ recording how much two ideas \emph{share} and $\rho_-$ recording
+how much one calls forth the other. The first quantity is bounded by
+Cauchy--Schwarz and underlies the geometric models of conceptual
+similarity; the second is unbounded, cohomologically classified, and
+underlies every doctrine of directional or asymmetric semantic
+relation. The two together exhaust the linear content of the resonance
+pairing, in the precise sense that any bilinear form on $V$ admits the
+unique decomposition $\rho=\rho_++\rho_-$.
+
+Three further consequences are worth recording for use in later chapters.
+First, the bilinear extension is automatic: it requires no new axiom and
+incurs no choice. Second, non-degeneracy is preserved under composition
+on the right by any element of $\Ideas$, with the corresponding statement
+on the left following symmetrically; this is the formal ground for the
+compositional stability of the cognitive-science zoo entries. Third, the
+cohomological invariance of $[\curv]$ supplies an intrinsic invariant
+that does not depend on any choice of basis, embedding, or normalization;
+this is the formal ground for the comparison of resonance structures
+across radically different domains (e.g.\ comparing a Bakhtinian
+literary algebra with a Mikolovian word-embedding algebra), a comparison
+that earlier formalisms could not even pose meaningfully.
+
+In Chapter~\ref{ch:cocycle} we turn to the third Aufhebung component
+$\elevate$ and its formal carrier, the emergence cocycle $\omega$. The
+relationship between $\curv$ and $\omega$ is intimate: $\omega$ is the
+$3$-tensor that records the failure of $\rho$ to be a homomorphism with
+respect to $\compose$ in its first slot, and its antisymmetrization in
+the first two arguments coincides (up to a coboundary) with the
+contraction of $\curv$ along $\compose$. The cocycle thus packages
+curvature data in a form better suited to the analysis of long
+transmission chains, while the $2$-form $\curv$ packages it in a form
+better suited to the analysis of structural equivalence. Both
+perspectives are needed; both are deployed throughout the applied
+volumes that follow.

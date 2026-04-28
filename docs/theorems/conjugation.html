@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 6: Conjugation — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorem 6: Conjugation</h1>
+<div class="thm"><span class="thm-label">Theorem 6.</span> Let \(g\in\mathcal{I}\) be invertible. Then \(\mathrm{Ad}_g\) is an automorphism of \(\mathcal{I}\) as an idea algebra: it is a monoid automorphism preserving the resonance pairing, the Aufhebung components, and the emergence cocycle.</div>
+
+<h2>Proof sketch</h2>
+<p>That \(\mathrm{Ad}_g\) is a monoid automorphism is standard. Preservation of \(\rho\) is an axiom of compatibility (verified for free idea algebras and assumed in general). Preservation of \(\sigma,\nu,\eta\) follows from preservation of \(\rho\) via Theorem 3. Preservation of \(\omega\) is immediate from \(v\circ\mathrm{Ad}_g = v\) (when \(v\) is class-functional) or holds modulo a coboundary in general.</p>
+
+<p>Verified as <code>IdeaTheory.Theorems6.conjugation_preserves_structure</code>.</p>
+<p><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

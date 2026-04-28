@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grading — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Grading</h1>
+<p>A grading is a homomorphism \(\deg:\mathcal{I}\to G\) into a totally ordered abelian group. It encodes the level, complexity, or rank of an idea.</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> A <em>grading</em> on the monoid \((\mathcal{I},\circ,e)\) is a function \(\deg:\mathcal{I}\to G\), with \(G\) a totally ordered abelian group, satisfying \(\deg(e)=0\) and \(\deg(a\circ b)=\deg a+\deg b\).</div>
+
+<h2>Worked examples</h2>
+<ul>
+<li><strong>Locke.</strong> Simple ideas have \(\deg=1\), complex ideas have \(\deg = \) number of simples used.</li>
+<li><strong>Foucault.</strong> An <em>épistémè</em> is a graded substructure: ideas of a given epoch have \(\deg\) in some bounded range.</li>
+<li><strong>Smolensky tensor binding.</strong> Filler/role bindings give \(\deg = \) tensor rank.</li>
+<li><strong>Cultural evolution.</strong> The Henrich ratchet is a strictly monotone increase of \(\deg\) over generations.</li>
+</ul>
+
+<h2>Compatibility with the rest of the structure</h2>
+<p>Theorem 9 ensures \(\deg\) is compatible with \(\rho\) (resonance respects level), with the Aufhebung (preserved part has minimum \(\deg\); elevated part has strictly higher \(\deg\) when emergence is non-trivial), and with \(\omega\) (the cocycle is graded).</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/graded-idea-algebra.html">Theorem 9</a></li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

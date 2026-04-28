@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emergence 2-Cocycle — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Emergence 2-Cocycle</h1>
+<p>Whenever a valuation \(v:\mathcal{I}\to A\) (with \(A\) abelian) fails to be a homomorphism, the discrepancy
+\[ \omega(a,b) = v(a\circ b) - v(a) - v(b) \]
+satisfies the cocycle identity
+\[ \omega(a,b) + \omega(a\circ b,c) = \omega(b,c) + \omega(a,b\circ c). \]</p>
+
+<div class="defn"><span class="thm-label">Definition.</span> An <em>emergence cocycle</em> is a normalized 2-cocycle \(\omega:\mathcal{I}\times\mathcal{I}\to A\) on the monoid \((\mathcal{I},\circ,e)\). Normalization means \(\omega(e,a)=\omega(a,e)=0\).</div>
+
+<p>The set of normalized 2-cocycles modulo coboundaries is the second Hochschild cohomology group \(H^{2}(\mathcal{I},A)\). The cohomology class of \(\omega\) is the genuine emergence: a cocycle in the trivial class \(\omega = \partial\phi\) is mere accounting (Bedau's <em>weak</em> emergence in our sense), while a class in \(H^{2}\setminus\{0\}\) is genuine novelty (Chalmers's <em>strong</em> emergence; see <a href="../zoo/emergence/chalmers-strong-vs-weak.html">Chalmers entry</a>).</p>
+
+<h2>Worked example</h2>
+<p>Let \(\mathcal{I}\) be a small set of biological functions, \(A=\mathbb{Z}\), and \(v\) the count of distinct phenotypes a function explains. \(\omega(a,b)\) is then the count of phenotypes explained by the combination of \(a\) and \(b\) together but by neither alone — the literally emergent ones. The cocycle identity says: when one chains a third function \(c\), the bookkeeping is consistent.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/emergence-2-cocycle.html">Theorem 4</a></li>
+<li><a href="../theorems/transmission-chain.html">Theorem 7</a></li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

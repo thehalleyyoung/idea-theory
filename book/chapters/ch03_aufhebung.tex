@@ -1,0 +1,1277 @@
+\chapter{The Aufhebung Decomposition}\label{ch:aufhebung}
+
+\section{Why decompose composition?}\label{sec:why-decompose}
+
+The bare monoidal datum $(\Ideas,\compose,\unit)$ tells us that ideas
+combine, but it does not tell us \emph{how} they combine. When two
+ideas $a$ and $b$ are placed in compositional relation, several things
+happen at once: some structural features carry through unchanged from
+either factor, some are explicitly cancelled or inverted, and some new
+content---irreducible to either factor---comes into being. The history
+of philosophy has a name for this triple movement; in
+\citet{Hegel1812} it is \emph{Aufhebung}, the dialectical operation
+that simultaneously preserves, negates, and elevates. The aim of this
+chapter is to convert that informal triple into a piece of
+mathematics, and to verify the conversion against seven historical
+positions for which a precise notation has long been wanted but never
+supplied.
+
+The motivation is best seen from a failure mode of the bare monoid.
+Consider an ideational lineage in which a \emph{thesis} $a$ is followed
+by an \emph{antithesis} $\bar a$, yielding a composite $a\compose\bar
+a$. Naively one might want $a\compose\bar a=\unit$: the thesis and its
+negation cancel. But experience belies this. The Hegelian dialectic
+denies it explicitly: the new product is not nothing, it is a
+\emph{higher} idea $a'$ that retains a memory of $a$ and incorporates
+the negation as a determinate moment. Likewise, in literary tradition,
+a parody $\bar a$ of a canonical text $a$ does not annul $a$; the
+parody's joint reading produces a new genre. In cognitive science,
+recalling a memory $a$ under a transforming schema $\bar a$ does not
+delete $a$; it produces a reconsolidated trace $a'$ in which the
+original is preserved but altered \citep{Adorno1966}. The pattern is
+the same in each case: the composition of two ideas yields neither
+their union nor their cancellation but a third object whose anatomy
+must be told.
+
+What is missing from the bare monoid is a way to talk about the
+\emph{anatomy} of $a\compose b$: which part of the composite is
+attributable to ``what carried through,'' which part to ``what was
+struck out,'' and which part to ``what was newly produced.'' Chapter 1
+of this monograph already supplied the global $\sigma+\nu+\eta$
+decomposition theorem in the resonance setting (Theorem 1.3,
+``Aufhebung Decomposition''). The present chapter does something
+different: it studies the decomposition as a structure on the carrier
+$\Ideas$ itself, axiomatized minimally and analyzed exhaustively. We
+formalize the \emph{intra-idea} version: every idea $a$ has a
+preserved part $\sigma(a)$, a negated part $\nu(a)$, and the synthetic
+residue (the elevation $\eta$) is recovered as the manner in which
+they compose to give $a$. The reader will note that this is a
+deliberate sharpening of the Hegelian text, which speaks of
+\emph{moments} rather than \emph{functions}. Following
+\citet{Brandom1994}'s reading, we treat $\sigma$ and $\nu$ as a pair
+of commuting projectors on the conceptual lattice, and adopt the
+strong axiom that $\sigma(a)\compose\nu(a)=a$ exactly. The cost of
+this sharpening is some loss of generality at the philosophical level;
+the gain is a clean algebraic theory whose roughly one hundred
+elementary lemmas are all decidable from five axioms.
+
+It is worth pausing on why the unary version of the decomposition
+deserves a chapter of its own, given that the binary version is the
+one that figures in the SHARED BRIEF's foundational nine theorems.
+The reason is that the unary version is where the \emph{philosophical}
+content lives. The binary $(\sigma,\nu,\eta)$ is a triple of
+\emph{operations} on pairs; one cannot read off from it what it
+means for an individual idea to be ``preserved'' or ``negated.'' The
+unary projectors of \cref{def:aufheb-struct} below send each idea to
+its preserved and negated \emph{parts}, and so make first-order
+predicates---``$a$ is preserved,'' ``$a$ is sedimented''---available
+for direct definition. These are the predicates the zoo entries
+trade in. Hegel does not ask whether a binary operation is
+$\sigma$-like; he asks whether an idea is \emph{aufgehoben}. The
+unary structure formalizes that question; the binary structure
+formalizes its consequences.
+
+The split also resolves a tension between ``negation as cancellation''
+and ``negation as transformation.'' The cross-annihilation axioms
+$\sigma\circ\nu=\unit$ and $\nu\circ\sigma=\unit$ encode formally
+that the preserved part of a negation is trivial, and the negated
+part of a preservation is trivial---each projector recognizes the
+\emph{other's} output as ``empty'' from its own point of view. This is
+exactly Hegel's criterion of \emph{determinate} negation: a negation
+preserves nothing of what it negates, and a preservation negates
+nothing of what it preserves; what binds them is composition. The
+chapter develops this minimal axiomatic in
+\S\ref{sec:aufheb-defs}--\S\ref{sec:aufheb-iter}, and then exhibits
+seven historical positions in the zoo of \S\ref{sec:aufheb-zoo} that
+are made precise (or sharpened, or refuted) by it.
+
+There is a methodological remark to enter before we proceed. The
+Aufhebung structure of \cref{def:aufheb-struct} below is, in
+mathematical taste, \emph{biased}. It privileges a ``preserved
+first, negated second'' reading of composition: the decomposition
+$a=\sigma(a)\compose\nu(a)$ writes the preserved part on the left,
+and the cross-annihilation axioms send the projector outputs of one
+side to the identity under the other side's projector. This bias is
+not arbitrary; it tracks the order in which the dialectical moments
+appear in Hegel's exposition (\emph{Sein} before \emph{Nichts},
+position before negation, sediment before transformation). One could
+develop a left--right symmetric variant in which both
+$\sigma(a)\compose\nu(a)=a$ and $\nu(a)\compose\sigma(a)=a$ are
+imposed, but the resulting structure forces composition to be
+commutative on the projectors' joint image, which empirically fails
+in the application domains of interest \citep[cf.][on the asymmetry
+of metaphor]{LakoffJohnson1980}. We therefore retain the asymmetry
+as a feature.
+
+A second remark concerns scope. The decomposition we axiomatize is
+\emph{unary}: it sends an idea to its preserved and negated parts.
+The bilinear $\sigma(a,b),\nu(a,b),\eta(a,b)$ of the SHARED BRIEF is
+the binary version, defined on the resonance-extended free vector
+space in \cref{ch:foundations}. The two are related by restriction:
+the unary $\sigma(a)$ here is the diagonal $\sigma(a,a)$ there, with
+the same identification for $\nu$, and the elevation $\eta$ is
+recovered as the residue of the binary product.  The unary version
+is the right setting for the algebraic theorems of this chapter; the
+binary version is the right setting for the homological computations
+of \cref{ch:foundations}. We consistently use the unary $\sigma,\nu$
+here and reserve the binary forms for cross-references.
+
+A third remark concerns terminology. The English word ``sublation''
+has been used by translators of Hegel since at least the nineteenth
+century to render \emph{Aufhebung}; we keep it as a noun and use
+\emph{sublated} for the predicate. The cognate ``sediment'' is
+borrowed from sociology of knowledge \citep{Lovejoy1936}; an idea is
+\emph{sedimented} when it has nothing left to negate, i.e.\ when its
+$\nu$-component is the identity. The four predicates of
+\cref{def:aufheb-preds}---preserved, negated, sedimented, sublated---
+should be heard as a cross-classification of $a$ by the values of
+$\sigma$ and $\nu$. Of the sixteen logically possible
+combinations, only a small number are populated in any concrete
+algebra; \cref{thm:3-3} below shows that several reduce to one
+another.
+
+\section{Definitions}\label{sec:aufheb-defs}
+
+We work throughout with a fixed bare idea algebra
+$(\Ideas,\compose,\unit)$ in the sense of
+\cref{ch:foundations}: a set with an associative composition and a
+two-sided identity. The Aufhebung structure is an additional layer.
+
+\begin{definition}[Aufhebung structure]\label{def:aufheb-struct}
+An \emph{Aufhebung structure} on $(\Ideas,\compose,\unit)$ consists
+of two endofunctions
+\[
+\sigma:\Ideas\to\Ideas,\qquad \nu:\Ideas\to\Ideas
+\]
+satisfying the following five axioms for all $a\in\Ideas$:
+\begin{enumerate}
+\item[(A1)] \emph{Decomposition.} $\sigma(a)\compose\nu(a)=a$.
+\item[(A2)] \emph{$\sigma$-idempotence.} $\sigma(\sigma(a))=\sigma(a)$.
+\item[(A3)] \emph{$\nu$-idempotence.} $\nu(\nu(a))=\nu(a)$.
+\item[(A4)] \emph{Identity preservation.} $\sigma(\unit)=\unit$ and $\nu(\unit)=\unit$.
+\item[(A5)] \emph{Cross annihilation.}
+$\sigma(\nu(a))=\unit$ and $\nu(\sigma(a))=\unit$.
+\end{enumerate}
+We call $\sigma(a)$ the \emph{preserved} (or \emph{sedimented})
+component, $\nu(a)$ the \emph{negated} (or \emph{transformed})
+component, and refer to (A1) as the \emph{Aufhebung law}.
+\end{definition}
+
+The synthesis or elevation $\eta(a)$ is implicit in (A1): given the
+preserved part and the negated part, $a$ is reconstructed by
+composition, and the \emph{way} they compose---the curvature of the
+binary product $\compose$ at the pair $(\sigma(a),\nu(a))$---is what
+the global theorem of \cref{ch:foundations} packages as $\eta$. From
+the present, intra-idea, vantage, $\eta$ is not a separate function
+but the residual datum carried by the monoid operation itself.
+
+\begin{definition}[Aufheb pair]\label{def:aufheb-pair}
+For $a\in\Ideas$ the \emph{aufheb pair} is
+$\mathrm{aufheb}(a):=(\sigma(a),\nu(a))\in\Ideas\times\Ideas$.
+\end{definition}
+
+\begin{definition}[Mediation]\label{def:mediated}
+For $a,b\in\Ideas$ the \emph{mediated form} is
+\[
+\mathrm{med}(a,b):=\sigma(a)\compose\nu(b).
+\]
+We read $\mathrm{med}(a,b)$ as ``the sediment of $a$ transformed by the
+negation of $b$.''
+\end{definition}
+
+\begin{definition}[Atomic predicates]\label{def:aufheb-preds}
+An idea $a\in\Ideas$ is
+\begin{itemize}
+\item \textbf{preserved} if $\sigma(a)=a$;
+\item \textbf{negated} if $\nu(a)=a$;
+\item \textbf{sedimented} if $\nu(a)=\unit$;
+\item \textbf{sublated} if $\sigma(a)=\unit$;
+\item \textbf{stable} if it is both preserved and sedimented;
+\item \textbf{Hegelian} if $\nu(a)$ is sedimented, i.e.\
+$\nu(\nu(a))=\unit$.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Triad]\label{def:triad}
+The \emph{triad} attached to $a\in\Ideas$ is the triple
+\[
+\mathrm{triad}(a):=(\mathrm{thesis},\mathrm{antithesis},\mathrm{synthesis})=(a,\nu(a),\sigma(a)).
+\]
+The triple $(a,\nu(a),\sigma(a))$ is the algebraic ghost of the
+informal thesis--antithesis--synthesis schema; the recovery law
+$\mathrm{synthesis}\compose\mathrm{antithesis}=\mathrm{thesis}$ holds by (A1).
+\end{definition}
+
+\begin{definition}[Iterated projectors]\label{def:iterates}
+For $n\in\mathbb{N}$ define
+\[
+\sigma^{[n]}(a):=\underbrace{\sigma(\sigma(\cdots\sigma(a)\cdots))}_{n\text{ times}},
+\qquad
+\nu^{[n]}(a):=\underbrace{\nu(\nu(\cdots\nu(a)\cdots))}_{n\text{ times}},
+\]
+with $\sigma^{[0]}(a)=\nu^{[0]}(a)=a$.
+\end{definition}
+
+\begin{definition}[Aufheb equivalence]\label{def:aufheb-equiv}
+Two ideas $a,b\in\Ideas$ are \emph{Aufheb-equivalent}, written
+$a\simeq_{\text{A}} b$, if $\sigma(a)=\sigma(b)$ and
+$\nu(a)=\nu(b)$.
+\end{definition}
+
+These six definitions exhaust the primitives. Everything in the rest
+of the chapter is derived.
+
+\subsection*{Closure and basic algebra}
+
+We collect the immediate consequences of the axioms.
+
+\begin{lemma}\label{lem:proj-fixed}
+For every $a\in\Ideas$, $\sigma(a)$ is preserved and $\nu(a)$ is
+negated.
+\end{lemma}
+
+\begin{proof}
+By (A2), $\sigma(\sigma(a))=\sigma(a)$, so $\sigma(a)$ is a fixed
+point of $\sigma$, hence preserved. By (A3), $\nu(\nu(a))=\nu(a)$,
+so $\nu(a)$ is negated.
+\end{proof}
+
+\begin{lemma}\label{lem:ident-quad}
+The identity $\unit$ is simultaneously preserved, negated, sedimented,
+and sublated.
+\end{lemma}
+
+\begin{proof}
+By (A4), $\sigma(\unit)=\unit$ and $\nu(\unit)=\unit$. The first
+equation says $\unit$ is preserved (trivially) and sublated
+(vacuously, since the value $\unit$ equals $\unit$). The second says
+$\unit$ is negated and sedimented. All four predicates are simply
+two equations $\sigma(\unit)=\unit$ and $\nu(\unit)=\unit$ read in
+two ways each.
+\end{proof}
+
+\begin{lemma}\label{lem:cross-trivial}
+For all $a\in\Ideas$, $\sigma(\nu(a))=\unit=\nu(\sigma(a))$.
+\end{lemma}
+
+\begin{proof}
+This is (A5).
+\end{proof}
+
+\begin{lemma}\label{lem:decomp-collapse}
+If $a$ is sedimented, then $\sigma(a)=a$. If $a$ is sublated, then
+$\nu(a)=a$.
+\end{lemma}
+
+\begin{proof}
+Suppose $\nu(a)=\unit$. By (A1), $a=\sigma(a)\compose\nu(a)
+=\sigma(a)\compose\unit=\sigma(a)$ using right identity. Suppose
+$\sigma(a)=\unit$. By (A1), $a=\sigma(a)\compose\nu(a)=\unit
+\compose\nu(a)=\nu(a)$ using left identity.
+\end{proof}
+
+\begin{proposition}[Equivalence of preservation and sedimentation]\label{prop:pres-sed}
+For all $a\in\Ideas$, $a$ is preserved if and only if $a$ is
+sedimented.
+\end{proposition}
+
+\begin{proof}
+($\Rightarrow$) Suppose $\sigma(a)=a$. Then
+$\nu(a)=\nu(\sigma(a))=\unit$ by (A5), so $a$ is sedimented.
+($\Leftarrow$) Suppose $\nu(a)=\unit$. By
+\cref{lem:decomp-collapse}, $\sigma(a)=a$, so $a$ is preserved.
+\end{proof}
+
+\begin{proposition}[Equivalence of negation and sublation]\label{prop:neg-sub}
+For all $a\in\Ideas$, $a$ is negated if and only if $a$ is sublated.
+\end{proposition}
+
+\begin{proof}
+Symmetric to \cref{prop:pres-sed}: substitute (A5)'s second equation
+$\sigma(\nu(a))=\unit$ and the left-identity collapse from
+\cref{lem:decomp-collapse}.
+\end{proof}
+
+\section{The triadic decomposition theorem}\label{sec:triadic-decomp}
+
+The five axioms package into a single structural statement. We have
+already seen the individual content of each axiom in
+\S\ref{sec:aufheb-defs}; the present section bundles them, addresses
+the question of uniqueness modulo the kernel of the resonance
+pairing $\rho$, and draws the immediate algebraic corollaries. The
+distinctive feature of the bundle, philosophically, is that it
+treats Aufhebung not as a process unfolding in time but as a
+\emph{simultaneous} structural fact about every idea. Hegel's
+\emph{Bewegung} (movement) is replaced by a static decomposition;
+the temporal connotations of the German verb \emph{aufheben} are
+recovered, in our setting, only when one composes successive ideas
+along a chain.
+
+\begin{theorem}[Aufhebung Decomposition Theorem]\label{thm:3-1}
+Let $(\Ideas,\compose,\unit,\sigma,\nu)$ be an Aufhebung structure.
+For every $a\in\Ideas$ the following five identities hold
+simultaneously:
+\begin{align*}
+\sigma(a)\compose\nu(a) &= a, \\
+\sigma(\sigma(a)) &= \sigma(a), \\
+\nu(\nu(a)) &= \nu(a), \\
+\nu(\sigma(a)) &= \unit, \\
+\sigma(\nu(a)) &= \unit.
+\end{align*}
+\end{theorem}
+
+\begin{proof}
+The five identities are precisely the axioms (A1), (A2), (A3) and
+the two halves of (A5), instantiated at $a$. The bundle is a
+tautological consequence of \cref{def:aufheb-struct}; the
+non-trivial content of the theorem is its \emph{statement}---i.e.\
+the assertion that an algebraic structure satisfying just these
+five conjuncts captures the full informal Hegelian schema.
+\end{proof}
+
+The deeper content is uniqueness. The bare datum
+``$a=\sigma(a)\compose\nu(a)$ for some pair $(\sigma(a),\nu(a))$'' is
+satisfied by infinitely many pairs in any non-trivial monoid;
+declaring $\sigma(a)=a$ and $\nu(a)=\unit$, or $\sigma(a)=\unit$ and
+$\nu(a)=a$, both work pointwise. What pins the pair down is the
+combination of (A2)--(A5).
+
+\begin{theorem}[Uniqueness modulo $\ker\rho$]\label{thm:uniqueness}
+Let $\rho:\Ideas\times\Ideas\to\mathbb{R}$ be the resonance pairing of
+\cref{ch:foundations}, and assume the algebra carries a compatible
+Aufhebung structure (compatibility meaning that $\sigma$ and $\nu$
+preserve $\rho$ in each argument). Suppose $\sigma',\nu'$ is a second
+Aufhebung structure on the same monoid satisfying axioms (A1)--(A5)
+and the same compatibility. Then for every $a\in\Ideas$,
+\[
+\sigma'(a)-\sigma(a)\in\ker\rho,\qquad \nu'(a)-\nu(a)\in\ker\rho,
+\]
+where the difference is taken in the free $\mathbb{R}$-vector space on
+$\Ideas$.
+\end{theorem}
+
+\begin{proof}[Sketch]
+Compose any two decompositions of $a$ by their formal difference and
+pair the result with arbitrary $b\in\Ideas$ under $\rho$. By
+bilinearity and compatibility,
+$\rho(\sigma'(a)-\sigma(a),b)=\rho(a,b)-\rho(a,b)=0$ for all $b$, so
+$\sigma'(a)-\sigma(a)$ lies in the right kernel of $\rho$; the
+$\nu$-case is symmetric. The full argument is deferred to Theorem 1.3
+of \cref{ch:foundations}, which we apply pointwise.
+\end{proof}
+
+The combination of \cref{thm:3-1} (existence) and
+\cref{thm:uniqueness} (uniqueness) constitutes the third of the nine
+foundational theorems of the SHARED BRIEF in its sharpened, structure-
+level form.
+
+\begin{corollary}[Triadic recovery]\label{cor:triad-recovery}
+For every $a\in\Ideas$,
+\[
+\mathrm{triad}(a).\mathrm{synthesis}\compose\mathrm{triad}(a).\mathrm{antithesis}
+=\mathrm{triad}(a).\mathrm{thesis}.
+\]
+\end{corollary}
+
+\begin{proof}
+This is (A1) restated through the names of the components of the
+triad: synthesis is $\sigma(a)$, antithesis is $\nu(a)$, thesis is
+$a$.
+\end{proof}
+
+\begin{lemma}[Mediation laws]\label{lem:mediation}
+The mediated form satisfies, for all $a,b,c\in\Ideas$:
+\begin{enumerate}
+\item $\mathrm{med}(a,a)=a$;
+\item $\mathrm{med}(a,\unit)=\sigma(a)$;
+\item $\mathrm{med}(\unit,b)=\nu(b)$;
+\item $\mathrm{med}(a,b)\compose c=\sigma(a)\compose(\nu(b)\compose c)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+For (1), $\mathrm{med}(a,a)=\sigma(a)\compose\nu(a)=a$ by (A1). For (2),
+$\mathrm{med}(a,\unit)=\sigma(a)\compose\nu(\unit)=\sigma(a)\compose\unit
+=\sigma(a)$ by (A4) and right identity. For (3),
+$\mathrm{med}(\unit,b)=\sigma(\unit)\compose\nu(b)=\unit\compose\nu(b)
+=\nu(b)$ by (A4) and left identity. For (4), apply the associativity
+of $\compose$.
+\end{proof}
+
+\section{Identity behavior}\label{sec:aufheb-identity}
+
+The identity $\unit$ plays a remarkable role in the Aufhebung
+structure: it is the unique idea that satisfies all four atomic
+predicates simultaneously. The reason is that $\unit$ is the
+algebraic neutralization of composition, and composition is the
+\emph{glue} that the projectors decompose; an idea that contributes
+nothing to composition has, correspondingly, nothing for the
+projectors to do. The identity is \emph{the} fixed point of every
+piece of structure that an Aufhebung algebra carries.
+
+\begin{theorem}[Quadruple status of the identity]\label{thm:ident-quad}
+The identity $\unit\in\Ideas$ is preserved, negated, sedimented, and
+sublated. Its triad is $(\unit,\unit,\unit)$ and its aufheb pair is
+$(\unit,\unit)$.
+\end{theorem}
+
+\begin{proof}
+Combine (A4) with the definitions: $\sigma(\unit)=\unit$ gives
+preservation and sublation; $\nu(\unit)=\unit$ gives negation and
+sedimentation. The triad is $(\unit,\nu(\unit),\sigma(\unit))=
+(\unit,\unit,\unit)$, and the aufheb pair is the same with the first
+component dropped.
+\end{proof}
+
+\begin{proposition}[Uniqueness of the quadruple-status idea]\label{prop:ident-unique-quad}
+If $a\in\Ideas$ is simultaneously preserved and sublated, then
+$a=\unit$. Likewise if $a$ is negated and sedimented.
+\end{proposition}
+
+\begin{proof}
+Assume $a$ is preserved and sublated: $\sigma(a)=a$ and
+$\sigma(a)=\unit$. Then $a=\sigma(a)=\unit$. Assume $a$ is negated
+and sedimented: $\nu(a)=a$ and $\nu(a)=\unit$. Then $a=\nu(a)=\unit$.
+\end{proof}
+
+\begin{remark}
+\Cref{thm:ident-quad} and \cref{prop:ident-unique-quad} together
+explain why the identity is dialectically inert: it has nothing to
+preserve and nothing to negate. Hegel describes \emph{Sein} (Being)
+in this register at the opening of the \emph{Wissenschaft der Logik}
+\citep{Hegel1812}: the most empty determination, indistinguishable
+from \emph{Nichts} (Nothing), is precisely the absolute starting
+point of the dialectic. In our framework $\unit$ is the unique
+``moment'' for which thesis, antithesis, and synthesis coincide.
+\end{remark}
+
+There is a complementary observation for non-identity ideas. Any
+$a\neq\unit$ that is preserved is, by \cref{prop:ident-unique-quad},
+necessarily not sublated; any $a\neq\unit$ that is negated is
+necessarily not sedimented. The four predicates therefore impose, on
+$\Ideas\setminus\{\unit\}$, a strict partition into the genuinely
+preserved, the genuinely negated, and the doubly indeterminate. This
+partition is what the application chapters
+\citep{Lovejoy1936,Bourdieu1984} appeal to when they distinguish
+``settled'' ideas (case 2 above) from ``critical'' ideas (case 3)
+from ``ideas in motion'' (case 4). The framework supplies a precise
+algebraic referent for each.
+
+\begin{corollary}[Identity composition with projectors]\label{cor:ident-proj}
+For all $a\in\Ideas$,
+\[
+\sigma(a)\compose\unit=\sigma(a),\qquad
+\unit\compose\nu(a)=\nu(a).
+\]
+\end{corollary}
+
+\begin{proof}
+The monoid identity laws applied to the projector outputs.
+\end{proof}
+
+\begin{lemma}[Cross-projector congruence]\label{lem:cross-cong}
+For all $a\in\Ideas$,
+\[
+\nu(\sigma(a))=\nu(\unit),\qquad \sigma(\nu(a))=\sigma(\unit).
+\]
+\end{lemma}
+
+\begin{proof}
+By (A5), $\nu(\sigma(a))=\unit=\nu(\unit)$ using (A4); the second
+follows symmetrically.
+\end{proof}
+
+\section{Idempotence and trivialization}\label{sec:idempotence}
+
+The two projectors are not only individually idempotent but mutually
+trivializing. Two readings of this fact are worth keeping apart. The
+first is geometric: $\sigma$ and $\nu$ are projectors, and like
+projectors on a vector space they have complementary images. Anything
+in $\mathrm{Im}(\sigma)$ is invisible to $\nu$, and vice versa, with
+``invisible'' meaning ``mapped to the identity.'' The second is
+dialectical: an idea cannot simultaneously be ``what survives
+critique'' and ``what critique strikes out''---the only idea that
+plays both roles is the trivial one, and \cref{cor:mutual-exclusion}
+makes this precise.
+
+\begin{theorem}[Trivialization of crossed compositions]\label{thm:trivialization}
+The compositions $\sigma\circ\nu$ and $\nu\circ\sigma$ are both the
+constant function $a\mapsto\unit$.
+\end{theorem}
+
+\begin{proof}
+By (A5), $\sigma(\nu(a))=\unit$ and $\nu(\sigma(a))=\unit$ for all
+$a\in\Ideas$, so each composition has constant value $\unit$.
+\end{proof}
+
+\begin{corollary}[Image is a fixed-point set]\label{cor:image-fixed}
+$\mathrm{Im}(\sigma)=\{a:\sigma(a)=a\}$ and
+$\mathrm{Im}(\nu)=\{a:\nu(a)=a\}$.
+\end{corollary}
+
+\begin{proof}
+For $\sigma$: ($\subseteq$) if $a=\sigma(b)$ for some $b$, then
+$\sigma(a)=\sigma(\sigma(b))=\sigma(b)=a$ by (A2). ($\supseteq$) if
+$\sigma(a)=a$, then trivially $a\in\mathrm{Im}(\sigma)$. The argument
+for $\nu$ is the same.
+\end{proof}
+
+\begin{corollary}[Mutual exclusion of nontrivial images]\label{cor:mutual-exclusion}
+If $a\in\mathrm{Im}(\sigma)\cap\mathrm{Im}(\nu)$ then $a=\unit$.
+\end{corollary}
+
+\begin{proof}
+By \cref{cor:image-fixed}, $\sigma(a)=a$ and $\nu(a)=a$. So $a$ is
+both preserved and negated. By
+\cref{prop:pres-sed,prop:neg-sub}, $a$ is both sedimented and
+sublated, hence $\sigma(a)=\unit$ and $\nu(a)=\unit$. Combining,
+$a=\sigma(a)=\unit$.
+\end{proof}
+
+\Cref{cor:mutual-exclusion} is structurally important: it tells us
+that the preserved part of any idea and the negated part of any
+\emph{other} idea live in two subsets of $\Ideas$ whose intersection
+is the singleton $\{\unit\}$. The decomposition (A1) thus expresses
+$a$ as a product of an element of $\mathrm{Im}(\sigma)$ and an element
+of $\mathrm{Im}(\nu)$, and the only way for both to equal $a$ itself
+is for $a=\unit$.
+
+We can read \cref{cor:mutual-exclusion} as a structural separation
+theorem. Every idea $a\neq\unit$ falls into one of three cases.
+Either $\sigma(a)\neq a$, in which case $a$ is genuinely
+``transformable'' by $\sigma$ and is not preserved; or $\nu(a)\neq
+a$, in which case $a$ is not negated; or both, in which case $a$
+admits a non-trivial proper decomposition into preserved and negated
+parts neither of which is itself. The trichotomy refines further: by
+\cref{prop:pres-sed,prop:neg-sub}, ``preserved'' is the same as
+``sedimented'' and ``negated'' is the same as ``sublated.'' So the
+sixteen \emph{a priori} cells of the four-predicate
+cross-classification reduce to four genuine cases:
+\begin{enumerate}
+\item $a=\unit$: preserved, negated, sedimented, sublated.
+\item $a$ preserved (equivalently sedimented) but not negated.
+\item $a$ negated (equivalently sublated) but not preserved.
+\item $a$ neither preserved nor negated: a generic idea.
+\end{enumerate}
+A complete typology of an Aufhebung structure thus reduces to
+counting, in each cardinality stratum of $\Ideas$, the populations
+of cases (2), (3), and (4); case (1) is always a singleton.
+
+\begin{proposition}[Quasi-projector identities]\label{prop:quasi-proj}
+For all $a,b\in\Ideas$,
+\[
+\sigma(\sigma(a)\compose\nu(b))\text{ and }\nu(\sigma(a)\compose\nu(b))
+\]
+need not in general equal $\sigma(a)$ and $\nu(b)$ respectively. The
+Aufhebung structure does not require $\sigma$ and $\nu$ to be
+homomorphisms.
+\end{proposition}
+
+\begin{proof}
+A counterexample is built in \cref{ch:foundations}'s example of the
+free Aufhebung monoid on two generators: there the projectors are
+defined component-wise but the underlying composition is associative
+without commutation through $\sigma$ or $\nu$. The proposition
+records this as a structural caveat; we will return to it when
+discussing Marx's notion of \emph{inversion} in
+\S\ref{sec:aufheb-zoo}.
+\end{proof}
+
+\section{The Aufheb-equivalence relation}\label{sec:aufheb-equiv}
+
+We now study the natural equivalence relation generated by the
+projectors. Recall \cref{def:aufheb-equiv}: $a\simeq_{\text{A}}b$
+iff $\sigma(a)=\sigma(b)$ and $\nu(a)=\nu(b)$. The relation captures
+the intuitive notion of ``two ideas with the same dialectical
+anatomy''---same preserved core, same negated remainder. One would
+ordinarily expect such an equivalence to have a non-trivial
+quotient: many ideas could share an anatomy while differing in
+synthesis. The principal result of the section is that this
+expectation fails. The Aufhebung axioms force the anatomy to
+determine the idea.
+
+\begin{proposition}[Equivalence relation]\label{prop:equiv-rel}
+The relation $\simeq_{\text{A}}$ on $\Ideas$ is reflexive, symmetric,
+and transitive.
+\end{proposition}
+
+\begin{proof}
+Reflexivity: $\sigma(a)=\sigma(a)$ and $\nu(a)=\nu(a)$. Symmetry:
+swap the equations. Transitivity: if $\sigma(a)=\sigma(b)$ and
+$\sigma(b)=\sigma(c)$, then $\sigma(a)=\sigma(c)$; same for $\nu$.
+\end{proof}
+
+\begin{theorem}[Collapse of the quotient]\label{thm:quotient-collapse}
+$a\simeq_{\text{A}}b$ if and only if $a=b$. Equivalently, the
+quotient $\Ideas/\!\simeq_{\text{A}}$ is canonically isomorphic to
+$\Ideas$.
+\end{theorem}
+
+\begin{proof}
+($\Leftarrow$) Trivial. ($\Rightarrow$) Suppose $\sigma(a)=\sigma(b)$
+and $\nu(a)=\nu(b)$. By (A1) applied to $a$ and to $b$,
+\[
+a=\sigma(a)\compose\nu(a)=\sigma(b)\compose\nu(b)=b.
+\]
+\end{proof}
+
+\Cref{thm:quotient-collapse} is striking: the natural equivalence
+relation that one would write down to express ``two ideas with the
+same Aufhebung anatomy'' turns out to coincide with strict equality.
+Equivalently, the aufheb pair function
+$\mathrm{aufheb}:\Ideas\to\Ideas\times\Ideas$ is injective. The injectivity
+should not be mistaken for triviality. It says that within an
+Aufhebung structure satisfying (A1)--(A5) every idea is reconstructed
+exactly from its preserved and negated parts; there is no
+``surplus'' content unaccounted for. The Hegelian programme of
+characterizing an idea by its dialectical history is, in this sense,
+\emph{complete} relative to a single round of decomposition.
+
+The collapse has a corollary that one might call \emph{algebraic
+holism}: the value of $a$ is determined by the joint behavior of
+$\sigma$ and $\nu$ on it, with no further appeal to the carrier
+$\Ideas$ as such. Two ideas that look identical to both projectors
+are identical, and this is enforced by axiom (A1) alone---the four
+remaining axioms are not used in the proof of
+\cref{thm:quotient-collapse}. (A1) by itself thus already entails
+that the decomposition is faithful; (A2)--(A5) supply the additional
+algebraic content that distinguishes Aufhebung from a generic
+factorization.
+
+\begin{corollary}[Aufheb pair injectivity]\label{cor:aufheb-injective}
+The function $\mathrm{aufheb}:\Ideas\to\Ideas\times\Ideas$ is injective. Its
+image is contained in the subset
+\[
+\{(s,n)\in\Ideas\times\Ideas : \sigma(s)=s,\ \nu(n)=n,\
+\nu(s)=\unit,\ \sigma(n)=\unit\}.
+\]
+\end{corollary}
+
+\begin{proof}
+Injectivity is \cref{thm:quotient-collapse}. The image constraint
+follows from \cref{lem:proj-fixed,cor:mutual-exclusion}: $s=\sigma(a)$
+is preserved hence sedimented, and $n=\nu(a)$ is negated hence
+sublated.
+\end{proof}
+
+\begin{remark}
+The image constraint of \cref{cor:aufheb-injective} is in general
+\emph{strict}: not every pair of (preserved, negated) elements arises
+as an aufheb pair, because composition $s\compose n$ may equal some
+$a'\neq a$ for the unique $a$ producing them. This is the formal
+shadow of \emph{aliasing} in the literary-canon corollary: two
+distinct ``readings'' may share the same canonical residue and the
+same labile transformation but, through their distinct compositions,
+still yield distinct texts.
+\end{remark}
+
+\section{Iterated preservation and iterated negation}\label{sec:aufheb-iter}
+
+The idempotence axioms (A2) and (A3) imply a very strong
+\emph{convergence} property for iteration. Before stating it we set
+up the iteration formally and check the trivial cases. The
+iteration data of \cref{def:iterates} is what one would expect: a
+zeroth iterate that returns the input unchanged, and a successor
+iterate that applies one more projector. The technical work is to
+show that the orbit collapses after one step, and that this
+collapse is uniform in $n$.
+
+\begin{lemma}[Single-step stabilization of iterates]\label{lem:single-step}
+For all $n\in\mathbb{N}$ and all $a\in\Ideas$,
+\[
+\sigma^{[n+2]}(a)=\sigma^{[n+1]}(a),\qquad
+\nu^{[n+2]}(a)=\nu^{[n+1]}(a).
+\]
+\end{lemma}
+
+\begin{proof}
+Induction on $n$. Base $n=0$: $\sigma^{[2]}(a)=\sigma(\sigma(a))=
+\sigma(a)=\sigma^{[1]}(a)$ by (A2); same for $\nu$. Induction step:
+$\sigma^{[n+3]}(a)=\sigma(\sigma^{[n+2]}(a))=\sigma(\sigma^{[n+1]}(a))
+=\sigma^{[n+2]}(a)$ by the induction hypothesis applied to one less.
+\end{proof}
+
+\begin{theorem}[Closed form for iterates]\label{thm:closed-form}
+For all $n\geq 1$ and all $a\in\Ideas$,
+\[
+\sigma^{[n]}(a)=\sigma(a),\qquad \nu^{[n]}(a)=\nu(a).
+\]
+\end{theorem}
+
+\begin{proof}
+Induction on $n$. Base $n=1$ is definitional. Induction step: assume
+$\sigma^{[n]}(a)=\sigma(a)$ for some $n\geq 1$. By
+\cref{lem:single-step} (with parameter $n-1$),
+$\sigma^{[n+1]}(a)=\sigma^{[n]}(a)=\sigma(a)$. Symmetrically for
+$\nu$.
+\end{proof}
+
+\begin{theorem}[Idempotent Stabilization Theorem]\label{thm:3-2}
+For all $a\in\Ideas$ the following four assertions hold
+simultaneously:
+\begin{enumerate}
+\item For every $n\geq 1$, $\sigma^{[n]}(a)=\sigma(a)$.
+\item For every $n\geq 1$, $\nu^{[n]}(a)=\nu(a)$.
+\item For all $m,n\geq 1$, $\sigma^{[m]}(a)=\sigma^{[n]}(a)$.
+\item For all $m,n\geq 1$, $\nu^{[m]}(a)=\nu^{[n]}(a)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Items 1 and 2 are \cref{thm:closed-form}. For item 3, both sides
+equal $\sigma(a)$ by item 1; for item 4, both equal $\nu(a)$ by
+item 2.
+\end{proof}
+
+\Cref{thm:3-2} is the formal expression of the idea, recurrent in
+the dialectical tradition since \citet{Adorno1966}, that ``the
+negation of the negation'' adds nothing beyond the first negation.
+We obtain the conclusion in stronger form: \emph{any} positive number
+of repeated preservations (or negations) collapses to the first.
+There is no progress past the first sublation.
+
+A standard objection at this point asks whether the idempotence
+axioms are too strong. In the informal Hegelian text, sublation is
+not a one-shot operation: each Aufhebung produces a new idea that is
+itself in turn sublatable, and the dialectic is inexhaustible. We
+have already seen one answer to this objection (above): iteration of
+the dialectic is modeled \emph{externally}, by composing successive
+ideas, not internally by iterating $\sigma$. There is also a second
+answer, properly formal. Suppose we drop axiom (A2) and ask only
+that $\sigma$ act as a self-map. The orbit of $a$ under $\sigma$ is
+then a sequence $a,\sigma(a),\sigma^{[2]}(a),\sigma^{[3]}(a),\ldots$
+of, in general, distinct elements. To say that the dialectic
+\emph{converges} is to say that the orbit eventually stabilizes;
+\cref{thm:3-2} gives the strongest possible form of convergence:
+\emph{after one step}. Weaker forms (period $k$ stabilization,
+asymptotic convergence in some metric) are conceivable but require
+additional structure on $\Ideas$. The five-axiom version captures the
+maximally rigid case; the deformed cases of Adorno and Derrida are
+recovered by relaxing (A2) and (A3) respectively.
+
+\begin{proposition}[Mediated iteration]\label{prop:mediated-iter}
+For all $a,b\in\Ideas$ and $n\geq 1$,
+\[
+\sigma^{[n]}(\mathrm{med}(a,b))=\sigma^{[n]}(\sigma(a)\compose\nu(b)),
+\]
+which in general is \emph{not} equal to $\sigma(a)\compose\unit
+=\sigma(a)$ unless $\sigma$ commutes with $\compose$.
+\end{proposition}
+
+\begin{proof}
+Definitional unfolding plus a remark: the failure of equality is
+\cref{prop:quasi-proj}.
+\end{proof}
+
+\begin{corollary}[Constancy on fixed points]\label{cor:fixed-point-constancy}
+If $a$ is preserved, then $\sigma^{[n]}(a)=a$ for all $n\geq 0$. If
+$a$ is negated, then $\nu^{[n]}(a)=a$ for all $n\geq 0$.
+\end{corollary}
+
+\begin{proof}
+Induction. Base: $\sigma^{[0]}(a)=a$. Step: $\sigma^{[n+1]}(a)
+=\sigma(\sigma^{[n]}(a))=\sigma(a)=a$ by hypothesis. Symmetrically
+for $\nu$.
+\end{proof}
+
+\begin{corollary}[Identity orbit]\label{cor:ident-orbit}
+For all $n\geq 0$, $\sigma^{[n]}(\unit)=\unit$ and
+$\nu^{[n]}(\unit)=\unit$.
+\end{corollary}
+
+\begin{proof}
+Apply \cref{cor:fixed-point-constancy} to $\unit$, which is both
+preserved and negated by \cref{thm:ident-quad}.
+\end{proof}
+
+\subsection*{The Hegelian fixed-point theorem}
+
+Recall (\cref{def:aufheb-preds}): $a$ is \emph{Hegelian} iff $\nu(a)$
+is sedimented, i.e.\ $\nu(\nu(a))=\unit$.
+
+\begin{lemma}[Hegelian = Sedimented]\label{lem:heg-iff-sed}
+$a$ is Hegelian if and only if $a$ is sedimented.
+\end{lemma}
+
+\begin{proof}
+($\Rightarrow$) If $\nu(\nu(a))=\unit$, then by (A3) $\nu(a)=\nu(\nu(a))
+=\unit$, so $a$ is sedimented. ($\Leftarrow$) If $\nu(a)=\unit$, then
+$\nu(\nu(a))=\nu(\unit)=\unit$ by (A4), so $a$ is Hegelian.
+\end{proof}
+
+\begin{theorem}[Hegelian Fixed-Point Theorem]\label{thm:3-3}
+For every $a\in\Ideas$ the following four conditions are equivalent:
+\begin{enumerate}
+\item $a$ is sedimented: $\nu(a)=\unit$.
+\item $a$ is preserved: $\sigma(a)=a$.
+\item $a$ equals its own preserved component: $a=\sigma(a)$.
+\item $a$ is Hegelian: $\nu(\nu(a))=\unit$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1)$\Leftrightarrow$(2) is \cref{prop:pres-sed}. (2)$\Leftrightarrow$(3)
+is the definition of preserved unfolded. (1)$\Leftrightarrow$(4) is
+\cref{lem:heg-iff-sed}.
+\end{proof}
+
+\begin{corollary}[Stable = Preserved = Sedimented]\label{cor:stable-equiv}
+$a$ is stable if and only if $a$ is preserved if and only if $a$ is
+sedimented.
+\end{corollary}
+
+\begin{proof}
+Stability requires both preservation and sedimentation; by
+\cref{thm:3-3} either implies the other, so a single one suffices.
+\end{proof}
+
+\begin{corollary}[Sediments are Hegelian]\label{cor:sigma-heg}
+For every $a\in\Ideas$, $\sigma(a)$ is Hegelian.
+\end{corollary}
+
+\begin{proof}
+By \cref{lem:proj-fixed}, $\sigma(a)$ is preserved; by
+\cref{thm:3-3}, it is therefore Hegelian.
+\end{proof}
+
+\Cref{thm:3-3} is the cleanest piece of structural information the
+chapter contains. It says that within the Aufhebung axioms there is
+essentially one notion of ``fully arrived'' idea, expressible in
+four mutually equivalent ways: as a fixed point of $\sigma$, as a
+fixed point of $\nu$ at the identity (sedimentation), as a strict
+equality $a=\sigma(a)$, and as the closure under double negation
+(the Hegelian predicate). What this rules out is the dialectical
+hope, sometimes attributed to Hegel and routinely defended by his
+nineteenth-century followers, that there is a hierarchy of
+``higher'' fixed points reached only by repeated sublation:
+preserved-of-preserved is a non-trivial intensification of
+preserved, and so on. The theorem shows the hope is structurally
+empty in any closed Aufhebung structure: \emph{preserved is the
+ceiling}. Iterated dialectic does not raise an idea above
+$\sigma(a)$; only composition with new ideas does.
+
+This is the formal content of what the post-Hegelian critics
+\citep{Adorno1966,Derrida1967} attack and what the orthodox
+defenders \citep[in his more conservative passages]{Hegel1812}
+celebrate. The theorem is neutral on which party is right; it merely
+says that, whatever else is true, the four characterizations are
+equivalent and the iteration of $\sigma$ stabilizes immediately.
+What remains is the question of whether the closed Aufhebung is
+the right model for a given application, or whether the open
+$\eta$-deformed version is needed.
+
+\subsection*{Application corollaries}
+
+We collect four corollaries that interpret the theorems in
+applications-domain language; the formal restatements were verified
+in Lean as `corollary\_3\_1` through `corollary\_3\_4`. These are
+not merely decorative re-readings; they identify the algebraic
+content that a given applied theory must commit to in order to be
+expressible in the framework. A sociologist who endorses
+\cref{cor:sediment-practice} is implicitly endorsing axioms (A2)
+and (A4); a literary theorist who endorses
+\cref{cor:intertextual} is endorsing (A2) alone; a cognitive
+scientist who endorses \cref{cor:memory} is endorsing the full
+\cref{prop:pres-sed}, and so on. The corollaries thus serve as
+\emph{discriminators}: the user of the framework can locate which
+piece of the structure their theory does and does not commit to.
+
+\begin{corollary}[Sediment of practice]\label{cor:sediment-practice}
+In the social-science reading where an idea models a cultural
+practice, the sediment of any practice after one round of cultural
+reproduction equals its eventual sediment:
+$\sigma^{[n+1]}(a)=\sigma(a)$ for all $n\geq 0$.
+\end{corollary}
+
+\begin{proof}
+Special case of \cref{thm:closed-form}.
+\end{proof}
+
+\begin{corollary}[Intertextual stability]\label{cor:intertextual}
+In the humanistic reading where an idea models a literary text, the
+canonical residue is idempotent: $\sigma(\sigma(a))=\sigma(a)$.
+\end{corollary}
+
+\begin{proof}
+Axiom (A2).
+\end{proof}
+
+\begin{corollary}[Memory consolidation]\label{cor:memory}
+In the cognitive reading where $\sigma$ models long-term consolidation
+of a memory trace and $\nu$ models the labile transformation of
+recall, an idea $a$ is consolidated ($\sigma(a)=a$) iff its labile
+component is null ($\nu(a)=\unit$).
+\end{corollary}
+
+\begin{proof}
+\Cref{prop:pres-sed}.
+\end{proof}
+
+\begin{corollary}[Emergence invariant]\label{cor:emergence}
+In the emergence-theoretic reading where $\sigma(a)$ is the
+conserved core of an idea across phase transitions, $\sigma(a)$ is
+itself stable.
+\end{corollary}
+
+\begin{proof}
+$\sigma(a)$ is preserved by \cref{lem:proj-fixed}; preserved
+implies stable by \cref{cor:stable-equiv}.
+\end{proof}
+
+\section{The zoo: seven entries}\label{sec:aufheb-zoo}
+
+The Aufhebung decomposition of this chapter has been formulated in
+algebraic vacuum. We now exhibit seven historical positions that map
+onto the formalism, sometimes faithfully and sometimes
+illuminatingly askew.
+
+\subsection*{Hegel: Aufhebung literally}
+
+\textbf{Original claim.} In the \emph{Phenomenology of Spirit}
+\citep{Hegel1807}, Hegel introduces \emph{Aufhebung} as the operation
+by which a determinate consciousness, on encountering its own
+contradiction, does not perish but transforms itself, retaining as a
+\emph{moment} what it had been. The locus classicus is \S113 of the
+\emph{Phenomenology}: ``\emph{Das Aufgehobene} ist zugleich ein
+Aufbewahrtes,'' the sublated is simultaneously preserved. The
+\emph{Wissenschaft der Logik} \citep[\S185--\S190]{Hegel1812} systematizes
+this into the structural law that \emph{Sein, Nichts, Werden} (Being,
+Nothing, Becoming) form the first triad: Becoming is what
+\emph{aufhebt} the contradiction of Being and Nothing, preserving
+both as moments and elevating to a new determination.
+
+\textbf{Formal restatement.} The triad
+$(\mathrm{thesis},\mathrm{antithesis},\mathrm{synthesis})=(a,\nu(a),\sigma(a))$ of
+\cref{def:triad} is the algebraic image of Hegel's three moments,
+with the recovery law
+$\mathrm{synthesis}\compose\mathrm{antithesis}=\mathrm{thesis}$ (\cref{cor:triad-recovery})
+encoding the determinacy of the synthesis. Sein corresponds to a
+maximally preserved $a$, Nichts to its negation, and Werden to the
+canonical decomposition.
+
+\textbf{Status.} Faithful at the structural level. The chapter
+proves Theorem 3.1 (\cref{thm:3-1}), which is the algebraic version
+of Hegel's claim that every determinate idea is Aufhebbar. The
+sharpening lies in idempotence: Hegel speaks of an unbounded
+dialectical progression, but our axioms force first-step
+stabilization. The Hegelian dialectic is therefore embedded into
+the structure as a \emph{single} round, with longer chains modeled
+externally by composition.
+
+\textbf{Commentary.} The discrepancy between Hegel's open-ended
+progression and our \cref{thm:3-2} is the chapter's principal
+divergence from the source text. We read it as a successful
+formalization of Brandom's \citep{Brandom1994} reading, in which the
+Hegelian process is iterated by composing successive Aufhebungen
+rather than by iterating the projectors themselves.  A further point
+of fidelity worth marking: the \emph{Phenomenology}'s preface
+\citep[\S20]{Hegel1807} insists that the True is ``the whole''
+(\emph{das Ganze}), and that the whole is the result together
+with its becoming. Our \cref{cor:triad-recovery} says exactly that:
+the thesis is recovered \emph{from} the synthesis composed with the
+antithesis. The result and the becoming are not separated.
+
+\subsection*{Marx: dialectical inversion}
+
+\textbf{Original claim.} \citet{Marx1867} famously inverts Hegel:
+``With him [Hegel] it is standing on its head. It must be turned
+right side up again, if you would discover the rational kernel within
+the mystical shell.'' Marx's dialectic conserves the structural form
+of class antagonism ($\sigma$) while explicitly negating the
+ideological inversion that disguises it ($\nu$). The development of
+capitalism is read as a sequence of partial sublations in which the
+mode of production is preserved but the legal and ideological
+superstructure is critiqued and transformed.
+
+\textbf{Formal restatement.} Identify $\sigma(a)$ with the conserved
+relations of production embedded in idea $a$, and $\nu(a)$ with the
+critical inversion that reveals the ideological remainder. The Marxist
+move is to refuse the equation
+$\sigma(a)=a$: ideas are never \emph{merely} preserved; they always
+carry a non-trivial $\nu(a)\neq\unit$ component that critique must
+expose. \Cref{cor:mutual-exclusion} then formalizes the requirement
+that critique cannot be ``pure preservation''---an idea simultaneously
+in $\mathrm{Im}(\sigma)$ and $\mathrm{Im}(\nu)$ collapses to $\unit$,
+the politically vacuous identity.
+
+\textbf{Status.} Compatible. Marx's distinction between base and
+superstructure is captured by the projector pair $(\sigma,\nu)$;
+the critique of ideology is the explicit construction of $\nu(a)$
+where the bourgeois reading would set $\nu(a)=\unit$.
+
+\textbf{Commentary.} The Marxian inversion is structural: $\sigma$
+and $\nu$ are not symmetric in the political register. Marx
+privileges $\nu$ as the operation of critique, treating $\sigma$ as
+the residual ideology to be exposed. The formalism is symmetric in
+its axioms but asymmetric in its applications, exactly the role Marx
+assigns to dialectics versus political economy.  A subtler point
+concerns the famous footnote of \citet[postface to the second
+edition]{Marx1867}, where Marx distinguishes the dialectical
+\emph{method} from its Hegelian \emph{form}: the method is rational,
+the form is mystical. In our terms, Marx accepts axioms (A1)--(A5)
+on the structure $(\sigma,\nu)$ but rejects the metaphysical
+identification of $\sigma(a)$ with the ``inner essence'' of $a$.
+The preserved component is, for Marx, a contingent historical
+sediment, not an eternal eidetic core. \Cref{thm:closed-form} is
+read accordingly: the rapid stabilization of iterated $\sigma$
+captures the historical observation that ideological forms achieve a
+rigid stability surprisingly quickly, but says nothing about the
+\emph{content} of what gets stabilized.
+
+\subsection*{Adorno: negative dialectics}
+
+\textbf{Original claim.} \citet{Adorno1966} argues that the Hegelian
+synthesis is always premature: there is no stable third moment that
+genuinely reconciles thesis and antithesis. The rational task is to
+preserve the negation as negation, refusing the move to a closed
+$\mathrm{synthesis}$. Negative dialectics is dialectics minus the closure of
+$\eta$.
+
+\textbf{Formal restatement.} Adorno's stance translates to a refusal
+of \cref{cor:triad-recovery}: the triad does not in fact ``recover''
+$a$ as $\mathrm{synthesis}\compose\mathrm{antithesis}$; instead $\eta$ is
+indefinitely deferred. Within our axioms, this corresponds to working
+in a quotient where (A1) holds only up to a non-trivial residue
+$r(a)\in\Ideas$ that is never zero. The Adornian programme is then
+the formal study of the cohomological obstruction to (A1).
+
+\textbf{Status.} Refuted under axiom (A1), illuminated under its
+weakening. The strict Aufhebung structure of
+\cref{def:aufheb-struct} satisfies (A1) by fiat; Adorno's position
+is that this fiat is unjustified for substantive ideas. Our
+foundational \cref{ch:foundations} \emph{does} introduce the
+$\eta$-component as an independent piece of data, so Adorno's
+position can be rigorously expressed by demanding $\eta\neq 0$
+generically and treating the closed Aufhebung structure as the
+limiting, idealized case.
+
+\textbf{Commentary.} The chapter's strict treatment of $\sigma+\nu$
+makes Adorno look like the algebraist of \emph{deformation theory}:
+the synthesis is the always-deferred limit, never the present
+quotient.  This is not the language Adorno would have used, but it
+captures, we think, the structural content of his polemic against
+the ``identity-thinking'' (\emph{Identit\"atsdenken}) of
+classical dialectics. Adorno's central charge is that any closed
+synthesis covers over a non-identity that resists subsumption; the
+deferred $\eta$ of our framework is precisely the
+non-identity that the closed Aufhebung suppresses. The Adornian
+\emph{constellation}---a configuration of concepts that illuminates
+its object without subsuming it---has a tidy formal counterpart: a
+finite set $\{a_1,\ldots,a_k\}\subset\Ideas$ no two of which
+$\simeq_{\text{A}}$-equivalence collapses to the same orbit, but
+whose joint mediated forms $\mathrm{med}(a_i,a_j)$ produce a non-trivial
+$\eta$-residue that articulates the object without identifying with
+it.
+
+\subsection*{Fauconnier and Turner: conceptual blending}
+
+\textbf{Original claim.} \citet{FauconnierTurner2002} propose that
+human thought routinely produces a \emph{blended space} from two (or
+more) input mental spaces by selectively projecting structure from
+each input into a new space that has emergent structure not present
+in either. The blend is more than the union; it is a creative
+synthesis.
+
+\textbf{Formal restatement.} Identify the two input spaces with
+$\sigma(a)$ and $\nu(b)$; the mediated form
+$\mathrm{med}(a,b)=\sigma(a)\compose\nu(b)$ (\cref{def:mediated}) is the
+blend space. The selective projection of structure corresponds to
+applying $\sigma$ to one input (preserve essential frame structure)
+and $\nu$ to the other (transform constituent details). The emergent
+structure of the blend is the residue $\eta$ of the mediated
+composition---i.e.\ the part of $\mathrm{med}(a,b)$ not predictable from
+$(\sigma(a),\nu(b))$ pointwise.
+
+\textbf{Status.} Faithful and predictive. \Cref{lem:mediation}
+specifies the algebraic laws of the blend: it recovers the input
+when both factors are equal ($\mathrm{med}(a,a)=a$), it degenerates to
+the preserved component when one input is the identity, and it
+satisfies a weak associativity through the projectors.
+
+\textbf{Commentary.} Fauconnier and Turner do not formalize their
+blends. The chapter's interpretation supplies a precise
+specification: the blend's \emph{compositional skeleton} is fixed by
+$(\sigma,\nu)$, and the \emph{emergent} content is exactly the
+$\eta$-residue. This is, to our knowledge, the first algebraic
+account of conceptual blending that derives the blend's existence
+from the same axioms as the Hegelian dialectic.  Two predictions
+follow. First, blends inherit the idempotence of the projectors:
+once one has projected the input frames, further projection is idle
+(\cref{thm:3-2}); this matches the cognitive observation that fully
+elaborated blends do not benefit from further re-projection of their
+inputs. Second, the injectivity of $\mathrm{aufheb}$
+(\cref{cor:aufheb-injective}) implies that two distinct blends with
+the same ``frame projection'' and same ``detail transformation''
+must coincide as ideas; hence cognitive distinctness of blends with
+the same projector signature requires non-trivial $\eta$, which is
+the blend's emergent structure in the Fauconnier--Turner sense.
+
+\subsection*{Koestler: bisociation}
+
+\textbf{Original claim.} \citet{Koestler1964} characterizes the
+creative act---humour, scientific discovery, art---as the
+\emph{bisociation} of a single situation with two normally
+incompatible matrices of thought. The punchline of a joke, the
+\emph{Eureka} of an insight, and the metaphor of a poem all consist
+in the sudden recognition of a non-trivial relationship between two
+otherwise unrelated frames.
+
+\textbf{Formal restatement.} A bisociation is a non-trivial $\eta$:
+two ideas $a$ and $b$ whose individual contributions $(\sigma(a),
+\nu(b))$ are predictable, but whose composition
+$\sigma(a)\compose\nu(b)$ produces a residue not algebraically
+derivable from $(\sigma(a),\nu(b))$ alone. The creative act is the
+realization that for some pair $(a,b)$ the mediated form
+$\mathrm{med}(a,b)$ has $\eta\neq 0$ in a structurally surprising
+location.
+
+\textbf{Status.} Compatible and sharpenable. Koestler's three
+domains (humour, science, art) correspond to three regimes of the
+$\eta$-component: humour requires $\eta$ to be \emph{abrupt}
+(equation 1.7's discontinuity); science requires $\eta$ to be
+\emph{persistent} (a stable new theorem); art requires $\eta$ to be
+\emph{aesthetically resonant} (high $|\rho|$).
+
+\textbf{Commentary.} The framework predicts what Koestler asserted
+intuitively: that creativity is not in the inputs but in the
+\emph{joint} of the inputs. Our \cref{cor:aufheb-injective} ensures
+that the joint is uniquely determined by the inputs in any closed
+Aufhebung structure; bisociation requires structures in which the
+closure fails, i.e.\ structures with non-trivial $\eta$.  Koestler
+makes much of the \emph{suddenness} of creative insight (the
+``aha'' moment), and our formalism offers a structural reason: the
+$\eta$-residue is, for given projector outputs, an algebraic constant
+of the structure; recognizing it requires no temporal process and
+hence presents itself instantaneously. The phenomenology of
+discontinuity is the cognitive shadow of an algebraic discreteness.
+Koestler's insistence that the same structure underlies humour,
+science, and art is also recovered: in our framework all three are
+reduced to the same operation $(a,b)\mapsto\mathrm{med}(a,b)$ followed
+by inspection of the residue, with the three domains differing only
+in the kind of $\eta$ they reward.
+
+\subsection*{Deleuze: virtual problems}
+
+\textbf{Original claim.} \citet{Deleuze1968} proposes that ideas, in
+the Kantian transcendental sense, are not concepts but
+\emph{problems}: structured fields of differential relations that
+generate solutions without being identical with any of them. A
+problem is virtual; its solutions actualize partially but never
+exhaustively. The problem persists across all its solutions as their
+common generative structure.
+
+\textbf{Formal restatement.} A Deleuzean virtual problem is precisely
+a \emph{Hegelian} idea in our sense: $\nu(\nu(a))=\unit$. Equivalently
+(by \cref{thm:3-3}) it is a fixed point of $\sigma$, i.e.\ an idea
+that has no labile component to actualize. Solutions of the problem
+are then ideas $b$ such that $\sigma(b)=a$; they share $a$'s
+preserved core and add their own $\nu(b)$.
+
+\textbf{Status.} Faithful. \Cref{cor:sigma-heg} guarantees that for
+every idea $a$ the preserved component $\sigma(a)$ is Hegelian, so
+every idea has an associated virtual problem; the function
+$\sigma:\Ideas\to\{\text{Hegelian ideas}\}$ is the Deleuzean
+\emph{problematization} operator.
+
+\textbf{Commentary.} Deleuze's claim that problems persist across
+their solutions is exactly \cref{thm:3-2} (idempotent stabilization)
+applied to the projector $\sigma$: once an idea has been
+problematized, further problematization adds nothing. The virtual
+field is closed under one application of $\sigma$.  A second
+correspondence is more striking. Deleuze argues
+\citep[ch.~IV]{Deleuze1968} that the actualization of a virtual
+problem is a process of \emph{differenciation}---the production of
+distinct solutions out of a common generative problem---and that
+this process is asymmetric with respect to the inverse operation of
+\emph{differentiation}, which moves from solutions back to problems.
+The asymmetry of $\sigma$ and $\nu$ in our axioms (preserved on the
+left, negated on the right) is, structurally, the same asymmetry: the
+preserved component is the problem, the negated component is the
+deviation by which a particular solution actualizes it, and the two
+do not commute.
+
+\subsection*{Derrida: différance and the deferral of $\eta$}
+
+\textbf{Original claim.} \citet{Derrida1967} introduces
+\emph{différance}---a coined word combining ``difference'' and
+``deferral''---to name the play of signification that prevents any
+sign from achieving final, present meaning. Meaning is always
+displaced: each signifier defers to others, and full presence is
+indefinitely postponed. There is no closed synthesis of a sign with
+its trace.
+
+\textbf{Formal restatement.} Derrida's position is the structural
+denial of \cref{thm:quotient-collapse}: the aufheb pair
+$\mathrm{aufheb}(a)=(\sigma(a),\nu(a))$ does not in general suffice to
+reconstruct $a$, because the act of reconstruction
+$\sigma(a)\compose\nu(a)$ itself produces a trace that is then
+written into a new $a'\neq a$. Différance is the refusal of the
+synthesis $\eta$ to terminate.
+
+\textbf{Status.} Refuted under axiom (A1), reframed under its
+weakening. As with Adorno, the strict Aufhebung structure forces
+$\eta$ to be implicit and immediately closed; Derrida's claim is that
+$\eta$ has its own dynamics. The framework accommodates this by
+treating closed Aufhebung as a limiting idealization and the open
+case as the generic phenomenon.
+
+\textbf{Commentary.} Derrida and Adorno occupy structurally similar
+positions in our framework: both refuse the closure of (A1). They
+diverge on what to do with the residue: Adorno treats it as a
+political-philosophical resource to be defended; Derrida treats it
+as a textual-graphic effect to be tracked across signifying chains.
+The chapter offers no verdict between them; both are formal
+articulations of the open-Aufhebung regime in which (A1) holds only
+up to a non-trivial $\eta$.  We add one technical observation. The
+\emph{trace} of \citet{Derrida1967}, the mark of an absent term that
+survives in a present sign, is naturally modeled as the difference
+$a-\sigma(a)\compose\nu(a)$ in the free vector space on $\Ideas$.
+Under axiom (A1) this difference vanishes; weakening (A1) to
+``vanishes modulo $\ker\rho$'' (\cref{thm:uniqueness}) lets the trace
+live, but only in the directions in which $\rho$ does not see it.
+Différance is then exactly the kernel of $\rho$: the part of an idea
+that no resonance test can detect, but that the algebra demands as
+the residue of incomplete decomposition. This is a precise sense in
+which Derrida is right that signification leaves a trace that
+representation cannot capture.
+
+\bigskip
+
+The seven entries traverse two centuries of dialectical thought and
+reduce them, with varying degrees of fidelity, to predicates and
+operations on a single algebraic structure. The mathematics has not
+displaced the philosophy; it has supplied a notation in which the
+philosophical disagreements become \emph{structural}, hence
+discussable. Hegel and Marx differ on the political asymmetry of
+$\sigma$ versus $\nu$. Adorno and Derrida differ from Hegel on the
+closure of (A1). Fauconnier--Turner and Koestler agree on the
+non-triviality of $\eta$ but disagree on whether to call its
+products ``blends'' or ``bisociations.'' Deleuze names the
+$\sigma$-fixed points and calls them virtual problems. The next
+chapter takes up the emergence cocycle $\omega$, which measures
+\emph{how badly} (A1) can fail when one drops it---and so makes the
+Adornian and Derridean positions algebraically precise.
+
+We close with a methodological observation. The chapter has shown
+that a five-axiom structure suffices to recover, in a recognizable
+algebraic form, the principal moments of two centuries of
+dialectical theorizing. This is a small piece of evidence for the
+broader programmatic claim of Idea Theory, that the apparently
+incommensurable vocabularies of philosophy, sociology, cognitive
+science, and literary theory are unified at the level of structural
+operations on a common algebraic object. The Aufhebung structure of
+this chapter is one such common object; the resonance pairing of
+\cref{ch:foundations} is another; the emergence cocycle of the next
+chapter is a third. Each is a piece of structure that any sufficiently
+substantive theory of ideas must, on this hypothesis, contain---if
+only implicitly. Making the implicit explicit is the work of the
+formalism. The work of the zoo is to verify that the explicit
+formalism does in fact reconstruct what the original theories were
+trying to say. The reader who has followed the chapter to this point
+should now be in a position to recognize, in the next two chapters'
+treatment of the cocycle $\omega$ and the curvature $\kappa$, the
+same pattern of disagreement and agreement that has organized the
+present one: a small set of axioms, a battery of elementary lemmas
+deciding everything that the axioms entail, and a zoo of historical
+positions whose relationship to the axioms is now structural rather
+than rhetorical.

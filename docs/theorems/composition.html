@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 1: Composition — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Theorem 1: Composition</h1>
+<div class="thm"><span class="thm-label">Theorem 1.</span> Let \((\mathcal{I},\circ,e)\) satisfy associativity and the two-sided identity axiom. Then (i) \(e\) is unique; (ii) for any \(a\in\mathcal{I}\) with a two-sided inverse \(a^{-1}\), the maps \(x\mapsto a\circ x\) and \(x\mapsto x\circ a\) are bijections.</div>
+
+<h2>Proof sketch</h2>
+<p>(i) Suppose \(e'\) is also a two-sided identity. Then \(e = e\circ e' = e'\). (ii) If \(a\circ x = a\circ y\), then \(a^{-1}\circ a\circ x = a^{-1}\circ a\circ y\), so \(x=y\). The other side is symmetric.</p>
+
+<p>Verified as <code>IdeaTheory.Theorems1.composition_monoid</code> and <code>IdeaTheory.Theorems1.cancellation_invertible</code>.</p>
+
+<h2>Zoo entries that depend on this</h2>
+<ul><li><a href="../zoo/philosophy/locke-simple-complex.html">Locke (simple/complex ideas)</a></li>
+<li><a href="../zoo/analytic/frege-sense.html">Frege</a></li></ul>
+<p><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>
