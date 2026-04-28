@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foundations – Lean – Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Idea Theory</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../formalism/index.html">Formalism</a>
+      <a href="../theorems/index.html">Theorems</a>
+      <a href="../chapters/index.html">Book</a>
+      <a href="../zoo/index.html">Zoo</a>
+      <a href="../literature/index.html">Literature</a>
+      <a class="active" href="index.html">Lean</a>
+      <a href="../about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<main class="content">
+  <div class="hero">
+    <h1>Foundations</h1>
+    <p class="lede">The <code>IdeaTheoryStructure</code> type class, three core axioms, and nine foundational theorems — all machine-verified.</p>
+  </div>
+
+  <p>
+    The <strong>Foundations</strong> module (<a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Foundations.lean"><code>IdeaTheory/Foundations.lean</code></a>) establishes the primitive algebraic structure on which every other module is built. The key insight is that ideas form a <em>monoid</em>: they can be combined (via an associative binary operation) and there is a neutral element representing the absence of any idea. Three axioms suffice to pin down this structure; all subsequent theorems follow by pure logic from those axioms.
+  </p>
+
+  <h2>The Core Structure</h2>
+
+  <p>
+    The type class <code>IdeaTheoryStructure</code> packages a carrier type \(\alpha\) together with a binary operation \(\star : \alpha \to \alpha \to \alpha\) and a distinguished element \(e \in \alpha\), subject to three axioms.
+  </p>
+
+  <pre><code class="language-lean">class IdeaTheoryStructure (α : Type*) where
+  op    : α → α → α
+  ident : α
+  assoc    : ∀ a b c : α, op (op a b) c = op a (op b c)
+  id_left  : ∀ a : α, op ident a = a
+  id_right : ∀ a : α, op a ident = a</code></pre>
+
+  <h2>Axioms</h2>
+
+  <div class="defn">
+    <span class="thm-label">A1 — Associativity</span>
+    <p>For all ideas \(a, b, c \in \alpha\),
+    \[ (a \star b) \star c \;=\; a \star (b \star c). \]
+    Combining ideas is order-of-bracketing-independent: sequential composition of three ideas is unambiguous.</p>
+  </div>
+
+  <div class="defn">
+    <span class="thm-label">A2 — Left Identity</span>
+    <p>There exists a distinguished element \(e \in \alpha\) such that for all \(a \in \alpha\),
+    \[ e \star a \;=\; a. \]
+    The neutral idea \(e\) acts as a left unit: composing any idea on its right returns that idea unchanged.</p>
+  </div>
+
+  <div class="defn">
+    <span class="thm-label">A3 — Right Identity</span>
+    <p>For all \(a \in \alpha\),
+    \[ a \star e \;=\; a. \]
+    The neutral idea \(e\) is also a right unit. Together A2 and A3 make \(e\) a two-sided identity, and together with A1 they make \((\alpha, \star, e)\) a <em>monoid</em>.</p>
+  </div>
+
+  <h2>Foundational Theorems</h2>
+
+  <div class="thm">
+    <span class="thm-label">T1 — Uniqueness of the identity</span>
+    <p>If \(e' \in \alpha\) satisfies \(e' \star a = a\) for all \(a\), then \(e' = e\).
+    \[ \bigl(\forall a.\; e' \star a = a\bigr) \;\Longrightarrow\; e' = e. \]
+    </p>
+    <p><em>Proof sketch.</em> Apply the hypothesis to \(a = e\) to get \(e' \star e = e\). By A3, \(e' \star e = e'\). Hence \(e' = e\). ∎</p>
+  </div>
+
+  <pre><code class="language-lean">theorem ident_unique (e : α) (h : ∀ a, op e a = a) : e = ident := by
+  have := h ident
+  rw [id_right] at this
+  exact this</code></pre>
+
+  <div class="thm">
+    <span class="thm-label">T2 — Left cancellation at the identity</span>
+    <p>The operation \(\star\) is left-cancellative when the left argument is \(e\):
+    \[ e \star a = e \star b \;\Longrightarrow\; a = b. \]
+    </p>
+    <p><em>Proof sketch.</em> Rewrite both sides using A2 (\(e \star x = x\)); the hypothesis becomes \(a = b\). ∎</p>
+  </div>
+
+  <pre><code class="language-lean">theorem op_ident_left_cancel {a b : α}
+    (h : op ident a = op ident b) : a = b := by
+  rw [id_left, id_left] at h
+  exact h</code></pre>
+
+  <p class="refs" style="margin-top:2em;">
+    The remaining structural theorems (identity normalization, monoid word-problem reductions) are derived throughout the extension modules as they are needed. See also the <a href="../formalism/index.html">Formalism</a> section for the mathematical context and the <a href="../zoo/index.html">Zoo</a> for worked examples of concrete <code>IdeaTheoryStructure</code> instances.
+  </p>
+
+  <h2>What These Axioms Buy</h2>
+
+  <p>
+    The monoid axioms may appear minimal, but they are exactly what is needed for the five extension modules to function. The associativity axiom underlies every aggregation result in Diffusion and RecombinantGrowth — it ensures that population-level compositions are bracket-independent. The identity axioms make the "null idea" well-behaved in GameTheory (the <code>identProfile</code> equilibrium) and in MeaningGames (silent speakers contribute nothing to the effective meaning). Strong results like the Wittgenstein–Nash existence theorem ultimately rest on the ability to freely insert and remove the identity element.
+  </p>
+
+  <h2>Navigation</h2>
+  <div class="tiles">
+    <a class="tile" href="game-theory.html">
+      <h3>→ Game Theory</h3>
+      <p>Ideas as strategies; Nash equilibria built on this monoid structure</p>
+    </a>
+    <a class="tile" href="diffusion.html">
+      <h3>→ Diffusion</h3>
+      <p>Cyclic population dynamics over the monoid carrier</p>
+    </a>
+    <a class="tile" href="index.html">
+      <h3>↑ Lean Overview</h3>
+      <p>All six modules with theorem counts</p>
+    </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p>
+</footer>
+
+</body>
+</html>

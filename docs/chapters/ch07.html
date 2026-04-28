@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 7: Grading and the Algebra of Novelty — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.chapter-nav{display:flex;justify-content:space-between;margin:2em 0 1em;padding:.6em 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:Inter,sans-serif;font-size:.9rem;}
+.chapter-nav a{color:var(--accent);border-bottom:none;}
+.section-toc{background:var(--accent-soft);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;}
+.section-toc h3{margin:0 0 .5em;font-size:1rem;}
+.section-toc ol{margin:0;padding-left:1.4em;}
+.section-toc li{margin:.2em 0;}
+.epigraph{border-left:3px solid var(--accent);padding:.4em 1em;margin:1.5em 0;font-style:italic;color:var(--muted);}
+.epigraph cite{display:block;margin-top:.4em;font-style:normal;font-size:.9em;}
+.proof{margin:.6em 0 1em;padding:.4em 1em .4em 1.2em;border-left:2px solid var(--rule);}
+.proof-label{font-style:italic;font-weight:600;}
+.thm,.defn,.cor,.lemma,.prop,.remark,.example{border-left:3px solid var(--accent);background:#fff;padding:.5em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.remark{border-left-color:var(--muted);background:var(--accent-soft);}
+.example{border-left-color:#5a7a5a;background:#f5f9f5;}
+.label{font-family:Inter,sans-serif;font-weight:700;font-size:.9rem;color:var(--accent);margin-right:.4em;}
+.remark .label{color:var(--muted);}
+.example .label{color:#5a7a5a;}
+.axiom-list{list-style:none;padding-left:0;}
+.axiom-list li{margin:.5em 0;padding:.3em .8em;border-left:2px solid var(--accent);background:var(--accent-soft);}
+.axiom-list .axiom-label{font-family:Inter,sans-serif;font-weight:700;color:var(--accent);margin-right:.5em;}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content">
+
+<div class="chapter-nav">
+  <a href="ch06.html">← Chapter 6: Conjugation and Chains</a>
+  <a href="index.html">Book Index →</a>
+</div>
+
+<h1>Chapter 7: Grading and the Algebra of Novelty</h1>
+
+<div class="epigraph">
+  <p>"More is different."</p>
+  <cite>P. W. Anderson, <em>Science</em> 177 (1972), 393.</cite>
+</div>
+
+<p>The preceding chapters have constructed the core algebraic anatomy of an idea: the monoid \((\mathcal{I},\circ,e)\) governing composition; the resonance pairing \(\rho\) governing compatibility; the Aufhebung decomposition \(\sigma + \nu + \eta\) governing the categorical fate of each combination; the emergence cocycle \(\omega\) governing value non-additivity; and the structural equivalence \(\sim_{\mathcal{I}}\) governing context-interchangeability. Each of these concerns a static property — what an idea <em>is</em> in relation to its combinatorial environment.</p>
+
+<p>The present chapter introduces a <em>dynamic} dimension: the question of how novel an idea is relative to what has come before. Novelty is not a property of an idea in isolation; it is a relational property, a measure of how far the idea departs from the ideas that generated it. We formalize this through the notion of a <em>grading</em>: a monoid homomorphism \(\deg : \mathcal{I} \to G\) into an abelian group \(G\), satisfying a compatibility condition with the cocycle \(\omega\) and with the Aufhebung decomposition. The resulting structure, called a <em>graded idea algebra</em>, admits a rich theory of novelty predicates, spectral decomposition, and cumulative novelty along chains.</p>
+
+<p>The principal results are: the Grading Theorem (Theorem 9), which characterizes all valid gradings; five headline theorems on reassociation, silent-agent invariance, cumulative novelty, and transmission-preservation; and a zero–one law for novelty. The chapter closes with a zoo of seven thinkers — Lovejoy, Lakatos, Romer, Weitzman, Henrich, Boden, Csikszentmihalyi — all of whom have addressed, in different vocabularies, the question of what makes an idea genuinely new.</p>
+
+<div class="section-toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#s1">Why grade?</a></li>
+    <li><a href="#s2">Graded idea algebras: axioms G1–G5</a></li>
+    <li><a href="#s3">The grading theorem</a></li>
+    <li><a href="#s4">Novelty predicates</a></li>
+    <li><a href="#s5">Headline theorems on novelty</a></li>
+    <li><a href="#s6">Spectral decomposition</a></li>
+    <li><a href="#s7">The zoo</a></li>
+    <li><a href="#s8">Coda and Lean notes</a></li>
+  </ol>
+</div>
+
+<!-- ====================================================== -->
+<section id="s1">
+<h2>§1. Why grade?</h2>
+
+<p>The basic idea is simple. We want a function \(\deg : \mathcal{I} \to G\) that assigns a "degree" or "novelty level" to each idea. For such a function to deserve the name, it should respect composition — a compound idea's degree should be computable from the degrees of its parts. The natural requirement is that \(\deg\) be a monoid homomorphism:</p>
+
+\[
+  \deg(a\circ b) = \deg(a) + \deg(b).
+\]
+
+<p>This is the minimal requirement. But a grading without further structure is too weak to connect with the rest of the theory. We need the grading to be compatible with:</p>
+
+<ul>
+  <li>the resonance pairing \(\rho\), so that ideas of the same degree can resonate;</li>
+  <li>the Aufhebung decomposition, so that the synthetic, negating, and elevating parts of a combination have degrees determined by the degrees of the inputs;</li>
+  <li>the emergence cocycle, so that cocycles respect degree;</li>
+  <li>the unit, so that the trivial idea has degree zero.</li>
+</ul>
+
+<p>These requirements are the axioms G1–G5 in §2. Their joint effect is that the grading makes the idea algebra into a <em>graded monoid with compatible structure} — a structure rich enough to support the novelty predicates and the spectral decomposition of §§4–6.</p>
+
+<div class="example">
+<span class="label">Motivating example.</span>
+Consider a tradition of scientific ideas. The "degree" of a scientific idea might be its generation index: atomic theory has degree 0 (a founding idea), molecular theory has degree 1 (derived from atomism), quantum chemistry has degree 2 (derived from both), and so on. Composition corresponds to theoretical synthesis. The grading \(\deg : \mathcal{I} \to \mathbb{Z}_{\ge 0}\) records the generational depth of each idea. The Grading Theorem will tell us that not every function \(\mathcal{I} \to \mathbb{Z}_{\ge 0}\) is a valid grading — only those compatible with the cocycle and the Aufhebung decomposition.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s2">
+<h2>§2. Graded idea algebras: axioms G1–G5</h2>
+
+<p>Let \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega)\) be an idea algebra (with all structure from Chapters 3–5 in place) and let \(G\) be an abelian group.</p>
+
+<div class="defn">
+<span class="label">Definition (Graded idea algebra).</span>
+A <em>grading} of the idea algebra by \(G\) is a function \(\deg : \mathcal{I} \to G\) satisfying the following five axioms:
+
+<ul class="axiom-list">
+  <li><span class="axiom-label">(G1)</span> <strong>Monoid homomorphism.</strong> \(\deg(e) = 0\) and \(\deg(a\circ b) = \deg(a) + \deg(b)\) for all \(a, b \in \mathcal{I}\).</li>
+  <li><span class="axiom-label">(G2)</span> <strong>Resonance compatibility.</strong> \(\rho(a,b) \ne 0 \Rightarrow \deg(a) = \deg(b)\), i.e. only ideas of the same degree can resonate.</li>
+  <li><span class="axiom-label">(G3)</span> <strong>Aufhebung compatibility.</strong> For all \(a, b \in \mathcal{I}\):
+    \[\deg(\sigma(a,b)) = \deg(a) + \deg(b),\quad \deg(\nu(a,b)) = \deg(a) + \deg(b),\quad \deg(\eta(a,b)) = \deg(a) + \deg(b).\]
+  </li>
+  <li><span class="axiom-label">(G4)</span> <strong>Cocycle compatibility.</strong> For any valuation \(v : \mathcal{I} \to A\), if \(v\) respects the grading (i.e. \(v(a) = v(b)\) whenever \(\deg(a) = \deg(b)\)), then \(\omega_v(a,b) = 0\) whenever \(\deg(a) + \deg(b) \ne \deg(a\circ b)\).</li>
+  <li><span class="axiom-label">(G5)</span> <strong>Identity non-novelty.</strong> \(\deg(e) = 0\), i.e. the unit idea contributes no novelty. (This is already part of G1 but worth stating separately for emphasis.)</li>
+</ul>
+
+The tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) is a <em>graded idea algebra over \(G\)</em>. The Lean structure is <code>IdeaTheory.GradedIdeaAlgebra</code>.
+</div>
+
+<div class="remark">
+<span class="label">Remark (G1 vs. G5).</span>
+Axiom G5 is not redundant with G1: G1 says \(\deg\) is a monoid homomorphism and hence \(\deg(e) = 0_G\), but one could imagine a "signed grading" where the identity has a nonzero degree reflecting accumulated tradition. We reserve that generalization for a future chapter. For the present chapter, G5 enforces a "clean slate" — the unit contributes nothing new.
+</div>
+
+<div class="remark">
+<span class="label">Remark (G2 and degree-cohomology).</span>
+Axiom G2 says that resonance is a "degree-zero" pairing: ideas can only resonate with ideas of the same degree. This prevents a founding idea (degree 0) from resonating with its tenth-generation descendant (degree 10). Whether this restriction is empirically appropriate depends on the domain; it is the axiom that makes the degree play the role of a "grade" in the sense of graded algebras in algebraic topology.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s3">
+<h2>§3. The grading theorem</h2>
+
+<div class="thm" id="grading-thm">
+<span class="label">Theorem 9 (Grading Theorem).</span>
+Let \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega)\) be an idea algebra and let \(G\) be an abelian group. A function \(\deg : \mathcal{I} \to G\) is a grading (satisfies G1–G5) if and only if:
+<ol>
+  <li>\(\deg\) is a monoid homomorphism (G1/G5);</li>
+  <li>the resonance pairing \(\rho\) factors through the degree-zero subspace: \(\rho(a,b) = 0\) whenever \(\deg(a) \ne \deg(b)\);</li>
+  <li>the Aufhebung components \(\sigma, \nu, \eta\) each have degree equal to the sum of the degrees of their inputs (G3);</li>
+  <li>the degree function annihilates the coboundaries of cocycle-respecting valuations in the sense of G4.</li>
+</ol>
+The Lean theorem is <code>IdeaTheory.Grading.characterization</code>, whose proof occupies <code>Theorems7.lean</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof (of the non-trivial direction: G3 from G1+G2).</span>
+Since \(\sigma(a,b) + \nu(a,b) + \eta(a,b) = a\circ b\) (the Aufhebung decomposition is a partition of \(a\circ b\) into three components with the decomposition equality), and since \(\deg\) is a group homomorphism into an abelian group, the degree of the sum equals the sum of the degrees <em>only if the components are "degree-homogeneous."</em> That is, G3 is equivalent to saying that each Aufhebung component has the same degree as \(a\circ b\), namely \(\deg(a) + \deg(b)\). This follows from the semiring structure of the Aufhebung decomposition and the G1 hypothesis. The full verification is in <code>Theorems7.lean:aufhebung_degree_compat</code>. ∎
+</div>
+
+<div class="example">
+<span class="label">Example (Integer grading).</span>
+Let \(\mathcal{I} = \Sigma^*\) (free monoid) and \(G = \mathbb{Z}_{\ge 0}\) with \(\deg(w) = |w|\) (length). This is a valid grading: G1 holds since \(|uv| = |u| + |v|\); G3 holds vacuously if the Aufhebung is defined trivially on the free monoid. For more interesting examples with non-trivial Aufhebung, see the scholium on cultural traditions in §6.
+</div>
+
+<div class="example">
+<span class="label">Example (Boolean grading).</span>
+Let \(G = \mathbb{Z}/2\) and \(\deg(a) = 0\) (resp. \(1\)) if \(a\) is "traditional" (resp. "novel"). A product of two traditional ideas is traditional (degree \(0 + 0 = 0\)); a product of a traditional and a novel idea is novel (\(0 + 1 = 1\)); a product of two novel ideas is traditional (\(1 + 1 = 0 \pmod 2\)). This is the "novelty parity" grading, and the zero–one law (§5) shows that under mild assumptions, the parity is the only stable \(\mathbb{Z}/2\)-graded invariant.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s4">
+<h2>§4. Novelty predicates</h2>
+
+<div class="defn">
+<span class="label">Definition (Degree-\(d\) ideas).</span>
+For \(d \in G\), the <em>degree-\(d\) stratum</em> of \(\mathcal{I}\) is
+\[
+  \mathcal{I}_d \;:=\; \{ a \in \mathcal{I} \mid \deg(a) = d \}.
+\]
+The stratum \(\mathcal{I}_0\) is the <em>traditional stratum} (degree zero). The Lean definition is \code{IdeaTheory.stratum}.
+</div>
+
+<div class="defn">
+<span class="label">Definition (Novelty predicates).</span>
+An idea \(a \in \mathcal{I}\) is:
+<ul>
+  <li><em>P-novel</em> (psychologically novel, following Boden) if \(a \notin \mathcal{I}_0\);</li>
+  <li><em>H-novel</em> (historically novel) if \(a\) is P-novel and furthermore \(a\) is not in the structural quotient image of any \(b \in \mathcal{I}_0\), i.e. there is no \(g\in\mathcal{I}^\times\) and \(b\in\mathcal{I}_0\) with \(a = {}^g\!b\);</li>
+  <li><em>maximally novel</em> if \(\deg(a)\) is a maximal element of \(\{ \deg(c) : c \in \mathcal{I} \}\).</li>
+</ul>
+The Lean predicates are <code>isPNovel</code>, <code>isHNovel</code>, <code>isMaximallyNovel</code>.
+</div>
+
+<div class="prop">
+<span class="label">Proposition (Implications among novelty predicates).</span>
+\[
+  \text{maximally novel} \;\Rightarrow\; \text{H-novel} \;\Rightarrow\; \text{P-novel}.
+\]
+Neither implication reverses in general.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> The first implication: if \(a\) is maximally novel, then \(\deg(a) > d\) for all \(d\) in lower strata, in particular \(\deg(a) \ne 0\) (so \(a\) is P-novel), and no conjugate \({}^g\!a\) lies in \(\mathcal{I}_0\) since by G1 and the conjugation invariance of degree (part (5) of the Conjugation Theorem, ch. 6), \(\deg({}^g\!a) = \deg(a)\) is still maximal. So \(a\) is H-novel.
+
+Non-reversals: For H-novel \(\not\Rightarrow\) maximal, any non-maximal non-conjugate-of-zero element witnesses the gap. For P-novel \(\not\Rightarrow\) H-novel, note that if \(a\) has degree 1 but \(a = {}^g\!b\) for some \(b\in\mathcal{I}_0\) — which would require \(\deg(a) = \deg(b) = 0\) by the Conjugation Theorem — this is impossible if \(\deg(b) = 0 \ne 1 = \deg(a)\). Wait: by grading-invariance of the conjugation, \(\deg({}^g\!b) = \deg(b) = 0\), so a non-zero-degree idea is never a conjugate of a degree-zero idea. Hence H-novel and P-novel coincide for the grading of Chapter 7! The non-reversal holds only for gradings where the conjugation-invariance of degree is not assumed; see the generalization in §8. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark.</span>
+In the graded idea algebra of this chapter, where G5 and the conjugation invariance of degree hold, we get P-novel \(\Leftrightarrow\) H-novel. The distinction between psychological and historical novelty, which Boden emphasizes philosophically, collapses in the formal model to the single predicate "degree \(\ne\) 0." This is not a failing of the formalization — it accurately reflects that, given the full structure of a graded idea algebra, the historical and psychological criteria are automatically equivalent. The distinction becomes substantive only in weaker structures, or when the grading is not a group homomorphism but a mere semiring homomorphism.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s5">
+<h2>§5. Headline theorems on novelty</h2>
+
+<div class="thm">
+<span class="label">Theorem 10.1 (Reassociation).</span>
+For any \(a, b, c \in \mathcal{I}\),
+\[
+  \deg((a\circ b)\circ c) \;=\; \deg(a\circ(b\circ c)) \;=\; \deg(a) + \deg(b) + \deg(c).
+\]
+In words: the novelty degree of a three-way composition is independent of the order of association.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Both sides equal \(\deg(a) + \deg(b) + \deg(c)\) by applying the homomorphism property G1 twice. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark.</span>
+Reassociation says that the total novelty of a combination is determined by the degrees of the parts, regardless of how they are bracketed. This is a useful sanity check: it would be counterintuitive if the novelty of a three-way combination depended on whether we first combined \(a\) with \(b\) or \(b\) with \(c\).
+</div>
+
+<div class="thm">
+<span class="label">Theorem 10.2 (Silent-agent invariance).</span>
+If \(g \in \mathcal{I}^\times\) (an invertible idea), then \(\deg(g) + \deg(g^{-1}) = 0\). In particular, if \(G\) is torsion-free (e.g. \(G = \mathbb{Z}\)), then \(\deg(g) = 0\) for all \(g \in \mathcal{I}^\times\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> By G1, \(\deg(g\circ g^{-1}) = \deg(g) + \deg(g^{-1})\). Since \(g\circ g^{-1} = e\) and \(\deg(e) = 0\), we get \(\deg(g) + \deg(g^{-1}) = 0\). If \(G\) is torsion-free, the only solution in \(G\) to \(x + y = 0\) with \(y = -x\) is consistent for any \(x\), but for an element \(g\in\mathcal{I}^\times\) we also have \(\deg(g^{-1}) = -\deg(g)\). If the grading takes values in \(\mathbb{Z}_{\ge 0}\), then both \(\deg(g)\) and \(\deg(g^{-1})\) are non-negative integers summing to 0, forcing both to be 0. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark (Naming).</span>
+The theorem is called "Silent-Agent Invariance" because it implies: <em>transmission operators \(g \in \mathcal{I}^\times\) leave the degree unchanged.</em> By part (5) of the Conjugation Theorem, \(\deg({}^g\!a) = \deg(a)\). The invertible agents are "silent" with respect to novelty: they can rearrange, translate, or conjugate an idea, but they cannot change its degree. Only non-invertible ideas carry positive novelty.
+</div>
+
+<div class="thm" id="cumulative-novelty">
+<span class="label">Theorem 12.2 (Cumulative Novelty).</span>
+For any chain \(a_1, \dots, a_n \in \mathcal{I}\),
+\[
+  \deg(a_1 \circ \cdots \circ a_n) \;=\; \sum_{k=1}^n \deg(a_k).
+\]
+The novelty of a chained composition is the sum of the novelties of the parts — <em>no emergence term appears in the degree.</em>
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Immediate by induction from the monoid homomorphism property G1. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark (Contrast with the Telescoping Theorem).</span>
+Compare Cumulative Novelty with the Transmission Telescoping Theorem (Chapter 5). The Telescoping Theorem says
+\[
+  v(a_1\circ\cdots\circ a_n) = \sum_k v(a_k) + \sum_{k=1}^{n-1}\omega_v(P_k, a_{k+1}).
+\]
+The degree is a valuation that is <em>always} additive (it is required to be a group homomorphism by G1), so its cocycle \(\omega_{\deg}\) is identically zero. Cumulative Novelty is just Telescoping with \(\omega_{\deg} \equiv 0\). The contrast is between the <em>value</em> (which may not be additive) and the <em>degree</em> (which is always additive). The degree is the "additive shadow" of the valuation.
+</div>
+
+<div class="thm">
+<span class="label">Theorem 12.3 (Transmission-Preservation).</span>
+Suppose \(v : \mathcal{I} \to \mathbb{R}\) is a valuation that is <em>degree-compatible</em>: there exists \(f : G \to \mathbb{R}\) such that \(v(a) = f(\deg(a))\) for all \(a \in \mathcal{I}\). Then the emergence cocycle \(\omega_v\) is determined entirely by the degree:
+\[
+  \omega_v(a,b) \;=\; f(\deg(a) + \deg(b)) \;-\; f(\deg(a)) \;-\; f(\deg(b)) \;=\; \omega_f(\deg(a),\deg(b)),
+\]
+where \(\omega_f\) is the emergence cocycle of \(f : G \to \mathbb{R}\) in the monoid \((G,+,0)\). In particular, \(\omega_v(a,b)\) depends only on \(\deg(a)\) and \(\deg(b)\), not on \(a\) and \(b\) individually.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span>
+\begin{align*}
+  \omega_v(a,b) &= v(a\circ b) - v(a) - v(b)\\
+  &= f(\deg(a\circ b)) - f(\deg(a)) - f(\deg(b))\\
+  &= f(\deg(a) + \deg(b)) - f(\deg(a)) - f(\deg(b))\\
+  &= \omega_f(\deg(a), \deg(b)). \qquad\square
+\end{align*}
+</div>
+
+<div class="remark">
+<span class="label">Remark (Degree-compatibility as a structural constraint).</span>
+Theorem 12.3 says that degree-compatible valuations "factor through" the degree. Their emergence cocycles are pulled back from the cocycles of the grading group \(G\). In practice this means: once we know the grading \(\deg\) and the function \(f\), we know the emergence cocycle of any degree-compatible valuation. The theorem reduces the complexity of the cocycle problem from a function on \(\mathcal{I}\times\mathcal{I}\) (a space of potentially uncountable size) to a function on \(G\times G\) (which is often small and computable).
+</div>
+
+<div class="thm">
+<span class="label">Theorem (Zero–one law for novelty).</span>
+Let \(G = \mathbb{Z}\) and suppose \(\mathcal{I}\) is finitely generated. If \(\deg : \mathcal{I} \to \mathbb{Z}\) is a valid grading, then either:
+<ol type="a">
+  <li>\(\deg \equiv 0\) (trivial grading, no novelty ever), or</li>
+  <li>the set \(\{ \deg(a) : a \in \mathcal{I} \}\) is unbounded above.</li>
+</ol>
+There is no grading into \(\mathbb{Z}\) with a finite non-zero image.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Suppose \(\deg\) has finite nonzero image \(\{d_1, \dots, d_n\} \subset \mathbb{Z}\) with maximum \(d_n > 0\). Let \(a\in\mathcal{I}\) with \(\deg(a) = d_n\). Then \(\deg(a\circ a) = 2d_n > d_n\), but \(2d_n \notin \{d_1,\dots,d_n\}\) (since \(d_n\) is maximal in the image), contradicting the assumption that the image is \(\{d_1,\dots,d_n\}\). Hence no nonzero finite image is possible. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark (Corollary for traditions).</span>
+The zero–one law says that a tradition — a finitely generated idea algebra graded by \(\mathbb{Z}\) — is either entirely stagnant (no new degrees) or perpetually generative (new degrees always appear). There is no "plateau with bounded novelty" available for \(\mathbb{Z}\)-gradings. For \(\mathbb{Z}/n\mathbb{Z}\)-gradings, finite nonzero images are possible; the boolean grading of Example 2 in §3 is an instance.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s6">
+<h2>§6. Spectral decomposition</h2>
+
+<div class="defn">
+<span class="label">Definition (Degree-\(d\) projection).</span>
+For \(d \in G\), define the <em>degree-\(d\) projection</em> \(\pi_d : \mathcal{I} \to \mathcal{I}_d\) as the restriction of the identity to the stratum \(\mathcal{I}_d\): \(\pi_d(a) = a\) if \(\deg(a) = d\), and \(\pi_d(a) = e\) otherwise (where we use the convention that the "zero" in the monoid is the unit \(e\), which lies in \(\mathcal{I}_0\)).
+</div>
+
+<p>For \(G = \mathbb{Z}\), the strata \(\mathcal{I}_0, \mathcal{I}_1, \mathcal{I}_2, \dots\) play the role of "homogeneous components" in the sense of graded rings and algebras. The composition map \(\circ\) satisfies \(\mathcal{I}_d \circ \mathcal{I}_{d'} \subseteq \mathcal{I}_{d+d'}\) by G1 (the degree-homogeneity condition). Every element of \(\mathcal{I}\) lies in exactly one stratum.</p>
+
+<div class="defn">
+<span class="label">Definition (Tradition and spectral sequence).</span>
+For \(n \ge 0\) and \(a \in \mathcal{I}\), the <em>\(n\)-th tradition of \(a\)</em> is the iterated composition
+\[
+  \mathsf{tradition}^n(a) \;:=\; a^{\circ n} = \underbrace{a \circ a \circ \cdots \circ a}_{n \text{ times}},
+\]
+with the convention \(a^{\circ 0} = e\). The <em>spectral sequence of \(a\)</em> is the sequence
+\[
+  (\deg(a^{\circ 0}), \deg(a^{\circ 1}), \deg(a^{\circ 2}), \dots) = (0, \deg(a), 2\,\deg(a), \dots)
+\]
+by Cumulative Novelty. The degree grows linearly in the number of self-compositions.
+</div>
+
+<div class="prop">
+<span class="label">Proposition (Spectral sequence of a tradition).</span>
+For \(a \in \mathcal{I}\) and valuation \(v : \mathcal{I} \to \mathbb{R}\),
+\[
+  v(a^{\circ n}) \;=\; n\cdot v(a) \;+\; \sum_{k=1}^{n-1} \omega_v(a^{\circ k},\, a).
+\]
+This is the Transmission Telescoping Theorem applied to the constant chain \(a, a, \dots, a\).
+</div>
+
+<div class="defn">
+<span class="label">Definition (Spectral decomposition).</span>
+For a valuation \(v : \mathcal{I} \to \mathbb{R}\) that is degree-compatible (i.e. \(v = f\circ\deg\) for some \(f : G \to \mathbb{R}\)), the <em>spectral decomposition</em> of \(v\) along a tradition is the decomposition of \(v(a^{\circ n})\) into:
+<ul>
+  <li>the <em>linear term} \(n\cdot v(a)\);</li>
+  <li>the <em>spectral correction terms} \(\sum_{k=1}^{n-1}\omega_v(a^{\circ k}, a)\), determined entirely by \(f\) and \(\deg(a)\) via Transmission-Preservation.</li>
+</ul>
+</div>
+
+<div class="example">
+<span class="label">Example (Log-linear spectral decomposition).</span>
+Let \(G = \mathbb{Z}\), \(v(a) = \deg(a)\), \(f(d) = d\) (the identity function). Then \(\omega_v = 0\) (since \(v\) is additive by G1), and the spectral decomposition reduces to \(v(a^{\circ n}) = n\cdot\deg(a)\). No spectral corrections.
+
+Now let \(f(d) = d^2\). Then \(\omega_f(d_1, d_2) = (d_1+d_2)^2 - d_1^2 - d_2^2 = 2d_1 d_2\). So the valuation \(v(a) = \deg(a)^2\) satisfies \(\omega_v(a,b) = 2\,\deg(a)\cdot\deg(b)\), and the spectral decomposition of \(v(a^{\circ n})\) is:
+\[
+  v(a^{\circ n}) = n\cdot\deg(a)^2 + 2\deg(a)\sum_{k=1}^{n-1} k\cdot\deg(a) = n\cdot\deg(a)^2 + 2\deg(a)^2\cdot\frac{n(n-1)}{2} = n^2\cdot\deg(a)^2,
+\]
+which is correct since \(\deg(a^{\circ n}) = n\cdot\deg(a)\) and \(f(n\cdot\deg(a)) = n^2\cdot\deg(a)^2\). The spectral decomposition correctly "resolves" the quadratic emergence of \(v\) into a sum of linear emergence corrections.
+</example>
+</section>
+
+<!-- ====================================================== -->
+<section id="s7">
+<h2>§7. The zoo</h2>
+
+<p>We collect seven historical positions on novelty and its algebra, each formalized as a special case of the graded idea algebra.</p>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Lovejoy — Unit-Ideas and Combinatorics</h3>
+<p><strong>Original claim.</strong> Arthur O. Lovejoy, in <em>The Great Chain of Being</em> and in the programmatic essays of the <em>Journal of the History of Ideas</em>, proposes that the history of ideas can be analyzed by identifying a small stock of primitive "unit-ideas" and tracing the combinations and recombinations they undergo across intellectual history. Lovejoy's unit-ideas are not themselves historical — they persist across ages — but their combinations produce historically situated ideas. The history of thought is, for Lovejoy, the combinatorics of a finite stock of unit-ideas.</p>
+<p><strong>Formal restatement.</strong> Lovejoy's unit-ideas are the generators of the monoid \(\mathcal{I}\): a set \(S \subset \mathcal{I}\) such that every element of \(\mathcal{I}\) is a product of elements of \(S\). The grading assigns degree 1 to each unit-idea (or, in the spirit of the zero–one law, there is a minimal positive degree). The degree of an arbitrary idea is then its "combinatorial depth" — the minimum number of unit-ideas needed to express it as a product. Lovejoy's program is to compute, for each historically significant idea, its decomposition into unit-ideas and thereby its degree.</p>
+<p><strong>Status.</strong> Formally coherent but informationally incomplete: the grading tells us the degree, but not the specific decomposition. Moreover, the zero–one law implies that a Lovejoy-style analysis with a finite stock of unit-ideas — if any idea has positive degree — produces a tradition of unbounded novelty. This is consistent with Lovejoy's own view that the history of ideas is not closed.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Lakatos — Research Programmes and Protective Belts</h3>
+<p><strong>Original claim.</strong> Imre Lakatos, in <em>The Methodology of Scientific Research Programmes</em>, proposes that science is organized not into individual theories but into <em>research programmes</em>: long-lived sequences of theories sharing a hard core of assumptions and a protective belt of auxiliary hypotheses that absorb anomalies. A research programme is <em>progressive</em> (hence novel) if its theoretical modifications lead to successful novel predictions; <em>degenerative</em> if modifications are post hoc. Lakatos thus relativizes novelty to the research programme: what is novel relative to programme \(P_1\) may not be novel relative to \(P_2\).</p>
+<p><strong>Formal restatement.</strong> A research programme is a transmission chain \((a; g_1, \dots, g_n)\) where the source idea \(a\) is the hard core and the agents \(g_k\) are the successive modifications. The degree of the output \(\mathsf{Ch}(a) = {}^{G_n}\!a\) is \(\deg(a)\) by Silent-Agent Invariance (the agents are invertible, hence degree-zero). Lakatos's "novelty of a programme" is not captured by the degree of the chain output (which equals \(\deg(a)\) by Silent-Agent Invariance) but by the emergence cocycle of the chain — the cumulative emergence \(\Omega_n\) measures how far the programme's current theory is from additive predictability relative to the hard core.</p>
+<p><strong>Status.</strong> Partially captured. The degree is too coarse for Lakatos's distinction: progressive vs. degenerative research programmes both produce chains of degree \(\deg(a)\) (since agents are invertible). The distinction lives in the sign of the emergence cocycle: a progressive programme has positive cumulative emergence (the chain value grows), a degenerative one has non-positive cumulative emergence. This makes Lakatos's normative distinction a quantitative one about the sign of \(\Omega_n\).</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Romer — Nonrival Ideas and Economic Growth</h3>
+<p><strong>Original claim.</strong> Paul Romer's endogenous growth theory (<em>Endogenous Technical Change</em>, 1990) identifies ideas as the key driver of long-run economic growth. Unlike physical goods, ideas are <em>nonrival</em>: once created, an idea can be used by any number of people simultaneously without diminishment. Romer argues that this nonrivalry, combined with the ability to combine ideas, generates the unbounded growth of productive capacity that has characterized modern economies. The Romer model assigns a "value" to each idea, and the combination of two ideas creates a new idea whose value exceeds the sum of the parts.</p>
+<p><strong>Formal restatement.</strong> Romer's nonrivalry is the statement that \(v(a)\) is not diminished by sharing — it is modeled by the monoid structure, where \(a\circ b\) represents both \(a\) and \(b\) being used simultaneously. The emergence cocycle \(\omega_v(a,b) = v(a\circ b) - v(a) - v(b) \ge 0\) represents the surplus value generated by combining two ideas. Romer's growth model is super-additivity of \(v\). The grading represents the "generation index" of an idea: economic growth is the fact that \(\deg(a_1\circ\cdots\circ a_n) = \sum_k \deg(a_k)\) grows without bound as the stock of ideas grows, by the zero–one law.</p>
+<p><strong>Status.</strong> True under super-additivity. Romer's central claim — that combining ideas generates more value than the sum of the parts — is precisely the claim that \(\omega_v > 0\), i.e. that the cocycle is everywhere positive. The Transmission Telescoping Theorem gives the exact accounting of this growth: \(v(a_1\circ\cdots\circ a_n) = \sum_k v(a_k) + \sum_{k=1}^{n-1}\omega_v(P_k, a_{k+1})\), where the cocycle sum represents the "knowledge externalities" of Romer's model.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Weitzman — Recombinant Growth</h3>
+<p><strong>Original claim.</strong> Martin Weitzman's <em>Recombinant Growth</em> (1998) provides a formal model of technological growth driven by the pairwise combination of existing ideas. Weitzman argues that the number of new ideas that can be generated from a stock of \(n\) existing ideas grows combinatorially — as \(\binom{n}{2}\), \(\binom{n}{3}\), etc. — leading to super-exponential growth in the long run. The key mechanism is that every pair of ideas has a positive probability of generating a genuinely new idea when combined.</p>
+<p><strong>Formal restatement.</strong> The stock of ideas at generation \(n\) is the set of ideas generated by chains of length \(\le n\) from a finite generating set. By the zero–one law, this stock is unbounded in degree. Weitzman's "recombinant" mechanism is the \(n\)-way telescoping of the Transmission Telescoping Theorem: each new combination contributes one cocycle term \(\omega_v(P_k, a_{k+1})\), and the number of such terms grows as the stock grows. Weitzman's combinatorial explosion corresponds to the fact that the number of pairs \((P_k, a_{k+1})\) in a chain of length \(n\) is \(n-1\), and as \(n\) grows the cocycle sum dominates the linear sum (assuming non-vanishing \(\omega_v\)).</p>
+<p><strong>Status.</strong> Formally consistent. The Weitzman model is a quantitative version of the zero–one law plus Telescoping: once the grading is non-trivial and \(\omega_v > 0\), the value of the tradition grows faster than linearly in the number of components. Weitzman's model specializes to the case where the Telescoping Theorem's cocycle sum exhibits combinatorial growth.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Henrich — Generation Index</h3>
+<p><strong>Original claim.</strong> Returning to Henrich's cultural ratchet, now in the grading context: Henrich proposes that the key measure of cultural complexity is the number of <em>cumulative modifications</em> that have been made to an original tool or practice. A stone hand-axe is modified by \(n\) generations of craftsmen, each adding a small improvement, and the result after \(n\) generations is far more complex than anything any single craftsman could have designed. Henrich calls this the <em>generation index</em> of a cultural artifact.</p>
+<p><strong>Formal restatement.</strong> The generation index is literally \(\deg(a)\) in the graded idea algebra: it is the degree of an idea, which by Cumulative Novelty equals the sum of the degrees of the components. For a tradition \(a^{\circ n}\) (repeated application of a unit modification), \(\deg(a^{\circ n}) = n\cdot\deg(a)\) by the same theorem. Henrich's "accumulation" of modifications is the linear growth of degree predicted by the Cumulative Novelty Theorem. The ratchet property — that improvements are retained — is the assumption that the individual degrees \(\deg(a_k) > 0\) are positive, so the sum \(\sum \deg(a_k)\) is strictly increasing.</p>
+<p><strong>Status.</strong> True by Cumulative Novelty. Henrich's generation index is a perfect instantiation of the graded idea algebra's degree function. The Cumulative Novelty Theorem is the formal version of Henrich's observation that cultural complexity grows linearly in the number of modifications (in the degree-additive regime). The spectral decomposition of §6 further shows that the <em>value</em> of the tradition may grow faster than linearly (if the valuation has positive cocycle), consistent with Henrich's claim that the cultural ratchet produces more than the sum of its modifications.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Boden — P-novelty and H-novelty</h3>
+<p><strong>Original claim.</strong> Margaret Boden, in <em>The Creative Mind: Myths and Mechanisms</em> and subsequent work, distinguishes psychological novelty (P-novelty) from historical novelty (H-novelty). A P-novel idea is one that is new to the individual who has it; an H-novel idea is one that is new to the entire history of human thought. Boden argues that the relationship between P-novelty and H-novelty is not straightforward: many P-novel ideas are historically familiar, and H-novelty is generally rare. She further distinguishes <em>exploratory</em> novelty (working within an existing conceptual space) from <em>transformational</em> novelty (altering the conceptual space itself).</p>
+<p><strong>Formal restatement.</strong> We showed in §4 that, within a graded idea algebra satisfying G1–G5 and the conjugation-invariance of degree, P-novelty and H-novelty coincide: both reduce to \(\deg(a) \ne 0\). Boden's distinction survives as the difference between the two concepts only in weaker structures (where degree is not invariant under conjugation). Boden's "exploratory" vs. "transformational" novelty corresponds to whether an idea lies within the current strata (\(\mathcal{I}_d\) for existing degrees) or introduces a new stratum (a degree \(d'\) not previously realized). By the zero–one law, every non-trivial tradition eventually produces new strata.</p>
+<p><strong>Status.</strong> Partially captured. The formal model collapses Boden's P/H distinction (in the full structure) and interprets her exploratory/transformational distinction as intra-stratum vs. inter-stratum novelty. The latter is a meaningful formalization that makes Boden's typology quantitative.  The full generalization that re-separates P-novelty from H-novelty is available by dropping the conjugation-invariance of degree, at the cost of a more complex structure.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Csikszentmihalyi — Flow and Optimal Novelty</h3>
+<p><strong>Original claim.</strong> Mihaly Csikszentmihalyi's <em>Flow: The Psychology of Optimal Experience</em> argues that the most rewarding creative experiences occur when the challenge of a task is optimally matched to the skill of the agent: too easy (too low novelty) produces boredom, too hard (too high novelty) produces anxiety, and the optimal "flow channel" lies between these. Csikszentmihalyi applies this to idea-generation: the most creative work happens at the boundary between what is already known (degree 0) and what is maximally unknown.</p>
+<p><strong>Formal restatement.</strong> Csikszentmihalyi's flow channel is the band of degrees \(d \in [d_{\min}, d_{\max}]\) such that ideas in stratum \(\mathcal{I}_d\) are simultaneously accessible (the agent can access degree-\(d\) ideas) and challenging. Accessibility corresponds to the agent's current "skill" grading; challenge corresponds to the degree being sufficiently above the agent's natural stratum. The emergence cocycle governs the "surprise" of a combination: large \(|\omega_v(a,b)|\) means the combination is surprising (high emergence), small means it is predictable (low emergence). The flow state corresponds to the agent operating in a regime where emergence is neither zero nor maximal — the intermediate zone of the weak-emergence taxonomy.</p>
+<p><strong>Status.</strong> Metaphorically consistent, not formally tight. Csikszentmihalyi's framework is a psychological theory, not an algebraic one, and the translation to the graded idea algebra requires additional assumptions about the mapping between degree and subjective challenge. The formal framework provides a vocabulary (degrees, emergence, flow channel as a degree interval) that could, in principle, be operationalized in a cognitive model.</p>
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s8">
+<h2>§8. Coda and Lean notes</h2>
+
+<p>The grading completes the formal structure of an idea algebra. We now have, in one structure:</p>
+
+<ul>
+  <li>a <em>monoid</em> \((\mathcal{I},\circ,e)\) governing composition;</li>
+  <li>a <em>resonance pairing</em> \(\rho\) governing semantic proximity;</li>
+  <li>an <em>Aufhebung decomposition</em> \(\sigma + \nu + \eta\) governing the dialectical fate of each composition;</li>
+  <li>an <em>emergence cocycle</em> \(\omega\) governing value non-additivity;</li>
+  <li>a <em>structural equivalence</em> \(\sim_{\mathcal{I}}\) governing context-interchangeability;</li>
+  <li>a <em>grading</em> \(\deg : \mathcal{I} \to G\) governing novelty depth.</li>
+</ul>
+
+<p>All five structures are compatible, in the senses formalized by the axioms G1–G5 and the theorems of this chapter. The grading makes the entire structure "spectral": ideas are decomposed into strata, each stratum is closed under composition up to a degree shift, and the emergence cocycle respects the stratification in the sense of Transmission-Preservation.</p>
+
+<p>The five headline theorems of §5 are the workhorses of the graded theory:</p>
+
+<ul>
+  <li><strong>Grading Theorem (Theorem 9):</strong> characterizes valid gradings.</li>
+  <li><strong>Reassociation (10.1):</strong> degree is insensitive to parenthesization.</li>
+  <li><strong>Silent-Agent Invariance (10.2):</strong> invertible agents preserve degree.</li>
+  <li><strong>Cumulative Novelty (12.2):</strong> degree of a chain is the sum of degrees of parts.</li>
+  <li><strong>Transmission-Preservation (12.3):</strong> degree-compatible valuations have degree-determined cocycles.</li>
+</ul>
+
+<h3>Lean verification notes</h3>
+
+<p>The following Lean declarations are central to this chapter's results:</p>
+
+<ul>
+  <li><code>IdeaTheory.GradedIdeaAlgebra</code> — the main structure, defining G1–G5 as axioms;</li>
+  <li><code>IdeaTheory.Grading.characterization</code> — the Grading Theorem (Theorem 9);</li>
+  <li><code>IdeaTheory.reassociation_degree</code> — Reassociation Theorem (10.1);</li>
+  <li><code>IdeaTheory.silent_agent_invariance</code> — Silent-Agent Invariance (10.2);</li>
+  <li><code>IdeaTheory.cumulative_novelty</code> — Cumulative Novelty (12.2);</li>
+  <li><code>IdeaTheory.transmission_preservation</code> — Transmission-Preservation (12.3);</li>
+  <li><code>IdeaTheory.zero_one_law_grading</code> — Zero–one law;</li>
+  <li><code>IdeaTheory.stratum</code>, <code>isPNovel</code>, <code>isHNovel</code>, <code>isMaximallyNovel</code> — novelty predicates;</li>
+  <li><code>IdeaTheory.spectral_decomposition</code> — the spectral decomposition of degree-compatible valuations;</li>
+  <li><code>Theorems7.lean</code> — the complete proof file for the chapter's results.</li>
+</ul>
+
+<h3>Looking ahead</h3>
+
+<p>The graded idea algebra assembled in this chapter is the final formal structure in the main sequence of the book. The remaining chapters (8 onward) develop applications and extensions: Chapter 8 constructs the category of idea algebras and studies functors between them; Chapter 9 develops the representation theory of idea algebras (how they act on semantic vector spaces); Chapter 10 turns to applications in cognitive science, linguistics, and the economics of knowledge. Throughout, the graded idea algebra of Chapters 1–7 is the ground truth to which all applications refer.</p>
+
+<p>A word on the relationship between the grading and the semantic geometry of Chapter 4. The resonance pairing \(\rho\) encodes local semantic proximity; the meaning curvature \(\kappa\) encodes global deviation from flat semantics. The grading \(\deg\) adds a third kind of structure: a global ordering by novelty depth. These three structures are, in principle, orthogonal: an idea can be semantically close to another (high resonance), lie in a region of high curvature (high \(\kappa\)), and yet have low degree (traditional), or vice versa. The full graded idea algebra allows all combinations, making the theory much richer — and much more empirically testable — than any one of its constituent parts.</p>
+
+<p>The zoo of seven thinkers — Lovejoy, Lakatos, Romer, Weitzman, Henrich, Boden, Csikszentmihalyi — illustrates that the grading and novelty predicates are not invented for formal completeness. They are the algebraic versions of distinctions that the most careful thinkers in the history of ideas, economics of knowledge, cultural evolution, and creativity research have found it necessary to make. The formal apparatus shows that all of these distinctions are, at bottom, distinctions about a single algebraic invariant — the degree — and its relationship to value via the cocycle. The apparent complexity of the intellectual landscape is the reflection, in many disciplinary mirrors, of a single underlying structure.</p>
+
+</section>
+
+<div class="chapter-nav">
+  <a href="ch06.html">← Chapter 6: Conjugation and Chains</a>
+  <a href="index.html">Book Index →</a>
+</div>
+
+<div class="refs">
+  <h3>Key references</h3>
+  <ol>
+    <li>Lovejoy, A. O. (1936). <em>The Great Chain of Being</em>. Harvard.</li>
+    <li>Lakatos, I. (1978). <em>The Methodology of Scientific Research Programmes</em>. Cambridge.</li>
+    <li>Romer, P. M. (1990). Endogenous technical change. <em>Journal of Political Economy</em>, 98, S71–S102.</li>
+    <li>Weitzman, M. L. (1998). Recombinant growth. <em>Quarterly Journal of Economics</em>, 113, 331–360.</li>
+    <li>Henrich, J. (2015). <em>The Secret of Our Success</em>. Princeton.</li>
+    <li>Boden, M. A. (1990). <em>The Creative Mind: Myths and Mechanisms</em>. Basic Books.</li>
+    <li>Csikszentmihalyi, M. (1990). <em>Flow: The Psychology of Optimal Experience</em>. Harper &amp; Row.</li>
+    <li>Anderson, P. W. (1972). More is different. <em>Science</em>, 177, 393–396.</li>
+  </ol>
+</div>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

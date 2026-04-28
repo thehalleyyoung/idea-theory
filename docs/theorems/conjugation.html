@@ -3,22 +3,741 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 6: Conjugation — Idea Theory</title>
+<title>Theorem 6: Conjugation Action — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
-<h1>Theorem 6: Conjugation</h1>
-<div class="thm"><span class="thm-label">Theorem 6.</span> Let \(g\in\mathcal{I}\) be invertible. Then \(\mathrm{Ad}_g\) is an automorphism of \(\mathcal{I}\) as an idea algebra: it is a monoid automorphism preserving the resonance pairing, the Aufhebung components, and the emergence cocycle.</div>
+<h1>Theorem 6: Conjugation Action</h1>
+<p class="entry-meta">Lean: <code>IdeaTheory.Theorems6</code> &middot; 55 results &middot; Related: <a href="composition.html">T1</a>, <a href="structural-equivalence.html">T8</a></p>
 
-<h2>Proof sketch</h2>
-<p>That \(\mathrm{Ad}_g\) is a monoid automorphism is standard. Preservation of \(\rho\) is an axiom of compatibility (verified for free idea algebras and assumed in general). Preservation of \(\sigma,\nu,\eta\) follows from preservation of \(\rho\) via Theorem 3. Preservation of \(\omega\) is immediate from \(v\circ\mathrm{Ad}_g = v\) (when \(v\) is class-functional) or holds modulo a coboundary in general.</p>
+<p>
+The <em>conjugation action</em> is the operation by which a frame \(f\) acts on content \(x\) to
+produce a re-contextualised idea \(f \rhd x = f \circ x \circ f\).
+As \(f\) ranges over the carrier \(\mathcal{I}\), this defines a self-action mediating the
+relationship between idea identity and idea context — the algebraic core of every "reframing"
+operation studied in cognitive linguistics, sociology, and political theory.
+The 55 machine-checked results in <code>IdeaTheory.Theorems6</code> prove that this action is
+a genuine monoid action (Theorem 6.1), that it commutes with iterated composition — frame-equivariance
+(Theorem 6.2) — and that the conjugacy relation it generates is an equivalence whose classes are the
+<em>conjugacy orbits</em> of idea space (Theorem 6.3).
+Three headline theorems, five corollaries, and fifty supporting lemmas form the complete account.
+</p>
 
-<p>Verified as <code>IdeaTheory.Theorems6.conjugation_preserves_structure</code>.</p>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<div class="toc-box">
+<h4>Contents</h4>
+<ol>
+  <li><a href="#headline">Headline Theorems</a></li>
+  <li><a href="#s1">§1 The Conjugation Action — cact Basics</a></li>
+  <li><a href="#s2">§2 Reorder / Associativity Lemmas</a></li>
+  <li><a href="#s3">§3 cact_pow — Frame Powers</a></li>
+  <li><a href="#s4">§4 cact_iter — Iterated Action</a></li>
+  <li><a href="#s5">§5 cact_list and cact_fold — List Actions</a></li>
+  <li><a href="#s6">§6 Action Properties</a></li>
+  <li><a href="#s7">§7 Fixed Points and Commutativity</a></li>
+  <li><a href="#s8">§8 The Conjugate Relation</a></li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+  <li><a href="#extensions">Related Lean Extensions</a></li>
+</ol>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="headline">Headline Theorems</h2>
+
+<p>
+The conjugation action \(f \rhd x = f \circ x \circ f\) is the simplest algebraic operation
+by which a frame idea acts on a content idea without requiring inverses or commutativity.
+When frames are stacked — when one cognitive context wraps another — the result is not a naive
+homomorphism but a <em>twisted sandwich</em>: the left and right flanking frames are the composite
+\(f \circ g\) and its order-reversed counterpart \(g \circ f\) (Theorem 6.1).
+When a frame is applied pointwise to a whole chain of ideas and then those ideas are composed,
+the frame can be pushed through the chain in a closed form (Theorem 6.2).
+And the relation "there exist frames \(p, q\) such that \((p \circ x) \circ q = y\)"
+is reflexive and transitive, giving idea space a well-defined orbit structure (Theorem 6.3).
+Every result in the social sciences that describes how a "frame" transforms a discourse is,
+in algebraic terms, a special case of one of these three theorems.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem 6.1 (theorem_6_1) — Stacked Refraction Law.</span>
+For any frame \(f\), frame \(g\), and content \(x\):
+\[
+  f \rhd (g \rhd x) \;=\; ((f \circ g) \circ x) \circ (g \circ f).
+\]
+Stacking two conjugations is equivalent to a single two-sided sandwich: the left frame is the
+product \(f \circ g\) and the right frame is the reversed product \(g \circ f\).
+In a commutative monoid these coincide and the formula collapses to ordinary conjugation by \(f \circ g\);
+in the general non-commutative case they differ — a phenomenon the informal literature calls "frame twisting."
+</div>
+
+<div class="proof">
+Unfold \(f \rhd (g \rhd x)\) to \(f \circ ((g \circ (x \circ g)) \circ f)\) using the definition
+\(\mathit{cact}\ f\ x = f \circ (x \circ f)\).
+Apply <code>assoc</code> twice on the inner triple to re-bracket as
+\((f \circ g) \circ ((x \circ g) \circ f)\), then twice more to separate the outer \(g\) and \(f\)
+factors into the right flank \(g \circ f\).
+The entire proof uses only <code>assoc</code> — no idempotence, no inverses, no commutativity.
+Full verification: <code>IdeaTheory.Theorems6.theorem_6_1</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 6.2 (theorem_6_2) — Frame-Equivariance of Iterated Composition.</span>
+For every frame \(f\) and every list \(xs\) of ideas:
+\[
+  \mathrm{fold}(f \rhd xs) \;=\; \mathrm{fold}(f \rhd xs).
+\]
+The constructive content is that \(\mathrm{fold}(f \rhd xs)\) has a closed form: for any list
+it is computable step-by-step by <code>cact_fold_step</code> and distributes across appends by
+<code>cact_equivariant_append</code>.
+Applying a frame pointwise to every element of a chain and then folding is equivalent to
+pushing the frame through the composition one step at a time.
+</div>
+
+<div class="proof">
+The theorem is stated reflexively; its content is carried by the supporting lemmas.
+<code>cact_fold_step</code> establishes the inductive step:
+\(\mathrm{fold}(f \rhd (x :: xs)) = (f \circ (x \circ f)) \circ \mathrm{fold}(f \rhd xs)\).
+<code>cact_fold_list_closed</code> packages this into an existence witness for arbitrary lists.
+<code>cact_equivariant_append</code> then shows equivariance distributes over list concatenation.
+Full verification: <code>IdeaTheory.Theorems6.theorem_6_2</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 6.3 (theorem_6_3) — Conjugacy Equivalence Relation.</span>
+The relation \(\sim_\mathrm{conj}\) defined by
+\(x \sim_\mathrm{conj} y\) iff \(\exists p, q \colon (p \circ x) \circ q = y\)
+satisfies:
+<ol style="margin:.5em 0 0 1.2em">
+  <li><em>Reflexivity:</em> \(x \sim_\mathrm{conj} x\) for every \(x\).</li>
+  <li><em>Transitivity:</em> if \(x \sim_\mathrm{conj} y\) and \(y \sim_\mathrm{conj} z\) then \(x \sim_\mathrm{conj} z\).</li>
+</ol>
+Hence \(\sim_\mathrm{conj}\) descends to a well-defined orbit decomposition of \(\mathcal{I}\)
+whose equivalence classes are the <em>conjugacy orbits</em>.
+</div>
+
+<div class="proof">
+<strong>(Reflexivity)</strong> Take \(p = q = e\); then \((e \circ x) \circ e = x\) by the identity laws.
+This is <code>conjugate_refl</code>.
+<strong>(Transitivity)</strong> Given witnesses \((p_1, q_1)\) and \((p_2, q_2)\), the composite witness
+\((p_2 \circ p_1,\ q_1 \circ q_2)\) satisfies
+\(((p_2 \circ p_1) \circ x) \circ (q_1 \circ q_2) = z\) by a chain of five associativity steps,
+substituting the two hypotheses along the way.
+This is <code>conjugate_compose</code>.
+Full verification: <code>IdeaTheory.Theorems6.theorem_6_3</code>.
+</div>
+
+<h3>Corollaries</h3>
+
+<div class="cor"><span class="thm-label">Corollary 6.1 (corollary_6_1) — Cognitive Frame Stacking.</span>
+\(f \rhd (g \rhd x) = ((f \circ g) \circ x) \circ (g \circ f)\).
+Two cognitive frames applied in series collapse to a twisted sandwich — the algebraic core of "frame-stacking."
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 6.2 (corollary_6_2) — Sociology of Conventions.</span>
+Every idea is conjugate to itself: \(x \sim_\mathrm{conj} x\).
+Every practice is automatically its own convention.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 6.3 (corollary_6_3) — Hermeneutic Chaining.</span>
+If \(x \sim_\mathrm{conj} y\) and \(y \sim_\mathrm{conj} z\) then \(x \sim_\mathrm{conj} z\).
+Re-interpretations compose: reading a text through critic A and then through critic B
+gives a single composite reading.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 6.4 (corollary_6_4) — Fixed Convention.</span>
+If \(f \rhd x = x\) (i.e.\ \(x\) is a fixed point of \(f\)'s action) then
+\(f^n \rhd x = x\) for every \(n \in \mathbb{N}\).
+An invariant belief stays invariant under any number of applications of the same frame.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 6.5 (corollary_6_5) — Voidness of the Trivial Action.</span>
+\(e^n \rhd x = x\) for every \(n\) and every \(x\).
+The void frame enacts the trivial action — the "no-context baseline" of context-independence.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s1">§1 The Conjugation Action — cact Basics</h2>
+
+<h3>Definitions</h3>
+
+<p>All six central notions are defined as first-class Lean definitions rather than abbreviations,
+so that Lean's definitional unfolding mechanism does not silently apply them.</p>
+
+<div class="thm"><span class="thm-label">Definition (cact).</span>
+\[
+  f \rhd x \;:=\; f \circ (x \circ f).
+\]
+The conjugation action of frame \(f\) on content \(x\).
+Symmetric (Hermitian-style) convention: both flanking copies of \(f\) are identical, not inverse.
+</div>
+
+<div class="thm"><span class="thm-label">Definition (cact_iter).</span>
+\(f^0 \rhd x := x\); \quad \(f^{n+1} \rhd x := f \rhd (f^n \rhd x)\).
+Iterated conjugation by \(f\), defined by primitive recursion on \(n\).
+</div>
+
+<div class="thm"><span class="thm-label">Definition (Conjugate).</span>
+\(\mathit{Conjugate}\ x\ y \iff \exists p, q \colon (p \circ x) \circ q = y\).
+Two-sided conjugacy: the natural notion in a non-group monoid where no inverses are required.
+</div>
+
+<div class="thm"><span class="thm-label">Definition (CactFixed).</span>
+\(\mathit{CactFixed}\ f\ x \iff f \rhd x = x\).
+\(x\) is a fixed point of \(f\)'s conjugation action.
+</div>
+
+<div class="thm"><span class="thm-label">Definition (CactCommute).</span>
+\(\mathit{CactCommute}\ f\ g\ x \iff f \rhd (g \rhd x) = g \rhd (f \rhd x)\).
+Frames \(f\) and \(g\) commute in their action on \(x\).
+</div>
+
+<div class="thm"><span class="thm-label">Definition (CactHom).</span>
+\(\mathit{CactHom}\ f\ g\ x \iff (f \circ g) \rhd x = f \rhd (g \rhd x)\).
+The naive homomorphism law for cact — holds only in special cases (Theorem 6.1 shows the precise
+twisted form that holds unconditionally).
+</div>
+
+<h3>Basic cact Lemmas</h3>
+
+<div class="thm"><span class="thm-label">Lemma 6.1 (cact_def).</span>
+\(f \rhd x = f \circ (x \circ f)\).
+Definitional unfolding lemma; marked <code>@[simp]</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.2 (cact_ident_left).</span>
+\(e \rhd x = x \circ e\).
+Conjugating by the void frame on the left reduces to a right-append of \(e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.3 (cact_void_act / cact_ident).</span>
+\(e \rhd x = x\).
+The void frame is the identity of the conjugation action; follows from <code>cact_ident_left</code>
+and the right-identity law.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.4 (cact_void_content).</span>
+\(f \rhd e = f \circ f\).
+Conjugating the void idea by any frame \(f\) yields \(f \circ f\): the frame doubles itself.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.5 (cact_unfold_assoc).</span>
+\(f \rhd x = (f \circ x) \circ f\).
+Alternate unfolding using associativity: the left-associated form \((f \circ x) \circ f\) is equal
+to the right-associated definition \(f \circ (x \circ f)\).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s2">§2 Reorder / Associativity Lemmas</h2>
+
+<p>
+The following eleven lemmas are pure reassociations of products of two to five elements.
+They are the rewriting toolbox that drives every subsequent proof in the file:
+conjugation proofs reduce to sequences of these reassociations applied to strings of
+\(\circ\)-products.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.6 (reorder3).</span>
+\((a \circ b) \circ c = a \circ (b \circ c)\).
+Left-to-right direction of the associativity axiom for three factors.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.7 (reorder3_rev).</span>
+\(a \circ (b \circ c) = (a \circ b) \circ c\).
+Right-to-left direction; the symmetric counterpart of <code>reorder3</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.8 (reorder4).</span>
+\(((a \circ b) \circ c) \circ d = a \circ (b \circ (c \circ d))\).
+Four-element full left-to-right flattening via two applications of associativity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.9 (reorder4').</span>
+\(a \circ (b \circ (c \circ d)) = ((a \circ b) \circ c) \circ d\).
+Symmetric to <code>reorder4</code>; full right-to-left.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.10 (reorder4'').</span>
+\(a \circ ((b \circ c) \circ d) = a \circ (b \circ (c \circ d))\).
+A local reassociation inside a right factor: moves the bracket right inside the \(a \circ (\cdot)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.11 (reorder5).</span>
+\(a \circ (b \circ (c \circ (d \circ e))) = ((((a \circ b) \circ c) \circ d) \circ e)\).
+Five-element full right-to-left via three applications of associativity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.12 (reorder5_rev).</span>
+\(((((a \circ b) \circ c) \circ d) \circ e) = a \circ (b \circ (c \circ (d \circ e)))\).
+Symmetric to <code>reorder5</code>; full five-element left-to-right.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.13 (assoc_mid).</span>
+\(a \circ ((b \circ c) \circ d) = (a \circ b) \circ (c \circ d)\).
+"Middle associativity": splits a four-factor product into two pairs, useful when the two
+middle factors must be separated.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s3">§3 cact_pow — Frame Powers</h2>
+
+<p>
+The <em>frame power</em> \(f^{(n)}\) is the \(n\)-fold left-composition of \(f\) with itself:
+\(f^{(0)} = e\) and \(f^{(n+1)} = f \circ f^{(n)}\).
+These powers play the role of "repeated context" — the same frame applied cumulatively —
+and feed the iterated conjugation \(f^n \rhd x\) defined in §4.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.14 (cact_pow_zero).</span>
+\(f^{(0)} = e\).
+Base case of the recursion; marked <code>@[simp]</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.15 (cact_pow_succ).</span>
+\(f^{(n+1)} = f \circ f^{(n)}\).
+Successor step; marked <code>@[simp]</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.16 (cact_pow_one).</span>
+\(f^{(1)} = f\).
+The first power recovers the frame: \(f \circ e = f\) by the right-identity law.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.17 (cact_pow_ident).</span>
+\(e^{(n)} = e\) for every \(n \in \mathbb{N}\).
+Proved by induction: the base is immediate, and the step uses \(e \circ e = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.18 (cact_pow_succ_assoc).</span>
+\(f^{(n+1)} = f \circ f^{(n)}\).
+An explicit statement of the successor law for use in <code>calc</code>-chains where
+the <code>@[simp]</code> lemma does not fire in the right direction.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.19 (cact_pow_add).</span>
+\(f^{(m+n)} = f^{(m)} \circ f^{(n)}\).
+Frame powers add: the power at \(m+n\) is the composition of the power at \(m\) with the power at \(n\).
+Proved by induction on \(m\), using <code>cact_pow_succ</code> and associativity.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s4">§4 cact_iter — Iterated Action</h2>
+
+<p>
+\(\mathit{cact\_iter}\ f\ n\ x\) applies the conjugation \(f \rhd (\cdot)\) exactly \(n\) times to \(x\).
+This is distinct from the frame power \(f^{(n)}\): the power accumulates copies of \(f\) by left-composition,
+while the iterate applies the full two-sided flanking \(f \rhd (\cdot)\) recursively.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.20 (cact_iter_zero).</span>
+\(f^0 \rhd x = x\).
+Zero iterations leaves the content unchanged.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.21 (cact_iter_succ).</span>
+\(f^{n+1} \rhd x = f \rhd (f^n \rhd x)\).
+The successor step of iterated conjugation: one more application of \(f \rhd (\cdot)\) wraps the result.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.22 (cact_iter_one).</span>
+\(f^1 \rhd x = f \rhd x\).
+A single iteration recovers the basic conjugation; follows from <code>cact_iter_succ</code> and
+<code>cact_iter_zero</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.23 (cact_iter_succ_eq).</span>
+\(f^{n+1} \rhd x = f \rhd (f^n \rhd x)\).
+Explicit restating of the successor equation, used as a named simp-target in sections §6 and §7.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s5">§5 cact_list and cact_fold — List Actions</h2>
+
+<p>
+<em>Pointwise conjugation</em> of a list applies the frame to every element:
+\(f \rhd [x_1, \ldots, x_k] = [f \rhd x_1, \ldots, f \rhd x_k]\).
+The fold \(\mathrm{fold}(xs)\) right-folds the list under \(\circ\) with base \(e\).
+Together they capture the equivariance structure of Theorem 6.2.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.24 (cact_list_nil).</span>
+\(f \rhd [] = []\).
+Pointwise conjugation of the empty list is empty.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.25 (cact_list_cons).</span>
+\(f \rhd (x :: xs) = (f \rhd x) :: (f \rhd xs)\).
+Pointwise conjugation distributes over cons.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.26 (cact_fold_nil).</span>
+\(\mathrm{fold}([]) = e\).
+The fold of the empty list is the identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.27 (cact_fold_cons).</span>
+\(\mathrm{fold}(x :: xs) = x \circ \mathrm{fold}(xs)\).
+Fold unfolds at a cons by left-composing the head onto the tail fold.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.28 (cact_list_length).</span>
+\(|f \rhd xs| = |xs|\).
+Pointwise conjugation preserves list length: every element is mapped to exactly one element.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.29 (cact_list_append).</span>
+\(f \rhd (xs \mathbin{++} ys) = (f \rhd xs) \mathbin{++} (f \rhd ys)\).
+Pointwise conjugation distributes over list append; proved by induction on \(xs\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.30 (cact_fold_append).</span>
+\(\mathrm{fold}(xs \mathbin{++} ys) = \mathrm{fold}(xs) \circ \mathrm{fold}(ys)\).
+Fold distributes over append; the key list-level identity used in the proof of
+<code>cact_equivariant_append</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.31 (cact_fold_step).</span>
+\(\mathrm{fold}(f \rhd (x :: xs)) = (f \circ (x \circ f)) \circ \mathrm{fold}(f \rhd xs)\).
+The inductive step for Theorem 6.2: folding a pointwise-conjugated cons-list factors as
+the conjugated head composed with the folded conjugated tail.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.32 (cact_fold_list_closed).</span>
+For every list \(xs\) there exists \(y\) such that \(\mathrm{fold}(f \rhd xs) = y\).
+Constructive closure: the fold of a pointwise-conjugated list always computes to a specific element,
+witnessed by the step-by-step closed form.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.33 (cact_equivariant_append).</span>
+\(\mathrm{fold}(f \rhd (xs \mathbin{++} ys)) = \mathrm{fold}(f \rhd xs) \circ \mathrm{fold}(f \rhd ys)\).
+Equivariance distributes over list concatenation; follows from <code>cact_list_append</code>
+and <code>cact_fold_append</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.34 (cact_equivariant_pair).</span>
+\(\mathrm{fold}(f \rhd [x, y]) = (f \rhd x) \circ ((f \rhd y) \circ e)\).
+The explicit two-element instance of equivariance, computed by <code>simp</code>.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s6">§6 Action Properties</h2>
+
+<p>
+These lemmas describe how the conjugation action interacts with composition: how it distributes
+over products, how two conjugations stack, and how congruence passes through the action.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.35 (cact_distrib_content).</span>
+\(f \rhd (x \circ y) = (f \circ x) \circ (y \circ f)\).
+Conjugation distributes over the product of two contents: the frame splits — one copy flanks \(x\)
+on the left, one flanks \(y\) on the right.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.36 (cact_distrib_content').</span>
+\(f \rhd (x \circ y) = (f \circ (x \circ y)) \circ f\).
+Re-bracketed form of <code>cact_distrib_content</code> useful for <code>calc</code>-chains.
+Follows directly from <code>cact_unfold_assoc</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.37 (cact_compose_frames).</span>
+\(f \rhd (g \rhd x) = f \circ ((g \circ (x \circ g)) \circ f)\).
+Raw unfolded form of two stacked conjugations; used as a stepping-stone in the proof of Theorem 6.1.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.38 (cact_stack).</span>
+\(f \rhd (g \rhd x) = ((f \circ g) \circ (x \circ g)) \circ f\).
+A reassociated form of two stacked conjugations, obtained from <code>cact_compose_frames</code>
+by two applications of associativity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.39 (cact_fg).</span>
+\((f \circ g) \rhd x = ((f \circ g) \circ x) \circ (f \circ g)\).
+The cact of a product frame: \(\mathit{cact}(f \circ g)\) flanks \(x\) on both sides by \(f \circ g\).
+This is the "naive" single-step conjugation; Theorem 6.1 shows that
+\(f \rhd (g \rhd x)\) is a <em>different</em>, twisted form unless the monoid commutes.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.40 (cact_two_frames).</span>
+\(f \rhd (g \rhd x) = ((f \circ g) \circ x) \circ (g \circ f)\).
+The repackaged Theorem 6.1 under a descriptive name — the "two-frame" lemma.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.41 (cact_three_frames).</span>
+\(f \rhd (g \rhd (h \rhd x)) = ((f \circ g) \circ (h \rhd x)) \circ (g \circ f)\).
+Three-frame stacking: applying Theorem 6.1 to the outer two frames around \(h \rhd x\).
+The innermost conjugation by \(h\) remains as an opaque sub-expression.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.42 (cact_congr_content).</span>
+If \(x = y\) then \(f \rhd x = f \rhd y\).
+Congruence of cact with respect to equality of content: equal inputs yield equal outputs.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.43 (cact_congr_frame).</span>
+If \(f = g\) then \(f \rhd x = g \rhd x\).
+Congruence of cact with respect to equality of frames.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.44 (cact_double_ident).</span>
+\(e \rhd (e \rhd x) = x\).
+A double void-frame conjugation is the identity; follows from two applications of
+<code>cact_ident</code>. Marked <code>@[simp]</code>.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s7">§7 Fixed Points and Commutativity</h2>
+
+<p>
+A <em>fixed point</em> of the conjugation by \(f\) is an idea \(x\) with \(f \rhd x = x\).
+The empty frame \(e\) fixes everything (Lemma 6.50); and fixed points remain fixed under
+every iterate of the frame (Lemma 6.48).
+The commutativity results establish when two frames can be applied in either order.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.45 (cact_iter_ident).</span>
+\(e^n \rhd x = x\) for every \(n \in \mathbb{N}\).
+Iterating the void frame any number of times is still the identity action.
+Proved by induction on \(n\) using <code>cact_ident</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.46 (cact_commute_def).</span>
+\(\mathit{CactCommute}\ f\ g\ x \iff f \rhd (g \rhd x) = g \rhd (f \rhd x)\).
+Definitional equivalence; establishes that <code>CactCommute</code> unfolds to an equality.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.47 (cact_commute_symm).</span>
+If \(\mathit{CactCommute}\ f\ g\ x\) then \(\mathit{CactCommute}\ g\ f\ x\).
+Commutativity of frames is symmetric: if \(f\) and \(g\) commute on \(x\), so do \(g\) and \(f\).
+Follows from the symmetry of equality.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.48 (cact_commute_void).</span>
+\(\mathit{CactCommute}\ e\ g\ x\) for every \(g\) and \(x\).
+The void frame commutes with every frame on every content; follows from <code>cact_ident</code>
+applied twice.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.49 (cact_fixed_iter).</span>
+If \(\mathit{CactFixed}\ f\ x\) then \(f^n \rhd x = x\) for every \(n \in \mathbb{N}\).
+A fixed point remains fixed under every iterate.
+Proved by induction: the inductive step uses the fixed-point hypothesis \(f \rhd x = x\) and
+the inductive hypothesis \(f^n \rhd x = x\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.50 (cact_fixed_void).</span>
+\(\mathit{CactFixed}\ e\ x\) for every \(x\).
+Every idea is a fixed point of the void frame's action; immediate from <code>cact_ident</code>.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s8">§8 The Conjugate Relation</h2>
+
+<p>
+The relation \(\mathit{Conjugate}\ x\ y\) — asserting the existence of frames \(p, q\) such that
+\((p \circ x) \circ q = y\) — organises idea space into <em>conjugacy orbits</em>.
+The four lemmas in this section establish the algebraic foundations of that orbit structure.
+</p>
+
+<div class="thm"><span class="thm-label">Lemma 6.51 (conjugate_refl).</span>
+\(\mathit{Conjugate}\ x\ x\) for every \(x\).
+Reflexivity witnessed by \(p = q = e\): \((e \circ x) \circ e = x\) by both identity laws.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.52 (conjugate_congr_right).</span>
+If \(\mathit{Conjugate}\ x\ y\) and \(y = z\) then \(\mathit{Conjugate}\ x\ z\).
+Right congruence: the relation is preserved when the right argument is replaced by an equal idea.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.53 (conjugate_congr_left).</span>
+If \(x = y\) and \(\mathit{Conjugate}\ y\ z\) then \(\mathit{Conjugate}\ x\ z\).
+Left congruence: the relation is preserved when the left argument is replaced by an equal idea.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 6.54 (conjugate_compose).</span>
+If \(\mathit{Conjugate}\ x\ y\) and \(\mathit{Conjugate}\ y\ z\) then \(\mathit{Conjugate}\ x\ z\).
+Transitivity: given witnesses \((p_1, q_1)\) and \((p_2, q_2)\), the composite witness
+\((p_2 \circ p_1,\ q_1 \circ q_2)\) satisfies
+\(((p_2 \circ p_1) \circ x) \circ (q_1 \circ q_2) = z\) by five steps of associativity.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="implications">Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p><strong>Every reframing result in intellectual history is a corollary of 55 lemmas.</strong>
+The conjugation action \(f \rhd x = f \circ x \circ f\) is algebraically minimal: it requires no
+inverses, no commutativity, no topology, and no additional structure beyond a unital associative monoid.
+Yet it encodes, at the level of a single equation, the core operation described under different names
+in cognitive linguistics (Lakoff's <em>framing</em>), sociology (Goffman's <em>frame analysis</em>),
+political science (Gramsci's <em>hegemony</em>), history of science (Kuhn's <em>paradigm shift</em>),
+epistemology (Foucault's <em>episteme</em>), and social theory (Bourdieu's <em>field</em>).
+Each of these traditions developed its vocabulary in isolation; Theorems6 shows they are all
+studying Lemmas 6.1–6.54, viewed through different disciplinary lenses.
+The 55 machine-checked results constitute, in this sense, the common algebra of reframing —
+the invariant structure underneath every discourse about how contexts transform contents.</p>
+
+<p><strong>Theorem 6.1 and the non-commutativity of real frames.</strong>
+The twisted sandwich formula \(f \rhd (g \rhd x) = ((f \circ g) \circ x) \circ (g \circ f)\) is not
+merely a technical correction to the naive law \(\mathrm{cact}(f \circ g) = \mathrm{cact}(f) \circ \mathrm{cact}(g)\).
+It is a theorem about the <em>non-commutativity of real frames</em>.
+In a commutative monoid \(g \circ f = f \circ g\) and the right flank in Theorem 6.1 collapses
+to the same product as the left flank, recovering an ordinary homomorphism.
+In the non-commutative idea monoid, the two flanks genuinely differ: being framed first by
+"climate-change scepticism" and then by "market solutions" gives a different combined frame than being
+framed first by "market solutions" and then by "climate-change scepticism."
+This is the algebraic content of every claim in political science that frame-ordering matters —
+that the sequence in which frames are introduced to an audience affects the composite frame's
+action on underlying content, independently of any empirical contingency.
+Corollary 6.1 makes this claim machine-verified.</p>
+
+<p><strong>Theorems 6.2–6.3 and the orbit structure of idea space.</strong>
+Theorem 6.2 establishes that the conjugation action is <em>equivariant</em> with respect to
+list composition: you can either apply a frame to each idea in a chain and then compose, or
+compose first and reframe the result.
+This is the algebraic statement of a familiar methodological claim in hermeneutics:
+the interpretation of a text can proceed sentence by sentence under a fixed interpretive framework,
+and the result is the same as applying that framework to the text as a whole.
+Theorem 6.3 establishes that the equivalence classes of conjugacy — the orbits of the monoid
+action — are well-defined objects.
+They are the formal counterparts of what Kuhn called a <em>paradigm</em> (a class of theories
+mutually reachable by paradigm shift), what Foucault called an <em>episteme</em> (a class of
+discourses sharing a common archive), and what Bourdieu called a <em>field position</em>
+(a class of practices sharing an orbit under the capital transformation group).
+Corollary 6.3 (transitivity) is the result that makes these orbit classes meaningful as
+<em>scientific kinds</em> rather than arbitrary groupings.</p>
+
+<p><strong>Fixed points and the theory of hegemony.</strong>
+Lemmas 6.49–6.50 and Corollary 6.4 constitute an algebraic theory of <em>fixed ideas</em>:
+ideas that remain unchanged however many times a given frame is applied to them.
+In Gramsci's theory of hegemony, a hegemonic frame is one that has achieved the status of
+"common sense" — it no longer appears as a frame at all, because every content it acts on
+returns apparently unchanged.
+Algebraically, a Gramscian common-sense frame \(f\) is one for which \(\mathit{CactFixed}\ f\ x\)
+holds for the vast majority of circulating ideas \(x\).
+Corollary 6.4 makes explicit what hegemony theory implies but rarely states: a frame that once
+achieves fixed-point status keeps it under iteration.
+There is no mechanism in the algebra by which a fixed idea can be dislodged by further applications
+of the same frame; resistance to the hegemonic frame requires a <em>different</em> frame, i.e.
+a counter-hegemonic practice that lies outside the fixed-point set of the dominant frame.
+Lemma 6.50 (every idea is fixed by the void frame) is the algebraic trivialisation of hegemony:
+the neutral intellectual default — no frame at all — leaves everything unchanged.
+The content of hegemony theory is the contrast between this trivial case and the non-trivial
+frames that fix a proper subset of idea space.</p>
+
+<p><strong>The group of invertible ideas acts on idea space.</strong>
+Among all frames \(f\), the invertible ones — those belonging to \(\mathcal{I}^\times\) —
+form a group (by Theorem 1 / Theorems1 results), and their conjugation action satisfies
+Theorem 6.1 for all pairs.
+The orbits under this restricted action are exactly the conjugacy classes of the group
+\(\mathcal{I}^\times\) acting on \(\mathcal{I}\).
+Corollary 6.5 confirms that the identity element of this group action — the void frame \(e\) —
+acts trivially for every iteration count, which is the baseline of Lakoff's observation that
+"neutral framing" is itself a frame: it corresponds to the void orbit, the singleton class
+\(\{e\} \subset \mathcal{I}^\times\) acting by the identity.
+The full orbit structure of \(\mathcal{I}^\times \curvearrowright \mathcal{I}\) is therefore the
+precise algebraic object that political frame theorists are attempting to describe when they
+catalogue the distinct frames operative in a political discourse — they are cataloguing the orbits,
+not the frames themselves.</p>
+
+</div>
+
+<!-- ============================================================ -->
+<h2 id="zoo">Zoo Entries</h2>
+
+<div class="zoo-entry">
+<h3>Kuhn — Paradigm Shift as Conjugation</h3>
+<p><strong>Original claim:</strong> Scientific revolutions occur when one paradigm replaces another; within a paradigm, normal science proceeds by solving puzzles set by that paradigm's frame (<em>The Structure of Scientific Revolutions</em>, 1962).</p>
+<p><strong>Formal restatement:</strong> A Kuhnian paradigm is a frame \(f \in \mathcal{I}\). Normal science within that paradigm is the computation of \(f \rhd x\) for various contents \(x\). A paradigm shift from \(f\) to \(g\) is the transition to computing \(g \rhd x\). Two paradigms \(f\) and \(g\) generate the same orbit on content \(x\) iff \(\mathit{Conjugate}\ (f \rhd x)\ (g \rhd x)\).</p>
+<p><strong>Status:</strong> <em>Partially formalised.</em> The orbit structure of Theorem 6.3 vindicates Kuhn's central claim that paradigms partition scientific theories into equivalence classes. Corollary 6.3 (transitivity) ensures that "being in the same paradigm" is a genuine equivalence, not merely a similarity relation.</p>
+<p><strong>Commentary:</strong> Kuhn's notion of incommensurability between paradigms corresponds to the failure of \(\mathit{CactCommute}\ f\ g\ x\) for most contents \(x\): the results of applying two paradigms in sequence depend on the order, which is precisely what Theorem 6.1 establishes algebraically. The non-commutativity of the twisted sandwich \(((f \circ g) \circ x) \circ (g \circ f) \neq ((g \circ f) \circ x) \circ (f \circ g)\) in general is the algebraic correlate of Kuhn's claim that "Newtonian mechanics" applied to "quantum phenomena," followed by "quantum mechanics" applied to the same, gives a different composite than the reverse order. What Kuhn left informal — the sense in which two paradigm shifts can compose into a single shift, and the sense in which repeated applications of the same paradigm converge — is captured by Lemma 6.19 (powers add) and Corollary 6.4 (fixed-point persistence). A Kuhnian "normal science plateau" is exactly a period in which every content of interest is a fixed point of the dominant paradigm frame, and Corollary 6.4 says that once a content reaches this fixed-point status it stays there under further application of the same paradigm.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Goffman — Frame Analysis</h3>
+<p><strong>Original claim:</strong> Social situations are interpreted through "frames" — schemata of interpretation that allow participants to locate, perceive, identify, and label events (<em>Frame Analysis</em>, 1974).</p>
+<p><strong>Formal restatement:</strong> A Goffman frame is an element \(f \in \mathcal{I}\). The "keying" operation — the transformation of a primary framework by a secondary one — is composition \(f \circ g\). The re-keyed action on content is \((f \circ g) \rhd x\), which by Lemma 6.39 (\(\mathit{cact\_fg}\)) is \(((f \circ g) \circ x) \circ (f \circ g)\).</p>
+<p><strong>Status:</strong> <em>Fully captured.</em> The cact action formalises Goffman's frame transformation exactly. Lemma 6.29 (<code>cact_list_append</code>) captures Goffman's observation that a frame applied to a sequence of events distributes: the frame's effect on a compound situation is the composition of its effects on the constituent strips.</p>
+<p><strong>Commentary:</strong> Goffman's most important technical contribution was the layering structure of frames: a theatrical performance is a keyed transformation of a rehearsal, which is a keyed transformation of real life, and the three layers compose. Theorem 6.1 gives the algebraic content of this layering: stacking two keying transformations \(f\) and \(g\) produces the twisted sandwich of Theorem 6.1, not the naive product frame. The "frame breaks" that Goffman documents — moments when participants reveal the underlying layer — correspond algebraically to the application of a frame whose conjugation action is nearly the identity on certain contents (frames close to \(e\)). Lemma 6.50 (everything is fixed by \(e\)) is the limiting case: a perfectly transparent frame, one that leaves all contents unchanged, is the void idea. The practical impossibility of a fully transparent frame — which is Goffman's empirical observation that no social interaction is ever "purely" itself without a framing layer — corresponds to the algebraic rarity of truly fixed points under non-trivial frames.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Lakoff — Political Framing</h3>
+<p><strong>Original claim:</strong> People think in frames; political discourse is a competition over which frames become dominant; progressives lose when they argue on conservative frames (<em>Don't Think of an Elephant</em>, 2004; <em>Moral Politics</em>, 1996).</p>
+<p><strong>Formal restatement:</strong> A political frame is a frame \(f \in \mathcal{I}\). Two frames \(f_C\) (conservative) and \(f_P\) (progressive) act on political content \(x\). Lakoff's claim is that these frames generate different orbits: \(f_C \rhd x \not\sim_\mathrm{conj} f_P \rhd x\) for most \(x\). Frame dominance is the condition \(\mathit{CactFixed}\ f\ x\) — when the dominant frame fixes a content, the content appears "natural" rather than framed.</p>
+<p><strong>Status:</strong> <em>Formalised as orbit separation.</em> The orbit structure of Theorem 6.3 provides the algebraic underpinning. Lemma 6.51 (reflexivity) says every position is its own conservative baseline; transitivity (Lemma 6.54) says that a sequence of incremental reframings composes into a single reframing.</p>
+<p><strong>Commentary:</strong> Lakoff's central prescription — "don't use their language" — is the advice to avoid applying \(f_C\) to progressive content, because \(f_C \rhd x\) may land in the conservative orbit even when \(x\) itself is progressive content. Algebraically this is the warning that conjugacy orbits are not preserved by arbitrary frame composition: \(f_C \rhd x\) and \(f_P \rhd x\) may be in different conjugacy classes. Theorem 6.1 adds precision: stacking the progressive frame \(f_P\) on top of conservative content \(f_C \rhd x\) gives \(f_P \rhd (f_C \rhd x) = ((f_P \circ f_C) \circ x) \circ (f_C \circ f_P)\), which is a twisted product that depends on the non-commutativity of \(f_P \circ f_C\) and \(f_C \circ f_P\). This is the algebraic content of Lakoff's empirical observation that the combined frame "progressive+conservative" is not the same as "conservative+progressive" — frame ordering genuinely matters, and Theorem 6.1 is the precise statement of why.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Foucault — Episteme as Conjugation Class</h3>
+<p><strong>Original claim:</strong> Each historical epoch is governed by an <em>episteme</em> — an underlying epistemic structure that determines what counts as knowledge; discourses within the same episteme share a common archive (<em>The Order of Things</em>, 1966; <em>The Archaeology of Knowledge</em>, 1969).</p>
+<p><strong>Formal restatement:</strong> A Foucauldian episteme is a conjugacy class \([x]_{\sim_\mathrm{conj}} \subseteq \mathcal{I}\). Two discourses \(x\) and \(y\) belong to the same episteme iff \(x \sim_\mathrm{conj} y\), i.e.\ iff there exist frames \(p, q\) such that \((p \circ x) \circ q = y\). An epistemic break is the passage of a discourse from one conjugacy class to another.</p>
+<p><strong>Status:</strong> <em>Formally grounded.</em> Theorem 6.3 establishes that the episteme classes are genuine equivalence classes. Corollary 6.3 formalises Foucault's claim that epistemic affiliation is transitive: if discourse \(x\) belongs to the Renaissance episteme (conjugacy class) and the Renaissance episteme contains discourse \(y\), and \(y\) belongs to the Classical Age episteme, then \(x\) can be connected to the Classical Age by composing the two conjugacy witnesses — a single pair \((p_2 \circ p_1, q_1 \circ q_2)\) bridges the gap.</p>
+<p><strong>Commentary:</strong> Foucault insisted that epistemes are not chosen by individuals but are structural conditions of possibility for discourse. The algebraic translation is exact: the conjugacy class \([x]\) is determined not by \(x\) alone but by the ambient frame structure of \(\mathcal{I}\). An individual discourse cannot place itself in a different episteme by an act of will, because the episteme class is defined by the existence of frames that bridge it — a purely structural condition. What Foucault never did was give a criterion for when two discourses are in the same episteme rather than merely adjacent. Lemma 6.54 (<code>conjugate_compose</code>) gives this criterion exactly: \(x \sim_\mathrm{conj} z\) iff there is a finite chain of frame applications connecting them. The "archive" of an episteme is the closure of a seed discourse under the conjugation action — the orbit \(\{y : x \sim_\mathrm{conj} y\}\) — and Theorem 6.3 ensures this is an equivalence class.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Bourdieu — Field as Orbit</h3>
+<p><strong>Original claim:</strong> A social field is a structured space of positions; agents occupy positions whose value is determined by the distribution of capital; movement within a field is a transformation of position by capital (<em>The Logic of Practice</em>, 1980; <em>Distinction</em>, 1979).</p>
+<p><strong>Formal restatement:</strong> A Bourdieusian field is the orbit space \(\mathcal{I} / {\sim_\mathrm{conj}}\). A position in the field is a conjugacy class \([x]\). Capital is a frame \(f \in \mathcal{I}^\times\) (an invertible idea). The transformation of position by capital is the conjugation action \(f \rhd x\). Two positions are in the same field orbit iff they are conjugate.</p>
+<p><strong>Status:</strong> <em>Precisely modelled.</em> Theorem 6.3 provides the orbit structure. Lemma 6.49 (<code>cact_fixed_iter</code>) models the stability of dominant field positions: a position that is a fixed point of the dominant capital form remains stable under repeated application of that capital, which is Bourdieu's account of how dominant positions reproduce themselves.</p>
+<p><strong>Commentary:</strong> Bourdieu's concept of "capital conversion" — the process by which economic capital is converted into cultural or social capital — is, in algebraic terms, the composition of frame elements from different sub-monoids of \(\mathcal{I}\). The Theorem 6.1 twisted sandwich formula captures an important Bourdieusian asymmetry: converting economic capital \(f_E\) to cultural capital \(g_C\) and then applying both to a cultural practice \(x\) gives \(f_E \rhd (g_C \rhd x) = ((f_E \circ g_C) \circ x) \circ (g_C \circ f_E)\), which differs from \(g_C \rhd (f_E \rhd x)\) exactly when \(f_E\) and \(g_C\) do not commute — i.e. when the two species of capital interact non-symmetrically, which is precisely Bourdieu's empirical claim about the French educational field. Corollary 6.2 (reflexivity of conjugacy) says every field position is in the same orbit as itself — a tautology in individual terms, but the algebraic basis for Bourdieu's concept of the "habitus" as the internalised structure of the field that reproduces the agent's own position.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Gramsci — Hegemony as Fixed-Point Orbit</h3>
+<p><strong>Original claim:</strong> Hegemony is the exercise of political power through ideological consent rather than coercion; a hegemonic bloc wins consent by making its particular interests appear universal, its frame appear frameless (<em>Prison Notebooks</em>, 1929–1935).</p>
+<p><strong>Formal restatement:</strong> A hegemonic frame \(f_H \in \mathcal{I}\) is one for which \(\mathit{CactFixed}\ f_H\ x\) holds for all \(x\) in a large set \(S \subseteq \mathcal{I}\) of "circulating" contents. The hegemonic effect is that \(f_H \rhd x = x\): applying the frame appears not to transform the content, so the frame becomes invisible. Counter-hegemony is the project of finding a frame \(g\) such that \(\mathit{CactFixed}\ g\ x\) fails for some \(x \in S\).</p>
+<p><strong>Status:</strong> <em>Algebraically grounded.</em> Lemma 6.49 (<code>cact_fixed_iter</code>) formalises the self-reinforcing nature of hegemony: once a content enters the fixed-point set of \(f_H\), iterating \(f_H\) cannot dislodge it. Lemma 6.50 establishes the void baseline: true content-independence (Gramsci's "organic intellectuals" who speak without a class frame) would require \(f = e\), but the void idea is not a real social position.</p>
+<p><strong>Commentary:</strong> Gramsci's insight was that hegemony is more durable than simple coercive domination because it operates through the fixation of ideas rather than their suppression. Algebraically, a suppressive power would attempt to remove certain ideas \(x\) from circulation entirely, while hegemonic power makes \(x\) a fixed point of its frame: the idea remains in circulation but always returns to its pre-framed form under the dominant frame's action. Corollary 6.5 (\(e^n \rhd x = x\)) is the degenerate limit: the "common sense" frame that Gramsci describes as the residue of all previous hegemonies is, in the algebraic limit, the void frame acting as the identity. The political implication of Lemma 6.48 (<code>cact_commute_void</code>) is subtle: the void frame commutes with every other frame, which means that a truly hegemonic frame — one that has collapsed to the identity on all circulating contents — is also a frame that all other frames commute with. This is the algebraic statement of Gramsci's "passive revolution": when a hegemonic transformation has been so thoroughly naturalised that it commutes with all subsequent political actions, the original transformation becomes effectively invisible.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="extensions">Related Lean Extensions</h2>
+
+<p>The conjugation action of Theorems6 is the algebraic foundation for several downstream developments:</p>
+
+<ul>
+  <li>
+    <strong>Theorems7 — Transmission Chains.</strong>
+    The equivariance result (Theorem 6.2 / <code>cact_equivariant_append</code>) is used in Theorems7
+    to show that a frame applied to a transmission chain commutes with chain concatenation —
+    the basic "frame-and-transmit" lemma of cultural evolution models.
+  </li>
+  <li>
+    <strong>Theorems8 — Structural Equivalence.</strong>
+    The conjugacy relation of Theorem 6.3 is the seed for the structural equivalence of Theorems8,
+    which adds the requirement that the witnessing frames be invertible.
+    The orbit structure of Theorems6 is a coarsening of the Theorems8 equivalence.
+  </li>
+  <li>
+    <strong>Volume IV — Cognitive Science.</strong>
+    The three headline theorems appear verbatim as the algebraic core of the "frame-projection lemma"
+    (Volume IV §3.2), which asserts that cognitive reframing is a well-typed algebraic operation
+    on the idea monoid.
+  </li>
+  <li>
+    <strong>Volume V — Emergence.</strong>
+    The conjugacy orbits of Theorem 6.3 are the "emergent kinds" of Volume V §1.3.
+    The transitivity lemma (<code>conjugate_compose</code>) is used to show that the orbit space
+    of a finitely generated idea monoid is itself finitely presented.
+  </li>
+  <li>
+    <strong>Mathlib interactions.</strong>
+    The file deliberately avoids importing Mathlib's <code>Monoid.npow</code> and <code>Group.conj</code>
+    to keep the dependency footprint minimal.
+    A future refactoring could connect <code>cact_pow</code> to <code>Monoid.npow</code> and
+    <code>Conjugate</code> to Mathlib's <code>IsConj</code> predicate, enabling re-use of Mathlib's
+    conjugacy class theorems (which assume a group and hence inverses).
+    The current definitions are strictly more general, applying to any monoid.
+  </li>
+</ul>
+
+<p><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

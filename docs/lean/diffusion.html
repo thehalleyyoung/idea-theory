@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diffusion — Lean Extension | Idea Theory</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a class="active" href="index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="main-content">
+
+<header class="page-header">
+  <h1>Diffusion</h1>
+  <p class="subtitle">Lean 4 Extension &mdash; Cyclic Population Transmission</p>
+  <p>
+    This extension formalises a discrete-time model of idea diffusion through a finite cyclic population.
+    Agents are arranged in a ring; at each step every agent adopts the \(\circ\)-composition of its left
+    neighbour's idea with its own. Thirty-four theorems certify the model's core properties: population
+    conservation, identity fixed points, semigroup iteration, aggregate stability, monotone adoption, and
+    the Granovetter strict-increase effect.
+  </p>
+  <p>
+    <strong>Source:</strong>
+    <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/Diffusion.lean"
+       target="_blank">IdeaTheory/Extensions/Diffusion.lean</a>
+  </p>
+</header>
+
+<!-- ============================================================ -->
+<h2>Model Overview</h2>
+<!-- ============================================================ -->
+
+<p>
+  A <em>population</em> is a <code>List&nbsp;&alpha;</code> of ideas drawn from the idea monoid
+  \((\mathcal{I},\circ,e)\). The function <code>step</code> applies one round of cyclic transmission:
+  each agent at position \(i\) adopts \(\mathrm{idea}_{i-1} \circ \mathrm{idea}_i\), with the
+  left-most agent receiving from the right-most (cyclic boundary). The helper
+  <code>lastEl&nbsp;x&nbsp;xs</code> retrieves the terminal element of a list (defaulting to
+  <code>x</code> on the empty list), implementing the cyclic wraparound.
+</p>
+
+<pre><code class="language-lean">-- Population model: cyclic transmission step
+abbrev Population (α : Type*) := List α
+
+def lastEl (x : α) : List α → α
+  | []      => x
+  | y :: ys => lastEl y ys
+
+def stepWith (prev : α) : List α → List α
+  | []      => []
+  | x :: xs => op prev x :: stepWith x xs
+
+def step : List α → List α
+  | []      => []
+  | y :: ys => stepWith (lastEl y ys) (y :: ys)
+</code></pre>
+
+<p>
+  Given these primitives, three derived operations complete the model:
+</p>
+<ul>
+  <li>\(\mathtt{iterate}\;n\;(\mathtt{step})\;\mathit{xs}\) &mdash; \(n\) rounds of transmission, written
+      \(\mathtt{step}^{[n]}\;\mathit{xs}\);</li>
+  <li>\(\mathtt{aggregate}\;\mathit{xs} = x_0 \circ x_1 \circ \cdots \circ x_{k-1}\) &mdash; the
+      \(\circ\)-fold of the population;</li>
+  <li>\(\mathtt{propagated}(a, L, n) = \mathtt{step}^{[n]}(\mathtt{replicate}\;L\;a)\) &mdash; the
+      state of an \(L\)-agent all-\(a\) population after \(n\) steps.</li>
+</ul>
+
+<pre><code class="language-lean">-- T1/T2: Length preservation and identity fixed point
+theorem step_length (xs : List α) : (step xs).length = xs.length
+theorem step_replicate_ident (n : Nat) :
+    step (List.replicate n (ident : α)) = List.replicate n ident
+</code></pre>
+
+<pre><code class="language-lean">-- T3/T4: Semigroup law and convergence
+theorem iterate_step_add (n m : Nat) (xs : List α) :
+    step^[n + m] xs = step^[n] (step^[m] xs)
+theorem propagated_ident (L n : Nat) :
+    propagated (ident : α) L n = List.replicate L ident
+</code></pre>
+
+<pre><code class="language-lean">-- T8/T9: Rogers monotonicity and Granovetter weak tie
+theorem rogers_monotone [DecidableEq α] {f : List α → List α}
+    (hf : NonErasing f) (xs : List α) (n : Nat) :
+    adopters xs ≤ adopters (f^[n] xs)
+theorem granovetter_weak_tie [DecidableEq α] (a : α) (ha : a ≠ ident) (j : Nat) :
+    adopters (a :: List.replicate (j+1) (ident : α))
+      &lt; adopters (step (a :: List.replicate (j+1) ident))
+</code></pre>
+
+<!-- ============================================================ -->
+<h2>§1 — Structural Lemmas on <code>lastEl</code> and <code>stepWith</code></h2>
+<!-- ============================================================ -->
+
+<p>
+  The first six results are definitional unfoldings; they establish the computational behaviour of
+  <code>lastEl</code> and <code>stepWith</code> on nil and cons lists. All proofs close with
+  <code>rfl</code>.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (lastEl_nil).</span>
+  For any default element \(x\), \(\mathtt{lastEl}\;x\;[] = x\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (lastEl_cons).</span>
+  \(\mathtt{lastEl}\;x\;(y{::}ys) = \mathtt{lastEl}\;y\;ys\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (stepWith_nil).</span>
+  \(\mathtt{stepWith}\;p\;[] = []\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (stepWith_cons).</span>
+  \(\mathtt{stepWith}\;p\;(x{::}xs) = (p \circ x) :: \mathtt{stepWith}\;x\;xs\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_nil).</span>
+  \(\mathtt{step}\;[] = []\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_cons).</span>
+  \(\mathtt{step}(y{::}ys) = \mathtt{stepWith}(\mathtt{lastEl}\;y\;ys)(y{::}ys)\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§2 — Length Preservation</h2>
+<!-- ============================================================ -->
+
+<p>
+  Diffusion is a <em>closed system</em>: no agent is created or destroyed. The following three
+  theorems certify this invariant at the level of a single step, a single iterate, and all iterates.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (stepWith_length).</span>
+  \(|\mathtt{stepWith}\;p\;\mathit{xs}| = |\mathit{xs}|\).
+  <br><small class="proof-sketch">Proof sketch: Induction on xs; base rfl; step simp using IH.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_length).</span>
+  For all populations \(\mathit{xs}\),
+  \[|\mathtt{step}(\mathit{xs})| = |\mathit{xs}|.\]
+  <br><small class="proof-sketch">Proof sketch: Cases on xs; nil trivial; cons follows from stepWith_length.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (iterate_step_length).</span>
+  For all \(n\),
+  \[|\mathtt{step}^{[n]}(\mathit{xs})| = |\mathit{xs}|.\]
+  <br><small class="proof-sketch">Proof sketch: Induction on n; step case combines step_length and IH.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§3 — All-Identity Fixed Point</h2>
+<!-- ============================================================ -->
+
+<p>
+  When every agent holds the identity idea \(e\), the population is algebraically inert: transmission
+  of \(e\) by composition with \(e\) reproduces \(e\). The theorems below certify that this state is
+  a fixed point at every level of abstraction.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (stepWith_replicate_ident).</span>
+  \(\mathtt{stepWith}\;e\;(\mathtt{replicate}\;n\;e) = \mathtt{replicate}\;n\;e\).
+  <br><small class="proof-sketch">Proof sketch: Induction; step uses id_left and IH.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (lastEl_replicate_self).</span>
+  \(\mathtt{lastEl}\;a\;(\mathtt{replicate}\;n\;a) = a\).
+  <br><small class="proof-sketch">Proof sketch: Induction; step uses lastEl_cons and IH.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_replicate_ident).</span>
+  The all-identity population is a fixed point:
+  \[\mathtt{step}(\mathtt{replicate}\;n\;e) = \mathtt{replicate}\;n\;e.\]
+  <br><small class="proof-sketch">Proof sketch: Use lastEl_replicate_self and stepWith_replicate_ident.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (iterate_step_add).</span>
+  The semigroup law for iterated diffusion:
+  \[\mathtt{step}^{[n+m]}\;\mathit{xs} = \mathtt{step}^{[n]}(\mathtt{step}^{[m]}\;\mathit{xs}).\]
+  <br><small class="proof-sketch">Proof sketch: Function.iterate_add_apply.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (iterate_step_replicate_ident).</span>
+  \(\mathtt{step}^{[n]}(\mathtt{replicate}\;L\;e) = \mathtt{replicate}\;L\;e\).
+  <br><small class="proof-sketch">Proof sketch: Induction on n; step applies IH then step_replicate_ident.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (propagated_ident).</span>
+  An all-identity population propagates as identity forever:
+  \[\mathtt{propagated}(e,\, L,\, n) = \mathtt{replicate}\;L\;e.\]
+  <br><small class="proof-sketch">Proof sketch: Unfolds to iterate_step_replicate_ident.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§4 — Aggregate</h2>
+<!-- ============================================================ -->
+
+<p>
+  The <em>aggregate</em> of a population is the \(\circ\)-fold over all agents:
+  \(\mathtt{aggregate}([x_0,\ldots,x_{k-1}]) = x_0 \circ (x_1 \circ \cdots \circ x_{k-1})\).
+  The aggregate captures the population's combined ideational output.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_nil).</span>
+  \(\mathtt{aggregate}([]) = e\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_cons).</span>
+  \(\mathtt{aggregate}(x{::}xs) = x \circ \mathtt{aggregate}(xs)\).
+  <br><small class="proof-sketch">Proof sketch: by definition (rfl).</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_replicate_ident).</span>
+  \(\mathtt{aggregate}(\mathtt{replicate}\;k\;e) = e\).
+  <br><small class="proof-sketch">Proof sketch: Induction; step uses id_left and IH.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_append_ident_replicate).</span>
+  Appending identity bystanders does not change the aggregate:
+  \[\mathtt{aggregate}(\mathit{xs} \mathbin{++} \mathtt{replicate}\;k\;e) = \mathtt{aggregate}(\mathit{xs}).\]
+  <br><small class="proof-sketch">Proof sketch: List.foldr_append, then aggregate_replicate_ident.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_replicate_ident_append).</span>
+  \(\mathtt{aggregate}(\mathtt{replicate}\;k\;e \mathbin{++} \mathit{xs}) = \mathtt{aggregate}(\mathit{xs})\).
+  <br><small class="proof-sketch">Proof sketch: Induction on k; step uses id_left and IH.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§5 — Strong-Tie Commutativity</h2>
+<!-- ============================================================ -->
+
+<p>
+  Among agents whose ideas commute — "strong ties" in Granovetter's vocabulary — the order of
+  transmission is aggregate-neutral. The following theorem formalises this.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_swap_adjacent_commute).</span>
+  If \(a \circ b = b \circ a\), then
+  \[\mathtt{aggregate}(\mathit{xs} \mathbin{++} [a, b] \mathbin{++} \mathit{ys})
+    = \mathtt{aggregate}(\mathit{xs} \mathbin{++} [b, a] \mathbin{++} \mathit{ys}).\]
+  Commuting adjacent ideas does not change the aggregate.
+  <br><small class="proof-sketch">Proof sketch: Induction on xs; base uses associativity and the commutativity hypothesis; step is congruence.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§6 — Idempotent Threshold</h2>
+<!-- ============================================================ -->
+
+<p>
+  An idea \(a\) is <em>idempotent</em> if \(a \circ a = a\). When a population has been fully
+  saturated with an idempotent idea, it is a fixed point: the idea is "tipped."
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (stepWith_replicate_idempotent).</span>
+  If \(a \circ a = a\), then \(\mathtt{stepWith}\;a\;(\mathtt{replicate}\;n\;a) = \mathtt{replicate}\;n\;a\).
+  <br><small class="proof-sketch">Proof sketch: Induction; step uses ha and IH.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_replicate_idempotent).</span>
+  If \(a \circ a = a\), then a fully-saturated idempotent population is a fixed point:
+  \[\mathtt{step}(\mathtt{replicate}(n{+}1)\;a) = \mathtt{replicate}(n{+}1)\;a.\]
+  <br><small class="proof-sketch">Proof sketch: Use lastEl_replicate_self and stepWith_replicate_idempotent.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§7 — Rogers-Style Monotone Adoption</h2>
+<!-- ============================================================ -->
+
+<p>
+  A rule \(f : \mathtt{List}\;\alpha \to \mathtt{List}\;\alpha\) is <em>non-erasing</em> if it never
+  decreases the adoption count: \(\mathtt{adopters}(\mathit{xs}) \le \mathtt{adopters}(f(\mathit{xs}))\)
+  for all \(\mathit{xs}\). The Rogers theorem extends this one-step property to all iterates.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (rogers_monotone).</span>
+  If \(f\) is non-erasing, then for all populations \(\mathit{xs}\) and \(n \in \mathbb{N}\),
+  \[\mathtt{adopters}(\mathit{xs}) \le \mathtt{adopters}(f^{[n]}(\mathit{xs})).\]
+  Iterating a non-erasing rule yields monotonically non-decreasing adoption.
+  <br><small class="proof-sketch">Proof sketch: Induction on n; step chains IH with the non-erasing property.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (nonErasing_id).</span>
+  The identity rule is non-erasing.
+  <br><small class="proof-sketch">Proof sketch: le_refl.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§8 — Granovetter Weak-Tie Effect</h2>
+<!-- ============================================================ -->
+
+<p>
+  The Granovetter section proves the micro-mechanism of the "strength of weak ties": a single
+  non-identity agent inserted into an otherwise all-identity population <em>strictly</em> increases
+  adoption after one cyclic transmission step. The proof proceeds by computing <code>step</code>
+  explicitly on this population, then counting adopters on both sides of the inequality.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (lastEl_replicate_succ).</span>
+  \(\mathtt{lastEl}\;x\;(\mathtt{replicate}(n{+}1)\;a) = a\).
+  <br><small class="proof-sketch">Proof sketch: Induction on n; step uses lastEl_cons and IH applied to a.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_single_a_ident).</span>
+  A single non-identity insertion into an all-identity population duplicates rightward in one step:
+  \[\mathtt{step}(a :: \mathtt{replicate}(j{+}1)\;e) = a :: a :: \mathtt{replicate}\;j\;e.\]
+  <br><small class="proof-sketch">Proof sketch: Unfold step; use lastEl_replicate_succ, id_left, id_right, stepWith_replicate_ident.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (granovetter_weak_tie).</span>
+  If \(a \ne e\), then
+  \[\mathtt{adopters}(a :: \mathtt{replicate}(j{+}1)\;e)
+    < \mathtt{adopters}(\mathtt{step}(a :: \mathtt{replicate}(j{+}1)\;e)).\]
+  A single non-identity insertion strictly increases adoption after one step.
+  <br><small class="proof-sketch">Proof sketch: Apply step_single_a_ident; compute countP on both sides using hcount; simp with ha.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>§9 — Further Structural Lemmas</h2>
+<!-- ============================================================ -->
+
+<p>
+  The final section gathers miscellaneous structural results used elsewhere or stated for
+  completeness.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem (iterate_step_nil).</span>
+  \(\mathtt{step}^{[n]}\;[] = []\).
+  <br><small class="proof-sketch">Proof sketch: Induction; step applies IH then step_nil.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_singleton).</span>
+  A length-1 population maps to its self-composition:
+  \[\mathtt{step}([a]) = [a \circ a].\]
+  <br><small class="proof-sketch">Proof sketch: Unfold step and stepWith; rfl.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (step_singleton_idempotent).</span>
+  If \(a \circ a = a\), then \(\mathtt{step}([a]) = [a]\).
+  <br><small class="proof-sketch">Proof sketch: Apply step_singleton, then ha.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_replicate_ident_eq).</span>
+  \(\mathtt{aggregate}(\mathtt{replicate}\;k\;e) = e\).
+  <br><small class="proof-sketch">Proof sketch: Delegates to aggregate_replicate_ident.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_append).</span>
+  \(\mathtt{aggregate}(\mathit{xs} \mathbin{++} \mathit{ys}) =
+    \mathtt{List.foldr}\;\mathrm{op}\;(\mathtt{aggregate}\;\mathit{ys})\;\mathit{xs}\).
+  <br><small class="proof-sketch">Proof sketch: Unfold aggregate; apply List.foldr_append.</small>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem (aggregate_replicate_idempotent).</span>
+  If \(a \circ a = a\), then a constant idempotent population aggregates to that element:
+  \[\mathtt{aggregate}(\mathtt{replicate}(n{+}1)\;a) = a.\]
+  <br><small class="proof-sketch">Proof sketch: Induction; base is id_right; step uses IH and ha.</small>
+</div>
+
+<!-- ============================================================ -->
+<h2>Theorem Index</h2>
+<!-- ============================================================ -->
+
+<p>Quick-reference table of all 34 results.</p>
+
+<table style="width:100%;border-collapse:collapse;font-size:.92em;">
+  <thead>
+    <tr style="background:var(--accent-soft);">
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">#</th>
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">Lean name</th>
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">Section</th>
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">Key connection</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:.3em .8em;">1</td><td><code>lastEl_nil</code></td><td>§1</td><td>Definitional</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">2</td><td><code>lastEl_cons</code></td><td>§1</td><td>Granovetter cyclic boundary</td></tr>
+    <tr><td style="padding:.3em .8em;">3</td><td><code>stepWith_nil</code></td><td>§1</td><td>Definitional</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">4</td><td><code>stepWith_cons</code></td><td>§1</td><td>Rogers transmission rule</td></tr>
+    <tr><td style="padding:.3em .8em;">5</td><td><code>step_nil</code></td><td>§1</td><td>Bass empty market</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">6</td><td><code>step_cons</code></td><td>§1</td><td>Rogers cons unfolding</td></tr>
+    <tr><td style="padding:.3em .8em;">7</td><td><code>stepWith_length</code></td><td>§2</td><td>Population conservation</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">8</td><td><code>step_length</code></td><td>§2</td><td>Rogers monotone adoption</td></tr>
+    <tr><td style="padding:.3em .8em;">9</td><td><code>iterate_step_length</code></td><td>§2</td><td>Rogers all iterates</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">10</td><td><code>stepWith_replicate_ident</code></td><td>§3</td><td>Sperber attractors</td></tr>
+    <tr><td style="padding:.3em .8em;">11</td><td><code>lastEl_replicate_self</code></td><td>§3</td><td>Sperber attractors</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">12</td><td><code>step_replicate_ident</code></td><td>§3</td><td>Sperber fixed point</td></tr>
+    <tr><td style="padding:.3em .8em;">13</td><td><code>iterate_step_add</code></td><td>§3</td><td>Rogers semigroup law</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">14</td><td><code>iterate_step_replicate_ident</code></td><td>§3</td><td>Sperber all iterates</td></tr>
+    <tr><td style="padding:.3em .8em;">15</td><td><code>propagated_ident</code></td><td>§3</td><td>Sperber global attractor</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">16</td><td><code>aggregate_nil</code></td><td>§4</td><td>Henrich empty culture</td></tr>
+    <tr><td style="padding:.3em .8em;">17</td><td><code>aggregate_cons</code></td><td>§4</td><td>Henrich cumulative ratchet</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">18</td><td><code>aggregate_replicate_ident</code></td><td>§4</td><td>Henrich null bystanders</td></tr>
+    <tr><td style="padding:.3em .8em;">19</td><td><code>aggregate_append_ident_replicate</code></td><td>§4</td><td>Henrich padding neutrality</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">20</td><td><code>aggregate_replicate_ident_append</code></td><td>§4</td><td>Henrich prepend neutrality</td></tr>
+    <tr><td style="padding:.3em .8em;">21</td><td><code>aggregate_swap_adjacent_commute</code></td><td>§5</td><td>Granovetter strong ties</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">22</td><td><code>stepWith_replicate_idempotent</code></td><td>§6</td><td>Sperber idempotent</td></tr>
+    <tr><td style="padding:.3em .8em;">23</td><td><code>step_replicate_idempotent</code></td><td>§6</td><td>Gladwell tipping point</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">24</td><td><code>rogers_monotone</code></td><td>§7</td><td>Rogers S-curve</td></tr>
+    <tr><td style="padding:.3em .8em;">25</td><td><code>nonErasing_id</code></td><td>§7</td><td>Rogers identity baseline</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">26</td><td><code>lastEl_replicate_succ</code></td><td>§8</td><td>Granovetter cyclic lemma</td></tr>
+    <tr><td style="padding:.3em .8em;">27</td><td><code>step_single_a_ident</code></td><td>§8</td><td>Granovetter duplication</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">28</td><td><code>granovetter_weak_tie</code></td><td>§8</td><td>Granovetter strict increase</td></tr>
+    <tr><td style="padding:.3em .8em;">29</td><td><code>iterate_step_nil</code></td><td>§9</td><td>Rogers empty</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">30</td><td><code>step_singleton</code></td><td>§9</td><td>Sperber self-composition</td></tr>
+    <tr><td style="padding:.3em .8em;">31</td><td><code>step_singleton_idempotent</code></td><td>§9</td><td>Sperber/Gladwell attractor</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">32</td><td><code>aggregate_replicate_ident_eq</code></td><td>§9</td><td>Henrich null aggregate</td></tr>
+    <tr><td style="padding:.3em .8em;">33</td><td><code>aggregate_append</code></td><td>§9</td><td>Henrich foldr identity</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">34</td><td><code>aggregate_replicate_idempotent</code></td><td>§9</td><td>Henrich idempotent culture</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>Theoretical Implications</h2>
+<!-- ============================================================ -->
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <p>
+    The fixed-point theorems &mdash; <code>step_replicate_ident</code> (T12),
+    <code>iterate_step_replicate_ident</code> (T14), and <code>propagated_ident</code> (T15) &mdash;
+    prove that every population of ideas has at least one stable attractor: the all-identity
+    configuration. This is not a sociological claim about equilibrium culture; it is a mathematical
+    theorem about the dynamics of the idea monoid. The identity element is the "ground state" of
+    ideational diffusion &mdash; the state to which a fully non-adopting population returns. This has
+    a direct implication for theories of cultural change: change requires the presence of at least
+    one non-identity idea. The algebraic structure guarantees that you cannot bootstrap novelty from
+    a homogeneous null population.
+  </p>
+  <p>
+    The length-conservation theorem (<code>step_length</code>, T8) establishes a fundamental
+    invariant that is surprising when first encountered: diffusion conserves population size exactly.
+    No agents are created or destroyed, no mergers occur, no agents drop out. This corresponds to
+    the closed-world assumption in many diffusion models and makes precise the boundary of the
+    model's applicability. Real-world diffusion involves births and deaths, immigration and
+    emigration. The Idea Theory model is a pure transmission model: it studies what happens to the
+    ideational content of a fixed population under iterated composition. Violations of this
+    invariant &mdash; when they occur empirically &mdash; are thus diagnostic of forces outside the
+    model.
+  </p>
+  <p>
+    The Granovetter theorem (<code>granovetter_weak_tie</code>, T28) proves the mechanism behind
+    the "strength of weak ties" from first principles. In a population of \(n+1\) agents where
+    \(n\) hold the identity and one holds \(a \ne e\), one step of cyclic transmission
+    <em>strictly</em> increases adoption. The strictness is crucial: it distinguishes the active
+    role of the lone adopter from the passive stability of the all-identity state. The proof uses
+    only <code>id_left</code>, <code>id_right</code>, and <code>List.countP</code> &mdash; no
+    continuous mathematics, no network topology, no probability. The structural result holds for
+    any non-identity idea in any idea-theory structure. This universality is what machine
+    verification guarantees: there are no hidden special-case assumptions.
+  </p>
+  <p>
+    The aggregate lemmas reveal a deep connection between the local transmission rule and the
+    global structure of the population's combined idea. The
+    <code>aggregate_swap_adjacent_commute</code> theorem (T21) shows that commutativity between
+    adjacent ideas &mdash; "strong ties" in Granovetter's vocabulary &mdash; is aggregate-neutral.
+    This means that among strongly connected agents (those whose ideas commute), the order of
+    transmission is irrelevant to the population's total output. But weak ties &mdash; non-commuting
+    adjacent ideas &mdash; do matter: their order affects the aggregate. The algebraic condition for
+    Granovetter's distinction between strong and weak ties is thus <em>commutativity of the idea
+    monoid</em>: strong-tie networks correspond to commutative sub-monoids; weak-tie bridges
+    correspond to non-commuting pairs.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2>Zoo Connections</h2>
+<!-- ============================================================ -->
+
+<h3>Rogers &mdash; The S-Curve</h3>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <p>
+    Everett Rogers's diffusion of innovations theory (1962, 2003) describes how new ideas spread
+    through populations in an S-shaped curve: slow initial adoption, rapid acceleration once a
+    critical threshold is reached, then deceleration as saturation approaches. The
+    <code>rogers_monotone</code> theorem (T24) formalises the monotonicity half of this picture:
+    any non-erasing transmission rule yields a weakly increasing adoption count over time. Once an
+    agent adopts an idea, they never lose it. The S-curve shape emerges from the interplay between
+    this monotonicity and the population's finite size: adoption must eventually saturate at the
+    population size, which is conserved by <code>step_length</code> (T8). Rogers's key insight
+    &mdash; that adoption is a one-way door &mdash; is thus a theorem in Idea Theory, not merely
+    an empirical regularity. The formalization makes precise what "non-erasing" means:
+    \(\mathtt{adopters}(\mathit{xs}) \le \mathtt{adopters}(f(\mathit{xs}))\) for every population
+    \(\mathit{xs}\).
+  </p>
+</div>
+
+<h3>Granovetter &mdash; The Strength of Weak Ties</h3>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <p>
+    Mark Granovetter's seminal paper (1973) argues that "weak ties" &mdash; acquaintances rather
+    than close friends &mdash; are more important for information diffusion than strong ties,
+    because weak ties bridge otherwise disconnected clusters. The
+    <code>granovetter_weak_tie</code> theorem (T28) formalises the micro-level mechanism: a single
+    non-identity agent inserted into an all-identity population <em>strictly</em> increases
+    adoption after one bilateral transmission step. The lone non-identity agent effectively
+    duplicates: the agent to its left (via cyclic boundary) also acquires the idea. This is the
+    "strength of weak ties" in its sharpest form: one bridging connection is sufficient to
+    strictly increase adoption. The theorem's strict inequality (\(&lt;\)) distinguishes it from
+    the mere monotonicity of Rogers. The <code>aggregate_swap_adjacent_commute</code> lemma (T21)
+    captures the complementary insight that strong ties &mdash; commuting adjacent ideas &mdash;
+    are aggregate-neutral.
+  </p>
+</div>
+
+<h3>Gladwell &mdash; The Tipping Point</h3>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <p>
+    Malcolm Gladwell's tipping point theory (2000) argues that social epidemics exhibit threshold
+    behavior: below a critical adoption level, diffusion stalls; above it, it explodes. The
+    <code>step_replicate_idempotent</code> theorem (T23) formalises the maximum-threshold case:
+    when an idempotent idea has reached 100% adoption, the population is a fixed point &mdash; the
+    idea is "tipped." The <code>rogers_monotone</code> theorem (T24) shows that adoption is
+    non-decreasing, providing the mechanism for tipping: once past a threshold, diffusion cannot
+    reverse. Gladwell's theory has been criticized for lacking mathematical precision. The Idea
+    Theory formalization provides that precision: tipping points correspond to populations where
+    enough agents hold an idempotent idea that the fixed-point condition of
+    <code>step_replicate_idempotent</code> is met. The <code>granovetter_weak_tie</code> theorem
+    shows that even below the tip, a single adopter in an otherwise non-adopting population
+    initiates strict growth.
+  </p>
+</div>
+
+<h3>Sperber &mdash; Epidemiology of Representations</h3>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <p>
+    Dan Sperber's epidemiology of representations (<em>Explaining Culture</em>, 1996) models
+    cultural transmission as an "epidemiological" process in which mental representations are
+    selectively transmitted, with cognitive attractors pulling variants toward stable forms. The
+    <code>propagated_ident</code> theorem (T15) captures attractor dynamics in their simplest
+    form: the all-identity population is a global attractor &mdash; it cannot be perturbed, because
+    it has no non-identity ideas to diffuse. The <code>step_replicate_idempotent</code> theorem
+    (T23) shows that any idempotent idea forms a local attractor: once fully adopted, it persists.
+    The <code>step_singleton</code> theorem (T30) reveals the micro-mechanism: in a length-1
+    population, the idea self-composes &mdash; it is an attractor precisely when it is idempotent.
+    Sperber's cognitive attractors correspond, algebraically, to idempotent elements of the idea
+    monoid.
+  </p>
+</div>
+
+<h3>Henrich &mdash; The Secret of Our Success</h3>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <p>
+    Joseph Henrich's cumulative cultural evolution theory (<em>The Secret of Our Success</em>,
+    2015) emphasises that human culture accumulates improvements through faithful transmission and
+    recombination across generations, constituting a "cultural ratchet." The aggregate theorems
+    formalise the ratchet's neutral element: <code>aggregate_replicate_ident</code> (T18) shows
+    that a population of non-adopters contributes nothing to the cultural aggregate;
+    <code>aggregate_append_ident_replicate</code> (T19) shows that adding silent bystanders changes
+    nothing. The <code>aggregate_replicate_idempotent</code> theorem (T34) shows that a population
+    fully committed to an idempotent idea aggregates to that idea &mdash; the ratchet has "clicked."
+    Henrich's key claim &mdash; that cultural accumulation is non-erasing &mdash; corresponds to
+    <code>rogers_monotone</code>: each ratchet click is irreversible. The formalization makes
+    explicit what the metaphor leaves implicit: "non-erasing" is a property of the transmission
+    rule, not of the ideas themselves.
+  </p>
+</div>
+
+<h3>Bass &mdash; Diffusion Model</h3>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <p>
+    Frank Bass's parametric diffusion model (1969) describes adoption through two channels:
+    "innovators" who adopt independently (rate \(p\)) and "imitators" who adopt by contact with
+    existing adopters (rate \(q\)). The <code>step_single_a_ident</code> lemma (T27) formalises
+    the imitator mechanism in its purest form: a single adopter in a population of non-adopters
+    generates one new adopter per step, corresponding to \(q=1\) in Bass's model. The
+    length-preservation theorem (<code>step_length</code>, T8) shows that the model conserves
+    population size &mdash; the total market is fixed, as Bass assumes. The
+    <code>iterate_step_length</code> theorem (T9) extends this to all iterates: at every time step,
+    the population count is conserved. Bass's model predicts eventual saturation; the Idea Theory
+    formalization shows that the algebraic mechanism &mdash; idempotent fixed points &mdash;
+    guarantees this for any idempotent idea under the <code>step_replicate_idempotent</code>
+    theorem.
+  </p>
+</div>
+
+<!-- ============================================================ -->
+<h2>Proof Architecture</h2>
+<!-- ============================================================ -->
+
+<p>
+  The 34 theorems are not independent: they form a dependency lattice in which the definitional
+  lemmas of §1 underpin every later result. The diagram below traces the main proof lines.
+</p>
+
+<h3>Dependency chains</h3>
+<ul>
+  <li>
+    <strong>Length conservation chain:</strong>
+    <code>stepWith_cons</code> &rarr; <code>stepWith_length</code> &rarr; <code>step_length</code>
+    &rarr; <code>iterate_step_length</code>.
+    Each result lifts the previous one one level of abstraction: from a single cons-cell, to a
+    single step, to all iterates.
+  </li>
+  <li>
+    <strong>Fixed-point chain:</strong>
+    <code>lastEl_replicate_self</code> + <code>stepWith_replicate_ident</code>
+    &rarr; <code>step_replicate_ident</code>
+    &rarr; <code>iterate_step_replicate_ident</code>
+    &rarr; <code>propagated_ident</code>.
+    The chain proceeds by first establishing the fixed-point at the level of <code>stepWith</code>,
+    then lifting to <code>step</code>, then to all iterates, then to the named <code>propagated</code>
+    combinator.
+  </li>
+  <li>
+    <strong>Granovetter chain:</strong>
+    <code>lastEl_replicate_succ</code> &rarr; <code>step_single_a_ident</code>
+    &rarr; <code>granovetter_weak_tie</code>.
+    The first lemma computes the cyclic boundary element; the second computes the full output of
+    <code>step</code> on the target population; the third counts adopters on both sides and
+    closes with the strict inequality.
+  </li>
+  <li>
+    <strong>Idempotent chain:</strong>
+    <code>stepWith_replicate_idempotent</code> + <code>lastEl_replicate_self</code>
+    &rarr; <code>step_replicate_idempotent</code>
+    &rarr; <code>step_singleton_idempotent</code>
+    &rarr; <code>aggregate_replicate_idempotent</code>.
+    Idempotence propagates from the local transmission lemma through to the global aggregate.
+  </li>
+</ul>
+
+<h3>Proof tactics</h3>
+<p>
+  The proofs make heavy use of Lean 4's <code>simp</code> and <code>induction</code> tactics,
+  together with the monoid axioms (<code>id_left</code>, <code>id_right</code>,
+  <code>mul_assoc</code>) and list lemmas (<code>List.foldr_append</code>,
+  <code>List.length_cons</code>). No proof requires more than 10 tactic lines. The most involved
+  result is <code>granovetter_weak_tie</code>, which needs <code>List.countP_cons</code> and a case
+  split on <code>a = ident</code> discharged by <code>ha</code>.
+</p>
+
+<h3>Decidability hypotheses</h3>
+<p>
+  The Rogers and Granovetter theorems require <code>[DecidableEq&nbsp;&alpha;]</code> because
+  <code>adopters</code> is defined via <code>List.countP (&middot; &ne; ident)</code>, which needs
+  decidable equality to evaluate. All structural lemmas (length, fixed points, aggregate) work
+  in fully general monoids with no decidability assumption.
+</p>
+
+<!-- ============================================================ -->
+<h2>Notation and Conventions</h2>
+<!-- ============================================================ -->
+
+<p>
+  Throughout this page the following notation is used consistently:
+</p>
+
+<table style="width:100%;border-collapse:collapse;font-size:.92em;margin:1em 0;">
+  <thead>
+    <tr style="background:var(--accent-soft);">
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">Symbol</th>
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">Lean</th>
+      <th style="padding:.4em .8em;text-align:left;border-bottom:2px solid var(--accent);">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td style="padding:.3em .8em;">\(e\)</td><td><code>ident</code></td><td>Identity element of the idea monoid</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">\(a \circ b\)</td><td><code>op a b</code></td><td>Composition of ideas \(a\) and \(b\)</td></tr>
+    <tr><td style="padding:.3em .8em;">\(\mathtt{step}^{[n]}\)</td><td><code>step^[n]</code></td><td>\(n\)-fold function iterate (Lean stdlib)</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">\(|\mathit{xs}|\)</td><td><code>xs.length</code></td><td>Population size</td></tr>
+    <tr><td style="padding:.3em .8em;">\(\mathtt{adopters}(\mathit{xs})\)</td><td><code>adopters xs</code></td><td>\(\mathtt{List.countP}\;(\cdot \ne e)\;\mathit{xs}\)</td></tr>
+    <tr style="background:#fafafa;"><td style="padding:.3em .8em;">\(\mathtt{replicate}\;n\;a\)</td><td><code>List.replicate n a</code></td><td>List of \(n\) copies of \(a\)</td></tr>
+    <tr><td style="padding:.3em .8em;">\(\mathtt{propagated}(a,L,n)\)</td><td><code>propagated a L n</code></td><td>\(\mathtt{step}^{[n]}(\mathtt{replicate}\;L\;a)\)</td></tr>
+  </tbody>
+</table>
+
+<p>
+  The idea monoid \((\mathcal{I}, \circ, e)\) is assumed throughout to satisfy the standard monoid
+  axioms: <em>associativity</em> \((a \circ b) \circ c = a \circ (b \circ c)\), <em>left
+  identity</em> \(e \circ a = a\), and <em>right identity</em> \(a \circ e = a\). No commutativity
+  is assumed globally; commutativity hypotheses are stated explicitly where needed
+  (as in <code>aggregate_swap_adjacent_commute</code>).
+</p>
+
+<!-- ============================================================ -->
+<h2>Related Links</h2>
+<!-- ============================================================ -->
+
+<h3>Core Theorems</h3>
+<ul>
+  <li><a href="../theorems/transmission-chain.html">T7: Transmission Chain</a> &mdash;
+      the foundational chain-of-composition theorem that the diffusion extension builds upon.</li>
+</ul>
+
+<h3>Related Extensions</h3>
+<ul>
+  <li><a href="recombinant-growth.html">Recombinant Growth</a> &mdash;
+      extends the idea monoid to populations with crossover and recombination operators.</li>
+  <li><a href="game-theory.html">Game Theory</a> &mdash;
+      studies strategic transmission where agents choose adoption based on payoff.</li>
+</ul>
+
+<h3>Source</h3>
+<ul>
+  <li>
+    <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/Diffusion.lean"
+       target="_blank">
+      IdeaTheory/Extensions/Diffusion.lean
+    </a>
+    &mdash; Lean 4 source file containing all 34 proofs.
+  </li>
+</ul>
+
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+
+</body>
+</html>

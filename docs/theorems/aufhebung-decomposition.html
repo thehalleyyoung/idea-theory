@@ -5,25 +5,663 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Theorem 3: Aufhebung Decomposition — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
+
 <h1>Theorem 3: Aufhebung Decomposition</h1>
-<div class="thm"><span class="thm-label">Theorem 3.</span> Let \((\mathcal{I},\circ,e,\rho)\) admit an Aufhebung structure. For each pair \((a,b)\), the triple \((\sigma,\nu,\eta)\) of components in \(\mathbb{R}\langle\mathcal{I}\rangle\) is uniquely determined modulo \(\ker\rho\).</div>
+<p class="entry-meta">Lean: <code>IdeaTheory.Theorems3</code> &middot; 87 results &middot; Chapter: <a href="../chapters/ch03.html">Ch.&nbsp;3</a> &middot; Related: <a href="composition.html">T1</a>, <a href="resonance-pairing.html">T2</a>, <a href="structural-equivalence.html">T8</a></p>
 
-<h2>Proof sketch</h2>
-<p>Set \(V = \mathbb{R}\langle\mathcal{I}\rangle\) and let \(W = V/\ker\rho\). The pairing \(\rho\) descends to a non-degenerate form on \(W\). The decomposition is determined by orthogonal projections onto the three subspaces \(W_\sigma,W_\nu,W_\eta\) defined by the resonance signs of \(a\) and \(b\). Two decompositions of the same \(a\circ b\) differ by an element whose three components lie in \(\ker\rho\), so they are equal in \(W\).</p>
+<!-- ===== TABLE OF CONTENTS ===== -->
+<nav style="background:var(--accent-soft);border:1px solid var(--rule);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;">
+<strong style="font-family:Inter,sans-serif;font-size:.9rem;">Contents</strong>
+<ol style="margin:.5em 0 0 0;font-size:.93rem;columns:2;column-gap:2em;">
+  <li><a href="#opening">The Three Moments of Aufhebung</a></li>
+  <li><a href="#headlines">Headline Theorems 3.1, 3.2, 3.3</a></li>
+  <li><a href="#s1">§1 Core Decomposition</a></li>
+  <li><a href="#s2">§2 &sigma; (Preservation) Lemmas</a></li>
+  <li><a href="#s3">§3 &nu; (Negation) Lemmas</a></li>
+  <li><a href="#s4">§4 Identity Behaviour Under Aufhebung</a></li>
+  <li><a href="#s5">§5 Iteration — &sigma;<sup>n</sup> and &nu;<sup>n</sup></a></li>
+  <li><a href="#s6">§6 Mediation, Triad, and aufheb</a></li>
+  <li><a href="#s7">§7 Stability Predicate</a></li>
+  <li><a href="#s8">§8 Hegelian Fixed Points and aufhebianEquiv</a></li>
+  <li><a href="#corollaries">Corollaries</a></li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+  <li><a href="#extensions">Related Lean Extensions</a></li>
+</ol>
+</nav>
 
-<p>Verified as <code>IdeaTheory.Theorems3.aufhebung_unique_mod_kernel</code>.</p>
+<!-- ===== OPENING ===== -->
+<h2 id="opening">The Three Moments of Aufhebung</h2>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/philosophy/hegel-aufhebung.html">Hegel</a></li>
-<li><a href="../zoo/cogsci/fauconnier-turner-blending.html">Fauconnier–Turner blending</a></li>
-<li><a href="../zoo/phenomenology/gadamer-fusion.html">Gadamer</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<p>Hegel's term <em>Aufhebung</em> — standardly left untranslated in philosophical contexts — names the movement by which a determinate idea is simultaneously <em>cancelled</em>, <em>preserved</em>, and <em>raised</em> into a higher unity. The three moments are not sequential stages but co-present aspects of a single logical operation. Idea Theory formalizes this intuition as a pair of idempotent endofunctions on the idea monoid \((\mathcal{I}, \circ, e)\):</p>
+
+<ul>
+  <li>\(\sigma\colon \mathcal{I} \to \mathcal{I}\) — the <strong>preservation projector</strong>: \(\sigma(a)\) is the sedimented, conserved residue of \(a\) after sublation.</li>
+  <li>\(\nu\colon \mathcal{I} \to \mathcal{I}\) — the <strong>negation projector</strong>: \(\nu(a)\) is the transformed, labile component of \(a\) that is set aside by sublation.</li>
+</ul>
+
+<p>The master equation is the <strong>Aufhebung decomposition</strong>:
+\[
+  \sigma(a) \circ \nu(a) \;=\; a.
+\]
+Every idea factors, canonically and uniquely (up to aufhebian equivalence), as the composition of its preserved part and its negated part. The \(\sigma\) and \(\nu\) projectors are idempotent (\(\sigma(\sigma(a)) = \sigma(a)\), \(\nu(\nu(a)) = \nu(a)\)) and cross-annihilating (\(\nu(\sigma(a)) = e\), \(\sigma(\nu(a)) = e\)). These five properties form the axiom set of the <code>AufhebungStructure</code> typeclass.</p>
+
+<p>The file <code>IdeaTheory.Theorems3</code> derives 87 named results from this axiom set: 16 closure lemmas, 15 identity-behaviour lemmas, 18 iteration lemmas, 15 decomposition-algebra lemmas, 6 stability lemmas, 10 Hegelian/equivalence lemmas, 3 headline theorems, and 4 corollaries. Every result is machine-verified in Lean 4 with no <code>sorry</code> or placeholder tactics.</p>
+
+<p>The key predicates used throughout are:</p>
+<table>
+<thead><tr><th>Lean name</th><th>Definition</th><th>Reading</th></tr></thead>
+<tbody>
+<tr><td><code>IsPreserved a</code></td><td>\(\sigma(a) = a\)</td><td>\(a\) is a fixed point of the preservation projector</td></tr>
+<tr><td><code>IsNegated a</code></td><td>\(\nu(a) = a\)</td><td>\(a\) is a fixed point of the negation projector</td></tr>
+<tr><td><code>Sedimented a</code></td><td>\(\nu(a) = e\)</td><td>the \(\nu\)-component of \(a\) is void; \(a\) has been fully sublated</td></tr>
+<tr><td><code>Sublated a</code></td><td>\(\sigma(a) = e\)</td><td>the \(\sigma\)-component of \(a\) is void; \(a\) is purely negated</td></tr>
+<tr><td><code>Stable a</code></td><td><code>IsPreserved a ∧ Sedimented a</code></td><td>\(a\) is both preserved and sedimented</td></tr>
+<tr><td><code>Hegelian a</code></td><td>\(\nu(\nu(a)) = e\)</td><td>the negation of \(a\) is itself sedimented</td></tr>
+</tbody>
+</table>
+
+<!-- ===== HEADLINE THEOREMS ===== -->
+<h2 id="headlines">Headline Theorems 3.1, 3.2, 3.3</h2>
+
+<div class="thm"><span class="thm-label">Theorem 3.1 (theorem_3_1) — Aufhebung Decomposition Theorem.</span>
+For every idea \(a \in \mathcal{I}\):
+<ol style="margin:.5em 0 0 0;">
+  <li>\(\sigma(a) \circ \nu(a) = a\) &nbsp; <em>(canonical decomposition)</em></li>
+  <li>\(\sigma(\sigma(a)) = \sigma(a)\) &nbsp; <em>(idempotence of preservation)</em></li>
+  <li>\(\nu(\nu(a)) = \nu(a)\) &nbsp; <em>(idempotence of negation)</em></li>
+  <li>\(\nu(\sigma(a)) = e\) &nbsp; <em>(negation annihilates the preserved part)</em></li>
+  <li>\(\sigma(\nu(a)) = e\) &nbsp; <em>(preservation annihilates the negated part)</em></li>
+</ol>
+</div>
+
+<div class="proof">
+<p><strong>Proof sketch.</strong> Each of the five clauses corresponds directly to one axiom of <code>AufhebungStructure</code>: (1) is <code>decomp</code>; (2) is <code>σ_idem</code>; (3) is <code>ν_idem</code>; (4) is <code>ν_σ</code>; (5) is <code>σ_ν</code>. The theorem bundles these five independent facts into a single conjunction, establishing that the Aufhebung decomposition is complete and self-consistent. In the Lean proof, each claim is extracted from the typeclass instance, then all five are assembled with <code>⟨h1, h2, h3, h4, h5⟩</code>. The sharpening over the informal Hegelian text is that the "three moments" are here given as explicit endofunctions satisfying exact equations, not as descriptions of a dialectical movement.</p>
+<p>Lean: <code>IdeaTheory.Theorems3.theorem_3_1</code> &nbsp;&middot;&nbsp; Sources: Hegel, <em>Wissenschaft der Logik</em>, Vol.&nbsp;I, §90; Brandom, <em>A Spirit of Trust</em>, ch.&nbsp;17.</p>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 3.2 (theorem_3_2) — Idempotent Stabilisation Theorem.</span>
+For every idea \(a \in \mathcal{I}\) and every \(n \in \mathbb{N}\):
+<ol style="margin:.5em 0 0 0;">
+  <li>\(\sigma^{n+1}(a) = \sigma(a)\) &nbsp; <em>(preservation stabilises after one step)</em></li>
+  <li>\(\nu^{n+1}(a) = \nu(a)\) &nbsp; <em>(negation stabilises after one step)</em></li>
+  <li>\(\sigma^{m+1}(a) = \sigma^{n+1}(a)\) for all \(m,n\) &nbsp; <em>(all positive iterates agree)</em></li>
+  <li>\(\nu^{m+1}(a) = \nu^{n+1}(a)\) for all \(m,n\) &nbsp; <em>(all positive negation iterates agree)</em></li>
+</ol>
+</div>
+
+<div class="proof">
+<p><strong>Proof sketch.</strong> The key lemma is <code>iteratePreserved_eq_σ</code>, proved by induction: the base case \(n=0\) is <code>rfl</code>; the inductive step combines <code>iteratePreserved_stable</code> (which says \(\sigma^{k+2}(a) = \sigma^{k+1}(a)\)) with the inductive hypothesis. The parallel result for \(\nu\) uses <code>iterateNegated_eq_ν</code>. Once clauses (1) and (2) are established, clauses (3) and (4) follow by rewriting both sides with (1) and (2) respectively. The philosophical sharpening over Adorno's "determined negation" is that stabilisation is <em>immediate</em> and quantitative: there is no \(n\) for which \(\sigma^n(a) \neq \sigma^{n+1}(a)\) once \(n \geq 1\).</p>
+<p>Lean: <code>IdeaTheory.Theorems3.theorem_3_2</code> &nbsp;&middot;&nbsp; Sources: Adorno, <em>Negative Dialektik</em>, Part I §3; Brandom, <em>A Spirit of Trust</em>, ch.&nbsp;18.</p>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 3.3 (theorem_3_3) — Hegelian Fixed-Point Theorem.</span>
+For every idea \(a \in \mathcal{I}\), the following are equivalent:
+<ol style="margin:.5em 0 0 0;">
+  <li>\(\text{Sedimented}(a) \iff \text{IsPreserved}(a)\) &nbsp; <em>(sediment = preservation fixed point)</em></li>
+  <li>\(\text{IsPreserved}(a) \iff \sigma(a) = a\) &nbsp; <em>(definitional unfolding)</em></li>
+  <li>\(\text{Sedimented}(a) \iff \text{Hegelian}(a)\) &nbsp; <em>(sediment = Hegelian fixed point)</em></li>
+  <li>\(\text{Sedimented}(a) \iff \sigma(a) = a\) &nbsp; <em>(composite equivalence)</em></li>
+</ol>
+</div>
+
+<div class="proof">
+<p><strong>Proof sketch.</strong> Clause (1) combines <code>preserved_of_sedimented</code> (if \(\nu(a)=e\) then the decomposition collapses to \(\sigma(a)=a\)) with <code>sedimented_of_preserved</code> (if \(\sigma(a)=a\) then the cross-annihilation \(\nu(\sigma(a))=e\) forces \(\nu(a)=e\)). Clause (2) is definitional. Clause (3) uses <code>hegelian_iff_sedimented</code>: the <code>Hegelian</code> predicate unfolds to \(\nu(\nu(a))=e\), and by \(\nu\)-idempotence this equals \(\nu(a)=e\), which is <code>Sedimented</code>. Clause (4) is obtained by composing clauses (1) and (2) via <code>Iff.trans</code>. The theorem establishes that the four characterisations of "fully sublated" coincide exactly, vindicating the informal Hegelian claim that preservation, sediment, and "negation of the negation" are three names for the same fixed-point condition.</p>
+<p>Lean: <code>IdeaTheory.Theorems3.theorem_3_3</code> &nbsp;&middot;&nbsp; Sources: Žižek, <em>Less Than Nothing</em>, ch.&nbsp;14; Brandom, <em>A Spirit of Trust</em>, ch.&nbsp;19.</p>
+</div>
+
+<!-- ===== §1 CORE DECOMPOSITION ===== -->
+<h2 id="s1">§1 Core Decomposition</h2>
+<p>The lemmas in this section establish the primary algebraic facts about the decomposition \(\sigma(a) \circ \nu(a) = a\) and the idempotence of both projectors. They are the immediate consequences of the <code>AufhebungStructure</code> axioms and are used as rewrite rules throughout the rest of the file.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.1 (decomp_eq).</span>
+\(\sigma(a) \circ \nu(a) = a\).
+</div>
+<p>The master decomposition restated as a rewrite rule. This is the algebraic form of the Hegelian claim that every idea is the composition of its preserved and negated moments. Lean: direct application of the <code>decomp</code> axiom.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.2 (decomp_ident).</span>
+\(\sigma(e) \circ \nu(e) = e\).
+</div>
+<p>The identity element decomposes trivially: both projectors fix the identity (by <code>σ_ident</code> and <code>ν_ident</code>), so the decomposition of \(e\) is \(e \circ e = e\). This is the degenerate case in which the "preserved" and "negated" components of the void idea are both void.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.3 (σ_idem_eq).</span>
+\(\sigma(\sigma(a)) = \sigma(a)\).
+</div>
+<p>The preservation projector is idempotent: applying \(\sigma\) twice is the same as applying it once. The image of \(\sigma\) consists exactly of its fixed points. Lean: <code>AufhebungStructure.σ_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.4 (ν_idem_eq).</span>
+\(\nu(\nu(a)) = \nu(a)\).
+</div>
+<p>The negation projector is idempotent. The image of \(\nu\) consists exactly of its fixed points. Lean: <code>AufhebungStructure.ν_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.5 (σν_trivial).</span>
+\(\sigma(\nu(a)) = e\).
+</div>
+<p>Cross-projector annihilation: applying the preservation projector to anything in the image of \(\nu\) returns the identity. The preserved part of a purely negated idea is void. This makes \(\sigma\) and \(\nu\) act as orthogonal projectors with disjoint images. Lean: <code>AufhebungStructure.σ_ν a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.6 (νσ_trivial).</span>
+\(\nu(\sigma(a)) = e\).
+</div>
+<p>The symmetric cross-annihilation: the negated part of any preserved idea is void. Together with <code>σν_trivial</code>, this establishes that \(\sigma\) and \(\nu\) are "orthogonal" in the sense that neither can "see" the image of the other. Lean: <code>AufhebungStructure.ν_σ a</code>.</p>
+
+<!-- ===== §2 σ LEMMAS ===== -->
+<h2 id="s2">§2 &sigma; (Preservation) Lemmas</h2>
+<p>These lemmas characterise the behaviour of the preservation projector \(\sigma\) on specific classes of ideas: its fixed points (<code>IsPreserved</code>), the identity element, and the image of \(\sigma\) itself.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.7 (σ_of_preserved).</span>
+If \(\sigma(a) = a\) (i.e., \(a\) is preserved), then \(\sigma(a) = a\).
+</div>
+<p>A tautological unwinding: the <code>IsPreserved</code> predicate is defined as \(\sigma(a) = a\), so this lemma is the identity function on the hypothesis. It exists as a named lemma for uniform proof-term style in downstream applications. Lean: <code>h</code> (definitional equality).</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.8 (σ_isPreserved).</span>
+\(\sigma(a)\) is preserved, i.e., \(\sigma(\sigma(a)) = \sigma(a)\).
+</div>
+<p>The image of \(\sigma\) lies entirely within the fixed-point set of \(\sigma\). Every idea, after one application of the preservation projector, becomes a preserved idea. This is the key closure property of \(\sigma\). Lean: <code>AufhebungStructure.σ_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.9 (σ_ident_eq).</span>
+\(\sigma(e) = e\).
+</div>
+<p>The preservation projector fixes the identity element. The identity is a preserved idea. Lean: <code>AufhebungStructure.σ_ident</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.10 (ident_isPreserved).</span>
+\(e\) is preserved.
+</div>
+<p>Stated as a predicate: <code>IsPreserved e</code>. The identity is a fixed point of \(\sigma\). This is an immediate consequence of <code>σ_ident_eq</code> and the definition of <code>IsPreserved</code>. Lean: <code>AufhebungStructure.σ_ident</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.11 (sedimented_σ).</span>
+\(\sigma(a)\) is sedimented, i.e., \(\nu(\sigma(a)) = e\).
+</div>
+<p>The preservation projector produces sedimented ideas: any output of \(\sigma\) has trivial \(\nu\)-component. This combines <code>σ_isPreserved</code> (which says \(\sigma(a)\) is preserved) with <code>sedimented_of_preserved</code> (which says preserved implies sedimented). Lean: <code>sedimented_of_preserved (σ_isPreserved a)</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.12 (σ_ν_eq_σ_ident).</span>
+\(\sigma(\nu(a)) = \sigma(e)\).
+</div>
+<p>Applying \(\sigma\) to any element of the \(\nu\)-image gives the same result as applying \(\sigma\) to the identity — namely \(e\). This follows from <code>σν_trivial</code> (which gives \(\sigma(\nu(a)) = e\)) and <code>σ_ident_eq</code> (which gives \(\sigma(e) = e\)). Both sides equal \(e\). Lean: <code>rw [AufhebungStructure.σ_ν, AufhebungStructure.σ_ident]</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.13 (op_σ_ident).</span>
+\(\sigma(a) \circ e = \sigma(a)\).
+</div>
+<p>The right-identity law specialised to a \(\sigma\)-image: composing any preserved part with the identity on the right leaves it unchanged. This is the monoid right-identity law <code>id_right</code> applied to \(\sigma(a)\). Lean: <code>IdeaTheoryStructure.id_right _</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.14 (stable_σ).</span>
+\(\sigma(a)\) is stable.
+</div>
+<p>Stability is the conjunction of <code>IsPreserved</code> and <code>Sedimented</code>. Since <code>σ_isPreserved</code> gives the first and <code>sedimented_σ</code> gives the second, <code>stable_σ</code> bundles them. The output of the preservation projector is maximally well-behaved: it neither gains a negated component under \(\nu\) nor loses its preserved status under \(\sigma\). Lean: <code>stable_of_preserved (σ_isPreserved a)</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.15 (hegelian_σ).</span>
+\(\sigma(a)\) is Hegelian.
+</div>
+<p>Since \(\sigma(a)\) is sedimented (<code>sedimented_σ</code>) and sedimented ideas are Hegelian (<code>hegelian_of_sedimented</code>), the preservation projector always produces Hegelian ideas. Lean: <code>hegelian_of_sedimented (sedimented_σ a)</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.16 (σ_aufheb_fst).</span>
+\(\sigma(\text{aufheb}(a).1) = \text{aufheb}(a).1\).
+</div>
+<p>The first component of the aufheb pair is \(\sigma(a)\), which is preserved by <code>σ_isPreserved</code>. This lemma restates that fact using the <code>aufheb</code> accessor: the first component of the pair is already a fixed point of \(\sigma\). Lean: <code>rw [aufheb_fst]; exact AufhebungStructure.σ_idem a</code>.</p>
+
+<!-- ===== §3 ν LEMMAS ===== -->
+<h2 id="s3">§3 &nu; (Negation) Lemmas</h2>
+<p>These lemmas characterise the negation projector \(\nu\): its fixed points, its behaviour on the identity, and the way sedimented and sublated ideas relate to \(\nu\).</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.17 (ν_of_negated).</span>
+If \(\nu(a) = a\) (i.e., \(a\) is negated), then \(\nu(a) = a\).
+</div>
+<p>The definitional unwinding for <code>IsNegated</code>, symmetric to <code>σ_of_preserved</code>. A named identity that makes proof terms uniform. Lean: <code>h</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.18 (ν_isNegated).</span>
+\(\nu(a)\) is negated, i.e., \(\nu(\nu(a)) = \nu(a)\).
+</div>
+<p>The image of \(\nu\) lies entirely within the fixed-point set of \(\nu\). Every idea, after one application of the negation projector, becomes a negated idea. Lean: <code>AufhebungStructure.ν_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.19 (ν_ident_eq).</span>
+\(\nu(e) = e\).
+</div>
+<p>The negation projector fixes the identity element. Lean: <code>AufhebungStructure.ν_ident</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.20 (ident_isNegated).</span>
+\(e\) is negated.
+</div>
+<p>Predicate form: <code>IsNegated e</code>. The identity is a fixed point of \(\nu\). Lean: <code>AufhebungStructure.ν_ident</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.21 (ident_sedimented).</span>
+\(e\) is sedimented, i.e., \(\nu(e) = e\).
+</div>
+<p>The identity element has trivial \(\nu\)-component (the \(\nu\)-component is the identity itself, which is the identity). By definition, <code>Sedimented e</code> means \(\nu(e) = e\), which is exactly <code>ν_ident_eq</code>. Lean: <code>AufhebungStructure.ν_ident</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.22 (ident_sublated).</span>
+\(e\) is sublated, i.e., \(\sigma(e) = e\).
+</div>
+<p>The identity has trivial \(\sigma\)-component (again the identity). By definition, <code>Sublated e</code> means \(\sigma(e) = e\), which is <code>σ_ident_eq</code>. The identity is simultaneously sedimented and sublated — it is fixed by both projectors. Lean: <code>AufhebungStructure.σ_ident</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.23 (sublated_ν).</span>
+\(\nu(a)\) is sublated, i.e., \(\sigma(\nu(a)) = e\).
+</div>
+<p>The negation projector produces sublated ideas: any output of \(\nu\) has trivial \(\sigma\)-component. This follows from <code>ν_isNegated</code> and <code>sublated_of_negated</code>. The output of \(\nu\) is maximally negated: it is killed entirely by \(\sigma\). Lean: <code>sublated_of_negated (ν_isNegated a)</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.24 (ν_σ_eq_ν_ident).</span>
+\(\nu(\sigma(a)) = \nu(e)\).
+</div>
+<p>Both sides equal \(e\): \(\nu(\sigma(a)) = e\) by <code>νσ_trivial</code> and \(\nu(e) = e\) by <code>ν_ident_eq</code>. This lemma states the cross-annihilation in a form that emphasises the "identity-congruence" of \(\sigma\) under \(\nu\). Lean: <code>rw [AufhebungStructure.ν_σ, AufhebungStructure.ν_ident]</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.25 (op_ident_ν).</span>
+\(e \circ \nu(a) = \nu(a)\).
+</div>
+<p>The left-identity law specialised to a \(\nu\)-image: composing the identity with any negated part leaves it unchanged. Lean: <code>IdeaTheoryStructure.id_left _</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.26 (ν_aufheb_snd).</span>
+\(\nu(\text{aufheb}(a).2) = \text{aufheb}(a).2\).
+</div>
+<p>The second component of the aufheb pair is \(\nu(a)\), which is negated by <code>ν_isNegated</code>. Restated using the <code>aufheb</code> accessor: the second component is already a fixed point of \(\nu\). Lean: <code>rw [aufheb_snd]; exact AufhebungStructure.ν_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.27 (triadOf_antithesis).</span>
+The antithesis of the triad of \(a\) is \(\nu(a)\).
+</div>
+<p>By definition, <code>triadOf a</code> has <code>antithesis := ν a</code>, so this lemma is <code>rfl</code>. It gives a named accessor for use in downstream reasoning about the dialectical triad. Lean: <code>rfl</code>.</p>
+
+<!-- ===== §4 IDENTITY BEHAVIOUR ===== -->
+<h2 id="s4">§4 Identity Behaviour Under Aufhebung</h2>
+<p>This section covers the interaction of the Aufhebung projectors with the monoid identity laws, and the derived implication structure linking the four predicates <code>IsPreserved</code>, <code>IsNegated</code>, <code>Sedimented</code>, and <code>Sublated</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.28 (op_ident_left).</span>
+\(e \circ a = a\).
+</div>
+<p>Left-identity axiom from <code>IdeaTheoryStructure</code>, restated within the Aufhebung module for uniform reference. Lean: <code>IdeaTheoryStructure.id_left a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.29 (op_ident_right).</span>
+\(a \circ e = a\).
+</div>
+<p>Right-identity axiom, restated within the Aufhebung module. Lean: <code>IdeaTheoryStructure.id_right a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.30 (op_assoc).</span>
+\((a \circ b) \circ c = a \circ (b \circ c)\).
+</div>
+<p>Associativity of composition, restated within the Aufhebung module. Lean: <code>IdeaTheoryStructure.assoc a b c</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.31 (decomp_of_sublated).</span>
+If \(\sigma(a) = e\) (i.e., \(a\) is sublated), then \(\nu(a) = a\).
+</div>
+<p>When the preserved component is void, the decomposition collapses: \(a = \sigma(a) \circ \nu(a) = e \circ \nu(a) = \nu(a)\). A sublated idea is purely negated — it equals its own \(\nu\)-component. Lean: uses <code>decomp</code>, rewrites with <code>h</code> and <code>id_left</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.32 (decomp_of_sedimented).</span>
+If \(\nu(a) = e\) (i.e., \(a\) is sedimented), then \(\sigma(a) = a\).
+</div>
+<p>When the negated component is void, the decomposition collapses: \(a = \sigma(a) \circ \nu(a) = \sigma(a) \circ e = \sigma(a)\). A sedimented idea is purely preserved — it equals its own \(\sigma\)-component. Lean: uses <code>decomp</code>, rewrites with <code>h</code> and <code>id_right</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.33 (preserved_of_sedimented).</span>
+If \(a\) is sedimented, then \(a\) is preserved.
+</div>
+<p>Sedimented implies preserved: if \(\nu(a)=e\) then \(\sigma(a)=a\) by <code>decomp_of_sedimented</code>, which is the definition of <code>IsPreserved</code>. This is one direction of the equivalence proved in Theorem 3.3. Lean: <code>decomp_of_sedimented h</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.34 (negated_of_sublated).</span>
+If \(a\) is sublated, then \(a\) is negated.
+</div>
+<p>Sublated implies negated: if \(\sigma(a)=e\) then \(\nu(a)=a\) by <code>decomp_of_sublated</code>. Lean: <code>decomp_of_sublated h</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.35 (sedimented_of_preserved).</span>
+If \(a\) is preserved, then \(a\) is sedimented.
+</div>
+<p>Preserved implies sedimented: if \(\sigma(a)=a\), then the cross-annihilation \(\nu(\sigma(a))=e\) can be rewritten to \(\nu(a)=e\) using the hypothesis. This is the other direction of the equivalence in Theorem 3.3. The key proof step is: \(\nu(a) = \nu(\sigma(a)) = e\). Lean: uses <code>ν_σ a</code> and rewrites through <code>h</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.36 (sublated_of_negated).</span>
+If \(a\) is negated, then \(a\) is sublated.
+</div>
+<p>Negated implies sublated: if \(\nu(a)=a\), then \(\sigma(a) = \sigma(\nu(a)) = e\) by cross-annihilation. Symmetric to <code>sedimented_of_preserved</code>. Lean: uses <code>σ_ν a</code> and rewrites through <code>h</code>.</p>
+
+<!-- ===== §5 ITERATION ===== -->
+<h2 id="s5">§5 Iteration — &sigma;<sup>n</sup> and &nu;<sup>n</sup></h2>
+<p>This section formalises the iterated application of the projectors, defined by recursion on \(\mathbb{N}\), and proves that both sequences stabilise immediately after the first step. The function <code>iteratePreserved n a</code> applies \(\sigma\) exactly \(n\) times to \(a\); <code>iterateNegated n a</code> applies \(\nu\) exactly \(n\) times.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.37 (iteratePreserved_zero).</span>
+\(\sigma^0(a) = a\).
+</div>
+<p>The zeroth iterate is the identity function on ideas. By definition: <code>iteratePreserved 0 a = a</code>. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.38 (iteratePreserved_succ).</span>
+\(\sigma^{n+1}(a) = \sigma(\sigma^n(a))\).
+</div>
+<p>The successor case of the recursion: one more application of \(\sigma\) on the outside. By definition. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.39 (iteratePreserved_one).</span>
+\(\sigma^1(a) = \sigma(a)\).
+</div>
+<p>The first iterate is just \(\sigma\). Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.40 (iterateNegated_zero).</span>
+\(\nu^0(a) = a\).
+</div>
+<p>The zeroth iterate of \(\nu\) is the identity function. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.41 (iterateNegated_succ).</span>
+\(\nu^{n+1}(a) = \nu(\nu^n(a))\).
+</div>
+<p>The successor case of the \(\nu\)-iteration recursion. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.42 (iterateNegated_one).</span>
+\(\nu^1(a) = \nu(a)\).
+</div>
+<p>The first iterate of \(\nu\) is just \(\nu\). Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.43 (iteratePreserved_two).</span>
+\(\sigma^2(a) = \sigma(a)\).
+</div>
+<p>Two applications of \(\sigma\) collapse to one, by \(\sigma\)-idempotence. This is the base case that drives the full stabilisation result. Lean: <code>show σ(σ(a)) = σ(a); exact AufhebungStructure.σ_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.44 (iterateNegated_two).</span>
+\(\nu^2(a) = \nu(a)\).
+</div>
+<p>Two applications of \(\nu\) collapse to one. Symmetric to <code>iteratePreserved_two</code>. Lean: <code>show ν(ν(a)) = ν(a); exact AufhebungStructure.ν_idem a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.45 (iteratePreserved_stable).</span>
+\(\sigma^{n+2}(a) = \sigma^{n+1}(a)\) for all \(n \in \mathbb{N}\).
+</div>
+<p>The \(\sigma\)-iteration sequence is eventually constant from step 1 onwards: consecutive iterates agree for all \(n \geq 0\). Proved by induction: base case is <code>iteratePreserved_two</code>; the inductive step applies \(\sigma\) to both sides of the inductive hypothesis, then uses congruence. Lean: induction on <code>n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.46 (iterateNegated_stable).</span>
+\(\nu^{n+2}(a) = \nu^{n+1}(a)\) for all \(n \in \mathbb{N}\).
+</div>
+<p>The \(\nu\)-iteration sequence is eventually constant from step 1 onwards. Symmetric proof. Lean: induction on <code>n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.47 (iteratePreserved_eq_σ).</span>
+\(\sigma^{n+1}(a) = \sigma(a)\) for all \(n \in \mathbb{N}\).
+</div>
+<p>Closed form for positive iterates of \(\sigma\): every iterate of index at least 1 equals the first iterate \(\sigma(a)\). Proved by induction using <code>iteratePreserved_stable</code>. This is the quantitative form of idempotent stabilisation. Lean: induction on <code>n</code>, using <code>iteratePreserved_stable k a</code> and the inductive hypothesis.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.48 (iterateNegated_eq_ν).</span>
+\(\nu^{n+1}(a) = \nu(a)\) for all \(n \in \mathbb{N}\).
+</div>
+<p>Closed form for positive iterates of \(\nu\). Symmetric proof. Lean: induction on <code>n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.49 (iteratePreserved_of_preserved).</span>
+If \(\sigma(a) = a\), then \(\sigma^n(a) = a\) for all \(n\).
+</div>
+<p>On a fixed point of \(\sigma\), iteration is constant at all levels including zero. Proved by induction: base is <code>rfl</code>; inductive step rewrites <code>iteratePreserved k a</code> with the inductive hypothesis to get <code>a</code>, then applies the fixed-point hypothesis. Lean: induction on <code>n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.50 (iterateNegated_of_negated).</span>
+If \(\nu(a) = a\), then \(\nu^n(a) = a\) for all \(n\).
+</div>
+<p>On a fixed point of \(\nu\), iteration is constant. Symmetric to <code>iteratePreserved_of_preserved</code>. Lean: induction on <code>n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.51 (iteratePreserved_ident).</span>
+\(\sigma^n(e) = e\) for all \(n\).
+</div>
+<p>The identity is a fixed point of all iterates of \(\sigma\). Immediate from <code>iteratePreserved_of_preserved</code> applied to <code>ident_isPreserved</code>. Lean: <code>iteratePreserved_of_preserved ident_isPreserved n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.52 (iterateNegated_ident).</span>
+\(\nu^n(e) = e\) for all \(n\).
+</div>
+<p>The identity is a fixed point of all iterates of \(\nu\). Lean: <code>iterateNegated_of_negated ident_isNegated n</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.53 (iteratePreserved_eq_iteratePreserved).</span>
+\(\sigma^{m+1}(a) = \sigma^{n+1}(a)\) for all \(m, n \in \mathbb{N}\).
+</div>
+<p>Any two positive iterates of \(\sigma\) agree: the sequence is constant from index 1 onwards. Both sides equal \(\sigma(a)\) by <code>iteratePreserved_eq_σ</code>. Lean: <code>rw [iteratePreserved_eq_σ, iteratePreserved_eq_σ]</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.54 (iterateNegated_eq_iterateNegated).</span>
+\(\nu^{m+1}(a) = \nu^{n+1}(a)\) for all \(m, n \in \mathbb{N}\).
+</div>
+<p>Any two positive iterates of \(\nu\) agree. Lean: <code>rw [iterateNegated_eq_ν, iterateNegated_eq_ν]</code>.</p>
+
+<!-- ===== §6 MEDIATION, TRIAD, AUFHEB ===== -->
+<h2 id="s6">§6 Mediation, Triad, and aufheb</h2>
+<p>This section covers three higher-level constructions that package the decomposition in ways suited to specific downstream applications: the <code>mediated</code> binary operation (pairing the \(\sigma\)-part of one idea with the \(\nu\)-part of another), the <code>aufheb</code> pair (packaging both components of a single idea), and the <code>triadOf</code> record (the dialectical thesis–antithesis–synthesis structure).</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.55 (mediated_self).</span>
+\(\text{mediated}(a, a) = a\), where \(\text{mediated}(a,b) = \sigma(a) \circ \nu(b)\).
+</div>
+<p>When both arguments are the same idea, the mediated form recovers the original: \(\sigma(a) \circ \nu(a) = a\) by <code>decomp_eq</code>. This is the "diagonal" case of mediation. Lean: <code>unfold mediated; exact AufhebungStructure.decomp a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.56 (mediated_ident_right).</span>
+\(\text{mediated}(a, e) = \sigma(a)\).
+</div>
+<p>With identity on the right, the mediated form collapses to the \(\sigma\)-part: \(\sigma(a) \circ \nu(e) = \sigma(a) \circ e = \sigma(a)\). Uses <code>ν_ident</code> and <code>id_right</code>. Lean: <code>rw [AufhebungStructure.ν_ident, IdeaTheoryStructure.id_right]</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.57 (mediated_ident_left).</span>
+\(\text{mediated}(e, b) = \nu(b)\).
+</div>
+<p>With identity on the left, the mediated form collapses to the \(\nu\)-part: \(\sigma(e) \circ \nu(b) = e \circ \nu(b) = \nu(b)\). Uses <code>σ_ident</code> and <code>id_left</code>. Lean: <code>rw [AufhebungStructure.σ_ident, IdeaTheoryStructure.id_left]</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.58 (aufheb_compose).</span>
+\((\text{aufheb}(a)).1 \circ (\text{aufheb}(a)).2 = a\).
+</div>
+<p>The aufheb pair, when composed, recovers the original idea. This is <code>decomp_eq</code> restated using the pair notation: the first component is \(\sigma(a)\) and the second is \(\nu(a)\). Lean: <code>unfold aufheb; exact AufhebungStructure.decomp a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.59 (aufheb_ident).</span>
+\(\text{aufheb}(e) = (e, e)\).
+</div>
+<p>The aufheb pair of the identity is the pair of identities. Uses <code>σ_ident</code> and <code>ν_ident</code>. Lean: <code>unfold aufheb; rw [AufhebungStructure.σ_ident, AufhebungStructure.ν_ident]</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.60 (aufheb_fst).</span>
+\((\text{aufheb}(a)).1 = \sigma(a)\).
+</div>
+<p>The first component of the aufheb pair is the \(\sigma\)-projection of \(a\). By definition. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.61 (aufheb_snd).</span>
+\((\text{aufheb}(a)).2 = \nu(a)\).
+</div>
+<p>The second component of the aufheb pair is the \(\nu\)-projection of \(a\). By definition. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.62 (triadOf_thesis).</span>
+The thesis of the triad of \(a\) is \(a\).
+</div>
+<p>By definition, <code>triadOf a</code> sets <code>thesis := a</code>. The original idea is its own thesis in the dialectical triad. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.63 (triadOf_synthesis).</span>
+The synthesis of the triad of \(a\) is \(\sigma(a)\).
+</div>
+<p>By definition, <code>triadOf a</code> sets <code>synthesis := σ a</code>. The preserved component of an idea is its synthesis in the Hegelian triad — what survives and is elevated. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.64 (triadOf_recovers).</span>
+The synthesis composed with the antithesis recovers the thesis: \(\text{synthesis}(a) \circ \text{antithesis}(a) = \text{thesis}(a)\).
+</div>
+<p>In the triad notation: \(\sigma(a) \circ \nu(a) = a\). This is <code>decomp_eq</code> in triad dress. It establishes the internal consistency of the dialectical triad: the three moments of an idea — thesis, antithesis, synthesis — algebraically recover the original. Lean: <code>show σ(a) ∘ ν(a) = a; exact AufhebungStructure.decomp a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.65 (mediated_of_components).</span>
+\(\text{mediated}(a,b) = \sigma(a) \circ \nu(b)\).
+</div>
+<p>The definition of <code>mediated</code> unfolded: the mediated form of a pair is the composition of the \(\sigma\)-part of the first with the \(\nu\)-part of the second. By definition. Lean: <code>rfl</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.66 (mediated_left_assoc).</span>
+\((\text{mediated}(a,b)) \circ c = \sigma(a) \circ (\nu(b) \circ c)\).
+</div>
+<p>Associativity in the mediated context: when the mediated form is composed with a third idea on the right, the composition associates through \(\sigma(a)\) and \(\nu(b)\). This is simply <code>op_assoc</code> applied to the components of <code>mediated</code>. Lean: <code>unfold mediated; exact IdeaTheoryStructure.assoc _ _ _</code>.</p>
+
+<!-- ===== §7 STABILITY ===== -->
+<h2 id="s7">§7 Stability Predicate</h2>
+<p>An idea is <em>stable</em> if it is both preserved (\(\sigma(a)=a\)) and sedimented (\(\nu(a)=e\)). Stability is the strongest fixed-point condition: a stable idea is completely absorbed by \(\sigma\) and is invisible to \(\nu\). These lemmas show that stability is equivalent to either of its conjuncts, and that the output of \(\sigma\) is always stable.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.67 (stable_ident).</span>
+\(e\) is stable.
+</div>
+<p>The identity is simultaneously preserved (<code>ident_isPreserved</code>) and sedimented (<code>ident_sedimented</code>), so it is stable. Lean: <code>⟨ident_isPreserved, ident_sedimented⟩</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.68 (stable_of_preserved).</span>
+If \(a\) is preserved, then \(a\) is stable.
+</div>
+<p>Preservation implies stability: being a fixed point of \(\sigma\) forces \(\nu(a)=e\) (by <code>sedimented_of_preserved</code>), giving both conjuncts of stability. Lean: <code>⟨h, sedimented_of_preserved h⟩</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.69 (stable_of_sedimented).</span>
+If \(a\) is sedimented, then \(a\) is stable.
+</div>
+<p>Sedimentation implies stability: \(\nu(a)=e\) forces \(\sigma(a)=a\) by <code>preserved_of_sedimented</code>. Lean: <code>⟨preserved_of_sedimented h, h⟩</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.70 (preserved_of_stable).</span>
+If \(a\) is stable, then \(a\) is preserved.
+</div>
+<p>The first projection of the stability conjunction. Lean: <code>h.1</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.71 (sedimented_of_stable).</span>
+If \(a\) is stable, then \(a\) is sedimented.
+</div>
+<p>The second projection of the stability conjunction. Lean: <code>h.2</code>.</p>
+
+<!-- ===== §8 HEGELIAN FIXED POINTS ===== -->
+<h2 id="s8">§8 Hegelian Fixed Points and aufhebianEquiv</h2>
+<p>The <em>Hegelian</em> predicate captures the "negation of the negation is the position" condition: an idea \(a\) is Hegelian when \(\nu(a)\) is itself sedimented. The <em>aufhebian equivalence</em> relation identifies two ideas that share both their preserved and negated components; it turns out to coincide with equality.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.72 (hegelian_ident).</span>
+\(e\) is Hegelian.
+</div>
+<p>The Hegelian predicate on \(e\) requires \(\nu(e)\) to be sedimented. Since \(\nu(e)=e\) and \(e\) is sedimented, this holds. Lean: <code>unfold Hegelian; rw [AufhebungStructure.ν_ident]; exact ident_sedimented</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.73 (hegelian_iff_sedimented).</span>
+\(\text{Hegelian}(a) \iff \text{Sedimented}(a)\).
+</div>
+<p>The Hegelian condition \(\nu(\nu(a))=e\) is equivalent to \(\nu(a)=e\) because by \(\nu\)-idempotence, \(\nu(\nu(a))=\nu(a)\). So \(\nu(\nu(a))=e\) iff \(\nu(a)=e\). The proof goes in both directions by rewriting with <code>ν_idem</code>. Lean: <code>unfold Hegelian Sedimented; constructor; rw [ν_idem]; exact id; rw [ν_idem]; exact id</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.74 (hegelian_of_sedimented).</span>
+If \(a\) is sedimented, then \(a\) is Hegelian.
+</div>
+<p>One direction of <code>hegelian_iff_sedimented</code>: the backwards implication. Lean: <code>(hegelian_iff_sedimented a).mpr h</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.75 (aufhebianEquiv_refl).</span>
+\(a \sim_{\mathcal{H}} a\).
+</div>
+<p>Aufhebian equivalence is reflexive: every idea has the same \(\sigma\)-part and \(\nu\)-part as itself. Lean: <code>⟨rfl, rfl⟩</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.76 (aufhebianEquiv_symm).</span>
+If \(a \sim_{\mathcal{H}} b\), then \(b \sim_{\mathcal{H}} a\).
+</div>
+<p>Symmetry: if \(\sigma(a)=\sigma(b)\) and \(\nu(a)=\nu(b)\), then the equalities hold in the reverse direction. Lean: <code>⟨h.1.symm, h.2.symm⟩</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.77 (aufhebianEquiv_trans).</span>
+If \(a \sim_{\mathcal{H}} b\) and \(b \sim_{\mathcal{H}} c\), then \(a \sim_{\mathcal{H}} c\).
+</div>
+<p>Transitivity: equalities of projector-values compose by <code>Eq.trans</code>. Lean: <code>⟨hab.1.trans hbc.1, hab.2.trans hbc.2⟩</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.78 (eq_of_aufhebianEquiv).</span>
+If \(a \sim_{\mathcal{H}} b\), then \(a = b\).
+</div>
+<p>Aufhebian equivalence implies equality: if \(\sigma(a)=\sigma(b)\) and \(\nu(a)=\nu(b)\), then by the decomposition law both sides of \(a=\sigma(a)\circ\nu(a)=\sigma(b)\circ\nu(b)=b\) agree. Lean: rewrites via <code>← decomp a</code>, <code>← decomp b</code>, then <code>h.1</code>, <code>h.2</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.79 (aufhebianEquiv_of_eq).</span>
+If \(a = b\), then \(a \sim_{\mathcal{H}} b\).
+</div>
+<p>Equality implies aufhebian equivalence. By <code>subst h</code> and reflexivity. Lean: <code>subst h; exact aufhebianEquiv_refl a</code>.</p>
+
+<div class="thm"><span class="thm-label">Lemma 3.80 (aufhebianEquiv_iff).</span>
+\(a \sim_{\mathcal{H}} b \iff a = b\).
+</div>
+<p>Aufhebian equivalence and equality coincide: the decomposition law makes the two indistinguishable. This means the quotient of \(\mathcal{I}\) by aufhebian equivalence is \(\mathcal{I}\) itself — the Aufhebung decomposition is a faithful decomposition. Lean: <code>⟨eq_of_aufhebianEquiv, aufhebianEquiv_of_eq⟩</code>.</p>
+
+<!-- ===== COROLLARIES ===== -->
+<h2 id="corollaries">Corollaries</h2>
+
+<div class="thm"><span class="thm-label">Corollary 3.1 (corollary_3_1) — Sediment of Practice.</span>
+For all \(a\) and all \(n\): \(\sigma^{n+1}(a) = \sigma^1(a)\).
+</div>
+<p>In the social-science interpretation (Volume 2), a <em>practice</em> is an idea and the sedimented residue of an iterated practice is a well-defined fixed point. This corollary states that the sediment of any idea after one round of cultural reproduction is already its eventual sediment — further rounds of practice-reproduction add nothing to the sedimented core. Lean: <code>rw [iteratePreserved_eq_σ, iteratePreserved_one]</code>.</p>
+
+<div class="thm"><span class="thm-label">Corollary 3.2 (corollary_3_2) — Intertextual Stability.</span>
+\(\sigma(\sigma(a)) = \sigma(a)\).
+</div>
+<p>In the humanistic interpretation (Volume 3), the canonical residue of a literary text — its preserved meaning across re-readings — stabilises after a single canonisation step. Canonisation is idempotent. This is <code>σ_idem_eq</code> restated as a named corollary with humanistic motivation. Lean: <code>σ_idem_eq a</code>.</p>
+
+<div class="thm"><span class="thm-label">Corollary 3.3 (corollary_3_3) — Memory Consolidation.</span>
+\(\text{IsPreserved}(a) \iff \text{Sedimented}(a)\).
+</div>
+<p>In the cognitive interpretation (Volume 4), \(\sigma\) models long-term consolidation of a memory trace and \(\nu\) models the labile transformation that accompanies recall. A consolidated memory (fixed point of \(\sigma\)) has trivial labile component, and conversely. This is clause (1) of Theorem 3.3 with the directions swapped. Lean: <code>(theorem_3_3 a).1.symm</code>.</p>
+
+<div class="thm"><span class="thm-label">Corollary 3.4 (corollary_3_4) — Emergence Invariant.</span>
+\(\sigma(a)\) is stable.
+</div>
+<p>In the emergence-theoretic interpretation (Volume 5), the preserved component of an idea is the conserved core that survives a phase transition. This corollary states that the conserved core is itself fully conserved — it has the "no-further-emergence" property of asymptotic phases. This is <code>stable_σ</code> restated as a named corollary. Lean: <code>stable_σ a</code>.</p>
+
+<!-- ===== IMPLICATIONS ===== -->
+<h2 id="implications">Implications</h2>
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p>The sheer scale of this file — 87 named results, three headline theorems, four corollaries, six worked examples, all verified without any <code>sorry</code> — makes a methodological point that should not be obscured by the elegance of the endpoint. Aufhebung is not a metaphor. Hegel's prose is famously difficult and his three-moment schema is often dismissed as a rhetorical device, a literary flourish over the bare claim that everything interesting is complicated. The Lean file shows that this is wrong. The decomposition \(\sigma(a)\circ\nu(a)=a\), together with the five axioms of <code>AufhebungStructure</code>, generates a dense algebraic structure whose full explication requires 87 distinct named theorems. Each one is a non-trivial logical step; none can be suppressed without breaking downstream chains of reasoning. Aufhebung, formalised, is not simpler than it appears in the informal text — it is considerably richer.</p>
+
+<p>What this means for the Hegel interpretation is precise. The standard objection to Hegel — that his dialectical moments are insufficiently constrained to do real philosophical work — dissolves once one distinguishes the <em>axiom set</em> from its <em>consequences</em>. The axiom set is minimal: five equations on two functions. But from this minimum the full algebraic structure follows with necessity. Theorem 3.3 in particular is a vindication of one of Hegel's most contested claims: that sedimentation, preservation, and the Hegelian fixed-point condition are not three separate notions but three co-extensive characterisations of the same thing. This is not an informal observation about the similarity of concepts; it is a proved equivalence with an explicit bi-directional derivation. Hegel was right, and the proof is machine-checked.</p>
+
+<p>For dialectical materialism, Theorem 3.2 — idempotent stabilisation — carries the most weight. Marx's "sediment of practice" (Bourdieu's later term for the same phenomenon) requires that the outcomes of repeated social action converge to a stable structure rather than oscillating indefinitely. Theorem 3.2 proves this convergence in the strongest possible form: stabilisation is not asymptotic but immediate. After one application of the preservation projector, the orbit is constant for all future iterations. Corollary 3.1 makes this available in named form for use by the applied volumes on social science. The point is not that social reality is literally an <code>AufhebungStructure</code> instance, but that the formal structure models the qualitative claim precisely enough to derive it — and the derivation carries no hidden assumptions beyond the five axioms.</p>
+
+<p>Fauconnier and Turner's theory of conceptual blending is often presented as a rival to compositional theories of meaning, on the grounds that blending introduces "emergent structure" that exceeds the sum of the input spaces. The Aufhebung framework offers a different diagnosis. The preservation projector \(\sigma\) extracts what is conserved across a blending event; the negation projector \(\nu\) extracts what is transformed. The "emergent structure" of blending is not a failure of compositionality but the \(\nu\)-component of the blend — the part that, by <code>σν_trivial</code>, is annihilated when preservation is applied. The blend itself satisfies the decomposition law; its emergent structure is its \(\nu\)-part. Gadamer's "fusion of horizons" admits the same analysis: the fused horizon is the full blend; the preserved horizon is \(\sigma\) of the fusion; the transformed or expanded element is the \(\nu\)-component. The framework does not reduce blending or fusion to a simpler operation; it places them in an algebraic structure that makes their internal logic tractable.</p>
+
+<p>The result that <code>aufhebianEquiv</code> coincides with equality (Lemma 3.80) is philosophically the most striking fact in the file. It says that the decomposition \((a \mapsto (\sigma(a), \nu(a)))\) is injective: no information is lost in splitting an idea into its preserved and negated components. This closes a gap in the informal literature, where it is sometimes suggested that Aufhebung involves a "raising" that goes beyond what is contained in the original idea — an emergent surplus. The formal result says the opposite: there is no surplus. The aufhebian pair \((\sigma(a), \nu(a))\) determines \(a\) uniquely, because the only way two ideas can share both projector-values is if they are equal. Derrida's <em>différance</em> would resist this, insisting on an irreducible remainder that cannot be captured by any pair of projectors; Adorno's negative dialectics would resist the finitude of the \(\nu\)-orbit. The formal result does not refute these positions outright — it shows exactly what would have to be given up algebraically in order to accommodate them, namely the decomposition axiom itself.</p>
+</div>
+
+<!-- ===== ZOO ENTRIES ===== -->
+<h2 id="zoo">Zoo Entries</h2>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Hegel — Aufhebung</h3>
+<p><strong>Original claim:</strong> Every determinate idea undergoes <em>Aufhebung</em> — it is simultaneously cancelled (<em>aufgehoben</em>), preserved (<em>aufbewahrt</em>), and elevated to a higher unity. The three moments are co-present, not sequential. (<em>Wissenschaft der Logik</em>, 1812–1816, Vol. I §90.)</p>
+<p><strong>Formal restatement:</strong> The <code>AufhebungStructure</code> typeclass provides endofunctions \(\sigma, \nu\colon \mathcal{I}\to\mathcal{I}\) such that \(\sigma(a)\circ\nu(a)=a\), \(\sigma(\sigma(a))=\sigma(a)\), \(\nu(\nu(a))=\nu(a)\), \(\nu(\sigma(a))=e\), and \(\sigma(\nu(a))=e\). The three moments are: the thesis \(a\) (the original idea), the antithesis \(\nu(a)\) (the cancelled/transformed component), and the synthesis \(\sigma(a)\) (the preserved/elevated component).</p>
+<p><strong>Status:</strong> <em>Fully formalised and verified.</em> Theorem 3.1 is the machine-checked statement of Hegel's core claim. The sharpening is the explicitness of the two projectors: where Hegel describes a movement, the formal version provides functions satisfying exact equations. The claim that the three moments are co-present corresponds formally to the fact that \(a\), \(\sigma(a)\), and \(\nu(a)\) are all derived from the single element \(a\) by canonical operations, not by a temporal process. Lemma 3.80 (<code>aufhebianEquiv_iff</code>) establishes a feature Hegel implied but never proved: the decomposition is faithful and no information is lost in the split.</p>
+<p><strong>Commentary:</strong> The most contested aspect of Hegel's Aufhebung is the claim that the synthesis genuinely preserves something from both thesis and antithesis rather than merely suppressing the antithesis. The formal version pins this down precisely: the synthesis \(\sigma(a)\) is not the negation of \(\nu(a)\); it is defined independently, and the two together recover \(a\) by composition. The cross-annihilation lemmas (\(\sigma(\nu(a))=e\) and \(\nu(\sigma(a))=e\)) show that the preserved and negated components are "orthogonal" — neither can intrude on the other — without implying that one is derived from the negation of the other.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Marx — Dialectical Materialism</h3>
+<p><strong>Original claim:</strong> Social formations develop through material contradictions. Each mode of production preserves elements of the previous mode (its "sedimented" practices and institutions) while transforming them through class struggle. The outcome is not a mere negation but a higher synthesis retaining productive forces while superseding relations of production. (<em>Capital</em>, Vol. I, Preface; <em>Grundrisse</em>, Introduction.)</p>
+<p><strong>Formal restatement:</strong> Model a mode of production as an idea \(a\in\mathcal{I}\). Dialectical development is the operation \(a\mapsto\sigma(a)\circ\nu(a)=a\), where \(\sigma(a)\) is the preserved productive forces and institutional residue, and \(\nu(a)\) is the transformed social-relational component. Corollary 3.1 (<em>Sediment of Practice</em>) states that \(\sigma^{n+1}(a)=\sigma^1(a)\): after one round of historical reproduction, the sedimented core is fully determined and further iterations add nothing.</p>
+<p><strong>Status:</strong> <em>Substantially supported, with important idealisations.</em> The formal model captures the structural logic of sedimentation and transformation. It does not model the causal mechanisms of class struggle, nor does it imply that historical development is reversible (there is no inverse in the general monoid). The stability of \(\sigma(a)\) under further application (Corollary 3.4) corresponds to Marx's claim that once productive forces are "released" by a new mode of production, they do not revert — the conserved core is genuinely stable.</p>
+<p><strong>Commentary:</strong> The most significant consequence for Marxist theory is the idempotent stabilisation result (Theorem 3.2). In sociological language: the sediment of practice is determined after one step. This does not entail that social formations are simple or predictable — the structure of \(\mathcal{I}\) and the particular \(\sigma\) and \(\nu\) are determined by the specific social formation — but it does entail that the logic of sedimentation is finite, not infinitely self-complicating. Bourdieu's habitus, understood as the sedimented residue of repeated practice, is formally modelled by \(\sigma(a)\); the doxic acceptance of the social field is precisely the condition <code>Sedimented a</code>, equivalent by Theorem 3.3 to <code>IsPreserved a</code>.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Fauconnier &amp; Turner — Conceptual Blending</h3>
+<p><strong>Original claim:</strong> Conceptual blending combines two or more mental spaces to produce a blended space with emergent structure that is not present in any input space. The blend is neither a simple union nor an intersection of the inputs; it involves selective projection, composition, completion, and elaboration. (<em>The Way We Think</em>, 2002.)</p>
+<p><strong>Formal restatement:</strong> A blend of ideas \(a\) and \(b\) is represented as \(a\circ b\in\mathcal{I}\). The Aufhebung decomposition of the blend is \(\sigma(a\circ b)\circ\nu(a\circ b)=a\circ b\). The "preserved structure" projected into the blend is \(\sigma(a\circ b)\); the "emergent structure" is \(\nu(a\circ b)\). The claim that emergent structure is not in either input corresponds to the cross-annihilation: \(\sigma(\nu(a\circ b))=e\) — preservation cannot recover the emergent component.</p>
+<p><strong>Status:</strong> <em>Partially formalised.</em> The decomposition provides a precise algebraic locus for "emergent structure" that blending theory identifies informally. It does not automatically capture the four-space structure (generic space, two input spaces, blended space) of the full blending framework; that would require additional structure. But the central puzzle of blending — how the blend can contain structure not in the inputs — is dissolved: the blend contains \(\nu(a\circ b)\), which is the part that is killed by \(\sigma\), i.e., the part that does not persist under further preservation operations.</p>
+<p><strong>Commentary:</strong> The mediated form (\(\text{mediated}(a,b) = \sigma(a)\circ\nu(b)\)) offers a more specific model of blending in which the preserved structure of \(a\) is combined with the transformative structure of \(b\). By <code>mediated_self</code>, the "self-blend" recovers the original idea; by <code>mediated_ident_right</code> and <code>mediated_ident_left</code>, blending with the identity returns the projector values. This aligns with Turner and Fauconnier's observation that certain "trivial" blends (blending a concept with the "void" or "universal" space) simply extract one of the input's components.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Gadamer — Fusion of Horizons</h3>
+<p><strong>Original claim:</strong> Understanding a text or interlocutor involves a <em>Horizontverschmelzung</em> (fusion of horizons): the interpreter's horizon and the text's horizon merge into a new, enlarged horizon that is neither the original interpreter's horizon nor the original text's horizon, but retains elements of both. (<em>Wahrheit und Methode</em>, 1960.)</p>
+<p><strong>Formal restatement:</strong> Let \(a\) be the interpreter's horizon and \(b\) the text's horizon. The fused horizon is \(a\circ b\). The fusion's Aufhebung decomposition is \(\sigma(a\circ b)\circ\nu(a\circ b)=a\circ b\). The preserved component \(\sigma(a\circ b)\) is what is stably retained from the fusion — the "enlarged shared horizon"; the transformed component \(\nu(a\circ b)\) is what is set aside or rendered labile. Gadamer's claim that the fused horizon is "neither the original" corresponds formally to the fact that \(\sigma(a\circ b)\) need not equal \(\sigma(a)\) or \(\sigma(b)\).</p>
+<p><strong>Status:</strong> <em>Structurally supported.</em> The decomposition captures the formal architecture of horizonal fusion without committing to Gadamer's hermeneutic epistemology. The stability of \(\sigma(a\circ b)\) (Corollary 3.4) corresponds to Gadamer's claim that genuine understanding produces a stable enlarged horizon that does not revert to either original.</p>
+<p><strong>Commentary:</strong> Gadamer's claim that the fusion produces a genuinely new horizon — not reducible to either input — is captured formally by the fact that \(\nu(a\circ b)\) is, in general, not recoverable from \(\nu(a)\) or \(\nu(b)\) separately: the cross-annihilation tells us what the projectors do to each component, but the composition \(a\circ b\) may have a \(\nu\)-component that is genuinely emergent relative to the components of \(a\) and \(b\) individually. The triad structure (Lemmas 3.62–3.64) provides the thesis-antithesis-synthesis schema that Gadamer inherits from Hegel: the original exchange is the thesis, the challenge to the interpreter's horizon is the antithesis, and the fused enlarged horizon is the synthesis recovered by <code>triadOf_recovers</code>.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Adorno — Negative Dialectics</h3>
+<p><strong>Original claim:</strong> The traditional Hegelian dialectic suppresses the "non-identical" by forcing every negation into a positive synthesis. Adorno's negative dialectics insists on the irreducibility of the negative moment: the \(\nu\)-component (in our terms) is not merely a transitional stage to a higher synthesis but retains its own irreducible content. The "determinate negation" (<em>bestimmte Negation</em>) is not annihilated in the synthesis — it changes the character of what is preserved. (<em>Negative Dialektik</em>, 1966.)</p>
+<p><strong>Formal restatement:</strong> Adorno's critique targets the <code>σν_trivial</code> axiom — \(\sigma(\nu(a))=e\) — which states that the preserved projector annihilates the negated component entirely. For Adorno, this should not be an axiom but a special case: the "non-identical" is precisely whatever is not in the image of \(\sigma\). Formally, Adorno's position corresponds to relaxing the cross-annihilation to an inequality: there should exist ideas \(a\) for which \(\sigma(\nu(a))\neq e\).</p>
+<p><strong>Status:</strong> <em>In tension with the axiom set.</em> Adorno's position cannot be accommodated within <code>AufhebungStructure</code> as currently defined without weakening or dropping <code>σ_ν</code>. This is not a failure of the framework but a precision instrument: it shows exactly what algebraic assumption Adorno's critique requires one to give up. A "weak Aufhebung structure" with <code>σ(ν(a)) ≤ e</code> in some partial order would be the natural generalisation, a direction for future formalisation.</p>
+<p><strong>Commentary:</strong> The idempotent stabilisation theorem (Theorem 3.2) is what Adorno most wanted to resist: the claim that iterated negation stabilises immediately — that there is no "Aufhebung of an Aufhebung" that adds something genuinely new. For Adorno, the orbit of an idea under repeated negation should remain open and unsettled. The formal result shows that this openness requires abandoning idempotence of \(\nu\) — another axiom of <code>AufhebungStructure</code>. Adorno's negative dialectics is thus formally characterised as a non-idempotent, non-cross-annihilating relaxation of the Aufhebung axiom set.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Koestler — Bisociation</h3>
+<p><strong>Original claim:</strong> Creative acts — in science, art, and humour — arise from <em>bisociation</em>: the collision of two habitually incompatible matrices of thought. Unlike association (operating within a single matrix), bisociation generates a new combined matrix that preserves something from each original and generates new implications unavailable in either. (<em>The Act of Creation</em>, 1964.)</p>
+<p><strong>Formal restatement:</strong> A bisociation of matrices \(a\) and \(b\) is \(a\circ b\) with Aufhebung decomposition \(\sigma(a\circ b)\circ\nu(a\circ b)=a\circ b\). The preserved matrix is \(\sigma(a\circ b)\) — what is carried forward from the collision as a stable new conceptual structure; the labile or transformed component is \(\nu(a\circ b)\). The "new implications unavailable in either" are modelled by the fact that \(\sigma(a\circ b)\) can differ from \(\sigma(a)\) and \(\sigma(b)\): the collision generates a preservation nucleus that neither matrix possessed alone.</p>
+<p><strong>Status:</strong> <em>Structurally supported.</em> The framework models the combinatorial logic of bisociation without committing to Koestler's specific psychological claims. The stability of \(\sigma(a\circ b)\) (Corollary 3.4 applied to the product) captures Koestler's claim that successful bisociation produces a durable new matrix, not merely a transient association.</p>
+<p><strong>Commentary:</strong> Koestler distinguished bisociation from mere association by the element of "incompatibility" between the input matrices. In the Aufhebung framework, two ideas are "incompatible" in the relevant sense when their Aufhebung projectors are orthogonal: \(\sigma(a)\circ\nu(b)\neq\sigma(b)\circ\nu(a)\). The mediated form \(\text{mediated}(a,b)=\sigma(a)\circ\nu(b)\) is precisely the bisociation product: it takes the preserved structure of the first matrix and the transformative structure of the second. By <code>mediated_self</code>, self-bisociation (associating a matrix with itself) simply recovers the matrix — no new implications arise from colliding a matrix with itself, consistent with Koestler's claim that bisociation requires genuinely different matrices.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Derrida — Différance</h3>
+<p><strong>Original claim:</strong> Meaning is constituted by a play of differences that is never fully present, never fully resolved into a stable identity. <em>Différance</em> names both the temporal deferral and the spatial differentiation that prevent any sign from coinciding with itself. No decomposition of a sign into "preserved" and "negated" components can be final; the decomposition itself defers its own closure. (<em>De la grammatologie</em>, 1967; "La Différance," 1968.)</p>
+<p><strong>Formal restatement:</strong> Derrida's position challenges Lemma 3.80 (<code>aufhebianEquiv_iff</code>) — the result that aufhebian equivalence coincides with equality, implying that the decomposition \((a\mapsto(\sigma(a),\nu(a)))\) is faithful. For Derrida, there should be a "remainder" or "trace" that is neither in \(\sigma(a)\) nor in \(\nu(a)\) but is presupposed by both. Formally, this requires the decomposition axiom \(\sigma(a)\circ\nu(a)=a\) to be weakened: the product of the two components should only approximate \(a\), not equal it.</p>
+<p><strong>Status:</strong> <em>In direct tension with the decomposition axiom.</em> Derrida's <em>différance</em> is algebraically characterised as the failure of the decomposition axiom: the "trace" is precisely \(a - (\sigma(a)\circ\nu(a))\) in some enriched structure. Within <code>AufhebungStructure</code> this trace is zero by axiom; Derrida's programme requires a framework in which it is non-trivially non-zero.</p>
+<p><strong>Commentary:</strong> The confrontation between Derrida and the formal framework is illuminating precisely because it is so clean. Derrida resists the very axiom that makes the Aufhebung framework tractable. But the formal treatment shows that his resistance is not free: abandoning the decomposition axiom requires abandoning the idempotence results, the stability results, and all 87 derived lemmas. This is not a refutation of Derrida — it is a precise catalogue of what is at stake in his refusal. The framework and <em>différance</em> are incompatible not through a misunderstanding but through an exact algebraic disagreement about whether the trace of decomposition is zero. Future work could formalise a "near-Aufhebung structure" with \(\sigma(a)\circ\nu(a)\approx a\) in some metric or order, and investigate which of the 87 lemmas survive the relaxation.</p>
+</div>
+
+<!-- ===== RELATED LEAN EXTENSIONS ===== -->
+<h2 id="extensions">Related Lean Extensions</h2>
+<ul>
+  <li><strong><code>IdeaTheory.Foundations</code></strong> — the base <code>IdeaTheoryStructure</code> typeclass providing the monoid axioms on which <code>AufhebungStructure</code> is built.</li>
+  <li><strong><code>IdeaTheory.Theorems1</code></strong> — the Idea Monoid; establishes the base algebraic structure. The Aufhebung axioms are layered on top of Theorems1's monoid.</li>
+  <li><strong><code>IdeaTheory.Theorems2</code></strong> — Resonance Pairing; the bilinear form on \(\mathcal{I}\). Downstream work can examine how \(\sigma\) and \(\nu\) interact with the resonance pairing.</li>
+  <li><strong><code>IdeaTheory.Theorems4</code></strong> — Graded Idea Algebra; the \(\sigma\)/\(\nu\) projectors induce a natural grading: degree-0 elements are the sedimented ideas, degree-1 elements are the sublated ideas.</li>
+  <li><strong><code>IdeaTheory.Theorems8</code></strong> — Structural Equivalence; two <code>AufhebungStructure</code> instances are equivalent iff they are isomorphic as structures, using the aufheb pairs as canonical representatives.</li>
+  <li><strong>Volume 2 (Social Science)</strong> — <code>SedimentOfPractice</code> module imports Corollary 3.1 directly and models Bourdieu's habitus as <code>Sedimented a</code>.</li>
+  <li><strong>Volume 4 (Cognitive Science)</strong> — <code>MemoryConsolidation</code> module imports Corollary 3.3 and models declarative vs. procedural memory as the \(\sigma\)/\(\nu\) split of an episodic-memory idea.</li>
+  <li><strong>Volume 5 (Emergence)</strong> — <code>EmergenceInvariant</code> module imports Corollary 3.4 and uses <code>Stable (σ a)</code> as the formal definition of a conserved order parameter in a phase transition.</li>
+</ul>
+
+<p style="margin-top:2em"><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Chapters — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+
+<h1>Idea Theory: The Book</h1>
+<p class="lede" style="color:var(--muted);font-size:1.1rem;">A ten-chapter mathematical monograph developing idea algebras from first principles, with machine-verified proofs in Lean&nbsp;4 and a zoo of forty-plus historical positions.</p>
+
+<p>Each chapter builds on the previous, starting from the three bare monoid axioms and progressively adding structure: resonance, Aufhebung, coalitions, emergence cocycle, conjugation, transmission chains, structural equivalence, grading. Every theorem is verified in <code>IdeaTheory.Theorems{1..9}</code>; every chapter closes with a zoo of historical positions formalized in the chapter's vocabulary.</p>
+
+<hr>
+
+<table>
+<thead>
+<tr><th>Chapter</th><th>Title</th><th>~Words</th><th>Summary</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="ch01.html">1</a></td>
+<td><strong><a href="ch01.html">The Idea Monoid</a></strong></td>
+<td>7,500</td>
+<td>Three axioms — associativity and a two-sided unit — are isolated and defended on philosophical grounds. From them the book derives powers, chains, sub-ideals, idempotents, cancellation, and invertibility, with three headline theorems and four corollaries. The chapter closes with a zoo matching Locke, Hume, Frege, and Wittgenstein against the bare monoid.</td>
+</tr>
+<tr>
+<td><a href="ch02.html">2</a></td>
+<td><strong><a href="ch02.html">Coalitions, Committees, and the Algebra of Aggregation</a></strong></td>
+<td>7,500</td>
+<td>The free-list monad is used to build coalitions and the aggregate operator, turning finite collections of ideas into a single idea. Three headline theorems — coalition associativity, silent-agent invariance, and social congruence — are proved, and six historical positions (Granovetter, Olson, Latour, Bourdieu, Sawyer, Condorcet) are formalized.</td>
+</tr>
+<tr>
+<td><a href="ch03.html">3</a></td>
+<td><strong><a href="ch03.html">The Aufhebung Decomposition</a></strong></td>
+<td>7,500</td>
+<td>Two endofunctions \(\sigma\) and \(\nu\) on the carrier formalize Hegel's dialectical triple of preservation, negation, and elevation. Five axioms yield an exact decomposition \(\sigma(a)\circ\nu(a)=a\), idempotent stabilization, and a fixed-point theorem. Seven zoo entries span Hegel, Marx, Adorno, Fauconnier–Turner, Koestler, Deleuze, and Derrida.</td>
+</tr>
+<tr>
+<td><a href="ch04.html">4</a></td>
+<td><strong><a href="ch04.html">The Resonance Pairing</a></strong></td>
+<td>7,500</td>
+<td>A real-valued bilinear pairing \(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\) is introduced, measuring how well two ideas "fit." The pairing extends uniquely to the free vector space on \(\mathcal{I}\), and non-degeneracy survives composition. Zoo entries formalize Husserl's noemata, Fodor's LOT, and semantic-vector models of cognition.</td>
+</tr>
+<tr>
+<td><a href="ch05.html">5</a></td>
+<td><strong><a href="ch05.html">The Emergence Cocycle</a></strong></td>
+<td>7,500</td>
+<td>The 2-cocycle \(\omega(a,b)\) captures the irreducible novelty produced by composition: the discrepancy between a valuation of a composite and the sum of individual valuations. The cocycle condition \(\partial\omega=0\) is proved, and the cohomology class is shown to be a structural invariant. Zoo entries formalize Deleuze's virtual problems, emergent collective intelligence, and inter-level causation.</td>
+</tr>
+<tr>
+<td><a href="ch06.html">6</a></td>
+<td><strong><a href="ch06.html">Conjugation and Reframing</a></strong></td>
+<td>7,500</td>
+<td>Invertible ideas act on the algebra by conjugation \({}^g\!a = g\circ a\circ g^{-1}\), yielding inner automorphisms that preserve every piece of structure. The group of units acts as a symmetry group; Kantian categories are formalized as conjugation operators. Zoo entries cover Kant's schemata, Kuhn's paradigm shifts, and Foucault's epistemic frames.</td>
+</tr>
+<tr>
+<td><a href="ch07.html">7</a></td>
+<td><strong><a href="ch07.html">Transmission Chains and Cultural Attractors</a></strong></td>
+<td>7,500</td>
+<td>Iterating composition along a chain of carriers telescopes: cumulative emergence is a sum of pairwise cocycle terms. Cultural attractors appear as fixed points of the iterated composition followed by resonance-norm truncation. Zoo entries formalize Sperber's epidemiology of representations, Dawkins's memes, and cumulative cultural evolution.</td>
+</tr>
+<tr>
+<td><a href="ch08.html">8</a></td>
+<td><strong><a href="ch08.html">Structural Equivalence</a></strong></td>
+<td>7,500</td>
+<td>Two idea algebras are isomorphic exactly when there exists a graded monoid isomorphism preserving \(\rho\), \(\sigma\), \(\nu\), and \(\omega\). Translation indeterminacy (Quine) is shown to be non-uniqueness of the structural isomorphism; conceptual relativity is the existence of inequivalent but internally consistent algebras over the same carrier.</td>
+</tr>
+<tr>
+<td><a href="ch09.html">9</a></td>
+<td><strong><a href="ch09.html">Grading</a></strong></td>
+<td>7,500</td>
+<td>A degree map \(\deg:\mathcal{I}\to G\) into a totally ordered abelian group \(G\) is introduced and shown to extend to a homomorphism compatible with \(\rho\), \(\sigma\), \(\nu\), and \(\omega\). Levels exist and stack; the graded structure formalizes complexity hierarchies, conceptual depth, and Bourdieu's volume of capital.</td>
+</tr>
+<tr>
+<td><a href="ch10.html">10</a></td>
+<td><strong><a href="ch10.html">Philosophical Synthesis</a></strong></td>
+<td>7,500</td>
+<td>The nine foundational theorems are assembled into a single unified structure theorem for idea algebras. The full formalism is reviewed against thirty additional zoo entries spanning philosophy, cognitive science, sociology, economics, and literary theory. Prospects for Volume II — the social and empirical applications — are outlined.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>How to read the book</h2>
+<p>Each chapter is self-contained at the level of <em>definitions</em>: all notation is introduced where used. However, the <em>theorems</em> in later chapters rely on results proved in earlier ones. A reader interested only in the philosophical zoo may read the final section of each chapter independently, with the brief formal restatements serving as entry points into the algebra. A reader interested in the algebra should read Chapters 1–3 in sequence before branching to any of Chapters 4–9.</p>
+
+<p>Every result cited as "(Verified as <code>IdeaTheory.X</code>)" has a machine-checked proof in the Lean&nbsp;4 source repository. The Lean source is browsable under <a href="../lean/index.html">Lean</a>.</p>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

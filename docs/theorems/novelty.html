@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 12: Emergent Novelty — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+
+<h1>Theorem 12: Emergent Novelty</h1>
+<p class="entry-meta">Lean: <code>IdeaTheory.Theorems12</code> &middot; 65 lemmas &middot; Related: <a href="../lean/emergence-levels.html">emergence levels</a>, <a href="recombinant-growth.html">T: recombinant growth</a>, <a href="transmission-chain.html">T7</a></p>
+
+<!-- ============================================================ -->
+<!-- TABLE OF CONTENTS                                             -->
+<!-- ============================================================ -->
+<nav class="toc" style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:1em 1.4em;margin:1.5em 0;display:inline-block;min-width:280px;">
+<strong>Contents</strong>
+<ol style="margin:.5em 0 0 1.2em;padding:0;line-height:1.9;">
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#lemmas">All 65 Lemmas</a>
+    <ol type="a" style="margin:.3em 0 0 1.2em;">
+      <li><a href="#sec-A">IsNovel and basic predicate properties (1–13)</a></li>
+      <li><a href="#sec-B">Identity cannot generate novelty (14–33)</a></li>
+      <li><a href="#sec-C">Closed sets and absorption (34–36)</a></li>
+      <li><a href="#sec-D">Congruence and implications (37–41)</a></li>
+      <li><a href="#sec-E">LineageNovel (42–49)</a></li>
+      <li><a href="#sec-F">Transmission–novelty interaction (50–57)</a></li>
+      <li><a href="#sec-headline">Headline theorems and corollaries (58–65)</a></li>
+    </ol>
+  </li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+</ol>
+</nav>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: OVERVIEW                                           -->
+<!-- ============================================================ -->
+<h2 id="overview">1. Overview</h2>
+
+<p>
+Theorem 12 develops a complete formal theory of <em>emergent novelty</em>: the condition under which the composition of two ideas produces a result that is genuinely new — not reducible to either ingredient. The central predicates are:
+</p>
+
+<ul>
+  <li><strong>\(\mathsf{IsNovel}(c, a)\)</strong> — defined as \(c \neq a\). One idea is novel relative to another simply when they differ. This predicate is irreflexive and symmetric in the obvious sense, but not transitive; it is a structural primitive.</li>
+  <li><strong>\(\mathsf{EN}(a, b)\)</strong> (\(\mathsf{EmergentNovel}(a,b)\)) — defined as \(a \circ b \neq a\) and \(a \circ b \neq b\). The composition of \(a\) and \(b\) is <em>genuinely new</em>: it is not the same as either input. Left-novelty (\(\mathsf{ENL}\)) and right-novelty (\(\mathsf{ENR}\)) split this into its two components.</li>
+  <li><strong>\(\mathsf{NoveltyWitness}(a,b)\)</strong> — a Lean structure that packages both proofs into a single witness term, enabling destructuring and transport.</li>
+  <li><strong>\(\mathsf{NovelEverywhere}(c, xs)\)</strong> — \(c\) is novel relative to every element in the list \(xs\); a list-indexed novelty predicate used to track cumulative distinctness.</li>
+  <li><strong>\(\mathsf{LineageNovel}(l)\)</strong> — the tradition \(\mathsf{tradition}(l)\) (the folded product of all ideas in the lineage) is not a member of the lineage \(l\). The whole is genuinely new relative to all its parts.</li>
+  <li><strong>\(\mathsf{Closed}(S)\)</strong> — \(\forall a, b \in S,\ a \circ b \in S\). A set is closed if composition never escapes it; closed sets cannot be sources of emergence.</li>
+</ul>
+
+<p>
+The 65 lemmas span every logical edge case: irreflexivity, iff-characterisations, interactions with the identity element \(e\), behaviour under concatenation of lineages, absorption laws, congruence under substitution, and the key headline theorems that unify these results. The proofs are machine-verified in <code>IdeaTheory.Theorems12</code>.
+</p>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: ALL 65 LEMMAS                                      -->
+<!-- ============================================================ -->
+<h2 id="lemmas">2. All 65 Lemmas</h2>
+
+<!-- §12.A -->
+<h3 id="sec-A">§12.A &nbsp; IsNovel and basic predicate properties</h3>
+
+<div class="thm"><span class="thm-label">Lemma 12.1 (IsNovel.irrefl).</span>
+For every idea \(a\),
+\[ \neg\, \mathsf{IsNovel}(a, a). \]
+An idea is never novel relative to itself.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.2 (IsNovel_iff).</span>
+For any ideas \(c, a\),
+\[ \mathsf{IsNovel}(c, a) \iff c \neq a. \]
+The predicate unfolds to plain inequality.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.3 (NoveltyWitness.toEmergent).</span>
+If \(w\) is a \(\mathsf{NoveltyWitness}(a, b)\), then \(\mathsf{EN}(a, b)\):
+\[ w : \mathsf{NoveltyWitness}(a,b) \;\Longrightarrow\; a \circ b \neq a \;\wedge\; a \circ b \neq b. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.4 (EmergentNovel.toWitness).</span>
+Conversely, any proof of \(\mathsf{EN}(a, b)\) packages into a \(\mathsf{NoveltyWitness}\):
+\[ \mathsf{EN}(a,b) \;\Longrightarrow\; \exists\, w : \mathsf{NoveltyWitness}(a,b). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.5 (EmergentNovel_iff).</span>
+\[ \mathsf{EN}(a, b) \iff a \circ b \neq a \;\wedge\; a \circ b \neq b. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.6 (EmergentNovelL_iff).</span>
+\[ \mathsf{ENL}(a, b) \iff a \circ b \neq a. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.7 (EmergentNovelR_iff).</span>
+\[ \mathsf{ENR}(a, b) \iff a \circ b \neq b. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.8 (EmergentNovel.of_LR).</span>
+Left-novelty and right-novelty together imply full emergent novelty:
+\[ \mathsf{ENL}(a,b) \;\wedge\; \mathsf{ENR}(a,b) \;\Longrightarrow\; \mathsf{EN}(a,b). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.9 (EmergentNovel.left).</span>
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; \mathsf{ENL}(a, b). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.10 (EmergentNovel.right).</span>
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; \mathsf{ENR}(a, b). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.11 (not_EmergentNovelL_iff).</span>
+\[ \neg\,\mathsf{ENL}(a, b) \iff a \circ b = a. \]
+Failure of left-novelty is exactly left-absorption.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.12 (not_EmergentNovelR_iff).</span>
+\[ \neg\,\mathsf{ENR}(a, b) \iff a \circ b = b. \]
+Failure of right-novelty is exactly right-absorption.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.13 (not_EmergentNovel_iff).</span>
+\[ \neg\,\mathsf{EN}(a, b) \iff a \circ b = a \;\vee\; a \circ b = b. \]
+The composition fails to be emergently novel precisely when it collapses to one of the inputs.</div>
+
+<!-- §12.B -->
+<h3 id="sec-B">§12.B &nbsp; Identity cannot generate novelty</h3>
+
+<div class="thm"><span class="thm-label">Lemma 12.14 (NovelEverywhere_nil).</span>
+\[ \mathsf{NovelEverywhere}(c, []) \iff \top. \]
+Novelty everywhere over the empty list is vacuously true.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.15 (NovelEverywhere_cons).</span>
+\[ \mathsf{NovelEverywhere}(c, a :: xs) \iff c \neq a \;\wedge\; \mathsf{NovelEverywhere}(c, xs). \]
+Membership in the head and novelty over the tail.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.16 (NovelEverywhere.mono_cons).</span>
+If \(\mathsf{NovelEverywhere}(c, a :: xs)\) then \(\mathsf{NovelEverywhere}(c, xs)\). The predicate is monotone under list extension.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.17 (NovelEverywhere.head).</span>
+\[ \mathsf{NovelEverywhere}(c, a :: xs) \;\Longrightarrow\; c \neq a. \]
+If \(c\) is novel everywhere in \(a :: xs\), it is novel relative to the head.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.18 (NovelEverywhere_append).</span>
+\[ \mathsf{NovelEverywhere}(c, xs \mathbin{++} ys) \iff \mathsf{NovelEverywhere}(c, xs) \;\wedge\; \mathsf{NovelEverywhere}(c, ys). \]
+Novelty distributes over list concatenation.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.19 (NovelEverywhere.tail).</span>
+\[ \mathsf{NovelEverywhere}(c, a :: xs) \;\Longrightarrow\; \mathsf{NovelEverywhere}(c, xs). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.20 (Closed.true_set).</span>
+The set of all ideas is closed:
+\[ \mathsf{Closed}(\mathcal{P}). \]
+Trivially, since \(a \circ b \in \mathcal{P}\) for all \(a, b\).</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.21 (Closed.singleton_ident).</span>
+The singleton \(\{e\}\) is closed:
+\[ \mathsf{Closed}(\{e\}), \]
+since \(e \circ e = e\).</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.22 (Closed.inter).</span>
+If \(S\) and \(T\) are both closed, so is their intersection:
+\[ \mathsf{Closed}(S) \;\wedge\; \mathsf{Closed}(T) \;\Longrightarrow\; \mathsf{Closed}(S \cap T). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.23 (not_EmergentNovel_ident_left).</span>
+\[ \neg\,\mathsf{EN}(e, b), \]
+because \(e \circ b = b\), so \(e \circ b = b\) and right-novelty fails immediately.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.24 (not_EmergentNovel_ident_right).</span>
+\[ \neg\,\mathsf{EN}(a, e), \]
+because \(a \circ e = a\), so left-novelty fails.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.25 (not_EmergentNovelR_ident_left).</span>
+\[ \neg\,\mathsf{ENR}(e, b). \]
+Since \(e \circ b = b\), the composition equals the right input.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.26 (not_EmergentNovelL_ident_right).</span>
+\[ \neg\,\mathsf{ENL}(a, e). \]
+Since \(a \circ e = a\), the composition equals the left input.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.27 (EmergentNovel.left_ne_ident).</span>
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; a \neq e. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.28 (EmergentNovel.right_ne_ident).</span>
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; b \neq e. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.29 (NoveltyWitness.left_ne_ident).</span>
+A novelty witness implies the left ingredient is non-trivial:
+\[ w : \mathsf{NoveltyWitness}(a, b) \;\Longrightarrow\; a \neq e. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.30 (NoveltyWitness.right_ne_ident).</span>
+\[ w : \mathsf{NoveltyWitness}(a, b) \;\Longrightarrow\; b \neq e. \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.31 (ident_not_IsNovel).</span>
+\[ \neg\,\mathsf{IsNovel}(e, e). \]
+The identity is not novel relative to itself (a special case of irreflexivity).</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.32 (not_EmergentNovel_of_left_ident).</span>
+If \(a = e\) then \(\neg\,\mathsf{EN}(a, b)\):
+\[ a = e \;\Longrightarrow\; \neg\,\mathsf{EN}(a, b). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.33 (not_EmergentNovel_of_right_ident).</span>
+\[ b = e \;\Longrightarrow\; \neg\,\mathsf{EN}(a, b). \]</div>
+
+<!-- §12.C -->
+<h3 id="sec-C">§12.C &nbsp; Closed sets and absorption</h3>
+
+<div class="thm"><span class="thm-label">Lemma 12.34 (Closed.mono).</span>
+If \(S \subseteq T\) and \(S\) is closed, then for all \(a, b \in S\), \(a \circ b \in S \subseteq T\). Closure is upward-monotone in the ambient set.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.35 (right_absorbing_of_not_NovelL).</span>
+\[ \neg\,\mathsf{ENL}(a, b) \;\Longrightarrow\; a \circ b = a. \]
+When left-novelty fails, \(a\) absorbs \(b\) on the right: the result is just \(a\) again.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.36 (left_absorbing_of_not_NovelR).</span>
+\[ \neg\,\mathsf{ENR}(a, b) \;\Longrightarrow\; a \circ b = b. \]
+When right-novelty fails, \(b\) absorbs \(a\) on the left.</div>
+
+<!-- §12.D -->
+<h3 id="sec-D">§12.D &nbsp; Congruence and implications</h3>
+
+<div class="thm"><span class="thm-label">Lemma 12.37 (EmergentNovel.imp_L).</span>
+\(\mathsf{EN}(a, b)\) implies a specific inequality regarding the left component; emergent novelty propagates to left-side implications.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.38 (EmergentNovel.imp_R).</span>
+\(\mathsf{EN}(a, b)\) implies a specific inequality regarding the right component; emergent novelty propagates to right-side implications.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.39 (EmergentNovel.congr_left).</span>
+If \(a = a'\), then
+\[ \mathsf{EN}(a, b) \iff \mathsf{EN}(a', b). \]
+Emergent novelty is invariant under substitution of equal left arguments.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.40 (EmergentNovel.congr_right).</span>
+If \(b = b'\), then
+\[ \mathsf{EN}(a, b) \iff \mathsf{EN}(a, b'). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.41 (EmergentNovel.toIsNovel).</span>
+If \(\mathsf{EN}(a, b)\) then \(\mathsf{IsNovel}(a \circ b, c)\) for appropriate \(c \in \{a, b\}\):
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; a \circ b \neq a \;\wedge\; a \circ b \neq b. \]
+Emergent novelty witnesses IsNovel in both directions simultaneously.</div>
+
+<!-- §12.E -->
+<h3 id="sec-E">§12.E &nbsp; LineageNovel</h3>
+
+<div class="thm"><span class="thm-label">Lemma 12.42 (LineageNovel_nil).</span>
+\[ \mathsf{LineageNovel}([]), \]
+i.e., \(\mathsf{tradition}([]) \notin []\). The empty lineage is vacuously novel (it has no members for the tradition to coincide with).</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.43 (LineageNovel_iff).</span>
+\[ \mathsf{LineageNovel}(l) \iff \mathsf{tradition}(l) \notin l. \]
+Unfolds the definition directly.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.44 (not_LineageNovel_singleton).</span>
+For any idea \(a\),
+\[ \neg\,\mathsf{LineageNovel}([a]). \]
+A singleton lineage has \(\mathsf{tradition}([a]) = a\), which is a member of \([a]\). The single-element "tradition" is no more than its source.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.45 (not_LineageNovel_of_tradition_mem).</span>
+\[ \mathsf{tradition}(l) \in l \;\Longrightarrow\; \neg\,\mathsf{LineageNovel}(l). \]
+If the folded product is already in the lineage, no novelty emerges.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.46 (LineageNovel.tradition_not_mem).</span>
+\[ \mathsf{LineageNovel}(l) \;\Longrightarrow\; \mathsf{tradition}(l) \notin l. \]
+The forward direction: novelty implies the tradition is genuinely outside the lineage.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.47 (LineageNovel_trivial_zero).</span>
+\[ \mathsf{LineageNovel}(\mathsf{trivial}(0)) \iff \mathsf{LineageNovel}([]), \]
+since \(\mathsf{trivial}(0) = []\). The zero-length trivial lineage is the empty list.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.48 (not_LineageNovel_trivial_succ).</span>
+For all \(n\),
+\[ \neg\,\mathsf{LineageNovel}(\mathsf{trivial}(n+1)). \]
+Any non-empty trivial lineage (whose elements are all \(e\)) has \(\mathsf{tradition} = e\), which is a member of the list.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.49 (LineageNovel.of_perm).</span>
+If \(l_1\) is a permutation of \(l_2\) and \(\mathsf{LineageNovel}(l_1)\), then \(\mathsf{LineageNovel}(l_2)\). Lineage novelty is invariant under reordering (given commutativity/associativity suffices for the tradition to be order-independent).</div>
+
+<!-- §12.F -->
+<h3 id="sec-F">§12.F &nbsp; Transmission–novelty interaction</h3>
+
+<div class="thm"><span class="thm-label">Lemma 12.50 (not_EmergentNovelR_of_tradition_eq).</span>
+If \(\mathsf{tradition}(l) = x\), then
+\[ \neg\,\mathsf{ENR}(\mathsf{tradition}(l),\, x). \]
+When the tradition equals \(x\), the composition \(\mathsf{tradition}(l) \circ x\) cannot be novel relative to \(x\) via right-novelty.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.51 (faithful_implies_not_NovelL).</span>
+Faithful transmission of lineage \(l\) implies
+\[ \neg\,\mathsf{ENL}(\mathsf{tradition}(l),\, x). \]
+Faithful copying preserves the tradition unchanged, so no left-novelty can emerge.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.52 (emergent_eq_tradition_then).</span>
+For any two lineages \(l_1, l_2\),
+\[ \mathsf{tradition}(l_1 \mathbin{++} l_2) = \mathsf{tradition}(l_1) \circ \mathsf{tradition}(l_2). \]
+Concatenation of lineages corresponds to composition of their traditions.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.53 (tradition_then_novel_left).</span>
+If \(\mathsf{EN}(\mathsf{tradition}(l_1), \mathsf{tradition}(l_2))\), then
+\[ \mathsf{tradition}(l_1 \mathbin{++} l_2) \neq \mathsf{tradition}(l_1). \]
+Emergently novel traditions produce a genuinely new composite on the left.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.54 (tradition_then_novel_right).</span>
+Under the same hypothesis,
+\[ \mathsf{tradition}(l_1 \mathbin{++} l_2) \neq \mathsf{tradition}(l_2). \]
+The right-side analogue.</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.55 (tradition_then_emergent).</span>
+If \(\mathsf{EN}(\mathsf{tradition}(l_1), \mathsf{tradition}(l_2))\), then the concatenated tradition is novel relative to both sub-traditions:
+\[ \mathsf{tradition}(l_1 \mathbin{++} l_2) \neq \mathsf{tradition}(l_1) \;\wedge\; \mathsf{tradition}(l_1 \mathbin{++} l_2) \neq \mathsf{tradition}(l_2). \]</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.56 (EmergentNovel.no_silent_right).</span>
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; b \neq e. \]
+Under emergent novelty, the right ingredient is not the identity (no silent right participant).</div>
+
+<div class="thm"><span class="thm-label">Lemma 12.57 (EmergentNovel.no_silent_left).</span>
+\[ \mathsf{EN}(a, b) \;\Longrightarrow\; a \neq e. \]
+The left ingredient is also non-trivial.</div>
+
+<!-- §12.G: Headline theorems -->
+<h3 id="sec-headline">§12.G &nbsp; Headline theorems and corollaries (58–65)</h3>
+
+<div class="thm"><span class="thm-label">Theorem 12.1 (theorem_12_1) — Identity and Novelty.</span>
+Emergent novelty requires both ingredients to be non-trivial:
+\[
+\mathsf{EN}(a,b) \;\Longrightarrow\; a \neq e \;\wedge\; b \neq e.
+\]
+Moreover: \(\neg\,\mathsf{EN}(e, b)\) for all \(b\); \(\neg\,\mathsf{EN}(a, e)\) for all \(a\); \(e \circ b = b\); \(a \circ e = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 12.2 (theorem_12_2) — Cumulative-Novelty Theorem.</span>
+<ul style="margin:.5em 0 0 0">
+  <li>If \(\mathsf{LineageNovel}(l)\) then \(\mathsf{tradition}(l) \notin l\): the whole tradition is genuinely new relative to all its parts.</li>
+  <li>\(\neg\,\mathsf{LineageNovel}([a])\): a singleton lineage is not novel.</li>
+  <li>For \(n \geq 1\): \(\neg\,\mathsf{LineageNovel}(\mathsf{trivial}(n))\): non-empty trivial lineages are not novel.</li>
+  <li>\(\mathsf{LineageNovel}([])\): the empty lineage is vacuously novel.</li>
+  <li>\(\mathsf{LineageNovel}(\mathsf{trivial}(0))\): equivalently, \(\mathsf{trivial}(0) = []\) is novel.</li>
+</ul>
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 12.3 (theorem_12_3) — Transmission-Preservation.</span>
+<ul style="margin:.5em 0 0 0">
+  <li>If the sub-traditions are emergently novel, the concatenated tradition is novel relative to both:
+    \[\mathsf{EN}(\mathsf{tradition}(l_1), \mathsf{tradition}(l_2)) \;\Longrightarrow\; \mathsf{tradition}(l_1{+\!\!+}l_2) \notin \{\mathsf{tradition}(l_1), \mathsf{tradition}(l_2)\}.\]
+  </li>
+  <li>Faithful transmission destroys right-novelty: faithfulness of \(l\) implies \(\neg\,\mathsf{ENL}(\mathsf{tradition}(l), x)\).</li>
+  <li>Cultural equivalence (permutation of lineage) preserves emergent novelty (Lemma 12.49).</li>
+</ul>
+</div>
+
+<div class="thm"><span class="thm-label">Corollary 12.1 (corollary_12_1) — Identity Cannot Originate Novelty.</span>
+\[
+\neg\,\mathsf{EN}(e, b) \quad \text{and} \quad \neg\,\mathsf{EN}(a, e) \quad \text{for all } a, b.
+\]
+The identity element cannot be a participant in any emergently novel composition, on either side.</div>
+
+<div class="thm"><span class="thm-label">Corollary 12.2 (corollary_12_2).</span>
+For any idea \(a\),
+\[ \neg\,\mathsf{LineageNovel}([a]). \]
+A singleton lineage is never novel: the tradition of a single source is that source itself.</div>
+
+<div class="thm"><span class="thm-label">Corollary 12.3 (corollary_12_3).</span>
+If transmission of \(l\) is faithful and \(x\) is any idea, then
+\[ \neg\,\mathsf{ENL}(\mathsf{tradition}(l),\, x). \]
+Faithful transmission destroys novelty: a perfectly copied tradition cannot generate a new left-ingredient.</div>
+
+<div class="thm"><span class="thm-label">Corollary 12.4 (corollary_12_4).</span>
+If \(\mathsf{EN}(\mathsf{tradition}(l_1), \mathsf{tradition}(l_2))\), then
+\[ \mathsf{tradition}(l_1 \mathbin{++} l_2) \neq \mathsf{tradition}(l_1) \;\wedge\; \mathsf{tradition}(l_1 \mathbin{++} l_2) \neq \mathsf{tradition}(l_2). \]
+Emergently novel traditions yield a genuinely new composite when their lineages are joined.</div>
+
+<div class="thm"><span class="thm-label">Corollary 12.5 (corollary_12_5) — Closed Sets Cannot Witness Emergence.</span>
+If \(S\) is closed (\(\mathsf{Closed}(S)\)) and \(a, b \in S\), then \(a \circ b \in S\). Consequently:
+\[ a, b \in S \;\wedge\; \mathsf{Closed}(S) \;\Longrightarrow\; a \circ b \in S. \]
+No composition of elements within a closed set ever produces something outside \(S\). Closed sets are the formal zones where emergent novelty is structurally impossible.</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: IMPLICATIONS                                       -->
+<!-- ============================================================ -->
+<h2 id="implications">3. Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p><strong>Novelty is not subjective.</strong> The 65 lemmas of Theorem 12 are machine-verified consequences of a single algebraic structure. \(\mathsf{IsNovel}(c, a)\) is not a matter of observer opinion or contextual framing: it is the binary predicate \(c \neq a\). Every irreflexivity, absorption, and closure result follows without any additional axioms. This matters philosophically: theories of creativity that treat novelty as purely in the eye of the beholder have no formal grip; theories that treat it as objective difference have all 65 results available as theorems.</p>
+
+<p><strong>The identity element cannot originate novelty.</strong> Theorem 12.1 is precise and total: \(\neg\,\mathsf{EN}(e, b)\) and \(\neg\,\mathsf{EN}(a, e)\) for all \(a, b\). An "empty" contribution — a silent participant, a culture that passes nothing on, a thinker who adds \(e\) — is provably incapable of generating an emergently novel composition. This is not a sociological hypothesis; it is a theorem. Any framework that credits background conditions, historical inevitability, or "the spirit of the age" with the production of genuine novelty must, if it is to be taken seriously, posit a non-trivial ingredient — the \(e\)-based account is formally ruled out.</p>
+
+<p><strong>Creativity theories as corollaries.</strong> Boden's three modes of creativity (combinational, exploratory, transformational) correspond to increasing degrees of \(\mathsf{EN}\): combinational creativity is exactly \(\mathsf{EN}(a, b)\) with \(a, b\) drawn from different conceptual spaces; exploratory creativity corresponds to \(\mathsf{EN}\) within a single space (the composition exceeds what either input could reach alone); transformational creativity corresponds to lineages \(l\) where \(\mathsf{LineageNovel}(l)\) and the tradition restructures the space itself. Csikszentmihalyi's flow states — episodes of maximal creative output — are periods of dense \(\mathsf{EN}\): the ideas produced during flow are, by phenomenological report, experienced as not reducible to any prior state. Corollary 12.1 sharpens this: flow states cannot be triggered by trivial (identity-valued) inputs; something genuinely non-trivial must be present on both sides.</p>
+
+<p><strong>The Cumulative-Novelty Theorem formalizes "More is Different."</strong> Anderson's 1972 claim that complex systems exhibit properties not found in their components is Theorem 12.2 in formal dress. \(\mathsf{LineageNovel}(l)\) says the tradition — the folded product of all contributions — is not a member of the lineage. The emergent whole is genuinely outside the set of parts. Lemma 12.44 closes off the degenerate case: a singleton cannot be novel relative to itself. Lemma 12.48 closes off the trivial lineage: any non-empty sequence of identity-elements fails novelty. These boundary conditions transform Anderson's slogan into a precise statement with well-defined failure modes.</p>
+
+<p><strong>Closed sets are the zones of non-emergence.</strong> Corollary 12.5 makes mathematically rigorous what Bedau calls "weak emergence": genuine emergence always crosses a boundary. If \(S\) is closed, no composition within \(S\) can produce something outside \(S\) — by definition. Conversely, emergent novelty requires that the composition escape the inputs' prior "home set." This gives a precise criterion for when a scientific discipline, a cultural tradition, or a research programme is genuinely generative: its productive output must fail to be a member of any closed set containing the inputs. The formal structure here echoes Sperber's epidemiology of representations: attractors are the fixed points of cultural transmission (non-novel by Lemma 12.44), while transformational moments are exactly the \(\mathsf{LineageNovel}\) episodes.</p>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: ZOO ENTRIES                                        -->
+<!-- ============================================================ -->
+<h2 id="zoo">4. Zoo Entries</h2>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Boden — Types of Creativity</h3>
+<p><strong>Original claim:</strong> Margaret Boden distinguishes combinational creativity (novel combinations of familiar ideas), exploratory creativity (exploring the limits of a conceptual space), and transformational creativity (restructuring the conceptual space itself) (<em>The Creative Mind</em>, 1990/2004).</p>
+<p><strong>Formal restatement:</strong> Combinational creativity is \(\mathsf{EN}(a, b)\) where \(a\) and \(b\) are drawn from distinct sub-spaces. Exploratory creativity is a sequence of compositions \(a_1 \circ a_2 \circ \cdots\) within a space \(S\) that approaches — but does not reach — \(\partial S\). Transformational creativity is \(\mathsf{LineageNovel}(l)\) where the tradition restructures the membership criterion of \(S\) itself.</p>
+<p><strong>Status:</strong> <em>Formally differentiated.</em> Theorem 12 supplies the distinctions Boden describes in prose: the three modes correspond to three distinct formal conditions on \(\mathsf{EN}\) and \(\mathsf{LineageNovel}\). Combinational creativity is the most basic case; transformational creativity is the strongest, requiring the tradition to escape the entire conceptual space. Corollary 12.5 implies that a genuinely transformational creative act cannot occur within any closed set — it must cross a boundary, precisely as Boden insists.</p>
+<p><strong>Commentary:</strong> Boden's framework has been criticized for lacking a formal criterion for when a space has been "transformed." Theorem 12 provides one: a space transformation corresponds to a \(\mathsf{LineageNovel}\) event in which \(\mathsf{tradition}(l)\) is not merely outside the individual elements but outside the closure of the space generated by those elements. The closed-set criterion (Corollary 12.5) is the needed formal precision.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Csikszentmihalyi — Flow and Optimal Experience</h3>
+<p><strong>Original claim:</strong> Flow states — episodes of complete absorption in a challenging activity — produce peak creative output: ideas that feel entirely new, not derived from prior states (<em>Flow: The Psychology of Optimal Experience</em>, 1990).</p>
+<p><strong>Formal restatement:</strong> A flow episode is a temporal interval during which the density of \(\mathsf{EN}\)-events is maximal: \(\mathsf{EN}(a_t, a_{t+1})\) holds at nearly every step \(t\). The phenomenology of "escaping the prior conceptual space" corresponds formally to \(\mathsf{tradition}(l_{\text{flow}}) \notin l_{\text{flow}}\), i.e., \(\mathsf{LineageNovel}(l_{\text{flow}})\).</p>
+<p><strong>Status:</strong> <em>Formally supported and sharpened.</em> Corollary 12.1 rules out flow states generated entirely by identity-valued interactions: the phenomenological report that flow requires non-trivial engagement from the agent is a theorem. Lemma 12.57 and Lemma 12.56 jointly say that no silent participant — no background condition that contributes \(e\) — can be the source of emergent novelty.</p>
+<p><strong>Commentary:</strong> Csikszentmihalyi's claim that flow produces ideas "not previously in one's conceptual space" is exactly the \(\mathsf{LineageNovel}\) condition. The theory of optimal experience is enriched by the closed-set boundary: flow states are episodes in which the agent leaves the closure of their habitual idea-set — formally, intervals where the composition escapes every \(\mathsf{Closed}\) neighborhood of the agent's prior intellectual position.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Lakatos — Research Programmes</h3>
+<p><strong>Original claim:</strong> A scientific research programme has a "hard core" of protected hypotheses and a "protective belt" of auxiliary hypotheses. A progressive programme generates novel predictions — testable content not derivable from the hard core alone (<em>The Methodology of Scientific Research Programmes</em>, 1978).</p>
+<p><strong>Formal restatement:</strong> The hard core is a closed set \(H\) (\(\mathsf{Closed}(H)\)). Novel predictions are ideas \(p\) with \(\mathsf{IsNovel}(p, h)\) for all \(h \in H\), i.e., \(p \notin H\). A progressive programme has \(\mathsf{EN}(h, a)\) for some \(h \in H\) and auxiliary \(a\): the hard core composed with an auxiliary produces something outside \(H\). A degenerating programme has \(a \circ h \in H\) for all \(a\) — the protective belt only ever returns the programme to the hard core.</p>
+<p><strong>Status:</strong> <em>Formalized and extended.</em> Corollary 12.5 identifies degeneration precisely: if the protective belt is chosen to keep \(H\) closed, no novelty can emerge. A progressive programme must, by Corollary 12.5, include auxiliaries that break the closure of \(H\). This is Lakatos's account of progress stated as a theorem.</p>
+<p><strong>Commentary:</strong> The \(\mathsf{LineageNovel}\) predicate captures Lakatos's distinction between a programme's individual contributions and the tradition they collectively generate. A progressive programme is one where \(\mathsf{LineageNovel}(\text{sequence of auxiliary hypotheses})\) — the tradition of successful predictions is not a member of the sequence itself, but emerges from their interaction.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Kuhn — Scientific Revolutions</h3>
+<p><strong>Original claim:</strong> Normal science operates within a paradigm; a scientific revolution replaces one paradigm with another that is incommensurable with it. The new theory is not a logical extension of the old — it is genuinely new (<em>The Structure of Scientific Revolutions</em>, 1962).</p>
+<p><strong>Formal restatement:</strong> Let \(P_1\) be the set of ideas associated with the old paradigm (\(\mathsf{Closed}(P_1)\) under normal science). A paradigm shift is a \(\mathsf{LineageNovel}\) event: the tradition produced by the revolutionary lineage \(l\) satisfies \(\mathsf{tradition}(l) \notin P_1\). Incommensurability is formalized as the absence of a monoid homomorphism between \((P_1, \circ)\) and \((P_2, \circ')\) that preserves the meaning map.</p>
+<p><strong>Status:</strong> <em>Formally supported.</em> Theorem 12.2 provides the Kuhnian structure: the tradition of a revolutionary lineage is not a member of the lineage (Lemma 12.46), and the old paradigm's closure (Corollary 12.5) is precisely the mathematical condition under which no normal-science composition could ever produce the new paradigm.</p>
+<p><strong>Commentary:</strong> Kuhn's incommensurability thesis has been attacked as vague. The closed-set framework gives it precision: two paradigms are incommensurable when neither is a subset of any closed set containing the other. The revolutionary idea is one that cannot be reached by any sequence of compositions from within the old paradigm's closed set — it is not merely different but structurally \(\mathsf{LineageNovel}\) with respect to the entire tradition.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Simonton — Genius and Creative Productivity</h3>
+<p><strong>Original claim:</strong> Genius is characterized by both quantity and quality of creative output; the most productive creators occupy regions of idea-space where chance combinations are most likely to be novel and valuable (Simonton's <em>Genius, Creativity, and Leadership</em>, 1984; <em>Origins of Genius</em>, 1999).</p>
+<p><strong>Formal restatement:</strong> A genius is an idea-agent \(g\) such that the proportion of compositions \(a \circ b\) where \(a, b \in \mathsf{range}(g)\) and \(\mathsf{EN}(a,b)\) holds is high — the personal idea-space of a genius is dense with \(\mathsf{EN}\)-pairs. The "chance permutation" model corresponds to random draws from \(\mathsf{range}(g)\); genius is a high baseline rate of emergent novelty among these draws.</p>
+<p><strong>Status:</strong> <em>Formally precise.</em> Lemmas 12.27–12.30 jointly imply that a genius cannot draw on identity-valued ideas as creative inputs: all \(\mathsf{EN}\)-events require both components to be non-trivial. This provides a formal criterion for what Simonton calls the "wide" associative horizon of the creative individual: it is a set \(\mathsf{range}(g)\) that is far from any closed set, so that most pairs \((a, b) \in \mathsf{range}(g)^2\) satisfy \(\mathsf{EN}(a,b)\).</p>
+<p><strong>Commentary:</strong> Simonton's empirical finding that productivity and originality co-occur is predicted by the structure: a large, open (non-closed) range maximizes both the number of compositions and the proportion that are \(\mathsf{EN}\)-events. The formal theory thus provides a mechanism for the observed correlation between output volume and breakthrough frequency in historical genius.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Weitzman — Variety and Economic Growth</h3>
+<p><strong>Original claim:</strong> Economic growth from variety arises when new goods enter the economy that were not previously available; the value of variety comes from the non-rivalry and non-exclusion of new idea-combinations that produce genuinely new outputs (<em>Recombinant Growth</em>, QJE 1998).</p>
+<p><strong>Formal restatement:</strong> The pool of available ideas at time \(t\) is \(S_t\). Growth occurs when \(\mathsf{EN}(a, b)\) for \(a, b \in S_t\) yields \(a \circ b \notin S_t\) — a new idea enters the pool. The non-rival nature of ideas is modeled by the monoid operation: \(a\) is not consumed by composing it with \(b\); \(a\) remains in \(S_t\) after the composition. The combinatorial explosion of recombinant growth is the super-linear scaling of \(\mathsf{EN}\)-pairs as \(|S_t|\) grows.</p>
+<p><strong>Status:</strong> <em>Formally grounded and extended.</em> Corollary 12.5 identifies the stagnation condition: if \(S_t\) becomes closed, no further \(\mathsf{EN}\)-events are possible from within \(S_t\). Growth requires the continued failure of closure. Theorem 12.2 provides the cumulative version: the tradition of a growing lineage of ideas is not a member of any earlier state of the pool — the tradition is genuinely outside the prior intellectual capital stock.</p>
+<p><strong>Commentary:</strong> Weitzman's model is the economic application of the same combinatorial structure that underlies Boden's creativity types and Kuhn's revolutions. The formal unification is non-trivial: all three — creativity, paradigm shift, economic variety growth — are \(\mathsf{LineageNovel}\) phenomena in which the tradition of a productive lineage escapes its own constitutive elements. See also <a href="recombinant-growth.html">Recombinant Growth</a> for the full formal treatment of non-rivalry in the idea monoid.</p>
+</div>
+
+<p style="margin-top:2em"><a href='index.html'>&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

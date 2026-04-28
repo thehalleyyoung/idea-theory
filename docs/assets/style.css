@@ -113,3 +113,63 @@ sup.cite{font-size:.7em;color:var(--accent);}
   .nav-links{gap:.05em .6em;}
   .nav-links a{font-size:.85rem;}
 }
+
+/* zoo entries (used in chapters and zoo/ pages) */
+.zoo-entry{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:.8em 1.2em;
+  margin:1.5em 0;
+  border-radius:0 4px 4px 0;
+}
+.zoo-entry h3,.zoo-entry .zoo-name{
+  color:var(--accent);font-family:Inter,sans-serif;
+  font-size:1.05rem;margin:0 0 .3em;
+}
+.zoo-entry .zoo-meta{
+  font-size:.85rem;color:var(--muted);
+  font-family:Inter,sans-serif;margin-bottom:.5em;
+}
+.zoo-entry .formal-claim{font-style:italic;margin:.5em 0;}
+.zoo-entry .formal-status{
+  background:#fff;border-radius:3px;
+  padding:.3em .6em;margin-top:.5em;
+  font-size:.92rem;
+}
+
+/* chapter pages */
+.chapter-nav{
+  display:flex;justify-content:space-between;
+  margin:2.5em 0 1em;padding-top:1em;
+  border-top:1px solid var(--rule);
+  font-family:Inter,sans-serif;font-size:.92rem;
+}
+.toc-box{
+  background:var(--accent-soft);border:1px solid var(--rule);
+  border-radius:6px;padding:.8em 1.2em;margin:1em 0 2em;
+}
+.toc-box h4{margin:0 0 .4em;font-size:.95rem;color:var(--muted);}
+.toc-box ol{margin:0;padding-left:1.4em;}
+.toc-box li{margin:.15em 0;font-size:.92rem;}
+
+/* lean code */
+.lean-module{
+  background:#f3f0ea;border:1px solid var(--rule);
+  border-radius:6px;padding:1em 1.2em;margin:1.5em 0;
+}
+.lean-module h4{margin:0 0 .5em;color:var(--accent);font-size:1rem;}
+
+/* proof sketch */
+.proof{
+  border-left:2px solid var(--rule);
+  padding:.3em 0 .3em 1em;
+  margin:.3em 0 1em;
+  color:var(--muted);
+  font-size:.97em;
+}
+.proof::before{content:"Proof. ";font-style:italic;}
+
+/* literature annotation */
+.lit-entry{margin:1.2em 0;padding-left:1em;border-left:2px solid var(--rule);}
+.lit-entry .lit-ref{font-family:Inter,sans-serif;font-size:.9rem;color:var(--muted);}
+.lit-entry .lit-note{margin:.3em 0 0;}

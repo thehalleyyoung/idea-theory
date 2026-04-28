@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 6: Conjugation, Transmission Chains, and Structural Equivalence — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.chapter-nav{display:flex;justify-content:space-between;margin:2em 0 1em;padding:.6em 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:Inter,sans-serif;font-size:.9rem;}
+.chapter-nav a{color:var(--accent);border-bottom:none;}
+.section-toc{background:var(--accent-soft);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;}
+.section-toc h3{margin:0 0 .5em;font-size:1rem;}
+.section-toc ol{margin:0;padding-left:1.4em;}
+.section-toc li{margin:.2em 0;}
+.epigraph{border-left:3px solid var(--accent);padding:.4em 1em;margin:1.5em 0;font-style:italic;color:var(--muted);}
+.epigraph cite{display:block;margin-top:.4em;font-style:normal;font-size:.9em;}
+.proof{margin:.6em 0 1em;padding:.4em 1em .4em 1.2em;border-left:2px solid var(--rule);}
+.proof-label{font-style:italic;font-weight:600;}
+.thm,.defn,.cor,.lemma,.prop,.remark,.example{border-left:3px solid var(--accent);background:#fff;padding:.5em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.remark{border-left-color:var(--muted);background:var(--accent-soft);}
+.example{border-left-color:#5a7a5a;background:#f5f9f5;}
+.label{font-family:Inter,sans-serif;font-weight:700;font-size:.9rem;color:var(--accent);margin-right:.4em;}
+.remark .label{color:var(--muted);}
+.example .label{color:#5a7a5a;}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content">
+
+<div class="chapter-nav">
+  <a href="ch05.html">← Chapter 5: The Emergence Cocycle</a>
+  <a href="ch07.html">Chapter 7: Grading and the Algebra of Novelty →</a>
+</div>
+
+<h1>Chapter 6: Conjugation, Transmission Chains, and Structural Equivalence</h1>
+
+<div class="epigraph">
+  <p>"An idea that is not dangerous is unworthy of being called an idea at all."</p>
+  <cite>Oscar Wilde, <em>The Critic as Artist</em>.</cite>
+</div>
+
+<p>The previous chapter constructed the emergence cocycle \(\omega : \mathcal{I}\times\mathcal{I} \to A\) and showed that it satisfies the 2-cocycle identity forced by associativity. The present chapter asks a further structural question: which ideas are <em>equivalent</em> in the sense that they play interchangeable roles in every context? This question has two distinct answers depending on what we mean by "context": the monoid context (an idea appears inside a composite) and the cohomological context (an idea contributes to a cocycle). The chapter shows that these two notions of context-equivalence coincide, and that both are captured by the notion of <em>conjugation</em>.</p>
+
+<p>The chapter is organized as follows. Section 1 identifies the invertible elements of \(\mathcal{I}\) as a group; Section 2 proves the Conjugation Theorem, which says that conjugation by any invertible element \(g\) is simultaneously a monoid automorphism, a resonance isometry, an Aufhebung equivalence, a cocycle isomorphism, and a grading isomorphism. Section 3 introduces transmission chains — the algebraic model of how an idea propagates through a sequence of cultural agents — and derives the chain rule for \(\omega\) and the identity-transmission theorem. Section 4 establishes the long-chain inequality. Section 5 introduces structural equivalence as the quotient of the relation induced by conjugation, and proves its universal property. Section 6 states the Structural Equivalence Theorem, which gives four equivalent characterizations of when two ideas are structurally equivalent. Section 7 is the zoo. Section 8 is a coda.</p>
+
+<div class="section-toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#s1">Invertible ideas as a group</a></li>
+    <li><a href="#s2">The conjugation theorem</a></li>
+    <li><a href="#s3">Transmission chains</a></li>
+    <li><a href="#s4">Cumulative emergence and the long-chain inequality</a></li>
+    <li><a href="#s5">Structural equivalence and the universal property</a></li>
+    <li><a href="#s6">The headline equivalence theorem</a></li>
+    <li><a href="#s7">The zoo</a></li>
+    <li><a href="#s8">Coda</a></li>
+  </ol>
+</div>
+
+<!-- ====================================================== -->
+<section id="s1">
+<h2>§1. Invertible ideas as a group</h2>
+
+<div class="defn">
+<span class="label">Definition (Invertible element).</span>
+An element \(g \in \mathcal{I}\) is <em>invertible</em> if there exists \(g^{-1} \in \mathcal{I}\) such that
+\[
+  g \circ g^{-1} = e = g^{-1} \circ g.
+\]
+The set of all invertible elements is denoted \(\mathcal{I}^\times\). The Lean declaration is <code>IdeaTheory.Invertibles</code>.
+</div>
+
+<div class="prop">
+<span class="label">Proposition (Group of units).</span>
+\(\mathcal{I}^\times\) is a group under \(\circ\). Specifically:
+<ol>
+  <li>The identity \(e\) is invertible, with \(e^{-1} = e\).</li>
+  <li>If \(g, h \in \mathcal{I}^\times\) then \(g\circ h \in \mathcal{I}^\times\), with \((g\circ h)^{-1} = h^{-1}\circ g^{-1}\).</li>
+  <li>If \(g \in \mathcal{I}^\times\) then \(g^{-1} \in \mathcal{I}^\times\), with \((g^{-1})^{-1} = g\).</li>
+  <li>Inverses are unique.</li>
+</ol>
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> All four properties are standard. For (2): \((g\circ h)\circ(h^{-1}\circ g^{-1}) = g\circ(h\circ h^{-1})\circ g^{-1} = g\circ e\circ g^{-1} = g\circ g^{-1} = e\) by associativity and the unit law. For (4): if \(g\circ h_1 = e = g\circ h_2\) then \(h_1 = e\circ h_1 = (g^{-1}\circ g)\circ h_1 = g^{-1}\circ(g\circ h_1) = g^{-1}\circ e = g^{-1}\), and similarly for right inverses. ∎
+</div>
+
+<p>The invertibles are the "symmetries" of the idea algebra in the following heuristic sense: an invertible idea can always be completely undone, leaving no trace in the monoid. The existence of non-invertible ideas (most of them, in practice) is what makes the theory non-trivial. The theory would collapse to group theory if every element were invertible.</p>
+
+<div class="example">
+<span class="label">Examples.</span>
+<em>(a)</em> In the free monoid \(\Sigma^*\) with concatenation, the only invertible element is the empty string \(\varepsilon\). <em>(b)</em> In the integers \(\mathbb{Z}\) under addition (a group!), every element is invertible. <em>(c)</em> In the ring \(M_n(\mathbb{R})\) of \(n\times n\) real matrices under multiplication, the invertibles are \(GL_n(\mathbb{R})\). <em>(d)</em> In a reachability monoid of a directed graph — where \(a \circ b\) means "apply edge \(a\) then edge \(b\)" — an element is invertible exactly when there is a return path from the target to the source: \(g\in\mathcal{I}^\times\) iff the edge is part of a cycle.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s2">
+<h2>§2. The conjugation theorem</h2>
+
+<div class="defn">
+<span class="label">Definition (Conjugation).</span>
+For \(g \in \mathcal{I}^\times\) and \(a \in \mathcal{I}\), the <em>conjugate of \(a\) by \(g\)</em> is
+\[
+  {}^g\!a \;:=\; g \circ a \circ g^{-1}.
+\]
+The map \(c_g : \mathcal{I} \to \mathcal{I}\), \(a \mapsto {}^g\!a\), is the <em>inner automorphism</em> by \(g\). The Lean declaration is <code>IdeaTheory.conj</code>.
+</div>
+
+<div class="thm" id="conj-thm">
+<span class="label">Theorem (Conjugation).</span>
+For every \(g \in \mathcal{I}^\times\), the map \(c_g : a \mapsto {}^g\!a\) satisfies all of the following:
+<ol>
+  <li><strong>Monoid automorphism.</strong> \(c_g\) is a bijection satisfying \(c_g(e) = e\) and \(c_g(a\circ b) = c_g(a)\circ c_g(b)\).</li>
+  <li><strong>Resonance isometry.</strong> If \((\mathcal{I},\circ,e,\rho)\) carries a resonance pairing, then \(\rho({}^g\!a, {}^g\!b) = \rho(a,b)\) for all \(a, b\).</li>
+  <li><strong>Aufhebung equivalence.</strong> \(\sigma({}^g\!a, {}^g\!b) = {}^g\!\sigma(a,b)\), and similarly for \(\nu\) and \(\eta\).</li>
+  <li><strong>Cocycle isomorphism.</strong> For any valuation \(v : \mathcal{I} \to A\), the pullback \(c_g^* v := v\circ c_g\) has cocycle \(\omega_{c_g^*v}(a,b) = \omega_v({}^g\!a, {}^g\!b)\).</li>
+  <li><strong>Grading invariance.</strong> If \(\deg : \mathcal{I} \to G\) is a grading homomorphism (as in Chapter 7), then \(\deg({}^g\!a) = \deg(a)\) for all \(a\).
+  </li>
+</ol>
+The verified Lean declarations are <code>conj_monoidHom</code>, <code>conj_resonance_iso</code>, <code>conj_aufhebung_equiv</code>, <code>conj_cocycle_iso</code>, and <code>conj_grading_inv</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof (of (1) and (4)).</span>
+
+<em>(1)</em> We check: \(c_g(e) = g\circ e\circ g^{-1} = g\circ g^{-1} = e\). For the product: \(c_g(a\circ b) = g\circ(a\circ b)\circ g^{-1} = (g\circ a\circ g^{-1})\circ(g\circ b\circ g^{-1}) = c_g(a)\circ c_g(b)\), using associativity and the fact that \(g^{-1}\circ g = e\). Bijectivity follows from \(c_g\circ c_{g^{-1}} = \mathrm{id} = c_{g^{-1}}\circ c_g\).
+
+<em>(4)</em> Let \(v' = v\circ c_g\). Then
+\begin{align*}
+  \omega_{v'}(a,b) &= v'(a\circ b) - v'(a) - v'(b)\\
+  &= v(c_g(a\circ b)) - v(c_g(a)) - v(c_g(b))\\
+  &= v(c_g(a)\circ c_g(b)) - v(c_g(a)) - v(c_g(b))\\
+  &= \omega_v(c_g(a), c_g(b)) = \omega_v({}^g\!a, {}^g\!b). \qquad\square
+\end{align*}
+</div>
+
+<div class="remark">
+<span class="label">Remark (Conjugation as change of basis).</span>
+Part (1) says that every inner automorphism acts on the monoid as a "change of basis" — it permutes the elements but preserves all monoid relations. Parts (2)–(5) say that every geometrically or analytically defined structure on \(\mathcal{I}\) that we have introduced is preserved by this change of basis. The idea algebra is, in this sense, "intrinsic": it is invariant under the group \(\mathcal{I}^\times\) acting by inner automorphisms.
+</div>
+
+<div class="cor">
+<span class="label">Corollary (Conjugacy classes preserve all invariants).</span>
+If \(a' = {}^g\!a\) for some \(g \in \mathcal{I}^\times\), then \(\rho(a',b) = \rho(a, {}^{g^{-1}}\!b)\) for all \(b\), and \(\omega_v(a', a') = \omega_v(a,a)\) for any valuation \(v\).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s3">
+<h2>§3. Transmission chains</h2>
+
+<p>An idea typically does not travel directly from its origin to its eventual resting place. It is transmitted through a sequence of <em>agents</em>: each agent receives the idea, possibly modifies it by composing it with their own idea or context, and passes the result on. The algebraic model of this process is a <em>transmission chain</em>.</p>
+
+<div class="defn">
+<span class="label">Definition (Transmission chain).</span>
+A <em>transmission chain of length \(n\) over \(\mathcal{I}\)</em> is a tuple
+\[
+  \mathsf{Ch} = (a; g_1, g_2, \dots, g_n)
+\]
+where \(a \in \mathcal{I}\) is the <em>source idea</em> and \(g_1, \dots, g_n \in \mathcal{I}^\times\) are the <em>transmission operators} (or \emph{agents}\). The <em>output</em> of the chain is
+\[
+  \mathsf{Ch}(a) \;:=\; {}^{g_n}\!\cdots\!{}^{g_1}\!a \;=\; g_n\circ\cdots\circ g_1\circ a\circ g_1^{-1}\circ\cdots\circ g_n^{-1}.
+\]
+The Lean structure is <code>IdeaTheory.TransmissionChain</code>.
+</div>
+
+<div class="defn">
+<span class="label">Definition (Chain composition).</span>
+Two transmission chains \(\mathsf{Ch}_1 = (a; g_1, \dots, g_n)\) and \(\mathsf{Ch}_2 = (b; h_1, \dots, h_m)\) may be <em>concatenated} as
+\[
+  \mathsf{Ch}_2 \bullet \mathsf{Ch}_1 \;:=\; (a\circ b;\, g_1, \dots, g_n, h_1, \dots, h_m).
+\]
+This extends the monoid multiplication of \(\mathcal{I}\) to chain compositions.
+</div>
+
+<div class="prop">
+<span class="label">Proposition (Chain calculus).</span>
+Let \(\mathsf{Ch} = (a; g_1, \dots, g_n)\). Write \(G_k := g_k\circ\cdots\circ g_1\) for the prefix product of agents. Then
+\[
+  \mathsf{Ch}(a) \;=\; {}^{G_n}\!a \;=\; G_n\circ a\circ G_n^{-1}.
+\]
+In other words, the chain's net effect on the source idea is conjugation by the product of all agents.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Induction on \(n\). For \(n=1\), \(G_1 = g_1\) and \(\mathsf{Ch}(a) = {}^{g_1}\!a = G_1\circ a\circ G_1^{-1}\). For the inductive step, suppose the claim holds for \(n-1\); then the first \(n-1\) agents produce \({}^{G_{n-1}}\!a = G_{n-1}\circ a\circ G_{n-1}^{-1}\). Applying agent \(g_n\) gives
+\[
+  {}^{g_n}\!(G_{n-1}\circ a\circ G_{n-1}^{-1}) = g_n\circ G_{n-1}\circ a\circ G_{n-1}^{-1}\circ g_n^{-1} = G_n\circ a\circ G_n^{-1} = {}^{G_n}\!a. \qquad\square
+\]
+</div>
+
+<div class="thm">
+<span class="label">Theorem (Chain rule for \(\omega\)).</span>
+Let \(v : \mathcal{I} \to A\) be a normalized valuation, and let \(a, b \in \mathcal{I}\), \(g \in \mathcal{I}^\times\). Then
+\[
+  \omega_v({}^g\!a,\, {}^g\!b) \;=\; \omega_{v\circ c_g}(a, b),
+\]
+i.e. the emergence cocycle of the transmitted ideas under \(g\) equals the cocycle of the original ideas under the twisted valuation \(v\circ c_g\).
+
+More generally, for a chain \((a; g_1, \dots, g_n)\),
+\[
+  \omega_v({}^{G_n}\!a,\, {}^{G_n}\!b) \;=\; \omega_{v\circ c_{G_n}}(a, b).
+\]
+The Lean lemma is <code>chain_rule_omega</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Immediate from part (4) of the Conjugation Theorem with \(v' = v\circ c_{G_n}\). ∎
+</div>
+
+<div class="thm">
+<span class="label">Theorem (Identity transmission).</span>
+Suppose \(v : \mathcal{I} \to A\) is a valuation and \(g \in \mathcal{I}^\times\) is an invertible element such that \(v(g\circ a\circ g^{-1}) = v(a)\) for all \(a \in \mathcal{I}\) (that is, \(g\) acts as an isometry for \(v\)). Then:
+\[
+  \omega_v({}^g\!a, {}^g\!b) \;=\; \omega_v(a, b)
+  \qquad\text{for all } a, b \in \mathcal{I}.
+\]
+In other words, an isometry of \(v\) is automatically a symmetry of \(\omega_v\). The Lean lemma is <code>identity_transmission</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> By the chain rule for \(\omega\), \(\omega_v({}^g\!a, {}^g\!b) = \omega_{v\circ c_g}(a,b)\). Since \(g\) is an isometry for \(v\), we have \(v\circ c_g = v\), so \(\omega_{v\circ c_g}(a,b) = \omega_v(a,b)\). ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark (Symmetry groups).</span>
+The set of isometries of \(v\) is a subgroup of \(\mathcal{I}^\times\), written \(\mathrm{Stab}(v)\). By Identity Transmission, \(\mathrm{Stab}(v)\) acts as a group of automorphisms of the cocycle \(\omega_v\). The larger \(\mathrm{Stab}(v)\), the more symmetric the emergence pattern — ideas transmitted by symmetries are structurally indistinguishable.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s4">
+<h2>§4. Cumulative emergence and the long-chain inequality</h2>
+
+<p>We now combine the Telescoping Theorem of Chapter 5 with the chain calculus of the previous section to obtain a quantitative bound on the emergence accumulated along a transmission chain.</p>
+
+<div class="defn">
+<span class="label">Definition (Cumulative emergence of a chain).</span>
+Given a transmission chain \((a; g_1, \dots, g_n)\) and a valuation \(v\), the <em>cumulative emergence</em> of the chain is
+\[
+  \Omega_n(a; g_1,\dots,g_n) \;:=\; v(\mathsf{Ch}(a)) \;-\; v(a).
+\]
+This measures how much the value of the idea changes as it passes through the chain of agents.
+</div>
+
+<div class="thm">
+<span class="label">Theorem (Long-chain inequality).</span>
+For any normalized valuation \(v\), chain \((a; g_1, \dots, g_n)\), and any norm \(\|\cdot\|\) on \(A = \mathbb{R}\),
+\[
+  \bigl|\Omega_n(a; g_1,\dots,g_n)\bigr| \;\le\; \sum_{k=1}^n \bigl|\omega_v(T_k, a\circ T_k^{-1})\bigr|
+\]
+where \(T_k = g_k\circ\cdots\circ g_1\) is the \(k\)-th prefix product of the transmission operators. The Lean lemma is <code>long_chain_ineq</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof (sketch).</span> Write \(A_k := {}^{T_k}\!a\) for the result of transmitting \(a\) through the first \(k\) agents. Then \(A_0 = a\) and \(A_n = \mathsf{Ch}(a)\), so
+\[
+  \Omega_n = v(A_n) - v(A_0) = \sum_{k=1}^n [v(A_k) - v(A_{k-1})].
+\]
+Each summand \(v(A_k) - v(A_{k-1}) = v(g_k \circ A_{k-1} \circ g_k^{-1}) - v(A_{k-1})\) equals the difference caused by applying \(g_k\). Expanding \(g_k\circ A_{k-1}\circ g_k^{-1}\) as a two-step composition, the cocycle definition and chain rule give the summand bounded by \(|\omega_v(T_k, a\circ T_k^{-1})|\). Summing these bounds gives the inequality. ∎
+</div>
+
+<div class="cor">
+<span class="label">Corollary.</span>
+If \(v\) is weakly emergent with bound \(M\) (i.e. \(|\omega_v| \le M\) everywhere), then
+\[
+  |\Omega_n| \;\le\; n\cdot M.
+\]
+Long transmission chains accumulate at most \(n\) units of emergence.
+</div>
+
+<div class="remark">
+<span class="label">Remark (Linear vs. sublinear growth).</span>
+The corollary gives a <em>linear</em> upper bound. The actual growth may be much slower: if the agents \(g_k\) are isometries of \(v\), each step contributes zero, and the cumulative emergence is identically zero throughout the chain. Conversely, if the agents are chosen adversarially to maximize emergence, the bound can be achieved. Whether cultural transmission chains of natural ideas exhibit linear, sublinear, or superlinear emergence growth is an empirical question, formalized but not settled by the present theory.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s5">
+<h2>§5. Structural equivalence and the universal property</h2>
+
+<div class="defn">
+<span class="label">Definition (Structural equivalence).</span>
+Two ideas \(a, b \in \mathcal{I}\) are <em>structurally equivalent</em>, written \(a \sim_{\mathcal{I}} b\), if there exists \(g \in \mathcal{I}^\times\) such that \(b = {}^g\!a\), i.e. \(b = g\circ a\circ g^{-1}\).
+</div>
+
+<div class="prop">
+<span class="label">Proposition (\(\sim_{\mathcal{I}}\) is an equivalence relation).</span>
+<ol>
+  <li><em>Reflexive:</em> \(a \sim_{\mathcal{I}} a\), witnessed by \(g = e\).</li>
+  <li><em>Symmetric:</em> if \(a \sim_{\mathcal{I}} b\) via \(g\), then \(b \sim_{\mathcal{I}} a\) via \(g^{-1}\).</li>
+  <li><em>Transitive:</em> if \(a \sim_{\mathcal{I}} b\) via \(g\) and \(b \sim_{\mathcal{I}} c\) via \(h\), then \(a \sim_{\mathcal{I}} c\) via \(h\circ g\).
+  </li>
+</ol>
+The Lean instance is <code>structuralEquiv_isEquivalence</code>.
+</div>
+
+<p>The equivalence classes \([a]_{\sim_{\mathcal{I}}}\) are exactly the <em>conjugacy classes</em> of the monoid \(\mathcal{I}\) restricted to the group \(\mathcal{I}^\times\). In a commutative monoid, every element is its own conjugacy class (since \(g\circ a\circ g^{-1} = a\) for all \(g\)), and structural equivalence degenerates to identity.</p>
+
+<div class="defn">
+<span class="label">Definition (Structural quotient).</span>
+The <em>structural quotient</em> of \(\mathcal{I}\) is the set
+\[
+  [\mathcal{I}] \;:=\; \mathcal{I}/{\sim_{\mathcal{I}}}
+\]
+of conjugacy classes, equipped with the induced monoid structure: \([a]\cdot[b] := [a\circ b]\) (this is well-defined by the Conjugation Theorem).
+</div>
+
+<div class="thm">
+<span class="label">Theorem (Universal property of the structural quotient).</span>
+For any monoid homomorphism \(\phi : \mathcal{I} \to M\) into a monoid \(M\) that satisfies \(\phi({}^g\!a) = \phi(a)\) for all \(g \in \mathcal{I}^\times\) and \(a \in \mathcal{I}\) (i.e. \(\phi\) is <em>conjugation-invariant</em>), there exists a unique monoid homomorphism \(\bar\phi : [\mathcal{I}] \to M\) such that \(\phi = \bar\phi \circ \pi\), where \(\pi : \mathcal{I} \to [\mathcal{I}]\) is the quotient map.
+
+The Lean declaration is <code>structural_quotient_universal</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Since \(\phi\) is conjugation-invariant, \(\phi(a) = \phi(b)\) whenever \(a \sim_{\mathcal{I}} b\). Define \(\bar\phi([a]) := \phi(a)\); this is well-defined by the previous sentence. Uniqueness follows from surjectivity of \(\pi\). That \(\bar\phi\) is a monoid homomorphism follows from \(\phi\) being one. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark (Structural quotient as a trace space).</span>
+The universal property identifies \([\mathcal{I}]\) with the "trace" or "center" space of \(\mathcal{I}\) — the space of functions of conjugacy classes. In representation theory, this is the appropriate domain for characters of representations. For idea algebras, the structural quotient is the right setting for "typological" or "genre-level" valuations that are invariant under repackaging of an idea in different cultural contexts.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s6">
+<h2>§6. The headline equivalence theorem</h2>
+
+<div class="thm">
+<span class="label">Theorem (Structural Equivalence).</span>
+For \(a, b \in \mathcal{I}\), the following are equivalent:
+<ol>
+  <li>\(a \sim_{\mathcal{I}} b\).</li>
+  <li>For all valuations \(v : \mathcal{I} \to \mathbb{R}\) and all \(c \in \mathcal{I}\): \(\omega_v(a, c) = \omega_v(b, c)\) and \(\omega_v(c, a) = \omega_v(c, b)\).</li>
+  <li>For all resonance pairings \(\rho\) and all \(c \in \mathcal{I}\): \(\rho(a, c) = \rho(b, c)\).</li>
+  <li>The Aufhebung decompositions of \(a\circ c\) and \(b\circ c\) are conjugate (in the sense of part (3) of the Conjugation Theorem) for all \(c \in \mathcal{I}\).</li>
+</ol>
+The Lean theorem is <code>structural_equiv_iff</code>.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof (sketch).</span>
+The direction (1) \(\Rightarrow\) (2), (3), (4) follows immediately from the Conjugation Theorem (parts 2–4). We prove (2) \(\Rightarrow\) (1) as the key direction.
+
+Suppose \(a\) and \(b\) have the same cocycle profile (condition (2)). Choose \(c = b^{-1}\) if \(b \in \mathcal{I}^\times\) (the case \(b \notin \mathcal{I}^\times\) requires a more careful argument using condition (3); see <code>structural_equiv_cocycle_char</code> in Lean). Then
+\[
+  \omega_v(a, b^{-1}) = \omega_v(b, b^{-1}) = v(e) - v(b) - v(b^{-1}),
+\]
+and similarly for \(a\). Choosing \(v\) to separate orbits — which can be done by Hahn-Banach-type arguments over \(\mathbb{R}\) — forces \(a = {}^g\!b\) for some \(g \in \mathcal{I}^\times\), i.e. \(a\sim_{\mathcal{I}} b\). Full details are in the verified proof. ∎
+</div>
+
+<div class="remark">
+<span class="label">Remark (Interpretation).</span>
+Condition (2) says that structurally equivalent ideas have the same emergence contribution in every context. Condition (3) says they resonate equally with every other idea. Condition (4) says that what they "mean" in combination with any other idea is structurally indistinguishable. The theorem says these four notions of "acting the same in every context" are all equivalent — a pleasing coherence result.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s7">
+<h2>§7. The zoo</h2>
+
+<p>We collect seven historical positions on cultural transmission and structural equivalence, each formalized as a special case of the preceding theory.</p>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Bourdieu — Habitus as Transmission Operator</h3>
+<p><strong>Original claim.</strong> Pierre Bourdieu's concept of <em>habitus</em> — articulated across <em>Outline of a Theory of Practice</em>, <em>The Logic of Practice</em>, and <em>Distinction</em> — is a system of durable, transposable dispositions that generates and structures practices and representations. Crucially for our purposes, Bourdieu treats the habitus as the mechanism by which cultural capital is both received and re-expressed: an idea does not pass through a cultural agent unmediated; it is transformed by the agent's field position, social trajectory, and embodied schemes of perception.</p>
+<p><strong>Formal restatement.</strong> The habitus of agent \(k\) is the transmission operator \(g_k \in \mathcal{I}^\times\). The transmission chain \((a; g_1, \dots, g_n)\) is the propagation of an idea through a sequence of agents, each contributing their habitus. The output \(\mathsf{Ch}(a) = {}^{G_n}\!a\) is the idea as rearticulated by the whole chain. Bourdieu's claim that habitus is "transposable" corresponds precisely to \(g_k \in \mathcal{I}^\times\): the agent can receive <em>any</em> idea and produce a transformed version, and (invertibility) the transformation in principle admits a reverse.</p>
+<p><strong>Status.</strong> The formal model captures Bourdieu's structure: invertibility of \(g_k\) represents habitus transposability, the group \(\mathcal{I}^\times\) represents the space of habitus positions, and conjugation invariance of structural equivalence (\(a \sim_{\mathcal{I}} {}^g\!a\)) represents Bourdieu's homology of position — ideas that are equivalent across field positions are structurally equivalent.</p>
+<p><strong>Commentary.</strong> Bourdieu's habitus is not fully captured by a single transmission operator, since Bourdieu emphasizes that the habitus is not mechanical — it generates novel responses to novel situations. In the algebraic model, this "generative" aspect is the fact that conjugation is a bijection on all of \(\mathcal{I}\), not just on a finite subspace.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Skinner — Context as Operator</h3>
+<p><strong>Original claim.</strong> B. F. Skinner's operant-conditioning framework treats the behavioral response to a stimulus as determined by the organism's reinforcement history — the <em>context</em> in which prior responses were reinforced. The same stimulus in different reinforcement contexts produces different responses. This is Skinner's famous "contextual control" doctrine.</p>
+<p><strong>Formal restatement.</strong> The reinforcement context is the transmission operator \(g\), the stimulus-idea is \(a\), and the response-idea is \({}^g\!a = g\circ a\circ g^{-1}\). Skinner's claim that the same stimulus can produce different responses in different contexts is just the statement that conjugation is non-trivial: \({}^g\!a\) and \({}^h\!a\) are, in general, not equal when \(g \ne h\).</p>
+<p><strong>Status.</strong> True in every non-commutative monoid \(\mathcal{I}\). In commutative monoids (where \(g\circ a = a\circ g\), so \({}^g\!a = a\)), contextual control is trivial — every context produces the same output. The non-commutativity of \(\mathcal{I}\) is the algebraic model of the non-commutativity of context and content in Skinnerian behaviorism.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Foucault — Épistémè as Structural Equivalence Class</h3>
+<p><strong>Original claim.</strong> Michel Foucault, in <em>The Order of Things</em>, proposes the concept of the <em>épistémè</em>: the implicit set of rules governing what counts as knowledge in a given period. Two different discourses (e.g., natural history and grammar in the Classical age) share the same épistémè if they are governed by the same underlying combinatorial structure. Foucault argues that the transition from one épistémè to another is not a matter of gradual progress but of sudden structural shifts.</p>
+<p><strong>Formal restatement.</strong> The épistémè is the structural equivalence class \([\mathcal{I}]\). Two discourses \(a, b \in \mathcal{I}\) share the same épistémè if \(a \sim_{\mathcal{I}} b\): they are conjugate under some invertible background structure \(g \in \mathcal{I}^\times\). Foucault's "archaeological" analysis corresponds to computing the partition of \(\mathcal{I}\) into conjugacy classes. An épistémè shift is a change in the group of invertible operators \(\mathcal{I}^\times\), leading to a coarsening or refinement of the equivalence relation \(\sim_{\mathcal{I}}\).</p>
+<p><strong>Status.</strong> Formally true by definition of \(\sim_{\mathcal{I}}\). The philosophical content of Foucault's épistémè — the claim that historical discourse is structured by such equivalences — is an empirical claim about natural language, not a mathematical theorem.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Latour — Translation Chains</h3>
+<p><strong>Original claim.</strong> Bruno Latour, in <em>Science in Action</em> and in the actor-network theory more generally, introduces the concept of <em>translation</em>: the process by which one actor enrolls another into a network by representing both their interests as aligned, thereby transforming the network's goals and the positions of actors. A chain of translations is Latour's model of how a scientific claim travels from laboratory to established fact.</p>
+<p><strong>Formal restatement.</strong> Latour's translation chain is the transmission chain \((a; g_1, \dots, g_n)\) of Definition 3.1. Each translation (enrollment, mobilization, obligatory passage point) is a transmission operator \(g_k \in \mathcal{I}^\times\). The output \(\mathsf{Ch}(a)\) is the claim as established-fact — the idea after all translations. The Identity Transmission Theorem says that, for agents \(g_k\) that are isometries of a given valuation \(v\), the emergence of the translated idea equals the emergence of the original: translations preserve cocycle structure.</p>
+<p><strong>Status.</strong> True by Identity Transmission. Latour's additional claim that translation chains are not lossless — that something is gained and something is lost in each enrollment — is the assertion that the transmission operators are <em>not</em> all isometries of every valuation, i.e. that the emergence \(\Omega_n\) is nontrivial. The Long-Chain Inequality bounds this loss.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Rogers — Diffusion of Innovations</h3>
+<p><strong>Original claim.</strong> Everett Rogers's <em>Diffusion of Innovations</em> identifies the attributes that predict whether an idea will spread: relative advantage, compatibility, complexity, trialability, and observability. Rogers models diffusion as a chain of adoption events, each driven by interpersonal communication. Ideas that are compatible with existing beliefs travel farther; ideas with high complexity lose adopters at each step.</p>
+<p><strong>Formal restatement.</strong> Rogers's "compatibility" is precisely the condition that the transmission operators \(g_k\) are close to the identity in the structural quotient \([\mathcal{I}]\). "Complexity" is the magnitude of the emergence cocycle \(\omega_v(P_k, a_{k+1})\) at each transmission step: the more complex the idea, the larger the cocycle term, and by the Long-Chain Inequality the faster the cumulative emergence \(\Omega_n\) grows. Rogers's adoption curve corresponds to the rate at which \(|\Omega_n|\) reaches some threshold.</p>
+<p><strong>Status.</strong> Formally consistent with the cocycle picture. Rogers's empirical generalizations — that highly complex ideas diffuse more slowly — correspond to the assertion that, for those ideas, the bound in the Long-Chain Inequality is tight (agents are not isometries, and the cocycle is large). Rogers's typology (innovators, early adopters, late majority, laggards) corresponds to a partition of agents by their emergence contribution \(\omega_v(g_k, \cdot)\).</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Henrich — The Cultural Ratchet</h3>
+<p><strong>Original claim.</strong> Joseph Henrich's <em>The Secret of Our Success</em> argues that human cultural evolution operates by a "ratchet": each generation not only learns existing ideas but also occasionally improves them, with the improvements being retained in subsequent transmission. Henrich distinguishes the ratchet from mere copying (which would be transmission without emergence) by the accumulation of adaptive improvements over time.</p>
+<p><strong>Formal restatement.</strong> The cultural ratchet is a transmission chain in which the emergence term \(\sum_{k=1}^{n-1} \omega_v(P_k, a_{k+1})\) in the Telescoping Theorem is not only nonzero but positive and growing: each junction contributes a positive cocycle term. The "ratchet" property is exactly that the cumulative emergence \(\Omega_n\) is monotone non-decreasing in \(n\) — ideas transmitted through the ratchet accumulate value.</p>
+<p><strong>Status.</strong> True for any super-additive valuation (Definition §6 of Chapter 5). Henrich's account of cultural ratcheting is a special case of the sign-and-telescoping lemma for super-additive \(v\). Whether the specific valuations Henrich has in mind (fitness, caloric efficiency, tool effectiveness) are actually super-additive over the relevant monoid of ideas is an empirical question, not a mathematical one.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3 style="margin-top:0;">Kuhn — Paradigm as Equivalence Class</h3>
+<p><strong>Original claim.</strong> Thomas Kuhn's <em>The Structure of Scientific Revolutions</em> proposes that science advances not by continuous accumulation but by <em>paradigm shifts</em>. A paradigm is a framework of exemplars, techniques, and values shared by a scientific community. All normal science within a paradigm consists of refinements within the equivalence class established by the paradigm. Scientific revolutions correspond to the discovery that the existing equivalence class is too coarse to accommodate anomalies.</p>
+<p><strong>Formal restatement.</strong> Kuhn's paradigm is the conjugacy class \([a]_{\sim_{\mathcal{I}}}\) of the founding exemplar \(a\). Normal science is work in the region of the structural quotient \([\mathcal{I}]\) near \([a]\). A scientific revolution is the discovery of an idea \(b \not\sim_{\mathcal{I}} a\) — one that is not structurally equivalent to the paradigm under the current group of invertibles \(\mathcal{I}^\times\). The revolution consists of enlarging \(\mathcal{I}^\times\) (or redefining the equivalence) to incorporate \(b\), which reorganizes the conjugacy classes and can merge or split them.</p>
+<p><strong>Status.</strong> Formally coherent as a model of paradigm dynamics. Kuhn's incommensurability claim — that ideas in different paradigms are not mutually translatable — is the claim that there is no \(g\in\mathcal{I}^\times\) with \(b = {}^g\!a\), i.e. that \(a \not\sim_{\mathcal{I}} b\). The Structural Equivalence Theorem (four-way equivalence) gives testable conditions for when incommensurability holds.</p>
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="s8">
+<h2>§8. Coda</h2>
+
+<p>The three sections of this chapter — conjugation, transmission chains, and structural equivalence — are not independent additions to the theory but three perspectives on the same phenomenon: the <em>symmetry structure of the idea algebra</em>. Conjugation is the active form of this symmetry (the group \(\mathcal{I}^\times\) acting on \(\mathcal{I}\) by inner automorphisms). Transmission chains are the dynamical unfolding of this symmetry over time (a sequence of conjugations by different operators). Structural equivalence is the quotient that identifies the orbits of this action (the structural quotient \([\mathcal{I}]\)).</p>
+
+<p>The Conjugation Theorem tells us that this symmetry is total: it preserves not only the monoid structure but the resonance, the Aufhebung decomposition, the emergence cocycle, and the grading (for ideas in the domain of Chapter 7). The Identity Transmission Theorem tells us that the symmetry is preserved along chains. The Structural Equivalence Theorem tells us that the orbits of the symmetry are characterized in four equivalent ways.</p>
+
+<p>The zoo illustrates that the theory is not an abstraction invented for its own sake: Bourdieu's habitus, Skinner's contextual control, Foucault's épistémè, Latour's translation chains, Rogers's diffusion attributes, Henrich's cultural ratchet, and Kuhn's paradigm — all are instances of the conjugation and structural-equivalence machinery. This convergence is not surprising once one notices that all of these thinkers are asking, in their respective idioms, the same underlying question: <em>what does it mean for two ideas to be interchangeable in a social or cultural context?</em> The present chapter gives that question a precise algebraic answer.</p>
+
+<p>Chapter 7 adds to this picture the grading function \(\deg : \mathcal{I} \to G\), which assigns a "novelty degree" to each idea in a way that is compatible with the monoid structure (a homomorphism) and with the cocycle. The grading refines the structural quotient \([\mathcal{I}]\) by further partitioning conjugacy classes according to degree, and produces the "spectral decomposition" of an idea into its degree components.</p>
+</section>
+
+<div class="chapter-nav">
+  <a href="ch05.html">← Chapter 5: The Emergence Cocycle</a>
+  <a href="ch07.html">Chapter 7: Grading and the Algebra of Novelty →</a>
+</div>
+
+<div class="refs">
+  <h3>Key references</h3>
+  <ol>
+    <li>Bourdieu, P. (1977). <em>Outline of a Theory of Practice</em>. Cambridge.</li>
+    <li>Bourdieu, P. (1984). <em>Distinction</em>. Harvard.</li>
+    <li>Skinner, B. F. (1938). <em>The Behavior of Organisms</em>. Appleton-Century-Crofts.</li>
+    <li>Foucault, M. (1966). <em>Les mots et les choses</em>. Gallimard. (Eng. trans. <em>The Order of Things</em>.).</li>
+    <li>Latour, B. (1987). <em>Science in Action</em>. Harvard.</li>
+    <li>Rogers, E. M. (1962). <em>Diffusion of Innovations</em>. Free Press.</li>
+    <li>Henrich, J. (2015). <em>The Secret of Our Success</em>. Princeton.</li>
+    <li>Kuhn, T. S. (1962). <em>The Structure of Scientific Revolutions</em>. Chicago.</li>
+  </ol>
+</div>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

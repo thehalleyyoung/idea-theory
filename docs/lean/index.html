@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lean Formalization – Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Idea Theory</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../formalism/index.html">Formalism</a>
+      <a href="../theorems/index.html">Theorems</a>
+      <a href="../chapters/index.html">Book</a>
+      <a href="../zoo/index.html">Zoo</a>
+      <a href="../literature/index.html">Literature</a>
+      <a class="active" href="index.html">Lean</a>
+      <a href="../about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<main class="content">
+  <div class="hero">
+    <h1>Lean Formalization</h1>
+    <p class="lede">Machine-verified proofs of Idea Theory in Lean 4 with Mathlib — zero <code>sorry</code>, zero <code>admit</code>.</p>
+  </div>
+
+  <h2>Why Lean 4?</h2>
+
+  <p>
+    Lean 4 is an interactive theorem prover and dependently typed programming language developed at Microsoft Research and AWS. Its accompanying mathematics library, <strong>Mathlib</strong>, contains tens of thousands of machine-verified results spanning algebra, topology, analysis, combinatorics, and game theory. By building Idea Theory on Lean 4 + Mathlib, every claim in the formalism inherits the full weight of that verification infrastructure.
+  </p>
+
+  <p>
+    The formalization achieves three things simultaneously. First, it forces complete precision: every definition must be stated without ambiguity, every hypothesis made explicit. Second, it provides a check against the informal theory: mismatches between the mathematical prose and the Lean code reveal hidden assumptions. Third, it creates a reusable artifact — downstream work in economics, linguistics, or cognitive science can import these modules and build on them with confidence.
+  </p>
+
+  <p>
+    All six modules compile cleanly with <code>lake build</code>. There are no <code>sorry</code> or <code>admit</code> placeholders anywhere in the codebase — every theorem is fully proved by Lean's kernel.
+  </p>
+
+  <h2>Module Overview</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Module</th>
+        <th style="text-align:center">Theorems</th>
+        <th>Description</th>
+        <th>Source</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="foundations.html"><strong>Foundations</strong></a></td>
+        <td style="text-align:center">9</td>
+        <td>Core axioms and nine foundational theorems about the <code>IdeaTheoryStructure</code> type class</td>
+        <td><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Foundations.lean">Foundations.lean</a></td>
+      </tr>
+      <tr>
+        <td><a href="game-theory.html"><strong>Extensions/GameTheory</strong></a></td>
+        <td style="text-align:center">19</td>
+        <td>Ideas as strategies, Nash equilibria, mixed strategies, evolutionary stability, iterated dominance</td>
+        <td><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/GameTheory.lean">GameTheory.lean</a></td>
+      </tr>
+      <tr>
+        <td><a href="diffusion.html"><strong>Extensions/Diffusion</strong></a></td>
+        <td style="text-align:center">34</td>
+        <td>Cyclic population dynamics, Rogers-style adoption monotonicity, Granovetter weak-tie effect</td>
+        <td><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/Diffusion.lean">Diffusion.lean</a></td>
+      </tr>
+      <tr>
+        <td><a href="recombinant-growth.html"><strong>Extensions/RecombinantGrowth</strong></a></td>
+        <td style="text-align:center">21</td>
+        <td>Romer/Weitzman combinatorial growth, binary closure, non-rivalry, recombinant explosion</td>
+        <td><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/RecombinantGrowth.lean">RecombinantGrowth.lean</a></td>
+      </tr>
+      <tr>
+        <td><a href="emergence-levels.html"><strong>Extensions/EmergenceLevels</strong></a></td>
+        <td style="text-align:center">25</td>
+        <td>Graded emergence via the 2-cocycle, Bedau weak emergence, Chalmers strong emergence, cohomological identity</td>
+        <td><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/EmergenceLevels.lean">EmergenceLevels.lean</a></td>
+      </tr>
+      <tr>
+        <td><a href="meaning-games.html"><strong>Extensions/MeaningGames</strong></a></td>
+        <td style="text-align:center">24</td>
+        <td>Wittgenstein + Nash meaning conventions, private-language argument, Kripkenstein underdetermination, Lewis focal points</td>
+        <td><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/MeaningGames.lean">MeaningGames.lean</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Architecture</h2>
+
+  <p>
+    The dependency graph is simple. <strong>Foundations</strong> stands alone and defines the <code>IdeaTheoryStructure</code> type class on which everything else is built. The five extension modules each import Foundations (and GameTheory also imports GameTheory in the case of MeaningGames). No circular dependencies exist.
+  </p>
+
+  <pre><code class="language-lean">-- Dependency graph (simplified)
+IdeaTheory.Foundations
+  ├── IdeaTheory.GameTheory
+  │     └── IdeaTheory.MeaningGames
+  ├── IdeaTheory.Diffusion
+  ├── IdeaTheory.RecombinantGrowth
+  └── IdeaTheory.EmergenceLevels</code></pre>
+
+  <h2>Browsing the Source</h2>
+
+  <p>
+    The full Lean source lives in the <a href="https://github.com/thehalleyyoung/idea-theory/tree/main/lean/IdeaTheory"><code>lean/IdeaTheory/</code></a> directory of the GitHub repository. Each file is self-contained with doc-string comments explaining the mathematical motivation. To build locally:
+  </p>
+
+  <pre><code class="language-bash">git clone https://github.com/thehalleyyoung/idea-theory.git
+cd idea-theory/lean
+lake update   # fetches Mathlib
+lake build    # compiles all modules (~5–10 min first time)</code></pre>
+
+  <p>
+    Lean 4 with Mathlib can also be browsed interactively in VS Code using the <strong>lean4</strong> extension, which provides hover-over goals, auto-completion, and inline error messages. The <a href="https://leanprover-community.github.io/">Mathlib community site</a> hosts additional documentation.
+  </p>
+
+  <h2>Extensions</h2>
+
+  <div class="tiles">
+    <a class="tile" href="foundations.html">
+      <h3>Foundations</h3>
+      <p>9 theorems · core axioms and the <code>IdeaTheoryStructure</code> monoid</p>
+    </a>
+    <a class="tile" href="game-theory.html">
+      <h3>Game Theory</h3>
+      <p>19 theorems · Nash equilibria, mixed strategies, ESS</p>
+    </a>
+    <a class="tile" href="diffusion.html">
+      <h3>Diffusion</h3>
+      <p>34 theorems · cyclic transmission, Rogers adoption, Granovetter ties</p>
+    </a>
+    <a class="tile" href="recombinant-growth.html">
+      <h3>Recombinant Growth</h3>
+      <p>21 theorems · binary closure, non-rivalry, combinatorial explosion</p>
+    </a>
+    <a class="tile" href="emergence-levels.html">
+      <h3>Emergence Levels</h3>
+      <p>25 theorems · 2-cocycle, Bedau/Chalmers emergence, Bool example</p>
+    </a>
+    <a class="tile" href="meaning-games.html">
+      <h3>Meaning Games</h3>
+      <p>24 theorems · Wittgenstein–Nash bridge, Kripkenstein, Lewis salience</p>
+    </a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p>
+</footer>
+
+</body>
+</html>

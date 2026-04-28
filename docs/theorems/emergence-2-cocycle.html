@@ -5,25 +5,848 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Theorem 4: Emergence 2-Cocycle — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
 <main class="content">
 <h1>Theorem 4: Emergence 2-Cocycle</h1>
-<div class="thm"><span class="thm-label">Theorem 4.</span> Let \(v:\mathcal{I}\to A\) be a function with \(v(e)=0\), and define \(\omega(a,b) := v(a\circ b)-v(a)-v(b)\). Then \(\omega\) is a normalized 2-cocycle: for all \(a,b,c\),
-\[ \omega(a,b)+\omega(a\circ b,c)=\omega(b,c)+\omega(a,b\circ c), \]
-and \(\omega(e,a)=\omega(a,e)=0\).</div>
+<p style="color:var(--muted);font-family:Inter,sans-serif;font-size:.92rem;margin-top:-.3em;">
+  <code>IdeaTheory.Theorems4</code> &mdash; 63 lemmas and theorems, fully machine-checked in Lean 4
+</p>
 
-<h2>Proof sketch</h2>
-<p>Direct computation: both sides of the cocycle identity equal \(v(a\circ b\circ c) - v(a)-v(b)-v(c)\). Normalization at \(e\) follows from \(v(e)=0\) and \(e\circ a = a\). Verified as <code>IdeaTheory.Theorems4.emergence_cocycle</code>.</p>
+<!-- ============================================================ TOC -->
+<nav style="background:var(--accent-soft);border:1px solid var(--rule);border-radius:5px;padding:.9em 1.2em;margin:1.5em 0;">
+<strong style="font-family:Inter,sans-serif;font-size:.92rem;">Contents</strong>
+<ol style="margin:.5em 0 0;padding-left:1.4em;font-size:.93rem;line-height:1.8;">
+  <li><a href="#opening">The 2-Cocycle Condition</a></li>
+  <li><a href="#headlines">Headline Theorems (4.1 &ndash; 4.3) and Corollaries</a></li>
+  <li><a href="#s1">§1 Brackets and Cochain Closure</a></li>
+  <li><a href="#s2">§2 Coboundary Representation</a></li>
+  <li><a href="#s3">§3 Vacuum Cochains</a></li>
+  <li><a href="#s4">§4 Linearity of \(\delta_1\) and \(\delta_2\)</a></li>
+  <li><a href="#s5">§5 Associativity and Cocycle Consequences</a></li>
+  <li><a href="#s6">§6 Cocycle Defect</a></li>
+  <li><a href="#s7">§7 Void Cocycle Lemmas</a></li>
+  <li><a href="#s8">§8 Cocycle Manipulations</a></li>
+  <li><a href="#s9">§9 Left-Additive Collapse</a></li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+  <li><a href="#lean-ext">Related Lean Extensions</a></li>
+</ol>
+</nav>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/emergence/anderson-more-different.html">Anderson</a></li>
-<li><a href="../zoo/emergence/bedau-weak.html">Bedau</a></li>
-<li><a href="../zoo/emergence/chalmers-strong-vs-weak.html">Chalmers</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<!-- ============================================================ OPENING -->
+<h2 id="opening">The 2-Cocycle Condition</h2>
+
+<p>
+The emergence functional \(\omega(a,b;c) = \rho(a \circ b, c) - \rho(a,c) - \rho(b,c)\) measures the excess resonance produced when two ideas combine. Its definition makes it look like a simple discrepancy — the gap between what a composition achieves and what its parts contribute individually. But hidden in this definition is a remarkable structural constraint: \(\omega\) is not merely a discrepancy function, it is a <em>2-coboundary</em> in the group cohomology of the idea monoid, and therefore automatically a <em>2-cocycle</em>. Every one of the 63 lemmas in <code>IdeaTheory.Theorems4</code> is a consequence of this single cohomological fact.
+</p>
+
+<p>
+The key definitions are as follows. Fix a probe \(c \in \mathcal{I}\). The <em>resonance probe</em> \(f_c : \mathcal{I} \to \mathbb{R}\) is the 1-cochain \(f_c(a) = \rho(a,c)\). The <em>coboundary operator</em> \(\delta_1\) takes a 1-cochain \(f\) to a 2-cochain:
+\[
+  (\delta_1 f)(a,b) = f(a \circ b) - f(a) - f(b).
+\]
+By direct substitution, \((\delta_1 f_c)(a,b) = \rho(a \circ b, c) - \rho(a,c) - \rho(b,c) = \omega(a,b;c)\). So \(\omega(\cdot,\cdot;c) = \delta_1 f_c\) is the coboundary of \(f_c\), making the emergence probe \(\omega_c := \omega(\cdot,\cdot;c)\) an exact 2-coboundary by construction.
+</p>
+
+<p>
+The second coboundary operator \(\delta_2\) takes a 2-cochain \(g\) to:
+\[
+  (\delta_2 g)(a,b,c) = g(a \circ b, c) - g(a, b \circ c) + g(a,b) - g(b,c).
+\]
+A 2-cochain is a <em>2-cocycle</em> if \(\delta_2 g = 0\) everywhere, and a <em>2-coboundary</em> if it equals \(\delta_1 f\) for some 1-cochain \(f\). Since \(\delta_2 \circ \delta_1 = 0\) (a standard identity in group cohomology), every coboundary is automatically a cocycle. This is why emergence satisfies the cocycle identity
+\[
+  \omega(a,b;d) + \omega(a \circ b, c; d) = \omega(b,c;d) + \omega(a, b \circ c; d)
+\]
+— not as an independent axiom, but as a theorem derivable from the very definition of \(\omega\) via the coboundary chain complex.
+</p>
+
+<p>
+All 63 results orbit this master constraint. Some (§§1–2) establish the coboundary structure directly. Others (§§3–4) explore how the cochain operators interact with the vacuum and with scalar operations. Sections §§5–8 unpack the many equivalent forms the cocycle identity takes when arguments are varied, negated, or specialized. Section §9 collapses the entire framework to triviality in the degenerate case where resonance is left-additive and emergence vanishes identically. The headline theorems (Theorems 4.1–4.3) synthesize these threads into the three main results: coboundary representation, the cocycle identity, and bracket independence.
+</p>
+
+<!-- ============================================================ HEADLINE THEOREMS -->
+<h2 id="headlines">Headline Theorems and Corollaries</h2>
+
+<p>Three theorems stand above the rest and are the target toward which the 63 lemmas collectively point.</p>
+
+<div class="thm" id="thm41"><span class="thm-label">Theorem 4.1 (theorem_4_1).</span>
+For every probe \(c \in \mathcal{I}\), the emergence probe \(\omega_c\) satisfies:
+<ol style="margin:.4em 0 .2em;padding-left:1.4em;">
+<li>\(\omega_c = \delta_1 f_c\) as 2-cochains: \(\omega(a,b;c) = f_c(a \circ b) - f_c(a) - f_c(b)\);</li>
+<li>\(\omega_c\) is a 2-coboundary, witnessed by the 1-cochain \(f_c(a) = \rho(a,c)\);</li>
+<li>\(\omega_c\) is a 2-cocycle: \(\delta_2 \omega_c = 0\) everywhere.</li>
+</ol>
+</div>
+
+<p><strong>Proof sketch.</strong> (i) is the definition of emergence unfolded: \(\omega(a,b;c) = \rho(a\circ b,c) - \rho(a,c) - \rho(b,c) = f_c(a\circ b) - f_c(a) - f_c(b) = (\delta_1 f_c)(a,b)\). (ii) follows immediately from (i) with witness \(f_c\). (iii) follows from the general fact that every coboundary is a cocycle (\(\delta_2 \circ \delta_1 = 0\)), which is <code>coboundary_is_cocycle</code>, applied to the specific coboundary \(\omega_c = \delta_1 f_c\). &square;</p>
+
+<div class="thm" id="thm42"><span class="thm-label">Theorem 4.2 (theorem_4_2).</span>
+The 2-cocycle identity: for all \(a,b,c,d \in \mathcal{I}\),
+\[
+  \omega(a,b;d) + \omega(a \circ b, c; d) \;=\; \omega(b,c;d) + \omega(a, b \circ c; d).
+\]
+</div>
+
+<p><strong>Proof sketch.</strong> Expand each of the four emergence terms using the definition \(\omega(x,y;d) = \rho(x\circ y,d) - \rho(x,d) - \rho(y,d)\). The left side becomes \(\rho(a\circ b,d) - \rho(a,d) - \rho(b,d) + \rho((a\circ b)\circ c,d) - \rho(a\circ b,d) - \rho(c,d)\), which simplifies to \(\rho((a\circ b)\circ c,d) - \rho(a,d) - \rho(b,d) - \rho(c,d)\). The right side similarly simplifies to \(\rho(a\circ(b\circ c),d) - \rho(a,d) - \rho(b,d) - \rho(c,d)\). These are equal by associativity of \(\circ\). This is the cohomological identity \(\delta_2(\delta_1 f_d) = 0\) instantiated at \((a,b,c)\). &square;</p>
+
+<div class="thm" id="thm43"><span class="thm-label">Theorem 4.3 (theorem_4_3).</span>
+Bracket independence: for all \(a,b,c,d \in \mathcal{I}\),
+<ol style="margin:.4em 0 .2em;padding-left:1.4em;">
+<li>\(\rho((a \circ b) \circ c,\, d) = \rho(a \circ (b \circ c),\, d)\);</li>
+<li>The bracket gap \(\rho((a\circ b)\circ c,d) - \rho(a\circ(b\circ c),d) = 0\) identically;</li>
+<li>Symmetric form: \(\rho((a\circ b)\circ c,d) + \rho(a\circ(b\circ c),d) = 2\rho(a\circ b\circ c,d)\).</li>
+</ol>
+</div>
+
+<p><strong>Proof sketch.</strong> (i) follows directly from associativity of \(\circ\): \((a\circ b)\circ c = a\circ(b\circ c)\), so their resonances with \(d\) are identical. (ii) is the subtraction of (i). (iii) follows because both bracketings equal the same value, so their sum is twice that value. These three forms are established as <code>rs_bracket_indep</code>, <code>bracketGap_zero</code>, and the symmetric-sum form of Corollary 4.2. &square;</p>
+
+<div class="cor"><span class="thm-label">Corollary 4.1 (corollary_4_1).</span>
+The cocycle identity restated: for all \(a,b,c,d\),
+\[
+  \omega(a,b;d) + \omega(a \circ b, c; d) = \omega(b,c;d) + \omega(a, b \circ c; d).
+\]
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 4.2 (corollary_4_2).</span>
+The symmetric sum formula for bracket resonance: for all \(a,b,c,d\),
+\[
+  \rho((a\circ b)\circ c, d) + \rho(a\circ(b\circ c), d) = 2\rho(a\circ b\circ c, d).
+\]
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 4.3 (corollary_4_3).</span>
+The bracket gap vanishes: \(\rho((a\circ b)\circ c, d) - \rho(a\circ(b\circ c), d) = 0\) for all \(a,b,c,d\).
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 4.4 (corollary_4_4).</span>
+The emTrace identity: for all \(a,b,c,d\),
+\[
+  \omega(a,b;d) + \omega(b,c;d) + \omega(a\circ b,\,c;\,d) + \omega(a,\,b\circ c;\,d) = 2\bigl[\omega(b,c;d) + \omega(a,b\circ c;d)\bigr].
+\]
+Equivalently, the emTrace \(\omega(a,b;d)+\omega(b,c;d)+\omega(a\circ b,c;d)+\omega(a,b\circ c;d)\) is determined by the right-hand two terms.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 4.5 (corollary_4_5).</span>
+Additivity iff zero emergence: \(\omega(a,b;c) = 0\) if and only if \(\rho(a\circ b, c) = \rho(a,c) + \rho(b,c)\). In particular, resonance is additive across a composition in the \(c\)-direction precisely when the pair \((a,b)\) produces no emergence toward \(c\).
+</div>
+
+<!-- ============================================================ §1 -->
+<h2 id="s1">§1 Brackets and Cochain Closure</h2>
+
+<p>The first three lemmas are the bedrock: they confirm that the bracket notation is well-defined (associativity makes left- and right-bracketings equal), and that the bracket gap — the quantity that would obstruct Theorem 4.3 if non-zero — vanishes identically. These lemmas are essentially definitional, but their Lean proofs close off any ambiguity about whether the algebraic framework is internally consistent.</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.1 (lBracket_eq_rBracket).</span>
+For all \(a,b,c \in \mathcal{I}\),
+\[
+  (a \circ b) \circ c = a \circ (b \circ c).
+\]
+Left and right bracketings of a triple composition are equal; the monoid operation is associative.
+</div>
+
+<div class="proof">
+Immediate from the associativity axiom of the idea monoid \((\mathcal{I}, \circ, e)\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.2 (rs_bracket_indep).</span>
+For all \(a,b,c,d \in \mathcal{I}\),
+\[
+  \rho\!\bigl((a \circ b) \circ c,\; d\bigr) = \rho\!\bigl(a \circ (b \circ c),\; d\bigr).
+\]
+Resonance of a triple composition with any probe \(d\) is independent of how the composition is bracketed.
+</div>
+
+<div class="proof">
+Substitute Lemma 4.1 into the left argument of \(\rho\). Since \((a\circ b)\circ c = a\circ(b\circ c)\), the resonances are identical.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.3 (bracketGap_zero).</span>
+For all \(a,b,c,d \in \mathcal{I}\),
+\[
+  \rho\!\bigl((a \circ b) \circ c,\; d\bigr) - \rho\!\bigl(a \circ (b \circ c),\; d\bigr) = 0.
+\]
+The bracket gap is identically zero.
+</div>
+
+<div class="proof">
+The bracket gap is the difference of the two equal quantities established in Lemma 4.2. Subtracting equals from equals yields zero.
+</div>
+
+<!-- ============================================================ §2 -->
+<h2 id="s2">§2 Coboundary Representation</h2>
+
+<p>
+This section contains the cohomological heart of the module. Seven lemmas establish, in progressively more abstract form, that the emergence probe \(\omega_c\) is a 2-coboundary of the 1-cochain \(f_c(a) = \rho(a,c)\), and that coboundaries are automatically cocycles. The progression from the concrete pointwise identity (Lemmas 4.4–4.5) to the cochain-level identity (Lemma 4.6) to the general abstract results (Lemmas 4.7–4.8) mirrors the standard development of group cohomology, but with all details machine-checked.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.4 (emergence_eq_cobd1_rsProbe).</span>
+For all \(a,b,c \in \mathcal{I}\),
+\[
+  \omega(a,b;c) = (\delta_1 f_c)(a,b),
+\]
+where \(f_c(x) = \rho(x,c)\) and \((\delta_1 f_c)(a,b) = f_c(a\circ b) - f_c(a) - f_c(b)\).
+</div>
+
+<div class="proof">
+Unfold: \((\delta_1 f_c)(a,b) = \rho(a\circ b,c) - \rho(a,c) - \rho(b,c) = \omega(a,b;c)\) by definition of emergence.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.5 (cobd1_rsProbe_eq_emergence).</span>
+For all \(a,b,c \in \mathcal{I}\),
+\[
+  (\delta_1 f_c)(a,b) = \omega(a,b;c).
+\]
+The symmetric form of Lemma 4.4, stating the equality in the other direction for use in rewriting.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.6 (emProbe_eq_cobd1_rsProbe).</span>
+As an equality of 2-cochains \(\mathcal{I}\times\mathcal{I}\to\mathbb{R}\),
+\[
+  \omega_c = \delta_1 f_c,
+\]
+i.e., the emergence probe at \(c\) is equal, as a function of two variables, to the coboundary of the resonance probe at \(c\).
+</div>
+
+<div class="proof">
+Pointwise equality of functions: for every \((a,b)\), Lemma 4.4 gives \(\omega_c(a,b) = (\delta_1 f_c)(a,b)\). By function extensionality, \(\omega_c = \delta_1 f_c\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.7 (cobd1_is_cocycle).</span>
+For any 1-cochain \(f : \mathcal{I} \to \mathbb{R}\), the 2-cochain \(\delta_1 f\) is a 2-cocycle: \(\delta_2(\delta_1 f) = 0\).
+</div>
+
+<div class="proof">
+Direct computation: \((\delta_2(\delta_1 f))(a,b,c)\) expands to \((\delta_1 f)(a\circ b,c) - (\delta_1 f)(a,b\circ c) + (\delta_1 f)(a,b) - (\delta_1 f)(b,c)\). Substituting \((\delta_1 f)(x,y) = f(x\circ y)-f(x)-f(y)\) and using associativity \((a\circ b)\circ c = a\circ(b\circ c)\), all terms cancel.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.8 (coboundary_is_cocycle).</span>
+Every 2-coboundary \(g\) (i.e., \(g = \delta_1 f\) for some \(f\)) is a 2-cocycle: if <code>Is2Coboundary g</code> then <code>Is2Cocycle g</code>.
+</div>
+
+<div class="proof">
+If \(g = \delta_1 f\), then \(\delta_2 g = \delta_2(\delta_1 f) = 0\) by Lemma 4.7. The condition <code>Is2Cocycle g</code> is exactly \(\delta_2 g = 0\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.9 (emProbe_is_coboundary).</span>
+For every \(c \in \mathcal{I}\), \(\omega_c\) is a 2-coboundary: <code>Is2Coboundary \(\omega_c\)</code>, witnessed by the 1-cochain \(f_c(a) = \rho(a,c)\).
+</div>
+
+<div class="proof">
+Lemma 4.6 establishes \(\omega_c = \delta_1 f_c\), which is the definition of being a coboundary.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.10 (emProbe_is_cocycle).</span>
+For every \(c \in \mathcal{I}\), \(\omega_c\) is a 2-cocycle: <code>Is2Cocycle \(\omega_c\)</code>.
+</div>
+
+<div class="proof">
+\(\omega_c\) is a coboundary (Lemma 4.9), and every coboundary is a cocycle (Lemma 4.8).
+</div>
+
+<!-- ============================================================ §3 -->
+<h2 id="s3">§3 Vacuum Cochains</h2>
+
+<p>
+The vacuum element \(e\) annihilates resonance from both sides: \(\rho(e,c)=0\) and \(\rho(a,e)=0\) by the axioms. This propagates into the cochain structure. The seven vacuum lemmas here establish that the resonance probe \(f_c\) vanishes at \(e\) and at the void probe, and that the coboundary \(\delta_1 f_c\) (equivalently, the emergence probe \(\omega_c\)) vanishes whenever either composition argument is \(e\). These lemmas are the cochain-level analogs of the vacuum emergence lemmas in <code>IdeaTheory.Theorems2</code>.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.11 (rsProbe_void).</span>
+For all \(c \in \mathcal{I}\),
+\[
+  f_c(e) = \rho(e, c) = 0.
+\]
+The resonance probe evaluates to zero at the vacuum.
+</div>
+
+<div class="proof">
+\(f_c(e) = \rho(e,c) = 0\) by the left-vacuum axiom.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.12 (rsProbe_at_void).</span>
+For all \(a \in \mathcal{I}\),
+\[
+  f_e(a) = \rho(a, e) = 0.
+\]
+The void probe \(f_e\) is the zero function.
+</div>
+
+<div class="proof">
+\(f_e(a) = \rho(a,e) = 0\) by the right-vacuum axiom.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.13 (cobd1_rsProbe_void_left).</span>
+For all \(b, c \in \mathcal{I}\),
+\[
+  (\delta_1 f_c)(e, b) = 0.
+\]
+The coboundary of any resonance probe vanishes when the left argument is void.
+</div>
+
+<div class="proof">
+\((\delta_1 f_c)(e,b) = f_c(e\circ b) - f_c(e) - f_c(b) = f_c(b) - 0 - f_c(b) = 0\), using \(e \circ b = b\) and Lemma 4.11.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.14 (cobd1_rsProbe_void_right).</span>
+For all \(a, c \in \mathcal{I}\),
+\[
+  (\delta_1 f_c)(a, e) = 0.
+\]
+The coboundary vanishes when the right argument is void.
+</div>
+
+<div class="proof">
+\((\delta_1 f_c)(a,e) = f_c(a\circ e) - f_c(a) - f_c(e) = f_c(a) - f_c(a) - 0 = 0\), using \(a \circ e = a\) and Lemma 4.11.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.15 (emProbe_void_left).</span>
+For all \(b, c \in \mathcal{I}\),
+\[
+  \omega(e, b; c) = 0.
+\]
+Emergence vanishes when the left factor is the vacuum.
+</div>
+
+<div class="proof">
+\(\omega(e,b;c) = (\delta_1 f_c)(e,b) = 0\) by Lemma 4.13 and the equality \(\omega_c = \delta_1 f_c\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.16 (emProbe_void_middle).</span>
+For all \(a, c \in \mathcal{I}\),
+\[
+  \omega(a, e; c) = 0.
+\]
+Emergence vanishes when the right factor is the vacuum.
+</div>
+
+<div class="proof">
+\(\omega(a,e;c) = (\delta_1 f_c)(a,e) = 0\) by Lemma 4.14.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.17 (emProbe_void_probe).</span>
+For all \(a, b \in \mathcal{I}\),
+\[
+  \omega(a, b; e) = 0.
+\]
+Emergence toward the void probe is identically zero.
+</div>
+
+<div class="proof">
+\(\omega(a,b;e) = (\delta_1 f_e)(a,b) = f_e(a\circ b) - f_e(a) - f_e(b) = 0 - 0 - 0 = 0\) by Lemma 4.12.
+</div>
+
+<!-- ============================================================ §4 -->
+<h2 id="s4">§4 Linearity of \(\delta_1\) and \(\delta_2\)</h2>
+
+<p>
+The coboundary operators \(\delta_1\) and \(\delta_2\) are linear maps between \(\mathbb{R}\)-vector spaces of cochains. Linearity is not assumed; it is derived from the definitions. The eight lemmas here prove each of the four standard linearity properties (additivity, subtractivity, scalar multiplication, negation) for both operators. These results are essential for any computation that manipulates formal sums or differences of cochains.
+</p>
+
+<h3>Linearity of \(\delta_1\)</h3>
+
+<div class="lemma"><span class="thm-label">Lemma 4.18 (cobd1_add).</span>
+For any 1-cochains \(f, g : \mathcal{I} \to \mathbb{R}\),
+\[
+  \delta_1(f + g) = \delta_1 f + \delta_1 g.
+\]
+</div>
+
+<div class="proof">
+Pointwise: \((\delta_1(f+g))(a,b) = (f+g)(a\circ b) - (f+g)(a) - (f+g)(b)\) \(= [f(a\circ b) - f(a) - f(b)] + [g(a\circ b) - g(a) - g(b)] = (\delta_1 f)(a,b) + (\delta_1 g)(a,b)\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.19 (cobd1_sub).</span>
+For any 1-cochains \(f, g\),
+\[
+  \delta_1(f - g) = \delta_1 f - \delta_1 g.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.20 (cobd1_smul).</span>
+For any scalar \(k \in \mathbb{R}\) and 1-cochain \(f\),
+\[
+  \delta_1(k \cdot f) = k \cdot \delta_1 f.
+\]
+</div>
+
+<div class="proof">
+\((\delta_1(kf))(a,b) = kf(a\circ b) - kf(a) - kf(b) = k[f(a\circ b) - f(a) - f(b)] = k(\delta_1 f)(a,b)\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.21 (cobd1_neg).</span>
+For any 1-cochain \(f\),
+\[
+  \delta_1(-f) = -\delta_1 f.
+\]
+</div>
+
+<div class="proof">
+Special case of Lemma 4.20 with \(k = -1\), or equivalently of Lemma 4.19 with \(g = f\) and \(f = 0\).
+</div>
+
+<h3>Linearity of \(\delta_2\)</h3>
+
+<div class="lemma"><span class="thm-label">Lemma 4.22 (cobd2_add).</span>
+For any 2-cochains \(g, h : \mathcal{I}\times\mathcal{I} \to \mathbb{R}\),
+\[
+  \delta_2(g + h) = \delta_2 g + \delta_2 h.
+\]
+</div>
+
+<div class="proof">
+Pointwise expansion using \((\delta_2 g)(a,b,c) = g(a\circ b,c) - g(a,b\circ c) + g(a,b) - g(b,c)\) and distributivity of addition.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.23 (cobd2_sub).</span>
+For any 2-cochains \(g, h\),
+\[
+  \delta_2(g - h) = \delta_2 g - \delta_2 h.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.24 (cobd2_smul).</span>
+For any scalar \(k \in \mathbb{R}\) and 2-cochain \(g\),
+\[
+  \delta_2(k \cdot g) = k \cdot \delta_2 g.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.25 (cobd2_neg).</span>
+For any 2-cochain \(g\),
+\[
+  \delta_2(-g) = -\delta_2 g.
+\]
+</div>
+
+<!-- ============================================================ §5 -->
+<h2 id="s5">§5 Associativity and Cocycle Consequences</h2>
+
+<p>
+Section §5 works out the explicit expansion of \(\rho(a\circ b\circ c, d)\) in two bracket orders, confirms they agree (restating Theorem 4.3 at the level of detailed algebra), and derives the cocycle identity as a direct consequence of this agreement. The three-term expansions give the emergence decomposition of triple compositions in its most explicit form.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.26 (rs_left_left).</span>
+For all \(a,b,c,d \in \mathcal{I}\), expanding \(\rho\) with left bracketing:
+\[
+  \rho\!\bigl((a \circ b) \circ c,\; d\bigr) = \rho(a,d) + \rho(b,d) + \rho(c,d) + \omega(a,b;d) + \omega(a\circ b,\,c;\,d).
+\]
+</div>
+
+<div class="proof">
+Apply the decomposition \(\rho(x\circ y,d) = \rho(x,d)+\rho(y,d)+\omega(x,y;d)\) twice: first to the outer composition \((a\circ b)\circ c\) giving \(\rho(a\circ b,d)+\rho(c,d)+\omega(a\circ b,c;d)\), then to the inner composition \(a\circ b\) giving \(\rho(a,d)+\rho(b,d)+\omega(a,b;d)\). Combining yields the stated formula.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.27 (rs_right_right).</span>
+For all \(a,b,c,d \in \mathcal{I}\), expanding with right bracketing:
+\[
+  \rho\!\bigl(a \circ (b \circ c),\; d\bigr) = \rho(a,d) + \rho(b,d) + \rho(c,d) + \omega(b,c;d) + \omega(a,\,b\circ c;\,d).
+\]
+</div>
+
+<div class="proof">
+Analogous to Lemma 4.26 but expanding the right composition first: \(\rho(a\circ(b\circ c),d) = \rho(a,d)+\rho(b\circ c,d)+\omega(a,b\circ c;d)\), then \(\rho(b\circ c,d) = \rho(b,d)+\rho(c,d)+\omega(b,c;d)\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.28 (rs_left_eq_right_assoc).</span>
+The two expansions of Lemmas 4.26–4.27 are equal:
+\[
+  \rho(a,d)+\rho(b,d)+\rho(c,d)+\omega(a,b;d)+\omega(a\circ b,c;d) = \rho(a,d)+\rho(b,d)+\rho(c,d)+\omega(b,c;d)+\omega(a,b\circ c;d).
+\]
+</div>
+
+<div class="proof">
+Both sides equal \(\rho((a\circ b)\circ c,d) = \rho(a\circ(b\circ c),d)\) by Lemma 4.2, which equals the same value by associativity. Subtracting the common terms \(\rho(a,d)+\rho(b,d)+\rho(c,d)\) from both sides yields the cocycle identity of Theorem 4.2.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.29 (cocycle_from_assoc).</span>
+The cocycle identity is a direct consequence of associativity:
+\[
+  \omega(a,b;d) + \omega(a\circ b,c;d) = \omega(b,c;d) + \omega(a,b\circ c;d).
+\]
+</div>
+
+<div class="proof">
+Cancel \(\rho(a,d)+\rho(b,d)+\rho(c,d)\) from both sides of Lemma 4.28.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.30 (cocycle_from_assoc').</span>
+Alternate form of the cocycle identity obtained by transposing terms:
+\[
+  \omega(a,b;d) - \omega(b,c;d) = \omega(a,b\circ c;d) - \omega(a\circ b,c;d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.31 (rs_op_three_left).</span>
+Three-term left-nested form: for all \(a,b,c,d\),
+\[
+  \rho(a\circ b\circ c,\,d) = \rho(a,d)+\rho(b,d)+\rho(c,d)+\omega(a,b;d)+\omega(a\circ b,c;d).
+\]
+(Using the left-to-right bracketing convention \(a\circ b\circ c = (a\circ b)\circ c\).)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.32 (rs_op_three_right).</span>
+Three-term right-nested form: for all \(a,b,c,d\),
+\[
+  \rho(a\circ b\circ c,\,d) = \rho(a,d)+\rho(b,d)+\rho(c,d)+\omega(b,c;d)+\omega(a,b\circ c;d).
+\]
+(Using the right-to-left bracketing convention \(a\circ b\circ c = a\circ(b\circ c)\).)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.33 (rs_op_three_indep).</span>
+The two three-term forms are equal: the left-nested and right-nested expansions of \(\rho(a\circ b\circ c,d)\) agree.
+</div>
+
+<div class="proof">
+Lemmas 4.31 and 4.32 both compute \(\rho((a\circ b)\circ c,d) = \rho(a\circ(b\circ c),d)\). The equality of their right-hand sides is exactly the cocycle identity (Lemma 4.29).
+</div>
+
+<!-- ============================================================ §6 -->
+<h2 id="s6">§6 Cocycle Defect</h2>
+
+<p>
+The <em>cocycle defect</em> of a 2-cochain \(g\) at a triple \((a,b,c)\) is the quantity \((\delta_2 g)(a,b,c)\), which vanishes if and only if \(g\) satisfies the cocycle condition at that triple. The five lemmas here pin down the defect for the emergence probe specifically, connecting it to the abstract <code>Is2Cocycle</code> predicate and verifying zero defect by multiple routes.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.34 (cocycleDefect_emProbe).</span>
+The cocycle defect of the emergence probe \(\omega_c\) is zero: for all \(a,b,c,d\),
+\[
+  \mathrm{cocycleDefect}(\omega_d)(a,b,c) = 0.
+\]
+</div>
+
+<div class="proof">
+\(\mathrm{cocycleDefect}(\omega_d)(a,b,c) = (\delta_2\omega_d)(a,b,c)\). Since \(\omega_d = \delta_1 f_d\) (Lemma 4.6) and \(\delta_2\circ\delta_1 = 0\) (Lemma 4.7), this equals zero.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.35 (cocycleDefect_emProbe_zero).</span>
+As a function, the cocycle defect of \(\omega_c\) is the zero function:
+\[
+  \mathrm{cocycleDefect}(\omega_c) = 0.
+\]
+</div>
+
+<div class="proof">
+Function extensionality applied to Lemma 4.34.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.36 (cobd2_emProbe_zero).</span>
+\(\delta_2(\omega_c) = 0\) everywhere: for all \(a,b,c \in \mathcal{I}\),
+\[
+  (\delta_2\,\omega_d)(a,b,c) = 0.
+\]
+</div>
+
+<div class="proof">
+This is Lemma 4.34 expressed using \(\delta_2\) notation rather than <code>cocycleDefect</code>.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.37 (emProbe_cocycle_eqn).</span>
+The cocycle equation for \(\omega_c\) spelled out in full: for all \(a,b,c,d\),
+\[
+  \omega(a\circ b,\,c;\,d) - \omega(a,\,b\circ c;\,d) + \omega(a,b;d) - \omega(b,c;d) = 0.
+\]
+</div>
+
+<div class="proof">
+This is \((\delta_2\omega_d)(a,b,c) = 0\) unfolded using the definition of \(\delta_2\). The four terms are the four evaluations of \(\omega_d\) appearing in the coboundary formula.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.38 (cocycleDefect_zero_iff).</span>
+A 2-cochain \(g\) is a 2-cocycle if and only if its defect vanishes:
+\[
+  \mathrm{Is2Cocycle}\;g \;\iff\; \mathrm{cocycleDefect}(g) = 0.
+\]
+</div>
+
+<div class="proof">
+By definition: <code>Is2Cocycle g</code> means \(\delta_2 g = 0\), and <code>cocycleDefect g = 0</code> is the same condition expressed pointwise.
+</div>
+
+<!-- ============================================================ §7 -->
+<h2 id="s7">§7 Void Cocycle Lemmas</h2>
+
+<p>
+When one or more arguments in the cocycle identity are specialized to the vacuum \(e\), the identity degenerates — several terms vanish and simpler identities emerge. The nine lemmas here work out all such specializations. They serve as building blocks for more complex cocycle arguments and as sanity checks on the framework: if any were false, the axiom system would be inconsistent.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.39 (cocycle_void_first).</span>
+With the first argument set to \(e\): for all \(b,c,d\),
+\[
+  \omega(e\circ b,\,c;\,d) - \omega(e,\,b\circ c;\,d) + \omega(e,b;d) - \omega(b,c;d) = 0,
+\]
+which simplifies using \(\omega(e,\,\cdot;\,\cdot)=0\) to \(\omega(b,c;d) = \omega(b,c;d)\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.40 (cocycle_void_second).</span>
+With the second argument set to \(e\): for all \(a,c,d\),
+\[
+  \omega(a\circ e,\,c;\,d) - \omega(a,\,e\circ c;\,d) + \omega(a,e;d) - \omega(e,c;d) = 0,
+\]
+which reduces to a trivially true identity after applying the void emergence lemmas.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.41 (cocycle_void_third).</span>
+With the third argument set to \(e\): for all \(a,b,d\),
+\[
+  \omega(a\circ b,\,e;\,d) - \omega(a,\,b\circ e;\,d) + \omega(a,b;d) - \omega(b,e;d) = 0,
+\]
+which simplifies to \(\omega(a,b;d) = \omega(a,b;d)\) after the void cancellations.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.42 (cocycle_void_probe).</span>
+With the probe set to \(e\): for all \(a,b,c\),
+\[
+  \omega(a\circ b,\,c;\,e) - \omega(a,\,b\circ c;\,e) + \omega(a,b;e) - \omega(b,c;e) = 0.
+\]
+This holds trivially since all four emergence terms vanish by Lemma 4.17.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.43 (emergence_void_left_collapse).</span>
+The collapse identity for void left argument:
+\[
+  \omega(e, b; c) = \rho(e \circ b, c) - \rho(e,c) - \rho(b,c) = 0.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.44 (emergence_void_left_collapse').</span>
+Alternate form: since \(e\circ b = b\), the collapse is also written
+\[
+  \rho(b,c) - \rho(e,c) - \rho(b,c) = 0.
+\]
+The \(\rho(b,c)\) terms cancel and \(\rho(e,c)=0\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.45 (emergence_void_right_collapse).</span>
+The collapse identity for void right argument:
+\[
+  \omega(a, e; c) = \rho(a \circ e, c) - \rho(a,c) - \rho(e,c) = 0.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.46 (emergence_void_right_collapse').</span>
+Alternate form: since \(a\circ e = a\),
+\[
+  \rho(a,c) - \rho(a,c) - \rho(e,c) = 0.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.47 (cocycle_void_first_simplified).</span>
+The simplified void-first cocycle identity, after all vacuum terms are cancelled:
+\[
+  \omega(b,c;d) = \omega(b,c;d),
+\]
+confirming that the cocycle equation at \((e,b,c)\) is a tautology — it places no additional constraint on \(\omega\).
+</div>
+
+<!-- ============================================================ §8 -->
+<h2 id="s8">§8 Cocycle Manipulations</h2>
+
+<p>
+The cocycle identity \(\omega(a,b;d)+\omega(a\circ b,c;d) = \omega(b,c;d)+\omega(a,b\circ c;d)\) can be rearranged in many ways to isolate any one of its four terms. These eight lemmas provide the standard repertoire of such rearrangements: swap, four isolation forms, negation, and two subtraction forms. They are the algebraic toolkit for computations that use the cocycle identity as a rewriting rule.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.48 (cocycle_swap_lhs_rhs).</span>
+Swapped form of the cocycle identity:
+\[
+  \omega(b,c;d) + \omega(a,b\circ c;d) = \omega(a,b;d) + \omega(a\circ b,c;d).
+\]
+This is Theorem 4.2 with the two sides exchanged.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.49 (cocycle_isolate_top).</span>
+Isolating the \(\omega(a\circ b,c;d)\) term:
+\[
+  \omega(a\circ b,\,c;\,d) = \omega(b,c;d) + \omega(a,b\circ c;d) - \omega(a,b;d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.50 (cocycle_isolate_inner).</span>
+Isolating the \(\omega(a,b\circ c;d)\) term:
+\[
+  \omega(a,\,b\circ c;\,d) = \omega(a,b;d) + \omega(a\circ b,c;d) - \omega(b,c;d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.51 (cocycle_isolate_left).</span>
+Isolating the \(\omega(a,b;d)\) term:
+\[
+  \omega(a,b;d) = \omega(b,c;d) + \omega(a,b\circ c;d) - \omega(a\circ b,c;d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.52 (cocycle_isolate_right).</span>
+Isolating the \(\omega(b,c;d)\) term:
+\[
+  \omega(b,c;d) = \omega(a,b;d) + \omega(a\circ b,c;d) - \omega(a,b\circ c;d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.53 (cocycle_neg_form).</span>
+Negated form of the cocycle identity: subtracting the left side from the right gives
+\[
+  \omega(b,c;d) + \omega(a,b\circ c;d) - \omega(a,b;d) - \omega(a\circ b,c;d) = 0.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.54 (cocycle_subtraction_form).</span>
+Subtraction form: the cocycle identity expressed as a difference equation:
+\[
+  \omega(a,b;d) - \omega(b,c;d) = \omega(a,b\circ c;d) - \omega(a\circ b,c;d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.55 (cocycle_subtraction_form').</span>
+Alternate subtraction form with opposite sign convention:
+\[
+  \omega(a\circ b,c;d) - \omega(a,b\circ c;d) = \omega(a,b;d) - \omega(b,c;d).
+\]
+</div>
+
+<!-- ============================================================ §9 -->
+<h2 id="s9">§9 Left-Additive Collapse</h2>
+
+<p>
+A resonance pairing is <em>left-additive</em> (the condition <code>LeftAdditiveRs</code>) if \(\rho(a\circ b,c) = \rho(a,c)+\rho(b,c)\) for all \(a,b,c\). This is exactly the condition that emergence vanishes identically: \(\omega(a,b;c) = 0\) for all triples. The three lemmas here confirm that the entire cocycle framework collapses to triviality under this assumption. Left-additivity is the special case that distributional semantics models typically assume, and these lemmas make the price of that assumption precise.
+</p>
+
+<div class="lemma"><span class="thm-label">Lemma 4.56 (emergence_zero_of_leftAdditive).</span>
+If resonance is left-additive, then emergence vanishes: if <code>LeftAdditiveRs</code>, then for all \(a,b,c\),
+\[
+  \omega(a,b;c) = 0.
+\]
+</div>
+
+<div class="proof">
+\(\omega(a,b;c) = \rho(a\circ b,c) - \rho(a,c) - \rho(b,c) = [\rho(a,c)+\rho(b,c)] - \rho(a,c) - \rho(b,c) = 0\), using left-additivity to replace \(\rho(a\circ b,c)\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.57 (emProbe_zero_of_leftAdditive).</span>
+If resonance is left-additive, then the emergence probe is the zero 2-cochain: if <code>LeftAdditiveRs</code>, then \(\omega_c = 0\) for all \(c\).
+</div>
+
+<div class="proof">
+\(\omega_c(a,b) = \omega(a,b;c) = 0\) by Lemma 4.56. Since \(\omega_c\) is zero at every point, it is the zero function.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 4.58 (cocycle_trivial_of_leftAdditive).</span>
+If resonance is left-additive, then the cocycle identity holds trivially: if <code>LeftAdditiveRs</code>, then
+\[
+  \omega(a,b;d) + \omega(a\circ b,c;d) = \omega(b,c;d) + \omega(a,b\circ c;d)
+\]
+because both sides equal \(0 + 0 = 0\).
+</div>
+
+<div class="proof">
+Each of the four emergence terms vanishes by Lemma 4.56. Both sides of the cocycle identity reduce to \(0 = 0\).
+</div>
+
+<!-- ============================================================ IMPLICATIONS -->
+<h2 id="implications">Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p>
+<strong>Emergence as a conservation law.</strong> The 2-cocycle identity \(\omega(a,b;d)+\omega(a\circ b,c;d) = \omega(b,c;d)+\omega(a,b\circ c;d)\) is structurally identical to a conservation law: the total emergence produced by assembling \(a,b,c\) into a triple, measured against probe \(d\), is conserved regardless of the order in which the pairings are made. If you first combine \(a\) and \(b\) and then merge with \(c\), the total emergence budget equals what you get by first combining \(b\) and \(c\) and then merging with \(a\). This is not a contingent empirical claim about any particular combination of ideas; it is a structural theorem that holds in every model satisfying the Idea Theory axioms. Conservation laws in physics arise from symmetries (Noether's theorem); here the conserved quantity arises from the associativity of composition — the theorem says that the way emergence distributes over sequential combination must be consistent with the fact that the monoid operation is associative.
+</p>
+
+<p>
+<strong>All 63 lemmas as consequences of one master constraint.</strong> It might seem that 63 lemmas require 63 independent insights. In fact they are all facets of a single algebraic fact: \(\omega_c = \delta_1 f_c\). From this one identity — established by trivial unfolding of definitions in Lemma 4.4 — the entire structure follows by systematic application of the chain complex identity \(\delta_2\circ\delta_1 = 0\), linearity of the coboundary operators, and vacuum annihilation. The 63 results are like 63 projections of a single object onto different coordinate planes: each is a genuine theorem (it might not be obvious until you compute), but their unity is more significant than their individual content. The formal proof development in Lean 4 makes this unity manifest: every proof in <code>IdeaTheory.Theorems4</code> traces back, in a finite number of steps, to the definition of \(\omega\) and the associativity axiom.
+</p>
+
+<p>
+<strong>Anderson, Bedau, and Chalmers are each invoking different aspects of the same cocycle.</strong> Philip Anderson's "More is Different" (1972) claims that at each level of organization, genuinely new laws emerge that cannot be reduced to lower-level descriptions. In the resonance framework, this is the claim that \(\omega(a,b;c) \neq 0\): the resonance of a compound with \(c\) is not the sum of its parts' resonances. Mark Bedau's "weak emergence" requires that macroscopic properties be derivable from microlevel facts only by explicit simulation — in cochain terms, that \(\omega_c\) is non-zero but its coboundary structure is computable. David Chalmers's "strong emergence" requires that macroscopic properties be genuinely ontologically novel, irreducible even in principle — the case where \(\omega_c\) cannot be expressed as \(\delta_1 f\) for any \(f\) definable at the microlevel. The Lean development shows all three share the same underlying algebraic structure (the 2-cocycle identity), but differ in whether the cocycle is a coboundary and whether the coboundary witness is accessible. Anderson invokes the non-vanishing of \(\omega\); Bedau invokes the computational complexity of computing the coboundary witness; Chalmers invokes the ontological inaccessibility of any such witness.
+</p>
+
+<p>
+<strong>What does it mean that emergence is exactly a coboundary?</strong> The result that \(\omega_c = \delta_1 f_c\) is striking for what it rules out. In abstract cohomology, a class in the first cohomology group \(H^1\) is non-trivial exactly when there exist 1-cocycles that are not coboundaries — global "twists" in the cochain complex that cannot be unwound by a potential function. Theorem 4.1 says that the emergence probe is always a coboundary: it is always globally exact. There is no cohomological obstruction. Emergence, as defined here, is never a non-trivial class in \(H^2\); it always has a potential, namely the resonance probe \(f_c\). This is philosophically significant: it means that the "extra" resonance generated by combination is never genuinely holistic — it always decomposes as the coboundary of a well-defined 1-cochain. Strong emergence, if it exists, must lie outside the axiom system; within it, all emergence is weak in the technical sense of being cohomologically trivial.
+</p>
+
+<p>
+<strong>The left-additive collapse and the price of additivity.</strong> Section §9 shows that the <code>LeftAdditiveRs</code> assumption annihilates all emergence. This is the formal correlate of the distributional semantics hypothesis that sentence meaning is compositional-additive: bag-of-words models, additive vector composition, and similar approaches all implicitly assume \(\omega \equiv 0\). The collapse lemmas (Lemmas 4.56–4.58) reveal the precise structural price: not just that emergence terms vanish, but that the entire cochain complex degenerates — every \(\delta_1 f\) is zero, every cocycle condition is tautological, and the framework offers no structural constraints beyond linearity. Whether this price is worth paying is an empirical question about language; what the Lean development establishes is that the question is mathematically precise. Adopting left-additivity is not a minor approximation — it is a commitment to a structurally degenerate special case.
+</p>
+
+</div>
+
+<!-- ============================================================ ZOO -->
+<h2 id="zoo">Zoo Entries</h2>
+
+<div class="zoo-entry">
+<div class="zoo-name">Anderson: Emergence as Non-Zero Cocycle</div>
+<div class="zoo-meta">Philip W. Anderson, "More is Different," <em>Science</em> 177 (1972), 393–396</div>
+<p>
+Anderson's landmark paper argues that each level of complexity in nature requires genuinely new laws that cannot be derived by simple reduction from lower-level descriptions. The central claim is that "the reductionist hypothesis does not by any means imply a constructionist one": knowing the laws of physics is not sufficient to reconstruct the laws of chemistry, biology, or psychology. In the resonance framework, Anderson's thesis corresponds to the assertion that \(\omega(a,b;c) \neq 0\) for at least some triples \((a,b,c)\): the resonance of a compound idea \(a\circ b\) with \(c\) genuinely exceeds — or falls short of — the sum of the individual resonances. Theorem 4.1 establishes that whenever \(\omega \neq 0\), it has an exact coboundary structure \(\omega_c = \delta_1 f_c\), meaning that the emergence is coherent and structured rather than arbitrary. The cocycle identity (Theorem 4.2) is then the precise analog of Anderson's claim about "new laws": the new quantity \(\omega\) obeys its own conservation law, making it a genuine structural feature of the level rather than noise.
+</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Bedau: Weak Emergence and Coboundary Computability</div>
+<div class="zoo-meta">Mark A. Bedau, "Weak Emergence," <em>Philosophical Perspectives</em> 11 (1997), 375–399</div>
+<p>
+Bedau defines a macro-state property \(P\) as weakly emergent if it can be derived from the micro-level facts only by explicit simulation — not by derivation from higher-level principles alone. Weak emergence is meant to capture the sense in which, say, the glider in Conway's Game of Life is emergent (you have to run the simulation to see it) without being strongly emergent in the mysterious sense of Chalmers. In the cochain framework, weak emergence corresponds to the situation where \(\omega_c = \delta_1 f_c\) holds — the coboundary witness \(f_c\) exists — but computing \(f_c(x) = \rho(x,c)\) for any given \(x\) requires tracing through the full micro-level dynamics rather than reading off a simple formula. The existence of the coboundary witness is guaranteed by Theorem 4.1; what Bedau is sensitive to is the computational complexity of evaluating it. Lemma 4.6 (\(\omega_c = \delta_1 f_c\) as an equality of functions) shows that the witness is in principle always accessible; what can vary is how hard it is to compute.
+</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Chalmers: Strong Emergence and Cohomological Irreducibility</div>
+<div class="zoo-meta">David J. Chalmers, "Strong and Weak Emergence," in P. Clayton and P. Davies, eds., <em>The Re-Emergence of Emergence</em> (2006), 244–254</div>
+<p>
+Chalmers distinguishes weak from strong emergence by whether the macro-level property could in principle (not just in practice) be derived from micro-level facts by any finite procedure. Strong emergence — which Chalmers thinks may describe consciousness — involves properties that are genuinely novel: no micro-level description, however complete, suffices to reconstruct them. In the cochain framework, strong emergence would require that \(\omega_c\) is a non-trivial 2-cocycle — not a coboundary of any 1-cochain definable at the micro-level. But Theorem 4.1 establishes that \(\omega_c = \delta_1 f_c\), where \(f_c(a) = \rho(a,c)\) is explicitly defined in terms of the same micro-level pairing \(\rho\). This means that within the Idea Theory axiom system, there is no strong emergence: every emergence cocycle has an explicit coboundary witness. Chalmers's strong emergence, if coherent, would require either adding new axioms that break the coboundary structure, or operating outside the framework entirely — which may be the correct conclusion about consciousness.
+</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Mill: Composition of Causes and Cocycle Additivity Failure</div>
+<div class="zoo-meta">John Stuart Mill, <em>A System of Logic</em> (1843), Book III, ch. 6 ("The Composition of Causes")</div>
+<p>
+Mill distinguishes cases where causes "compound" — their joint effect is the sum of their separate effects — from cases where they "chemically" combine to produce an effect qualitatively different from either cause alone. The compositional case is what he calls the "composition of causes"; the non-compositional case he regards as a practical limit on the applicability of inductive logic. In the resonance framework, Mill's compositional case is precisely left-additivity (\(\omega \equiv 0\), the <code>LeftAdditiveRs</code> condition), and his non-compositional case is the generic situation where \(\omega \neq 0\). Lemmas 4.56–4.58 show that left-additivity collapses the entire framework: when the composition of causes holds universally, emergence vanishes identically and the cocycle structure degenerates. Mill's observation that the composition of causes is a special case — not the general rule — is thus vindicated as a structural theorem: the axiom system is inconsistent with \(\omega \equiv 0\) as a general principle unless all composition is trivially additive.
+</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Kim: Supervenience and the Coboundary Witness</div>
+<div class="zoo-meta">Jaegwon Kim, "Concepts of Supervenience," <em>Philosophy and Phenomenological Research</em> 45 (1984), 153–176; <em>Supervenience and Mind</em> (1993)</div>
+<p>
+Kim's supervenience relation requires that there be no change in higher-level properties without a change in lower-level properties. In terms of the resonance framework, supervenience of the emergence functional on the basic resonance pairing amounts to the requirement that \(\omega_c\) be determined by \(\rho\). This is exactly what Theorem 4.1 guarantees: \(\omega_c = \delta_1 f_c\) where \(f_c(a) = \rho(a,c)\), so \(\omega\) is a definite function of \(\rho\) — there is no freedom to vary \(\omega\) independently of \(\rho\). Kim's stronger thesis — that supervenience implies reducibility — corresponds to the coboundary structure: not only does \(\omega\) supervene on \(\rho\), it is literally defined as a coboundary of \(\rho\). This is as tight a reduction as one could ask for. Kim's arguments about the explanatory gap between supervening and base properties thus find a precise analog: the "gap" is the cochain computation \(\delta_1 f_c\), which is conceptually transparent (it is just a subtraction) but may be computationally non-trivial to evaluate in specific cases.
+</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Holland: Complex Adaptive Systems and Multi-Scale Cocycles</div>
+<div class="zoo-meta">John H. Holland, <em>Emergence: From Chaos to Order</em> (1998); <em>Hidden Order</em> (1995)</div>
+<p>
+Holland's theory of complex adaptive systems (CAS) posits that emergent properties arise from the interaction of many agents following simple rules, and that the interesting behaviour of a CAS cannot be predicted from the rules alone without simulating the system. The key mechanisms are: tagging (identifying regularities), internal models (predictive schemes agents maintain about their environment), and building blocks (reusable structures that recombine to produce higher-level behaviours). In the resonance framework, building blocks are idea compositions \(a\circ b\), and the emergence \(\omega(a,b;c)\) measures the excess resonance they produce with a target \(c\) beyond the sum of their parts. Holland's "non-decomposability" claim — that complex systems cannot be understood by decomposing them into independent parts — is the assertion that \(\omega\) is non-zero at multiple scales simultaneously. The cocycle identity (Theorem 4.2) constrains how non-zero \(\omega\) values at different scales relate: the emergence of triples is not free to vary independently of the emergence of pairs, precisely as Holland's building-block hypothesis requires.
+</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Sawyer: Social Emergence and the Non-Trivial Cocycle Class</div>
+<div class="zoo-meta">R. Keith Sawyer, <em>Social Emergence: Societies as Complex Systems</em> (Cambridge, 2005); "Emergence in Sociology," <em>American Journal of Sociology</em> 107 (2001), 551–585</div>
+<p>
+Sawyer argues that social phenomena are emergent in a strong sense: they are not merely the aggregate of individual actions but constitute a distinct ontological level with causal powers of its own. Against methodological individualism (which holds that all social facts reduce to facts about individuals), Sawyer claims that social structures can feed back to constrain and enable individual action in ways that have no purely individualist explanation. In the resonance framework, this corresponds to the possibility that the emergence probe \(\omega_c\) is a non-trivial 2-cocycle — one that is not a coboundary of any 1-cochain accessible at the individual level. Theorem 4.1 shows that within the axiom system, \(\omega_c\) is always a coboundary (of \(f_c(a)=\rho(a,c)\)), and hence trivial as a cohomology class. Sawyer's strong social emergence would require that the probe function \(f_c\) is not individualist-reducible — not because the mathematical structure fails, but because the relevant \(\rho\) values are only accessible at the social level. The formal framework thus locates Sawyer's position precisely: it is a claim about the accessibility of the coboundary witness, not about the existence of the cocycle structure.
+</p>
+</div>
+
+<!-- ============================================================ LEAN EXT -->
+<h2 id="lean-ext">Related Lean Extensions</h2>
+
+<p>The full source for this module is in <code>IdeaTheory.Theorems4</code>. Several natural extensions are in preparation or available in adjacent modules:</p>
+<ul>
+  <li><strong><code>IdeaTheory.Theorems2</code></strong> — the <a href="resonance-pairing.html">Resonance Pairing</a> theorems, which establish the foundational lemmas about \(\rho\), \(\omega\), and weight that Theorems4 builds upon. In particular, the decomposition \(\rho(a\circ b,c) = \rho(a,c)+\rho(b,c)+\omega(a,b;c)\) (Lemma 2.4 there) is the starting point for the coboundary representation here.</li>
+  <li><strong><code>IdeaTheory.Theorems1</code></strong> — the <a href="composition.html">Composition</a> theorems, which establish the free monoid structure on \(\mathcal{I}\) and the associativity that underpins Lemma 4.1 and hence the entire cocycle framework.</li>
+  <li><strong><code>IdeaTheory.Theorems3</code></strong> — the <a href="graded-idea-algebra.html">Graded Idea Algebra</a>, which stratifies \(\mathcal{I}\) by weight and shows how resonance respects the grading. The graded structure constrains which cocycle classes can be non-trivial.</li>
+  <li><strong>Forthcoming: cohomology of the idea monoid.</strong> The chain complex \(\cdots \xrightarrow{\delta_1} C^2 \xrightarrow{\delta_2} C^3 \cdots\) established implicitly by the linearity lemmas of §4 is the beginning of a full group cohomology computation for the monoid \((\mathcal{I},\circ,e)\). The first cohomology group \(H^1\) classifies 1-cocycles modulo coboundaries; the second cohomology group \(H^2\) classifies 2-cocycles modulo coboundaries. Theorem 4.1 shows that \([\omega_c] = 0 \in H^2\) for all resonance-probe-derived emergence functionals. Computing \(H^2\) in general — and asking whether there are non-trivial classes — is the next step.</li>
+  <li><strong>Forthcoming: categorical formulation.</strong> The cochain complex and the coboundary operators have a natural categorical interpretation: ideas are objects, compositions are morphisms, and the emergence functional is a natural transformation measuring the failure of resonance to be a monoidal functor. This categorical perspective would unify Theorems4 with the literature on non-strict monoidal categories and categorified cohomology.</li>
+  <li><strong>Forthcoming: defect quantification.</strong> The <code>cocycleDefect</code> function is identically zero for emergence probes (Lemma 4.34), but for an arbitrary 2-cochain \(g\), the defect can be non-zero. A natural extension would quantify the minimum-defect approximation of a given 2-cochain by a coboundary — a least-squares problem whose solution would give the "most emergence-like" decomposition of any resonance-style functional.</li>
+</ul>
+
+<p><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

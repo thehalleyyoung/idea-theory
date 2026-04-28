@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RecombinantGrowth &mdash; Lean Extension | Idea Theory</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a class="active" href="index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="page-content">
+
+  <!-- ═══════════════════════════════════════════ PAGE HEADER -->
+  <header class="page-header">
+    <h1>RecombinantGrowth</h1>
+    <p class="subtitle">
+      Lean&nbsp;4 Extension &mdash; Combinatorial Explosion of Ideas under Free Recombination
+    </p>
+    <p class="source-link">
+      Source:
+      <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/RecombinantGrowth.lean"
+         target="_blank">
+        <code>IdeaTheory/Extensions/RecombinantGrowth.lean</code>
+      </a>
+    </p>
+  </header>
+
+  <!-- ═══════════════════════════════════════════ OVERVIEW -->
+  <section id="overview">
+    <h2>Overview</h2>
+
+    <p>
+      The <strong>RecombinantGrowth</strong> extension formalises the combinatorial explosion of
+      ideas under free binary recombination. It operates entirely within the
+      <code>Finset</code> API of Mathlib, so every result is computable and decidable. Two
+      operators drive the theory:
+    </p>
+
+    <ul>
+      <li>
+        <strong><code>binaryClosure(s)</code></strong> &mdash; the smallest set containing \(s\)
+        and closed under one round of binary composition:
+        \[
+          \operatorname{binaryClosure}(s)
+          \;=\; s \;\cup\; igl\{\,a \circ b \;\mid\; a,b \in s\,igr\}.
+        \]
+        One application of <code>binaryClosure</code> takes a pool of \(n\) ideas to a pool of
+        at most \(n + n^2\) ideas (Theorem T9).
+      </li>
+      <li>
+        <strong><code>closureN(s, n)</code></strong> &mdash; the \(n\)-step iterated closure,
+        defined by \(\operatorname{closureN}(s, 0) = s\) and
+        \(\operatorname{closureN}(s, n+1) =
+          \operatorname{binaryClosure}(\operatorname{closureN}(s,n))\).
+        This is the algebraic model of the Jones (1995) &ldquo;ideas beget ideas&rdquo; equation.
+      </li>
+    </ul>
+
+    <p>
+      The 21 theorems proved here collectively establish
+      <em>Weitzman&rsquo;s combinatorial wealth hypothesis as a theorem</em>: super-exponential
+      growth is a structural consequence of the composition operation, not an empirical regularity.
+      Non-rivalry is algebraic — the closure always contains the originals — and the bounds on
+      cardinality growth (\(\le n + n^2\) from above; \(\ge 3\) from two genuinely distinct
+      elements below) delimit the space of Weitzman&rsquo;s &ldquo;combinatorial wealth.&rdquo;
+    </p>
+
+    <p>
+      All results assume a type \(lpha\) equipped with an <code>IdeaTheoryStructure</code>
+      instance, which provides the binary composition \(\circ\), an identity element \(e\),
+      and the axioms <code>id_left</code>/<code>id_right</code>. <code>DecidableEq</code> is
+      required for <code>Finset</code> operations. No further algebraic axioms are needed: the
+      theorems in this file hold for any magma-like structure satisfying the identity laws.
+    </p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ DEFINITIONS -->
+  <section id="definitions">
+    <h2>Core Definitions</h2>
+
+    <h3>Pool, binaryClosure, closureN</h3>
+
+    <pre><code class="language-lean">-- Pool and binary closure definitions
+abbrev Pool (α : Type*) [DecidableEq α] [IdeaTheoryStructure α] : Type _ := Finset α
+
+def binaryClosure (s : Finset α) : Finset α :=
+  s ∪ (s ×ˢ s).image (fun p => op p.1 p.2)
+
+def closureN (s : Finset α) : Nat → Finset α
+  | 0     => s
+  | n + 1 => binaryClosure (closureN s n)</code></pre>
+
+    <p>
+      <code>Pool α</code> is a type alias for <code>Finset α</code> when \(lpha\) carries an
+      <code>IdeaTheoryStructure</code>. The <code>binaryClosure</code> definition unpacks
+      directly into the Lean&nbsp;4 <code>Finset</code> API: <code>s ×ˢ s</code> is the
+      Cartesian product, <code>.image</code> applies the composition \(\circ\), and <code>∪</code>
+      adjoins the originals. The image step may collapse duplicates (if \(a \circ b = a \circ c\)
+      for distinct \(b,c\)), which is why the upper bound in T9 uses the cardinality of the
+      Cartesian product rather than the number of distinct pairs.
+    </p>
+
+    <p>
+      The <code>closureN</code> recursor is definitionally transparent: the pattern match is
+      structural, so <code>closureN_succ</code> reduces to <code>rfl</code>. This matters for
+      proof automation — many downstream lemmas are proved by <code>simp only [closureN_succ]</code>
+      followed by <code>binaryClosure_mono</code>.
+    </p>
+
+    <h3>Membership Characterisation</h3>
+
+    <pre><code class="language-lean">-- Membership characterization
+lemma mem_binaryClosure {s : Finset α} {x : α} :
+    x ∈ binaryClosure s ↔ x ∈ s ∨ ∃ a ∈ s, ∃ b ∈ s, op a b = x</code></pre>
+
+    <p>
+      This lemma is the workhorse of the file. Almost every subsequent theorem is proved by
+      rewriting via <code>mem_binaryClosure</code> and then performing case analysis. The
+      left disjunct covers &ldquo;original ideas&rdquo;; the right disjunct covers
+      &ldquo;recombinant ideas.&rdquo;
+    </p>
+
+    <h3>Non-Rivalry and Explosion Signatures</h3>
+
+    <pre><code class="language-lean">-- Non-rivalry: originals always survive
+theorem subset_binaryClosure (s : Finset α) : s ⊆ binaryClosure s
+theorem subset_closureN (s : Finset α) (n : Nat) : s ⊆ closureN s n</code></pre>
+
+    <pre><code class="language-lean">-- Combinatorial explosion
+theorem binaryClosure_card_le (s : Finset α) :
+    (binaryClosure s).card ≤ s.card + s.card * s.card
+theorem recombinant_explosion {s : Finset α} {a b : α}
+    (ha : a ∈ s) (hb : b ∈ s) (hab : op a b ∈ s)
+    (hne1 : a ≠ b) (hne2 : op a b ≠ a) (hne3 : op a b ≠ b) : 3 ≤ s.card</code></pre>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ THEOREMS -->
+  <section id="theorems">
+    <h2>Theorems and Lemmas</h2>
+    <p>
+      All 21 results are stated below in the order they appear in the Lean file. Each theorem
+      box includes the Lean name, the mathematical statement, and a proof sketch.
+    </p>
+
+    <h3>Membership and One-Step Structural Properties</h3>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (mem_binaryClosure).</span>
+      \(x \in \operatorname{binaryClosure}(s)
+        \;\iff\;
+        x \in s \;ee\; \exists\,a \in s,\;\exists\,b \in s,\; a \circ b = x.\)
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Unfold <code>binaryClosure</code> using union and image; <code>simp</code>
+        with <code>mem_image</code> and <code>mem_product</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (subset_binaryClosure).</span>
+      \(s \subseteq \operatorname{binaryClosure}(s).\)
+      Every idea in the pool is in its own recombinant closure (non-rivalry).
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>Finset.mem_union.mpr</code> with <code>Or.inl</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_mono_step).</span>
+      \(\operatorname{binaryClosure}(s)
+        \subseteq
+        \operatorname{binaryClosure}(\operatorname{binaryClosure}(s)).\)
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Apply <code>subset_binaryClosure</code> to <code>binaryClosure(s)</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_mono).</span>
+      \(s \subseteq t \;\Rightarrow\; \operatorname{binaryClosure}(s) \subseteq
+      \operatorname{binaryClosure}(t).\)
+      The closure operator is monotone.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Case analysis using <code>mem_binaryClosure</code>; existing elements use
+        <code>h</code>, compositions use <code>Or.inr</code> with <code>h</code> applied to both
+        components.
+      </small>
+    </div>
+
+    <h3>Iterated Closure: <code>closureN</code></h3>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (closureN_succ).</span>
+      \(\operatorname{closureN}(s,\, n+1)
+        = \operatorname{binaryClosure}(\operatorname{closureN}(s,n)).\)
+      The recurrence unfolding for the \(n\)-step closure.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: By definition (<code>rfl</code>).
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (closureN_subset_succ).</span>
+      \(\operatorname{closureN}(s,n) \subseteq \operatorname{closureN}(s,n+1).\)
+      The recombinant trajectory is monotonically increasing.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Apply <code>subset_binaryClosure</code> to <code>closureN(s,n)</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (subset_closureN).</span>
+      \(s \subseteq \operatorname{closureN}(s,n)\) for all \(n \in \mathbb{N}\).
+      The original pool is always contained in every later closure (non-rivalry in iterated form).
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Induction on \(n\); zero is <code>refl</code>; succ chains the induction
+        hypothesis with <code>closureN_subset_succ</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (closureN_mono).</span>
+      \(m \le n \;\Rightarrow\; \operatorname{closureN}(s,m) \subseteq
+      \operatorname{closureN}(s,n).\)
+      The closure is monotone in the time parameter.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Induction on the \(\le\) proof; <code>refl</code> for the base case;
+        the step case chains the induction hypothesis with <code>closureN_subset_succ</code>.
+      </small>
+    </div>
+
+    <h3>Cardinality Bounds</h3>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_card_le).</span>
+      \(\operatorname{card}(\operatorname{binaryClosure}(s))
+        \le \operatorname{card}(s) + \operatorname{card}(s)^2.\)
+      One round of recombination grows the pool by at most \(n^2\) new ideas.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>card_union_le</code>; <code>card_image_le</code> for the composition
+        image; <code>card_product</code> gives \(n^2\).
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (card_le_insert).</span>
+      \(\operatorname{card}(s) \le \operatorname{card}(\operatorname{insert}\,a\,s).\)
+      Inserting an idea never decreases the pool.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>Finset.card_le_card</code> with <code>Finset.subset_insert</code>.
+      </small>
+    </div>
+
+    <h3>Special Cases: Singleton and Empty</h3>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_singleton_ident).</span>
+      \(\operatorname{binaryClosure}(\{e\}) = \{e\}.\)
+      The identity singleton is closed under recombination.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>ext</code>; <code>simp</code> with <code>mem_binaryClosure</code>;
+        forward direction: the only element is \(e\), and composition of \(e\) with \(e\) is
+        \(e\) by <code>id_left</code>; backward direction: <code>Or.inl</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_empty).</span>
+      \(\operatorname{binaryClosure}(\emptyset) = \emptyset.\)
+      The empty pool stays empty.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Unfold <code>binaryClosure</code>; <code>simp</code>.
+      </small>
+    </div>
+
+    <h3>Explosion and Erasure</h3>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (recombinant_explosion).</span>
+      If \(a, b \in s\), \(a \circ b \in s\), \(a 
+e b\), \(a \circ b 
+e a\),
+      \(a \circ b 
+e b\), then \(\operatorname{card}(s) \ge 3.\)
+      A pool containing two distinct ideas with a genuinely new composition has at least 3
+      elements (Romer / Weitzman explosion).
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Show \(\{a,\,b,\,a \circ b\} \subseteq s\) and compute its cardinality as
+        3 using the distinctness conditions.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (erase_card_lower_bound).</span>
+      \(\operatorname{card}(s)
+        \le \operatorname{card}(s.\operatorname{erase}\,a) + 1.\)
+      Removing one idea removes at most one element from the pool
+      (non-rivalry in cardinality form).
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Case on \(a \in s\): use <code>card_erase_of_mem</code>; otherwise erase
+        is identity.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_erase_subset).</span>
+      \(\operatorname{binaryClosure}(s.\operatorname{erase}\,a)
+        \subseteq \operatorname{binaryClosure}(s).\)
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Apply <code>binaryClosure_mono</code> to <code>Finset.erase_subset</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (closureN_erase_subset).</span>
+      \(\operatorname{closureN}(s.\operatorname{erase}\,a,\,n)
+        \subseteq \operatorname{closureN}(s,\,n).\)
+      Erasing one idea before iterating still yields a sub-pool of the full iteration.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Induction on \(n\); zero uses <code>erase_subset</code>; succ uses the
+        induction hypothesis and <code>binaryClosure_mono</code>.
+      </small>
+    </div>
+
+    <h3>Identity, Closure Characterisation, and Union</h3>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_union_ident).</span>
+      \(\operatorname{binaryClosure}(s \cup \{e\})
+        = \operatorname{binaryClosure}(s) \cup \{e\}.\)
+      Adjoining the identity commutes with one round of recombination.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>ext</code>; case analysis on membership using
+        <code>mem_binaryClosure</code>; compositions involving \(e\) reduce via
+        <code>id_left</code>/<code>id_right</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (op_mem_binaryClosure).</span>
+      \(a \in s \;\wedge\; b \in s
+        \;\Rightarrow\; a \circ b \in \operatorname{binaryClosure}(s).\)
+      Any composition of pool elements is in the closure.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>mem_binaryClosure.mpr</code> with <code>Or.inr</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (op_mem_of_binaryClosure_eq).</span>
+      \(\operatorname{binaryClosure}(s) = s
+        \;\Rightarrow\; a \in s
+        \;\Rightarrow\; b \in s
+        \;\Rightarrow\; a \circ b \in s.\)
+      If \(s\) is its own closure (already closed under \(\circ\)), then compositions stay
+      in \(s\).
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Apply <code>op_mem_binaryClosure</code>; rewrite with the fixed-point
+        hypothesis.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (binaryClosure_eq_iff_closed).</span>
+      \(\operatorname{binaryClosure}(s) = s
+        \;\iff\;
+        orall\,a \in s,\;orall\,b \in s,\; a \circ b \in s.\)
+      The closure is a fixed point if and only if the pool is already closed under composition.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: Forward direction: <code>op_mem_of_binaryClosure_eq</code>. Backward
+        direction: <code>Finset.Subset.antisymm</code> using the closure hypothesis and
+        <code>subset_binaryClosure</code>.
+      </small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (union_binaryClosure_subset).</span>
+      \(\operatorname{binaryClosure}(s) \cup \operatorname{binaryClosure}(t)
+        \subseteq \operatorname{binaryClosure}(s \cup t).\)
+      The closure of the union dominates the union of closures.
+      <br>
+      <small class="proof-sketch">
+        Proof sketch: <code>Finset.union_subset</code>; each component uses
+        <code>binaryClosure_mono</code> with
+        <code>subset_union_left</code>/<code>subset_union_right</code>.
+      </small>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ IMPLICATIONS -->
+  <section id="implications">
+    <h2>Implications for Growth Theory</h2>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <p>
+        Non-rivalry is not an assumption in Idea Theory &mdash; it is a theorem. The
+        <code>subset_binaryClosure</code> theorem proves that every original idea survives every
+        round of recombination. This formalises the economic intuition behind Romer&rsquo;s
+        growth model: unlike physical capital, ideas are not consumed by use. The algebraic
+        mechanism is transparent: <code>binaryClosure(s)</code> is defined as
+        <code>s ∪ (compositions)</code>, so the union contains \(s\) as a subset by
+        construction. But this means non-rivalry is not merely a definitional artifact &mdash;
+        it is a structural property of the closure operator that persists under iteration (as
+        <code>subset_closureN</code> proves) and under erasure of individual ideas (as
+        <code>closureN_erase_subset</code> proves). Non-rivalry is <em>robust</em>.
+      </p>
+    </div>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <p>
+        The <code>recombinant_explosion</code> theorem proves Weitzman&rsquo;s combinatorial
+        wealth claim from first principles. The proof requires only three distinct elements
+        &mdash; \(a\), \(b\), and \(a \circ b\) &mdash; with three distinctness conditions. No
+        continuous mathematics, no probability, no economic equilibrium assumptions. The result
+        is purely combinatorial: the composition operation on a set of ideas
+        <em>necessarily</em> generates new elements, provided the compositions are genuinely
+        novel. This is the algebraic mechanism behind the super-linear growth of scientific
+        knowledge: each new idea that is genuinely compositionally distinct from existing ones
+        increases the pool&rsquo;s recombinant potential by more than linearly.
+      </p>
+    </div>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <p>
+        The <code>binaryClosure_eq_iff_closed</code> theorem identifies precisely when creative
+        recombination is <em>exhausted</em>: when the idea pool is already closed under
+        composition. A closed pool is its own closure &mdash; adding recombination to it changes
+        nothing. This is the algebraic characterisation of a &ldquo;mature&rdquo; or
+        &ldquo;paradigmatic&rdquo; scientific field in Kuhn&rsquo;s sense: normal science
+        operates within a closed idea pool, generating recombinations that are already implicitly
+        contained in the paradigm. Revolutionary science &mdash; the creation of genuinely novel
+        ideas &mdash; corresponds to the addition of elements that break the closure: new ideas
+        \(a\) such that \(a 
+otin \operatorname{binaryClosure}(	ext{old pool})\). The theorem
+        makes this precise.
+      </p>
+    </div>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <p>
+        The monotonicity and subset theorems collectively prove that the recombinant growth of
+        an idea pool is path-dependent and irreversible. <code>closureN_mono</code> shows growth
+        is non-decreasing in time. <code>subset_closureN</code> shows original ideas are
+        permanently accessible. <code>binaryClosure_mono</code> shows that larger initial pools
+        produce larger closures at every step. This path-dependence is not a feature of any
+        particular growth model &mdash; it is a structural consequence of the monotonicity of
+        the closure operator. Ideas that have been generated cannot be
+        &ldquo;un-generated.&rdquo; The history of a pool&rsquo;s recombinant trajectory is
+        fully determined by its initial contents and the composition operation &mdash; there is
+        no stochasticity, no optimisation, no equilibrium selection. Just the algebra.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ ZOO -->
+  <section id="zoo">
+    <h2>Connections to the Idea Zoo</h2>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3>Romer &mdash; Non-Rival Ideas and Endogenous Growth</h3>
+      <p>
+        Paul Romer&rsquo;s endogenous growth theory (1990) built on two premises: ideas are
+        non-rival (one person&rsquo;s use of an idea does not prevent another&rsquo;s) and
+        ideas combine to generate new ideas. The <code>subset_binaryClosure</code> theorem (T2)
+        is the algebraic proof of non-rivalry: after any round of recombination, every original
+        idea remains in the pool. It has not been &ldquo;used up.&rdquo; The
+        <code>subset_closureN</code> theorem (T7) extends this to all time steps: non-rivalry is
+        not just a one-step property but a permanent feature of the closure operator. The
+        <code>erase_card_lower_bound</code> theorem (T14) gives the cardinality version:
+        excising a single idea removes at most one element &mdash; the marginal cost of idea use
+        is at most 1, regardless of how many others use the same idea. Romer&rsquo;s growth
+        model thus rests on a theorem, not merely an assumption.
+      </p>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3>Weitzman &mdash; Combinatorial Wealth</h3>
+      <p>
+        Martin Weitzman (1998) argued that the diversity of ideas produces
+        &ldquo;combinatorial wealth&rdquo; &mdash; the number of new ideas generated by
+        recombination grows super-linearly with the initial stock. The
+        <code>binaryClosure_card_le</code> theorem (T9) gives the upper bound: one round of
+        recombination grows the pool from \(n\) to at most \(n + n^2\) elements. The
+        <code>recombinant_explosion</code> theorem (T13) provides the lower bound in a concrete
+        case: a pool of 2 elements with a genuinely new composition already has 3 elements. The
+        gap between the upper and lower bounds &mdash; \(n^2\) minus 1 &mdash; is the space in
+        which Weitzman&rsquo;s &ldquo;combinatorial wealth&rdquo; lives. The
+        <code>closureN_mono</code> theorem (T8) shows that the wealth is non-decreasing over
+        time. Weitzman&rsquo;s intuition &mdash; that a larger idea stock generates
+        combinatorially more recombinant possibilities &mdash; is validated by these two bounds
+        taken together.
+      </p>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3>Jones &mdash; Idea-Based Growth</h3>
+      <p>
+        Charles Jones (1995, 2019) formalised Romer&rsquo;s model and emphasised that the growth
+        rate of the idea stock depends on the existing stock: ideas beget ideas. The
+        <code>closureN_succ</code> recurrence (T5) is the algebraic version of this
+        self-referential growth:
+        \(\operatorname{closureN}(s, n+1)
+          = \operatorname{binaryClosure}(\operatorname{closureN}(s,n))\).
+        Each new round of recombination operates on the <em>already-expanded</em> pool, not the
+        original. The <code>closureN_mono</code> theorem (T8) shows that this process is
+        monotone: closures at later times dominate earlier ones. Jones&rsquo;s
+        &ldquo;semi-endogenous growth&rdquo; models &mdash; where the growth rate depends on
+        the population of researchers &mdash; correspond to the interaction between
+        <code>rogers_monotone</code> (in Diffusion) and <code>closureN_mono</code> here. The
+        <code>union_binaryClosure_subset</code> theorem (T21) captures Jones&rsquo;s
+        &ldquo;standing on the shoulders of giants&rdquo; effect: merging two idea pools and
+        recombining dominates recombining them separately.
+      </p>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3>Hayek &mdash; The Knowledge Problem</h3>
+      <p>
+        Friedrich Hayek (<em>The Use of Knowledge in Society</em>, 1945) argued that knowledge
+        is dispersed across individuals and cannot be aggregated without loss. The
+        <code>binaryClosure_union_ident</code> theorem (T17) formalises a Hayekian insight:
+        adjoining the identity element &mdash; the &ldquo;null knowledge&rdquo; of an agent who
+        knows nothing &mdash; commutes with recombination. Agents who contribute no knowledge
+        (hold the identity idea) neither add to nor subtract from the recombinant closure. The
+        <code>closureN_erase_subset</code> theorem (T16) shows that removing one agent&rsquo;s
+        knowledge always yields a sub-pool of the full closure: no single agent is
+        indispensable to the recombinant process. Hayek&rsquo;s dispersal thesis is partially
+        refuted at the level of closure: the union of individual idea pools has a richer
+        recombinant closure than any subset. But no <em>central</em> aggregator is needed
+        &mdash; the closure operator is purely compositional.
+      </p>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3>Schumpeter &mdash; Creative Destruction</h3>
+      <p>
+        Joseph Schumpeter (<em>Capitalism, Socialism and Democracy</em>, 1942) identified
+        innovation as the engine of capitalist growth, driven by the recombination of existing
+        elements into new configurations &mdash; &ldquo;creative destruction.&rdquo; The
+        <code>op_mem_binaryClosure</code> theorem (T18) formalises the creation side: any
+        composition of pool elements is automatically in the closure. The
+        <code>op_mem_of_binaryClosure_eq</code> theorem (T19) formalises the destruction side
+        in its most abstract form: if a pool is already closed, then combining elements within
+        it stays within it &mdash; the pool is &ldquo;saturated&rdquo; and there is no further
+        creative destruction. Schumpeter&rsquo;s dynamic occurs precisely when the pool is
+        <em>not</em> closed &mdash; when
+        \(\operatorname{binaryClosure}(s) 
+e s\). The
+        <code>binaryClosure_eq_iff_closed</code> theorem (T20) gives the exact criterion:
+        creative potential is exhausted if and only if the pool is already closed under
+        composition.
+      </p>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3>Arrow &mdash; Knowledge as a Public Good</h3>
+      <p>
+        Kenneth Arrow (<em>Economic Welfare and the Allocation of Resources for Invention</em>,
+        1962) argued that knowledge has the properties of a public good: non-excludability and
+        non-rivalry. The non-rivalry proof (<code>subset_binaryClosure</code>) has already been
+        discussed. The <code>union_binaryClosure_subset</code> theorem (T21) captures
+        non-excludability in its mathematical form: the closure of the union of two idea pools
+        contains (at least) the union of their individual closures. Sharing an idea pool
+        strictly dominates withholding:
+        \[
+          \operatorname{binaryClosure}(s \cup t)
+          \;\supseteq\;
+          \operatorname{binaryClosure}(s) \cup \operatorname{binaryClosure}(t),
+        \]
+        with the gap representing the cross-recombinant ideas that can only be generated when
+        both pools are accessible. Arrow&rsquo;s argument for public funding of basic research
+        corresponds exactly to this theorem: the recombinant surplus from open access to idea
+        pools cannot be achieved by any private arrangement that keeps them separate.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ SUMMARY TABLE -->
+  <section id="summary-table">
+    <h2>Theorem Summary</h2>
+    <p>
+      The table below gives a compact reference. The &ldquo;Zoo&rdquo; column indicates which
+      thinker&rsquo;s framework is most directly illuminated by the theorem.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Lean name</th>
+          <th>Mathematical content</th>
+          <th>Zoo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>T1</td>
+          <td><code>mem_binaryClosure</code></td>
+          <td>Membership iff original or composition</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T2</td>
+          <td><code>subset_binaryClosure</code></td>
+          <td>\(s \subseteq \operatorname{binaryClosure}(s)\)</td>
+          <td>Romer non-rivalry</td>
+        </tr>
+        <tr>
+          <td>T3</td>
+          <td><code>binaryClosure_mono_step</code></td>
+          <td>One-step monotonicity of the closure</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T4</td>
+          <td><code>binaryClosure_mono</code></td>
+          <td>Monotone closure operator: \(s \subseteq t \Rightarrow \operatorname{binaryClosure}(s) \subseteq \operatorname{binaryClosure}(t)\)</td>
+          <td>Weitzman</td>
+        </tr>
+        <tr>
+          <td>T5</td>
+          <td><code>closureN_succ</code></td>
+          <td>Recurrence: \(\operatorname{closureN}(s,n+1) = \operatorname{binaryClosure}(\operatorname{closureN}(s,n))\)</td>
+          <td>Romer / Jones</td>
+        </tr>
+        <tr>
+          <td>T6</td>
+          <td><code>closureN_subset_succ</code></td>
+          <td>Monotone trajectory in time</td>
+          <td>Weitzman</td>
+        </tr>
+        <tr>
+          <td>T7</td>
+          <td><code>subset_closureN</code></td>
+          <td>\(s \subseteq \operatorname{closureN}(s,n)\) for all \(n\)</td>
+          <td>Romer non-rivalry</td>
+        </tr>
+        <tr>
+          <td>T8</td>
+          <td><code>closureN_mono</code></td>
+          <td>Monotone in the time parameter: \(m \le n \Rightarrow \operatorname{closureN}(s,m) \subseteq \operatorname{closureN}(s,n)\)</td>
+          <td>Jones</td>
+        </tr>
+        <tr>
+          <td>T9</td>
+          <td><code>binaryClosure_card_le</code></td>
+          <td>\(\operatorname{card}(\operatorname{binaryClosure}(s)) \le n + n^2\)</td>
+          <td>Weitzman</td>
+        </tr>
+        <tr>
+          <td>T10</td>
+          <td><code>card_le_insert</code></td>
+          <td>Insert never shrinks the pool</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T11</td>
+          <td><code>binaryClosure_singleton_ident</code></td>
+          <td>\(\operatorname{binaryClosure}(\{e\}) = \{e\}\)</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T12</td>
+          <td><code>binaryClosure_empty</code></td>
+          <td>\(\operatorname{binaryClosure}(\emptyset) = \emptyset\)</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T13</td>
+          <td><code>recombinant_explosion</code></td>
+          <td>\(\operatorname{card}(s) \ge 3\) from two distinct ideas with a novel composition</td>
+          <td>Weitzman</td>
+        </tr>
+        <tr>
+          <td>T14</td>
+          <td><code>erase_card_lower_bound</code></td>
+          <td>\(\operatorname{card}(s) \le \operatorname{card}(s.\operatorname{erase}\,a) + 1\)</td>
+          <td>Romer non-rivalry</td>
+        </tr>
+        <tr>
+          <td>T15</td>
+          <td><code>binaryClosure_erase_subset</code></td>
+          <td>Erase respects closure monotonicity</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T16</td>
+          <td><code>closureN_erase_subset</code></td>
+          <td>Iterated closure: erase before iterating is a sub-pool</td>
+          <td>Romer</td>
+        </tr>
+        <tr>
+          <td>T17</td>
+          <td><code>binaryClosure_union_ident</code></td>
+          <td>Identity commutes with one round of recombination</td>
+          <td>Hayek</td>
+        </tr>
+        <tr>
+          <td>T18</td>
+          <td><code>op_mem_binaryClosure</code></td>
+          <td>Compositions of pool elements land in closure</td>
+          <td>Schumpeter</td>
+        </tr>
+        <tr>
+          <td>T19</td>
+          <td><code>op_mem_of_binaryClosure_eq</code></td>
+          <td>Fixed point implies internal compositional closure</td>
+          <td>Schumpeter</td>
+        </tr>
+        <tr>
+          <td>T20</td>
+          <td><code>binaryClosure_eq_iff_closed</code></td>
+          <td>Fixed point iff closed under \(\circ\)</td>
+          <td>Arrow</td>
+        </tr>
+        <tr>
+          <td>T21</td>
+          <td><code>union_binaryClosure_subset</code></td>
+          <td>\(\operatorname{binaryClosure}(s \cup t) \supseteq \operatorname{binaryClosure}(s) \cup \operatorname{binaryClosure}(t)\)</td>
+          <td>Arrow / Jones</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ PROOF NOTES -->
+  <section id="proof-notes">
+    <h2>Proof Technique Notes</h2>
+
+    <h3>The Role of <code>mem_binaryClosure</code></h3>
+    <p>
+      The single most important lemma in the file is <code>mem_binaryClosure</code> (T1). Nearly
+      every subsequent proof proceeds by rewriting the membership condition and then performing
+      a case split on the two disjuncts. The left disjunct (\(x \in s\)) is handled by the
+      monotonicity of the surrounding operator; the right disjunct (\(\exists a,b \in s,\;
+      a \circ b = x\)) is handled by supplying witnesses. This two-branch pattern is so uniform
+      that several proofs reduce to one-liners after unfolding.
+    </p>
+
+    <h3>Induction on \(n\) vs Induction on \(\le\)</h3>
+    <p>
+      Two styles of induction appear in the file. The <code>closureN</code> lemmas (T7, T8) use
+      different induction targets: <code>subset_closureN</code> (T7) inducts on the natural
+      number \(n\), while <code>closureN_mono</code> (T8) inducts on the proof of
+      \(m \le n\). The latter style is more expressive: it allows the base case to handle
+      \(m = n\) (reflexivity) and the step case to chain with <code>closureN_subset_succ</code>.
+      Both proofs are short; the choice is a matter of which induction principle gives the
+      cleaner structure.
+    </p>
+
+    <h3>Cardinality Arguments</h3>
+    <p>
+      The cardinality bound in T9 is the sharpest easily provable upper bound. The key steps
+      are: (1) <code>Finset.card_union_le</code> gives
+      \(\operatorname{card}(A \cup B) \le \operatorname{card}(A) + \operatorname{card}(B)\);
+      (2) <code>Finset.card_image_le</code> gives
+      \(\operatorname{card}(\operatorname{image}\,f\,A) \le \operatorname{card}(A)\); and
+      (3) <code>Finset.card_product</code> gives
+      \(\operatorname{card}(s 	imes s) = \operatorname{card}(s)^2\). Chaining these three
+      produces the bound in one calculation. The bound is not tight: if the composition is
+      idempotent (\(a \circ a = a\) for all \(a\)) then many compositions collapse, and the
+      actual growth may be much smaller. The <code>binaryClosure_singleton_ident</code> (T11)
+      and <code>binaryClosure_empty</code> (T12) theorems exhibit the extreme cases.
+    </p>
+
+    <h3>The Fixed-Point Criterion</h3>
+    <p>
+      Theorem T20 (<code>binaryClosure_eq_iff_closed</code>) is the most structurally
+      significant result in the file because it characterises when recombination
+      <em>adds nothing</em>. The backward direction (&ldquo;if closed then equal&rdquo;)
+      requires <code>Finset.Subset.antisymm</code>: the \(\supseteq\) direction is
+      <code>subset_binaryClosure</code> (T2); the \(\subseteq\) direction requires showing
+      every recombinant element is already in \(s\), which follows from the closure
+      assumption. The forward direction is a direct application of T19. The criterion is
+      the Lean analogue of the algebraic notion of a sub-magma: a set that is closed under
+      the binary operation.
+    </p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ RELATED -->
+  <section id="related">
+    <h2>Related Pages</h2>
+    <ul>
+      <li>
+        <strong>Core theorems:</strong>
+        <a href="../theorems/graded-idea-algebra.html">T9: Graded Idea Algebra</a> &mdash;
+        the graded algebraic structure underlying recombinant growth; provides the
+        <code>IdeaTheoryStructure</code> type class used throughout this extension.
+      </li>
+      <li>
+        <strong>Lean extension:</strong>
+        <a href="emergence-levels.html">Emergence Levels</a> &mdash;
+        hierarchical stratification of idea pools by compositional depth; the level function
+        interacts with <code>closureN</code> via a depth-tracking variant.
+      </li>
+      <li>
+        <strong>Lean extension:</strong>
+        <a href="diffusion.html">Diffusion</a> &mdash;
+        spread of ideas through networks; the <code>rogers_monotone</code> lemma there
+        parallels <code>closureN_mono</code> here.
+      </li>
+      <li>
+        <strong>GitHub source:</strong>
+        <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/RecombinantGrowth.lean"
+           target="_blank">
+          <code>IdeaTheory/Extensions/RecombinantGrowth.lean</code>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

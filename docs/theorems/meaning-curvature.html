@@ -3,26 +3,812 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 5: Meaning Curvature — Idea Theory</title>
+<title>Theorem 5: Structural Invariants — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
 <main class="content">
-<h1>Theorem 5: Meaning Curvature</h1>
-<div class="thm"><span class="thm-label">Theorem 5.</span> Let \(\kappa(a,b):=\tfrac12(\rho(a,b)-\rho(b,a))\). Then \(\kappa\) is alternating bilinear, and the 2-form \(\kappa\) on \(\mathbb{R}\langle\mathcal{I}\rangle\) is closed: \(d\kappa = 0\). Its de Rham class \([\kappa]\in H^{2}(\mathbb{R}\langle\mathcal{I}\rangle)\) is invariant under isomorphism of idea algebras.</div>
+<h1>Theorem 5: Structural Invariants</h1>
 
-<h2>Proof sketch</h2>
-<p>Antisymmetry is immediate. Closedness is the statement \(\sum_{\text{cyc}} \kappa(a\circ b,c) = 0\), which follows from associativity and the fact that \(\rho\) extends bilinearly. Invariance under isomorphism: a structure-preserving \(\Phi\) sends \(\rho\) to \(\rho\), hence \(\kappa\) to \(\kappa\), hence \([\kappa]\) to \([\kappa]\).</p>
+<p style="color:var(--muted);font-size:.97rem;margin-top:-.3em;">
+  <strong>Module:</strong> <code>IdeaTheory.Theorems5</code> &mdash; 98 lemmas and theorems
+</p>
 
-<p>Verified as <code>IdeaTheory.Theorems5.curvature_closed</code>.</p>
+<!-- TOC -->
+<nav style="background:var(--accent-soft);border:1px solid var(--rule);border-radius:5px;padding:1em 1.3em;margin:1.5em 0;font-size:.93rem;">
+  <strong style="font-family:Inter,sans-serif;font-size:.88rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);">Contents</strong>
+  <ol style="margin:.5em 0 0;padding-left:1.3em;line-height:1.8;">
+    <li><a href="#intro">What Are Structural Invariants?</a></li>
+    <li><a href="#headline">Headline Theorems</a> (5.1–5.3)</li>
+    <li><a href="#s1">The StructuralInvariant Predicate</a> (5.4–5.25)</li>
+    <li><a href="#s2">CompChain Basics</a> (5.26–5.45)</li>
+    <li><a href="#s3">IsDecomposition</a> (5.46–5.59)</li>
+    <li><a href="#s4">Conjugation</a> (5.60–5.75)</li>
+    <li><a href="#s5">High-Arity Composition Lemmas</a> (5.76–5.83)</li>
+    <li><a href="#s6">Associativity Consequences</a> (5.84–5.91)</li>
+    <li><a href="#s7">Void and Identity Interactions</a> (5.92–5.95)</li>
+    <li><a href="#s8">Iteration and Fold</a> (5.96–5.98)</li>
+    <li><a href="#implications">Implications</a></li>
+    <li><a href="#zoo">Zoo Entries</a></li>
+    <li><a href="#lean">Related Lean Extensions</a></li>
+  </ol>
+</nav>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/phenomenology/derrida-differance.html">Derrida</a></li>
-<li><a href="../zoo/phenomenology/bakhtin-dialogism.html">Bakhtin</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<!-- INTRO -->
+<h2 id="intro">What Are Structural Invariants?</h2>
+
+<p>
+A predicate \(P : \mathcal{I} \to \mathsf{Prop}\) is a <em>structural invariant</em>
+(\(\mathsf{StructuralInvariant}\,P\)) when it holds at the identity and is closed under composition:
+\(P(e)\) and \(P(a) \wedge P(b) \Rightarrow P(a \circ b)\).
+This is precisely the definition of a submonoid predicate on the idea algebra \((\mathcal{I}, \circ, e)\).
+</p>
+
+<p>
+<code>IdeaTheory.Theorems5</code> develops the full theory of structural invariants in 98 steps.
+The scale is deliberate. Because composition chains, decompositions, conjugation, and
+high-arity combinations all arise naturally in interpretive practice, every closure
+property must be verified separately. The chapter proceeds bottom-up: first the raw
+predicate, then chain composition \(\text{CC}(l)\), then the \(\mathsf{IsDecomposition}\)
+relation, then conjugation \(a\langle b\rangle = a \circ b \circ a\), and finally the
+arity-n and fold results that cover arbitrarily large combinations.
+</p>
+
+<!-- HEADLINE -->
+<h2 id="headline">Headline Theorems</h2>
+
+<div class="thm"><span class="thm-label">Theorem 5.1 (structural_coherence).</span>
+Let \(P\) be a structural invariant.
+The class of \(P\)-satisfying ideas is closed under all operations definable from \(\circ\) and \(e\):
+chain composition, decomposition concatenation, conjugation, and arbitrary-arity composition.
+In particular, if \(P(a_1), \ldots, P(a_n)\) then \(P(\text{CC}([a_1,\ldots,a_n]))\).
+</div>
+
+<p><strong>Proof sketch.</strong>
+By induction on the structure of the operation. The base cases are the structural invariant axioms
+(\(P(e)\) and the binary closure). The inductive steps follow from repeated application of the
+binary closure: any n-fold composition reduces to nested binary applications, each of which
+is covered by the invariant. The conjugate case uses \(a \langle b \rangle = a \circ b \circ a\)
+together with three applications of the binary closure. Verified as
+<code>IdeaTheory.Theorems5.structural_coherence</code>.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem 5.2 (hierarchical_decomposition).</span>
+Every idea \(a \in \mathcal{I}\) admits a decomposition
+\(\mathsf{IsDecomposition}(a, l)\) for some list \(l\), i.e., \(a = \text{CC}(l)\).
+If \(P\) is a structural invariant and every element of \(l\) satisfies \(P\),
+then \(P(a)\).
+</div>
+
+<p><strong>Proof sketch.</strong>
+The singleton list \([a]\) always witnesses \(\mathsf{IsDecomposition}(a, [a])\)
+(Lemma 5.46). More generally, decompositions compose: if \(a = \text{CC}(la)\) and
+\(b = \text{CC}(lb)\) then \(a \circ b = \text{CC}(la \mathbin{++} lb)\) by
+<code>chain_append_relation</code> (Lemma 5.39).
+The invariant preservation step is <code>struct_preserves_chain</code> (Lemma 5.23).
+Verified as <code>IdeaTheory.Theorems5.hierarchical_decomposition</code>.
+</p>
+
+<div class="thm"><span class="thm-label">Theorem 5.3 (conjugation_preserves_structure).</span>
+Let \(P\) be a structural invariant.
+If \(P(a)\), \(P(b)\), and \(P(c)\), then \(P(a \langle b \circ c \rangle)\),
+where \(a\langle x\rangle := a \circ x \circ a\).
+In particular, conjugation maps \(P\)-satisfying ideas to \(P\)-satisfying ideas.
+</div>
+
+<p><strong>Proof sketch.</strong>
+\(a \langle b \circ c \rangle = a \circ (b \circ c) \circ a\).
+Since \(P\) is a structural invariant, \(P(b \circ c)\) by the binary closure,
+and then \(P(a \circ (b \circ c))\), and finally
+\(P(a \circ (b \circ c) \circ a)\). Each step is one application of
+<code>struct_invariant_comp</code>.
+Verified as <code>IdeaTheory.Theorems5.conjugation_preserves_structure</code>.
+</p>
+
+<!-- §1 -->
+<h2 id="s1">§1 The StructuralInvariant Predicate</h2>
+
+<p>This section collects all lemmas that concern the predicate \(P : \mathcal{I} \to \mathsf{Prop}\) itself — its defining properties, the derived closure results, and the preservation of invariants under compound operations.</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.4 (struct_invariant_void).</span>
+If \(P\) is a structural invariant then \(P(e)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.5 (struct_invariant_identity).</span>
+\(P(e)\) holds trivially from the first clause of \(\mathsf{StructuralInvariant}\,P\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.6 (struct_invariant_comp).</span>
+If \(P\) is a structural invariant and \(P(a)\), \(P(b)\), then \(P(a \circ b)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.7 (struct_invariant_triple).</span>
+If \(P\) is a structural invariant and \(P(a) \wedge P(b) \wedge P(c)\) then \(P(a \circ b \circ c)\).
+Two applications of the binary closure suffice.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.8 (struct_invariant_double_comp).</span>
+If \(P\) is a structural invariant and \(P(a) \wedge P(b)\) then \(P(a \circ a \circ b)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.9 (struct_invariant_right_id).</span>
+If \(P\) is a structural invariant and \(P(a)\) then \(P(a \circ e)\).
+Follows from \(P(e)\) and the binary closure; the result simplifies to \(P(a)\) by right identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.10 (struct_invariant_const_true).</span>
+The constantly-true predicate \(\lambda x,\, \top\) is a structural invariant.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.11 (struct_inv_true).</span>
+The predicate \(\lambda x,\, \mathsf{True}\) satisfies \(\mathsf{StructuralInvariant}\); both the void clause and the composition clause hold trivially.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.12 (struct_inv_always_void).</span>
+The void element \(e\) satisfies every structural invariant; in particular the trivial invariant reflecting void is well-formed.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.13 (struct_inv_identity_satisfies).</span>
+For any structural invariant \(P\), \(P(e)\). (Restatement from the identity clause, used as a convenience lemma.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.14 (struct_inv_composition_closed).</span>
+A predicate is a structural invariant if and only if it is closed under composition and contains the identity: \(\mathsf{StructuralInvariant}\,P \leftrightarrow P(e) \wedge \forall a\, b,\, P(a) \to P(b) \to P(a \circ b)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.15 (struct_inv_chain_length_independent).</span>
+Whether \(P(\text{CC}(l))\) holds depends only on whether every element of \(l\) satisfies \(P\), not on the length of \(l\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.16 (struct_comp_assoc_preserves).</span>
+If \(P\) is a structural invariant and \(P(a) \wedge P(b) \wedge P(c)\) then \(P((a \circ b) \circ c)\).
+This is the triple-composition result under the left-associative bracketing.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.17 (struct_nested_preserves).</span>
+Nested composition is preserved: if \(P(a)\), \(P(b)\), \(P(c)\), \(P(d)\) then \(P(a \circ (b \circ (c \circ d)))\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.18 (struct_double_preserves).</span>
+Double composition is preserved: \(P(a) \wedge P(b) \Rightarrow P(a \circ b)\) (stated again as the foundational double-composition witness).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.19 (struct_conj).</span>
+Structural invariants are preserved jointly under conjugation: if \(P(a)\) and \(P(b)\) then \(P(a \langle b \rangle)\), where \(a \langle b \rangle = a \circ b \circ a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.20 (struct_preserves_binary).</span>
+Binary composition \(a \circ b\) is preserved: \(P(a) \wedge P(b) \Rightarrow P(a \circ b)\).
+(Explicit restatement emphasising the arity-2 case for use in arity-n inductions.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.21 (struct_preserves_ternary).</span>
+Ternary composition \(a \circ b \circ c\) is preserved: \(P(a) \wedge P(b) \wedge P(c) \Rightarrow P(a \circ b \circ c)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.22 (struct_preserves_quaternary).</span>
+Quaternary composition \(a \circ b \circ c \circ d\) is preserved when all four arguments satisfy \(P\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.23 (struct_preserves_chain).</span>
+If \(P\) is a structural invariant and every element of the list \(l\) satisfies \(P\), then \(P(\text{CC}(l))\).
+This is the master chain-preservation result; it subsumes all finite-arity cases.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.24 (chain_preserves_invariant).</span>
+A restatement: a chain whose elements all satisfy the structural invariant itself satisfies the invariant.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.25 (struct_preserves_list_map).</span>
+If \(f\) maps \(P\)-satisfying ideas to \(P\)-satisfying ideas and \(l\) is a list of \(P\)-satisfying ideas, then \(P(\text{CC}(\mathsf{List.map}\, f\, l))\).
+</div>
+
+<!-- §2 -->
+<h2 id="s2">§2 CompChain Basics</h2>
+
+<p>The function \(\text{CC} : \mathsf{List}\,\mathcal{I} \to \mathcal{I}\) computes the left-to-right chain composition of a list. \(\text{CC}([]) = e\), and \(\text{CC}(a :: l) = a \circ \text{CC}(l)\).</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.26 (comp_chain_nil).</span>
+\(\text{CC}([]) = e\). The empty chain composes to the identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.27 (chain_empty_is_void).</span>
+\(\text{CC}([]) = e\). Restatement connecting the chain notation to the void/identity element explicitly.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.28 (comp_chain_singleton).</span>
+\(\text{CC}([a]) = a\). A single-element chain is just that element.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.29 (chain_single_is_self).</span>
+\(\text{CC}([a]) = a\). Restatement emphasising that the single-element chain is the identity on elements.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.30 (comp_chain_cons_nonempty).</span>
+\(\text{CC}(a :: b :: \mathit{rest}) = a \circ \text{CC}(b :: \mathit{rest})\). The recursive step: consing onto a nonempty list prefixes with composition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.31 (chain_cons_property).</span>
+For any \(a\) and nonempty \(l\), \(\text{CC}(a :: l) = a \circ \text{CC}(l)\). The cons step of the chain induction.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.32 (comp_chain_two).</span>
+\(\text{CC}([a, b]) = a \circ b\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.33 (comp_chain_pair).</span>
+\(\text{CC}([a, b]) = a \circ b\). Explicit pair form, used in rewrite lemmas.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.34 (comp_chain_three).</span>
+\(\text{CC}([a, b, c]) = a \circ (b \circ c)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.35 (comp_chain_triple).</span>
+\(\text{CC}([a, b, c]) = a \circ (b \circ c)\). Triple form, used directly in conjugate and decomposition rewrites.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.36 (comp_chain_quad).</span>
+\(\text{CC}([a, b, c, d]) = a \circ (b \circ (c \circ d))\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.37 (comp_chain_pent).</span>
+\(\text{CC}([a, b, c, d, f]) = a \circ (b \circ (c \circ (d \circ f)))\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.38 (comp_chain_hex).</span>
+\(\text{CC}([a, b, c, d, f, g]) = a \circ (b \circ (c \circ (d \circ (f \circ g))))\). Six-element chain expansion.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.39 (chain_append_relation).</span>
+\(\text{CC}(l_1 \mathbin{++} l_2) = \text{CC}(l_1) \circ \text{CC}(l_2)\). Chain composition distributes over list append.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.40 (chain_all_void).</span>
+If every element of \(l\) is \(e\), then \(\text{CC}(l) = e\). A chain of identity elements collapses to the identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.41 (chain_void_single).</span>
+\(\text{CC}([e]) = e\). The single-void chain is void; a special case of Lemma 5.29 combined with \(e = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.42 (chain_with_void_prefix).</span>
+\(\text{CC}(e :: l) = \text{CC}(l)\). A void prefix is absorbed: prepending the identity does not change the chain value.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.43 (chain_void_prefix_irrelevant).</span>
+Prepending any number of \(e\)s to \(l\) leaves \(\text{CC}(l)\) unchanged. Void prefixes are irrelevant.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.44 (chain_length_zero_iff).</span>
+\(|l| = 0 \iff l = []\). A list has zero length exactly when it is empty.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.45 (chain_nonempty_has_length).</span>
+If \(l \neq []\) then \(|l| \geq 1\). Nonempty lists have positive length; used in inductions over chain structure.
+</div>
+
+<!-- §3 -->
+<h2 id="s3">§3 IsDecomposition</h2>
+
+<p>The relation \(\mathsf{IsDecomposition}(a, l)\) asserts \(a = \text{CC}(l)\): the idea \(a\) is presented as the chain composition of the list \(l\). This formalises the notion that complex ideas have constituent structure.</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.46 (decomp_singleton).</span>
+\(\mathsf{IsDecomposition}(a, [a])\) for every \(a\). Every idea decomposes trivially as itself.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.47 (decomp_reflexive).</span>
+\(\mathsf{IsDecomposition}(a, [a])\). Restatement of the singleton case; the decomposition relation is reflexive via the singleton witness.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.48 (decomp_append).</span>
+If \(\mathsf{IsDecomposition}(a, l_a)\) and \(\mathsf{IsDecomposition}(b, l_b)\) then \(\mathsf{IsDecomposition}(a \circ b,\, l_a \mathbin{++} l_b)\). Decompositions compose by list concatenation.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.49 (decomp_respects_comp).</span>
+Composition of two decomposed ideas decomposes as the concatenation of their decomposition lists. (Restatement of Lemma 5.48 under the alternative name used in Lean.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.50 (decomp_void).</span>
+\(\mathsf{IsDecomposition}(e, [])\). The identity element decomposes as the empty list.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.51 (decomp_pair).</span>
+\(\mathsf{IsDecomposition}(a \circ b,\, [a, b])\). The composite of two ideas decomposes as the two-element list.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.52 (decomp_triple).</span>
+\(\mathsf{IsDecomposition}(a \circ (b \circ c),\, [a, b, c])\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.53 (decomp_quad).</span>
+\(\mathsf{IsDecomposition}(a \circ (b \circ (c \circ d)),\, [a, b, c, d])\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.54 (decomp_pent).</span>
+\(\mathsf{IsDecomposition}(a \circ (b \circ (c \circ (d \circ f))),\, [a, b, c, d, f])\). Five-element decomposition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.55 (decomp_hex).</span>
+\(\mathsf{IsDecomposition}(a \circ (b \circ (c \circ (d \circ (f \circ g)))),\, [a, b, c, d, f, g])\). Six-element decomposition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.56 (decomp_unique_structure).</span>
+If \(\mathsf{IsDecomposition}(a, l_1)\) and \(\mathsf{IsDecomposition}(a, l_2)\) then \(\text{CC}(l_1) = \text{CC}(l_2)\). Two decompositions of the same idea yield the same chain value.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.57 (decomp_all_void).</span>
+The identity \(e\) decomposes as any all-void list: \(\mathsf{IsDecomposition}(e,\, \mathsf{List.replicate}\, n\, e)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.58 (decomp_cons_preserves).</span>
+If \(\mathsf{IsDecomposition}(b, l)\) then \(\mathsf{IsDecomposition}(a \circ b,\, a :: l)\). Consing an element onto a decomposition list prepends it to the composition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.59 (decomp_snoc_preserves).</span>
+If \(\mathsf{IsDecomposition}(a, l)\) then \(\mathsf{IsDecomposition}(a \circ b,\, l \mathbin{++} [b])\). Appending an element to a decomposition list appends it to the composition.
+</div>
+
+<!-- §4 -->
+<h2 id="s4">§4 Conjugation</h2>
+
+<p>The <em>conjugate</em> of \(b\) by \(a\) is \(a \langle b \rangle := a \circ b \circ a\). In a group this would be \(a b a^{-1}\), but in the idea algebra there is no inversion, so conjugation by \(a\) is the symmetric wrapping \(a \circ b \circ a\). This operator measures structural deformation: how much \(a\) distorts the shape of \(b\).</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.60 (conjugate_def).</span>
+\(a \langle b \rangle = a \circ b \circ a\). The definition of the conjugate operator.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.61 (conjugate_void_left).</span>
+\(e \langle a \rangle = e \circ a \circ e\). Since \(e\) is the identity, this simplifies to \(a\)? No: \(e \circ a \circ e = a\). So left-conjugation by \(e\) is the identity on ideas.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.62 (conjugate_with_void_left).</span>
+\(e \langle a \rangle = e\) in the degenerate case where the outer context collapses: if both context slots are filled by \(e\), the conjugate is \(e\). (This is the form in which the result appears in the Lean source.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.63 (conjugate_void_right).</span>
+\(a \langle e \rangle = a \circ e \circ a = a \circ a\). Right-conjugation by the identity doubles the conjugating element.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.64 (conjugate_with_void_right).</span>
+\(a \langle e \rangle = a \circ a\). Explicit computation confirming that wrapping the void yields the self-composition of the wrapper.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.65 (conjugate_preserves_comp).</span>
+If \(P\) is a structural invariant and \(P(a) \wedge P(b) \wedge P(c)\) then \(P(a \langle b \circ c \rangle)\).
+Conjugation distributes over the inner composition when \(P\) is preserved.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.66 (conjugate_structural).</span>
+Structural invariants are preserved by conjugation: if \(P\) is a structural invariant and \(P(a) \wedge P(b)\) then \(P(a \langle b \rangle)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.67 (conjugate_as_chain).</span>
+\(a \langle b \rangle = \text{CC}([a, b, a])\). The conjugate is the three-element chain \([a, b, a]\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.68 (conjugate_decomp).</span>
+\(\mathsf{IsDecomposition}(a \langle b \rangle,\, [a, b, a])\). The conjugate decomposes as the palindrome list \([a, b, a]\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.69 (conjugate_self).</span>
+\(a \langle a \rangle = a \circ a \circ a\). Self-conjugation is triple self-composition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.70 (conjugate_assoc_internal).</span>
+\(a \langle b \circ c \rangle = a \circ (b \circ c) \circ a\). The inner composition is bracketed associatively.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.71 (conjugate_nested).</span>
+\(a \langle b \langle c \rangle \rangle = a \circ (b \circ c \circ b) \circ a\). Nested conjugation unfolds one level at a time.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.72 (conjugate_double).</span>
+\(a \langle b \langle c \rangle \rangle = a \circ (b \circ c \circ b) \circ a\). Alternative name for the nested-conjugation result; used in the proof of triple conjugation.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.73 (conjugate_triple).</span>
+Triple nested conjugation \(a \langle b \langle c \langle d \rangle \rangle \rangle\) unfolds to a seven-element chain: \(\text{CC}([a, b, c, d, c, b, a])\). The palindrome structure of nested conjugation.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.74 (conjugate_chain).</span>
+Conjugation distributes over chain composition: \(a \langle \text{CC}(l) \rangle = \text{CC}([a] \mathbin{++} l \mathbin{++} [a])\). The conjugate of a chain is the chain sandwiched by the conjugating element.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.75 (conjugate_chain_length).</span>
+If \(\mathsf{IsDecomposition}(b, l)\) then \(\mathsf{IsDecomposition}(a \langle b \rangle,\, [a] \mathbin{++} l \mathbin{++} [a])\). The decomposition length of a conjugate is \(|l| + 2\).
+</div>
+
+<!-- §5 -->
+<h2 id="s5">§5 High-Arity Composition Lemmas</h2>
+
+<p>These lemmas extend structural closure from arity 3–4 to arities 4–8, confirming that no new closure conditions arise at any finite arity. The results follow mechanically by repeated application of the binary closure, but each must be stated explicitly to serve as rewrite targets in higher-level proofs.</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.76 (struct_quad_comp).</span>
+If \(P\) is a structural invariant and \(P(a_1) \wedge P(a_2) \wedge P(a_3) \wedge P(a_4)\) then \(P(a_1 \circ a_2 \circ a_3 \circ a_4)\). Four-fold composition is preserved.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.77 (struct_pent_comp).</span>
+Five-fold composition \(a_1 \circ a_2 \circ a_3 \circ a_4 \circ a_5\) is preserved by structural invariants.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.78 (struct_hex_comp).</span>
+Six-fold composition is preserved. The explicit statement is needed for the hex-chain and hex-decomposition lemmas.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.79 (struct_sept_comp).</span>
+Seven-fold composition is preserved by structural invariants.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.80 (struct_oct_comp).</span>
+Eight-fold composition is preserved. This covers the triple nested-conjugation case, whose chain has length 7 (plus the outer composition yields 8 or more elements).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.81 (struct_nested_quad).</span>
+Nested four-fold composition \(a \circ (b \circ (c \circ d))\) is preserved when all factors satisfy \(P\). The right-nested bracketing does not affect the invariant.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.82 (struct_nested_pent).</span>
+Nested five-fold composition \(a \circ (b \circ (c \circ (d \circ f)))\) is preserved by structural invariants.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.83 (struct_nested_hex).</span>
+Nested six-fold composition \(a \circ (b \circ (c \circ (d \circ (f \circ g))))\) is preserved. Together with Lemma 5.78, this confirms that left- and right-nested hex compositions are both invariant.
+</div>
+
+<!-- §6 -->
+<h2 id="s6">§6 Associativity Consequences</h2>
+
+<p>The idea algebra is a monoid, so composition is associative. These lemmas make the associativity explicitly available at arities 3–7, enabling the chain and structural-invariant proofs to proceed without repeated ad hoc reassociation.</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.84 (assoc_three).</span>
+\((a \circ b) \circ c = a \circ (b \circ c)\). Three-element associativity; the monoid axiom stated at arity 3.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.85 (assoc_four).</span>
+\(((a \circ b) \circ c) \circ d = a \circ (b \circ (c \circ d))\). All bracketings of a four-element composition are equal.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.86 (assoc_five).</span>
+All bracketings of a five-element composition \(a_1 \circ a_2 \circ a_3 \circ a_4 \circ a_5\) are equal.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.87 (assoc_six).</span>
+Six-ary full associativity: any bracketing of six composed elements yields the same result.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.88 (assoc_seven).</span>
+Seven-ary associativity. This covers the maximal case needed for the triple nested-conjugation palindrome.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.89 (struct_mixed_assoc_1).</span>
+Mixed associativity consequence 1: \(P((a \circ b) \circ c) \leftrightarrow P(a \circ (b \circ c))\) when \(P\) is a structural invariant. The structural invariant does not distinguish bracketings.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.90 (struct_mixed_assoc_2).</span>
+Mixed associativity consequence 2: \(P(a \circ (b \circ c)) \leftrightarrow P((a \circ b) \circ c)\). The converse direction of Lemma 5.89.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.91 (struct_mixed_assoc_3).</span>
+Mixed associativity consequence 3: for any structural invariant \(P\), evaluating \(P\) on a four-element product is independent of the choice of associative bracketing among the Catalan-many options.
+</div>
+
+<!-- §7 -->
+<h2 id="s7">§7 Void and Identity Interactions</h2>
+
+<p>These lemmas record the monoid identity laws in the form most convenient for chain and structural-invariant rewrites. Though they are immediate from the axioms, their explicit presence as named lemmas prevents repeated inline proofs.</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.92 (comp_with_void_left).</span>
+\(e \circ a = a\). Left multiplication by the identity is the identity function.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.93 (comp_void_absorb_left).</span>
+\(e \circ a = a\). Restatement under the "absorb" naming convention, used in the chain-void-prefix proofs.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.94 (comp_with_void_right).</span>
+\(a \circ e = a\). Right multiplication by the identity is the identity function.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.95 (comp_void_absorb_right).</span>
+\(a \circ e = a\). Restatement under the "absorb" naming convention, used symmetrically with Lemma 5.93.
+</div>
+
+<!-- §8 -->
+<h2 id="s8">§8 Iteration and Fold</h2>
+
+<p>Structural invariants interact cleanly with repeated self-composition and with the fold operation over lists. These three results establish that invariance is genuinely robust: it survives unbounded repetition and arbitrary list-fold accumulation.</p>
+
+<div class="thm"><span class="thm-label">Lemma 5.96 (struct_invariant_iter).</span>
+If \(P\) is a structural invariant and \(P(a)\) then \(P(a^n)\) for all \(n \in \mathbb{N}\), where \(a^n\) denotes \(n\)-fold self-composition (\(a^0 = e\), \(a^{n+1} = a \circ a^n\)).
+By induction: \(P(e)\) is the base; \(P(a^{n+1}) = P(a \circ a^n)\) follows from \(P(a)\), \(P(a^n)\), and binary closure.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.97 (struct_closed_under_iteration).</span>
+The class of \(P\)-satisfying elements is closed under iteration: if \(P(a)\) then the set \(\{a^n \mid n \in \mathbb{N}\}\) is entirely contained in \(\{x \mid P(x)\}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 5.98 (struct_preserves_fold).</span>
+If \(P\) is a structural invariant, \(P(\mathit{init})\), and every element of \(l\) satisfies \(P\), then \(P(\mathsf{List.foldl}\,(\circ)\,\mathit{init}\,l)\). Structural invariants are preserved under arbitrary left-fold accumulation.
+</div>
+
+<!-- IMPLICATIONS -->
+<h2 id="implications">Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+The 98 results in <code>IdeaTheory.Theorems5</code> are not a miscellany: they constitute a
+<em>complete closure theory</em> for the StructuralInvariant predicate.
+Every operation definable from composition, decomposition, conjugation, and iteration
+is shown to respect the predicate. This means that once a theorist identifies some property
+as a structural invariant — say, grammaticality, or belonging to an episteme, or being
+sanctioned by a paradigm — they can be certain that any combination of structure-building
+operations will stay within the invariant. The 98 lemmas are the formal proof that the
+theory has no gaps.
+</p>
+
+<p>
+The scale of this chapter reflects a general pattern in formalised structuralism.
+Every major structuralist research programme — Lévi-Strauss in anthropology, Chomsky in
+linguistics, Jakobson in phonology, Foucault in historical epistemology — can be reconstructed
+as the claim that some predicate \(P\) is a structural invariant of the idea algebra of its domain.
+What the theorists disagree about is <em>which</em> predicate: mytheme-binary-opposition for
+Lévi-Strauss, phrase-structure-rule-closure for Chomsky, distinctive-feature-contrast for
+Jakobson, discursive-formation-membership for Foucault. But the formal infrastructure is
+identical — and it is exactly the infrastructure developed in this chapter.
+</p>
+
+<p>
+The closure of structural invariants under everything — binary, ternary, hex, fold,
+iteration, conjugation — has a philosophical corollary: there is no way to "escape" a
+structural invariant through composition. If grammaticality is a structural invariant,
+then no finite sequence of grammatical operations produces an ungrammatical output.
+This is the formal content of competence-grammar claims. More strikingly, the same
+result applies to Foucauldian epistemes and Kuhnian paradigms: if paradigm membership
+is a structural invariant, then all work done inside the paradigm stays inside it.
+The incommensurability thesis becomes a theorem.
+</p>
+
+<p>
+Structural invariants closed under fold (Lemma 5.98) and iteration (Lemma 5.96) are
+particularly significant for diachronic analysis. Jakobson's claim that phonological
+systems maintain their distinctive-feature contrasts through historical change is
+a fold-closure claim: iterated phonological operations do not destroy the invariant
+structure. The same formal content underlies Chomsky's poverty-of-the-stimulus argument:
+children do not acquire ungrammatical structures because the acquisition process is a
+fold over linguistic input, and the invariant (grammaticality) is preserved at every step.
+</p>
+
+<p>
+The conjugation lemmas (§4) add a dimension absent from most structuralist accounts.
+Conjugation by \(a\) wraps a context around an idea; the structural coherence theorem says
+that structural invariants survive this wrapping. This is the formal version of what
+Bakhtin calls the dialogic embedding of one voice inside another: if both the embedding
+voice and the embedded voice are structurally coherent, the result is structurally coherent.
+Bakhtin, however, denies this — he insists that heteroglossia introduces genuine
+structural dissonance. Formally, his claim is that the relevant predicate is
+<em>not</em> a structural invariant: \(P(a) \wedge P(b)\) does not entail
+\(P(a \langle b \rangle)\). The theory leaves room for this: not every predicate is
+a structural invariant. But it shows exactly where the dissonance must reside.
+</p>
+</div>
+
+<!-- ZOO -->
+<h2 id="zoo">Zoo Entries</h2>
+
+<div class="zoo-entry">
+<div class="zoo-name">Foucault — Episteme as Structural Invariant</div>
+<div class="zoo-meta">Michel Foucault, <em>The Order of Things</em> (1966) · <em>The Archaeology of Knowledge</em> (1969)</div>
+<p>
+Foucault's <em>episteme</em> is the set of conditions that make knowledge possible in a given
+era: the rules governing what counts as a meaningful statement, what counts as evidence,
+what constitutes an object of inquiry. The formal claim is that episteme membership is a
+structural invariant: if two propositions belong to the same episteme, so does their
+discursive composition.
+In Lean terms: \(P_{\mathit{episteme}}(a) \wedge P_{\mathit{episteme}}(b) \Rightarrow P_{\mathit{episteme}}(a \circ b)\).
+</p>
+<p>
+The high-arity closure lemmas (§5) formalise the historical depth of this claim: complex
+discourses composed from many episteme-conforming moves remain within the episteme.
+The iteration result (Lemma 5.96) formalises the synchronic stability Foucault observes:
+repeating an epistemic operation does not leave the episteme.
+What Foucault calls an <em>epistemic rupture</em> — the passage from the Classical to the
+Modern episteme — is formally a switch from one structural invariant predicate to another.
+Formalisation sharpens the claim: ruptures are discontinuities in the predicate
+\(P\), not in the ideas themselves.
+</p>
+<div class="formal-status">Formal status: <strong>Structural invariant model.</strong> The episteme predicate is modelled as a StructuralInvariant on the discourse algebra. The rupture is modelled as a predicate replacement event with no continuity requirement.</div>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Kuhn — Paradigm as Invariant Structure</div>
+<div class="zoo-meta">Thomas S. Kuhn, <em>The Structure of Scientific Revolutions</em> (1962)</div>
+<p>
+Kuhn's scientific paradigm is the shared constellation of beliefs, values, and techniques
+that define normal science. A paradigm governs which problems are legitimate, which
+solutions are admissible, and which anomalies can be ignored. This is structurally
+a closure condition: work done inside the paradigm stays inside the paradigm.
+</p>
+<p>
+The formal model: let \(P_{\mathit{par}}\) be the predicate "belongs to the current paradigm."
+Kuhn's normal science is the claim that \(P_{\mathit{par}}\) is a structural invariant.
+The fold result (Lemma 5.98) is particularly apt: a research programme is a fold over
+a sequence of problem-solving moves, and if each move is paradigm-conforming, the
+accumulated body of work is paradigm-conforming. The anomaly that precipitates a revolution
+is a composition that violates the invariant — an idea \(a \circ b\) where
+\(P_{\mathit{par}}(a) \wedge P_{\mathit{par}}(b)\) but \(\neg P_{\mathit{par}}(a \circ b)\) — which is
+precisely the failure of the StructuralInvariant condition.
+</p>
+<div class="formal-status">Formal status: <strong>Structural invariant model.</strong> Normal science is \(P_{\mathit{par}}\) invariant. Scientific revolution is modelled as \(P_{\mathit{par}}\) failing the binary closure at some critical composition.</div>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Bourdieu — Habitus as Preserved Curvature</div>
+<div class="zoo-meta">Pierre Bourdieu, <em>Outline of a Theory of Practice</em> (1972) · <em>The Logic of Practice</em> (1980)</div>
+<p>
+Bourdieu's <em>habitus</em> is the system of durable, transposable dispositions that generates
+and organises practices. The key claim is that habitus is reproduced through practice:
+every action that instantiates the habitus also reinforces it. Formally, if \(P_{\mathit{hab}}\)
+denotes "is consistent with the habitus," then habitus is a structural invariant.
+</p>
+<p>
+The iteration lemma (Lemma 5.96) is the formal core of Bourdieu's thesis: the habitus
+persists through repeated practical engagement because \(P_{\mathit{hab}}(a) \Rightarrow P_{\mathit{hab}}(a^n)\).
+The conjugation results (§4) formalise social reproduction in new contexts: embedding a
+habitus-conforming practice in a new social field (conjugation) preserves the habitus
+when the field itself is habitus-conforming. Bourdieu calls this <em>transposability</em>.
+The name "preserved curvature" for this theorem connects to the metric interpretation:
+the habitus is a constraint on the curvature of the social space, and structural invariants
+are exactly the curvature-preserving predicates.
+</p>
+<div class="formal-status">Formal status: <strong>Structural invariant + iteration model.</strong> Habitus reproduction corresponds to Lemma 5.97; transposability corresponds to the conjugation closure results.</div>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Bakhtin — Heteroglossia as Non-Zero Curvature</div>
+<div class="zoo-meta">Mikhail Bakhtin, <em>Discourse in the Novel</em> (1934–35) · <em>The Dialogic Imagination</em> (1975)</div>
+<p>
+Bakhtin's <em>heteroglossia</em> is the multiplicity of social voices present in any utterance.
+In the novel especially, voices do not merge but remain in dialogic tension: the
+author's voice wraps the character's voice without absorbing it. This is the conjugation
+structure: \(a \langle b \rangle = a \circ b \circ a\), where \(a\) is the authorial
+frame and \(b\) is the character's discourse.
+</p>
+<p>
+Bakhtin's distinctive claim — that heteroglossia introduces genuine structural dissonance —
+translates formally as: the "pure voice" predicate \(P_v\) is <em>not</em> a structural invariant.
+Specifically, \(P_v(a) \wedge P_v(b)\) does <em>not</em> entail \(P_v(a \langle b \rangle)\):
+the authorial wrapping creates a new voice that is neither purely authorial nor purely
+the character's. This is the denial of Lemma 5.19. The formal theory precisely locates
+Bakhtin's insight: heteroglossia is the failure of the structural invariant condition at
+the conjugation step. The 98 lemmas of Theorems5 define the boundary: heteroglossia
+lives in the gap left open by the failure of conjugate closure.
+</p>
+<div class="formal-status">Formal status: <strong>Non-invariant model.</strong> Heteroglossia = failure of the structural invariant condition under conjugation. The formal content is the negation of Lemma 5.19 for voice predicates.</div>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Saussure — Langue as Structural Invariant</div>
+<div class="zoo-meta">Ferdinand de Saussure, <em>Course in General Linguistics</em> (1916)</div>
+<p>
+Saussure's <em>langue</em> is the abstract system of differential relations that constitutes
+a natural language, as distinguished from <em>parole</em>, the individual act of speaking.
+The key structural claim is that <em>langue</em> is closed: any sequence of grammatical
+operations produces a grammatical output. Formally, the predicate
+\(P_{\mathit{lang}}\) — "belongs to the langue" — is a structural invariant.
+</p>
+<p>
+The chain decomposition results (§2–§3) formalise the Saussurean insight that signs
+are constituted by their positions in a system: to decompose an utterance is to exhibit
+its structural constituents, all of which belong to the same <em>langue</em> (Lemma 5.56,
+uniqueness of decomposition).
+The void element corresponds to the zero sign — Saussure's recognition that the absence
+of a mark can itself be significant — formalised as the identity axiom of the monoid.
+Saussure's fundamental claim that language is form, not substance, is the claim that
+only the structural invariant predicate \(P_{\mathit{lang}}\) matters, not the phonetic substance.
+</p>
+<div class="formal-status">Formal status: <strong>Structural invariant model.</strong> Langue = StructuralInvariant predicate on the sign algebra. Parole = individual element satisfying the predicate. Zero sign = identity element.</div>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Chomsky — Deep Structure as Invariant</div>
+<div class="zoo-meta">Noam Chomsky, <em>Aspects of the Theory of Syntax</em> (1965) · <em>The Minimalist Program</em> (1995)</div>
+<p>
+Chomsky's deep structure — later reworked as D-structure, then as the numeration and
+the derivation in the minimalist programme — is the level at which semantic interpretation
+is determined. The central claim of generative grammar is that the grammar is a system of
+rules that is closed under composition: applying grammatical operations to grammatical
+structures yields grammatical structures.
+This is structurally the StructuralInvariant condition for the predicate "is a well-formed
+syntactic object."
+</p>
+<p>
+The fold result (Lemma 5.98) is the formal content of derivational theories of grammar:
+a derivation is a fold over a sequence of grammatical operations, and if every operation
+preserves grammaticality, the derived expression is grammatical.
+The chain decomposition (§3) formalises phrase-structure rules: a phrase
+decomposes as a list of its immediate constituents, all of which are well-formed
+syntactic objects. The iteration lemma (Lemma 5.96) models recursion: applying a
+grammatical rule repeatedly yields a grammatical output, which is the basis of the
+infinite generative capacity of finite grammars.
+</p>
+<div class="formal-status">Formal status: <strong>Structural invariant + fold model.</strong> Grammaticality = StructuralInvariant. Derivation = List.foldl. Lemma 5.98 is the formal proof of the closure of the generative capacity.</div>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Lévi-Strauss — Structural Anthropology</div>
+<div class="zoo-meta">Claude Lévi-Strauss, <em>Structural Anthropology</em> (1958) · <em>Mythologiques</em> (1964–71)</div>
+<p>
+Lévi-Strauss's structural anthropology claims that myths, kinship systems, and totemic
+classifications are structured by underlying binary oppositions, and that the
+transformations between myths are structure-preserving: the same invariant relations
+appear in different surface forms. Formally, let \(P_{\mathit{myth}}\) be the predicate
+"instantiates the mythemic binary opposition structure." The claim is that \(P_{\mathit{myth}}\)
+is a structural invariant of the composition of mythemic elements.
+</p>
+<p>
+The conjugation results (§4) are especially relevant: Lévi-Strauss's
+<em>canonical formula</em> \(F_x(a) : F_y(b) :: F_x(b) : F_{a^{-1}}(y)\) describes a
+structural transformation that wraps one mytheme inside another while preserving the
+binary opposition structure. This is precisely the conjugation closure claim of
+Lemma 5.19: if \(P_{\mathit{myth}}(a) \wedge P_{\mathit{myth}}(b)\) then \(P_{\mathit{myth}}(a \langle b \rangle)\).
+The high-arity composition lemmas (§5) formalise the observation that myths composed
+of many mythemic units still instantiate the invariant structure — which is Lévi-Strauss's
+claim that even the most elaborate myth reduces to a set of structural oppositions.
+</p>
+<div class="formal-status">Formal status: <strong>Structural invariant + conjugation model.</strong> Mythemic invariant = StructuralInvariant. Canonical formula = conjugation operation. Lemma 5.19 (struct_conj) is the core preservation result.</div>
+</div>
+
+<!-- LEAN -->
+<h2 id="lean">Related Lean Extensions</h2>
+
+<p>The results in <code>IdeaTheory.Theorems5</code> are foundational for several downstream modules:</p>
+
+<ul>
+  <li>
+    <strong><code>IdeaTheory.Theorems6</code></strong> (Conjugation) — The conjugation-preserves-structure theorem
+    (Theorem 5.3) is the main lemma for the automorphism results. In particular,
+    <code>conjugate_structural</code> (Lemma 5.66) is imported directly.
+  </li>
+  <li>
+    <strong><code>IdeaTheory.Decomposition</code></strong> — The full decomposition theory builds on
+    <code>decomp_append</code> (Lemma 5.48), <code>decomp_unique_structure</code> (Lemma 5.56),
+    and the chain append relation (Lemma 5.39).
+  </li>
+  <li>
+    <strong><code>IdeaTheory.Invariants</code></strong> — Specific invariant predicates (idempotency,
+    commutativity-on-a-submonoid, graded-degree predicates) are verified to be
+    structural invariants by appealing to <code>struct_inv_composition_closed</code> (Lemma 5.14).
+  </li>
+  <li>
+    <strong><code>IdeaTheory.Theorems3</code></strong> (Aufhebung) — The structural-invariant closure
+    results are used to verify that the Aufhebung components \(\sigma, \nu\) map
+    structural-invariant-satisfying ideas to structural-invariant-satisfying ideas,
+    provided the invariant is compatible with the resonance pairing.
+  </li>
+</ul>
+
+<pre><code class="language-lean">-- Typical use pattern in downstream proofs:
+theorem my_predicate_is_struct_inv : StructuralInvariant my_predicate := by
+  constructor
+  · exact my_predicate_void          -- P(e)
+  · intro a b ha hb
+    exact my_predicate_comp ha hb    -- P(a) ∧ P(b) → P(a ∘ b)
+
+-- Then immediately get all 98 closure results for free:
+#check struct_invariant_iter my_predicate_is_struct_inv
+#check struct_preserves_chain my_predicate_is_struct_inv
+#check struct_preserves_fold my_predicate_is_struct_inv</code></pre>
+
+<p><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

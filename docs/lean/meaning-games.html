@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MeaningGames — Lean Extension | Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a class="active" href="index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="page-content">
+<header class="page-header">
+  <h1>MeaningGames</h1>
+  <p class="subtitle">Lean 4 Extension &mdash; Wittgenstein meets Nash: use-theory of meaning as coordination equilibrium</p>
+  <p><strong>Module:</strong> <code>IdeaTheory.Extensions.MeaningGames</code> &nbsp;&middot;&nbsp;
+     <strong>Theorems:</strong> 25 &nbsp;&middot;&nbsp;
+     <strong>Zoo entries:</strong> 7</p>
+  <p><a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/MeaningGames.lean" target="_blank">View source on GitHub</a></p>
+</header>
+
+<!-- ============================================================ -->
+<section id="overview">
+<h2>Overview</h2>
+<p>
+The <strong>MeaningGames</strong> extension formalizes the intersection of two landmark 20th-century accounts of meaning.
+A <em>meaning game</em> is a coordination game played by \(n\) speakers over an idea monoid \((lpha, \circ, e)\): each speaker holds a <em>use</em> \(\sigma(i) \in lpha\), and their joint practice produces the <strong>effective meaning</strong>
+\[
+  \mathrm{effectiveMeaning}(\sigma) \;=\; \sigma(0) \circ \sigma(1) \circ \cdots \circ \sigma(n{-}1),
+\]
+computed as a left-fold over the monoid operation starting from the identity \(e\).
+A profile \(\sigma\) is a <strong>convention</strong> (\(\mathrm{IsConvention}(G,\sigma)\)) when no speaker benefits from unilateral deviation — the Lewis-Nash equilibrium condition.
+The coordination payoff \(\mathrm{coordPayoff}(n,M)(i,\sigma)\) equals \(1\) when \(\mathrm{effectiveMeaning}(\sigma) \in M\), else \(0\).
+</p>
+<p>
+The module&rsquo;s capstone result, <strong><code>wittgenstein_nash_existence</code></strong>, proves that for any non-empty finite meaning set \(M\) and any \(n \ge 1\), an effective convention \(\sigma\) exists.
+This is the formal bridge between Wittgenstein&rsquo;s use-theory of meaning (<em>PI</em> §43) and Lewis&rsquo;s analysis of conventions (1969) as Nash equilibria of coordination games.
+</p>
+</section>
+
+<!-- ============================================================ -->
+<section id="core-definitions">
+<h2>Core Definitions</h2>
+
+<h3>MeaningGame and effectiveMeaning</h3>
+<pre><code class="language-lean">-- MeaningGame and core definitions
+structure MeaningGame (α : Type u) [IdeaTheoryStructure α] where
+  n : ℕ
+  meaningSet : α → Prop
+  payoff : Fin n → (Fin n → α) → ℝ
+
+def effectiveMeaning {n : ℕ} (σ : Fin n → α) : α :=
+  (List.ofFn σ).foldl op ident
+
+def IsConvention (G : MeaningGame α) (σ : Fin G.n → α) : Prop :=
+  ∀ (i : Fin G.n) (b : α), G.payoff i (update σ i b) ≤ G.payoff i σ
+</code></pre>
+<p>
+The <code>MeaningGame</code> structure packages speaker count \(n\), a meaning set predicate \(M : lpha 	o \mathrm{Prop}\), and a payoff function.
+<code>effectiveMeaning</code> converts the profile \(\sigma : \mathrm{Fin}\,n 	o lpha\) into a list via <code>List.ofFn</code> and left-folds with the monoid operation, starting from the identity \(e\).
+<code>IsConvention</code> is the Nash condition: for every speaker \(i\) and every alternative use \(b\), deviating from \(\sigma\) does not improve \(i\)&rsquo;s payoff.
+</p>
+
+<h3>Coordination payoff and game</h3>
+<pre><code class="language-lean">-- Coordination payoff and coordination game
+noncomputable def coordPayoff (n : ℕ) (M : α → Prop) :
+    Fin n → (Fin n → α) → ℝ :=
+  fun _ σ => by classical exact if M (effectiveMeaning σ) then 1 else 0
+
+noncomputable def coordGame (n : ℕ) (M : α → Prop) : MeaningGame α :=
+  { n := n, meaningSet := M, payoff := coordPayoff n M }
+</code></pre>
+<p>
+The coordination game rewards all speakers equally with payoff \(1\) when the joint meaning lands in \(M\), and \(0\) otherwise.
+The <code>noncomputable</code> annotation arises from the classical if-then-else on a <code>Prop</code>; the <code>classical</code> tactic recovers decidability.
+</p>
+
+<h3>Private language and family resemblance</h3>
+<pre><code class="language-lean">-- Private language and family resemblance
+def FamilyResemblance (F : α → Prop) : Prop :=
+  ∀ a, F a → ∀ b, F b → ∃ c : α, op c c = c ∧ op c a = a ∧ op c b = b
+
+theorem private_no_unique_convention (M : α → Prop) (σ : Fin 1 → α) :
+    IsConvention ({ n := 1, meaningSet := M,
+                   payoff := trivialPayoff 1 } : MeaningGame α) σ
+</code></pre>
+
+<h3>Kripkenstein underdetermination</h3>
+<pre><code class="language-lean">-- Kripkenstein finite underdetermination
+theorem kripkenstein_underdetermination {a b : α} (hab : a ≠ b)
+    (h : List α) :
+    ∃ r₁ r₂ : List α → α, r₁ h = r₂ h ∧ r₁ ≠ r₂
+</code></pre>
+
+<h3>Wittgenstein-Nash bridge</h3>
+<pre><code class="language-lean">-- The Wittgenstein-Nash bridge (capstone theorem)
+theorem wittgenstein_nash_existence {n : ℕ} (hn : 1 ≤ n) {M : α → Prop}
+    {a : α} (ha : M a) :
+    ∃ σ : Fin n → α, IsConvention (coordGame n M) σ
+</code></pre>
+</section>
+
+<!-- ============================================================ -->
+<section id="theorems">
+<h2>Theorem Catalogue</h2>
+
+<h3>§1 &mdash; Effective Meaning Lemmas (L1–L6)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_zero).</span>
+\(\mathrm{effectiveMeaning}(\sigma : \mathrm{Fin}\,0 	o lpha) = e.\)
+With no speakers, joint practice yields the identity &mdash; there is no language without language users.
+<br><small class="proof-sketch">Proof sketch: simp with <code>effectiveMeaning</code> unfolded to <code>List.ofFn 0 = []</code>, so the fold over the empty list is the identity \(e\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_succ).</span>
+\(\mathrm{effectiveMeaning}(\sigma : \mathrm{Fin}(n{+}1) 	o lpha) = igl(\mathrm{List.ofFn}(\lambda i,\, \sigma(i.\mathrm{succ}))igr).\mathrm{foldl}\,(\circ)\,(\sigma\,0).\)
+The effective meaning unfolds recursively: the first speaker&rsquo;s use becomes the initial accumulator, and subsequent speakers compose into it.
+<br><small class="proof-sketch">Proof sketch: Unfold <code>effectiveMeaning</code>; apply <code>List.ofFn_succ</code> to split the head; use <code>id_left</code> to absorb the initial identity fold step.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_one).</span>
+\(\mathrm{effectiveMeaning}(\sigma : \mathrm{Fin}\,1 	o lpha) = \sigma\,0.\)
+In a monologue the effective meaning is the sole speaker&rsquo;s use.
+<br><small class="proof-sketch">Proof sketch: Apply <code>effectiveMeaning_succ</code>; simp — the tail <code>List.ofFn (Fin 0 → α)</code> is empty, so the fold returns the accumulator \(\sigma\,0\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_const_ident).</span>
+\(\mathrm{effectiveMeaning}(\lambda\,\_:\mathrm{Fin}\,n,\; e) = e.\)
+If every speaker plays the identity, joint practice produces the identity.
+<br><small class="proof-sketch">Proof sketch: Unfold <code>effectiveMeaning</code>; apply <code>foldl_op_ident_list</code> — every element of the list is \(e\), so each fold step is \(e \circ e = e\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_const_idemp).</span>
+If \(c \circ c = c\) and \(n \ge 1\), then \(\mathrm{effectiveMeaning}(\lambda\_,\, c) = c.\)
+A constant idempotent profile yields that idempotent as effective meaning.
+<br><small class="proof-sketch">Proof sketch: Apply <code>effectiveMeaning_succ</code>; then <code>foldl_op_const_of_idemp</code> using hypothesis <code>ha : c∘c=c</code> on each tail element.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_loudProfile).</span>
+If \(n \ge 1\), then \(\mathrm{effectiveMeaning}(\mathrm{loudProfile}\,n\,a) = a.\)
+In the loud-speaker profile (speaker \(0\) says \(a\), everyone else says \(e\)), the effective meaning is \(a\).
+<br><small class="proof-sketch">Proof sketch: Apply <code>effectiveMeaning_succ</code>; the tail consists entirely of \(e\), so <code>foldl_op_ident_list</code> returns the initial accumulator \(a\).</small></div>
+
+<h3>§2 &mdash; Coordination Payoff (L7–L9)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (coordPayoff_eq_one_iff).</span>
+\(\mathrm{coordPayoff}(n,M)(i,\sigma) = 1 \;\iff\; M(\mathrm{effectiveMeaning}(\sigma)).\)
+The coordination payoff equals \(1\) exactly when the joint meaning lies in the meaning set.
+<br><small class="proof-sketch">Proof sketch: Classical split; <code>split_ifs</code> on \(M(\mathrm{effectiveMeaning}(\sigma))\); both directions follow immediately from the definition.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (coordPayoff_le_one).</span>
+\(\mathrm{coordPayoff}(n,M)(i,\sigma) \le 1.\)
+Coordination can never yield more than perfect alignment — the Nash-style upper bound on payoffs.
+<br><small class="proof-sketch">Proof sketch: <code>split_ifs</code>; in the true branch <code>le_refl 1</code>; in the false branch <code>norm_num</code> gives \(0 \le 1\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (coordPayoff_nonneg).</span>
+\(0 \le \mathrm{coordPayoff}(n,M)(i,\sigma).\)
+Coordination never hurts — the Lewis no-punishment assumption.
+<br><small class="proof-sketch">Proof sketch: <code>split_ifs</code>; <code>norm_num</code> closes both cases since the payoff is either \(0\) or \(1\).</small></div>
+
+<h3>§3 &mdash; Conventions in the Coordination Game (T1–T4)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (coord_convention_of_meaning).</span>
+If \(M(\mathrm{effectiveMeaning}(\sigma))\), then \(\sigma\) is a convention of \(\mathrm{coordGame}(n,M)\).
+Any profile whose joint meaning already lies in \(M\) is a convention — successful use <em>is</em> the convention.
+<br><small class="proof-sketch">Proof sketch: Show \(\mathrm{coordPayoff} = 1\) for \(\sigma\) via <code>coordPayoff_eq_one_iff</code>; then <code>coordPayoff_le_one</code> bounds every deviation from above by \(1\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (coord_convention_zero).</span>
+The empty profile is vacuously a convention of \(\mathrm{coordGame}(0,M)\).
+<br><small class="proof-sketch">Proof sketch: <code>intro i _</code>; <code>exact i.elim0</code> — there are no speakers to deviate, so the universal quantifier is vacuously satisfied.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (wittgenstein_nash_existence).</span>
+If \(n \ge 1\) and \(M(a)\), then \(\exists\,\sigma : \mathrm{Fin}\,n 	o lpha,\; \mathrm{IsConvention}(\mathrm{coordGame}(n,M),\sigma).\)
+<strong>THE CAPSTONE</strong> — for any non-empty meaning set and any \(n \ge 1\), a Nash equilibrium convention exists. The Wittgenstein-Nash bridge.
+<br><small class="proof-sketch">Proof sketch: Witness \(\mathrm{loudProfile}\,n\,a\); apply <code>coord_convention_of_meaning</code>; rewrite with <code>effectiveMeaning_loudProfile</code> to get \(M(a)\), which is exactly <code>ha</code>.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (exists_convention_one_speaker).</span>
+If \(M(a)\), then \(\exists\,\sigma : \mathrm{Fin}\,1 	o lpha,\; \mathrm{IsConvention}(\mathrm{coordGame}(1,M),\sigma).\)
+A one-speaker meaning game with non-empty meaning set has a convention.
+<br><small class="proof-sketch">Proof sketch: Witness \(\lambda\,\_\Rightarrow a\); apply <code>coord_convention_of_meaning</code>; use <code>effectiveMeaning_one</code> to reduce effective meaning to \(a\), then <code>ha</code>.</small></div>
+
+<h3>§4 &mdash; Refinement and Closure (T5–T8)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (coord_convention_mono).</span>
+If \(M \subseteq N\) and \(\sigma\) is an \(M\)-convention, then \(\sigma\) is an \(N\)-convention.
+Enlarging the meaning set preserves conventions — meaning compatibility is monotone.
+<br><small class="proof-sketch">Proof sketch: Apply <code>coord_convention_of_meaning</code>; use <code>hMN</code> to transport \(M(\mathrm{effectiveMeaning}(\sigma))\) to \(N(\mathrm{effectiveMeaning}(\sigma))\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (coord_convention_union).</span>
+If \(M(\mathrm{effectiveMeaning}(\sigma)) \lor N(\mathrm{effectiveMeaning}(\sigma))\), then \(\sigma\) is a \((M \lor N)\)-convention.
+The union of two meaning sets inherits conventions coordinated under either.
+<br><small class="proof-sketch">Proof sketch: Apply <code>coord_convention_of_meaning</code> with the disjunction directly; the union predicate \((M \lor N)(x)\) is defined as \(M(x) \lor N(x)\).</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (effectiveMeaning_in_meaningSet).</span>
+If \(e \in M\) and \(M\) is closed under \(\circ\), then the effective meaning of any all-meaningful profile lies in \(M\).
+Inferential closure of conceptual content — if all uses are meaningful, the joint practice is meaningful.
+<br><small class="proof-sketch">Proof sketch: <code>foldl_op_in_M</code> with <code>hOp : ∀ x y, M x → M y → M (x∘y)</code> and <code>hId : M e</code>, applied inductively along the list.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (convention_of_constant_payoff).</span>
+If payoffs are profile-independent (i.e., <code>h : G.payoff i σ = G.payoff i (update σ i b)</code> for all \(i,b,\sigma\)), then every profile is a convention.
+The game-theoretic analogue: when payoffs don&rsquo;t depend on play, all profiles are Nash equilibria.
+<br><small class="proof-sketch">Proof sketch: <code>intro i b</code>; <code>le_of_eq</code> using <code>h i σ b</code> — profile-independence means any deviation has the same payoff.</small></div>
+
+<h3>§5 &mdash; Private Language (T9)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (private_no_unique_convention).</span>
+In a one-speaker trivial-payoff game, every profile is a convention.
+The private-language argument: with no coordination signal, any use is vacuously conventional, so meaning cannot be fixed privately.
+<br><small class="proof-sketch">Proof sketch: <code>intro i b</code>; unfold <code>trivialPayoff</code>; <code>le_refl</code> — all payoffs are equal (e.g., \(0\)), so no deviation can strictly improve.</small></div>
+
+<h3>§6 &mdash; Lewis Salience and Focal Points (T10)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (salient_convention_in_meaning).</span>
+If \(a \circ a = a\) and \(M(a)\) and \(n \ge 1\), then \((\lambda\_,\, a)\) is a convention of \(\mathrm{coordGame}(n,M)\).
+Salient (idempotent) uses that lie in the meaning set form self-enforcing conventions — Schelling focal points.
+<br><small class="proof-sketch">Proof sketch: Apply <code>coord_convention_of_meaning</code>; rewrite with <code>effectiveMeaning_const_idemp</code> using salience hypothesis <code>hs : a∘a=a</code> and <code>hn : 1 ≤ n</code>; close with <code>hM</code>.</small></div>
+
+<h3>§7 &mdash; Family Resemblance (T11–T12)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (family_resemblance_idempotent).</span>
+If \(F\) has family resemblance, then \(orall a \in F,\; \exists c,\; c \circ c = c \;\wedge\; c \circ a = a.\)
+Every member of a family-resemblance class has an idempotent &ldquo;common feature&rdquo; that absorbs it.
+<br><small class="proof-sketch">Proof sketch: Apply <code>hF a ha a ha</code>; extract \(c\) from the existential (setting \(b := a\)); return <code>(c, hc.1, hc.2.1)</code>.</small></div>
+
+<div class="thm"><span class="thm-label">Theorem (family_resemblance_convention).</span>
+If \(F\) has family resemblance and \(F(a)\) and \(n \ge 1\), then \(\exists\,\sigma,\; \mathrm{IsConvention}(\mathrm{coordGame}(n,F),\sigma).\)
+Family resemblance is a sufficient condition for linguistic coordination.
+<br><small class="proof-sketch">Proof sketch: Delegates directly to <code>wittgenstein_nash_existence hn ha</code> — no additional structure beyond the non-emptiness of \(F\) at \(a\) is needed.</small></div>
+
+<h3>§8 &mdash; Strict Dominance (T13)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (dominance_unique).</span>
+If \(u\) strictly dominates every alternative for every speaker, then every convention has every speaker playing \(u\).
+Strict dominance implies convention uniqueness — there is exactly one &ldquo;correct&rdquo; use.
+<br><small class="proof-sketch">Proof sketch: <code>by_contra h</code> — assume some speaker \(i\) plays \(b 
+e u\); apply <code>hd i b</code> to get a strict payoff inequality for deviating to \(u\); <code>rw update_eq_self</code> if \(b = u\); combine with the convention inequality via <code>linarith</code>.</small></div>
+
+<h3>§9 &mdash; Kripkenstein (T14)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (kripkenstein_underdetermination).</span>
+For any finite history \(h\) and any \(a 
+e b\), there exist two distinct rules \(r_1 
+e r_2\) that both map \(h\) to the same value:
+\[\exists\, r_1\, r_2 : \mathrm{List}\,lpha 	o lpha,\quad r_1\,h = r_2\,h \;\wedge\; r_1 
+e r_2.\]
+Finite observation can never single out a rule — the rule-following paradox in its sharpest finite form.
+<br><small class="proof-sketch">Proof sketch: Witness \(r_1 = \mathrm{const}\,a\) and \(r_2 = (\lambda l,\; \mathrm{if}\; l = h\; \mathrm{then}\; a\; \mathrm{else}\; b)\). Both agree on \(h\) (output \(a\)); they differ on \(h \mathbin{++} [e]\) by a list-length argument together with <code>hab : a ≠ b</code>.</small></div>
+
+<h3>§10 &mdash; Iterated Meaning Games (T15)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (iterMeaning_monotone).</span>
+\(\mathrm{iterMeaning}(M,k,a) \implies \mathrm{iterMeaning}(M,k{+}1,a).\)
+Cultural drift is monotone — every meaning available at step \(k\) remains available at step \(k{+}1\). Meanings are never erased.
+<br><small class="proof-sketch">Proof sketch: <code>Or.inl</code> carries the inductive step: if \(a\) is reachable at step \(k\) via the inductive hypothesis, it is also reachable at step \(k+1\) by inclusion.</small></div>
+
+<h3>§11 &mdash; Aggregation (T16)</h3>
+
+<div class="thm"><span class="thm-label">Theorem (aggregation_constant_convention).</span>
+If \(n \ge 1\), \(a \circ a = a\), and \(M(a)\), then \(M(\mathrm{effectiveMeaning}(\lambda\_,\, a)).\)
+A unanimous salient convention realizes perfect coordination — the agreed reading of a unanimous convention lies in the meaning set.
+<br><small class="proof-sketch">Proof sketch: Rewrite with <code>effectiveMeaning_const_idemp ha hn</code> to reduce the effective meaning to \(a\); then <code>exact hM</code>.</small></div>
+</section>
+
+<!-- ============================================================ -->
+<section id="zoo">
+<h2>Philosophical Zoo</h2>
+<p>Seven traditions in the philosophy of language, formalized through the lens of MeaningGames.</p>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Wittgenstein I &mdash; Tractarian Meaning</h3>
+<p>
+The early Wittgenstein (<em>Tractatus Logico-Philosophicus</em>, 1921) held that meaning is pictorial: propositions are logical pictures of facts, and meaning is determined by the correspondence between propositional structure and worldly structure.
+On this view, meaning is fully determined by the internal structure of an idea — independent of use.
+The <code>effectiveMeaning_const_ident</code> theorem (L4) implicitly refutes this: a profile of nothing but identities — ideas with no pictorial content — yields the identity, i.e., no meaning.
+Meaning requires non-identity content.
+But the early Wittgenstein would insist that the <em>content</em> of that identity is still determined by its logical form, not its use.
+The contrast with Wittgenstein II is stark: the <em>Tractatus</em> view would predict that <code>effectiveMeaning</code> is determined by the logical form of each \(\sigma(i)\), independently.
+The Idea Theory model makes no such assumption — effective meaning is a joint product of all speakers&rsquo; uses, not a function of individual logical form alone.
+</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Wittgenstein II &mdash; Meaning as Use</h3>
+<p>
+The later Wittgenstein (<em>Philosophical Investigations</em>, 1953) abandoned the picture theory in favor of the use-theory: &ldquo;the meaning of a word is its use in the language&rdquo; (PI §43).
+A word has meaning only within a language game — a form of life.
+The <code>effectiveMeaning</code> function formalizes this exactly: meaning is the \(\circ\)-aggregate of uses, not any intrinsic property of the idea.
+The <code>effectiveMeaning_one</code> theorem (L3) confirms the private-language argument&rsquo;s formal structure: a lone speaker&rsquo;s &ldquo;effective meaning&rdquo; is just their own use — there is no intersubjective grounding.
+But <code>wittgenstein_nash_existence</code> (T3) extends this: when multiple speakers coordinate, a genuine convention emerges.
+Wittgenstein&rsquo;s language games are formalized as coordination games, and his criterion for meaning — successful coordination — is exactly the Lewis condition for convention.
+</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Lewis &mdash; Convention</h3>
+<p>
+David Lewis (<em>Convention: A Philosophical Study</em>, 1969) defined a convention as a Nash equilibrium of a coordination game with the properties that (a) it is common knowledge, (b) any deviation would be self-defeating, and (c) an alternative convention could have served equally well.
+The <code>IsConvention</code> predicate formalizes Lewis&rsquo;s Nash equilibrium condition exactly: no unilateral deviation improves payoff.
+The <code>wittgenstein_nash_existence</code> theorem proves Lewis&rsquo;s existence claim: for any non-empty meaning set, a convention exists.
+The <code>coord_convention_mono</code> theorem (T5) formalizes Lewis&rsquo;s counterfactual condition: if a convention works for meaning set \(M\), it works for any superset \(N\).
+<code>dominance_unique</code> (T13) formalizes the case where Lewis&rsquo;s alternative conventions collapse to one — when a single use strictly dominates all others.
+Lewis&rsquo;s framework is thus a special case of the more general Idea Theory coordination game structure.
+</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Kripkenstein &mdash; Rule-Following Scepticism</h3>
+<p>
+Saul Kripke&rsquo;s interpretation of Wittgenstein (<em>Wittgenstein on Rules and Private Language</em>, 1982) presents the &ldquo;sceptical paradox&rdquo;: no fact about a speaker&rsquo;s past behavior or mental states can determine which rule they are following, since any finite history is compatible with infinitely many rules.
+The <code>kripkenstein_underdetermination</code> theorem (T14) gives the precise mathematical content of this claim: for any finite observation history \(h\), there exist two distinct rules that agree on \(h\) but disagree on extensions.
+The proof constructs the two rules explicitly: the constant rule and the &ldquo;deviant&rdquo; rule that agrees on \(h\) but produces \(b 
+e a\) elsewhere.
+Kripkenstein&rsquo;s paradox is thus a theorem, not merely a philosophical argument.
+But <code>wittgenstein_nash_existence</code> shows that conventions still exist despite underdetermination: we cannot determine <em>which</em> rule a speaker follows, but we can establish <em>that</em> a convention exists.
+</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Schelling &mdash; Focal Points</h3>
+<p>
+Thomas Schelling (<em>The Strategy of Conflict</em>, 1960) argued that among multiple Nash equilibria, agents converge on &ldquo;salient&rdquo; or &ldquo;focal&rdquo; ones — points that stand out by virtue of some contextual prominence rather than payoff structure.
+The <code>salient_convention_in_meaning</code> theorem (T10) formalizes Lewis&rsquo;s interpretation of Schelling: an idempotent idea \(a\) that lies in the meaning set is a self-enforcing focal point — playing it unanimously is a convention.
+The salience condition — <code>Salient a</code> means \(a \circ a = a\) — is the algebraic criterion for a &ldquo;stable&rdquo; use: an idea that is self-reinforcing under composition.
+Schelling&rsquo;s focal points are thus the idempotent elements of the idea monoid that lie in the meaning set.
+The <code>family_resemblance_idempotent</code> theorem (T11) shows that family resemblance classes always contain such focal points — shared idempotent &ldquo;common features&rdquo; that serve as natural coordination points.
+</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Davidson &mdash; Radical Interpretation</h3>
+<p>
+Donald Davidson (<em>Inquiries into Truth and Interpretation</em>, 1984) argued that meaning must be understood through radical interpretation: we attribute meanings to speakers by assuming they are largely rational and mostly true.
+The <code>convention_of_constant_payoff</code> theorem (T8) captures the trivial case of Davidson&rsquo;s principle: when payoffs don&rsquo;t depend on the profile, every use is equally conventional — the linguistic equivalent of Davidson&rsquo;s &ldquo;principle of charity&rdquo; at its most permissive.
+The <code>effectiveMeaning_in_meaningSet</code> theorem (T7) captures the closure condition that Davidson&rsquo;s holism requires: if all uses are meaningful (lie in \(M\)) and \(M\) is closed under composition, the joint meaning stays within \(M\).
+Davidson&rsquo;s &ldquo;holism of the mental&rdquo; — the claim that meaning attributions must be globally coherent — corresponds algebraically to the closure of the meaning set under the composition operation.
+</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Grice &mdash; Meaning and Intention</h3>
+<p>
+Paul Grice (<em>Meaning</em>, 1957; <em>Logic and Conversation</em>, 1975) distinguished natural meaning (smoke means fire) from non-natural meaning (the speaker means something by an utterance) and argued that non-natural meaning involves complex iterated intentions.
+The <code>coord_convention_of_meaning</code> theorem (T1) gives the non-intentional analogue: meaning is not defined by what the speaker intends, but by whether their use achieves coordination.
+A profile is conventional if and only if no speaker benefits by deviating — no reference to intentions.
+The <code>kripkenstein_underdetermination</code> theorem (T14) shows that intentions — even infinite hierarchies of them — cannot determine meaning, because finitely many observed uses are compatible with infinitely many intention-realizing rules.
+Grice&rsquo;s intentional theory of meaning is thus underdetermined in exactly the way Kripkenstein predicts.
+The Idea Theory convention-based account is immune: conventions are determined by Nash equilibria, not by intentions.
+</p>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="implications">
+<h2>Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+The Wittgenstein-Nash bridge theorem (<code>wittgenstein_nash_existence</code>) is not merely a technical result in applied game theory.
+It is the formal proof that the two most influential 20th-century accounts of linguistic meaning — Wittgenstein&rsquo;s use-theory and Lewis&rsquo;s convention theory — are theorems about the same mathematical structure.
+Wittgenstein said meaning is use; Lewis said conventions are Nash equilibria of coordination games.
+The bridge theorem says: if meaning is use (<code>effectiveMeaning</code> is the \(\circ\)-aggregate of uses), then for any non-empty meaning set, a Lewis convention exists.
+Use-theory and convention-theory are not competing accounts but complementary aspects of a single algebraic structure.
+The machine-verified proof leaves no room for doubt about the connection.
+</p>
+</div>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+The Kripkenstein underdetermination theorem (<code>kripkenstein_underdetermination</code>) proves that the rule-following paradox is a genuine theorem, not a philosophical sleight of hand.
+For any finite observation history, two distinct rules always agree on that history.
+This means that no amount of finite behavioral observation can uniquely determine a speaker&rsquo;s rule.
+But the Kripkenstein paradox is usually taken to threaten the very existence of meaning.
+The <code>wittgenstein_nash_existence</code> theorem deflates this threat: even though rules are underdetermined by finite data, conventions still exist.
+Meaning does not require a uniquely determined rule — it requires only a stable coordination pattern.
+The Kripkenstein paradox shows that meaning cannot be reduced to rule-following; the Wittgenstein-Nash bridge shows that meaning is convention, and conventions exist regardless of which rule the speakers are &ldquo;really&rdquo; following.
+</p>
+</div>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+The private-language argument (<code>private_no_unique_convention</code>, T9) is formalized as the observation that in a single-speaker game with trivial payoffs, every profile is vacuously a convention.
+This means that private language is not <em>impossible</em> — it is <em>meaningless</em> in the technical sense: any use is equally conventional when there is no coordination game to be won.
+Wittgenstein&rsquo;s argument is not that a private linguist cannot follow rules, but that there is no fact of the matter about which rule they are following, because there is no intersubjective coordination game to fix a convention.
+The theorem makes this precise: without at least two speakers and a non-trivial payoff structure, &ldquo;convention&rdquo; has no content.
+</p>
+</div>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+The family resemblance theorems (<code>family_resemblance_idempotent</code>, T11; <code>family_resemblance_convention</code>, T12) formalize Wittgenstein&rsquo;s revolutionary insight about concepts (<em>PI</em> §§65-67): natural language concepts are not defined by necessary and sufficient conditions but by overlapping similarities — &ldquo;a complicated network of similarities overlapping and criss-crossing.&rdquo;
+The algebraic formalization is: a family resemblance class \(F\) has the property that any two members share a common idempotent &ldquo;feature&rdquo; \(c\) such that \(c\) absorbs both (\(c \circ a = a\) and \(c \circ b = b\)).
+The <code>family_resemblance_convention</code> theorem shows that this structural condition is sufficient for a convention to exist — family resemblance is not just a description of concepts but a sufficient condition for coordination.
+Wittgenstein&rsquo;s anti-essentialism is thus compatible with Lewis&rsquo;s coordination-theoretic account of conventions.
+</p>
+</div>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+The aggregation and monotonicity theorems reveal the temporal dimension of meaning.
+<code>iterMeaning_monotone</code> (T15) shows that cultural transmission is non-erasing: meanings available at step \(k\) remain available at step \(k{+}1\).
+This is the formal content of the &ldquo;language-as-tradition&rdquo; view: a linguistic community cannot simply erase meanings that have been established.
+The <code>aggregation_constant_convention</code> theorem (T16) shows that when all speakers agree on a salient use and it lies in the meaning set, perfect coordination is achieved.
+These two results together describe the lifecycle of a convention: it is established through coordination (Wittgenstein-Nash bridge), propagates non-erasingly through time (<code>iterMeaning_monotone</code>), and sustains perfect coordination as long as the unanimous salient use remains in the meaning set.
+</p>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<section id="related">
+<h2>Related Pages</h2>
+<ul>
+  <li><strong>Core theorems:</strong> <a href="../theorems/structural-equivalence.html">Structural Equivalence</a></li>
+  <li><strong>Related extensions:</strong>
+    <a href="game-theory.html">Game Theory</a>,
+    <a href="emergence-levels.html">Emergence Levels</a>
+  </li>
+  <li><strong>GitHub source:</strong>
+    <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/MeaningGames.lean" target="_blank">IdeaTheory/Extensions/MeaningGames.lean</a>
+  </li>
+</ul>
+</section>
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

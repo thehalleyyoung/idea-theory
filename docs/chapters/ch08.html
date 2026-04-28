@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 8: The Philosophy of Ideas, Reformalized — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.chapter-nav{display:flex;justify-content:space-between;margin:2em 0 1em;padding:.6em 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:Inter,sans-serif;font-size:.9rem;}
+.chapter-nav a{color:var(--accent);border-bottom:none;}
+.section-toc{background:var(--accent-soft);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;}
+.section-toc h3{margin:0 0 .5em;font-size:1rem;}
+.section-toc ol{margin:0;padding-left:1.4em;}
+.section-toc li{margin:.2em 0;}
+.epigraph{border-left:3px solid var(--accent);padding:.4em 1em;margin:1.5em 0;font-style:italic;color:var(--muted);}
+.epigraph cite{display:block;margin-top:.4em;font-style:normal;font-size:.9em;}
+.proof{margin:.6em 0 1em;padding:.4em 1em .4em 1.2em;border-left:2px solid var(--rule);}
+.proof-label{font-style:italic;font-weight:600;}
+.thm,.defn,.cor,.lemma,.prop,.remark,.example{border-left:3px solid var(--accent);background:#fff;padding:.5em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.remark{border-left-color:var(--muted);background:var(--accent-soft);}
+.example{border-left-color:#5a7a5a;background:#f5f9f5;}
+.label{font-family:Inter,sans-serif;font-weight:700;font-size:.9rem;color:var(--accent);margin-right:.4em;}
+.remark .label{color:var(--muted);}
+.example .label{color:#5a7a5a;}
+.zoo-entry{border:1px solid var(--rule);border-radius:6px;padding:.8em 1.2em;margin:1.2em 0;background:var(--accent-soft);}
+.zoo-entry h4{margin:.1em 0 .4em;font-size:1rem;color:var(--accent);}
+.formal-status{border:2px solid var(--accent);border-radius:6px;padding:.6em 1.2em;margin:1em 0;background:#f0f4ff;}
+.formal-status .fs-label{font-family:Inter,sans-serif;font-weight:700;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);display:block;margin-bottom:.3em;}
+.fs-true{background:#f0fff4;border-color:#3a7a3a;}
+.fs-true .fs-label{color:#3a7a3a;}
+.fs-contingent{background:#fffbf0;border-color:#8a6a00;}
+.fs-contingent .fs-label{color:#8a6a00;}
+.fs-false{background:#fff0f0;border-color:#8a0000;}
+.fs-false .fs-label{color:#8a0000;}
+.key-theorems{background:var(--accent-soft);border:1px solid var(--accent);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;}
+.key-theorems h3{margin:0 0 .6em;font-size:1rem;color:var(--accent);}
+.thinker-section{border-top:2px solid var(--rule);padding-top:.8em;margin-top:2em;}
+.thinker-label{font-family:Inter,sans-serif;font-weight:700;font-size:.85rem;color:var(--muted);display:inline-block;margin-bottom:.3em;}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content">
+
+<div class="chapter-nav">
+  <a href="ch07.html">← Ch. 7: Grading and Novelty</a>
+  <a href="ch09.html">Ch. 9: Cognitive Science →</a>
+</div>
+
+<h1>Chapter 8: The Philosophy of Ideas, Reformalized</h1>
+
+<div class="epigraph">
+  <p>"The history of philosophy is to a great extent that of a certain clash of human temperaments."</p>
+  <cite>William James</cite>
+</div>
+
+<p>The philosophical record on <em>ideas</em> is a zoo, and its inhabitants are typically described in mutually incompatible idioms: Forms, universals, <em>species intelligibilis</em>, monads, schemata, sense, picture, family resemblance, rigid designator. The thesis of this chapter is that the formalism of <a href="ch01.html">Chapter 1</a>—the tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) together with Theorems 1–9—supplies a single language in which all of these positions can be stated, compared, and adjudicated.</p>
+
+<p>The format of each section is fixed. We give a faithful reading of the position with citations, restate it in the formalism, and end with a <em>precise formal status</em>: which of the nine foundational theorems makes the position <strong>true</strong>, <strong>contingent</strong>, or <strong>false</strong> in the algebra.</p>
+
+<div class="remark">
+<span class="label">Translation key.</span>
+"A theory \(T\) <em>is true in Idea Theory</em>" means that the formal restatement of \(T\) is provable from Theorems 1–9 (with no extra hypothesis on the algebra). "\(T\) <em>is contingent</em>" means it picks out a non-empty proper subclass of idea algebras. "\(T\) <em>is false</em>" means it is inconsistent with Theorems 1–9, i.e.\ no idea algebra realizes it.
+</div>
+
+<div class="key-theorems">
+  <h3>Key Results of Chapter 8</h3>
+  <ul>
+    <li><strong>Lemma 8.1</strong> (Regulative Ideas as cohomology classes) — \(H^1\)-classes that organize \(\mathcal{I}\) without being elements of it.</li>
+    <li><strong>Lemma 8.2</strong> (Compositionality is exact mod \(\omega\)) — \(\omega_v\) is a 2-cocycle; its class equals \([\omega]\) from T4.</li>
+    <li><strong>Lemma 8.3</strong> (Family-resemblance partition) — \(\sim_\theta\) is an equivalence, compatible with \(\circ\) iff \(\sigma\) is sub-multiplicative in \(\rho\)-norm.</li>
+    <li><strong>Lemma 8.4</strong> (Sections and indeterminacy) — Sections of \(p:\mathcal{I}\to\mathcal{I}/{\sim_\mathcal{I}}\) form a torsor; orbits collapse iff \([\omega]=0\).</li>
+    <li><strong>Status summary:</strong> Three positions are <em>theorems</em> (Aristotle, Hegel, apperception); eight reduce to theorem clauses; the rest are contingent properties.</li>
+  </ul>
+</div>
+
+<div class="section-toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#plato">Plato: Forms as fixed points of \(\circ\)</a></li>
+    <li><a href="#aristotle">Aristotle: universals as \(\sigma\)-invariants</a></li>
+    <li><a href="#medieval">Augustine and Aquinas: divine ideas and <em>species intelligibilis</em></a></li>
+    <li><a href="#descartes">Descartes: innate, adventitious, factitious</a></li>
+    <li><a href="#locke">Locke: simple/complex as monoid generators</a></li>
+    <li><a href="#berkeley">Berkeley: <em>esse est percipi</em></a></li>
+    <li><a href="#hume">Hume: association as resonance, missing shade as coboundary</a></li>
+    <li><a href="#spinoza">Spinoza: adequate ideas and conatus</a></li>
+    <li><a href="#leibniz">Leibniz: monads as graded atoms</a></li>
+    <li><a href="#kant">Kant: schemata, apperception, regulative Ideas</a></li>
+    <li><a href="#hegel">Hegel: Aufhebung literally</a></li>
+    <li><a href="#schopenhauer">Schopenhauer: Platonic Ideas as \(\rho\)-eigenvectors</a></li>
+    <li><a href="#frege">Frege: sense, reference, compositionality</a></li>
+    <li><a href="#russell">Russell: propositional functions as parametric ideas</a></li>
+    <li><a href="#wittgenstein1">Wittgenstein I: the picture theory</a></li>
+    <li><a href="#wittgenstein2">Wittgenstein II: family resemblance</a></li>
+    <li><a href="#quine">Quine: indeterminacy as cocycle section</a></li>
+    <li><a href="#putnam">Putnam: Twin Earth and externalism</a></li>
+    <li><a href="#kripke">Kripke: rigid designators</a></li>
+    <li><a href="#brandom">Brandom: inferential commitments</a></li>
+    <li><a href="#coda">Coda</a></li>
+  </ol>
+</div>
+
+<!-- ====================================================== -->
+<section id="plato" class="thinker-section">
+<h2>§1. Plato: Forms as fixed points of \(\circ\)</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#plato">Plato (Republic, Parmenides)</a></h4>
+  <p>In the <em>Republic</em> and the late dialogues, a Form is what an object "participates in": a stable, self-identical paradigm whose presence guarantees the predicate. Conjugation by any particular instance leaves the Form what it is.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Let \(\mathcal{I}^{\times}\) be the unit group. Call \(F\in\mathcal{I}\) a <em>Form</em> when, for every invertible \(g\in\mathcal{I}\), \(g\circ F\circ g^{-1}=F\). The fixed-point set \(\mathrm{Fix}_{\circ}(\mathcal{I})\) is a submonoid (T6); its elements are Forms. Plato's "one over many" principle asserts the centre of \(\mathcal{I}\) surjects onto \(\mathcal{I}/{\sim_\mathcal{I}}\). The Form ladder is \(F_0=\mathrm{Fix}_{\circ}(\mathcal{I})\), \(F_{n+1}=\mathrm{Fix}_{\circ}(F_n)\); it stabilizes iff \(\deg F_n\) is bounded.</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent</span>
+  The unit \(e\) is always a Form, so \(\mathrm{Fix}_{\circ}(\mathcal{I})\neq\emptyset\) in every algebra. Whether non-trivial Forms exist depends on the centre of the monoid. Plato's strong claim—that there is a Form for every general predicate—is ruled out by T6 in any non-trivial non-commutative case. The Third Man Argument becomes a graded regress: in algebras with unbounded \(\deg\) the Form ladder does not stabilize, exhibiting the original argument as a graded phenomenon.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="aristotle" class="thinker-section">
+<h2>§2. Aristotle: universals as \(\sigma\)-invariants</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#aristotle">Aristotle (Metaphysics Z)</a></h4>
+  <p>Aristotle's <em>Metaphysics</em> Z repudiates separate Forms in favour of universals <em>in re</em>: the universal is what is preserved across the predications it licenses.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Using the Aufhebung decomposition from <a href="ch03.html">Chapter 3</a>, define the <em>Aristotelian universal of \(a\)</em> as
+\[U(a)\;\defeq\;\{b\in\mathcal{I}\mid\sigma(a,b)=a\}.\]
+A universal in Aristotle's strong sense is an \(a\) for which \(U(a)\) is closed under \(\circ\) and contains \(e\). Hylomorphism falls out as the Aufhebung itself: form is \(\sigma\), matter is \(\nu\), substance is the elevated \(\eta\).</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True</span>
+  By T3 (Aufhebung), the \(\sigma\)-component is well defined modulo \(\ker\rho\); by T6 (Conjugation), inner automorphisms preserve \(\sigma\), so \(U(a)\) is conjugation-stable and \(e\in U(a)\) trivially. Closure under \(\circ\) is guaranteed by T3 on the quotient \(\mathcal{I}/\ker\rho\). Universals exist as \(\sigma\)-invariant submonoids in every idea algebra; their non-triviality beyond \(\{e\}\) is equivalent to non-degeneracy of \(\rho\) (T2).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="medieval" class="thinker-section">
+<h2>§3. Augustine and Aquinas: divine ideas and <em>species intelligibilis</em></h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#medieval">Augustine / Aquinas</a></h4>
+  <p>Augustine's <em>De Trinitate</em> locates ideas in the divine mind, eternal and unchanging. Aquinas in <em>Summa Theologiae</em> I, q. 84–85 interposes <em>species intelligibilis</em>, finite mental representations through which the intellect knows divine archetypes.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Augustinian divine ideas are the equivalence class \([e]_{\sim_{\mathrm{conj}}}\)—by T6, this is the singleton \(\{e\}\). The Thomistic <em>species intelligibilis</em> are graded representatives: sections \(s_n:\mathcal{I}/{\sim_\mathcal{I}}\to\mathcal{I}\) with \(\deg s_n([a])=n\). The obstruction to their existence is the cohomology class
+\[0\to\ker\deg\to\mathcal{I}\xrightarrow{\deg}G\to 0\]
+which admits a multiplicative section iff \([\omega]=0\in H^2(G,\ker\deg)\).</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Augustine true; Aquinas contingent</span>
+  Augustine's claim that the divine ideas form a unique archetype is <em>true</em> by T6. Aquinas's claim that graded sections exist is <em>contingent</em>: by T4, the sections exist when the short exact sequence admits a multiplicative section, which fails iff \(\omega\) has non-trivial cohomology class in \(H^2(G,\ker\deg)\). Illumination doctrine is logically indispensable in any algebra where \([\omega]\neq 0\).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="descartes" class="thinker-section">
+<h2>§4. Descartes: innate, adventitious, factitious</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#descartes">Descartes (Meditation III)</a></h4>
+  <p>In Meditation III, Descartes partitions ideas into <em>innate</em> (born with the mind), <em>adventitious</em> (caused by external things), and <em>factitious</em> (invented by the mind through composition).</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Use the grading \(\deg\) to define
+\[\mathcal{I}_{\mathrm{innate}}:=\deg^{-1}(0_G),\quad \mathcal{I}_{\mathrm{adventitious}}:=\{a\in\mathcal{I}\mid a=g\circ e,\ \deg g\neq 0\},\]
+\[\mathcal{I}_{\mathrm{factitious}}:=\{a\mid a=a_1\circ\cdots\circ a_k,\ k\ge 2,\ a_i\in\mathcal{I}_{\mathrm{innate}}\cup\mathcal{I}_{\mathrm{adventitious}}\}.\]
+The <em>cogito</em> receives the structural reading: every \(a\) factors as \(e\circ a\), so T1 is the formal core. The clear-and-distinct criterion translates as: \(a\) is clear and distinct iff \(\rho(a,a)\) is maximally separated from \(\rho(a,b)\) for all \(b\neq a\).</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent</span>
+  The partition is a tripartition iff (i) \(\deg\) is surjective with \(\ker\deg\) a sub-monoid and (ii) \(\mathcal{I}\) is generated by \(\mathcal{I}_{\mathrm{innate}}\cup\mathcal{I}_{\mathrm{adventitious}}\) as a monoid. T1 and T9 guarantee that whenever the conditions hold the partition is unique. Descartes's argument that the idea of God must be innate becomes a degree argument: \(\deg(\mathrm{God})=\infty\) is impossible in a \(\mathbb{N}\)-graded algebra with finite innate generators.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="locke" class="thinker-section">
+<h2>§5. Locke: simple/complex as monoid generators</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#locke">Locke (Essay II.ii–xii)</a></h4>
+  <p>Locke divides ideas into simple (received passively from sensation or reflection) and complex (formed by combining, comparing, and abstracting). All complex ideas are constructed from simples.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Take a generating set \(\Sigma\subset\mathcal{I}\). Simple ideas are \(\Sigma\cup\{e\}\); complex are \(\langle\Sigma\rangle_{\circ}\setminus\Sigma\). Sensation and reflection are realized as sub-monoids \(\mathcal{I}_S,\mathcal{I}_R\) with \(\mathcal{I}_S\cap\mathcal{I}_R=\{e\}\). Abstraction is the \(\sigma\)-projection: the abstract idea of triangle is \(\sigma(\Delta_{\mathrm{eq}},\Delta_{\mathrm{sc}})\), the preserved part of any pair of triangle-instances.</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True (with contingent free-product claim)</span>
+  By T1, every monoid is generated by some set of generators, and the choice of \(\Sigma\) realizes the simple/complex distinction. The specific claim that \(\mathcal{I}=\mathcal{I}_S*\mathcal{I}_R\) as a free product is contingent and equivalent, by T8 (Structural Equivalence), to the cocycle \(\omega\) being trivial across the boundary. Berkeley's attack on abstraction—that no idea of triangle is neither equilateral nor scalene—is the empirical denial that \(\sigma\) projects to a non-zero representative; this is formally precise by T3 and its non-degeneracy is contingent.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="berkeley" class="thinker-section">
+<h2>§6. Berkeley: <em>esse est percipi</em></h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#berkeley">Berkeley (Principles)</a></h4>
+  <p>For Berkeley, for ideas (and sensible objects that are bundles of ideas) to exist is to be perceived. There is no idea apart from a perceiver registering it.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Let \(\rho\) be the resonance pairing. The Berkeleian thesis is: for every \(a\in\mathcal{I}\setminus\{0\}\), there exists \(b\in\mathcal{I}\) with \(\rho(b,a)\neq 0\). This is the <em>left non-degeneracy</em> of \(\rho\). Berkeley's role for God is the postulate of a maximal perceiver: an idea \(\Omega\) with \(\rho(\Omega,a)\neq 0\) for every \(a\neq 0\).</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: Logical thesis true; metaphysical thesis contingent</span>
+  The logical thesis (non-degeneracy) is <em>true</em> on the side of the formalism in any algebra satisfying T2 (Resonance Pairing). Berkeley's stronger metaphysical claim—that the perceiving witness is itself an idea, not an extra-idealistic substance—is equivalent to \(\rho\) being induced by an inner product, an extra structural condition not implied by T2. The existence of \(\Omega\) (God as maximal perceiver) is contingent and requires that the dual space \(\mathcal{I}^*\) contain the constant non-vanishing functional.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="hume" class="thinker-section">
+<h2>§7. Hume: association as resonance, missing shade as coboundary</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#hume">Hume (Treatise I.i)</a></h4>
+  <p>Hume identifies three principles of association—resemblance, contiguity, cause—and the famous missing shade of blue is an admission that not every idea need derive from a corresponding impression.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Resemblance and contiguity are symmetric contributions to \(\rho\); cause is the antisymmetric curvature \(\kappa\) from T5. Impressions and ideas form a graded pair \((\mathcal{I}_1,\mathcal{I}_0)\) with \(\deg=1\) and \(\deg=0\) respectively, related by a copy map \(\pi:\mathcal{I}_1\to\mathcal{I}_0\). The missing shade of blue is an element \(b_*\in\mathcal{I}_0\) not in the image of \(\pi\) but in the closure under \(\circ\)—a coboundary that is not exact.</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True (associationism); missing shade forced whenever H¹ ≠ 0</span>
+  The associationist thesis is <em>true</em> as T2 and T5 make the resonance pairing decompose into symmetric and antisymmetric parts. The graded copy map is <em>contingent</em> on the algebra. The missing-shade phenomenon is <em>true and even forced</em> whenever \(H^1(\circ,\mathrm{im}\,\pi)\neq 0\), by the long exact sequence attached to \(0\to\mathrm{im}\,\pi\to\mathcal{I}_0\to\mathrm{coker}\,\pi\to 0\). Hume's problem of induction is the observation that the symmetric part of \(\rho\) on a finite generating set does not in general extend uniquely to the closure under \(\circ\)—made precise by T5 (Curvature).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="spinoza" class="thinker-section">
+<h2>§8. Spinoza: adequate ideas and conatus</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#spinoza">Spinoza (Ethics II–III)</a></h4>
+  <p>In the <em>Ethics</em> an idea is <em>adequate</em> when it possesses the intrinsic marks of a true idea "without relation to its object"; <em>conatus</em> is the striving by which each thing perseveres in its being.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> An idea \(a\) is <em>adequate</em> when \(\sigma(a,a)=a\) and \(\nu(a,a)=0\): it is a \(\sigma\)-idempotent in the kernel of \(\nu\). <em>Conatus</em> is positivity of \(\rho\): \(\rho(a,a)>0\) for every non-null \(a\). Spinoza's parallelism becomes the assertion that the canonical map \(\mathcal{I}\to\mathcal{I}^*\) from T2 is an isometry—the same algebra under two labels for \(\rho\).</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent</span>
+  Adequacy is <em>contingent</em>: the set of adequate ideas is a sub-algebra (T3), but its non-triviality requires a non-trivial idempotent structure on \(\sigma\), not implied by T1–9. Conatus is <em>contingent</em>: positive-definiteness of \(\rho\) is a strict strengthening of T2's non-degeneracy. The affects receive quantitative reading: joy is \(\rho(a+\delta a,a+\delta a)>\rho(a,a)\), sadness is \(<\rho(a,a)\).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="leibniz" class="thinker-section">
+<h2>§9. Leibniz: monads as graded atoms</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#leibniz">Leibniz (Monadology)</a></h4>
+  <p>The <em>Monadology</em> declares monads to be the simple substances, "windowless," mirroring the universe each in its own perspective; their harmony is pre-established by God.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Monads are graded atoms: elements \(m\in\mathcal{I}\) with \(\deg(m)\) minimal in the positive cone of \(G\) and \(\circ\)-irreducible (\(m=a\circ b\) implies \(a=e\) or \(b=e\)). "Windowlessness" requires that \(\rho(m,m')\) for distinct atoms is encoded not by direct pairing but by a global map \(\Phi:\mathcal{I}\to A\) with \(\Phi(a\circ b)=\Phi(a)+\Phi(b)+\omega(a,b)\). Pre-established harmony is the existence of \(\Phi\) as a global section, i.e.\ a global trivialization of \(\omega\). The principle of sufficient reason requires every \(a\in\mathcal{I}\) to be reached from \(e\) by a finite composition chain.</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Existence contingent; pre-established harmony false as universal claim</span>
+  Existence of graded atoms is <em>contingent</em>: in any algebra with \(G\) well-ordered they exist by T9. Windowlessness is contingent. The pre-established harmony—a global trivialization of \(\omega\)—is <em>false</em> as a universal claim because by T4 (Emergence), \(\omega\) may have nontrivial cohomology class. Leibniz's God is the postulate that this class always vanishes; Idea Theory shows this is a theological commitment, not a theorem.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="kant" class="thinker-section">
+<h2>§10. Kant: schemata, apperception, regulative Ideas</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#kant">Kant (Critique of Pure Reason)</a></h4>
+  <p>The <em>Critique</em> treats the categories as rules of synthesis applied via the schemata of the imagination; the transcendental unity of apperception is the "I think" that must be able to accompany all representations; regulative Ideas (soul, world, God) are limits to which experience tends without attaining.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Categories are operators \(C:\mathcal{I}\to\mathcal{I}\) satisfying \(C(a\circ b)=C(a)\circ C(b)+\omega_C(a,b)\). Transcendental unity of apperception is precisely the identity element \(e\) "accompanying" every idea via \(a=e\circ a\). Regulative Ideas are nontrivial cohomology classes \([\xi]\in H^1(\circ,A)\) that organize \(\mathcal{I}\) but are not elements of it.</p>
+
+<div class="lemma">
+<span class="label">Lemma 8.1</span> (Regulative ideas as cohomology classes). Let \((\mathcal{I},\circ,e,\omega)\) be an idea algebra with abelian emergence group \(A\). Define
+\[C^0=\mathrm{Maps}(\mathcal{I},A),\quad C^1=\mathrm{Maps}(\mathcal{I}\times\mathcal{I},A),\]
+with \(\delta f(a,b)=f(a\circ b)-f(a)-f(b)\) for \(f\in C^0\). The kernel of \(\delta:C^0\to C^1\) classifies the homomorphisms \(\mathcal{I}\to A\). The cohomology \(H^1:=C^1/(\delta C^0)\) contains \(\omega\), and any class \([\xi]\in H^1\) not in the image of \(\delta\) defines a regulative Idea.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Direct verification of the cochain conditions of T4. The cocycle identity \(\delta^2=0\) follows from associativity, which is T1. A class not in the image of \(\delta\) corresponds to a constraint on \(\mathcal{I}\) that cannot be witnessed by any single function \(f\); this is the formal correlate of Kant's "Idee, der kein Gegenstand entspricht." □
+</div>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Unity of apperception true; categories contingent; regulative Ideas true as Lemma 8.1</span>
+  Categories as \(\omega\)-twisted operators are <em>contingent</em>: their existence requires morphisms on \(\mathcal{I}\) closed under composition, extra data not implied by T1–9. The transcendental unity of apperception is <em>true</em> by T1: \(e\) exists and is unique. The regulative status of \(H^1\)-classes is <em>true</em> as Lemma 8.1. The synthetic <em>a priori</em> is the cohomology class of the structurally determined \(\omega\).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="hegel" class="thinker-section">
+<h2>§11. Hegel: Aufhebung literally</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#hegel">Hegel (Phenomenology, Science of Logic)</a></h4>
+  <p>Hegel's <em>Phenomenology</em> and <em>Science of Logic</em> make <em>Aufhebung</em> (sublation) the engine of conceptual development: a content is preserved, negated, and elevated.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> This is taken <em>literally</em>: the Aufhebung decomposition \(a\circ b=\sigma(a,b)+\nu(a,b)+\eta(a,b)\) of T3 is the formal version of Hegel's three moments. Preservation is \(\sigma\), negation \(\nu\), elevation \(\eta\). The slogan "the rational is the actual" becomes: \(\sigma+\nu+\eta=\circ\). The triadic pattern applied to a maximally degenerate pair \((b,\bar{b})\): \(\sigma(b,\bar{b})=0\), \(\nu(b,\bar{b})=-b\), and \(\eta(b,\bar{b})=\) "becoming."</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True — Theorem 3</span>
+  Hegel's thesis is <em>true</em> as T3 (Aufhebung Decomposition), in every idea algebra. The dialectic is not a quirk of <em>Geist</em>; it is an algebraic identity. The "cunning of reason" is the empirical claim that the \(\eta\)-component grows over iterated composition while \(\nu\) remains bounded—an asymptotic property, not a metaphysical guarantee.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="schopenhauer" class="thinker-section">
+<h2>§12. Schopenhauer: Platonic Ideas as \(\rho\)-eigenvectors</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#schopenhauer">Schopenhauer (World as Will and Representation)</a></h4>
+  <p>Schopenhauer reinterprets Plato's Forms as the adequate objectifications of the Will at fixed grades. Aesthetic contemplation is the apprehension of an Idea liberated from the <em>principium individuationis</em>.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Let \(L_a:b\mapsto\rho(a,b)\) be the linear functional attached to \(a\) via \(\rho\). Schopenhauer's Platonic Ideas are the <em>eigenvectors</em> of \(L_a\) as \(a\) ranges over the Will's degrees: an Idea \(I\) is one for which there exists \(\lambda\in\mathbb{R}^{\times}\) with \(L_a(I)=\lambda\cdot v(I)\) for some valuation \(v\), for all \(a\) in a \(\deg\)-fibre. The grades \(\deg\) recapitulate Schopenhauer's hierarchy. Aesthetic liberation from individuation is the vanishing of curvature \(\kappa(I,\cdot)=0\).</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent</span>
+  By T2 (Resonance Pairing), the extended bilinear form has a well-defined spectrum whenever non-degenerate; existence of eigenvectors with the prescribed grading is a real condition. Aesthetic liberation (\(\kappa=0\)) is contingent and rare. Schopenhauer's pessimism—that ordinary representation is permeated by Will—becomes the empirical claim that \(\kappa\) is generically nonzero.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="frege" class="thinker-section">
+<h2>§13. Frege: sense, reference, compositionality</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#frege">Frege ("Über Sinn und Bedeutung")</a></h4>
+  <p>Frege distinguishes <em>Sinn</em> (sense, mode of presentation) from <em>Bedeutung</em> (reference). Compositionality: the sense of a complex expression is determined by the senses of its parts.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Senses are elements of \(\mathcal{I}\); references are values \(v(a)\in A\) for some valuation \(v\). The principle of compositionality is <em>additivity of \(v\) modulo \(\omega\)</em>:
+\[v(a\circ b)=v(a)+v(b)+\omega(a,b).\]
+Strict compositionality is the special case \(\omega=0\).</p>
+
+<div class="lemma">
+<span class="label">Lemma 8.2</span> (Compositionality is exact mod \(\omega\)). For any valuation \(v\) on \(\mathcal{I}\) with values in an abelian group \(A\), the function \(\omega_v(a,b):=v(a\circ b)-v(a)-v(b)\) is a 2-cocycle on \(\mathcal{I}\) with values in \(A\). Its cohomology class \([\omega_v]\in H^2(\mathcal{I},A)\) is independent of \(v\) within its homotopy class and equals the class of \(\omega\) from T4 when \(v\) is induced by the standard valuation.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Apply \(\delta\) to \(\omega_v\); expand using associativity of \(\circ\) (T1); all \(v\)-terms cancel pairwise, giving \(\delta\omega_v=0\). Replacing \(v\) by \(v+\delta f\) adds \(\delta^2 f=0\); equality with \(\omega\) from T4 follows from the universal property. □
+</div>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: Sense/reference distinction true and forced; strict compositionality contingent</span>
+  The sense/reference distinction is <em>true and forced</em> by T1 and T4. Compositionality is <em>true modulo \(\omega\)</em>; strict compositionality is contingent and equivalent to \([\omega]=0\). Frege's puzzles—"Hesperus is Phosphorus," substitution failure—are exactly the failure of \(\omega\) to vanish on the relevant pair.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="russell" class="thinker-section">
+<h2>§14. Russell: propositional functions as parametric ideas</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#russell">Russell (Principles of Mathematics)</a></h4>
+  <p>Russell treats propositional functions \(\phi(x)\) as incomplete entities that become propositions upon assignment of \(x\). The theory of types prevents self-application and resolves the paradoxes.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> A propositional function is a <em>parametric idea</em>: a map \(\phi:\mathcal{I}\to\mathcal{I}\) respecting \(\circ\) in the parameter. The grading \(\deg\) implements Russell's type theory: \(\deg\phi(a)=\deg\phi+\deg a\), and the no-self-application rule is \(\deg\phi\neq 0\) for \(\phi\) acting on its own type. Russell's paradox becomes the attempt to construct \(a\) with \(\deg a=-\deg a\); in a torsion-free \(G\) this forces \(\deg a=0\), hence \(a=e\), and the paradox dissolves.</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True — Theorem 9</span>
+  By T9 (Grading), the additive law \(\deg\phi(a)=\deg\phi+\deg a\) holds, and \(\phi(\phi)\) is well-defined only if \(\deg\phi=0\). The vicious-circle principle is a grading constraint, not a metaphysical taboo. Compositional respect for \(\circ\) is contingent and equivalent to the parametric idea being a morphism of idea algebras.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="wittgenstein1" class="thinker-section">
+<h2>§15. Wittgenstein I: the picture theory</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#wittgensteinI">Wittgenstein I (Tractatus)</a></h4>
+  <p>The <em>Tractatus</em> proposes that propositions are <em>pictures</em> of facts: a <em>Sachverhalt</em> and a <em>Satz</em> share a logical form that allows the latter to depict the former.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Facts and propositions form two sub-algebras \(\mathcal{I}_W,\mathcal{I}_S\subset\mathcal{I}\). The picture theory asserts the existence of a \(\rho\)-isomorphism \(\pi:\mathcal{I}_W\to\mathcal{I}_S\): \(\rho(\pi(a),\pi(b))=\rho(a,b)\) for all \(a,b\in\mathcal{I}_W\). Logical form is the pull-back of the resonance pairing. The mystical—"what cannot be said but only shown"—is the kernel of \(\pi\).</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent</span>
+  By T8 (Structural Equivalence), two sub-algebras are isomorphic iff there is a graded monoid iso preserving \(\rho,\sigma,\nu,\omega\). The picture theory <em>adds</em> the existence of such a \(\pi\), which is non-trivial. T2 implies that <em>if</em> \(\pi\) exists it is uniquely determined on the support of \(\rho\), so the picture is unique up to \(\ker\rho\). Wittgenstein's later rejection of the picture theory is the empirical claim that no such \(\pi\) exists in natural-language algebras.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="wittgenstein2" class="thinker-section">
+<h2>§16. Wittgenstein II: family resemblance</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#wittgensteinII">Wittgenstein II (Philosophical Investigations)</a></h4>
+  <p>The <em>Philosophical Investigations</em> replace shared essences with overlapping similarities: members of a family resemble one another in different ways without any single feature being common.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Family resemblance is the equivalence relation \(\sim_\mathcal{I}\) generated by "shares a \(\sigma\)-component above threshold \(\theta\)": \(a\sim_\theta b\) iff \(\rho(\sigma(a,b),e)\geq\theta\).</p>
+
+<div class="lemma">
+<span class="label">Lemma 8.3</span> (Family-resemblance partition). Let \(\sim_\theta\) be the binary relation \(a\sim_\theta b\) iff \(\rho(\sigma(a,b),e)\geq\theta\), and let \(\sim_\mathcal{I}\) be its transitive closure. Then \(\sim_\mathcal{I}\) is an equivalence relation, and the projection \(\mathcal{I}\to\mathcal{I}/{\sim_\mathcal{I}}\) is compatible with \(\circ\) if and only if \(\sigma\) is sub-multiplicative in \(\rho\)-norm:
+\[\rho(\sigma(a\circ c,b\circ c),e)\geq\min\bigl(\rho(\sigma(a,b),e),\rho(\sigma(c,c),e)\bigr)-\|\omega(a,b)\|.\]
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Reflexivity and symmetry follow from the symmetry of the symmetric part of \(\rho\) (T5). Transitivity is forced by definition of \(\sim_\mathcal{I}\). Compatibility with \(\circ\) follows from T3 (the Aufhebung is a \(\circ\)-bilinear operation modulo \(\ker\rho\)) together with T4 (\(\omega\) controls the failure of additivity). □
+</div>
+
+<p>The private-language argument: a language is private if its \(\sim_\mathcal{I}\) is supported on a single individual's sub-algebra. T2's non-degeneracy implies that any genuinely private idea has zero pairing with all public ideas, hence is identified with \(0\) modulo \(\sim_\mathcal{I}\).</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True (conditional on sub-multiplicativity)</span>
+  By Lemma 8.3, family resemblance equivalence is well-defined; "essences" correspond to singleton classes in \(\mathcal{I}/{\sim_\mathcal{I}}\). The threshold \(\theta\) parametrizes the strictness: as \(\theta\to 0\) everything resembles everything; as \(\theta\to\infty\) the partition shatters to singletons. Rule-following: a rule is a parametric idea; the skeptical paradox is indeterminacy of parametric extension from finite data, quantitatively measured by the curvature \(\kappa\).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="quine" class="thinker-section">
+<h2>§17. Quine: indeterminacy as cocycle section</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#quine">Quine (Word and Object)</a></h4>
+  <p><em>Word and Object</em> argues that translation is underdetermined: incompatible manuals can be equally compatible with the totality of speech dispositions. There is no fact of the matter as to which is correct.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Translation is a section of the projection \(\mathcal{I}\twoheadrightarrow\mathcal{I}/{\sim_\mathcal{I}}\). The indeterminacy thesis asserts that there are inequivalent sections, i.e.\ the projection has nontrivial automorphism group. Equivalently, the cocycle \(\omega\) is non-trivial in \(H^2(\mathcal{I}/{\sim_\mathcal{I}},A)\).</p>
+
+<div class="lemma">
+<span class="label">Lemma 8.4</span> (Sections and indeterminacy). Let \(p:\mathcal{I}\to\mathcal{I}/{\sim_\mathcal{I}}\) be the quotient. Sections \(s\) of \(p\) form a torsor over the abelian group \(C^1_{\mathrm{nor}}\) of normalized 1-cochains valued in \(\ker p\). The orbits under the action of inner automorphisms (T6) collapse iff \(\omega=\delta f\) for some \(f\), i.e.\ \([\omega]=0\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Two sections \(s,s'\) differ by \(\delta:\mathcal{I}/{\sim_\mathcal{I}}\to\ker p\), a 1-cochain. Normalization \(s(e)=e\) enforces \(\delta(e)=0\). The inner automorphism action on sections is \(g\cdot s:a\mapsto g\circ s(a)\circ g^{-1}\), which by T6 preserves \(\rho,\sigma,\nu,\omega\). Two sections lie in the same orbit iff their difference is the coboundary of an inner automorphism; the obstruction is exactly \([\omega]\). □
+</div>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent — property of the algebra</span>
+  Indeterminacy is <em>true</em> whenever \([\omega]\neq 0\), <em>false</em> when \([\omega]=0\). Both possibilities are realized by T4. Quine's empirical bet is that natural-language algebras have \([\omega]\neq 0\). His confirmation holism—"no statement faces the tribunal of experience alone"—is an algebraic theorem: any change to a single idea propagates via the cocycle throughout its composition orbit (T7).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="putnam" class="thinker-section">
+<h2>§18. Putnam: Twin Earth and externalism</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#putnam">Putnam ("The Meaning of 'Meaning'")</a></h4>
+  <p>Putnam argues that meanings "ain't in the head": molecule-for-molecule duplicates can entertain ideas with different references because of different surrounding environments.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> Let \(E\) be the environment, modelled as an invertible idea \(g_E\in\mathcal{I}^{\times}\). Two thinkers in environments \(E,E'\) host "the same idea" \(a\) as conjugates \(g_E\circ a\circ g_E^{-1}\) and \(g_{E'}\circ a\circ g_{E'}^{-1}\) respectively. By T6, conjugation preserves structural data, but the value \(v(g_E\circ a\circ g_E^{-1})=v(a)+\omega(g_E,a)+\omega(g_E\circ a,g_E^{-1})\) generally differs between environments because \(\omega\) does. Externalism is the claim that \(\omega(\cdot,\cdot)\) does not vanish on environment–idea pairs. Putnam's later <em>internal realism</em> is a gauge choice: fix \(g_E\) and read \(\omega\) relative to it.</p>
+
+<div class="formal-status fs-contingent">
+  <span class="fs-label">Formal Status: Contingent</span>
+  Twin Earth is <em>contingent</em>: conjugation is a structural automorphism (T6) and so preserves the algebra up to isomorphism, but values can differ because the cocycle moves the absolute reading. The externalist thesis is precisely \(\omega(g_E,a)\neq\omega(g_{E'},a)\) for some \(a\) when \(E\neq E'\). The gauge-invariant content—true in every environment—is exactly the fixed-point set \(\mathrm{Fix}_\circ(\mathcal{I})\) of §1 (Plato).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="kripke" class="thinker-section">
+<h2>§19. Kripke: rigid designators</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#kripke">Kripke (Naming and Necessity)</a></h4>
+  <p><em>Naming and Necessity</em> introduces rigid designators: terms that pick out the same object in every possible world in which the object exists.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> A rigid designator is an idea \(r\in\mathcal{I}\) unaffected by conjugation: \(g\circ r\circ g^{-1}=r\) for all invertible \(g\). Possible worlds are environments \(g\in\mathcal{I}^{\times}\), and the designator's indifference to environment is its rigidity. Equivalently, \(r\) lies in the centralizer of \(\mathcal{I}^{\times}\) in \(\mathcal{I}\), hence in the fixed-point set of §1. <em>A posteriori</em> necessity: Hesperus and Phosphorus name the same fixed point of conjugation, hence are necessarily identical—but detecting this requires empirical labor.</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: True — Corollary of T6 and §1</span>
+  Rigid designators are exactly Plato's Forms: <em>true</em> as a corollary of T6 and the analysis of §1. That a Kripkean rigid designator is a Platonic Form is a formal observation: Kripke's modal apparatus and Plato's metaphysical one converge on the same algebraic locus, \(\mathrm{Fix}_\circ(\mathcal{I})\). Kripkean essentialism about natural kinds is the empirical claim that natural-kind terms are rigid in this conjugation-invariant sense.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="brandom" class="thinker-section">
+<h2>§20. Brandom: inferential commitments</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/philosophy.html#brandom">Brandom (Making It Explicit)</a></h4>
+  <p><em>Making It Explicit</em> develops an inferential semantics: the content of a concept is the set of inferential moves—entitlements and commitments—that mastery of the concept licenses.</p>
+</div>
+
+<p><span class="thinker-label">Formal restatement.</span> For each \(a\in\mathcal{I}\), define the <em>commitment set</em> \(K(a):=\{b\mid\rho(a,b)>0\}\) and the <em>entitlement set</em> \(E(a):=\{b\mid\rho(b,a)>0\}\). The asymmetry is the curvature \(\kappa\). The inferential content of \(a\) is the pair \((K(a),E(a))\). Brandom's thesis that "the propositional is the inferential" is the claim that every \(a\) is determined, up to \(\sim_\mathcal{I}\), by \((K(a),E(a))\). The score-keeping model of discursive practice becomes a groupoid action on \(\mathcal{I}\).</p>
+
+<div class="formal-status fs-true">
+  <span class="fs-label">Formal Status: Structural core true; surjectivity contingent</span>
+  By T2 (non-degeneracy of \(\rho\)), the map \(a\mapsto(K(a),E(a))\) is injective modulo \(\ker\rho\)—<em>true</em>. Brandom's stronger claim—surjectivity onto consistent commitment-entitlement pairs—is <em>contingent</em>. The asymmetry between commitment and entitlement is the curvature \(\kappa\) of §7. The well-foundedness of score-keeping—that scores can be reconciled across speakers—is a cohomological condition on \(\omega\); nothing in the algebra forces \([\omega]=0\).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="coda" class="thinker-section">
+<h2>§21. Coda</h2>
+
+<p>The chapter has surveyed twenty positions and demonstrated that each fits, without contortion, in the formalism of \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\). The distribution of statuses is instructive: of the twenty restatements:</p>
+<ul>
+  <li><strong>Three are theorems</strong> of Idea Theory: Aristotle's universals (T3+T6), Hegel's Aufhebung (T3), the unity of apperception (T1).</li>
+  <li><strong>Eight reduce to specific clauses</strong> of T2–9: Berkeley's logical core (T2), Hume's association (T2+T5), Frege's distinction (T1+T4), Russell's type theory (T9), Wittgenstein I (conditional, T2+T8), Putnam (T6+T4), Kripke (T6), Brandom's structural core (T2+T5).</li>
+  <li><strong>The remainder are contingent</strong>: Plato, the medievals, Descartes, Locke, Spinoza, Leibniz, Kant's categories, Schopenhauer, Wittgenstein II, Quine. Each corresponds to a specific cohomological or spectral condition.</li>
+</ul>
+
+<p>None are formally <em>false</em>. The philosophical zoo collapses, under the formalism, to a small catalogue of cohomology classes and spectral conditions. The remaining chapters extend the procedure to cognitive science (<a href="ch09.html">Chapter 9</a>) and meaning games (<a href="ch10.html">Chapter 10</a>).</p>
+</section>
+
+<div class="chapter-nav">
+  <a href="ch07.html">← Ch. 7: Grading and Novelty</a>
+  <a href="ch09.html">Ch. 9: Cognitive Science →</a>
+</div>
+
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

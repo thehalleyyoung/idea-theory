@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 2: Coalitions — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.toc{background:var(--accent-soft);border:1px solid var(--rule);border-radius:6px;padding:.8em 1.2em;margin:1.5em 0;font-size:.93rem;}
+.toc h2{font-size:1rem;margin:.1em 0 .5em;border:none;padding:0;}
+.toc ol{margin:0;padding-left:1.4em;}
+.toc li{margin:.2em 0;}
+.toc a{border-bottom:none;color:var(--accent);}
+.toc a:hover{text-decoration:underline;}
+.proof{margin:.5em 0 .5em 1.2em;font-style:italic;font-size:.96rem;color:var(--muted);}
+.proof::before{content:"Proof. ";font-style:normal;font-weight:600;color:var(--accent);}
+.proof-end::after{content:" □";font-style:normal;}
+.remark{border-left:3px solid var(--rule);background:var(--bg);padding:.4em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.remark-label{font-family:Inter,sans-serif;font-weight:600;font-size:.9rem;color:var(--muted);}
+.prop{border-left:3px solid #9b7bb5;background:#f5f0fa;padding:.4em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.prop-label{font-family:Inter,sans-serif;font-weight:600;color:#6b4a8a;font-size:.9rem;text-transform:uppercase;letter-spacing:.05em;}
+.zoo-entry{border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;}
+.zoo-entry h4{font-family:Inter,sans-serif;font-size:1rem;color:var(--accent);margin:.1em 0 .5em;}
+.zoo-entry .zoo-section{font-family:Inter,sans-serif;font-size:.85rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:.8em 0 .2em;}
+.chapter-nav{display:flex;justify-content:space-between;margin:3em 0 1em;padding-top:1em;border-top:1px solid var(--rule);}
+.chapter-nav a{font-family:Inter,sans-serif;font-size:.95rem;border-bottom:none;padding:.4em .8em;background:var(--accent-soft);border-radius:4px;color:var(--accent);}
+.chapter-nav a:hover{background:#ead9d3;}
+.epigraph{border-left:none;padding:.4em 0 .4em 1.5em;margin:1em 0 2em;color:var(--muted);font-style:italic;}
+.epigraph cite{display:block;font-style:normal;font-size:.9em;margin-top:.4em;}
+</style>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+      Ideas: '{\\mathcal{I}}',
+      compose: '{\\circ}',
+      unit: '{e}',
+      IdMon: '{(\\mathcal{I},\\circ,e)}',
+      chain: ['{\\mathsf{Ch}(#1)}', 1],
+      npow: '{\\mathsf{npow}}',
+      aggregate: '{\\mathsf{agg}}',
+      equivIdea: '{\\sim_{\\mathcal{I}}}',
+      defeq: '{:=}',
+      eqdef: '{:=}',
+      NN: '{\\mathbb{N}}',
+      ZZ: '{\\mathbb{Z}}',
+      RR: '{\\mathbb{R}}',
+      emerg: '{\\omega}',
+      deg: '{\\deg}',
+    },
+    tags: 'ams',
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+
+<p style="font-family:Inter,sans-serif;font-size:.9rem;color:var(--muted);margin-bottom:.3em;"><a href="index.html">Book</a> › Chapter 2</p>
+<h1>Chapter 2: Coalitions, Committees, and the Algebra of Aggregation</h1>
+
+<blockquote class="epigraph">
+"In every act of association, however small, the problem of the relation of the part to the whole is already posed in miniature."
+<cite>— Mancur Olson<sup class="cite">[1]</sup></cite>
+</blockquote>
+
+<p>The previous chapter introduced the bare idea algebra \(\IdMon\): a set \(\mathcal{I}\) equipped with an associative composition \(\circ\) and a two-sided identity \(e\). Its objects are individual ideas and its operation is the binary composition that fuses any two ideas into a third. A great deal of what passes for "social" or "collective" thought, however, does not arise from binary acts at all but from the <em>simultaneous</em> contribution of indefinitely many parties: a committee meeting, a research school, a jury, an actor-network, a diffusion cascade. To talk about such phenomena inside the formalism we need a free construction that turns finite sequences of ideas into a single idea while remaining faithful to the monoidal structure underneath. That construction is the <em>coalition</em>, and the operator that carries it back into \(\mathcal{I}\) is the <em>aggregate</em>.</p>
+
+<p>The Lean witness for the development is the module <code>IdeaTheory.Theorems10</code>.</p>
+
+<nav class="toc">
+<h2>Contents</h2>
+<ol>
+  <li><a href="#s1">From single ideas to coalitions: the list monad</a></li>
+  <li><a href="#s2">The aggregate operator</a></li>
+  <li><a href="#s3">Committees and assemblies</a></li>
+  <li><a href="#s4">Silence: idempotence at zero and the silent coalition</a></li>
+  <li><a href="#s5">Coalition equivalence</a></li>
+  <li><a href="#s6">Insertion and delegation</a></li>
+  <li><a href="#s7">The headline theorems</a></li>
+  <li><a href="#s8">The zoo: six historical positions</a></li>
+  <li><a href="#s9">Chapter summary</a></li>
+  <li><a href="#refs">References</a></li>
+</ol>
+</nav>
+
+<!-- ================================================================ -->
+<section id="s1">
+<h2>1. From single ideas to coalitions: the list monad</h2>
+
+<p>Let \(\IdMon\) be a bare idea algebra in the sense of Chapter 1. Write \(\mathrm{List}(\mathcal{I})\) for the set of finite sequences (or lists) drawn from \(\mathcal{I}\). We use the standard list constructors: the empty list \([]\), the cons \(a :: \mathbf{x}\) that prepends an element \(a\) to a list \(\mathbf{x}\), and the concatenation \(\mathbf{x} {+\!+} \mathbf{y}\). Two lists are equal exactly when they have the same length and agree pointwise; order matters.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 2.1</span> (Coalition).
+A <em>coalition</em> of agents over the carrier \(\mathcal{I}\) is an element
+\[\mathbf{c} = [a_1, a_2, \ldots, a_n] \in \mathrm{List}(\mathcal{I}).\]
+The integer \(n \geq 0\) is the <em>size</em> of the coalition; the elements \(a_i \in \mathcal{I}\) are the <em>individually-held ideas</em> of the agents. The empty coalition is denoted \([]\).
+</div>
+
+<p>The choice of <em>lists</em> rather than <em>multisets</em> or <em>sets</em> is deliberate. Following Arrow's<sup class="cite">[2]</sup> discussion of the order in which voters are polled and Sen's<sup class="cite">[3]</sup> parallel treatment, we treat the order of a coalition as a piece of <em>enumeration</em> — a contingent way of writing the coalition down — rather than as a structural priority. This distinction is paid for in subsequent theorems: order-independence is a result we will <em>prove</em>, not an axiom we will assume.</p>
+
+<div class="prop">
+<span class="prop-label">Proposition 2.1</span> (Naturality of coalition formation).
+For every map of carriers \(f : \mathcal{I} \to \mathcal{I}'\), the induced map \(\mathrm{List}(f) : \mathrm{List}(\mathcal{I}) \to \mathrm{List}(\mathcal{I}')\), \([a_1,\ldots,a_n] \mapsto [f(a_1),\ldots,f(a_n)]\), is a homomorphism of free monoids. In particular, the formation of coalitions commutes with relabelling of agents.
+</div>
+<p class="proof">Direct from the definition: \(\mathrm{List}(f)([]) = []\) and \(\mathrm{List}(f)(\mathbf{x} {+\!+} \mathbf{y}) = \mathrm{List}(f)(\mathbf{x}) {+\!+} \mathrm{List}(f)(\mathbf{y})\).<span class="proof-end"></span></p>
+
+<p>This naturality is the formal underwriting of the practice, common in sociological and economic modelling, of treating the same coalition under different "descriptions" of its members (List &amp; Pettit<sup class="cite">[4]</sup>, Hardin<sup class="cite">[5]</sup>). So long as the description is applied componentwise, the coalitional structure is undisturbed.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s2">
+<h2>2. The aggregate operator</h2>
+
+<p>The point of building \(\mathrm{List}(\mathcal{I})\) at all is to compute the <em>single</em> idea that a coalition stands for.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 2.2</span> (Aggregate).
+The <em>aggregate</em> of a coalition is the function \(\mathsf{agg} : \mathrm{List}(\mathcal{I}) \to \mathcal{I}\) defined by the recurrence
+\[\mathsf{agg}([]) = e, \qquad \mathsf{agg}(a :: \mathbf{x}) = a \circ \mathsf{agg}(\mathbf{x}).\]
+</div>
+
+<p>Equivalently, \(\mathsf{agg}\) is the unique monoid homomorphism \(\mathrm{List}(\mathcal{I}) \to \IdMon\) that sends each singleton \([a]\) to \(a\); existence and uniqueness are the universal property of the free monoid<sup class="cite">[6]</sup>. Note that \(\mathsf{agg}\) is the <em>right-leaning</em> fold: a triple is read as \(a \circ (b \circ c)\), not as \((a \circ b) \circ c\). The two readings agree because \(\circ\) is associative.</p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.1</span> (Small-coalition aggregates).
+For every \(a, b, c \in \mathcal{I}\):
+\[\mathsf{agg}([]) = e, \quad \mathsf{agg}([a]) = a, \quad \mathsf{agg}([a,b]) = a \circ b, \quad \mathsf{agg}([a,b,c]) = a \circ (b \circ c).\]
+</div>
+<p class="proof">The first line is the base of the recurrence. For the second: \(\mathsf{agg}([a]) = a \circ \mathsf{agg}([]) = a \circ e = a\) by the right identity. The third and fourth unfold by iteration.<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.2</span> (Append decomposition).
+For all coalitions \(\mathbf{x}, \mathbf{y} \in \mathrm{List}(\mathcal{I})\):
+\[\mathsf{agg}(\mathbf{x} {+\!+} \mathbf{y}) = \mathsf{agg}(\mathbf{x}) \circ \mathsf{agg}(\mathbf{y}).\]
+</div>
+<p class="proof">By induction on \(\mathbf{x}\). If \(\mathbf{x} = []\): \(\mathsf{agg}(\mathbf{y}) = e \circ \mathsf{agg}(\mathbf{y}) = \mathsf{agg}(\mathbf{y})\). For \(\mathbf{x} = a :: \mathbf{x}'\):
+\[\mathsf{agg}(a :: (\mathbf{x}' {+\!+} \mathbf{y})) = a \circ \mathsf{agg}(\mathbf{x}' {+\!+} \mathbf{y}) = a \circ (\mathsf{agg}(\mathbf{x}') \circ \mathsf{agg}(\mathbf{y})) = (a \circ \mathsf{agg}(\mathbf{x}')) \circ \mathsf{agg}(\mathbf{y}) = \mathsf{agg}(a::\mathbf{x}') \circ \mathsf{agg}(\mathbf{y}),\]
+using the induction hypothesis and associativity.<span class="proof-end"></span></p>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.1</span> (Trivial-side identities).
+For every coalition \(\mathbf{x}\): \(\mathsf{agg}(\mathbf{x} {+\!+} []) = \mathsf{agg}(\mathbf{x}) = \mathsf{agg}([] {+\!+} \mathbf{x})\).
+</div>
+<p class="proof">From Lemma 2.2 together with \(\mathsf{agg}([]) = e\) and the identity laws.<span class="proof-end"></span></p>
+
+<p>The aggregate is the chain operator from Chapter 1 restricted to coalitions considered as lists:
+\[\mathsf{agg}([a_1, \ldots, a_n]) = \mathsf{Ch}(a_1, a_2, \ldots, a_n) = a_1 \circ a_2 \circ \cdots \circ a_n.\]
+The point of singling out \(\mathsf{agg}\) as a separate piece of vocabulary is not to introduce a new operation but to license the social/cognitive readings developed in this chapter: chains are syntactic, aggregates are <em>joint judgements</em> of a collective (List &amp; Pettit<sup class="cite">[4]</sup>).</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s3">
+<h2>3. Committees and assemblies</h2>
+
+<p>Real social bodies are rarely flat. The minimal structural elaboration is to mark one member out as the <em>chair</em> — the agenda-setter, the institutionally distinguished node<sup class="cite">[3]</sup>. The next is to group flat coalitions into a meta-coalition.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 2.3</span> (Committee).
+A <em>committee</em> is a pair \(\mathbf{C} = (\mathrm{chair}, \mathrm{members})\) with \(\mathrm{chair} \in \mathcal{I}\) and \(\mathrm{members} \in \mathrm{List}(\mathcal{I})\). The <em>collective idea</em> of \(\mathbf{C}\) is
+\[\mathbf{C}.\mathrm{collective} = \mathrm{chair} \circ \mathsf{agg}(\mathrm{members}).\]
+</div>
+
+<div class="defn">
+<span class="thm-label">Definition 2.4</span> (Assembly).
+An <em>assembly</em> is a list of committees, \(\mathbf{A} = [\mathbf{C}_1, \ldots, \mathbf{C}_k]\). Its <em>collective idea</em> is the aggregate of the collective ideas of its committees:
+\[\mathbf{A}.\mathrm{collective} = \mathsf{agg}([\mathbf{C}_1.\mathrm{collective}, \ldots, \mathbf{C}_k.\mathrm{collective}]).\]
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.3</span> (Committee equals chair-prepended aggregate).
+For every committee \(\mathbf{C} = (\mathrm{chair}, \mathrm{members})\):
+\[\mathbf{C}.\mathrm{collective} = \mathsf{agg}(\mathrm{chair} :: \mathrm{members}).\]
+</div>
+<p class="proof">By Definition 2.3 the left-hand side is \(\mathrm{chair} \circ \mathsf{agg}(\mathrm{members})\), which by Definition 2.2 is exactly \(\mathsf{agg}(\mathrm{chair} :: \mathrm{members})\).<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.4</span> (Empty / silent / singleton committees).
+<ol>
+  <li>If \(\mathrm{members} = []\) then \(\mathbf{C}.\mathrm{collective} = \mathrm{chair}\).</li>
+  <li>If \(\mathrm{chair} = e\) then \(\mathbf{C}.\mathrm{collective} = \mathsf{agg}(\mathrm{members})\).</li>
+  <li>If \(\mathbf{C} = (\mathrm{chair}, [])\) then \(\mathbf{C}.\mathrm{collective} = \mathrm{chair}\).</li>
+</ol>
+</div>
+<p class="proof">(1) and (3): \(\mathrm{chair} \circ \mathsf{agg}([]) = \mathrm{chair} \circ e = \mathrm{chair}\). (2): \(e \circ \mathsf{agg}(\mathrm{members}) = \mathsf{agg}(\mathrm{members})\).<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.5</span> (Small assemblies).
+\(([\,]).\mathrm{collective} = e\); \(([\mathbf{C}]).\mathrm{collective} = \mathbf{C}.\mathrm{collective}\); \(([\mathbf{C}, \mathbf{C}']).\mathrm{collective} = \mathbf{C}.\mathrm{collective} \circ \mathbf{C}'.\mathrm{collective}\).
+</div>
+
+<p>Flat coalitions, committees, and assemblies are distinguished <em>structurally</em> but not <em>aggregationally</em>: each has a collective idea in \(\mathcal{I}\), but the road from members to that idea takes a different form. In Chapter 5 the emergence cocycle \(\omega\) <em>does</em> distinguish them — this is the formal content of Sawyer's claim that group cognition is not a flattening of individual contributions<sup class="cite">[14]</sup>.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s4">
+<h2>4. Silence: idempotence at zero and the silent coalition</h2>
+
+<p>A coalition has many internal degrees of freedom that the aggregate cannot detect. The simplest is silence.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 2.5</span> (Silent agent).
+An agent \(a \in \mathcal{I}\) is <em>silent</em> iff \(a = e\). A coalition \(\mathbf{x}\) is <em>all-silent</em> iff every member is silent.
+</div>
+
+<div class="defn">
+<span class="thm-label">Definition 2.6</span> (Trivial coalition).
+For each \(n \in \mathbb{N}\), the <em>trivial coalition of length \(n\)</em> is
+\[\mathbf{0}_n = \underbrace{[e, e, \ldots, e]}_{n\text{ copies}} = \mathrm{List.replicate}(n, e).\]
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.6</span> (Silent insertion at the head).
+\(\mathsf{agg}(e :: \mathbf{x}) = \mathsf{agg}(\mathbf{x})\).
+</div>
+<p class="proof">\(\mathsf{agg}(e :: \mathbf{x}) = e \circ \mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{x})\) by the left identity.<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.7</span> (Trivial collapse).
+\(\mathsf{agg}(\mathbf{0}_n) = e\) for every \(n \geq 0\).
+</div>
+<p class="proof">By induction on \(n\). Base \(n = 0\): \(\mathsf{agg}([]) = e\). Inductive step: \(\mathsf{agg}(\mathbf{0}_{n+1}) = \mathsf{agg}(e :: \mathbf{0}_n) = \mathsf{agg}(\mathbf{0}_n) = e\) by Lemma 2.6 and the inductive hypothesis.<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.8</span> (All-silent collapse).
+If \(\mathbf{x}\) is all-silent then \(\mathsf{agg}(\mathbf{x}) = e\).
+</div>
+<p class="proof">Induction on \(\mathbf{x}\). If \(\mathbf{x} = []\) then \(\mathsf{agg}(\mathbf{x}) = e\). If \(\mathbf{x} = a :: \mathbf{x}'\) with \(a = e\) and \(\mathbf{x}'\) all-silent: \(\mathsf{agg}(\mathbf{x}) = e \circ \mathsf{agg}(\mathbf{x}') = e \circ e = e\).<span class="proof-end"></span></p>
+
+<div class="prop">
+<span class="prop-label">Proposition 2.2</span> (Bulk silent absorption).
+For every \(\mathbf{x} \in \mathrm{List}(\mathcal{I})\) and every \(n \geq 0\):
+\[\mathsf{agg}(\mathbf{0}_n {+\!+} \mathbf{x}) = \mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{x} {+\!+} \mathbf{0}_n).\]
+In particular, \(\mathsf{agg}(e :: \mathbf{x} {+\!+} [e]) = \mathsf{agg}(\mathbf{x})\).
+</div>
+<p class="proof">By Lemma 2.2: \(\mathsf{agg}(\mathbf{0}_n {+\!+} \mathbf{x}) = \mathsf{agg}(\mathbf{0}_n) \circ \mathsf{agg}(\mathbf{x}) = e \circ \mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{x})\), where the second equality is Lemma 2.7 and the third is the left identity. The right-side identity is symmetric.<span class="proof-end"></span></p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s5">
+<h2>5. Coalition equivalence</h2>
+
+<div class="defn">
+<span class="thm-label">Definition 2.7</span> (Coalition equivalence).
+Two coalitions \(\mathbf{x}, \mathbf{y} \in \mathrm{List}(\mathcal{I})\) are <em>coalition-equivalent</em>, written \(\mathbf{x} \sim \mathbf{y}\), iff \(\mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{y})\).
+</div>
+
+<p>The relation \(\sim\) is the kernel pair of the homomorphism \(\mathsf{agg}\). By a general fact about kernel pairs of monoid maps<sup class="cite">[7]</sup>, \(\sim\) is an equivalence relation <em>and</em> a congruence with respect to concatenation.</p>
+
+<div class="prop">
+<span class="prop-label">Proposition 2.3</span> (\(\sim\) is an equivalence). The relation \(\sim\) on \(\mathrm{List}(\mathcal{I})\) is reflexive, symmetric, and transitive.
+</div>
+
+<div class="prop">
+<span class="prop-label">Proposition 2.4</span> (\(\sim\) is a congruence for \({+\!+}\)).
+If \(\mathbf{x}_1 \sim \mathbf{x}_2\) and \(\mathbf{y}_1 \sim \mathbf{y}_2\), then \(\mathbf{x}_1 {+\!+} \mathbf{y}_1 \sim \mathbf{x}_2 {+\!+} \mathbf{y}_2\).
+</div>
+<p class="proof">By Lemma 2.2: \(\mathsf{agg}(\mathbf{x}_1 {+\!+} \mathbf{y}_1) = \mathsf{agg}(\mathbf{x}_1) \circ \mathsf{agg}(\mathbf{y}_1) = \mathsf{agg}(\mathbf{x}_2) \circ \mathsf{agg}(\mathbf{y}_2) = \mathsf{agg}(\mathbf{x}_2 {+\!+} \mathbf{y}_2)\).<span class="proof-end"></span></p>
+
+<div class="prop">
+<span class="prop-label">Proposition 2.5</span> (Singleton equivalence is equality).
+\([a] \sim [b] \iff a = b\).
+</div>
+<p class="proof">By Lemma 2.1, \(\mathsf{agg}([a]) = a\) and \(\mathsf{agg}([b]) = b\).<span class="proof-end"></span></p>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.2</span> (Trivial-empty equivalence). \(\mathbf{0}_n \sim []\) for every \(n \geq 0\).
+</div>
+<p class="proof">\(\mathsf{agg}(\mathbf{0}_n) = e = \mathsf{agg}([])\) by Lemma 2.7.<span class="proof-end"></span></p>
+
+<div class="remark">
+<span class="remark-label">Remark.</span> The quotient \(\mathrm{List}(\mathcal{I})/{\!\sim}\) is isomorphic to the image of \(\mathsf{agg}\) in \(\mathcal{I}\). So coalition equivalence <em>is</em> the difference between <em>which agents are present</em> (a list-level fact) and <em>what the coalition collectively says</em> (an idea-level fact). The whole problem of social choice can be cast as the search for further relations on \(\mathrm{List}(\mathcal{I})\) that refine \(\sim\) in interesting ways (Arrow<sup class="cite">[2]</sup>, Sen<sup class="cite">[3]</sup>).
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s6">
+<h2>6. Insertion and delegation</h2>
+
+<p>A coalition is rarely born in its final form. It grows by accretion: a new member joins at some position; a sub-coalition delegates itself en bloc; a co-opted body is appended at the end.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 2.8</span> (Positional insertion).
+For \(a \in \mathcal{I}\), \(n \in \mathbb{N}\) and \(\mathbf{x} \in \mathrm{List}(\mathcal{I})\), the <em>insertion of \(a\) at position \(n\)</em> is \(\mathrm{insertAt}(a, n, \mathbf{x})\) defined by:
+\[\mathrm{insertAt}(a, n, []) = [a], \quad \mathrm{insertAt}(a, 0, \mathbf{x}) = a :: \mathbf{x}, \quad \mathrm{insertAt}(a, n{+}1, x :: \mathbf{x}') = x :: \mathrm{insertAt}(a, n, \mathbf{x}').\]
+If \(n\) exceeds the length of \(\mathbf{x}\) the agent is appended at the end.
+</div>
+
+<div class="defn">
+<span class="thm-label">Definition 2.9</span> (Delegation).
+The <em>delegation</em> of \(\mathbf{y}\) into \(\mathbf{x}\) is the concatenation \(\mathbf{x} {+\!+} \mathbf{y}\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.9</span> (Delegation decomposition).
+\(\mathsf{agg}(\mathbf{x} {+\!+} \mathbf{y}) = \mathsf{agg}(\mathbf{x}) \circ \mathsf{agg}(\mathbf{y})\). Delegation is associative: \((\mathbf{x} {+\!+} \mathbf{y}) {+\!+} \mathbf{z} = \mathbf{x} {+\!+} (\mathbf{y} {+\!+} \mathbf{z})\).
+</div>
+<p class="proof">The decomposition is Lemma 2.2; the associativity is the standard associativity of list concatenation<sup class="cite">[7]</sup>.<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 2.10</span> (Silent positional insertion).
+For every \(n \geq 0\) and every \(\mathbf{x} \in \mathrm{List}(\mathcal{I})\):
+\[\mathsf{agg}(\mathrm{insertAt}(e, n, \mathbf{x})) = \mathsf{agg}(\mathbf{x}).\]
+</div>
+<p class="proof">Induction on \(\mathbf{x}\), with \(n\) free. For \(\mathbf{x} = []\): \(\mathrm{insertAt}(e, n, []) = [e]\) and \(\mathsf{agg}([e]) = e = \mathsf{agg}([])\). For \(\mathbf{x} = x :: \mathbf{x}'\) split on \(n\): if \(n=0\), \(\mathsf{agg}(e :: x :: \mathbf{x}') = \mathsf{agg}(x :: \mathbf{x}')\) by Lemma 2.6. If \(n=k+1\), \(\mathsf{agg}(x :: \mathrm{insertAt}(e, k, \mathbf{x}')) = x \circ \mathsf{agg}(\mathrm{insertAt}(e, k, \mathbf{x}')) = x \circ \mathsf{agg}(\mathbf{x}') = \mathsf{agg}(x :: \mathbf{x}')\) by the inductive hypothesis.<span class="proof-end"></span></p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s7">
+<h2>7. The headline theorems</h2>
+
+<p>Three theorems organize the rest of the development. The first is the social-composition law that says coalitions can be partitioned arbitrarily before aggregation. The second is the silent-agent invariance theorem. The third is the social-congruence theorem that says coalition equivalence is preserved by every coalitional move introduced in this chapter.</p>
+
+<div class="thm">
+<span class="thm-label">Theorem 2.1</span> (Coalition associativity).
+For every \(\mathbf{x}, \mathbf{y}, \mathbf{z} \in \mathrm{List}(\mathcal{I})\), the aggregate of a binary delegation decomposes as
+\[\mathsf{agg}(\mathbf{x} {+\!+} \mathbf{y}) = \mathsf{agg}(\mathbf{x}) \circ \mathsf{agg}(\mathbf{y}),\]
+and the aggregate of a triple delegation is independent of the parenthesization:
+\[\mathsf{agg}((\mathbf{x} {+\!+} \mathbf{y}) {+\!+} \mathbf{z}) = \mathsf{agg}(\mathbf{x} {+\!+} (\mathbf{y} {+\!+} \mathbf{z})).\]
+</div>
+<p class="proof">The decomposition is Lemma 2.2. For the reassociation, apply Lemma 2.2 on each side:
+\[\mathsf{agg}((\mathbf{x} {+\!+} \mathbf{y}) {+\!+} \mathbf{z}) = (\mathsf{agg}(\mathbf{x}) \circ \mathsf{agg}(\mathbf{y})) \circ \mathsf{agg}(\mathbf{z}) = \mathsf{agg}(\mathbf{x}) \circ (\mathsf{agg}(\mathbf{y}) \circ \mathsf{agg}(\mathbf{z})) = \mathsf{agg}(\mathbf{x} {+\!+} (\mathbf{y} {+\!+} \mathbf{z})),\]
+where the middle equality uses the associativity of \(\circ\).<span class="proof-end"></span></p>
+
+<p>The informal social-choice literature (Arrow<sup class="cite">[2]</sup>, Sen<sup class="cite">[3]</sup>) usually states the result for two sub-coalitions only. The formal version packages both the two-coalition decomposition and three-coalition reassociation into a single proposition, locating the only structural input as the associativity of \(\circ\).</p>
+
+<div class="thm">
+<span class="thm-label">Theorem 2.2</span> (Silent-agent invariance).
+For every coalition \(\mathbf{x} \in \mathrm{List}(\mathcal{I})\) the following four identities hold:
+<ol>
+  <li>\(\mathsf{agg}(\mathrm{insertAt}(e, n, \mathbf{x})) = \mathsf{agg}(\mathbf{x})\) for every \(n \geq 0\);</li>
+  <li>\(\mathsf{agg}(\mathbf{0}_n {+\!+} \mathbf{x}) = \mathsf{agg}(\mathbf{x})\) for every \(n \geq 0\);</li>
+  <li>\(\mathsf{agg}(\mathbf{x} {+\!+} \mathbf{0}_n) = \mathsf{agg}(\mathbf{x})\) for every \(n \geq 0\);</li>
+  <li>\(\mathsf{agg}(e :: \mathbf{x} {+\!+} [e]) = \mathsf{agg}(\mathbf{x})\).</li>
+</ol>
+</div>
+<p class="proof">Item (1) is Lemma 2.10. For (2) and (3): \(\mathsf{agg}(\mathbf{0}_n {+\!+} \mathbf{x}) = \mathsf{agg}(\mathbf{0}_n) \circ \mathsf{agg}(\mathbf{x}) = e \circ \mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{x})\) (using Lemmas 2.2 and 2.7); symmetric for (3). Item (4) follows from two applications of the above.<span class="proof-end"></span></p>
+
+<p>The informal version, traceable to Sen's discussion of "abstention-invariance"<sup class="cite">[3]</sup>, treats only the addition of one silent agent at the head. The formal statement is a conjunction of four invariances and is therefore strictly sharper.</p>
+
+<div class="thm">
+<span class="thm-label">Theorem 2.3</span> (Social congruence).
+The relation \(\sim\) on \(\mathrm{List}(\mathcal{I})\) enjoys the following seven properties:
+<ol>
+  <li>(Reflexivity) \(\mathbf{x} \sim \mathbf{x}\) for every \(\mathbf{x}\).</li>
+  <li>(Symmetry) \(\mathbf{x} \sim \mathbf{y}\) implies \(\mathbf{y} \sim \mathbf{x}\).</li>
+  <li>(Transitivity) \(\mathbf{x} \sim \mathbf{y}\) and \(\mathbf{y} \sim \mathbf{z}\) imply \(\mathbf{x} \sim \mathbf{z}\).</li>
+  <li>(Bilateral congruence) \(\mathbf{x}_1 \sim \mathbf{x}_2\) and \(\mathbf{y}_1 \sim \mathbf{y}_2\) imply \(\mathbf{x}_1 {+\!+} \mathbf{y}_1 \sim \mathbf{x}_2 {+\!+} \mathbf{y}_2\).</li>
+  <li>(Left congruence) \(\mathbf{x} \sim \mathbf{y}\) implies \(\mathbf{z} {+\!+} \mathbf{x} \sim \mathbf{z} {+\!+} \mathbf{y}\) for every \(\mathbf{z}\).</li>
+  <li>(Right congruence) \(\mathbf{x} \sim \mathbf{y}\) implies \(\mathbf{x} {+\!+} \mathbf{z} \sim \mathbf{y} {+\!+} \mathbf{z}\) for every \(\mathbf{z}\).</li>
+  <li>(Silent insertion) \(\mathbf{x} \sim \mathrm{insertAt}(e, n, \mathbf{x})\) for every \(n\) and every \(\mathbf{x}\).</li>
+</ol>
+</div>
+<p class="proof">Items (1)–(3) are Proposition 2.3. Item (4) is Proposition 2.4. Items (5) and (6) are specializations of (4). Item (7) is Lemma 2.10: \(\mathbf{x} \sim \mathrm{insertAt}(e, n, \mathbf{x})\) iff \(\mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathrm{insertAt}(e, n, \mathbf{x}))\), which is exactly the lemma.<span class="proof-end"></span></p>
+
+<p>The seven items together state that \(\sim\) is a monoid congruence on the free monoid \((\mathrm{List}(\mathcal{I}), {+\!+}, [])\) that is moreover stable under the silent-insertion move<sup class="cite">[7]</sup>. This is the strongest statement that holds <em>without</em> commutativity.</p>
+
+<h3>Corollaries</h3>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.3</span> (Two-coalition decomposition).
+\(\mathsf{agg}(\mathbf{x} {+\!+} \mathbf{y}) = \mathsf{agg}(\mathbf{x}) \circ \mathsf{agg}(\mathbf{y})\).
+</div>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.4</span> (Trivial-coalition collapse).
+If every member of \(\mathbf{x}\) is silent, \(\mathsf{agg}(\mathbf{x}) = e\).
+</div>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.5</span> (Insertion-deletion congruence).
+For every \(n\) and every \(\mathbf{x}\), \(\mathbf{x} \sim \mathrm{insertAt}(e, n, \mathbf{x})\).
+</div>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.6</span> (Committee-collective decomposition).
+For every committee \(\mathbf{C} = (\mathrm{chair}, \mathrm{members})\): \(\mathbf{C}.\mathrm{collective} = \mathrm{chair} \circ \mathsf{agg}(\mathrm{members})\).
+</div>
+
+<div class="cor">
+<span class="thm-label">Corollary 2.7</span> (Assembly-pair decomposition).
+For any two committees \(\mathbf{C}\), \(\mathbf{C}'\): \(([\mathbf{C}, \mathbf{C}']).\mathrm{collective} = \mathbf{C}.\mathrm{collective} \circ \mathbf{C}'.\mathrm{collective}\).
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s8">
+<h2>8. The zoo: six historical positions</h2>
+
+<p>We close, as ever, with the chapter's six historical positions matched against the formalism. Each entry restates a classical claim in the vocabulary of \(\mathsf{agg}\), \(\circ\), \(\sim\), and silence, then uses the headline theorems to assess its formal content.</p>
+
+<div class="zoo-entry" id="zoo-granovetter">
+<h4>Granovetter (1973, 1983): The strength of weak ties</h4>
+<div class="zoo-section">Original Claim</div>
+<p>In "The strength of weak ties"<sup class="cite">[8]</sup>, Granovetter argues that the diffusion of information through a social network is dominated by the rare, non-redundant "weak" ties bridging dense cliques, rather than by the many strong ties internal to those cliques. The thesis was sharpened in<sup class="cite">[9]</sup> as the claim that the expected informational reach of a network is essentially a function of its bridges and not its hubs.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Cast a person's network position as a coalition \(\mathbf{x} = [a_1, \ldots, a_n]\) in which the agent's \(i\)-th tie is recorded as the contributed idea \(a_i \in \mathcal{I}\). A <em>strong</em> tie is one whose contribution is silent or near-silent: it returns nothing the agent does not already have, so \(a_i = e\). A <em>weak</em> tie is one whose contribution is non-trivial: \(a_i \neq e\). By Theorem 2.2, the silent (strong) ties may be inserted or deleted at any position without changing \(\mathsf{agg}(\mathbf{x})\). Hence
+\[\mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{x}_{\text{weak}}),\]
+where \(\mathbf{x}_{\text{weak}}\) is the sublist of non-silent contributions: the coalition's aggregate is dominated, in the strict sense of equality, by its non-\(e\) insertions.</p>
+<div class="zoo-section">Status</div>
+<p><strong>True as a theorem of the bare framework.</strong> The required machinery is Theorem 2.2(1) applied repeatedly to the silent contributions, together with Lemma 2.2.</p>
+<div class="zoo-section">Commentary</div>
+<p>The translation flattens an originally probabilistic claim about <em>expected</em> informational reach into a deterministic one about <em>actual</em> aggregates, but the structural insight is preserved exactly: only the non-trivial insertions matter. A further prediction unique to the formalism is that the bridging-versus-hub asymmetry in informational reach is, at the level of the aggregate, <em>quantised</em>: silent contributions add nothing at all. Empirical departures from this quantised limit are then diagnostic of the failure of the silent-equals-\(e\) idealisation and motivate the resonance refinement of Chapter 4.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-olson">
+<h4>Olson (1965): The logic of collective action</h4>
+<div class="zoo-section">Original Claim</div>
+<p><em>The Logic of Collective Action</em><sup class="cite">[1]</sup>, sharpened in Hardin<sup class="cite">[5]</sup>, argues that in a group facing the production of a public good, members below a critical threshold of incentive will free-ride and contribute nothing. The collective output is therefore the work of the non-free-riders alone; the silent majority is, despite its size, formally absent from the outcome.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Model a producing group as a coalition \(\mathbf{x} = [a_1, \ldots, a_n]\) where each \(a_i\) is the agent's contribution. A free-rider is an agent with \(a_i = e\). By Corollary 2.4, every all-silent sub-coalition aggregates to \(e\), and by Lemma 2.2:
+\[\mathsf{agg}(\mathbf{x}) = \mathsf{agg}(\mathbf{x}_{\text{contrib}}) \circ e = \mathsf{agg}(\mathbf{x}_{\text{contrib}}),\]
+where \(\mathbf{x}_{\text{contrib}}\) is the sub-coalition of non-silent agents.</p>
+<div class="zoo-section">Status</div>
+<p><strong>True as a corollary of Theorems 2.1 and 2.2.</strong></p>
+<div class="zoo-section">Commentary</div>
+<p>The result is, formally, the dual of the Granovetter zoo entry: the same theorem (silent-agent invariance) supplies both. What distinguishes them is the interpretation of \(e\): in Granovetter it is the redundancy of a strong tie's information; in Olson it is the free-rider's deliberate non-contribution. The familiar Olsonian prediction that public-good provision should fall <em>nonlinearly</em> with group size cannot be read off the bare framework — it requires the cocycle \(\omega\) of Chapter 5 together with the grading \(\deg\) of Chapter 9.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-latour">
+<h4>Latour (2005): Actor-network theory</h4>
+<div class="zoo-section">Original Claim</div>
+<p>In <em>Reassembling the Social</em><sup class="cite">[10]</sup>, anticipated in Callon's "sociology of translation"<sup class="cite">[12]</sup>, Latour argues that social action is the joint effect of <em>heterogeneous</em> networks mixing human and non-human actors. The key methodological move is the refusal to privilege human contributions a priori.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Take \(\mathcal{I}\) to contain both human-borne and non-human-borne ideas: \(\mathcal{I} = \mathcal{I}_H \cup \mathcal{I}_N\). An actor-network is then a coalition \(\mathbf{x} \in \mathrm{List}(\mathcal{I})\) with no constraint on which sub-carrier each \(a_i\) comes from. The collective effect is \(\mathsf{agg}(\mathbf{x})\). By Proposition 2.1, any relabelling that respects the human/non-human distinction acts componentwise and commutes with \(\mathsf{agg}\); no analytic privilege attaches to the human entries by the structure of the formalism.</p>
+<div class="zoo-section">Status</div>
+<p><strong>True as a structural property of the bare framework.</strong> The relevant piece is the naturality of \(\mathsf{agg}\) under relabelling (Proposition 2.1), together with the absence of any structural distinction between \(\mathcal{I}_H\) and \(\mathcal{I}_N\).</p>
+<div class="zoo-section">Commentary</div>
+<p>The formalisation supplies a precise version of Latour's "methodological symmetry" principle. Where the formalism diverges from ANT is in the use of <em>ordered</em> lists rather than networks: the chapter's coalitions impose an enumeration that ANT explicitly rejects. The two views can be reconciled by passing to the quotient \(\mathrm{List}(\mathcal{I})/{\!\sim}\) and — under additional commutativity hypotheses — to the quotient by permutation, where the result is exactly the multiset structure ANT prefers.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-bourdieu">
+<h4>Bourdieu (1984, 1990): Distinction</h4>
+<div class="zoo-section">Original Claim</div>
+<p><em>Distinction</em><sup class="cite">[13]</sup> and <em>The Logic of Practice</em><sup class="cite">[13b]</sup> argue that taste, judgement, and the classifications of practical reason emerge from a graded, structured field whose hierarchies are reproduced through the embodied dispositions Bourdieu calls <em>habitus</em>. A judgement is not the output of an undifferentiated mass but of an internally graded body in which some positions weigh more than others.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Take a committee in the sense of Definition 2.3 as the formal counterpart of a Bourdieusian <em>graded</em> body: the chair carries the weight of institutional position, the members carry the weight of dispersed dispositions. The aggregate norm of the committee is then
+\[\mathbf{C}.\mathrm{collective} = \mathrm{chair} \circ \mathsf{agg}(\mathrm{members}).\]
+Habitus is the global pattern by which \(\mathrm{chair}\) is selected. Distinction is the inequality \(\mathbf{C}.\mathrm{collective} \neq (\mathrm{chair}', \mathrm{members}).\mathrm{collective}\) when the chair is changed.</p>
+<div class="zoo-section">Status</div>
+<p><strong>Contingent.</strong> The bare framework underwrites the committee construction and the structural inequality \(\mathrm{chair} \circ x \neq \mathrm{chair}' \circ x\) in general. Whether it underwrites Bourdieu's stronger empirical claim that distinction is reproduced <em>stably</em> requires the additional axiom that the chair-selection map is a fixed point of a higher-order dynamics on \(\mathcal{I}\).</p>
+<div class="zoo-section">Commentary</div>
+<p>The formalisation is faithful to the structural part of Bourdieu's account — the committee <em>is</em> a graded coalition — and to the predicted asymmetry between chair and members. A natural next step is to add a degree map \(\deg : \mathcal{I} \to G\) such that \(\deg(\mathbf{C}.\mathrm{collective}) = \deg(\mathrm{chair}) + \deg(\mathsf{agg}(\mathrm{members}))\); this would give Bourdieu's "volume of capital" a direct algebraic referent.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-sawyer">
+<h4>Sawyer (2005): Emergent group cognition</h4>
+<div class="zoo-section">Original Claim</div>
+<p><em>Social Emergence</em><sup class="cite">[14]</sup> argues that group cognition is irreducible to the cognition of its members: the collective output of a group exhibits properties not present in any individual contribution and not predictable from the unstructured sum of contributions. Sawyer's empirical exemplar is improvisational theatre, where the joint scene is undeniably the work of the ensemble but cannot be decomposed into separate authorial moves.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>For a coalition \(\mathbf{x} = [a_1, \ldots, a_n]\) define the <em>emergence defect</em>
+\[\omega(\mathbf{x}) = v(\mathsf{agg}(\mathbf{x})) - \sum_{i=1}^{n} v(a_i),\]
+where \(v : \mathcal{I} \to A\) is any valuation into an abelian group \(A\). By Corollary 2.3 together with the cocycle identity of Chapter 5, \(\omega\) collects, for a binary delegation, exactly the cocycle value:
+\[\omega(\mathbf{x} {+\!+} \mathbf{y}) - \omega(\mathbf{x}) - \omega(\mathbf{y}) = \omega(\mathsf{agg}(\mathbf{x}), \mathsf{agg}(\mathbf{y})).\]
+The non-vanishing of \(\omega\) on a committee aggregate is the formal content of group-level emergence.</p>
+<div class="zoo-section">Status</div>
+<p><strong>True as a corollary of the cocycle theorem (Theorem 5 of Chapter 5)</strong> applied to the committee construction. This is the chapter's only zoo entry that strictly requires <em>more</em> structure than the bare framework: a valuation \(v\) and its associated cocycle \(\omega\).</p>
+<div class="zoo-section">Commentary</div>
+<p>The structural prediction is that, under the cocycle decomposition, the irreducibility Sawyer diagnoses is not located in the aggregate operator (which is fully determined by the monoid) but in the failure of \(v\) to be a homomorphism. This rewards the methodological investment of the cocycle apparatus and supplies a quantitative diagnostic — the cocycle's cohomology class — for the strength of group emergence.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-condorcet">
+<h4>Condorcet (1785): The jury theorem</h4>
+<div class="zoo-section">Original Claim</div>
+<p>The <em>Essai</em><sup class="cite">[15]</sup>, recovered analytically in Black<sup class="cite">[16]</sup> and probabilistically in Young<sup class="cite">[17]</sup>, proves that, under independence and better-than-chance individual competence, the probability of correct majority decision tends to one as the size of the jury grows. The limiting object is an <em>idealised aggregator</em> that perfectly recovers the truth from a sufficiently large coalition.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Take an idea algebra \(\IdMon\) with \(\circ\) commutative and with left-cancellation. For a coalition \(\mathbf{x} = [a_1, \ldots, a_n]\) in which each \(a_i\) is either a "correct" idea \(t \in \mathcal{I}\) or its inverse \(t^{-1}\), the aggregate
+\[\mathsf{agg}(\mathbf{x}) = a_1 \circ \cdots \circ a_n = t^{2k - n}\]
+where \(k\) is the number of \(t\)-votes. Coalition equivalence in this setting is sensitive to the <em>count</em> alone, not to the order: \(\mathbf{x} \sim \mathbf{y}\) iff their net \(t\)-power agrees. As \(n \to \infty\) with each \(a_i = t\) independently with probability \(p > 1/2\), the law of large numbers gives \(\mathsf{agg}(\mathbf{x}) \to t^\infty\).</p>
+<div class="zoo-section">Status</div>
+<p><strong>True under the additional axioms of commutativity and cancellation.</strong> The bare framework gives only the structural skeleton; the probabilistic limit requires standard additional hypotheses external to the algebra.</p>
+<div class="zoo-section">Commentary</div>
+<p>The Condorcet entry shows the opposite face of the formalism from Granovetter's: where the latter exploits silent insertion to delete redundant ties, the former exploits cancellation to make <em>antithetic</em> contributions cancel exactly. The two together delimit the algebraic envelope of any aggregation theorem expressible in the bare framework: at one extreme, all dissent collapses to silence; at the other, dissent and assent cancel out along the orbit of an inverse.</p>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s9">
+<h2>9. Chapter summary</h2>
+
+<p>We have introduced the coalition \(\mathrm{Coalition}(\mathcal{I}) = \mathrm{List}(\mathcal{I})\) as the free monoidal hull of an idea algebra and the aggregate \(\mathsf{agg}\) as the unique homomorphism extending the identity on singletons. We proved the three headline theorems — coalition associativity, silent-agent invariance, and social congruence of \(\sim\) — and recorded their five corollaries. The two structured variants, committees and assemblies, were introduced as carriers of the chair-distinguished and hierarchically-organised aggregations, and reduced to the flat case via Lemmas 2.3 and 2.5. The six zoo entries cast Granovetter, Olson, Latour, Bourdieu, Sawyer, and Condorcet within a single algebraic frame.</p>
+
+<p>The development of this chapter is the foundation for everything that follows. The grading of Chapter 9 grades the aggregate; the cocycle of Chapter 5 measures the defect of \(v \circ \mathsf{agg}\) from a homomorphism; the resonance pairing of Chapter 4 extends to a bilinear form on the coalition algebra. In each case the present chapter's three theorems and five corollaries are the silent infrastructure on which the new structure is laid.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="refs">
+<h2>References</h2>
+<div class="refs">
+<ol>
+  <li id="ref1">Olson, M. (1965). <em>The Logic of Collective Action</em>. Harvard University Press.</li>
+  <li id="ref2">Arrow, K. J. (1951). <em>Social Choice and Individual Values</em>. Wiley.</li>
+  <li id="ref3">Sen, A. K. (1970). <em>Collective Choice and Social Welfare</em>. Holden-Day.</li>
+  <li id="ref4">List, C. &amp; Pettit, P. (2011). <em>Group Agency: The Possibility, Design, and Status of Corporate Agents</em>. Oxford University Press.</li>
+  <li id="ref5">Hardin, R. (1982). <em>Collective Action</em>. Johns Hopkins University Press.</li>
+  <li id="ref6">MacLane, S. (1998). <em>Categories for the Working Mathematician</em>, 2nd ed. Springer.</li>
+  <li id="ref7">Howie, J. M. (1995). <em>Fundamentals of Semigroup Theory</em>. Oxford University Press.</li>
+  <li id="ref8">Granovetter, M. (1973). The strength of weak ties. <em>American Journal of Sociology</em> 78(6), 1360–1380.</li>
+  <li id="ref9">Granovetter, M. (1983). The strength of weak ties: A network theory revisited. <em>Sociological Theory</em> 1, 201–233.</li>
+  <li id="ref10">Latour, B. (2005). <em>Reassembling the Social: An Introduction to Actor-Network-Theory</em>. Oxford University Press.</li>
+  <li id="ref11">Callon, M. (1986). Some elements of a sociology of translation. In J. Law (ed.), <em>Power, Action and Belief</em>. Routledge.</li>
+  <li id="ref12">Callon, M. (1986). [same as 11]</li>
+  <li id="ref13">Bourdieu, P. (1984). <em>Distinction: A Social Critique of the Judgement of Taste</em>. Harvard University Press. (1990) <em>The Logic of Practice</em>. Stanford University Press.</li>
+  <li id="ref14">Sawyer, R. K. (2005). <em>Social Emergence: Societies as Complex Systems</em>. Cambridge University Press.</li>
+  <li id="ref15">Condorcet, M. de (1785). <em>Essai sur l'application de l'analyse à la probabilité des décisions rendues à la pluralité des voix</em>. Paris.</li>
+  <li id="ref16">Black, D. (1958). <em>The Theory of Committees and Elections</em>. Cambridge University Press.</li>
+  <li id="ref17">Young, H. P. (1988). Condorcet's theory of voting. <em>American Political Science Review</em> 82(4), 1231–1244.</li>
+</ol>
+</div>
+</section>
+
+<div class="chapter-nav">
+  <a href="ch01.html">← Chapter 1: The Idea Monoid</a>
+  <a href="ch03.html">Chapter 3: Aufhebung →</a>
+</div>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

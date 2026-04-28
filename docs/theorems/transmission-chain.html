@@ -3,28 +3,1134 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 7: Transmission Chain — Idea Theory</title>
+<title>Theorems 7 &amp; 11: Transmission Chain &amp; Cultural Transmission — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
-<h1>Theorem 7: Transmission Chain</h1>
-<div class="thm"><span class="thm-label">Theorem 7.</span> Let \(\omega\) be a normalized 2-cocycle. For any chain \(a_1,\ldots,a_n\),
-\[ v(a_1\circ\cdots\circ a_n) = \sum_i v(a_i) + \sum_{i=1}^{n-1}\omega(a_1\circ\cdots\circ a_i,\, a_{i+1}). \]</div>
 
-<h2>Proof sketch</h2>
-<p>Induction on \(n\). The base case \(n=2\) is the definition of \(\omega\). For the inductive step, apply the definition to \((a_1\circ\cdots\circ a_n)\circ a_{n+1}\) and use the inductive hypothesis on the prefix.</p>
+<h1>Theorems 7 &amp; 11: Transmission Chain &amp; Cultural Transmission</h1>
+<p class="entry-meta">
+  Lean: <code>IdeaTheory.Theorems7</code> &middot; <code>IdeaTheory.Theorems11</code>
+  &middot; 93 + 60 = 153 lemmas
+  &middot; Related: <a href="diffusion-extension.html">Diffusion Extension</a>, <a href="recombinant-growth.html">Recombinant Growth</a>
+</p>
 
-<p>Verified as <code>IdeaTheory.Theorems7.transmission_chain</code>.</p>
+<!-- ============================================================ TOC -->
+<nav style="background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:1em 1.4em;margin:1.5em 0;">
+<strong>Contents</strong>
+<ol style="margin:.4em 0 0 0;column-count:2;column-gap:2em;">
+  <li><a href="#headline">Headline Theorems</a>
+    <ol type="a" style="margin:.2em 0">
+      <li><a href="#thm71">Theorem 7.1 — Composition Identity Package</a></li>
+      <li><a href="#thm72">Theorem 7.2 — Identity Transmission</a></li>
+      <li><a href="#thm73">Theorem 7.3 — Compositional Fixed Point</a></li>
+      <li><a href="#thm111">Theorem 11.1 — Vertical-Transmission Composition</a></li>
+      <li><a href="#thm112">Theorem 11.2 — Faithfulness Characterization</a></li>
+      <li><a href="#thm113">Theorem 11.3 — Cultural-Equivalence Congruence</a></li>
+      <li><a href="#cor7">Corollaries 7.1–7.5</a></li>
+      <li><a href="#cor11">Corollaries 11.1–11.5</a></li>
+    </ol>
+  </li>
+  <li><a href="#sec2">Theorems7 Lemma Catalogue</a>
+    <ol type="a" style="margin:.2em 0">
+      <li><a href="#s7a">§7.A Iterated Composition (compPow)</a></li>
+      <li><a href="#s7b">§7.B Identity Rewrites</a></li>
+      <li><a href="#s7c">§7.C Reassociation Helpers</a></li>
+      <li><a href="#s7d">§7.D IdentityTransparent</a></li>
+      <li><a href="#s7e">§7.E FactorsThroughIdentity</a></li>
+      <li><a href="#s7f">§7.F IsSelfFixedPoint</a></li>
+      <li><a href="#s7g">§7.G PreservesIdentity</a></li>
+      <li><a href="#s7h">§7.H Identity Uniqueness</a></li>
+      <li><a href="#s7k">§7.K Transmission Chains</a></li>
+      <li><a href="#s7m">§7.M Self-Fixed Points under Chains</a></li>
+      <li><a href="#s7o">§7.O Additional Helpers</a></li>
+    </ol>
+  </li>
+  <li><a href="#sec3">Theorems11 Lemma Catalogue</a>
+    <ol type="a" style="margin:.2em 0">
+      <li><a href="#s11a">§11.1 Monoidal Closure</a></li>
+      <li><a href="#s11b">§11.2 Vertical Transmission</a></li>
+      <li><a href="#s11c">§11.3 Faithful Transmission</a></li>
+      <li><a href="#s11d">§11.4 Lineage Equivalence</a></li>
+    </ol>
+  </li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+</ol>
+</nav>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/cultural/boyd-richerson-dual-inheritance.html">Boyd–Richerson</a></li>
-<li><a href="../zoo/cultural/henrich-ratchet.html">Henrich ratchet</a></li>
-<li><a href="../zoo/cultural/sperber-attractors.html">Sperber attractors</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<!-- ============================================================ SECTION 1 -->
+<h2 id="headline">1. Headline Theorems</h2>
+
+<h3 id="thm71">Theorem 7.1 — Composition Identity Package</h3>
+<div class="thm"><span class="thm-label">Theorem 7.1 (theorem_7_1).</span>
+Let \((\mathcal{P},\circ,e)\) be an idea monoid. The following hold jointly:
+<ol style="margin:.5em 0 0 1.2em">
+  <li><strong>Two-sided identity transparency.</strong> For every \(a\in\mathcal{P}\):
+    \[e\circ a = a \qquad\text{and}\qquad a\circ e = a.\]</li>
+  <li><strong>Left-identity uniqueness.</strong> If \(e'\in\mathcal{P}\) satisfies \(e'\circ a = a\) for all \(a\), then \(e' = e\).</li>
+  <li><strong>Right-identity uniqueness.</strong> If \(e'\in\mathcal{P}\) satisfies \(a\circ e' = a\) for all \(a\), then \(e' = e\).</li>
+  <li><strong>Identity idempotence.</strong> \(e^n = e\) for all \(n\in\mathbb{N}\).</li>
+  <li><strong>Self-fixed point.</strong> \(e\circ e = e\), i.e., \(e\) is its own self-fixed point.</li>
+</ol>
+<pre><code class="language-lean">theorem theorem_7_1 (M : IdeaMonoid) :
+    (∀ a, M.op M.ident a = a) ∧
+    (∀ a, M.op a M.ident = a) ∧
+    (∀ e', (∀ a, M.op e' a = a) → e' = M.ident) ∧
+    (∀ e', (∀ a, M.op a e' = a) → e' = M.ident) ∧
+    (∀ n, compPow M n M.ident = M.ident) ∧
+    M.op M.ident M.ident = M.ident</code></pre>
+</div>
+
+<h3 id="thm72">Theorem 7.2 — Identity Transmission Theorem</h3>
+<div class="thm"><span class="thm-label">Theorem 7.2 (theorem_7_2).</span>
+The identity element \(e\) is completely transparent to chain computation. For any lists \(xs, ys\) of ideas:
+<ol style="margin:.5em 0 0 1.2em">
+  <li>\(\mathrm{chain}(e :: xs) = \mathrm{chain}(xs)\) — prepending \(e\) is vacuous.</li>
+  <li>\(\mathrm{chain}(xs\mathbin{+\!+}[e]) = \mathrm{chain}(xs)\) — appending \(e\) is vacuous.</li>
+  <li>\(\mathrm{chain}(xs\mathbin{+\!+} e :: ys) = \mathrm{chain}(xs\mathbin{+\!+} ys)\) — interior insertion of \(e\) is vacuous.</li>
+  <li>\(e\circ\mathrm{chain}(xs) = \mathrm{chain}(xs)\) — left absorption.</li>
+  <li>\(\mathrm{chain}(xs)\circ e = \mathrm{chain}(xs)\) — right absorption.</li>
+</ol>
+<pre><code class="language-lean">theorem theorem_7_2 (xs ys : List α) :
+    chain (e :: xs) = chain xs ∧
+    chain (xs ++ [e]) = chain xs ∧
+    chain (xs ++ e :: ys) = chain (xs ++ ys) ∧
+    op e (chain xs) = chain xs ∧
+    op (chain xs) e = chain xs</code></pre>
+</div>
+
+<h3 id="thm73">Theorem 7.3 — Compositional Fixed Point Theorem</h3>
+<div class="thm"><span class="thm-label">Theorem 7.3 (theorem_7_3).</span>
+An element \(a\in\mathcal{P}\) is a <em>self-fixed point</em> if \(a\circ a = a\). The following hold:
+<ol style="margin:.5em 0 0 1.2em">
+  <li>If \(a\circ a = a\), then \(a\circ e = a\) and \(e\circ a = a\).</li>
+  <li>If \(a\circ a = a\) and \(n\geq 1\), then \(a^{n+1} = a\).</li>
+  <li>If \(a\circ a = a\) and \(n\geq 1\), then \(\mathrm{chain}(\underbrace{a,\ldots,a}_{n+1}) = a\).</li>
+  <li>\(e\) is a self-fixed point: \(e\circ e = e\).</li>
+  <li>If \(a\) is a self-fixed point, so is \(a\circ e\) and \(e\circ a\).</li>
+</ol>
+<pre><code class="language-lean">theorem theorem_7_3 {a : α} (h : op a a = a) (n : ℕ) :
+    op a e = a ∧ op e a = a ∧
+    compPow (n + 1) a = a ∧
+    chain (List.replicate (n + 1) a) = a ∧
+    IsSelfFixedPoint (op a e) ∧ IsSelfFixedPoint (op e a)</code></pre>
+</div>
+
+<h3 id="thm111">Theorem 11.1 — Vertical-Transmission Composition Law</h3>
+<div class="thm"><span class="thm-label">Theorem 11.1 (theorem_11_1).</span>
+Vertical transmission respects lineage concatenation:
+<ol style="margin:.5em 0 0 1.2em">
+  <li><strong>Pointwise.</strong> For any lineages \(\ell_1, \ell_2\) and starting idea \(x\):
+    \[\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2)(x) = \mathrm{transmitVertical}(\ell_1)\!\left(\mathrm{transmitVertical}(\ell_2)(x)\right).\]</li>
+  <li><strong>Functionally.</strong> \(\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2) = \mathrm{composeTrans}(\mathrm{transmitVertical}(\ell_1),\,\mathrm{transmitVertical}(\ell_2))\).</li>
+  <li><strong>Associativity.</strong> For three lineages \(\ell_1,\ell_2,\ell_3\): transmission over \(\ell_1\mathbin{+\!+}\ell_2\mathbin{+\!+}\ell_3\) is associative.</li>
+</ol>
+<pre><code class="language-lean">theorem theorem_11_1 (l1 l2 l3 : Lineage α) (x : α) :
+    transmitVertical (l1 ++ l2) x =
+      transmitVertical l1 (transmitVertical l2 x) ∧
+    transmitVertical (l1 ++ l2) =
+      composeTrans (transmitVertical l1) (transmitVertical l2) ∧
+    transmitVertical (l1 ++ l2 ++ l3) =
+      composeTrans (transmitVertical l1)
+        (composeTrans (transmitVertical l2) (transmitVertical l3))</code></pre>
+</div>
+
+<h3 id="thm112">Theorem 11.2 — Faithfulness Characterization</h3>
+<div class="thm"><span class="thm-label">Theorem 11.2 (theorem_11_2).</span>
+A transmission is <em>faithful</em> if it equals \(\mathrm{idTrans}\). The following are equivalent, and each implication is machine-checked:
+<ol style="margin:.5em 0 0 1.2em">
+  <li>A lineage \(\ell\) transmits faithfully if and only if \(\mathrm{tradition}(\ell) = e\).</li>
+  <li>The trivial lineage (all \(e\)) of any length is always faithful.</li>
+  <li>Every all-silent lineage is faithful.</li>
+  <li>The identity transmission \(\mathrm{idTrans}\) is faithful.</li>
+</ol>
+<pre><code class="language-lean">theorem theorem_11_2 (l : Lineage α) :
+    (FaithfulTrans (transmitVertical l) ↔ tradition l = e) ∧
+    FaithfulTrans (transmitVertical (List.replicate n e)) ∧
+    (AllSilent l → FaithfulTrans (transmitVertical l)) ∧
+    FaithfulTrans idTrans</code></pre>
+</div>
+
+<h3 id="thm113">Theorem 11.3 — Cultural-Equivalence Congruence</h3>
+<div class="thm"><span class="thm-label">Theorem 11.3 (theorem_11_3).</span>
+Define \(\ell_1 \equiv \ell_2\) iff \(\mathrm{tradition}(\ell_1)=\mathrm{tradition}(\ell_2)\). Then:
+<ol style="margin:.5em 0 0 1.2em">
+  <li>\(\equiv\) is an equivalence relation (reflexivity, symmetry, transitivity).</li>
+  <li>\(\equiv\) is preserved under \(\mathrm{then}\)-concatenation on both sides.</li>
+  <li>Inserting a silent generation is a congruence move: \(\ell\equiv \ell\mathbin{+\!+}[e]\mathbin{+\!+}\ell'\).</li>
+  <li>Two lineages are equivalent iff their traditions are equal.</li>
+</ol>
+<pre><code class="language-lean">theorem theorem_11_3 (l1 l2 m1 m2 : Lineage α) (n : ℕ) :
+    LineageEquiv l1 l1 ∧
+    (LineageEquiv l1 l2 → LineageEquiv l2 l1) ∧
+    (LineageEquiv l1 l2 → LineageEquiv l2 m1 → LineageEquiv l1 m1) ∧
+    (LineageEquiv l1 l2 → LineageEquiv (l1 ++ m1) (l2 ++ m1)) ∧
+    (LineageEquiv m1 m2 → LineageEquiv (l1 ++ m1) (l1 ++ m2)) ∧
+    LineageEquiv l1 (l1 ++ List.replicate n e ++ l2) ∧
+    (LineageEquiv l1 l2 ↔ tradition l1 = tradition l2)</code></pre>
+</div>
+
+<!-- Corollaries 7 -->
+<h3 id="cor7">Corollaries 7.1–7.5</h3>
+
+<div class="cor"><span class="thm-label">Corollary 7.1 (chain_hom).</span>
+The map \(\mathrm{chain}\colon(\mathrm{List}\;\mathcal{P},\mathbin{+\!+},[])\to(\mathcal{P},\circ,e)\) is a monoid homomorphism:
+\(\mathrm{chain}(xs\mathbin{+\!+}ys) = \mathrm{chain}(xs)\circ\mathrm{chain}(ys)\) and \(\mathrm{chain}([]) = e\).
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 7.2 (selfFixed_power_invariant).</span>
+If \(a\circ a = a\) then \(a^n = a\) for every \(n\geq 1\). In particular, the iterative orbit of any self-fixed point is a singleton.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 7.3 (filter_ident_chain).</span>
+For any list \(xs\), \(\mathrm{chain}(xs.\mathrm{filter}(\cdot\neq e)) = \mathrm{chain}(xs)\). The identity elements carry no information in a chain.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 7.4 (compPow_ident_absorbs).</span>
+\(e^n = e\) for all \(n\), and \(\mathrm{chain}(\mathrm{replicate}(n,e)) = e\). Chains of silence collapse to silence.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 7.5 (identityTransparent_chain).</span>
+Every value of \(\mathrm{chain}\) is identity-transparent: for any \(xs\), \(e\circ\mathrm{chain}(xs) = \mathrm{chain}(xs)\) and \(\mathrm{chain}(xs)\circ e = \mathrm{chain}(xs)\).
+</div>
+
+<!-- Corollaries 11 -->
+<h3 id="cor11">Corollaries 11.1–11.5</h3>
+
+<div class="cor"><span class="thm-label">Corollary 11.1 (corollary_11_1).</span>
+\(\mathrm{tradition}(\ell_1\mathbin{+\!+}\ell_2) = \mathrm{tradition}(\ell_1)\circ\mathrm{tradition}(\ell_2)\). Tradition is a monoid homomorphism from lineages under concatenation to the idea monoid.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 11.2 (corollary_11_2).</span>
+Inserting a silent generation (element \(e\)) anywhere in a lineage yields a culturally equivalent lineage.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 11.3 (corollary_11_3).</span>
+A lineage \(\ell\) is equivalent to the empty lineage if and only if it transmits faithfully.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 11.4 (corollary_11_4).</span>
+\(\mathrm{transmitVertical}(\ell) = \mathrm{leftMul}(\mathrm{tradition}(\ell))\). Every vertical-transmission function is a left-multiplication.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 11.5 (corollary_11_5).</span>
+A trivial lineage of any length \(n\) is equivalent to the empty lineage: \(\mathrm{replicate}(n,e)\equiv []\).
+</div>
+
+<!-- ============================================================ SECTION 2 -->
+<h2 id="sec2">2. Theorems7 Lemma Catalogue</h2>
+<p>The 93 machine-checked lemmas of <code>IdeaTheory.Theorems7</code> are organised below by topic. Every lemma appears in its own box with its Lean name, mathematical statement, and a brief gloss.</p>
+
+<!-- §7.A -->
+<h3 id="s7a">§7.A — Iterated Composition (<code>compPow</code>)</h3>
+
+<div class="thm"><span class="thm-label">Lemma 7.A.1 (compPow_zero).</span>
+For any \(a\in\mathcal{P}\), \(a^0 = e\). This is the base case of the recursive definition.
+<pre><code class="language-lean">lemma compPow_zero (a : α) : compPow 0 a = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.A.2 (compPow_succ).</span>
+For any \(a\in\mathcal{P}\) and \(n\in\mathbb{N}\), \(a^{n+1} = a\circ a^n\). This is the recursive step unfolding one power.
+<pre><code class="language-lean">lemma compPow_succ (a : α) (n : ℕ) : compPow (n + 1) a = op a (compPow n a)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.A.3 (compPow_one).</span>
+\(a^1 = a\). The first non-trivial power recovers the element itself.
+<pre><code class="language-lean">lemma compPow_one (a : α) : compPow 1 a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.A.4 (compPow_two).</span>
+\(a^2 = a\circ a\).
+<pre><code class="language-lean">lemma compPow_two (a : α) : compPow 2 a = op a a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.A.5 (compPow_three).</span>
+\(a^3 = a\circ(a\circ a)\).
+<pre><code class="language-lean">lemma compPow_three (a : α) : compPow 3 a = op a (op a a)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.A.6 (compPow_ident).</span>
+For every \(n\in\mathbb{N}\), \(e^n = e\). The identity element is a fixed point of all powers.
+<pre><code class="language-lean">lemma compPow_ident (n : ℕ) : compPow n e = e</code></pre>
+</div>
+
+<!-- §7.B -->
+<h3 id="s7b">§7.B — Identity Rewrites</h3>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.1 (op_ident_left).</span>
+\(e\circ a = a\). Left-identity law, direct rewrite form.
+<pre><code class="language-lean">lemma op_ident_left (a : α) : op e a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.2 (op_ident_right).</span>
+\(a\circ e = a\). Right-identity law, direct rewrite form.
+<pre><code class="language-lean">lemma op_ident_right (a : α) : op a e = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.3 (op_ident_both).</span>
+\((e\circ a)\circ e = a\). Sandwiching any element between two copies of \(e\) returns the element.
+<pre><code class="language-lean">lemma op_ident_both (a : α) : op (op e a) e = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.4 (op_ident_both').</span>
+\(e\circ(a\circ e) = a\). The "inside-out" sandwich form.
+<pre><code class="language-lean">lemma op_ident_both' (a : α) : op e (op a e) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.5 (ident_self_op).</span>
+\(e\circ e = e\). The identity composes with itself to give the identity.
+<pre><code class="language-lean">lemma ident_self_op : op e e = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.6 (ident_op_chain2).</span>
+\(e\circ(e\circ e) = e\). A three-fold identity chain.
+<pre><code class="language-lean">lemma ident_op_chain2 : op e (op e e) = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.7 (ident_op_chain3).</span>
+\((e\circ e)\circ(e\circ e) = e\). A four-fold identity chain, associatively grouped.
+<pre><code class="language-lean">lemma ident_op_chain3 : op (op e e) (op e e) = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.8 (ident_op_chain4).</span>
+The five-element identity chain \(((e\circ e)\circ e)\circ(e\circ e) = e\).
+<pre><code class="language-lean">lemma ident_op_chain4 : op (op (op e e) e) (op e e) = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.9 (op_ident_left_eq).</span>
+If \(a = b\) then \(e\circ a = b\). Congruence form of left-identity.
+<pre><code class="language-lean">lemma op_ident_left_eq {a b : α} (h : a = b) : op e a = b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.10 (op_ident_right_eq).</span>
+If \(a = b\) then \(a\circ e = b\). Congruence form of right-identity.
+<pre><code class="language-lean">lemma op_ident_right_eq {a b : α} (h : a = b) : op a e = b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.11 (sandwich_ident).</span>
+\((e\circ a)\circ e = a\). A named version of the sandwich pattern, useful as a simp lemma.
+<pre><code class="language-lean">lemma sandwich_ident (a : α) : op (op e a) e = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.12 (double_ident_left).</span>
+\(e\circ(e\circ a) = a\). Two left-identity steps cancel simultaneously.
+<pre><code class="language-lean">lemma double_ident_left (a : α) : op e (op e a) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.13 (double_ident_right).</span>
+\((a\circ e)\circ e = a\). Two right-identity steps cancel simultaneously.
+<pre><code class="language-lean">lemma double_ident_right (a : α) : op (op a e) e = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.14 (triple_ident_left).</span>
+\(e\circ(e\circ(e\circ a)) = a\). Three nested left-identity steps collapse.
+<pre><code class="language-lean">lemma triple_ident_left (a : α) : op e (op e (op e a)) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.B.15 (triple_ident_right).</span>
+\(((a\circ e)\circ e)\circ e = a\). Three nested right-identity steps collapse.
+<pre><code class="language-lean">lemma triple_ident_right (a : α) : op (op (op a e) e) e = a</code></pre>
+</div>
+
+<!-- §7.C -->
+<h3 id="s7c">§7.C — Reassociation Helpers</h3>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.1 (reassoc3).</span>
+\((a\circ b)\circ c = a\circ(b\circ c)\). Named instance of associativity for three arguments.
+<pre><code class="language-lean">lemma reassoc3 (a b c : α) : op (op a b) c = op a (op b c)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.2 (reassoc3').</span>
+\(a\circ(b\circ c) = (a\circ b)\circ c\). The symmetric direction.
+<pre><code class="language-lean">lemma reassoc3' (a b c : α) : op a (op b c) = op (op a b) c</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.3 (reassoc4).</span>
+\(((a\circ b)\circ c)\circ d = a\circ(b\circ(c\circ d))\). Full right reassociation of four elements.
+<pre><code class="language-lean">lemma reassoc4 (a b c d : α) : op (op (op a b) c) d = op a (op b (op c d))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.4 (reassoc4_alt).</span>
+\((a\circ b)\circ(c\circ d) = a\circ(b\circ(c\circ d))\). Alternative four-element regrouping.
+<pre><code class="language-lean">lemma reassoc4_alt (a b c d : α) : op (op a b) (op c d) = op a (op b (op c d))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.5 (reassoc4_alt').</span>
+\(a\circ((b\circ c)\circ d) = a\circ(b\circ(c\circ d))\). A second alternative grouping.
+<pre><code class="language-lean">lemma reassoc4_alt' (a b c d : α) : op a (op (op b c) d) = op a (op b (op c d))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.6 (reassoc5).</span>
+Five-element full right reassociation: \(((a\circ b)\circ(c\circ d))\circ e' = a\circ(b\circ(c\circ(d\circ e')))\).
+<pre><code class="language-lean">lemma reassoc5 (a b c d e' : α) :
+    op (op (op a b) (op c d)) e' = op a (op b (op c (op d e')))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.7 (op_ident_middle).</span>
+\((a\circ e)\circ b = a\circ b\). Eliminating an identity in the middle, left-associated.
+<pre><code class="language-lean">lemma op_ident_middle (a b : α) : op (op a e) b = op a b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.8 (op_ident_middle').</span>
+\(a\circ(e\circ b) = a\circ b\). Eliminating an identity in the middle, right-associated.
+<pre><code class="language-lean">lemma op_ident_middle' (a b : α) : op a (op e b) = op a b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.9 (op_ident_middle_assoc).</span>
+\(a\circ(e\circ b) = (a\circ e)\circ b\). Identity insertion commutes with associativity.
+<pre><code class="language-lean">lemma op_ident_middle_assoc (a b : α) : op a (op e b) = op (op a e) b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.10 (insert_ident_middle).</span>
+\(a\circ b = (a\circ e)\circ b\). Inserts \(e\) as a no-op between \(a\) and \(b\).
+<pre><code class="language-lean">lemma insert_ident_middle (a b : α) : op a b = op (op a e) b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.11 (insert_ident_middle').</span>
+\(a\circ b = a\circ(e\circ b)\). Right-side identity insertion.
+<pre><code class="language-lean">lemma insert_ident_middle' (a b : α) : op a b = op a (op e b)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.12 (insert_ident_left).</span>
+\(a = e\circ a\). Identity insertion on the left (equational reverse of op_ident_left).
+<pre><code class="language-lean">lemma insert_ident_left (a : α) : a = op e a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.C.13 (insert_ident_right).</span>
+\(a = a\circ e\). Identity insertion on the right.
+<pre><code class="language-lean">lemma insert_ident_right (a : α) : a = op a e</code></pre>
+</div>
+
+<!-- §7.D -->
+<h3 id="s7d">§7.D — <code>IdentityTransparent</code> Predicate</h3>
+<p>An element \(a\) is <em>identity-transparent</em> if \(e\circ a = a\) and \(a\circ e = a\). Since these are just the identity laws, every element is identity-transparent; the predicate is introduced to make transparent reasoning explicit in proofs.</p>
+
+<div class="thm"><span class="thm-label">Lemma 7.D.1 (identityTransparent_all).</span>
+Every element \(a\in\mathcal{P}\) is identity-transparent.
+<pre><code class="language-lean">lemma identityTransparent_all (a : α) : IdentityTransparent a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.D.2 (identityTransparent_ident).</span>
+The identity element \(e\) is identity-transparent.
+<pre><code class="language-lean">lemma identityTransparent_ident : IdentityTransparent e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.D.3 (identityTransparent_op).</span>
+If \(a\) and \(b\) are identity-transparent, then so is \(a\circ b\).
+<pre><code class="language-lean">lemma identityTransparent_op (a b : α) : IdentityTransparent (op a b)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.D.4 (identityTransparent_left).</span>
+If \(a\) is identity-transparent, then \(e\circ a = a\).
+<pre><code class="language-lean">lemma identityTransparent_left {a : α} (h : IdentityTransparent a) : op e a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.D.5 (identityTransparent_right).</span>
+If \(a\) is identity-transparent, then \(a\circ e = a\).
+<pre><code class="language-lean">lemma identityTransparent_right {a : α} (h : IdentityTransparent a) : op a e = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.D.6 (identityTransparent_iff).</span>
+\(a\) is identity-transparent iff \(e\circ a = a\) and \(a\circ e = a\). The iff characterisation connects the predicate to its definition.
+<pre><code class="language-lean">lemma identityTransparent_iff (a : α) :
+    IdentityTransparent a ↔ op e a = a ∧ op a e = a</code></pre>
+</div>
+
+<!-- §7.E -->
+<h3 id="s7e">§7.E — <code>FactorsThroughIdentity</code> Predicate</h3>
+<p>An element <em>factors through identity</em> if it can be written as \(e\circ a\) or \(a\circ e\) — that is, if the identity serves as a witness to its own transparency. Since \(e\circ a = a = a\circ e\), every element factors through identity.</p>
+
+<div class="thm"><span class="thm-label">Lemma 7.E.1 (factorsThroughIdentity_self).</span>
+Every \(a\in\mathcal{P}\) factors through identity, via the witness \(a = e\circ a\).
+<pre><code class="language-lean">lemma factorsThroughIdentity_self (a : α) : FactorsThroughIdentity a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.E.2 (factorsThroughIdentity_via_ident_left).</span>
+Alternate witness: \(a = a\circ e\).
+<pre><code class="language-lean">lemma factorsThroughIdentity_via_ident_left (a : α) : FactorsThroughIdentity a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.E.3 (factorsThroughIdentity_op).</span>
+If \(a\) and \(b\) each factor through identity, then so does \(a\circ b\).
+<pre><code class="language-lean">lemma factorsThroughIdentity_op (a b : α) : FactorsThroughIdentity (op a b)</code></pre>
+</div>
+
+<!-- §7.F -->
+<h3 id="s7f">§7.F — <code>IsSelfFixedPoint</code> Predicate</h3>
+<p>An element \(a\) is a <em>self-fixed point</em> if \(a\circ a = a\). Self-fixed points are algebraic idempotents; they play the role of attractors in the dynamics of cultural transmission.</p>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.1 (ident_isSelfFixedPoint).</span>
+\(e\circ e = e\). The identity element is always a self-fixed point.
+<pre><code class="language-lean">lemma ident_isSelfFixedPoint : IsSelfFixedPoint e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.2 (selfFixedPoint_op_ident_right).</span>
+If \(a\) is a self-fixed point, then so is \(a\circ e\): \((a\circ e)\circ(a\circ e) = a\circ e\).
+<pre><code class="language-lean">lemma selfFixedPoint_op_ident_right {a : α} (h : IsSelfFixedPoint a) :
+    IsSelfFixedPoint (op a e)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.3 (selfFixedPoint_op_ident_left).</span>
+If \(a\) is a self-fixed point, then so is \(e\circ a\).
+<pre><code class="language-lean">lemma selfFixedPoint_op_ident_left {a : α} (h : IsSelfFixedPoint a) :
+    IsSelfFixedPoint (op e a)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.4 (selfFixedPoint_pow_two).</span>
+If \(a\circ a = a\) then \(a^2 = a\).
+<pre><code class="language-lean">lemma selfFixedPoint_pow_two {a : α} (h : IsSelfFixedPoint a) : compPow 2 a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.5 (selfFixedPoint_pow_three).</span>
+If \(a\circ a = a\) then \(a^3 = a\).
+<pre><code class="language-lean">lemma selfFixedPoint_pow_three {a : α} (h : IsSelfFixedPoint a) : compPow 3 a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.6 (selfFixedPoint_pow_succ_succ).</span>
+If \(a\circ a = a\) then \(a^{n+2} = a\) for every \(n\in\mathbb{N}\).
+<pre><code class="language-lean">lemma selfFixedPoint_pow_succ_succ {a : α} (h : IsSelfFixedPoint a) (n : ℕ) :
+    compPow (n + 2) a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.F.7 (selfFixedPoint_pow_pos).</span>
+If \(a\circ a = a\) then \(a^{n+1} = a\) for all \(n\). Unifying the positive-power case.
+<pre><code class="language-lean">lemma selfFixedPoint_pow_pos {a : α} (h : IsSelfFixedPoint a) :
+    ∀ n, compPow (n + 1) a = a</code></pre>
+</div>
+
+<!-- §7.G -->
+<h3 id="s7g">§7.G — <code>PreservesIdentity</code> Predicate</h3>
+<p>A function \(f\colon\mathcal{P}\to\mathcal{P}\) <em>preserves identity</em> if \(f(e) = e\). This is a necessary condition for a function to be a monoid homomorphism.</p>
+
+<div class="thm"><span class="thm-label">Lemma 7.G.1 (preservesIdentity_id).</span>
+The identity function preserves identity: \(\mathrm{id}(e) = e\).
+<pre><code class="language-lean">lemma preservesIdentity_id : PreservesIdentity (id : α → α)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.G.2 (preservesIdentity_const_ident).</span>
+The constant-\(e\) function preserves identity (vacuously): \((\lambda\,x.\,e)(e) = e\).
+<pre><code class="language-lean">lemma preservesIdentity_const_ident : PreservesIdentity (fun _ : α => e)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.G.3 (preservesIdentity_op_left_ident).</span>
+The function \(x\mapsto e\circ x\) preserves identity.
+<pre><code class="language-lean">lemma preservesIdentity_op_left_ident : PreservesIdentity (fun x : α => op e x)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.G.4 (preservesIdentity_op_right_ident).</span>
+The function \(x\mapsto x\circ e\) preserves identity.
+<pre><code class="language-lean">lemma preservesIdentity_op_right_ident : PreservesIdentity (fun x : α => op x e)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.G.5 (preservesIdentity_comp).</span>
+If \(f\) and \(g\) both preserve identity, then so does their composition \(f\circ g\).
+<pre><code class="language-lean">lemma preservesIdentity_comp {f g : α → α}
+    (hf : PreservesIdentity f) (hg : PreservesIdentity g) :
+    PreservesIdentity (f ∘ g)</code></pre>
+</div>
+
+<!-- §7.H -->
+<h3 id="s7h">§7.H — Identity Uniqueness</h3>
+
+<div class="thm"><span class="thm-label">Lemma 7.H.1 (ident_unique_left).</span>
+If \(e'\circ a = a\) for all \(a\), then \(e' = e\). Left-identities are unique.
+<pre><code class="language-lean">lemma ident_unique_left (e' : α) (h : ∀ a, op e' a = a) : e' = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.H.2 (ident_unique_right).</span>
+If \(a\circ e' = a\) for all \(a\), then \(e' = e\). Right-identities are unique.
+<pre><code class="language-lean">lemma ident_unique_right (e' : α) (h : ∀ a, op a e' = a) : e' = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.H.3 (ident_unique_two_sided).</span>
+If \(e'\) is a two-sided identity, then \(e' = e\). Two-sided uniqueness follows from one-sided uniqueness.
+<pre><code class="language-lean">lemma ident_unique_two_sided (e' : α)
+    (hl : ∀ a, op e' a = a) (hr : ∀ a, op a e' = a) : e' = e</code></pre>
+</div>
+
+<!-- §7.K -->
+<h3 id="s7k">§7.K — Transmission Chains</h3>
+<p>The function \(\mathrm{chain}\colon\mathrm{List}\;\mathcal{P}\to\mathcal{P}\) folds a list under \(\circ\) with base \(e\). These lemmas establish its full equational theory.</p>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.1 (chain_nil).</span>
+\(\mathrm{chain}([]) = e\). The empty chain is silent.
+<pre><code class="language-lean">lemma chain_nil : chain ([] : List α) = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.2 (chain_cons).</span>
+\(\mathrm{chain}(a :: as) = a\circ\mathrm{chain}(as)\). Unfolding the head element.
+<pre><code class="language-lean">lemma chain_cons (a : α) (as : List α) : chain (a :: as) = op a (chain as)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.3 (chain_singleton).</span>
+\(\mathrm{chain}([a]) = a\). A single-element chain evaluates to that element.
+<pre><code class="language-lean">lemma chain_singleton (a : α) : chain [a] = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.4 (chain_pair).</span>
+\(\mathrm{chain}([a,b]) = a\circ b\).
+<pre><code class="language-lean">lemma chain_pair (a b : α) : chain [a, b] = op a b</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.5 (chain_triple).</span>
+\(\mathrm{chain}([a,b,c]) = a\circ(b\circ c)\).
+<pre><code class="language-lean">lemma chain_triple (a b c : α) : chain [a, b, c] = op a (op b c)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.6 (chain_append).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}ys) = \mathrm{chain}(xs)\circ\mathrm{chain}(ys)\). The chain of a concatenation is the composition of the chains — i.e., \(\mathrm{chain}\) is a monoid homomorphism.
+<pre><code class="language-lean">lemma chain_append (xs ys : List α) :
+    chain (xs ++ ys) = op (chain xs) (chain ys)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.7 (chain_cons_ident).</span>
+\(\mathrm{chain}(e :: xs) = \mathrm{chain}(xs)\). Prepending \(e\) leaves the chain value unchanged.
+<pre><code class="language-lean">lemma chain_cons_ident (xs : List α) : chain (e :: xs) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.8 (chain_append_ident_right).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}[e]) = \mathrm{chain}(xs)\). Appending \(e\) leaves the chain value unchanged.
+<pre><code class="language-lean">lemma chain_append_ident_right (xs : List α) : chain (xs ++ [e]) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.9 (chain_filter_ne_ident).</span>
+Filtering all occurrences of \(e\) from \(xs\) does not change \(\mathrm{chain}(xs)\).
+<pre><code class="language-lean">lemma chain_filter_ne_ident (xs : List α) :
+    chain (xs.filter (· ≠ e)) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.10 (chain_insert_ident).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+} e :: ys) = \mathrm{chain}(xs\mathbin{+\!+} ys)\). Inserting \(e\) at any interior position is vacuous.
+<pre><code class="language-lean">lemma chain_insert_ident (xs ys : List α) :
+    chain (xs ++ e :: ys) = chain (xs ++ ys)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.11 (chain_ident_left_transparent).</span>
+\(e\circ\mathrm{chain}(xs) = \mathrm{chain}(xs)\). The identity absorbs from the left.
+<pre><code class="language-lean">lemma chain_ident_left_transparent (xs : List α) : op e (chain xs) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.K.12 (chain_ident_right_transparent).</span>
+\(\mathrm{chain}(xs)\circ e = \mathrm{chain}(xs)\). The identity absorbs from the right.
+<pre><code class="language-lean">lemma chain_ident_right_transparent (xs : List α) : op (chain xs) e = chain xs</code></pre>
+</div>
+
+<!-- §7.M -->
+<h3 id="s7m">§7.M — Self-Fixed Points under Chains</h3>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.1 (selfFixedPoint_chain_replicate).</span>
+If \(a\circ a = a\) then \(\mathrm{chain}(\mathrm{replicate}(n+1,a)) = a\) for every \(n\).
+<pre><code class="language-lean">lemma selfFixedPoint_chain_replicate {a : α} (h : IsSelfFixedPoint a) (n : ℕ) :
+    chain (List.replicate (n + 1) a) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.2 (selfFixedPoint_op_self_right).</span>
+If \(a\) is a self-fixed point, then \(a\circ a = a\) (trivially, by definition), stated here for symmetry with other absorption lemmas.
+<pre><code class="language-lean">lemma selfFixedPoint_op_self_right {a : α} (h : IsSelfFixedPoint a) : op a a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.3 (selfFixedPoint_op_self_left).</span>
+If \(a\) is a self-fixed point, then \(a\circ a = a\) read as left-absorption.
+<pre><code class="language-lean">lemma selfFixedPoint_op_self_left {a : α} (h : IsSelfFixedPoint a) : op a a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.4 (selfFixedPoint_sandwich).</span>
+If \(a\) is a self-fixed point, then \((a\circ a)\circ a = a\).
+<pre><code class="language-lean">lemma selfFixedPoint_sandwich {a : α} (h : IsSelfFixedPoint a) : op (op a a) a = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.5 (selfFixedPoint_chain_pair).</span>
+If \(a\circ a = a\) then \(\mathrm{chain}([a,a]) = a\).
+<pre><code class="language-lean">lemma selfFixedPoint_chain_pair {a : α} (h : IsSelfFixedPoint a) : chain [a, a] = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.6 (selfFixedPoint_chain_triple).</span>
+If \(a\circ a = a\) then \(\mathrm{chain}([a,a,a]) = a\).
+<pre><code class="language-lean">lemma selfFixedPoint_chain_triple {a : α} (h : IsSelfFixedPoint a) :
+    chain [a, a, a] = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.7 (selfFixedPoint_absorb_ident).</span>
+If \(a\) is a self-fixed point and \(e\) is prepended: \(\mathrm{chain}(e :: [a]) = a\).
+<pre><code class="language-lean">lemma selfFixedPoint_absorb_ident {a : α} (h : IsSelfFixedPoint a) :
+    chain (e :: [a]) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.8 (selfFixedPoint_chain_extend_left).</span>
+If every element of \(xs\) is \(a\) and \(a\) is a self-fixed point, extending the chain on the left preserves the value \(a\).
+<pre><code class="language-lean">lemma selfFixedPoint_chain_extend_left {a : α} (h : IsSelfFixedPoint a)
+    {xs : List α} (hxs : ∀ x ∈ xs, x = a) :
+    chain (a :: xs) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.9 (selfFixedPoint_chain_extend_right).</span>
+Under the same hypotheses, extending the chain on the right preserves the value \(a\).
+<pre><code class="language-lean">lemma selfFixedPoint_chain_extend_right {a : α} (h : IsSelfFixedPoint a)
+    {xs : List α} (hxs : ∀ x ∈ xs, x = a) :
+    chain (xs ++ [a]) = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.M.10 (selfFixedPoint_compPow_add_one).</span>
+If \(a\) is a self-fixed point, then \(a^{n+1} = a^1 = a\) for all \(n\).
+<pre><code class="language-lean">lemma selfFixedPoint_compPow_add_one {a : α} (h : IsSelfFixedPoint a) (n : ℕ) :
+    compPow (n + 1) a = compPow 1 a</code></pre>
+</div>
+
+<!-- §7.O -->
+<h3 id="s7o">§7.O — Additional Chain and Power Helpers</h3>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.1 (chain_replicate_ident).</span>
+\(\mathrm{chain}(\mathrm{replicate}(n,e)) = e\). A chain of \(n\) silent transmissions is silent.
+<pre><code class="language-lean">lemma chain_replicate_ident (n : ℕ) : chain (List.replicate n e) = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.2 (chain_append_replicate_ident).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}\mathrm{replicate}(n,e)) = \mathrm{chain}(xs)\). Appending any number of silent generations does not change the chain.
+<pre><code class="language-lean">lemma chain_append_replicate_ident (xs : List α) (n : ℕ) :
+    chain (xs ++ List.replicate n e) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.3 (chain_replicate_ident_append).</span>
+\(\mathrm{chain}(\mathrm{replicate}(n,e)\mathbin{+\!+} xs) = \mathrm{chain}(xs)\). Prepending silent generations is equally vacuous.
+<pre><code class="language-lean">lemma chain_replicate_ident_append (xs : List α) (n : ℕ) :
+    chain (List.replicate n e ++ xs) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.4 (chain_concat).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}[a]) = \mathrm{chain}(xs)\circ a\). Appending a single element multiplies on the right.
+<pre><code class="language-lean">lemma chain_concat (xs : List α) (a : α) :
+    chain (xs ++ [a]) = op (chain xs) a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.5 (chain_concat_ident).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}[e]) = \mathrm{chain}(xs)\). Specialisation of chain_concat and chain_append_ident_right.
+<pre><code class="language-lean">lemma chain_concat_ident (xs : List α) : chain (xs ++ [e]) = chain xs</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.6 (chain_double_append).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}ys\mathbin{+\!+}zs) = (\mathrm{chain}(xs)\circ\mathrm{chain}(ys))\circ\mathrm{chain}(zs)\). Three-segment chain, left-associated.
+<pre><code class="language-lean">lemma chain_double_append (xs ys zs : List α) :
+    chain (xs ++ ys ++ zs) = op (op (chain xs) (chain ys)) (chain zs)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.7 (chain_double_append_assoc).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+}ys\mathbin{+\!+}zs) = \mathrm{chain}(xs)\circ(\mathrm{chain}(ys)\circ\mathrm{chain}(zs))\). Right-associated form.
+<pre><code class="language-lean">lemma chain_double_append_assoc (xs ys zs : List α) :
+    chain (xs ++ ys ++ zs) = op (chain xs) (op (chain ys) (chain zs))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.8 (chain_two_inserts_ident).</span>
+\(\mathrm{chain}(xs\mathbin{+\!+} e :: ys\mathbin{+\!+} e :: zs) = \mathrm{chain}(xs\mathbin{+\!+}ys\mathbin{+\!+}zs)\). Two interior identity insertions both collapse.
+<pre><code class="language-lean">lemma chain_two_inserts_ident (xs ys zs : List α) :
+    chain (xs ++ e :: ys ++ e :: zs) = chain (xs ++ ys ++ zs)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.9 (compPow_succ_eq_op_self).</span>
+\(a^{n+1} = a\circ a^n\). Provides the same content as compPow_succ in a named form used by other tactic proofs.
+<pre><code class="language-lean">lemma compPow_succ_eq_op_self (a : α) (n : ℕ) :
+    compPow (n + 1) a = op a (compPow n a)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 7.O.10 (compPow_add_one_self_fixed).</span>
+If \(a\) is a self-fixed point, then \(a^{n+1} = a^1\) for all \(n\). Power stabilises at the first positive exponent.
+<pre><code class="language-lean">lemma compPow_add_one_self_fixed {a : α} (h : IsSelfFixedPoint a) (n : ℕ) :
+    compPow (n + 1) a = compPow 1 a</code></pre>
+</div>
+
+<!-- ============================================================ SECTION 3 -->
+<h2 id="sec3">3. Theorems11 Lemma Catalogue</h2>
+<p>The 60 machine-checked lemmas of <code>IdeaTheory.Theorems11</code> formalise cultural transmission as a monoidal action on ideas. The four subsections cover the monoidal structure of the transmission category, the definition and properties of vertical transmission, faithful transmission, and lineage equivalence.</p>
+
+<!-- §11.1 -->
+<h3 id="s11a">§11.1 — Monoidal Closure</h3>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.1 (idTrans_apply).</span>
+\(\mathrm{idTrans}(x) = x\). The identity transmission is the identity function.
+<pre><code class="language-lean">lemma idTrans_apply (x : α) : idTrans x = x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.2 (composeTrans_apply).</span>
+\(\mathrm{composeTrans}(f,g)(x) = f(g(x))\). Transmission composition is function composition.
+<pre><code class="language-lean">lemma composeTrans_apply (f g : α → α) (x : α) : composeTrans f g x = f (g x)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.3 (idTrans_compose_left).</span>
+\(\mathrm{composeTrans}(\mathrm{idTrans}, f) = f\). The identity is a left unit for composeTrans.
+<pre><code class="language-lean">lemma idTrans_compose_left (f : α → α) : composeTrans idTrans f = f</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.4 (idTrans_compose_right).</span>
+\(\mathrm{composeTrans}(f, \mathrm{idTrans}) = f\). The identity is a right unit for composeTrans.
+<pre><code class="language-lean">lemma idTrans_compose_right (f : α → α) : composeTrans f idTrans = f</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.5 (composeTrans_assoc).</span>
+\(\mathrm{composeTrans}(f,\mathrm{composeTrans}(g,h)) = \mathrm{composeTrans}(\mathrm{composeTrans}(f,g),h)\). Composition of transmissions is associative.
+<pre><code class="language-lean">lemma composeTrans_assoc (f g h : α → α) :
+    composeTrans f (composeTrans g h) = composeTrans (composeTrans f g) h</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.6 (leftMul_apply).</span>
+\(\mathrm{leftMul}(a)(x) = a\circ x\). Left-multiplication by \(a\) is the function \(x\mapsto a\circ x\).
+<pre><code class="language-lean">lemma leftMul_apply (a x : α) : leftMul a x = op a x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.7 (rightMul_apply).</span>
+\(\mathrm{rightMul}(a)(x) = x\circ a\). Right-multiplication by \(a\) is the function \(x\mapsto x\circ a\).
+<pre><code class="language-lean">lemma rightMul_apply (a x : α) : rightMul a x = op x a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.8 (leftMul_ident).</span>
+\(\mathrm{leftMul}(e) = \mathrm{idTrans}\). Left-multiplication by the identity is the identity transmission.
+<pre><code class="language-lean">lemma leftMul_ident : leftMul (e : α) = idTrans</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.9 (rightMul_ident).</span>
+\(\mathrm{rightMul}(e) = \mathrm{idTrans}\). Right-multiplication by the identity is the identity transmission.
+<pre><code class="language-lean">lemma rightMul_ident : rightMul (e : α) = idTrans</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.10 (leftMul_compose).</span>
+\(\mathrm{composeTrans}(\mathrm{leftMul}(a),\mathrm{leftMul}(b)) = \mathrm{leftMul}(a\circ b)\). Left-multiplication is a monoid homomorphism into the transmission monoid.
+<pre><code class="language-lean">lemma leftMul_compose (a b : α) :
+    composeTrans (leftMul a) (leftMul b) = leftMul (op a b)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.1.11 (rightMul_compose).</span>
+\(\mathrm{composeTrans}(\mathrm{rightMul}(a),\mathrm{rightMul}(b)) = \mathrm{rightMul}(b\circ a)\). Right-multiplication reverses the order: it is an anti-homomorphism.
+<pre><code class="language-lean">lemma rightMul_compose (a b : α) :
+    composeTrans (rightMul a) (rightMul b) = rightMul (op b a)</code></pre>
+</div>
+
+<!-- §11.2 -->
+<h3 id="s11b">§11.2 — Vertical Transmission</h3>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.1 (transmitVertical_nil).</span>
+\(\mathrm{transmitVertical}([])(x) = x\). An empty lineage transmits any idea unchanged.
+<pre><code class="language-lean">lemma transmitVertical_nil (x : α) : transmitVertical [] x = x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.2 (transmitVertical_cons).</span>
+\(\mathrm{transmitVertical}(a :: \ell)(x) = a\circ\mathrm{transmitVertical}(\ell)(x)\). Each generation composes on the left.
+<pre><code class="language-lean">lemma transmitVertical_cons (a : α) (l : List α) (x : α) :
+    transmitVertical (a :: l) x = op a (transmitVertical l x)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.3 (transmitVertical_singleton).</span>
+\(\mathrm{transmitVertical}([a])(x) = a\circ x\).
+<pre><code class="language-lean">lemma transmitVertical_singleton (a x : α) : transmitVertical [a] x = op a x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.4 (transmitHorizontal_nil).</span>
+\(\mathrm{transmitHorizontal}([])(x) = x\). An empty horizontal lineage is also the identity.
+<pre><code class="language-lean">lemma transmitHorizontal_nil (x : α) : transmitHorizontal [] x = x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.5 (transmitHorizontal_cons).</span>
+\(\mathrm{transmitHorizontal}(a :: \ell)(x) = \mathrm{transmitHorizontal}(\ell)(x\circ a)\). Horizontal transmission accumulates on the right.
+<pre><code class="language-lean">lemma transmitHorizontal_cons (x a : α) (l : List α) :
+    transmitHorizontal (a :: l) x = transmitHorizontal l (op x a)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.6 (transmitHorizontal_singleton).</span>
+\(\mathrm{transmitHorizontal}([a])(x) = x\circ a\).
+<pre><code class="language-lean">lemma transmitHorizontal_singleton (x a : α) : transmitHorizontal [a] x = op x a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.7 (transmitVertical_at_ident).</span>
+\(\mathrm{transmitVertical}(\ell)(e) = \mathrm{tradition}(\ell)\). Evaluating vertical transmission at \(e\) recovers the tradition.
+<pre><code class="language-lean">lemma transmitVertical_at_ident (l : List α) : transmitVertical l e = tradition l</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.8 (tradition_eq_transmit_at_ident).</span>
+\(\mathrm{tradition}(\ell) = \mathrm{transmitVertical}(\ell)(e)\). The reverse direction.
+<pre><code class="language-lean">lemma tradition_eq_transmit_at_ident (l : List α) : tradition l = transmitVertical l e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.9 (transmitVertical_eq_op_aggregate).</span>
+\(\mathrm{transmitVertical}(\ell)(x) = \mathrm{tradition}(\ell)\circ x\). Vertical transmission at any \(x\) is left-multiplication by the tradition.
+<pre><code class="language-lean">lemma transmitVertical_eq_op_aggregate (l : List α) (x : α) :
+    transmitVertical l x = op (tradition l) x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.10 (transmitVertical_append).</span>
+\(\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2)(x) = \mathrm{transmitVertical}(\ell_1)(\mathrm{transmitVertical}(\ell_2)(x))\). Appending lineages composes their transmissions.
+<pre><code class="language-lean">lemma transmitVertical_append (l1 l2 : List α) (x : α) :
+    transmitVertical (l1 ++ l2) x =
+      transmitVertical l1 (transmitVertical l2 x)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.11 (transmitVertical_then).</span>
+\(\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2)(x) = \mathrm{transmitVertical}(\ell_1)(\mathrm{transmitVertical}(\ell_2)(x))\). Named alias of transmitVertical_append using the <code>then</code> combinator.
+<pre><code class="language-lean">lemma transmitVertical_then (l1 l2 : List α) (x : α) :
+    transmitVertical (l1.then l2) x =
+      transmitVertical l1 (transmitVertical l2 x)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.12 (transmitVertical_eq_leftMul).</span>
+\(\mathrm{transmitVertical}(\ell) = \mathrm{leftMul}(\mathrm{tradition}(\ell))\). Every vertical-transmission function is a left-multiplication.
+<pre><code class="language-lean">lemma transmitVertical_eq_leftMul (l : List α) :
+    transmitVertical l = leftMul (tradition l)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.13 (transmitVertical_singleton_at_ident).</span>
+\(\mathrm{transmitVertical}([a])(e) = a\). A single-generation lineage transmits the identity to its own tradition.
+<pre><code class="language-lean">lemma transmitVertical_singleton_at_ident (a : α) :
+    transmitVertical [a] e = a</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.14 (tradition_then).</span>
+\(\mathrm{tradition}(\ell_1\mathbin{+\!+}\ell_2) = \mathrm{tradition}(\ell_1)\circ\mathrm{tradition}(\ell_2)\). Tradition is a monoid homomorphism.
+<pre><code class="language-lean">lemma tradition_then (l1 l2 : List α) :
+    tradition (l1 ++ l2) = op (tradition l1) (tradition l2)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.15 (transmitVertical_then_compose).</span>
+\(\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2) = \mathrm{composeTrans}(\mathrm{transmitVertical}(\ell_1),\mathrm{transmitVertical}(\ell_2))\). The functional version of the append law.
+<pre><code class="language-lean">lemma transmitVertical_then_compose (l1 l2 : List α) :
+    transmitVertical (l1 ++ l2) =
+      composeTrans (transmitVertical l1) (transmitVertical l2)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.16 (transmitVertical_trivial).</span>
+\(\mathrm{transmitVertical}(\mathrm{replicate}(n,e))(x) = x\). A trivial lineage (all \(e\)) transmits every idea unchanged.
+<pre><code class="language-lean">lemma transmitVertical_trivial (n : ℕ) (x : α) :
+    transmitVertical (List.replicate n e) x = x</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.2.17 (tradition_nil).</span>
+\(\mathrm{tradition}([]) = e\). The tradition of an empty lineage is the identity.
+<pre><code class="language-lean">lemma tradition_nil : tradition ([] : List α) = e</code></pre>
+</div>
+
+<!-- §11.3 -->
+<h3 id="s11c">§11.3 — Faithful Transmission</h3>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.1 (idTrans_faithful).</span>
+\(\mathrm{idTrans}\) is faithful: it equals \(\mathrm{idTrans}\) by reflexivity.
+<pre><code class="language-lean">lemma idTrans_faithful : FaithfulTrans idTrans</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.2 (leftMul_ident_faithful).</span>
+\(\mathrm{leftMul}(e)\) is faithful, since \(\mathrm{leftMul}(e) = \mathrm{idTrans}\).
+<pre><code class="language-lean">lemma leftMul_ident_faithful : FaithfulTrans (leftMul (e : α))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.3 (rightMul_ident_faithful).</span>
+\(\mathrm{rightMul}(e)\) is faithful, since \(\mathrm{rightMul}(e) = \mathrm{idTrans}\).
+<pre><code class="language-lean">lemma rightMul_ident_faithful : FaithfulTrans (rightMul (e : α))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.4 (composeTrans_faithful).</span>
+If \(f\) and \(g\) are faithful, so is \(\mathrm{composeTrans}(f,g)\).
+<pre><code class="language-lean">lemma composeTrans_faithful {f g : α → α}
+    (hf : FaithfulTrans f) (hg : FaithfulTrans g) :
+    FaithfulTrans (composeTrans f g)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.5 (transmitVertical_nil_faithful).</span>
+The empty lineage transmits faithfully.
+<pre><code class="language-lean">lemma transmitVertical_nil_faithful : FaithfulTrans (transmitVertical ([] : List α))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.6 (transmitVertical_trivial_faithful).</span>
+For any \(n\), the trivial lineage of length \(n\) transmits faithfully.
+<pre><code class="language-lean">lemma transmitVertical_trivial_faithful (n : ℕ) :
+    FaithfulTrans (transmitVertical (List.replicate n e))</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.7 (transmitVertical_faithful_of_tradition_ident).</span>
+If \(\mathrm{tradition}(\ell) = e\) then \(\mathrm{transmitVertical}(\ell)\) is faithful.
+<pre><code class="language-lean">lemma transmitVertical_faithful_of_tradition_ident {l : List α}
+    (h : tradition l = e) : FaithfulTrans (transmitVertical l)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.8 (tradition_ident_of_transmitVertical_faithful).</span>
+If \(\mathrm{transmitVertical}(\ell)\) is faithful then \(\mathrm{tradition}(\ell) = e\).
+<pre><code class="language-lean">lemma tradition_ident_of_transmitVertical_faithful {l : List α}
+    (h : FaithfulTrans (transmitVertical l)) : tradition l = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.9 (transmitVertical_faithful_iff).</span>
+\(\mathrm{transmitVertical}(\ell)\) is faithful iff \(\mathrm{tradition}(\ell) = e\). The biconditional combining 11.3.7 and 11.3.8.
+<pre><code class="language-lean">lemma transmitVertical_faithful_iff (l : List α) :
+    FaithfulTrans (transmitVertical l) ↔ tradition l = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.10 (tradition_trivial).</span>
+\(\mathrm{tradition}(\mathrm{replicate}(n,e)) = e\). The tradition of the trivial lineage is the identity.
+<pre><code class="language-lean">lemma tradition_trivial (n : ℕ) : tradition (List.replicate n e) = e</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.11 (transmitVertical_append_faithful_right).</span>
+If \(\mathrm{transmitVertical}(\ell_2)\) is faithful, then \(\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2)\) is faithful iff \(\mathrm{transmitVertical}(\ell_1)\) is faithful.
+<pre><code class="language-lean">lemma transmitVertical_append_faithful_right {l1 l2 : List α}
+    (h2 : FaithfulTrans (transmitVertical l2)) :
+    FaithfulTrans (transmitVertical (l1 ++ l2)) ↔
+      FaithfulTrans (transmitVertical l1)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.12 (transmitVertical_append_faithful_left).</span>
+If \(\mathrm{transmitVertical}(\ell_1)\) is faithful, then \(\mathrm{transmitVertical}(\ell_1\mathbin{+\!+}\ell_2)\) is faithful iff \(\mathrm{transmitVertical}(\ell_2)\) is faithful.
+<pre><code class="language-lean">lemma transmitVertical_append_faithful_left {l1 l2 : List α}
+    (h1 : FaithfulTrans (transmitVertical l1)) :
+    FaithfulTrans (transmitVertical (l1 ++ l2)) ↔
+      FaithfulTrans (transmitVertical l2)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.3.13 (transmitVertical_all_silent_faithful).</span>
+If every element of \(\ell\) is \(e\) (an all-silent lineage), then \(\mathrm{transmitVertical}(\ell)\) is faithful.
+<pre><code class="language-lean">lemma transmitVertical_all_silent_faithful {l : List α}
+    (h : ∀ x ∈ l, x = e) : FaithfulTrans (transmitVertical l)</code></pre>
+</div>
+
+<!-- §11.4 -->
+<h3 id="s11d">§11.4 — Lineage Equivalence</h3>
+<p>Two lineages are <em>equivalent</em> (\(\ell_1 \equiv \ell_2\)) if \(\mathrm{tradition}(\ell_1) = \mathrm{tradition}(\ell_2)\). This is a congruence on the lineage monoid.</p>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.1 (LineageEquiv.refl).</span>
+\(\ell \equiv \ell\). Lineage equivalence is reflexive.
+<pre><code class="language-lean">lemma LineageEquiv.refl (l : List α) : LineageEquiv l l</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.2 (LineageEquiv.symm).</span>
+If \(\ell_1 \equiv \ell_2\) then \(\ell_2 \equiv \ell_1\). Lineage equivalence is symmetric.
+<pre><code class="language-lean">lemma LineageEquiv.symm {l1 l2 : List α} (h : LineageEquiv l1 l2) :
+    LineageEquiv l2 l1</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.3 (LineageEquiv.trans).</span>
+If \(\ell_1 \equiv \ell_2\) and \(\ell_2 \equiv \ell_3\) then \(\ell_1 \equiv \ell_3\). Lineage equivalence is transitive.
+<pre><code class="language-lean">lemma LineageEquiv.trans {l1 l2 l3 : List α}
+    (h12 : LineageEquiv l1 l2) (h23 : LineageEquiv l2 l3) :
+    LineageEquiv l1 l3</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.4 (LineageEquiv.of_tradition_eq).</span>
+If \(\mathrm{tradition}(\ell_1) = \mathrm{tradition}(\ell_2)\) then \(\ell_1 \equiv \ell_2\).
+<pre><code class="language-lean">lemma LineageEquiv.of_tradition_eq {l1 l2 : List α}
+    (h : tradition l1 = tradition l2) : LineageEquiv l1 l2</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.5 (tradition_eq_of_LineageEquiv).</span>
+If \(\ell_1 \equiv \ell_2\) then \(\mathrm{tradition}(\ell_1) = \mathrm{tradition}(\ell_2)\).
+<pre><code class="language-lean">lemma tradition_eq_of_LineageEquiv {l1 l2 : List α}
+    (h : LineageEquiv l1 l2) : tradition l1 = tradition l2</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.6 (LineageEquiv_iff_tradition_eq).</span>
+\(\ell_1 \equiv \ell_2\) if and only if \(\mathrm{tradition}(\ell_1) = \mathrm{tradition}(\ell_2)\). The iff collapsing 11.4.4 and 11.4.5.
+<pre><code class="language-lean">lemma LineageEquiv_iff_tradition_eq (l1 l2 : List α) :
+    LineageEquiv l1 l2 ↔ tradition l1 = tradition l2</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.7 (LineageEquiv.then_right).</span>
+If \(\ell_1 \equiv \ell_2\) then \(m\mathbin{+\!+}\ell_1 \equiv m\mathbin{+\!+}\ell_2\). Right-congruence under <code>then</code>.
+<pre><code class="language-lean">lemma LineageEquiv.then_right {l1 l2 : List α} (m : List α)
+    (h : LineageEquiv l1 l2) : LineageEquiv (m ++ l1) (m ++ l2)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.8 (LineageEquiv.then_left).</span>
+If \(\ell_1 \equiv \ell_2\) then \(\ell_1\mathbin{+\!+} m \equiv \ell_2\mathbin{+\!+} m\). Left-congruence under <code>then</code>.
+<pre><code class="language-lean">lemma LineageEquiv.then_left {l1 l2 : List α} (m : List α)
+    (h : LineageEquiv l1 l2) : LineageEquiv (l1 ++ m) (l2 ++ m)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.9 (LineageEquiv.then).</span>
+If \(\ell_1 \equiv \ell_2\) and \(m_1 \equiv m_2\) then \(\ell_1\mathbin{+\!+} m_1 \equiv \ell_2\mathbin{+\!+} m_2\). Joint congruence.
+<pre><code class="language-lean">lemma LineageEquiv.then {l1 l2 m1 m2 : List α}
+    (hl : LineageEquiv l1 l2) (hm : LineageEquiv m1 m2) :
+    LineageEquiv (l1 ++ m1) (l2 ++ m2)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.10 (LineageEquiv.insert_silent).</span>
+For any \(n\) and lineage \(\ell\): \(\ell \equiv \ell\mathbin{+\!+}\mathrm{replicate}(n,e)\mathbin{+\!+}\ell'\). Inserting any number of silent generations preserves lineage equivalence.
+<pre><code class="language-lean">lemma LineageEquiv.insert_silent (n : ℕ) (l l' : List α) :
+    LineageEquiv (l ++ l') (l ++ List.replicate n e ++ l')</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.11 (LineageEquiv.trivial_nil).</span>
+\(\mathrm{replicate}(n,e) \equiv []\). The trivial lineage of any length is equivalent to the empty lineage.
+<pre><code class="language-lean">lemma LineageEquiv.trivial_nil (n : ℕ) :
+    LineageEquiv (List.replicate n e) ([] : List α)</code></pre>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 11.4.12 (LineageEquiv_nil_iff_faithful).</span>
+\(\ell \equiv []\) if and only if \(\mathrm{transmitVertical}(\ell)\) is faithful.
+<pre><code class="language-lean">lemma LineageEquiv_nil_iff_faithful (l : List α) :
+    LineageEquiv l [] ↔ FaithfulTrans (transmitVertical l)</code></pre>
+</div>
+
+<!-- ============================================================ SECTION 4 -->
+<h2 id="implications">4. Implications</h2>
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p>The 153 lemmas of Theorems 7 and 11 together constitute a machine-verified proof that <em>cultural transmission is mathematically lossless when the identity element is involved</em>. This is not a trivial result: it depends on associativity at every step, and without associativity the interior-insertion lemmas (7.K.10, 11.4.10) would fail. The exhaustive coverage of every rewriting context — head insertion, tail insertion, interior insertion, left absorption, right absorption — guarantees that no edge case of identity-element behaviour is left to informal intuition. Every identity-elimination step that a cultural theorist might perform informally when simplifying a chain of transmissions is validated by a named lemma with a machine-checked proof.</p>
+
+<p>The identity element \(e\) is genuinely <em>invisible</em> in the formal sense established by Theorem 7.2: it cannot be detected by any function that factors through the chain computation. This formalises the intuition — shared by Dawkins, Henrich, and Tomasello — that "doing nothing" is a coherent and well-defined act in cultural transmission. A generation that transmits a cultural item unchanged contributes \(e\) to the lineage, and that contribution is not merely small but algebraically zero. Theorem 7.2 shows that removing or adding any number of identity-contributing generations changes nothing about the aggregate cultural product.</p>
+
+<p>Self-fixed points (Theorem 7.3, §7.F, §7.M) formalise the concept of <em>cultural attractors</em> from Sperber's epidemiology of representations. An attractor is not merely a frequently-occurring idea; it is one whose internal dynamics are stable under composition with itself. The power lemmas (7.F.4–7.F.7, 7.M.1) show that once a lineage reaches an attractor, no further iterated transmission can move it away: \(a^n = a\) for all positive \(n\). This is stronger than the usual informal claim that attractors "pull ideas toward them"; the formal claim is that an already-attractor idea is a fixed point of the entire orbit. The implication for cognitive anthropology is that attractor status is an all-or-nothing, not a matter-of-degree, property.</p>
+
+<p>The Faithfulness Characterization (Theorem 11.2) vindicates Henrich's account of cumulative culture at the formal level. Henrich argues that human culture ratchets upward because each generation transmits the received cultural package with high fidelity, adding its own innovations on top. In the formal model, high fidelity corresponds to \(\mathrm{tradition}(\ell)\approx e\), and perfect fidelity corresponds to \(\mathrm{tradition}(\ell) = e\) exactly. The iff in Theorem 11.2 shows that this is not merely a sufficient but a <em>necessary and sufficient</em> condition for faithful transmission: there is no other way to transmit faithfully than to have tradition equal to identity. This rules out accounts of cumulative culture that appeal to faithful transmission for reasons other than the neutrality of the accumulated tradition.</p>
+
+<p>Non-compositivity of culture — the phenomenon Sperber identified as the gap between a representation's public and mental forms — is formalised as the gap between a lineage's tradition \(\mathrm{tradition}(\ell)\) and its individual contributions \([a_1,\ldots,a_n]\). Corollary 11.1 shows that tradition is a homomorphism, so if one believes traditions are non-trivial, one must accept that the individual contributions are themselves non-trivial. Lineage Equivalence (Theorem 11.3) says exactly when two lineages are culturally interchangeable: when they produce the same tradition. This means the fine-grained identity of who transmitted what is irrelevant to the cultural outcome — only the aggregate matters. This aligns with selectionist accounts of cultural evolution and contradicts strong particularist views, on which the identity of the transmitter is always culturally relevant.</p>
+</div>
+
+<!-- ============================================================ SECTION 5 -->
+<h2 id="zoo">5. Zoo Entries</h2>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Dawkins, Richard — <em>The Selfish Gene</em> (1976), ch. 11: "Memes: the new replicators"</strong><br>
+<em>Original claim.</em> Memes are units of cultural inheritance that propagate through imitation. Like genes, they are subject to selection, mutation, and recombination. A meme's fitness is its copying fidelity, fecundity, and longevity. The cultural pool is a meme-ocean in which high-fidelity replicators outcompete low-fidelity ones.<br><br>
+<em>Formal translation.</em> A meme is an element \(a\in\mathcal{P}\) of the idea monoid. Its replication through a lineage \(\ell=[a,a,\ldots,a]\) is modelled by \(\mathrm{chain}([a,\ldots,a]) = a^n\). High copying fidelity corresponds to the lineage having tradition \(\approx e\), and perfect fidelity to \(\mathrm{tradition}(\ell) = e\) (Theorem 11.2). The Dawkinsian claim that high-fidelity replicators dominate is captured by the convergence of \(a^n\to a\) for self-fixed points (§7.F). The monoid structure explains why meme combination is not arbitrary: \(a\circ b \neq b\circ a\) in general, so the order of cultural transmission matters, vindicating Dawkins's emphasis on the directionality of cultural inheritance chains.
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Sperber, Dan — <em>Explaining Culture</em> (1996): epidemiology of representations</strong><br>
+<em>Original claim.</em> Cultural representations are not copied faithfully but instead reconstructed by each recipient. Transmission is a causal process in which attractors — cognitively natural or emotionally salient representation-types — act as basins of attraction. Most representations drift toward attractors during transmission, explaining the cross-cultural recurrence of certain themes, forms, and content-types.<br><br>
+<em>Formal translation.</em> Attractors are precisely the self-fixed points of the idea monoid: elements \(a\) satisfying \(a\circ a = a\). Theorem 7.3 shows that every power \(a^n = a\) for \(n\geq 1\), meaning that iterated transmission within an attractor's basin stabilises immediately. The gap between a lineage's tradition and the identity (\(\mathrm{tradition}(\ell)\neq e\)) measures the degree of non-faithful transmission — exactly the "transformation" Sperber identifies at each transmission step. The epidemiological claim that populations converge on attractors is formalised by Lemma 7.M.1: any chain of self-fixed points collapses to that single attractor regardless of length. What Sperber describes informally as "cognitive attraction" the formalism identifies with algebraic idempotence.
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Henrich, Joseph — <em>The Secret of Our Success</em> (2016): cumulative cultural evolution and the ratchet effect</strong><br>
+<em>Original claim.</em> Human culture uniquely ratchets upward because each generation copies the received cultural package with sufficient fidelity to allow innovations to accumulate. Without high-fidelity transmission, cultural complexity erodes; with it, each generation can build on the last. The ratchet requires that faithful transmission be the default, not the exception.<br><br>
+<em>Formal translation.</em> Theorem 11.2 characterises faithful transmission exactly: a lineage transmits faithfully if and only if its tradition equals \(e\). This iff is Henrich's empirical claim stated as a theorem: the only way cumulative culture can ratchet is if the aggregate distortion introduced by each lineage segment is neutral. The chain-homomorphism property (Corollary 7.1) means that a lineage of faithful transmitters (\(\mathrm{tradition}(\ell_i) = e\)) produces a concatenated lineage whose tradition is also \(e\) (by Corollary 11.1): \(\mathrm{tradition}(\ell_1\mathbin{+\!+}\cdots\mathbin{+\!+}\ell_n) = e\circ\cdots\circ e = e\). The ratchet is thus a consequence of the monoid identity law applied to faithful transmission segments, not an independent biological or psychological postulate.
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Vygotsky, Lev — <em>Mind in Society</em> (1978): Zone of Proximal Development (ZPD)</strong><br>
+<em>Original claim.</em> Development occurs in the zone proximal to the learner's current competence, where a more capable partner provides scaffolding. The scaffolding is not arbitrary but is precisely calibrated: the partner supplies what the learner cannot yet produce independently, guiding the learner's construction of new capabilities. Internalisation — taking over the scaffolded function — is the mechanism of cognitive development.<br><br>
+<em>Formal translation.</em> The <code>leftMul</code> structure models scaffolding: a teacher with contribution \(a\) transforms a learner's current idea \(x\) into \(a\circ x\), supplying the missing cultural component from the left. The ZPD scaffold is the difference between \(a\circ x\) and \(x\) — measured by \(a\). Internalisation corresponds to the learner absorbing \(a\) into their own repertoire, after which their own unscaffolded output equals \(a\circ x\). Sequential ZPD steps are modelled by \(\mathrm{composeTrans}(\mathrm{leftMul}(a_1),\mathrm{leftMul}(a_2)) = \mathrm{leftMul}(a_1\circ a_2)\) (Lemma 11.1.10): a chain of scaffolded interactions aggregates into a single left-multiplication by the product of the scaffolding contributions. The limit case — full internalisation — is when the learner's tradition equals \(e\), giving faithful transmission as per Theorem 11.2.
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Rogers, Everett — <em>Diffusion of Innovations</em> (1962): S-curve adoption and coalitions</strong><br>
+<em>Original claim.</em> Innovations spread through a social system via communication channels over time. Adopters can be categorised by their time of adoption (innovators, early adopters, early majority, late majority, laggards). The cumulative adoption curve is S-shaped. A critical mass of adopters creates a self-sustaining cascade; below the critical mass the innovation dies out.<br><br>
+<em>Formal translation.</em> A coalition of adopters is a list \([a_1,\ldots,a_n]\) of idea-transmitting agents; the cumulative adoption at any time is \(\mathrm{chain}([a_1,\ldots,a_n])\). The chain homomorphism (Corollary 7.1) means that the cumulative adoption of a merged coalition is the composition of the individual cumulative adoptions: \(\mathrm{chain}(\ell_1\mathbin{+\!+}\ell_2) = \mathrm{chain}(\ell_1)\circ\mathrm{chain}(\ell_2)\). Critical mass is the tipping point at which the aggregate tradition \(\mathrm{tradition}(\ell)\) becomes a self-fixed point: once reached, further adoption leaves the tradition unchanged (Theorem 7.3). The S-curve corresponds to the growth of the chain's length before reaching this fixed point. See also <a href="diffusion-extension.html">Diffusion Extension</a> for the full formal treatment.
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Lévi-Strauss, Claude — <em>Mythologiques</em> (1964–1971): structural transformations of myths</strong><br>
+<em>Original claim.</em> Myths in different cultures are not independent inventions but structural transformations of one another. The same "mythological bundle" recurs across geographically and historically distant societies, transformed by systematic operations (inversion, permutation, substitution). The structure of a myth — its pattern of relations among elements — is what is transmitted and transformed, not its surface content.<br><br>
+<em>Formal translation.</em> Lineage equivalence (Theorem 11.3) is exactly structural sameness of transmission chains: two lineages are equivalent iff they produce the same tradition, regardless of the particular sequence of contributing agents. This captures Lévi-Strauss's claim that what matters is the aggregate structural relation, not the particular mediating steps. The congruence property (lineage equivalence is preserved under concatenation) says that structurally equivalent myth-chains can be freely substituted within larger sequences of cultural transmission. The silent-generation insertion (Lemma 11.4.10) formalises Lévi-Strauss's observation that structurally "inert" transmission stages (those contributing nothing to the mythological structure) can be inserted or deleted without changing the structural outcome.
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<strong>Tomasello, Michael — <em>The Cultural Origins of Human Cognition</em> (1999): shared intentionality</strong><br>
+<em>Original claim.</em> Human cultural transmission is uniquely supported by shared intentionality — the capacity to understand others as intentional agents with minds like one's own. This allows humans to transmit not just behaviours but the intentions and goals behind them. Cumulative cultural learning depends on the learner correctly identifying the transmitter's communicative intention, not merely imitating the surface behaviour.<br><br>
+<em>Formal translation.</em> Faithful transmission (\(\mathrm{transmitVertical}(\ell) = \mathrm{idTrans}\)) is the algebraic model of perfect intentional fidelity: the transmitted idea arrives at the recipient exactly as it left the sender. Theorem 11.2 provides the characterisation: faithfulness holds iff \(\mathrm{tradition}(\ell) = e\). Tomasello's claim is that human shared intentionality provides the cognitive scaffolding that makes \(\mathrm{tradition}(\ell)\approx e\) achievable at scale. The identity transmission \(\mathrm{idTrans}\) (Lemma 11.3.1) models the ideal limit of perfect shared-intentional fidelity. Deviations from faithfulness — \(\mathrm{tradition}(\ell)\neq e\) — correspond to failures of shared intentionality: misunderstandings, false attributions of intent, or substitution of the learner's own interpretation for the transmitter's. The composeTrans associativity (Lemma 11.1.5) guarantees that chains of shared-intentional acts are coherently composable, which Tomasello's theory requires.
+</div>
+
+<p style="margin-top:1.5em;">See also: <a href="diffusion-extension.html">Diffusion Extension Theorems</a> &middot; <a href="recombinant-growth.html">Recombinant Growth Theorems</a></p>
+
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

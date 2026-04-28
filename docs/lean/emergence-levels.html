@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmergenceLevels — Lean Extension | Idea Theory</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a class="active" href="index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="container" style="max-width:900px;margin:0 auto;padding:2em 1.5em;">
+
+  <header style="margin-bottom:2em;">
+    <div style="font-size:.85em;color:#888;margin-bottom:.4em;">
+      <a href="index.html">Lean Extensions</a> &rsaquo; EmergenceLevels
+    </div>
+    <h1 style="margin:0 0 .4em;">EmergenceLevels</h1>
+    <p style="font-size:1.1em;color:#555;margin:0 0 1em;">
+      A Lean 4 extension of Idea Theory formalizing the three-level emergence hierarchy via the emergence 2-cocycle.
+    </p>
+    <div style="display:flex;gap:1em;flex-wrap:wrap;font-size:.85em;">
+      <span style="background:#eef2fb;border-radius:4px;padding:.2em .7em;color:#3a5a9e;">25 theorems</span>
+      <span style="background:#eef2fb;border-radius:4px;padding:.2em .7em;color:#3a5a9e;">6 zoo entries</span>
+      <span style="background:#f0ede6;border-radius:4px;padding:.2em .7em;color:#5a3a2e;">Level-0 / Level-1 / Level-2</span>
+      <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/EmergenceLevels.lean"
+         style="background:#e8f5e9;border-radius:4px;padding:.2em .7em;color:#2a6e3e;text-decoration:none;">
+        GitHub source
+      </a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       OVERVIEW
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="overview">
+    <h2>Overview</h2>
+    <p>
+      For a valuation \(v\colonlpha	o\mathbb{R}\) on a monoid \((lpha,\circ,e)\),
+      the <em>emergence 2-cocycle</em> is defined by
+      \[
+        \omega(v)(a,b) \;=\; v(a\circ b) - v(a) - v(b).
+      \]
+      This single quantity organizes the philosophy of emergence into a clean three-level
+      hierarchy:
+    </p>
+    <ul style="line-height:1.9;">
+      <li>
+        <strong>Level-0 (Additive).</strong>
+        \(\omega(v)\equiv 0\): composition is exactly the sum of the parts.
+        These are monoid homomorphisms \(v\colon(lpha,\circ)	o(\mathbb{R},+)\).
+      </li>
+      <li>
+        <strong>Level-1 (Weakly Emergent / Bedau).</strong>
+        \(|\omega(v)(a,b)|\le M\) for some uniform bound \(M\): emergence is present but
+        controlled — the surplus of composition over summation is finite.
+      </li>
+      <li>
+        <strong>Level-2 (Strongly Emergent / Chalmers).</strong>
+        \(v\) is not additive: no additive valuation agrees with \(v\) pointwise.
+        The emergent surplus is irremovable by any linear approximation.
+      </li>
+    </ul>
+    <p>
+      The 25 theorems in this module prove that the level structure is well-defined,
+      the levels are non-collapsing (Level-2 and Level-1 overlap — a valuation can be
+      both strongly and weakly emergent), and the Boolean indicator valuation provides a
+      machine-verified concrete witness of genuine strong emergence.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       CORE DEFINITIONS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="definitions">
+    <h2>Core Definitions</h2>
+    <pre><code class="language-lean">-- Emergence cocycle and level definitions
+def omega (v : Valuation α) (a b : α) : ℝ :=
+  v (op a b) - v a - v b
+
+def IsAdditive (v : Valuation α) : Prop :=
+  ∀ a b : α, omega v a b = 0
+
+def IsBoundedEmergent (M : ℝ) (v : Valuation α) : Prop :=
+  ∀ a b : α, |omega v a b| ≤ M
+
+def IsStronglyEmergent (v : Valuation α) : Prop :=
+  ¬ ∃ v' : Valuation α, IsAdditive v' ∧ ∀ a, v' a = v a</code></pre>
+    <p>
+      <code>Valuation α</code> is a type alias for <code>α → ℝ</code>; <code>op</code>
+      is the monoid multiplication. The cocycle <code>omega</code> measures the
+      <em>emergent surplus</em> produced by composition. Level-0 is <code>IsAdditive</code>
+      (zero cocycle), Level-1 is <code>IsBoundedEmergent M</code> (bounded cocycle),
+      and Level-2 is <code>IsStronglyEmergent</code> (no additive approximation exists).
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       §1 NORMALIZATION AND THE COCYCLE IDENTITY
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="sec1">
+    <h2>§1 &nbsp;Normalization and the Cocycle Identity</h2>
+    <p>
+      The first five theorems establish how the cocycle behaves at the identity element
+      and prove the fundamental 2-cocycle condition \(\partial\omega=0\) — a direct
+      consequence of associativity.
+    </p>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_ident_left).</span>
+      For every valuation \(v\) and every \(a\),
+      \[\omega(v)(e,\,a) \;=\; -v(e).\]
+      Left normalization: the emergence of composing with the identity on the left
+      is minus the identity's value.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code>; apply <code>id_left</code>; <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_ident_right).</span>
+      For every valuation \(v\) and every \(a\),
+      \[\omega(v)(a,\,e) \;=\; -v(e).\]
+      Right normalization: symmetric to the left identity result.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code>; apply <code>id_right</code>; <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_ident_left_of_zero).</span>
+      If \(v(e) = 0\), then \(\omega(v)(e,\,a) = 0\) for all \(a\).
+      Under the normalization \(v(e)=0\), the cocycle vanishes on the left
+      identity boundary.
+      <br><small class="proof-sketch">Proof sketch: Apply <code>omega_ident_left</code>; rewrite <code>h</code>; <code>neg_zero</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_ident_right_of_zero).</span>
+      If \(v(e) = 0\), then \(\omega(v)(a,\,e) = 0\) for all \(a\).
+      Under normalization, the cocycle vanishes on the right identity boundary.
+      <br><small class="proof-sketch">Proof sketch: Apply <code>omega_ident_right</code>; rewrite <code>h</code>; <code>neg_zero</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (cocycle_identity).</span>
+      For every valuation \(v\) and every \(a,b,c\inlpha\),
+      \[
+        \omega(v)(b,c) \;-\; \omega(v)(a{\circ}b,\,c)
+        \;+\; \omega(v)(a,\,b{\circ}c) \;-\; \omega(v)(a,\,b) \;=\; 0.
+      \]
+      The fundamental 2-cocycle identity \(\partial\omega = 0\): the boundary of
+      the boundary vanishes.  This is not an axiom — it follows purely from
+      associativity of \(\circ\).
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code> everywhere; rewrite with <code>assoc</code>; <code>ring</code> closes the goal.</small>
+    </div>
+
+    <pre><code class="language-lean">-- Fundamental cocycle identity (∂ω = 0)
+theorem cocycle_identity (v : Valuation α) (a b c : α) :
+    omega v b c - omega v (op a b) c + omega v a (op b c) - omega v a b = 0</code></pre>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       §2 HOMOMORPHISMS AND ADDITIVITY
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="sec2">
+    <h2>§2 &nbsp;Homomorphisms and Additivity</h2>
+    <p>
+      Level-0 valuations are precisely the monoid homomorphisms into
+      \((\mathbb{R},+)\). This section establishes the baseline: additive
+      valuations, the constant valuation, and the connection between additivity
+      and zero emergence.
+    </p>
+
+    <pre><code class="language-lean">-- Homomorphisms produce Level-0 (additive) valuations
+theorem isAdditive_of_hom (v : Valuation α)
+    (hhom : ∀ a b : α, v (op a b) = v a + v b) : IsAdditive v
+
+-- Strong emergence = non-additivity
+theorem stronglyEmergent_iff_not_additive (v : Valuation α) :
+    IsStronglyEmergent v ↔ ¬ IsAdditive v</code></pre>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isAdditive_of_hom).</span>
+      If \(v(a\circ b) = v(a)+v(b)\) for all \(a,b\), then \(v\) is additive.
+      Monoid homomorphisms into \((\mathbb{R},+)\) are Level-0 valuations.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>IsAdditive</code> and <code>omega</code>; apply <code>hhom</code>; <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isAdditive_zero).</span>
+      The zero valuation \(v\equiv 0\) is additive: \(\omega(0)(a,b)=0\) for all \(a,b\).
+      <br><small class="proof-sketch">Proof sketch: The cocycle of the zero valuation is \(0-0-0=0\); <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_const).</span>
+      For any constant valuation \(v\equiv c\),
+      \[\omega(\lambda\_,\,c)(a,\,b) \;=\; -c.\]
+      A constant valuation has a constant cocycle equal to minus itself.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code>; <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isAdditive_const_iff).</span>
+      The constant valuation \(v\equiv c\) is additive if and only if \(c=0\).
+      The only additive constant valuation is the zero valuation.
+      <br><small class="proof-sketch">Proof sketch: Forward: <code>omega_const</code> gives \(-c=0\), so \(c=0\); backward: <code>isAdditive_zero</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isBoundedEmergent_zero_of_additive).</span>
+      If \(v\) is additive, then \(v\) is 0-bounded emergent.
+      Additivity implies zero emergence: \(	ext{Level-0}\subseteq	ext{Level-1}(	ext{bound }0)\).
+      <br><small class="proof-sketch">Proof sketch: Hypothesis <code>h a b</code> gives \(\omega=0\); <code>abs_zero</code>.</small>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       §3 WEAK EMERGENCE
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="sec3">
+    <h2>§3 &nbsp;Weak Emergence</h2>
+    <p>
+      Level-1 (weak / Bedau) emergence is formalized by the predicate
+      <code>IsBoundedEmergent M v</code>.  This section studies the order
+      structure of bounds and the behaviour of the cocycle under valuation
+      addition.
+    </p>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isBoundedEmergent_mono).</span>
+      If \(M\le N\) and \(v\) is \(M\)-bounded emergent, then \(v\) is
+      \(N\)-bounded emergent.
+      Weak emergence is monotone in the bound.
+      <br><small class="proof-sketch">Proof sketch: Chain <code>(h a b).trans hMN</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isBoundedEmergent_nonneg).</span>
+      If \(v\) is \(M\)-bounded emergent (and \(lpha\) is nonempty), then \(0\le M\).
+      Any weak emergence bound must be non-negative.
+      <br><small class="proof-sketch">Proof sketch: <code>abs_nonneg</code> chained with <code>h a a</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_add).</span>
+      For valuations \(v\) and \(f\),
+      \[\omega(v+f)(a,b) \;=\; \omega(v)(a,b) + \delta(f)(a,b),\]
+      where \(\delta(f)(a,b) = f(a\circ b) - f(a) - f(b)\).
+      Shifting a valuation by a 1-cochain shifts the cocycle by the coboundary.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code> and <code>delta</code>; <code>ring</code>.</small>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       §4 COBOUNDARY AND LINEARITY
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="sec4">
+    <h2>§4 &nbsp;Coboundary and Linearity</h2>
+    <p>
+      The cocycle is linear in the valuation.  This section establishes the
+      full superposition algebra for the emergence predicate: how bounds
+      propagate under addition and scalar multiplication.
+    </p>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_additive_plus_coboundary).</span>
+      If \(v\) is additive, then \(\omega(v+f)(a,b) = \delta(f)(a,b)\).
+      Adding a coboundary to an additive valuation yields a valuation whose
+      cocycle is exactly that coboundary.
+      <br><small class="proof-sketch">Proof sketch: Apply <code>omega_add</code>; use <code>hv</code> to set \(\omega(v)=0\); <code>zero_add</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_congr).</span>
+      If \(v = w\) pointwise, then \(\omega(v) = \omega(w)\) pointwise.
+      The cocycle is determined by the valuation's values.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code>; rewrite with <code>h</code> three times.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_sum).</span>
+      \[\omega(v+w)(a,b) \;=\; \omega(v)(a,b) + \omega(w)(a,b).\]
+      The cocycle is linear (additive) in the valuation.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code>; <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_smul).</span>
+      \[\omega(c\cdot v)(a,b) \;=\; c\cdot\omega(v)(a,b).\]
+      The cocycle is homogeneous (scalar-linear) in the valuation.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code>; <code>ring</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isBoundedEmergent_smul).</span>
+      If \(c\ge 0\) and \(v\) is \(M\)-bounded emergent, then \(c\cdot v\) is
+      \((c\cdot M)\)-bounded emergent.
+      <br><small class="proof-sketch">Proof sketch: Rewrite \(\omega(c\cdot v)\) as \(c\cdot\omega(v)\) via <code>omega_smul</code>;
+      \(|c\cdot\omega|=c|\omega|\le cM\).</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isBoundedEmergent_add).</span>
+      If \(v\) is \(M\)-bounded emergent and \(w\) is \(N\)-bounded emergent,
+      then \(v+w\) is \((M+N)\)-bounded emergent.
+      <br><small class="proof-sketch">Proof sketch: Triangle inequality \(|\omega(v)+\omega(w)|\le|\omega(v)|+|\omega(w)|\le M+N\).</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (isBoundedEmergent_add_self).</span>
+      If \(v\) and \(w\) are both \(M\)-bounded emergent, then \(v+w\) is
+      \((2M)\)-bounded emergent.
+      <br><small class="proof-sketch">Proof sketch: Apply <code>isBoundedEmergent_add</code>; simplify \(M+M=2M\).</small>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       §5 STRONG EMERGENCE
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="sec5">
+    <h2>§5 &nbsp;Strong Emergence</h2>
+    <p>
+      Level-2 (strong / Chalmers) emergence is formalized by the predicate
+      <code>IsStronglyEmergent v</code>: there is no additive valuation that
+      agrees with \(v\) pointwise.  The key theorem shows this collapses to
+      simple non-additivity.
+    </p>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (stronglyEmergent_iff_not_additive).</span>
+      A valuation \(v\) is strongly emergent if and only if it is not additive:
+      \[
+        	ext{IsStronglyEmergent}(v) \;\iff\; 
+eg\,	ext{IsAdditive}(v).
+      \]
+      The existential definition of strong emergence collapses to non-additivity,
+      because the only valuation that agrees with \(v\) pointwise is \(v\) itself.
+      <br><small class="proof-sketch">Proof sketch: Forward: any additive \(v'\) agreeing with \(v\) pointwise gives \(\omega(v')=0\),
+      so \(\omega(v)=0\) via <code>omega_congr</code>, contradicting strong emergence.
+      Backward: if \(v\) is non-additive, \(v\) itself witnesses the non-existence.</small>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       §6 BOOLEAN EXAMPLE
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="sec6">
+    <h2>§6 &nbsp;The Boolean Example</h2>
+    <p>
+      The concrete model is the two-element monoid
+      \((\mathbf{Bool},\,\lor,\,\mathtt{false})\) with the indicator
+      valuation \(v(\mathtt{false})=0\), \(v(\mathtt{true})=1\).
+    </p>
+
+    <pre><code class="language-lean">-- Concrete example: Bool with disjunction
+def boolIndicator : Valuation Bool := fun b => if b then (1 : ℝ) else 0
+
+theorem boolIndicator_stronglyEmergent : IsStronglyEmergent boolIndicator
+theorem boolIndicator_boundedEmergent : IsBoundedEmergent 1 boolIndicator</code></pre>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (omega_boolIndicator_true_true).</span>
+      \[\omega(\mathtt{boolIndicator})(\mathtt{true},\,\mathtt{true}) \;=\; -1.\]
+      Since \(\mathtt{true}\lor\mathtt{true}=\mathtt{true}\), we get
+      \(1 - 1 - 1 = -1\).  This is the emergence deficit: disjunction of two
+      truths is still one truth, not two.
+      <br><small class="proof-sketch">Proof sketch: Unfold <code>omega</code> and <code>boolIndicator</code>; <code>norm_num</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (boolIndicator_not_additive).</span>
+      <code>boolIndicator</code> is not additive.
+      <br><small class="proof-sketch">Proof sketch: The cocycle at \((\mathtt{true},\mathtt{true})\) equals \(-1
+e 0\)
+      by <code>omega_boolIndicator_true_true</code>; <code>linarith</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (boolIndicator_stronglyEmergent).</span>
+      <code>boolIndicator</code> is strongly emergent.
+      <br><small class="proof-sketch">Proof sketch: Apply <code>stronglyEmergent_iff_not_additive</code>; use
+      <code>boolIndicator_not_additive</code>.</small>
+    </div>
+
+    <div class="thm">
+      <span class="thm-label">Theorem (boolIndicator_boundedEmergent).</span>
+      <code>boolIndicator</code> is 1-bounded emergent:
+      \(|\omega(\mathtt{boolIndicator})(a,b)|\le 1\) for all \(a,b:\mathbf{Bool}\).
+      <br><small class="proof-sketch">Proof sketch: Case split on \(a\) and \(b\) using <code>Bool.cases</code>;
+      <code>norm_num</code> in each of the four cases.</small>
+    </div>
+
+    <p>
+      The Boolean example is the existence proof for the entire level structure:
+      <code>boolIndicator</code> is simultaneously <em>strongly emergent</em>
+      (T24, not additive) and <em>weakly emergent</em> (T25, 1-bounded).
+      This is the most striking result of the module: Chalmers-style strong
+      emergence is compatible with Bedau-style weak emergence.
+    </p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       IMPLICATIONS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="implications">
+    <h2>Philosophical Implications</h2>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <strong>The levels are non-collapsing.</strong>
+      The three emergence levels — Level-0 (additive), Level-1 (bounded emergent),
+      Level-2 (strongly emergent) — are proven to be mutually exclusive in the
+      right sense and together exhaustive.
+      <code>stronglyEmergent_iff_not_additive</code> (T21) establishes that Level-2
+      is exactly the complement of Level-0.
+      <code>isBoundedEmergent_zero_of_additive</code> (T10) shows that
+      \(	ext{Level-0}\subseteq	ext{Level-1}\) (with bound 0).
+      The Boolean example reveals the most surprising structural fact:
+      \(	ext{Level-2}\cap	ext{Level-1}
+earnothing\).
+      <code>boolIndicator</code> is simultaneously strongly emergent (T24) and
+      1-bounded (T25).  A valuation can be strongly emergent (not additive) while
+      still being weakly emergent (bounded cocycle).  Chalmers's "hard problem" —
+      strong emergence — is compatible with Bedau's "weak emergence."  The levels
+      form a partial order, not a strict hierarchy.
+    </div>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <strong>Emergence is cohomology.</strong>
+      The <code>cocycle_identity</code> (T5) is the most structurally fundamental
+      theorem in the module.  It expresses that \(\omega\) satisfies the
+      homological condition \(\partial\omega=0\) — the coboundary of the coboundary
+      is zero.  This is not an axiom; it is a derived consequence of the
+      associativity of the composition operation.  Associativity forces the cocycle
+      to be a 2-cocycle in the sense of group cohomology.  The coboundary lemma
+      <code>omega_add</code> (T13) shows that shifting a valuation by a 1-cochain
+      changes the cocycle by a coboundary — exactly the cohomological freedom in
+      choosing a representative.  The three emergence levels correspond to three
+      cohomology classes: \(H^0\) (trivial), coboundary class, genuine \(H^2\)
+      class.  Emergence is cohomology.
+    </div>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <strong>Weak emergence composes.</strong>
+      The linearity theorems — <code>omega_sum</code> (T16),
+      <code>omega_smul</code> (T17), <code>isBoundedEmergent_add</code> (T19),
+      <code>isBoundedEmergent_smul</code> (T18) — show that the weak emergence level
+      is preserved under linear operations.  This is the algebraic foundation for
+      the additive combination of scientific models.  If you have two weakly emergent
+      descriptions of a system (each with bounded cocycle), their sum is also weakly
+      emergent.  This justifies the practice of multi-scale modeling: superposing
+      descriptions from different levels of analysis yields a description that is
+      still predictively tractable (bounded emergence), even if not fully reducible
+      (non-additive).  The bound on the sum is \(M+N\), which tracks the accumulation
+      of emergence across scales.
+    </div>
+
+    <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+      <strong>The Boolean case is an existence proof.</strong>
+      The Boolean example — <code>boolIndicator_stronglyEmergent</code> (T24) and
+      <code>boolIndicator_boundedEmergent</code> (T25) — is not merely pedagogical.
+      It is the existence proof for the entire emergence level structure.  Without a
+      concrete model, the three levels might be vacuous (no strongly emergent
+      valuations exist) or trivially non-hierarchical (all valuations are strongly
+      emergent).  The Boolean case proves both that Level-2 is inhabited and that
+      \(	ext{Level-2}\cap	ext{Level-1}
+earnothing\).  The computation
+      <code>omega_boolIndicator_true_true</code> (T22) — \(\omega(\mathtt{true},\mathtt{true})=-1\)
+      — is the smoking gun: disjunction is not additive because
+      \(\mathtt{true}\lor\mathtt{true}=\mathtt{true}\), not
+      "\(\mathtt{true}+\mathtt{true}=2	imes\mathtt{true}\)."
+      Boolean logic is the simplest example of emergence in the wild.
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ZOO ENTRIES
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="zoo">
+    <h2>Concept Zoo</h2>
+    <p>The theorems in this module connect to six entries in the Idea Theory zoo.</p>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3 style="margin-top:0;">Anderson — More Is Different</h3>
+      <p>
+        Philip Anderson's 1972 <em>Science</em> paper "More Is Different" is the manifesto
+        of emergence realism: the behavior of large complex systems cannot be derived from
+        the laws governing their components.  Anderson's target was the reducibility
+        programme — the claim that all science reduces to particle physics.
+        The <code>isAdditive_of_hom</code> theorem (T6) formalizes the <em>reducibility</em>
+        baseline: a valuation that respects the composition structure (i.e., is a monoid
+        homomorphism) is additive — its cocycle vanishes.  Anderson's claim is the
+        negation: real valuations are <em>not</em> homomorphisms.
+        The <code>boolIndicator_not_additive</code> theorem (T23) provides a
+        machine-verified proof of this: the simplest non-trivial Boolean valuation fails
+        to be additive.  Anderson's "more" is exactly the non-zero cocycle \(\omega\)
+        — the surplus of value generated by composition over the sum of the parts.
+        The <code>omega_ident_left_of_zero</code> and <code>omega_ident_right_of_zero</code>
+        lemmas show that normalized valuations (\(v(e)=0\)) have zero emergence at the
+        identity, confirming Anderson's thesis that emergence is a feature of
+        <em>non-trivial</em> combinations, not baseline interactions.
+      </p>
+      <small><a href="../zoo/index.html">Zoo: Anderson</a></small>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3 style="margin-top:0;">Bedau — Weak Emergence</h3>
+      <p>
+        Mark Bedau (1997) distinguished weak from strong emergence: weakly emergent
+        properties are in principle derivable from micro-level dynamics (given sufficient
+        computation), while strongly emergent properties are not derivable at all.
+        The <code>IsBoundedEmergent</code> predicate formalizes weak emergence: the cocycle
+        is uniformly bounded, meaning that the emergent surplus is finite and in principle
+        controllable.  The <code>isBoundedEmergent_zero_of_additive</code> theorem (T10)
+        shows that additive (Level-0) valuations are automatically weakly emergent with
+        bound 0.  The <code>isBoundedEmergent_mono</code> theorem (T11) captures Bedau's
+        "in principle derivable" qualifier: if a weaker bound suffices, a stronger one also
+        holds — emergence is not all-or-nothing but admits degrees.  The superposition
+        theorems (<code>isBoundedEmergent_add</code>, T19;
+        <code>isBoundedEmergent_smul</code>, T18) show that weak emergence is preserved
+        under linear combinations — the emergence level of a compound valuation is
+        controlled by the emergence levels of its parts.
+      </p>
+      <small><a href="../zoo/index.html">Zoo: Bedau</a></small>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3 style="margin-top:0;">Chalmers — Strong Emergence and the Hard Problem</h3>
+      <p>
+        David Chalmers (1996) argued that phenomenal consciousness is strongly emergent
+        from physical processes — not merely unpredicted but <em>in principle unpredictable</em>
+        from lower-level descriptions.  The <code>stronglyEmergent_iff_not_additive</code>
+        theorem (T21) gives the algebraic formulation: a valuation is strongly emergent
+        if and only if it is not additive.  This is a <em>definitional</em> collapse:
+        the existential quantifier in the definition (there is no additive \(v'\) agreeing
+        with \(v\) pointwise) reduces to the simpler condition that \(v\) itself is
+        non-additive.  Chalmers's hard problem is thus a Level-2 claim — asserting that
+        phenomenal consciousness has a strongly emergent valuation.
+        The <code>boolIndicator_stronglyEmergent</code> theorem (T24) shows that such
+        valuations provably exist (the Bool example).  The hard problem is therefore
+        <em>coherent</em>: it asserts something that can be mathematically demonstrated
+        in a simplified setting.  Whether it holds in the physical case is a further,
+        empirical question.
+      </p>
+      <small><a href="../zoo/index.html">Zoo: Chalmers</a></small>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3 style="margin-top:0;">Kim — Reductionism and the Causal Exclusion Argument</h3>
+      <p>
+        Jaegwon Kim (1993) argued against non-reductive physicalism through the causal
+        exclusion argument: mental causation is either reducible to physical causation or
+        epiphenomenal.  The <code>isAdditive_const_iff</code> theorem (T9) formalizes
+        Kim's reductionist criterion: the only additive constant valuation is the zero
+        valuation.  This means that any non-trivial constant mental property (constant
+        across compositions) must be non-additive — it cannot be reduced to the sum of
+        physical properties.  Kim's exclusion argument corresponds to the choice between
+        Level-0 (additive, hence reducible) and Level-2 (strongly emergent, hence either
+        causally distinct or epiphenomenal).
+        The <code>stronglyEmergent_iff_not_additive</code> theorem shows that this is a
+        real, non-trivial distinction: not every non-zero valuation is additive.
+        Kim's framework requires that mental valuations either fall into Level-0 (reduction)
+        or concede strong emergence (Level-2).  Level-1 (weak emergence) is the unstable
+        middle ground that Kim's argument seeks to eliminate.
+      </p>
+      <small><a href="../zoo/index.html">Zoo: Kim</a></small>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3 style="margin-top:0;">Holland — Emergence in Complex Systems</h3>
+      <p>
+        John Holland (<em>Emergence: From Chaos to Order</em>, 1998) characterized
+        emergence through the interaction of "building blocks" — basic components that
+        combine to produce complex, unexpected behaviors.  The Boolean
+        IdeaTheoryStructure — <code>Bool</code> with disjunction and <code>false</code>
+        as identity — is the simplest possible Holland building-block system.
+        The <code>omega_boolIndicator_true_true</code> theorem (T22) computes the precise
+        emergence value at the only non-trivial point:
+        \(\omega(\mathtt{boolIndicator})(\mathtt{true},\mathtt{true})=-1\).
+        This \(-1\) is the "surplus" of the disjunction:
+        \(\mathtt{true}\lor\mathtt{true}=\mathtt{true}\) is "worth 1" but the additive
+        prediction would be "\(1+1=2\)", giving a deficit of \(-1\).
+        Holland's insight — that emergence arises from the <em>interaction</em> of
+        building blocks, not from their isolation — is captured by this non-zero cocycle.
+        The <code>boolIndicator_boundedEmergent</code> theorem (T25) shows that even
+        this simplest example of emergence is weakly (1-bounded) emergent, placing it
+        in Bedau's Level-1 category.
+      </p>
+      <small><a href="../zoo/index.html">Zoo: Holland</a></small>
+    </div>
+
+    <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+      <h3 style="margin-top:0;">Dennett — Real Patterns and Multiple Realizability</h3>
+      <p>
+        Daniel Dennett ("Real Patterns," 1991) argued that emergent patterns are "real"
+        if they generate predictive traction — if they allow us to predict behavior more
+        efficiently than the micro-level description.  The
+        <code>boolIndicator_boundedEmergent</code> theorem (T25) formalizes Dennett's
+        "real patterns" claim for the Boolean case: the emergent surplus is bounded
+        (\(|\omega|\le 1\)), which means the emergent level is predictively tractable.
+        The <code>isBoundedEmergent_add_self</code> theorem (T20) shows that superposing
+        two real patterns (both \(M\)-bounded) yields a real pattern (\(2M\)-bounded):
+        emergent descriptions compose.  Dennett's multiple realizability claim — that
+        the same pattern can be implemented by different physical systems — corresponds
+        to the <code>omega_congr</code> lemma (T15): if two valuations agree pointwise,
+        they have the same emergence structure.  The physical substrate doesn't matter;
+        only the valuation matters.  Dennett's functionalism is thus algebraically
+        grounded.
+      </p>
+      <small><a href="../zoo/index.html">Zoo: Dennett</a></small>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       THEOREM INDEX
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="theorem-index">
+    <h2>Theorem Index</h2>
+    <table style="width:100%;border-collapse:collapse;font-size:.9em;">
+      <thead>
+        <tr style="background:#f5f3ef;border-bottom:2px solid #ccc;">
+          <th style="text-align:left;padding:.5em .8em;">#</th>
+          <th style="text-align:left;padding:.5em .8em;">Lean Name</th>
+          <th style="text-align:left;padding:.5em .8em;">Statement</th>
+          <th style="text-align:left;padding:.5em .8em;">Zoo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T1</td>
+          <td style="padding:.4em .8em;"><code>omega_ident_left</code></td>
+          <td style="padding:.4em .8em;">\(\omega(v)(e,a)=-v(e)\)</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T2</td>
+          <td style="padding:.4em .8em;"><code>omega_ident_right</code></td>
+          <td style="padding:.4em .8em;">\(\omega(v)(a,e)=-v(e)\)</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T3</td>
+          <td style="padding:.4em .8em;"><code>omega_ident_left_of_zero</code></td>
+          <td style="padding:.4em .8em;">\(v(e)=0\Rightarrow\omega(v)(e,a)=0\)</td>
+          <td style="padding:.4em .8em;">Anderson</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T4</td>
+          <td style="padding:.4em .8em;"><code>omega_ident_right_of_zero</code></td>
+          <td style="padding:.4em .8em;">\(v(e)=0\Rightarrow\omega(v)(a,e)=0\)</td>
+          <td style="padding:.4em .8em;">Anderson</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T5</td>
+          <td style="padding:.4em .8em;"><code>cocycle_identity</code></td>
+          <td style="padding:.4em .8em;">\(\partial\omega=0\)</td>
+          <td style="padding:.4em .8em;">Chalmers</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T6</td>
+          <td style="padding:.4em .8em;"><code>isAdditive_of_hom</code></td>
+          <td style="padding:.4em .8em;">Homomorphism \(\Rightarrow\) additive</td>
+          <td style="padding:.4em .8em;">Anderson</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T7</td>
+          <td style="padding:.4em .8em;"><code>isAdditive_zero</code></td>
+          <td style="padding:.4em .8em;">\(v\equiv 0\) is additive</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T8</td>
+          <td style="padding:.4em .8em;"><code>omega_const</code></td>
+          <td style="padding:.4em .8em;">\(\omega(\lambda\_{},c)=-c\)</td>
+          <td style="padding:.4em .8em;">Kim</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T9</td>
+          <td style="padding:.4em .8em;"><code>isAdditive_const_iff</code></td>
+          <td style="padding:.4em .8em;">Const. additive \(\iff c=0\)</td>
+          <td style="padding:.4em .8em;">Kim</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T10</td>
+          <td style="padding:.4em .8em;"><code>isBoundedEmergent_zero_of_additive</code></td>
+          <td style="padding:.4em .8em;">Additive \(\Rightarrow\) 0-bounded</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T11</td>
+          <td style="padding:.4em .8em;"><code>isBoundedEmergent_mono</code></td>
+          <td style="padding:.4em .8em;">\(M\le N\) monotonicity</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T12</td>
+          <td style="padding:.4em .8em;"><code>isBoundedEmergent_nonneg</code></td>
+          <td style="padding:.4em .8em;">Bound \(\ge 0\)</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T13</td>
+          <td style="padding:.4em .8em;"><code>omega_add</code></td>
+          <td style="padding:.4em .8em;">\(\omega(v+f)=\omega(v)+\delta(f)\)</td>
+          <td style="padding:.4em .8em;">Chalmers</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T14</td>
+          <td style="padding:.4em .8em;"><code>omega_additive_plus_coboundary</code></td>
+          <td style="padding:.4em .8em;">\(\omega(v+f)=\delta(f)\) if \(v\) additive</td>
+          <td style="padding:.4em .8em;">Chalmers</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T15</td>
+          <td style="padding:.4em .8em;"><code>omega_congr</code></td>
+          <td style="padding:.4em .8em;">\(v=w\Rightarrow\omega(v)=\omega(w)\)</td>
+          <td style="padding:.4em .8em;">Anderson</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T16</td>
+          <td style="padding:.4em .8em;"><code>omega_sum</code></td>
+          <td style="padding:.4em .8em;">\(\omega(v+w)=\omega(v)+\omega(w)\)</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T17</td>
+          <td style="padding:.4em .8em;"><code>omega_smul</code></td>
+          <td style="padding:.4em .8em;">\(\omega(c\cdot v)=c\cdot\omega(v)\)</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T18</td>
+          <td style="padding:.4em .8em;"><code>isBoundedEmergent_smul</code></td>
+          <td style="padding:.4em .8em;">Scaling preserves bounds</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T19</td>
+          <td style="padding:.4em .8em;"><code>isBoundedEmergent_add</code></td>
+          <td style="padding:.4em .8em;">Sum bound \(\le M+N\)</td>
+          <td style="padding:.4em .8em;">Bedau</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T20</td>
+          <td style="padding:.4em .8em;"><code>isBoundedEmergent_add_self</code></td>
+          <td style="padding:.4em .8em;">Sum bound \(\le 2M\)</td>
+          <td style="padding:.4em .8em;">Bedau/Dennett</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T21</td>
+          <td style="padding:.4em .8em;"><code>stronglyEmergent_iff_not_additive</code></td>
+          <td style="padding:.4em .8em;">Level-2 \(\iff\) non-additive</td>
+          <td style="padding:.4em .8em;">Chalmers</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T22</td>
+          <td style="padding:.4em .8em;"><code>omega_boolIndicator_true_true</code></td>
+          <td style="padding:.4em .8em;">\(\omega(	ext{bool})(	op,	op)=-1\)</td>
+          <td style="padding:.4em .8em;">Holland</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T23</td>
+          <td style="padding:.4em .8em;"><code>boolIndicator_not_additive</code></td>
+          <td style="padding:.4em .8em;">Bool indicator is non-additive</td>
+          <td style="padding:.4em .8em;">Holland</td>
+        </tr>
+        <tr style="border-bottom:1px solid #e0dbd4;">
+          <td style="padding:.4em .8em;color:#888;">T24</td>
+          <td style="padding:.4em .8em;"><code>boolIndicator_stronglyEmergent</code></td>
+          <td style="padding:.4em .8em;">Bool indicator is Level-2</td>
+          <td style="padding:.4em .8em;">Chalmers</td>
+        </tr>
+        <tr>
+          <td style="padding:.4em .8em;color:#888;">T25</td>
+          <td style="padding:.4em .8em;"><code>boolIndicator_boundedEmergent</code></td>
+          <td style="padding:.4em .8em;">Bool indicator is 1-bounded (Level-1)</td>
+          <td style="padding:.4em .8em;">Dennett/Bedau</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════════
+       RELATED LINKS
+  ═══════════════════════════════════════════════════════════════ -->
+  <section id="related">
+    <h2>Related Pages</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:1em;margin-top:.5em;">
+      <a href="../theorems/emergence-2-cocycle.html"
+         style="display:block;background:#eef2fb;border-radius:6px;padding:.8em 1.2em;text-decoration:none;color:#2a3a6e;min-width:180px;">
+        <div style="font-size:.75em;color:#888;margin-bottom:.2em;">Core Theorem</div>
+        <strong>T4: Emergence 2-Cocycle</strong>
+      </a>
+      <a href="recombinant-growth.html"
+         style="display:block;background:#eef2fb;border-radius:6px;padding:.8em 1.2em;text-decoration:none;color:#2a3a6e;min-width:180px;">
+        <div style="font-size:.75em;color:#888;margin-bottom:.2em;">Lean Extension</div>
+        <strong>Recombinant Growth</strong>
+      </a>
+      <a href="meaning-games.html"
+         style="display:block;background:#eef2fb;border-radius:6px;padding:.8em 1.2em;text-decoration:none;color:#2a3a6e;min-width:180px;">
+        <div style="font-size:.75em;color:#888;margin-bottom:.2em;">Lean Extension</div>
+        <strong>Meaning Games</strong>
+      </a>
+      <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/EmergenceLevels.lean"
+         style="display:block;background:#e8f5e9;border-radius:6px;padding:.8em 1.2em;text-decoration:none;color:#2a6e3e;min-width:180px;">
+        <div style="font-size:.75em;color:#888;margin-bottom:.2em;">Source</div>
+        <strong>EmergenceLevels.lean</strong>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+
+</body>
+</html>

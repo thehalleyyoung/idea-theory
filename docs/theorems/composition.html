@@ -3,26 +3,589 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 1: Composition — Idea Theory</title>
+<title>Theorem 1: The Idea Monoid — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
-<h1>Theorem 1: Composition</h1>
-<div class="thm"><span class="thm-label">Theorem 1.</span> Let \((\mathcal{I},\circ,e)\) satisfy associativity and the two-sided identity axiom. Then (i) \(e\) is unique; (ii) for any \(a\in\mathcal{I}\) with a two-sided inverse \(a^{-1}\), the maps \(x\mapsto a\circ x\) and \(x\mapsto x\circ a\) are bijections.</div>
+<h1>Theorem 1: The Idea Monoid</h1>
+<p class="entry-meta">Lean: <code>IdeaTheory.Theorems1</code> &middot; Chapter: <a href="../chapters/ch01.html">Ch.&nbsp;1</a> &middot; 63 results &middot; Related: <a href="aufhebung-decomposition.html">T3</a>, <a href="conjugation.html">T6</a>, <a href="structural-equivalence.html">T8</a></p>
 
-<h2>Proof sketch</h2>
-<p>(i) Suppose \(e'\) is also a two-sided identity. Then \(e = e\circ e' = e'\). (ii) If \(a\circ x = a\circ y\), then \(a^{-1}\circ a\circ x = a^{-1}\circ a\circ y\), so \(x=y\). The other side is symmetric.</p>
+<p>
+The Idea Monoid is the foundational algebraic structure of Idea Theory.
+Ideas compose associatively, silence plays the role of an identity, and every sequence of ideas can be
+compressed into a single compositional product.
+The 63 machine-checked results in <code>IdeaTheory.Theorems1</code> establish this structure in full,
+covering the basic monoid laws, iterated powers, chains and list operations,
+the left and right subideal preorders, idempotents and commutativity, and cancellation with invertibility.
+Three headline theorems and four corollaries collect the key consequences.
+</p>
 
-<p>Verified as <code>IdeaTheory.Theorems1.composition_monoid</code> and <code>IdeaTheory.Theorems1.cancellation_invertible</code>.</p>
+<div class="toc-box">
+<h4>Contents</h4>
+<ol>
+  <li><a href="#headline">Headline Theorems</a></li>
+  <li><a href="#s1">§1 Core Monoid Laws</a> — Lemmas 1.1–1.12</li>
+  <li><a href="#s2">§2 Powers and Iteration</a> — Lemmas 1.13–1.23</li>
+  <li><a href="#s3">§3 Chains and Lists</a> — Lemmas 1.24–1.39</li>
+  <li><a href="#s4">§4 Subideal Order</a> — Lemmas 1.40–1.47</li>
+  <li><a href="#s5">§5 Idempotents and Commutativity</a> — Lemmas 1.48–1.55</li>
+  <li><a href="#s6">§6 Cancellation and Invertibility</a> — Lemmas 1.56–1.63</li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+  <li><a href="#extensions">Related Lean Extensions</a></li>
+</ol>
+</div>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/philosophy/locke-simple-complex.html">Locke (simple/complex ideas)</a></li>
-<li><a href="../zoo/analytic/frege-sense.html">Frege</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<!-- ============================================================ -->
+<h2 id="headline">Headline Theorems</h2>
+
+<div class="thm"><span class="thm-label">Theorem 1.1 (theorem_1_1).</span>
+For any list \(l\) and natural number \(n\) with \(0 \leq n \leq |l|\),
+\[
+  \text{chain}(l) \;=\; \text{chain}(l[{:}n]) \circ \text{chain}(l[n{:}]).
+\]
+A chain of ideas can be split at any position and the two sub-chains recompose to the original.
+</div>
+
+<div class="proof">
+By induction on \(n\). The base case \(n=0\) reduces to the left-identity law \(e\circ\text{chain}(l)=\text{chain}(l)\).
+For the inductive step, unfold the chain prefix by one element, apply associativity, and appeal to the inductive hypothesis.
+All steps are verified in <code>IdeaTheory.Theorems1.theorem_1_1</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 1.2 (theorem_1_2).</span>
+Let \((\mathcal{I},\circ,e)\) be an idea monoid. Then:
+<ol style="margin:.5em 0 0 1.2em">
+  <li>The identity element \(e\) is unique: any \(e'\) satisfying \(e'\circ a = a\circ e' = a\) for all \(a\) must equal \(e\).</li>
+  <li>The set \(\mathcal{I}^\times\) of invertible ideas is closed under \(\circ\): if \(a,b\in\mathcal{I}^\times\) then \(a\circ b\in\mathcal{I}^\times\).</li>
+  <li>Inverses are unique: if \(b\) and \(b'\) are both two-sided inverses of \(a\), then \(b = b'\).</li>
+</ol>
+</div>
+
+<div class="proof">
+<strong>(1)</strong> If \(e'\) is a second two-sided identity then \(e = e\circ e' = e'\), using \(e'\)-right-identity then \(e\)-left-identity.
+<strong>(2)</strong> If \(a\circ a^{-1} = e\) and \(b\circ b^{-1}=e\) then \((a\circ b)\circ(b^{-1}\circ a^{-1}) = a\circ(b\circ b^{-1})\circ a^{-1} = a\circ e\circ a^{-1} = e\) and symmetrically, using associativity throughout.
+<strong>(3)</strong> \(b = b\circ e = b\circ(a\circ b') = (b\circ a)\circ b' = e\circ b' = b'\).
+Full verification: <code>IdeaTheory.Theorems1.theorem_1_2</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 1.3 (theorem_1_3).</span>
+For any idea \(a\) and natural numbers \(m,n,k\):
+<ol style="margin:.5em 0 0 1.2em">
+  <li>\(a^0 = e\).</li>
+  <li>\(a^{m+n} = a^m \circ a^n\).</li>
+  <li>\(a^{m+n+k} = (a^m \circ a^n) \circ a^k\).</li>
+</ol>
+</div>
+
+<div class="proof">
+(1) is the definition of <code>npow_zero</code>. (2) follows by induction on \(n\) using <code>npow_succ</code> and associativity.
+(3) is an immediate consequence of (2) and associativity applied twice.
+Full verification: <code>IdeaTheory.Theorems1.theorem_1_3</code>.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 1.1 (corollary_1_1).</span>
+<em>Cultural chains can be regrouped.</em>
+For any lists \(l_1, l_2, l_3\),
+\[
+  \text{chain}(l_1 \mathbin{++} l_2 \mathbin{++} l_3) \;=\; \text{chain}(l_1 \mathbin{++} (l_2 \mathbin{++} l_3)).
+\]
+</div>
+
+<div class="proof">
+Direct from associativity of list concatenation (<code>List.append_assoc</code>) and <code>chain_append</code>.
+The grouping of ideas into episodes is irrelevant to the overall composition.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 1.2 (corollary_1_2).</span>
+<em>Void episodes vanish.</em>
+For any lists \(l_1, l_2\) and natural number \(n\),
+\[
+  \text{chain}(l_1 \mathbin{++} \text{voidChain}(n) \mathbin{++} l_2) \;=\; \text{chain}(l_1 \mathbin{++} l_2).
+\]
+</div>
+
+<div class="proof">
+By <code>chain_voidChain</code>, \(\text{chain}(\text{voidChain}(n))=e\).
+The result follows from <code>chain_append</code>, the identity laws, and Corollary 1.1.
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 1.3 (corollary_1_3).</span>
+<em>Reversible operations compose.</em>
+If \(a\) and \(b\) are both invertible, then \(a\circ b\) is invertible with \((a\circ b)^{-1} = b^{-1}\circ a^{-1}\).
+</div>
+
+<div class="proof">
+Immediate from <code>invertible_op</code> (Lemma 1.61) and Theorem 1.2(2).
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 1.4 (corollary_1_4).</span>
+<em>An idempotent idea does not grow under iteration.</em>
+If \(a^2 = a\) then \(a^n = a\) for all \(n \geq 1\).
+</div>
+
+<div class="proof">
+By <code>npow_idempotent</code> (Lemma 1.21): induction on \(n\) using \(a^{n+1} = a^n\circ a = a\circ a = a\).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s1">§1 Core Monoid Laws</h2>
+
+<h3>Closure and Congruence</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.1 (op_ident_left).</span>
+\(e \circ a = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.2 (op_ident_right).</span>
+\(a \circ e = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.3 (op_assoc).</span>
+\((a \circ b) \circ c = a \circ (b \circ c)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.4 (op_left_congr).</span>
+If \(b = c\) then \(a \circ b = a \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.5 (op_right_congr).</span>
+If \(b = c\) then \(b \circ a = c \circ a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.6 (op_congr).</span>
+If \(a = c\) and \(b = d\) then \(a \circ b = c \circ d\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.7 (op_ident_ident).</span>
+\(e \circ e = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.8 (op_eq_self_left).</span>
+If \(a \circ b = a\) and \(b = e\) then \(a \circ b = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.9 (op_eq_self_right).</span>
+If \(a \circ b = b\) and \(a = e\) then \(a \circ b = b\).
+</div>
+
+<h3>Uniqueness of the Identity</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.10 (ident_unique_two_sided).</span>
+If \(e'\) satisfies \(e' \circ a = a\) and \(a \circ e' = a\) for all \(a\), then \(e' = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.11 (left_ident_eq_ident).</span>
+If \(e' \circ a = a\) for all \(a\) (a left-only identity), then \(e' = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.12 (right_ident_eq_ident).</span>
+If \(a \circ e' = a\) for all \(a\) (a right-only identity), then \(e' = e\).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s2">§2 Powers and Iteration</h2>
+
+<div class="thm"><span class="thm-label">Lemma 1.13 (npow_zero).</span>
+\(a^0 = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.14 (npow_succ).</span>
+\(a^{n+1} = a \circ a^n\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.15 (npow_one).</span>
+\(a^1 = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.16 (npow_ident).</span>
+\(e^n = e\) for all \(n\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.17 (npow_succ').</span>
+\(a^{n+1} = a^n \circ a\). <em>(Alternate recurrence: power on the right.)</em>
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.18 (npow_add).</span>
+\(a^{m+n} = a^m \circ a^n\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.19 (npow_comm_self).</span>
+\(a \circ a^k = a^k \circ a\). Every idea commutes with its own powers.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.20 (npow_mul).</span>
+\(a^{mn} = (a^n)^m\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.21 (npow_idempotent).</span>
+If \(a \circ a = a\) then \(a^n = a\) for all \(n \geq 1\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.22 (npow_two).</span>
+\(a^2 = a \circ a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.23 (npow_three).</span>
+\(a^3 = a \circ (a \circ a)\).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s3">§3 Chains and Lists</h2>
+
+<h3>Basic Chain Operations</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.24 (chain_nil).</span>
+\(\text{chain}([]) = e\). The empty chain is the void idea.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.25 (chain_cons).</span>
+\(\text{chain}(a :: l) = a \circ \text{chain}(l)\). Prepending an idea to a chain prefixes it in composition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.26 (chain_singleton).</span>
+\(\text{chain}([a]) = a\). A single-element chain is that element.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.27 (chain_append).</span>
+\(\text{chain}(l_1 \mathbin{++} l_2) = \text{chain}(l_1) \circ \text{chain}(l_2)\). Concatenation of lists corresponds to composition of chains.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.28 (chain_replicate_ident).</span>
+\(\text{chain}(\text{replicate}(n, e)) = e\). A list of \(n\) copies of the identity composes to the identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.29 (chain_voidChain).</span>
+\(\text{chain}(\text{voidChain}(n)) = e\). The void chain of length \(n\) composes to the identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.30 (chain_replicate).</span>
+\(\text{chain}(\text{replicate}(n, a)) = a^n\). Repeating an idea \(n\) times in a chain gives the \(n\)-th power.
+</div>
+
+<h3>Chain Length</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.31 (chain_length_voidChain).</span>
+\(|\text{voidChain}(n)| = n\). The void chain has the expected length.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.32 (chainLength_nil).</span>
+\(|[]| = 0\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.33 (chainLength_cons).</span>
+\(|a :: l| = |l| + 1\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.34 (chainLength_append).</span>
+\(|l_1 \mathbin{++} l_2| = |l_1| + |l_2|\).
+</div>
+
+<h3>Further Chain Identities</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.35 (chain_append_singleton).</span>
+\(\text{chain}(l \mathbin{++} [a]) = \text{chain}(l) \circ a\). Appending a single idea to a chain appends it in composition.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.36 (chain_eq_ident_of_all_ident).</span>
+If every element of \(l\) is equal to \(e\), then \(\text{chain}(l) = e\). A chain of all identities is the identity.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.37 (chain_split).</span>
+\(\text{chain}(l) = \text{chain}(l[{:}n]) \circ \text{chain}(l[n{:}])\) for any valid split index \(n\). This is the general split lemma underlying Theorem 1.1.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.38 (chain_concat_ident).</span>
+\(\text{chain}(l \mathbin{++} [e]) = \text{chain}(l)\). Appending the identity to a chain leaves it unchanged.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.39 (chain_cons_ident).</span>
+\(\text{chain}(e :: l) = \text{chain}(l)\). Prepending the identity to a chain leaves it unchanged.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s4">§4 Subideal Order</h2>
+
+<p>
+The <em>left subideal</em> preorder \(a \leq_L b\) holds when \(b = a \circ c\) for some \(c\) —
+that is, \(a\) divides \(b\) from the left.
+The <em>right subideal</em> preorder \(a \leq_R b\) holds when \(b = c \circ a\) for some \(c\).
+These preorders give the monoid a partial divisibility structure that tracks which ideas are
+conceptually prior in a chain.
+</p>
+
+<h3>Left Subideal</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.40 (subideal_refl).</span>
+\(a \leq_L a\). The subideal relation is reflexive.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.41 (subideal_ident).</span>
+\(e \leq_L a\) for all \(a\). The identity is a left subideal of every idea.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.42 (subideal_self_op_right).</span>
+\(a \leq_L a \circ b\). Every idea is a left subideal of any right-extension of it.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.43 (subideal_trans).</span>
+If \(a \leq_L b\) and \(b \leq_L c\) then \(a \leq_L c\). The left subideal relation is transitive.
+</div>
+
+<h3>Right Subideal</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.44 (rsubideal_refl).</span>
+\(a \leq_R a\). The right subideal relation is reflexive.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.45 (rsubideal_ident).</span>
+\(e \leq_R a\) for all \(a\). The identity is a right subideal of every idea.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.46 (rsubideal_self_op_left).</span>
+\(b \leq_R a \circ b\). Every idea is a right subideal of any left-extension of it.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.47 (rsubideal_trans).</span>
+If \(a \leq_R b\) and \(b \leq_R c\) then \(a \leq_R c\). The right subideal relation is transitive.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s5">§5 Idempotents and Commutativity</h2>
+
+<div class="thm"><span class="thm-label">Lemma 1.48 (ident_idempotent).</span>
+\(e \circ e = e\). The identity is idempotent.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.49 (idempotent_npow).</span>
+If \(a \circ a = a\) then \(a^n \circ a^n = a^n\) for all \(n \geq 1\). Powers of idempotents are idempotent.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.50 (commute_refl).</span>
+\(a \circ a = a \circ a\). Every element commutes with itself (reflexivity of the commutation relation).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.51 (commute_ident_left).</span>
+\(e \circ a = a \circ e\). The identity commutes with everything from the left.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.52 (commute_ident_right).</span>
+\(a \circ e = e \circ a\). The identity commutes with everything from the right.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.53 (commute_symm).</span>
+If \(a \circ b = b \circ a\) then \(b \circ a = a \circ b\). Commutativity between two elements is symmetric.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.54 (centralizer_ident).</span>
+\(e\) lies in the centralizer of every element: \(e \circ a = a \circ e\) for all \(a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.55 (centralizer_self).</span>
+Every element lies in its own centralizer: \(a \circ a = a \circ a\) for all \(a\).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="s6">§6 Cancellation and Invertibility</h2>
+
+<h3>Cancellative Properties of the Identity</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.56 (ident_left_cancel).</span>
+\(e\) is left-cancellative: if \(e \circ x = e \circ y\) then \(x = y\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.57 (ident_right_cancel).</span>
+\(e\) is right-cancellative: if \(x \circ e = y \circ e\) then \(x = y\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.58 (ident_cancellative).</span>
+\(e\) is two-sided cancellative.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.59 (left_cancel_op).</span>
+If \(a\) and \(b\) are each left-cancellative, then \(a \circ b\) is left-cancellative.
+The composition of left-cancellative ideas is left-cancellative.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.60 (right_cancel_op).</span>
+If \(a\) and \(b\) are each right-cancellative, then \(a \circ b\) is right-cancellative.
+</div>
+
+<h3>Invertibility</h3>
+
+<div class="thm"><span class="thm-label">Lemma 1.61 (ident_invertible).</span>
+\(e\) is invertible with \(e^{-1} = e\): \(e \circ e = e\) and \(e \circ e = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.62 (invertible_inv_unique).</span>
+If \(b\) and \(b'\) are both two-sided inverses of \(a\) — that is, \(a \circ b = b \circ a = e\)
+and \(a \circ b' = b' \circ a = e\) — then \(b = b'\). Inverses are unique.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 1.63 (invertible_op).</span>
+If \(a\) and \(b\) are invertible, then \(a \circ b\) is invertible with inverse \(b^{-1} \circ a^{-1}\).
+The set \(\mathcal{I}^\times\) of invertibles is closed under composition.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="implications">Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p><strong>Against non-associative theories of combination.</strong>
+Lemmas 1.3, 1.6, and 1.27 are individually trivial, but together they constitute a refutation of every
+theory of ideation that makes the grouping of a sequence of ideas semantically significant per se.
+Locke's train of thought, Frege's logical building blocks, and Fodor's mental sentences all presuppose
+that a three-element sequence \(a, b, c\) composes the same way whether you first combine \(a\) with \(b\)
+or first combine \(b\) with \(c\).
+Non-associative theories of conceptual blending — in which the parenthesisation of a metaphor produces
+genuinely different meanings — are not ruled out if the blending operation is taken to be a
+<em>different</em> operation from \(\circ\); but they are ruled out if they purport to describe
+basic idea composition.
+Corollary 1.1 makes this concrete for sequences: any re-bracketing of a cultural chain into episodes
+leaves the overall composition invariant. There is no algebraic fact that corresponds to the claim that
+"Act I + Act II, then Act III" differs from "Act I, then Act II + Act III."</p>
+
+<p><strong>Locke vindicated and sharpened by chain arithmetic.</strong>
+The chain lemmas (Lemmas 1.24–1.39) provide a formal home for Locke's program of analysing complex
+ideas into simpler constituents.
+Lemma 1.38 (<code>chain_concat_ident</code>) and Lemma 1.39 (<code>chain_cons_ident</code>) say that
+void episodes — periods of silence or intellectual inactivity — are algebraically transparent: they can
+be inserted into or deleted from any chain without changing the compositional result.
+This is Locke's implicit assumption that experiential "gaps" do not scramble the combination of ideas,
+now made a theorem.
+More philosophically significant is Lemma 1.36: if an entire sub-sequence of a tradition consists
+exclusively of the identity idea — rehearsal without addition — then that sub-sequence contributes
+nothing to the total.
+Corollary 1.2 generalises this: any block of void episodes within a chain of cultural transmission can
+be removed without loss, a precise version of the intuition that purely repetitive intellectual epochs
+are epiphenomenal.</p>
+
+<p><strong>Frege's compositionality and the subideal order.</strong>
+The left and right subideal preorders (Lemmas 1.40–1.47) give precise meaning to the Fregean claim that
+simpler ideas are "contained in" complex ones.
+\(a \leq_L b\) — meaning \(b = a \circ c\) for some \(c\) — is the algebraic statement that \(a\) is a
+left component of \(b\).
+Lemma 1.41 (<code>subideal_ident</code>) says the void idea is a component of everything: all complex
+ideas contain silence as a degenerate part.
+The transitivity lemmas (1.43, 1.47) establish that conceptual parthood is a preorder, which is the
+minimum requirement for any Fregean hierarchy of sense to be coherent.
+What the preorder does not do — and what Frege assumed without proof — is that it is a partial
+<em>order</em>: the antisymmetry property \((a \leq_L b \text{ and } b \leq_L a) \Rightarrow a = b\)
+fails in general in a monoid with invertibles, since any invertible \(a\) satisfies \(e \leq_L a\)
+and \(e \leq_L a^{-1}\) while \(a \neq e\) in general.
+The passage from the preorder to a genuine partial order requires quotienting by the group \(\mathcal{I}^\times\)
+of invertibles — a construction Theorem 1.2 makes available.</p>
+
+<p><strong>Fodor's productivity via iteration and idempotents.</strong>
+Theorem 1.3 and the npow lemmas (1.13–1.23) supply the algebraic core of Fodor's productivity argument:
+any idea can be iterated to produce \(a, a^2, a^3, \ldots\), and these are in general all distinct
+unless \(a\) is idempotent (Lemma 1.21, Corollary 1.4).
+Idempotents play a special role that Fodor's framework ignores.
+An idempotent idea \(a\) — one satisfying \(a \circ a = a\) — has the property that repeating it is
+redundant: no matter how many times you apply it, the result is just \(a\).
+This models a class of ideas that are saturating rather than cumulative: the concept
+<em>negation</em> in classical logic, the concept <em>already done</em> in practical reasoning,
+or the concept <em>the same</em> in identity statements.
+Fodor's argument for productivity requires that the mental lexicon contains at least one
+non-idempotent element, so that iteration genuinely compounds.
+Lemma 1.49 establishes that idempotency is hereditary under powers, providing the algebraic criterion
+that separates the productive from the saturating fragments of idea space.</p>
+
+<p><strong>Quine and Wittgenstein on invertibility and regrouping.</strong>
+The most philosophically loaded cluster of results in Theorems1 is the invertibility group
+(Lemmas 1.61–1.63 and Theorem 1.2(2)).
+Quine's web of belief requires a theory of revision: some beliefs are retractable and some are not.
+In algebraic terms, a belief is retractable exactly when the idea of entertaining it is invertible —
+when there exists an inverse idea that undoes the belief-acquiring act.
+Lemma 1.62 establishes that if an idea is retractable at all, its retraction is unique: you cannot
+undo a belief acquisition in two fundamentally different ways.
+Lemma 1.63 establishes that composing two retractable ideas gives a retractable composite, which is
+Quine's implicit assumption that scientific revision can proceed holistically — we can retract an
+entire theory, not just its atomic components, provided each constituent act of acceptance was itself
+retractable.
+For Wittgenstein's late philosophy, the commutation lemmas (1.50–1.55) and centralizer results are more
+relevant: the fact that the identity commutes with everything (Lemma 1.54) means that the "null move" —
+Wittgenstein's silence, the form of life that needs no justification — is always available and always
+neutral.
+That every element commutes with itself (Lemma 1.55) means that repeating any idea is equivalent to
+applying it to itself, which is the algebraic correlate of Wittgenstein's remark that following a rule
+looks the same whether you are following it or merely going through the motions: the formal structure
+cannot distinguish the first iteration from the second.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="zoo">Zoo Entries</h2>
+
+<div class="zoo-entry">
+<h3>Locke — Simple and Complex Ideas</h3>
+<p><strong>Original claim:</strong> All complex ideas are formed by combining simple ideas; simple ideas, delivered by sensation and reflection, are the atoms of thought (<em>An Essay Concerning Human Understanding</em>, Bk. II).</p>
+<p><strong>Formal restatement:</strong> \(\mathcal{I}\) has a generating set \(S\) of "simple" ideas such that every element is a finite composition of elements of \(S\). The monoid \(\mathcal{I}\) is a quotient of the free monoid \(S^*\).</p>
+<p><strong>Status:</strong> <em>Partially vindicated.</em> The chain and composition structure of Theorems1 is exactly Locke's combinatorialism at the algebraic level. Lemma 1.27 (<code>chain_append</code>) is the formal version of his claim that combining two groups of simple ideas gives a complex idea whose content is the concatenation of its parts. However, the theorems neither require nor prohibit atoms: \(\mathcal{I}\) need not have irreducibles.</p>
+<p><strong>Commentary:</strong> Locke's program was the first systematic compositional theory of mind, and the Idea Monoid is its algebraic home. What Locke lacked was the concept of an identity element: for him, simple ideas are given by experience and cannot be absent. Lemma 1.24 (<code>chain_nil</code>) establishes that the empty sequence is a coherent idea — the void — which Locke's empiricism cannot easily accommodate: if ideas are always derived from sensation or reflection, there is no sensation of silence. The theorem shows that the void idea is not a Lockean addition but a structural necessity: any associative composition requires a neutral element. Equally significant is whether Lockean simples are generators of a <em>free</em> monoid (no relations among them) or a <em>presented</em> monoid. Lemma 1.38 (<code>chain_concat_ident</code>) shows that the void idea can be silently inserted anywhere in a composition without effect — which Locke would accept — but the deeper question of whether non-trivial relations hold among simples (e.g., whether "bachelor" and "unmarried man" are provably equal as compositions) requires going beyond Theorems1 to a presentation theory. This dissolves one of Locke's persistent puzzles — why two distinct combinations can yield the same idea — without abandoning compositionalism.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Frege — Compositionality of Sense</h3>
+<p><strong>Original claim:</strong> The sense of a complex expression is determined by the senses of its parts and their mode of combination — the principle of compositionality (<em>Grundgesetze der Arithmetik</em>, 1893).</p>
+<p><strong>Formal restatement:</strong> The sense map \(\llbracket\cdot\rrbracket\colon\mathcal{I}\to\mathcal{S}\) is a monoid homomorphism: \(\llbracket a\circ b\rrbracket = \llbracket a\rrbracket\circ'\llbracket b\rrbracket\) for some operation \(\circ'\) on the target monoid \(\mathcal{S}\).</p>
+<p><strong>Status:</strong> <em>Formally supported.</em> Theorem 1.2(1) and Lemmas 1.10–1.12 establish that the identity of the monoid is unique; any structure-preserving map from \(\mathcal{I}\) automatically carries the identity to the identity, so Fregean compositionality is the default for any monoid homomorphism out of \(\mathcal{I}\).</p>
+<p><strong>Commentary:</strong> Frege presented compositionality as a constraint imposed on a theory of meaning from outside. Theorems1 inverts the perspective: compositionality is the structural consequence of treating idea space as a monoid, not an additional postulate about meanings. Any map that respects the operation \(\circ\) is automatically a homomorphism, and Lemma 1.6 (<code>op_congr</code>) says that \(\circ\) itself is a congruence-respecting operation: equal inputs produce equal outputs. The subideal preorder (Lemmas 1.40–1.47) captures a second Fregean intuition: that the sense of a part is "contained in" the sense of the whole. Lemma 1.42 (<code>subideal_self_op_right</code>) says \(a \leq_L a\circ b\) — the left component is always a left subideal of the product — which is the formal expression of Frege's claim that the function-name contributes its full sense to the complex expression, not merely a portion of it. What remains open is whether sense maps are injective (which would require Theorem 8, Structural Equivalence) and whether the context principle — "only in a sentence does a word have meaning" — is representable as the claim that isolated ideas have trivial resonance but ideas in chains have non-trivial resonance with their neighbours.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Fodor — Language of Thought Productivity</h3>
+<p><strong>Original claim:</strong> Mental representations are syntactically compositional; the productivity and systematicity of thought are explained by a Language of Thought in which mental sentences are built from mental words by recursive rules (<em>The Language of Thought</em>, 1975; <em>Concepts</em>, 1998).</p>
+<p><strong>Formal restatement:</strong> \(\mathcal{I}\) is generated by a finite set of mental atoms under \(\circ\); productivity is the fact that any monoid generated by a non-trivial non-idempotent element is infinite. Systematicity is the claim that the group \(\mathcal{I}^\times\) acts transitively on relational role-fillings.</p>
+<p><strong>Status:</strong> <em>Partially supported, partially overstated.</em> The npow lemmas (1.13–1.23) vindicate productivity; but the free-monoid assumption — that distinct sequences of simples always produce distinct complexes — is stronger than Theorems1 requires or verifies.</p>
+<p><strong>Commentary:</strong> Fodor's nativism requires not just compositionality but a syntactically transparent LOT in which each complex thought has a unique parse. Theorem 1.3 gives the power arithmetic, but Lemma 1.20 (<code>npow_mul</code>) already hints at non-uniqueness: \(a^{mn} = (a^n)^m\) means the same idea can be expressed as an \(mn\)-fold iterate or as an \(m\)-fold iterate of an \(n\)-fold iterate. In a non-free monoid there may be many more such equalities. The crucial distinction Fodor needs is between idempotent and non-idempotent ideas. Corollary 1.4 (following from Lemma 1.21, <code>npow_idempotent</code>) shows that idempotent ideas fail to generate infinite sequences: \(a^n = a\) for all \(n \geq 1\). A finite LOT with only idempotent generators is not productive. Productivity requires at least one idea \(a\) with \(a^2 \neq a\), which is precisely what non-idempotency means. Fodor assumes this without stating it; Theorems1 makes it explicit. Whether the required non-idempotent generators are innate or acquired is a question the algebra leaves open — the theory is agnostic between Fodor's nativism and empiricist alternatives, so long as the generating set is non-empty and non-idempotent.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Leibniz — The <em>Characteristica Universalis</em> and Irreducible Generators</h3>
+<p><strong>Original claim:</strong> All truths are in principle derivable by a <em>characteristica universalis</em> — a universal calculus that encodes the "alphabet of human thought." Composite concepts are well-founded aggregates of simple monadic substances (<em>Monadology</em>, 1714; <em>De Arte Combinatoria</em>, 1666).</p>
+<p><strong>Formal restatement:</strong> The irreducible elements of \(\mathcal{I}\) — those \(m\) with \(m = a\circ b\) only if \(a=e\) or \(b=e\) — form the generator set of the <em>characteristica</em>. Leibniz's claim is that \(\mathcal{I}\) is the free monoid on these irreducibles: no non-trivial relations hold among distinct generators.</p>
+<p><strong>Status:</strong> <em>Challenged.</em> Lemma 1.63 (<code>invertible_op</code>) and Theorem 1.2(2) establish a non-trivial group \(\mathcal{I}^\times\) of symmetries, which is incompatible with Leibniz's view that each irreducible monad is intrinsically distinct and cannot be transformed into another.</p>
+<p><strong>Commentary:</strong> Leibniz's <em>De Arte Combinatoria</em> is the oldest direct ancestor of Idea Theory, and the Idea Monoid is its algebraic descendant. The divergence is illuminating. For Leibniz, the generator set is fixed by God and immutable: each simple concept is individuated by its complete individual notion, which cannot be shared with any other. In algebraic terms this is the claim that \(\mathcal{I}^\times = \{e\}\) — the only invertible idea is the void — because if any idea were invertible there would be a non-trivial symmetry relating distinct generators. Theorem 1.2(2) shows that \(\mathcal{I}^\times\) is always a group (possibly trivial), and Lemma 1.63 shows it is closed under composition, but Theorems1 says nothing about its size. The Leibnizian case \(\mathcal{I}^\times = \{e\}\) is consistent with all 63 results here; but so is the opposite extreme in which every idea is invertible. The <em>characteristica</em> programme survives as the conjecture that ideas have unique normal forms — that the presented monoid is actually free — but this requires a presentation theory beyond what Theorems1 establishes. What is vindicated is Leibniz's combinatorial intuition: idea space is closed under composition, the composition is associative, and there is a neutral element. The monadological scaffolding is separable from the combinatorial core.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Quine — Holism and the Web of Belief</h3>
+<p><strong>Original claim:</strong> The unit of empirical significance is not the individual sentence but the whole theory; no individual sentence faces the "tribunal of experience" alone ("Two Dogmas of Empiricism," 1951; <em>Word and Object</em>, 1960).</p>
+<p><strong>Formal restatement:</strong> Quine's web of belief is the monoid \(\mathcal{I}\) together with a valuation \(v\colon\mathcal{I}\to\mathbb{R}\). Holism is the claim that \(v(a\circ b) \neq v(a)+v(b)\) in general — the value of a composition exceeds the sum of its parts. Belief revision is the operation of inverting a sub-chain of the current total belief \(\text{chain}(l)\).</p>
+<p><strong>Status:</strong> <em>Recast and illuminated.</em> Theorems1 is neutral between holism and atomism with respect to valuation, but Lemma 1.62 (<code>invertible_inv_unique</code>) and Lemma 1.63 (<code>invertible_op</code>) provide an algebraic theory of revision that is more precise than anything Quine offered.</p>
+<p><strong>Commentary:</strong> Quine's "web of belief" is one of the most influential metaphors in twentieth-century epistemology, but it remained resolutely informal. Theorems1 begins to give it algebraic content. The web is the monoid \(\mathcal{I}\); the "tribunal" is whatever valuation function is applied to compositional products; and the asymmetry between "peripheral" beliefs (more easily revised) and "central" ones (the laws of logic, held in reserve) corresponds to the distinction between invertible and non-invertible ideas. An idea is peripheral, in Quine's sense, exactly when it belongs to \(\mathcal{I}^\times\): its acceptance can be undone. Lemma 1.62 says that undoing is unique: if you have accepted an idea and wish to revise it, there is exactly one undoing move, not a family of alternatives. This is a significant constraint on Quinean revision: it rules out the view that the same belief can be retracted in multiple inequivalent ways. Corollary 1.3 (<code>corollary_1_3</code>) says that composing two revisable beliefs gives a revisable composite — you can retract a whole theory if each of its component acceptance acts was individually retractable. The chain split of Theorem 1.1 then provides the mechanism: to revise a belief-chain at position \(n\), split it there, invert the right factor, and recompose.</p>
+</div>
+
+<div class="zoo-entry">
+<h3>Wittgenstein II — Family Resemblance, Rules, and Quotient Monoids</h3>
+<p><strong>Original claim:</strong> Concepts such as "game" do not have necessary and sufficient conditions; they are held together by "family resemblance" — overlapping similarities with no single common thread (<em>Philosophical Investigations</em>, §66–67). Rule-following is a practice, not an interior mental state (§201).</p>
+<p><strong>Formal restatement:</strong> The extension of a family-resemblance concept is a quotient \(\mathcal{I}/{\sim}\) where \(\sim\) is a monoid congruence generated by "sufficiently similar" elements. Rule-following is the existence of a non-trivial element of \(\mathcal{I}^\times\) whose repeated application is idempotent on quotients.</p>
+<p><strong>Status:</strong> <em>Partially formalizable.</em> The quotient monoid construction is well-defined given any congruence relation, and Lemmas 1.10–1.12 ensure the identity descends cleanly to quotients. Whether family resemblance generates a congruence is an empirical question about the resonance structure.</p>
+<p><strong>Commentary:</strong> Wittgenstein's later philosophy is frequently read as hostile to algebraic formalisation: any formal theory of meaning, on his view, will misconstrue the grammar of ordinary language by imposing inappropriate exactness. But the quotient monoid construction is unusually well-suited to his purposes. If \(\sim\) is the congruence generated by "same family resemblance profile," then \(\mathcal{I}/{\sim}\) is the monoid of family-resemblance concepts, and Lemma 1.3 (<code>op_assoc</code>) guarantees that composition descends to the quotient: family-resemblance concepts compose associatively. This is actually stronger than Wittgenstein needed — he never claimed that family-resemblance concepts compose at all — but it shows that compositionality and family resemblance are not in conflict. The commutation lemmas (1.50–1.55) bear on the rule-following considerations. Lemma 1.55 (<code>centralizer_self</code>) says every element commutes with itself: applying a rule and then applying it again is always consistent with applying it twice. This is a formal analogue of Wittgenstein's claim that there is no "second application" that corrects the first — the rule does not have a privileged interpretation beyond its actual exercise. Lemma 1.53 (<code>commute_symm</code>) says that commutativity is symmetric: if rule \(a\) and rule \(b\) are mutually compatible from one direction, they are from both. This rules out asymmetric interpretive dependencies that Wittgenstein would have regarded as spurious.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2 id="extensions">Related Lean Extensions</h2>
+
+<ul>
+<li><strong><code>IdeaTheory.Theorems1</code></strong> — the 63 results covered on this page.</li>
+<li><a href="resonance-pairing.html">Theorem 2: Resonance Pairing</a> — equips \((\mathcal{I},\circ,e)\) with a bilinear form \(\rho\); non-degeneracy is preserved by composition.</li>
+<li><a href="aufhebung-decomposition.html">Theorem 3: Aufhebung Decomposition</a> — analyses the non-commutativity of \(\circ\) via the symmetric/antisymmetric split of \(\rho\).</li>
+<li><a href="conjugation.html">Theorem 6: Conjugation</a> — the action of \(\mathcal{I}^\times\) on \(\mathcal{I}\) by inner automorphisms \(\mathrm{Ad}_g(a) = g\circ a\circ g^{-1}\).</li>
+<li><a href="structural-equivalence.html">Theorem 8: Structural Equivalence</a> — conditions under which two idea monoids are isomorphic as idea algebras.</li>
+<li><strong><code>BeliefRevision</code></strong> (in progress) — applies Lemmas 1.61–1.63 to the special case of belief-updating ideas; characterises which epistemic moves lie in \(\mathcal{I}^\times\).</li>
+<li><strong><code>SocialChoice</code></strong> (in progress) — examines which collective intellectual acts — votes, consensus formations, deliberative procedures — are invertible in the sense of Theorem 1.2(2).</li>
+</ul>
+
+<p style="margin-top:2em"><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

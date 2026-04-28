@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theorem 10: Coalitions &amp; Social Aggregation — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+
+<h1>Theorem 10: Coalitions &amp; Social Aggregation</h1>
+<p class="entry-meta">Lean: <code>IdeaTheory.Theorems10</code> &middot; 70 lemmas &middot; Related: <a href="transmission-chain.html">T7</a>, <a href="../lean/game-theory.html">Game Theory</a></p>
+
+<!-- ============================================================ -->
+<!-- TABLE OF CONTENTS                                            -->
+<!-- ============================================================ -->
+<nav style="background:var(--accent-soft);border:1px solid var(--border);border-radius:4px;padding:1em 1.4em;margin:1.5em 0;">
+<strong>Contents</strong>
+<ol style="margin:.5em 0 0 1.2em;line-height:1.9;">
+  <li><a href="#overview">Overview</a></li>
+  <li><a href="#lemmas">All 70 Lemmas</a>
+    <ol type="a" style="margin:.3em 0 0 1.2em;">
+      <li><a href="#basic">§10.A Basic aggregate lemmas</a></li>
+      <li><a href="#silent">§10.B Silent agents</a></li>
+      <li><a href="#append">§10.C Append / delegate</a></li>
+      <li><a href="#insertat">§10.D Coalition.insertAt</a></li>
+      <li><a href="#equiv">§10.E Congruence and equivalence</a></li>
+      <li><a href="#twoident">§10.F Two-identity insertions</a></li>
+      <li><a href="#committee">§10.G Committee and Assembly</a></li>
+      <li><a href="#social">§10.H Social congruence helpers</a></li>
+      <li><a href="#headline">Headline theorems and corollaries</a></li>
+    </ol>
+  </li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo entries</a></li>
+</ol>
+</nav>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: OVERVIEW                                         -->
+<!-- ============================================================ -->
+<h2 id="overview">1. Overview</h2>
+
+<p>The <code>Coalition</code> structure formalises social aggregation of ideas. A coalition is a <em>list</em> of agents — written \([a_1, \ldots, a_n]\) — where each agent holds an idea drawn from a monoid \((\mathcal{I}, \circ, e)\). The <em>aggregate</em> map \(\mathsf{agg}\) is the monoid right-fold over that list: it is exactly the free-monoid evaluation homomorphism applied to the coalition as a word. Three headline results are proved and machine-checked in <code>IdeaTheory/Theorems10.lean</code>:</p>
+
+<div class="thm"><span class="thm-label">Theorem 10.1 (aggregate_homomorphism).</span>
+\(\mathsf{agg}\) is a monoid homomorphism from \(\text{List}\,\mathcal{I}\) (under concatenation) to \(\mathcal{I}\) (under \(\circ\)):
+\[
+  \mathsf{agg}([]) = e, \qquad
+  \mathsf{agg}(xs \mathbin{\|} ys) = \mathsf{agg}(xs) \circ \mathsf{agg}(ys).
+\]
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 10.2 (silent_invariance).</span>
+Silent agents — those holding the identity idea \(e\) — are invisible to aggregation. Inserting \(e\) at any position, prepending or appending arbitrarily many copies of \(e\), or sandwiching a coalition between identity elements never changes \(\mathsf{agg}(xs)\).
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 10.3 (social_congruence).</span>
+Coalition equivalence \(xs \equiv ys\) (i.e.\ \(\mathsf{agg}(xs) = \mathsf{agg}(ys)\)) is an equivalence relation that is a congruence with respect to concatenation, delegate-composition, and identity-insertion.
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: LEMMAS                                           -->
+<!-- ============================================================ -->
+<h2 id="lemmas">2. All 70 Lemmas</h2>
+
+<!-- ---- §10.A ---- -->
+<h3 id="basic">§10.A &nbsp; Basic aggregate lemmas</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.1 (aggregate_nil).</span>
+The aggregate of the empty coalition is the identity:
+\[\mathsf{agg}([]) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.2 (aggregate_singleton).</span>
+For any agent \(a\),
+\[\mathsf{agg}([a]) = a.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.3 (aggregate_cons).</span>
+The aggregate unfolds one step:
+\[\mathsf{agg}(a :: xs) = a \circ \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.4 (aggregate_pair).</span>
+For agents \(a, b\),
+\[\mathsf{agg}([a, b]) = a \circ b.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.5 (aggregate_triple).</span>
+For agents \(a, b, c\),
+\[\mathsf{agg}([a, b, c]) = a \circ (b \circ c).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.6 (trivial_zero).</span>
+The trivial coalition of length 0 is the empty list:
+\[\mathrm{Coalition.trivial}(\alpha, 0) = [].\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.7 (trivial_succ).</span>
+The trivial coalition of length \(n+1\) prepends one copy of \(e\):
+\[\mathrm{Coalition.trivial}(\alpha, n+1) = e :: \mathrm{Coalition.trivial}(\alpha, n).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.8 (aggregate_trivial).</span>
+Every trivial coalition aggregates to the identity:
+\[\mathsf{agg}(\mathrm{Coalition.trivial}(\alpha, n)) = e.\]
+</div>
+
+<!-- ---- §10.B ---- -->
+<h3 id="silent">§10.B &nbsp; Silent agents</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.9 (aggregate_singleton_silent).</span>
+A singleton coalition of a silent agent aggregates to the identity:
+\[\mathsf{agg}([e]) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.10 (aggregate_pair_silent).</span>
+Two silent agents aggregate to the identity:
+\[\mathsf{agg}([e, e]) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.11 (aggregate_triple_silent).</span>
+Three silent agents aggregate to the identity:
+\[\mathsf{agg}([e, e, e]) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.12 (aggregate_cons_ident).</span>
+Prepending a silent agent does not change the aggregate:
+\[\mathsf{agg}(e :: xs) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.13 (aggregate_cons_singleton_ident).</span>
+Direct restatement: a singleton silent coalition has aggregate \(e\):
+\[\mathsf{agg}([e]) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.14 (aggregate_insert_ident_zero).</span>
+Inserting \(e\) at position 0 of \(xs\) does not change the aggregate:
+\[\mathsf{agg}(\mathrm{insertAt}(e, 0, xs)) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.15 (aggregate_insert_ident).</span>
+Inserting the silent agent at <em>any</em> position \(n\) is invisible to aggregation:
+\[\mathsf{agg}(\mathrm{insertAt}(e, n, xs)) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.16 (aggregate_tail_of_ident_head).</span>
+If the head element is \(e\), the aggregate of the list equals the aggregate of the tail:
+\[\mathsf{agg}(xs) = \mathsf{agg}(\mathrm{tail}(xs)) \quad \text{when } \mathrm{head}(xs) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.17 (aggregate_of_all_silent).</span>
+If every element of \(xs\) is silent (\(\mathrm{AllSilent}(xs)\)), then
+\[\mathsf{agg}(xs) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.18 (aggregate_snoc_ident).</span>
+Appending a silent agent on the right does not change the aggregate:
+\[\mathsf{agg}(xs \mathbin{\|} [e]) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.19 (aggregate_snoc_two_idents).</span>
+Appending two silent agents on the right does not change the aggregate:
+\[\mathsf{agg}(xs \mathbin{\|} [e, e]) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.20 (aggregate_sandwich_idents).</span>
+Sandwiching a coalition between silent agents on both ends does not change the aggregate:
+\[\mathsf{agg}([e] \mathbin{\|} xs \mathbin{\|} [e]) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.21 (aggregate_replicate_ident_append).</span>
+Prepending \(n\) copies of the silent agent does not change the aggregate:
+\[\mathsf{agg}(\underbrace{[e, \ldots, e]}_{n} \mathbin{\|} xs) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.22 (aggregate_append_replicate_ident).</span>
+Appending \(n\) copies of the silent agent does not change the aggregate:
+\[\mathsf{agg}(xs \mathbin{\|} \underbrace{[e, \ldots, e]}_{n}) = \mathsf{agg}(xs).\]
+</div>
+
+<!-- ---- §10.C ---- -->
+<h3 id="append">§10.C &nbsp; Append / delegate</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.23 (aggregate_append).</span>
+The aggregate distributes over concatenation:
+\[\mathsf{agg}(xs \mathbin{\|} ys) = \mathsf{agg}(xs) \circ \mathsf{agg}(ys).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.24 (aggregate_append_nil).</span>
+Appending the empty coalition on the right is a no-op:
+\[\mathsf{agg}(xs \mathbin{\|} []) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.25 (aggregate_nil_append).</span>
+Prepending the empty coalition on the left is a no-op:
+\[\mathsf{agg}([] \mathbin{\|} xs) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.26 (aggregate_append_trivial).</span>
+Appending a trivial coalition (all-\(e\) list) of any length changes nothing:
+\[\mathsf{agg}(xs \mathbin{\|} \mathrm{trivial}(n)) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.27 (aggregate_trivial_append).</span>
+Prepending a trivial coalition of any length changes nothing:
+\[\mathsf{agg}(\mathrm{trivial}(n) \mathbin{\|} xs) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.28 (aggregate_delegate).</span>
+The aggregate of a delegate coalition equals the composition of the two aggregates:
+\[\mathsf{agg}(xs \mathbin{\|} ys) = \mathsf{agg}(xs) \circ \mathsf{agg}(ys).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.29 (delegate_assoc).</span>
+Delegation (concatenation) is associative:
+\[(xs \mathbin{\|} ys) \mathbin{\|} zs = xs \mathbin{\|} (ys \mathbin{\|} zs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.30 (delegate_nil_right).</span>
+The empty coalition is a right unit for delegation:
+\[xs \mathbin{\|} [] = xs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.31 (delegate_nil_left).</span>
+The empty coalition is a left unit for delegation:
+\[[] \mathbin{\|} xs = xs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.32 (aggregate_append_assoc_L).</span>
+Left-associated triple concatenation:
+\[\mathsf{agg}((xs \mathbin{\|} ys) \mathbin{\|} zs) = \mathsf{agg}(xs) \circ (\mathsf{agg}(ys) \circ \mathsf{agg}(zs)).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.33 (aggregate_append_assoc_R).</span>
+Right-associated triple concatenation:
+\[\mathsf{agg}(xs \mathbin{\|} (ys \mathbin{\|} zs)) = \mathsf{agg}(xs) \circ (\mathsf{agg}(ys) \circ \mathsf{agg}(zs)).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.34 (aggregate_append_triple_assoc).</span>
+Both associations of a triple concatenation yield the same aggregate:
+\[\mathsf{agg}((xs \mathbin{\|} ys) \mathbin{\|} zs) = \mathsf{agg}(xs \mathbin{\|} (ys \mathbin{\|} zs)).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.35 (aggregate_append_left_congr).</span>
+Equivalent left components yield equivalent concatenations: if \(xs \equiv ys\), then for any \(zs\),
+\[xs \mathbin{\|} zs \equiv ys \mathbin{\|} zs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.36 (aggregate_append_right_congr).</span>
+Equivalent right components yield equivalent concatenations: if \(xs \equiv ys\), then for any \(zs\),
+\[zs \mathbin{\|} xs \equiv zs \mathbin{\|} ys.\]
+</div>
+
+<!-- ---- §10.D ---- -->
+<h3 id="insertat">§10.D &nbsp; Coalition.insertAt</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.37 (insertAt_nil).</span>
+Inserting any element into the empty list at any position gives a singleton:
+\[\mathrm{insertAt}(a, n, []) = [a].\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.38 (insertAt_succ_cons).</span>
+Recursive unfolding of <code>insertAt</code> at a successor position:
+\[\mathrm{insertAt}(a, n{+}1, x :: xs) = x :: \mathrm{insertAt}(a, n, xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.39 (insertAt_zero_cons).</span>
+Inserting at position 0 prepends the element:
+\[\mathrm{insertAt}(a, 0, x :: xs) = a :: x :: xs.\]
+</div>
+
+<!-- ---- §10.E ---- -->
+<h3 id="equiv">§10.E &nbsp; Congruence and equivalence</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.40 (aggregate_cons_congr).</span>
+Prefixing with the same element preserves equivalence: if \(xs \equiv ys\), then
+\[a :: xs \equiv a :: ys.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.41 (aggregate_swap_head_silent).</span>
+If the head \(a = e\), swapping it for \(e\) preserves the aggregate:
+\[\mathsf{agg}(a :: xs) = \mathsf{agg}(e :: xs) \quad \text{when } a = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.42 (aggregate_replace_head_ident).</span>
+Given a proof that \(a = e\), replacing the head with \(e\) does not change the aggregate:
+\[\mathsf{agg}(a :: xs) = \mathsf{agg}(xs) \quad \text{when } a = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.43 (CoalitionEquiv.refl).</span>
+Coalition equivalence is reflexive:
+\[xs \equiv xs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.44 (CoalitionEquiv.symm).</span>
+Coalition equivalence is symmetric: if \(xs \equiv ys\) then \(ys \equiv xs\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.45 (CoalitionEquiv.trans).</span>
+Coalition equivalence is transitive: if \(xs \equiv ys\) and \(ys \equiv zs\) then \(xs \equiv zs\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.46 (CoalitionEquiv.append_right).</span>
+Equivalence is a right congruence for concatenation: if \(xs \equiv ys\), then
+\[xs \mathbin{\|} zs \equiv ys \mathbin{\|} zs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.47 (CoalitionEquiv.append_left).</span>
+Equivalence is a left congruence for concatenation: if \(xs \equiv ys\), then for any \(zs\),
+\[zs \mathbin{\|} xs \equiv zs \mathbin{\|} ys.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.48 (CoalitionEquiv.append).</span>
+Joint congruence: if \(xs_1 \equiv ys_1\) and \(xs_2 \equiv ys_2\), then
+\[xs_1 \mathbin{\|} xs_2 \equiv ys_1 \mathbin{\|} ys_2.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.49 (CoalitionEquiv.insert_ident).</span>
+Inserting the silent agent at any position yields an equivalent coalition:
+\[\mathrm{insertAt}(e, n, xs) \equiv xs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.50 (CoalitionEquiv.trivial_nil).</span>
+Every trivial coalition is equivalent to the empty coalition:
+\[\mathrm{trivial}(n) \equiv [].\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.51 (CoalitionEquiv.singleton_iff).</span>
+Two singleton coalitions are equivalent if and only if their elements are equal:
+\[[a] \equiv [b] \iff a = b.\]
+</div>
+
+<!-- ---- §10.F ---- -->
+<h3 id="twoident">§10.F &nbsp; Two-identity insertions</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.52 (aggregate_insert_ident_after_head).</span>
+Inserting a silent agent immediately after the head collapses:
+\[\mathsf{agg}(a :: e :: xs) = a \circ \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.53 (aggregate_two_idents_middle).</span>
+Two consecutive silent agent insertions in the middle collapse without a trace:
+\[\mathsf{agg}(xs \mathbin{\|} [e, e] \mathbin{\|} ys) = \mathsf{agg}(xs) \circ \mathsf{agg}(ys).\]
+</div>
+
+<!-- ---- §10.G ---- -->
+<h3 id="committee">§10.G &nbsp; Committee and Assembly</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.54 (committee_collective_eq_aggregate).</span>
+A committee's collective idea is the chair's idea composed with the aggregate of the members:
+\[c.\mathrm{collective} = c.\mathrm{chair} \circ \mathsf{agg}(c.\mathrm{members}).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.55 (assembly_empty_collective).</span>
+An empty assembly has collective idea equal to the identity:
+\[\mathsf{agg}([]) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.56 (assembly_singleton_collective).</span>
+A single-committee assembly has collective equal to that committee's collective:
+\[\mathrm{Assembly.collective}([c]) = c.\mathrm{collective}.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.57 (assembly_pair_collective).</span>
+A two-committee assembly composes the collectives in order:
+\[\mathrm{Assembly.collective}([c, d]) = c.\mathrm{collective} \circ d.\mathrm{collective}.\]
+</div>
+
+<!-- ---- §10.H ---- -->
+<h3 id="social">§10.H &nbsp; Social congruence helpers</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.58 (aggregate_delegate_swap_of_eq).</span>
+If \(\mathsf{agg}(xs) = \mathsf{agg}(ys)\), then for any \(zs\),
+\[\mathsf{agg}(xs \mathbin{\|} zs) = \mathsf{agg}(ys \mathbin{\|} zs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.59 (aggregate_of_insert_idents).</span>
+Inserting multiple copies of \(e\) at arbitrary positions does not change the aggregate:
+\[\mathsf{agg}(\mathrm{insertManyIdents}(ns, xs)) = \mathsf{agg}(xs).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.60 (aggregate_silent_left).</span>
+If the first coalition is entirely silent, the aggregate of the delegate equals the aggregate of the second coalition:
+\[\mathrm{AllSilent}(xs) \Rightarrow \mathsf{agg}(xs \mathbin{\|} ys) = \mathsf{agg}(ys).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.61 (committee_silent_chair).</span>
+If the chair holds the identity idea, the committee's collective equals the aggregate of the members:
+\[c.\mathrm{chair} = e \Rightarrow c.\mathrm{collective} = \mathsf{agg}(c.\mathrm{members}).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.62 (committee_empty_members).</span>
+If the member list is empty, the committee's collective equals the chair's idea:
+\[c.\mathrm{members} = [] \Rightarrow c.\mathrm{collective} = c.\mathrm{chair}.\]
+</div>
+
+<!-- ---- Headline theorems ---- -->
+<h3 id="headline">Headline theorems and corollaries</h3>
+
+<div class="thm"><span class="thm-label">Lemma 10.63 (theorem_10_1).</span>
+<strong>Aggregate decomposition law.</strong> For coalitions \(xs, ys, zs\),
+\[
+  \mathsf{agg}(xs \mathbin{\|} ys) = \mathsf{agg}(xs) \circ \mathsf{agg}(ys),
+\]
+and the three-way form is associatively re-parenthesisable without changing the result:
+\[
+  \mathsf{agg}((xs \mathbin{\|} ys) \mathbin{\|} zs) = \mathsf{agg}(xs \mathbin{\|} (ys \mathbin{\|} zs)) = \mathsf{agg}(xs) \circ (\mathsf{agg}(ys) \circ \mathsf{agg}(zs)).
+\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.64 (theorem_10_2).</span>
+<strong>Silent-agent invariance.</strong> For any coalition \(xs\) and position \(n\),
+\[
+  \mathsf{agg}(\mathrm{insertAt}(e, n, xs)) = \mathsf{agg}(xs),
+\]
+\[
+  \mathsf{agg}(\underbrace{[e,\ldots,e]}_{n} \mathbin{\|} xs) = \mathsf{agg}(xs),
+\]
+\[
+  \mathsf{agg}(xs \mathbin{\|} \underbrace{[e,\ldots,e]}_{n}) = \mathsf{agg}(xs),
+\]
+\[
+  \mathsf{agg}([e] \mathbin{\|} xs \mathbin{\|} [e]) = \mathsf{agg}(xs).
+\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.65 (theorem_10_3).</span>
+<strong>Social congruence.</strong> \(\mathrm{CoalitionEquiv}\) is an equivalence relation (reflexivity, symmetry, transitivity) and is preserved under concatenation on the left and right, joint concatenation, and identity insertion. Precisely: \(\equiv\) is a congruence on the free monoid of coalitions.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.66 (corollary_10_1).</span>
+For any coalitions \(xs, ys\),
+\[\mathsf{agg}(xs \mathbin{\|} ys) = \mathsf{agg}(xs) \circ \mathsf{agg}(ys).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.67 (corollary_10_2).</span>
+If every agent in \(xs\) is silent (\(\mathrm{AllSilent}(xs)\)), then
+\[\mathsf{agg}(xs) = e.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.68 (corollary_10_3).</span>
+For any \(n\) and coalition \(xs\), inserting the silent agent at position \(n\) yields a coalitionally equivalent list:
+\[\mathrm{insertAt}(e, n, xs) \equiv xs.\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.69 (corollary_10_4).</span>
+A committee's collective idea equals the chair's idea composed with the aggregate of the members:
+\[c.\mathrm{collective} = c.\mathrm{chair} \circ \mathsf{agg}(c.\mathrm{members}).\]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 10.70 (corollary_10_5).</span>
+The collective of a two-committee assembly is the composition of the two collectives:
+\[\mathrm{Assembly.collective}([c, d]) = c.\mathrm{collective} \circ d.\mathrm{collective}.\]
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: IMPLICATIONS                                      -->
+<!-- ============================================================ -->
+<h2 id="implications">3. Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p>Theorem 10.2 establishes that silent agents — those holding the identity idea \(e\) — are algebraically invisible to the aggregate. A social group that admits new members who contribute nothing (who "hold the identity") does not change its collective output. This is a rigorous formal counterpart to the sociological observation that passive or uncommitted participants leave a group's ideational product unchanged. More sharply, the theorem says this holds <em>regardless of where the silent agent is inserted</em> — whether at the front, back, or middle, and however many such agents are added. Silence is commutative with everything and transparent to aggregation in all directions.</p>
+
+<p>The monoid fold defining \(\mathsf{agg}\) is not required to be commutative, and in general it is not: \(\mathsf{agg}([a, b]) = a \circ b\) while \(\mathsf{agg}([b, a]) = b \circ a\), and these are equal only if the monoid happens to be commutative. The <em>order</em> of agents matters. This non-commutativity is the algebraic root of Arrow's impossibility theorem: any procedure that demands a neutral, order-independent social aggregate is imposing commutativity on a structure that is not, in general, commutative. There is no canonical way to neutralise the ordering of agents; the theorem does not require us to find one, and indeed shows that any attempt to do so must make substantive assumptions about the monoid that are not forced by the axioms.</p>
+
+<p>The congruence theorem (10.3) provides the formal foundation for a theory of coalitional substitutability. Two coalitions \(xs\) and \(ys\) are equivalent when \(\mathsf{agg}(xs) = \mathsf{agg}(ys)\); the theorem says this relation is a congruence — it is preserved by every operation the formalism defines. In practical terms: if two committees produce the same collective idea, then merging either of them into a larger body yields the same overall aggregate. This means that coalition-level identity is not just pairwise but compositional; it licenses substitution in every context, not merely in isolation. Social scientists who treat coalitions as interchangeable when they have the same "platform" are implicitly invoking this congruence.</p>
+
+<p>The committee structure (Lemmas 10.54–10.62) reveals that <em>hierarchy is algebraically thin</em>. A committee — a chair plus a membership coalition — has a collective idea that is simply the chair's idea composed with the membership aggregate. Hierarchy introduces no new algebraic operation; it merely fixes one agent as the left component. Lemma 10.61 shows that a silent chair renders hierarchy invisible: the committee behaves exactly as if it were a leaderless coalition of its members. Lemma 10.62 shows that an empty membership renders the committee equivalent to a single-agent coalition. These extremes are not degenerate — they are the boundary cases that carve out the full parameter space of committee structure.</p>
+
+<p>The delegate structure \(xs \mathbin{\|} ys\) models federation. A federation of coalitions is itself a coalition whose aggregate is the composition of the member coalitions' aggregates. Theorem 10.1 says this is exact, not approximate: there is no "emergence" cost to federation at the algebraic level — what the sub-coalitions contribute, the whole coalition inherits by folding. Practically, this means that a federating body can compute its aggregate by computing sub-aggregates independently and then composing them, without any central coordinator. The associativity result (Lemma 10.29 and Theorem 10.1) further says that the way federations are nested — which coalitions are grouped into which sub-federations first — does not affect the overall aggregate. This is the algebraic vindication of modular, decentralised deliberation.</p>
+
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: ZOO ENTRIES                                       -->
+<!-- ============================================================ -->
+<h2 id="zoo">4. Zoo entries</h2>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Condorcet — The Voting Paradox</h3>
+<p><strong>Original claim:</strong> Majority voting over three or more alternatives can produce cyclic preferences — A beats B, B beats C, C beats A — even when every individual voter has transitive preferences (<em>Essai sur l'application de l'analyse à la probabilité des décisions rendues à la pluralité des voix</em>, 1785).</p>
+<p><strong>Formal restatement:</strong> A social aggregation procedure \(f\colon \mathrm{List}\,\mathcal{I} \to \mathcal{I}\) that is not a monoid homomorphism (i.e., \(f(xs \mathbin{\|} ys) \neq f(xs) \circ f(ys)\)) can produce cyclic outputs even from acyclic inputs. Cycling arises precisely where \(\mathsf{agg}\) is replaced by a non-associative or non-homomorphic map.</p>
+<p><strong>Status:</strong> <em>Recast and explained.</em> The coalition framework shows that the Condorcet paradox is a symptom of non-commutativity of the underlying aggregation. When \(a \circ b \neq b \circ a\), the result of majority aggregation depends on the order agents vote, and cyclic outcomes emerge as a byproduct. Theorem 10.1 establishes that <em>the unique canonical aggregation</em> — the monoid fold — is free of cycles precisely because it is a homomorphism. Condorcet-style cycling is not a paradox within this framework but a diagnostic: it indicates that the aggregation being used is not the monoid fold.</p>
+<p><strong>Commentary:</strong> The Condorcet paradox has motivated two centuries of social choice theory. Within Idea Theory, it pinpoints exactly which structural feature is being violated: a monoid-fold aggregate is cycle-free by construction, but any procedure that imposes symmetry (commutativity) or ignores ordering will generically produce cycles when the monoid is non-commutative. The paradox is, in this sense, a feature rather than a bug — it reveals the non-commutativity of the idea space.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Arrow — Impossibility Theorem</h3>
+<p><strong>Original claim:</strong> No rank-order voting system satisfying unrestricted domain, Pareto efficiency, independence of irrelevant alternatives, and non-dictatorship can convert individual preference rankings into a collective ordering (<em>Social Choice and Individual Values</em>, 1951).</p>
+<p><strong>Formal restatement:</strong> Arrow's conditions jointly demand that the social aggregation function \(f\) be both a homomorphism (Pareto + IIA) and invariant under permutation of the agent list (non-dictatorship). But invariance under permutation is exactly commutativity of \(\mathsf{agg}\). Since the monoid \((\mathcal{I}, \circ, e)\) is not assumed commutative, no such \(f\) can exist: \(\mathsf{agg}([a, b]) = a \circ b \neq b \circ a = \mathsf{agg}([b, a])\) in general.</p>
+<p><strong>Status:</strong> <em>Illuminated.</em> The impossibility does not follow from deep combinatorial complexity but from the mismatch between demanding commutativity (order-neutrality) and operating in a non-commutative monoid. Theorem 10.1 identifies the canonical homomorphic aggregation; Arrow's theorem shows that the canonical aggregation is not commutative and therefore cannot satisfy all four conditions simultaneously.</p>
+<p><strong>Commentary:</strong> This restatement does not "prove" Arrow's theorem from within Idea Theory — that would require embedding preference rankings into the monoid formalism in detail — but it gives the impossibility a clear algebraic meaning. The dictator in Arrow's proof is precisely the agent whose idea appears as the leftmost factor in the fold: in a non-commutative monoid, someone's position in the list always determines the outcome, and no symmetrization procedure can eliminate this without breaking the homomorphism property.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Olson — The Logic of Collective Action</h3>
+<p><strong>Original claim:</strong> Rational, self-interested individuals will not voluntarily contribute to a public good even when it is in their collective interest to do so; large groups systematically under-produce collective goods unless selective incentives or coercion are used (<em>The Logic of Collective Action</em>, 1965).</p>
+<p><strong>Formal restatement:</strong> A free-rider is precisely a silent agent: an agent \(a\) with \(a = e\) (holding the identity idea). By Lemma 10.15 and Theorem 10.2, such agents are exactly those whose participation or absence does not alter \(\mathsf{agg}(xs)\). The free-rider problem is the question: under what conditions do rational agents choose \(e\) rather than some \(a \neq e\)?</p>
+<p><strong>Status:</strong> <em>Formally restated and sharpened.</em> Olson's insight is that rational actors tend toward \(e\). The formal machinery shows exactly what this means: it is not that free-riders contribute a small amount, but that they contribute the algebraic zero — the identity — whose effect on the group is literally nil. Theorem 10.2 makes this precise: inserting any number of silent agents at any position changes nothing.</p>
+<p><strong>Commentary:</strong> The formalism clarifies Olson's claim in a non-obvious way. In the coalition model, the free-rider is not someone who takes from the collective but someone who holds \(e\) — a structurally neutral element. The group's aggregate is unchanged by their presence or absence. This makes the free-rider problem measurable: the degree of under-provision of a collective good is exactly the measure of how many agents have converged to \(e\). Selective incentives, in this language, are devices for pushing agents away from \(e\) toward non-identity elements.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Granovetter — The Strength of Weak Ties</h3>
+<p><strong>Original claim:</strong> Weak interpersonal ties (acquaintances rather than close friends) are disproportionately important for the diffusion of information and social mobility because they bridge otherwise disconnected social clusters (<em>American Journal of Sociology</em>, 1973).</p>
+<p><strong>Formal restatement:</strong> A coalition \([a_1, \ldots, a_n]\) decomposes into sub-coalitions \(xs\) and \(ys\) connected by a bridge agent \(b\): \([xs, b, ys]\). By Lemma 10.23 (aggregate_append), the bridge agent appears as the middle factor in \(\mathsf{agg}(xs) \circ b \circ \mathsf{agg}(ys)\). The "weak tie" is the element \(b\) that mediates between the aggregate of the left cluster and the aggregate of the right cluster in the delegate decomposition.</p>
+<p><strong>Status:</strong> <em>Structurally represented.</em> The delegate structure \(xs \mathbin{\|} [b] \mathbin{\|} ys\) captures bridge membership exactly. The aggregate of this three-way split is \(\mathsf{agg}(xs) \circ b \circ \mathsf{agg}(ys)\), so the bridge agent's idea is the composition operator between the two cluster aggregates.</p>
+<p><strong>Commentary:</strong> The Granovetter insight — that bridges carry outsized information — corresponds formally to the observation that \(b\) is the only non-trivial connection between \(\mathsf{agg}(xs)\) and \(\mathsf{agg}(ys)\). Removing \(b\) (replacing it with \(e\)) makes the two sub-aggregates multiply independently, losing any cross-cluster composition. The "strength" of the weak tie is the extent to which \(b \neq e\): a silent bridge agent is precisely a broken bridge. The coalition framework gives Granovetter's structural insight a precise algebraic expression that extends naturally to multi-bridge and multi-cluster scenarios.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Latour — Actor-Network Theory</h3>
+<p><strong>Original claim:</strong> Society and knowledge are produced by heterogeneous networks of human and non-human actors (actants); agency is distributed across the network; the properties of the network cannot be reduced to those of its individual members (<em>Science in Action</em>, 1987; <em>Reassembling the Social</em>, 2005).</p>
+<p><strong>Formal restatement:</strong> A Latourian network is a coalition \([a_1, \ldots, a_n]\) where each actant \(a_i \in \mathcal{I}\) holds an idea (including objects, texts, instruments). The network's "idea" is \(\mathsf{agg}([a_1, \ldots, a_n])\). Non-reducibility corresponds to the non-commutativity of \(\circ\): the network's aggregate is not determined by a symmetric function of its members but by their ordered composition. Immutable mobiles — inscriptions that stabilise the network — are elements with high resistance to replacement, i.e., elements far from \(e\).</p>
+<p><strong>Status:</strong> <em>Formally represented, partially.</em> The coalition framework captures the aggregative and non-reductive aspects of ANT. What it does not model is the dynamic recruitment of actants — the enrolment process — which requires a theory of how the list \([a_1, \ldots, a_n]\) is constructed over time.</p>
+<p><strong>Commentary:</strong> Latour's insistence on the agency of non-humans is accommodated naturally: the monoid \(\mathcal{I}\) does not restrict membership to humans. Any entity holding an idea is an agent in the coalition, and its contribution is its monoid element. The aggregate is the network's "black box" — the stabilised output that downstream actors interact with, not knowing its internal composition. Theorem 10.3 (social congruence) is the formal analogue of Latourian substitutability: two coalitions with the same aggregate are interchangeable from outside the black box.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Bourdieu — Collective Habitus</h3>
+<p><strong>Original claim:</strong> Social groups possess a collective habitus — a set of durable, transposable dispositions — that is not merely the sum of individual habitus but is reproduced through shared practices and fields (<em>The Logic of Practice</em>, 1990; <em>Distinction</em>, 1979).</p>
+<p><strong>Formal restatement:</strong> The habitus of a group is \(\mathsf{agg}([a_1, \ldots, a_n])\) where each \(a_i\) is the individual disposition-idea of agent \(i\). The claim that the collective habitus is "more than the sum" is the claim that \(\mathsf{agg}\) is not additive (i.e., not merely \(\sum v(a_i)\) for some valuation \(v\)) — it is a non-commutative fold. The field structure corresponds to the ordering of the coalition: agents earlier in the list (higher in field position) contribute their idea as a left factor, which is not in general equal to a right-factor contribution.</p>
+<p><strong>Status:</strong> <em>Substantively captured.</em> The non-commutativity of \(\mathsf{agg}\) provides the formal basis for Bourdieu's claim that the collective habitus is not a symmetric function of individual habitus. The coalition order encodes field hierarchy; aggregate non-commutativity encodes the non-equivalence of field positions.</p>
+<p><strong>Commentary:</strong> Bourdieu is often accused of vagueness about the mechanism by which individual dispositions aggregate into collective practice. The monoid fold gives a precise mechanism: each agent's idea is composed, left-to-right, with the running aggregate, in an order determined by field position. High-capital agents appear early in the list; their ideas are the left factors. The "doxa" — the unquestioned background assumptions of the field — is the aggregate of a coalition of agents who all hold the same element, a case captured by the all-silent and trivial coalition lemmas.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<h3>Habermas — Discourse Ethics and Communicative Rationality</h3>
+<p><strong>Original claim:</strong> Rational discourse aims at an ideal speech situation in which the only force is the force of the better argument; consensus is the goal of communicative action; norms are valid only if they could be agreed to by all affected parties under ideal conditions (<em>The Theory of Communicative Action</em>, 1981; <em>Moral Consciousness and Communicative Action</em>, 1990).</p>
+<p><strong>Formal restatement:</strong> The Habermasian ideal is exactly <em>coalition equivalence</em>: two deliberative paths \(xs\) and \(ys\) — two sequences of argumentative moves — are communicatively rational when \(xs \equiv ys\), i.e., \(\mathsf{agg}(xs) = \mathsf{agg}(ys)\). Different argumentative paths lead to the same rational consensus. Lemma 10.51 (\(\mathrm{CoalitionEquiv.singleton\_iff}\)) shows that for single-speaker discourse, equivalence reduces to identity. The full congruence theorem (10.3) shows that equivalent sub-discourses can be substituted in any larger deliberative context without changing the outcome.</p>
+<p><strong>Status:</strong> <em>Formally illuminated.</em> Habermas's idealization of rational discourse is captured by the equivalence class \([xs]_{\equiv}\): the set of all argumentative sequences that reach the same aggregate. Rational discourse is the process of discovering that \(xs \equiv ys\) — that two different paths lead to the same collective idea.</p>
+<p><strong>Commentary:</strong> Habermas presupposes that rational consensus is possible — that there exists some \(z \in \mathcal{I}\) such that any ideal deliberation converges to \(z\). In monoid terms this is the claim that the deliberative coalition has a determinate aggregate. The congruence theorem shows that this aggregate is robust: substituting equivalent sub-arguments in any position does not disturb it. What Habermas calls "strategic action" (manipulation rather than genuine argument) corresponds to inserting non-identity elements \(a \neq e\) into the coalition without disclosing them — a violation of the transparency condition that the monoid framework otherwise assumes. The silent-agent lemmas show that the only truly transparent participation is \(e\): the only contribution that cannot distort is none.</p>
+</div>
+
+<h2>Cross-links</h2>
+<ul>
+  <li><a href="../lean/game-theory.html">Lean: Game Theory</a> — extends the coalition formalism to strategic settings</li>
+  <li><a href="transmission-chain.html">Theorem 7: Transmission Chain</a> — the aggregate along a temporal chain is the special case of a linearly-ordered coalition</li>
+</ul>
+
+<p style="margin-top:2em"><a href="index.html">&larr; Back to Theorems</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

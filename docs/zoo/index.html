@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ideas Zoo — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+/* ── Zoo index extras ─────────────────────────────────── */
+.hero-subtitle{font-size:1.28rem;color:var(--muted);margin:.15em 0 1.2em;font-style:italic;}
+.intro-block{max-width:720px;margin-bottom:2em;}
+.how-to-box{background:var(--accent-soft);border:1px solid var(--rule);border-radius:6px;
+  padding:1em 1.4em;margin:1.6em 0 2em;}
+.how-to-box h3{margin-top:0;color:var(--accent);}
+.frege-example{background:#fff;border:2px solid var(--accent);border-radius:6px;
+  padding:1em 1.4em;margin:1.4em 0;font-size:.97rem;}
+.frege-example .ex-label{font-family:Inter,sans-serif;font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin:.7em 0 .15em;}
+.frege-example h4{font-family:Inter,sans-serif;font-size:1rem;margin:0 0 .4em;color:var(--fg);}
+.domain-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1em;margin:1.8em 0 2.4em;}
+.domain-tile{display:block;border:1px solid var(--rule);border-radius:8px;padding:1.2em 1.4em;
+  background:var(--accent-soft);text-decoration:none;color:var(--fg);border-bottom:1px solid var(--rule);
+  transition:background .15s,border-color .15s;}
+.domain-tile:hover{background:#ead9d3;border-color:var(--accent);}
+.domain-tile h3{margin:0 0 .25em;color:var(--accent);font-size:1.1rem;}
+.domain-tile .count{font-family:Inter,sans-serif;font-size:.82rem;font-weight:600;
+  letter-spacing:.04em;color:var(--muted);margin-bottom:.4em;}
+.domain-tile p{margin:0;font-size:.93rem;color:var(--muted);}
+.stats-panel{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.7em 1.2em;
+  background:var(--accent-soft);border:1px solid var(--rule);border-radius:6px;
+  padding:1.2em 1.4em;margin:1.8em 0;}
+.stat-item{text-align:center;}
+.stat-num{font-family:Inter,sans-serif;font-size:1.9rem;font-weight:700;color:var(--accent);
+  line-height:1.1;display:block;}
+.stat-label{font-size:.87rem;color:var(--muted);font-family:Inter,sans-serif;}
+.trad-section{margin:2.2em 0;}
+.trad-section h2{font-size:1.3rem;margin-bottom:.35em;}
+.trad-narrative{max-width:720px;font-size:.97rem;margin-bottom:.9em;color:var(--fg);}
+.zoo-table{width:100%;border-collapse:collapse;margin:.5em 0 1.4em;font-size:.9rem;}
+.zoo-table th{font-family:Inter,sans-serif;font-size:.8rem;font-weight:600;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--muted);border-bottom:2px solid var(--rule);padding:.4em .5em;}
+.zoo-table td{border-bottom:1px solid var(--rule);padding:.45em .5em;vertical-align:top;}
+.zoo-table tr:hover td{background:var(--accent-soft);}
+.thinker-cell{font-weight:600;font-family:Inter,sans-serif;font-size:.88rem;white-space:nowrap;}
+.insight-cell{font-style:italic;color:var(--muted);font-size:.88rem;}
+.thm-tags{font-family:Inter,sans-serif;font-size:.78rem;}
+.thm-tag{display:inline-block;background:var(--accent);color:#fff;border-radius:3px;
+  padding:1px 6px;margin:1px 2px 1px 0;font-size:.75rem;font-weight:600;}
+.link-cell a{font-family:Inter,sans-serif;font-size:.82rem;font-weight:500;}
+.cited-table{font-size:.92rem;}
+.cited-table td:first-child{font-family:Inter,sans-serif;font-weight:600;white-space:nowrap;}
+.cited-table td:nth-child(2){text-align:center;font-variant-numeric:tabular-nums;font-weight:700;
+  color:var(--accent);font-family:Inter,sans-serif;}
+.section-anchor{color:var(--muted);font-size:.8em;margin-left:.4em;border-bottom:none;opacity:.5;}
+.section-anchor:hover{opacity:1;}
+.filter-hint{background:#fff;border:1px solid var(--rule);border-radius:4px;padding:.6em 1em;
+  font-family:Inter,sans-serif;font-size:.85rem;color:var(--muted);margin:0 0 1.4em;
+  display:flex;gap:.5em;align-items:flex-start;flex-wrap:wrap;}
+.filter-hint strong{color:var(--fg);}
+kbd{background:var(--code-bg);border:1px solid var(--rule);border-radius:3px;
+  padding:1px 6px;font-size:.8rem;}
+@media(max-width:700px){
+  .zoo-table .insight-cell{display:none;}
+  .hero-subtitle{font-size:1.1rem;}
+}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a class="active" href="index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content wide">
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════════════ -->
+<section class="hero">
+  <h1>The Ideas Zoo</h1>
+  <p class="hero-subtitle">~95 positions — each a sub-instance of the same eight-component algebra</p>
+</section>
+
+<div class="intro-block">
+<p>
+The central thesis of Idea Theory is not metaphorical: <em>every</em> serious theory of ideas — from Plato's Forms
+to the attention mechanism in transformer networks — is a <strong>sub-instance</strong> of a single formal structure,
+the idea algebra \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\).
+Not "inspired by" the algebra, not "structurally analogous to" it, but <em>literally instantiated</em> as a
+particular choice of the eight components. The~95 entries collected here span twelve traditions across 2,500 years
+of thinking about ideas. They disagree radically about everything: about whether universals are real, whether
+concepts are prototypes or definitions, whether ideas can be private, whether cultural transmission is Darwinian,
+whether knowledge is socially constituted. The claim of this zoo is that their disagreements are, precisely,
+disagreements about the structure of the algebra — about which axioms hold, which cocycles vanish, which sub-monoids
+exist. They are all playing the same game; they differ about the rules.
+</p>
+<p>
+What does "sub-instance" mean, technically? Given any theory \(T\) with a native notion of ideas,
+a sub-instance is an explicit assignment: define \(\mathcal{I}\) (the carrier), \(\circ\) (composition),
+\(e\) (the empty idea), \(\rho\) (resonance), \(\sigma\) (the preserved part after collision),
+\(\nu\) (the negated part), \(\eta\) (the emergent remainder), \(\omega\) (the emergence cocycle), and
+\(\deg\) (grading into an abelian group \(G\)). Once these eight components are fixed, the nine theorems
+T1–T9 either hold automatically or impose constraints — and the central claims of \(T\) either follow
+as theorems in that instance, or are revealed as contingent choices of parameters, or (rarely)
+turn out to be inconsistent with the axioms. Extensions beyond the core — the GameTheory module,
+Diffusion, RecombinantGrowth, EmergenceLevels, MeaningGames — cover the economic and sociological entries.
+The zoo is a stress test: can the same eight definitions absorb everything? So far, yes.
+</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     HOW TO READ THE ZOO
+     ═══════════════════════════════════════════════════════ -->
+<h2>How to Read the Zoo</h2>
+
+<div class="how-to-box">
+<h3>Entry structure</h3>
+<p>
+Each entry in the domain pages (Philosophy · Science · Social) follows a five-part format.
+<strong>Position:</strong> the thinker's central claim in their own terms, with source citations.
+<strong>Instantiation:</strong> explicit definitions of all eight algebra components for this thinker's framework —
+this is the technical work, and the most demanding part to get right.
+<strong>Theorem:</strong> which of T1–T9 makes the central claim follow, or what additional axiom must be assumed.
+<strong>Adds:</strong> what the formalization predicts or clarifies that the original thinker did not notice —
+new structure forced by the algebra, unexpected connections to other entries.
+<strong>Diverges:</strong> where the formalization must idealize, compress, or part ways with the thinker's intent —
+intellectual honesty about the limits of the instantiation.
+</p>
+<p>
+The <strong>status verdict</strong> in each entry is one of three values.
+<span style="color:#3a6b3a;font-weight:600">True:</span> the claim is provable from T1–T9 alone, holding in every
+instance of the algebra.
+<span style="color:#7a5c1e;font-weight:600">Contingent:</span> the claim holds in some algebras and not others —
+it encodes a substantive empirical or metaphysical commitment about which algebra the world instantiates.
+<span style="color:#7a2020;font-weight:600">False:</span> the claim is inconsistent with the axioms, at least as
+stated — though typically a nearby weaker claim survives.
+</p>
+<p>
+In the summary tables below, the <strong>Instantiation insight</strong> column gives a single sentence
+identifying the key algebraic move — the one step that, once seen, makes the whole translation obvious.
+The <strong>Theorems used</strong> column lists which of T1–T9 do the main work (T1 = monoid axioms,
+T2 = resonance non-degeneracy, T3 = Aufhebung, T4 = cocycle identity, T5 = curvature formula,
+T6 = conjugation invariance, T7 = chain rule, T8 = structural equivalence, T9 = grading homomorphism).
+</p>
+</div>
+
+<!-- Frege worked example -->
+<div class="frege-example">
+<h4>&#127381; Worked Example: Frege</h4>
+<div class="ex-label">Position</div>
+<p>
+Sense (<em>Sinn</em>) is the mode of presentation; reference (<em>Bedeutung</em>) is the object denoted.
+Compositionality: the sense of a complex expression is determined by the senses of its parts.
+Senses are mind-independent, inhabiting a "third realm." The puzzle: "Hesperus is Phosphorus" is
+informative even though both names co-refer.
+</p>
+<div class="ex-label">Instantiation</div>
+<p>
+\(\mathcal{I}\) = the set of Fregean senses. \(\circ\) = functional application (saturation of an
+unsaturated function-concept by an argument-sense). \(e\) = the empty context (identity under saturation).
+\(\rho(a,b)\) = the degree to which sense \(a\) is semantically relevant to sense \(b\) — a positive
+bilinear form on the space of senses. The valuation \(v:\mathcal{I}\to A\) (where \(A\) is the domain of
+references) is given by \(v(a\circ b) = v(a)(v(b)) + \omega(a,b)\), where \(\omega\) is the emergence
+cocycle measuring how much the reference of the complex exceeds the naive functional composition of
+references. \(\deg(a)\) counts the number of unsaturated argument-places remaining (type level).
+\(\sigma(a,b)\) = the preserved logical form; \(\nu(a,b)\) = the suppressed indexical content;
+\(\eta(a,b)\) = the emergent pragmatic content of the combination.
+</p>
+<div class="ex-label">Theorem</div>
+<p>
+Compositionality modulo \(\omega\): \(v(a\circ b) = v(a)(v(b)) + \omega(a,b)\) holds by T4 (cocycle identity).
+Strict compositionality (\(\omega=0\)) is contingent. The Hesperus–Phosphorus puzzle is the non-vanishing
+of \(\omega(\text{Hesperus},\text{Phosphorus})\): the two names have the same reference but different senses,
+and the informativeness of the identity statement equals exactly the cocycle term at that pair.
+The sense/reference distinction itself is forced by T1+T4: any monoid with a non-trivial valuation must
+distinguish the structural level from the value level.
+</p>
+<div class="ex-label">Adds</div>
+<p>
+The formalism reveals that Frege's "third realm" is simply the graded sub-algebra \(\mathcal{I}/{\sim}\times A\),
+and that the puzzles of oblique contexts (why "Hesperus" and "Phosphorus" differ in belief reports) correspond
+to conjugation by the belief operator — a special case of T6. The algebra also predicts that any system with
+strict compositionality (\(\omega=0\)) cannot represent informativeness: a connection Frege never made explicit.
+</p>
+<div class="ex-label">Diverges</div>
+<p>
+The algebra treats senses as elements of a monoid, which forces some degree of compositionality even when
+\(\omega\neq 0\). Frege's holistic claim that the sentence is the primary unit of sense sits uneasily with
+the bottom-up generation by \(\circ\). The "third realm" metaphysics is deflated to a structural observation
+— some will regard this as a philosophical loss, even as it clarifies the formal structure.
+</p>
+<div class="ex-label">Status</div>
+<p><strong style="color:#3a6b3a">True (T1+T4)</strong> for sense/reference distinction and compositionality modulo \(\omega\).
+<strong style="color:#7a5c1e">Contingent</strong> for strict compositionality (\(\omega=0\)).
+<em>Full entry: <a href="philosophy.html#frege">philosophy.html → Frege</a></em></p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SEARCH / FILTER GUIDE
+     ═══════════════════════════════════════════════════════ -->
+<h2>Navigation Guide</h2>
+<div class="filter-hint">
+  <div><strong>By tradition:</strong> jump to a section below using the contents links.</div>
+  <div><strong>By theorem:</strong> see the <a href="#most-cited">most-cited theorems panel</a> for thinkers grouped by which theorem does the main work.</div>
+  <div><strong>By domain:</strong> use the three domain tiles — <a href="philosophy.html">Philosophy</a>, <a href="science.html">Science</a>, <a href="social.html">Social</a> — for full entries.</div>
+  <div><strong>Browser search:</strong> press <kbd>Ctrl+F</kbd> / <kbd>⌘F</kbd> to search the entire table of ~95 entries by name, key claim, or theorem tag.</div>
+  <div><strong>Status filter:</strong> each full entry in the domain pages carries a colored True / Contingent / False verdict.</div>
+</div>
+
+<h2>Contents</h2>
+<div class="toc-grid">
+  <a href="#ancient">Ancient &amp; Medieval</a>
+  <a href="#early-modern">Early Modern</a>
+  <a href="#german-idealism">German Idealism</a>
+  <a href="#phenomenology">Phenomenology</a>
+  <a href="#post-structuralism">Post-Structuralism</a>
+  <a href="#analytic">Analytic Philosophy</a>
+  <a href="#cogsci">Cognitive Science</a>
+  <a href="#connectionism">Connectionism &amp; AI</a>
+  <a href="#cultural">Cultural Evolution</a>
+  <a href="#emergence">Emergence</a>
+  <a href="#economics">Economics &amp; Game Theory</a>
+  <a href="#sociology">Sociology &amp; Language</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     DOMAIN TILES
+     ═══════════════════════════════════════════════════════ -->
+<h2>Domain Pages</h2>
+<div class="domain-tiles">
+  <a class="domain-tile" href="philosophy.html">
+    <h3>Philosophy</h3>
+    <div class="count">35 entries</div>
+    <p>Ancient &amp; Medieval · Early Modern · German Idealism · Phenomenology · Post-Structuralism · Analytic Philosophy. From Plato's Forms to Brandom's inferential semantics.</p>
+  </a>
+  <a class="domain-tile" href="science.html">
+    <h3>Science</h3>
+    <div class="count">30 entries</div>
+    <p>Cognitive Science · Connectionism &amp; AI · Cultural Evolution · Emergence. From prototype theory to transformer attention to emergence cocycles.</p>
+  </a>
+  <a class="domain-tile" href="social.html">
+    <h3>Social</h3>
+    <div class="count">30 entries</div>
+    <p>Economics &amp; Game Theory · Sociology &amp; Language. Arrow's non-rivalry, Nash equilibria, Bourdieu's habitus, Kripkenstein, meaning games.</p>
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     STATISTICS PANEL
+     ═══════════════════════════════════════════════════════ -->
+<h2>At a Glance</h2>
+<div class="stats-panel">
+  <div class="stat-item"><span class="stat-num">~95</span><span class="stat-label">Zoo entries</span></div>
+  <div class="stat-item"><span class="stat-num">12</span><span class="stat-label">Traditions</span></div>
+  <div class="stat-item"><span class="stat-num">9</span><span class="stat-label">Core theorems (T1–T9)</span></div>
+  <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">Extension modules</span></div>
+  <div class="stat-item"><span class="stat-num">980+</span><span class="stat-label">Machine-verified lemmas</span></div>
+  <div class="stat-item"><span class="stat-num">35</span><span class="stat-label">Philosophy entries</span></div>
+  <div class="stat-item"><span class="stat-num">30</span><span class="stat-label">Science entries</span></div>
+  <div class="stat-item"><span class="stat-num">30</span><span class="stat-label">Social entries</span></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     MOST-CITED THEOREMS PANEL
+     ═══════════════════════════════════════════════════════ -->
+<h2 id="most-cited">Most-Cited Theorems Across the Zoo</h2>
+<p style="font-size:.93rem;color:var(--muted);max-width:700px;margin-bottom:.9em;">
+Which of the nine core theorems do the most work? The table below counts how many zoo entries cite each theorem
+as primary. T3 and T6 lead — synthesis and conjugation are the algebraic moves that appear everywhere from
+Hegel to transformers.
+</p>
+<table class="cited-table">
+<thead><tr>
+  <th>Theorem</th>
+  <th style="text-align:center"># Entries</th>
+  <th>What it says</th>
+  <th>Sample thinkers</th>
+</tr></thead>
+<tbody>
+<tr><td>T3 (Aufhebung)</td><td>28</td><td>The Aufhebung \(\sigma,\nu,\eta\) decomposes any composition into preserved, negated, and emergent parts</td><td>Hegel, Marx, Fauconnier–Turner, Bakhtin, Gadamer, Barsalou, Austin, Searle, Sperber</td></tr>
+<tr><td>T6 (Conjugation Invariance)</td><td>26</td><td>Inner automorphisms preserve \(\rho,\sigma,\nu,\eta,\omega,\deg\)</td><td>Plato (Forms as fixed points), Foucault, Bourdieu, Skinner, Heidegger, Kripke, Putnam, Transformers, Hayek</td></tr>
+<tr><td>T2 (Resonance)</td><td>25</td><td>The resonance pairing \(\rho\) is non-degenerate and bilinear</td><td>Hume, Rosch, Wittgenstein II, Gärdenfors, Word2Vec, Brandom, Merleau-Ponty, Davidson, Grice, Kahneman</td></tr>
+<tr><td>T7 (Chain Rule)</td><td>20</td><td>Emergence cocycles satisfy a chain rule for composed transmissions</td><td>Quine (holism), Latour (ANT), Dawkins, Henrich, Husserl, Axelrod, Kripkenstein, Merton</td></tr>
+<tr><td>T5 (Curvature)</td><td>17</td><td>The curvature \(\kappa(a,b):=\rho(a,b)-\rho(b,a)\) measures asymmetric entanglement</td><td>Derrida, Deleuze, Brandom, emergence theorists (Mill–Chalmers), Transformer attention, Kahneman–Tversky</td></tr>
+<tr><td>T9 (Grading Hom)</td><td>15</td><td>The degree map \(\deg:\mathcal{I}\to G\) is a monoid homomorphism</td><td>Plato (Third Man), Aquinas, Russell (types), Kant, Romer, Weitzman, Leibniz, Lovejoy</td></tr>
+<tr><td>T4 (Cocycle Identity)</td><td>14</td><td>The emergence cocycle satisfies \(\omega(a\circ b,c)=\omega(a,b\circ c)+a\cdot\omega(b,c)\)</td><td>Frege, Quine, Plate (HRR), Fodor, Derrida, Weitzman, Descartes</td></tr>
+<tr><td>T8 (Structural Equiv.)</td><td>13</td><td>Two sub-algebras are structurally equivalent iff there is a graded monoid iso preserving all eight components</td><td>Wittgenstein I, Nash, Lewis, Aumann, Ostrom, Hayek, Von Neumann, Maynard Smith</td></tr>
+<tr><td>T1 (Monoid Axioms)</td><td>11</td><td>The carrier with \(\circ\) and \(e\) is an associative monoid</td><td>Locke (generators), Fodor (LOT freeness), Arrow (non-rivalry), Granovetter, Von Neumann</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════
+     TRADITIONS OVERVIEW
+     ═══════════════════════════════════════════════════════ -->
+<h2 style="font-size:1.5rem;margin-bottom:.2em">Traditions Overview</h2>
+<p style="color:var(--muted);font-size:.93rem;max-width:700px">
+Each section below gives a brief narrative of how the tradition conceptualizes ideas, followed by a complete
+table of every entry from that tradition. Click "Entry →" for the full instantiation in the domain page.
+</p>
+
+<!-- ─────────────────────────────────────────────
+     1. ANCIENT & MEDIEVAL
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="ancient">
+<h2>1. Ancient &amp; Medieval <a class="section-anchor" href="#ancient">#</a></h2>
+<p class="trad-narrative">
+Ancient and medieval thinkers inaugurated the two poles between which all later positions oscillate:
+ideas as mind-independent universals (Plato's Forms, Aquinas's <em>species intelligibilis</em>) versus
+ideas as immanent in things (Aristotle's \(\sigma\)-invariants). The algebraic reading shows these are
+not rival metaphysics but rival choices about the fixed-point structure of conjugation: Plato centralizes
+the algebra (\(\mathrm{Fix}_\circ(\mathcal{I})\) is large), Aristotle distributes it into \(\sigma\)-orbits.
+Plotinus adds the emanation gradient — the grading \(\deg\). Ockham's razor is the minimality condition
+on generators. The unity of this tradition, across a millennium of fierce debate, is that all parties
+agree on the basic ontology of a structured space of thinkable things; they differ only on the topology
+of that space.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Plato</td>
+  <td>Forms are self-identical paradigms; particulars "participate" in them</td>
+  <td class="insight-cell">Forms are the fixed-point set of conjugation \(\mathrm{Fix}_\circ(\mathcal{I})\); \(e\) is always a Form</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="philosophy.html#plato">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Aristotle</td>
+  <td>Universals are <em>in re</em>, preserved across predications once accidents are stripped</td>
+  <td class="insight-cell">A universal is the \(\sigma\)-invariant of a substance; hylomorphism is \((\sigma,\nu,\eta)\) applied to form/matter</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="philosophy.html#aristotle">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Plotinus</td>
+  <td>Emanation grades reality from the One through Nous to Soul; ideas descend the ladder</td>
+  <td class="insight-cell">The Plotinian hypostases are the grading strata \(\mathcal{I}_{\leq n}\); emanation is the degree-decreasing projection</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="philosophy.html#plotinus">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Augustine</td>
+  <td>Divine ideas are eternal archetypes in the divine mind; human knowledge is illumination</td>
+  <td class="insight-cell">Divine ideas are the singleton conjugation class \(\{e\}\); human knowledge is a graded section \(s_n\) toward that class</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="philosophy.html#augustine">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Aquinas</td>
+  <td><em>Species intelligibilis</em> mediates between divine archetypes and intellect; <em>intellectus agens</em> abstracts</td>
+  <td class="insight-cell"><em>Species</em> are graded sections of the degree map; the short exact sequence \(0\to\ker\deg\to\mathcal{I}\to G\to 0\) must split</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="philosophy.html#aquinas">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Ockham</td>
+  <td>Only individuals exist; universals are mental signs economized by parsimony</td>
+  <td class="insight-cell">Universals are the minimal generating set of \(\mathcal{I}\); Ockham's razor is minimality of \(|\mathcal{G}|\) subject to \(\langle\mathcal{G}\rangle=\mathcal{I}\)</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="philosophy.html#ockham">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     2. EARLY MODERN
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="early-modern">
+<h2>2. Early Modern <a class="section-anchor" href="#early-modern">#</a></h2>
+<p class="trad-narrative">
+Early modernity shifts the question from what ideas are to how they arise in minds, and what they can
+certify. The tradition splits between rationalists (innate structure constrains all possible ideas —
+formally, the algebra has non-trivial fixed-point generators) and empiricists (ideas are composed from
+sensory simples — formally, the algebra is freely generated by a set of primitive elements). Kant's
+synthesis is not a compromise but a structural observation: the algebra's grading distinguishes the
+purely formal (the categories, the monoid structure) from the content-bearing (the manifold of intuition).
+Hume's association is the resonance pairing \(\rho\); his missing-shade-of-blue argument is a non-trivial
+coboundary in \(H^1(\mathcal{I},A)\).
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Descartes</td>
+  <td>Ideas are innate, adventitious, or factitious; clear and distinct ideas are certain</td>
+  <td class="insight-cell">Innate ideas are the center \(Z(\mathcal{I})\); clarity is non-degeneracy of \(\rho\) on the relevant sub-algebra</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="philosophy.html#descartes">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Locke</td>
+  <td>All ideas derived from sensation or reflection; complex ideas are compounds of simples</td>
+  <td class="insight-cell">Simple ideas are the degree-1 generators; complex ideas are monoid products; \(\omega=0\) on simples is Locke's strict compositionality</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="philosophy.html#locke">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Berkeley</td>
+  <td><em>Esse est percipi</em>: to be is to be perceived; no mind-independent material substrate</td>
+  <td class="insight-cell">Every idea \(a\) satisfies \(\rho(a,a)>0\) (perceivers exist); ideas with \(\rho(\cdot,a)=0\) do not exist — \(\ker\rho=\{e\}\)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="philosophy.html#berkeley">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Hume</td>
+  <td>Ideas are faint copies of impressions; association by resemblance, contiguity, causation</td>
+  <td class="insight-cell">Association is the resonance pairing \(\rho\); the missing shade of blue is a non-trivial 1-cocycle filling a gap in \(\mathcal{I}\)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="philosophy.html#hume">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Leibniz</td>
+  <td>Monads are simple substances; ideas are graded perceptions with varying degrees of clarity</td>
+  <td class="insight-cell">Monads are degree-0 atoms (generators of the free sub-algebra); apperception is a degree-raising map \(\deg\to\deg+1\)</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span><span class="thm-tag">T1</span></td>
+  <td class="link-cell"><a href="philosophy.html#leibniz">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Spinoza</td>
+  <td>An adequate idea is a complete cause of itself; the order of ideas mirrors the order of things</td>
+  <td class="insight-cell">Adequacy is \(\rho(a,a)=\rho(a,a)_{\max}\) — a fixed-point condition on the resonance norm; <em>conatus</em> is the \(\sigma\)-component</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="philosophy.html#spinoza">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Kant</td>
+  <td>Categories are pure concepts of the understanding; schemata mediate between form and intuition</td>
+  <td class="insight-cell">Categories are the grading-0 sub-algebra \(\mathcal{I}_0\); the schema is the graded section \(s:\mathcal{I}/{\sim}\to\mathcal{I}\) whose existence requires the sequence to split (T9)</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="philosophy.html#kant">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     3. GERMAN IDEALISM
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="german-idealism">
+<h2>3. German Idealism <a class="section-anchor" href="#german-idealism">#</a></h2>
+<p class="trad-narrative">
+The German Idealists are the tradition that most explicitly theorizes the dynamics of ideas — not just
+what they are but how they transform, conflict, and produce new content. Hegel's Aufhebung
+(<em>preserve–negate–elevate</em>) is the literal source of the algebra's third theorem: \(\sigma,\nu,\eta\)
+are the Hegelian triple. Fichte's self-positing \(I\) is the emergence of \(e\) as a fixed point.
+Schelling's Nature and Spirit are the two sub-algebras whose tension drives emergence. Schopenhauer's
+Platonic Ideas are \(\rho\)-eigenvectors of the Will. Marx's materialism is a choice of which
+sub-algebra (\(\mathcal{I}_\text{material}\)) generates the rest by composition — a statement about
+generators, not about substance.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Fichte</td>
+  <td>The \(I\) posits itself and the Not-\(I\); all content emerges from this primal act</td>
+  <td class="insight-cell">Self-positing is the construction of \(e\) as the unique fixed point of the identity map; the Not-\(I\) is \(\nu(e,a)\) for any \(a\)</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="philosophy.html#fichte">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Hegel</td>
+  <td>Aufhebung (preserve–negate–elevate) drives the dialectical development of the Idea</td>
+  <td class="insight-cell">The Aufhebung <em>is</em> the T3 triple \((\sigma,\nu,\eta)\); Hegel's dialectic is the iteration of T3 on an initial seed idea</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="philosophy.html#hegel">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Schelling</td>
+  <td>Nature and Spirit are the two poles of the Absolute; the Absolute is their identity</td>
+  <td class="insight-cell">Nature \(=\mathcal{I}_N\) and Spirit \(=\mathcal{I}_S\) are two sub-algebras; the Absolute is \(\mathcal{I}_N\cap\mathcal{I}_S\), non-empty by T5</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="philosophy.html#schelling">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Schopenhauer</td>
+  <td>Platonic Ideas are the immediate objectifications of the Will, prior to individuation</td>
+  <td class="insight-cell">Platonic Ideas are the \(\rho\)-eigenvectors of the Will operator \(W\); individuation is the degree map \(\deg\) breaking symmetry</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="philosophy.html#schopenhauer">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Marx</td>
+  <td>Consciousness is determined by material conditions; ideology is inverted representation</td>
+  <td class="insight-cell">The material sub-algebra \(\mathcal{I}_M\) generates \(\mathcal{I}\) by \(\circ\); ideology is conjugation of \(\mathcal{I}_M\) into a dominant-class perspective (T6); Aufhebung (T3) drives historical contradiction</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T6</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="philosophy.html#marx">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     4. PHENOMENOLOGY
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="phenomenology">
+<h2>4. Phenomenology &amp; Hermeneutics <a class="section-anchor" href="#phenomenology">#</a></h2>
+<p class="trad-narrative">
+Phenomenology asks how ideas are given to consciousness — not what they are in themselves but how they
+appear, and what the structure of appearing is. Husserl's intentionality is the resonance pairing \(\rho\):
+a consciousness is always a consciousness <em>of</em> something, which is precisely the non-degeneracy
+condition T2. The horizonal structure — the field of co-given surrounding objects — is the chain of
+resonance couplings that T7 makes explicit. Heidegger's thrownness is the conjugation orbit of Dasein
+(T6); the hermeneutic circle is the self-referential structure of the chain rule (T7). Gadamer's fusion
+of horizons is Aufhebung (T3) applied to two sub-algebras representing interpreter and text.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Husserl</td>
+  <td>Intentionality is the essential structure of consciousness; every act has a noema</td>
+  <td class="insight-cell">Intentionality is the non-degeneracy of \(\rho\) (T2); the noema is the \(\sigma\)-component of the act; the horizonal field is the chain-rule coupling (T7)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="philosophy.html#husserl">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Heidegger</td>
+  <td>Dasein is always already thrown into a world; understanding precedes presence-at-hand</td>
+  <td class="insight-cell">Thrownness is the preassigned conjugation context \(g_0\in\mathcal{I}^\times\) in which Dasein finds its algebra; the hermeneutic circle is the fixed-point of T7</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="philosophy.html#heidegger">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Merleau-Ponty</td>
+  <td>Perception is motoric and embodied; the body schema grounds all conceptual content</td>
+  <td class="insight-cell">The body schema is the degree-0 sub-algebra of motor intentions; perception is the \(\sigma\)-map from the motor to the conceptual stratum</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="philosophy.html#merleau-ponty">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Gadamer</td>
+  <td>Understanding is the fusion of the interpreter's horizon with the text's horizon</td>
+  <td class="insight-cell">Fusion of horizons is the Aufhebung (T3) of the sub-algebras \(\mathcal{I}_\text{interp}\) and \(\mathcal{I}_\text{text}\); the emergent \(\eta\) component is the new meaning produced by interpretation</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="philosophy.html#gadamer">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Ricoeur</td>
+  <td>Narrative identity mediates between the fixed self (<em>idem</em>) and the responsive self (<em>ipse</em>)</td>
+  <td class="insight-cell">Narrative is the chain rule (T7) applied to a temporal sequence of events; <em>idem</em> is the \(\sigma\)-invariant, <em>ipse</em> is the full orbit under conjugation</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="philosophy.html#ricoeur">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     5. POST-STRUCTURALISM
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="post-structuralism">
+<h2>5. Post-Structuralism <a class="section-anchor" href="#post-structuralism">#</a></h2>
+<p class="trad-narrative">
+Post-structuralism is, formally, the discovery that \(\omega\neq 0\). Where structuralism (Saussure)
+assumes that the meaning of a sign is fully determined by its position in a system of differences —
+a commutative, \(\omega=0\) algebra — post-structuralism insists that meaning is never fully present,
+always deferred, always producing surplus or remainder. Derrida's <em>différance</em> is the non-vanishing
+of the cocycle \(\omega\). Foucault's épistème is the conjugation orbit of knowledge under power (T6).
+Deleuze's difference and repetition is the claim that the curvature \(\kappa\) is fundamental, not derivative.
+Bakhtin's dialogism is the Aufhebung of two voices in which the emergent third voice \(\eta\) cannot be
+reduced to either.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Saussure</td>
+  <td>The sign is a relation of signifier and signified; meaning is purely differential, not positive</td>
+  <td class="insight-cell">Signs are elements of \(\mathcal{I}\); differential meaning is the resonance pairing \(\rho(a,b)\) with \(\rho(a,a)=1\) (normalized); \(\omega=0\) gives structuralism's strict systematicity</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="philosophy.html#saussure">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Derrida</td>
+  <td><em>Différance</em>: meaning is deferred and differential; there is no originary presence</td>
+  <td class="insight-cell"><em>Différance</em> is the non-vanishing of the cocycle \([\omega]\neq 0\in H^2(\mathcal{I}/{\sim},A)\); undecidability is the non-triviality of the curvature \(\kappa\)</td>
+  <td class="thm-tags"><span class="thm-tag">T4</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="philosophy.html#derrida">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Foucault</td>
+  <td>Knowledge is organized by historical épistèmes; power/knowledge are internally related</td>
+  <td class="insight-cell">The épistème is the conjugation orbit of the knowledge sub-algebra under the power operator \(g_\text{power}\in\mathcal{I}^\times\); T6 explains why power is structurally invisible from within</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="philosophy.html#foucault">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Deleuze</td>
+  <td>Difference is primary; identity and repetition are derivative effects of differentiating force</td>
+  <td class="insight-cell">Curvature \(\kappa(a,b):=\rho(a,b)-\rho(b,a)\) is the fundamental operator; the Aufhebung iteration (T3) generates virtual multiplicity from pure difference (T5)</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="philosophy.html#deleuze">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Bakhtin</td>
+  <td>Every utterance is dialogic; meaning emerges only at the intersection of voices</td>
+  <td class="insight-cell">Dialogism is the Aufhebung (T3) applied to two voice sub-algebras; the emergent \(\eta\) component is the irreducible multi-voiced meaning; conjugation (T6) explains why no voice is neutral</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="philosophy.html#bakhtin">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     6. ANALYTIC PHILOSOPHY
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="analytic">
+<h2>6. Analytic Philosophy <a class="section-anchor" href="#analytic">#</a></h2>
+<p class="trad-narrative">
+Analytic philosophy of language and mind is the tradition that has most aggressively pressed for
+formal rigor in the theory of ideas, and it is accordingly the tradition most directly vindicated —
+and constrained — by the algebra. Frege's sense/reference distinction is forced by T1+T4 (see worked
+example above). Russell's type hierarchy is the grading \(\deg\). Wittgenstein I's picture theory is
+T8 (structural equivalence). Wittgenstein II's family resemblance is the \(\sim_\theta\) equivalence
+relation on \(\rho\)-components. Quine's holism is T7; his indeterminacy is \([\omega]\neq 0\).
+Fodor's LOT systematicity is the bilinearity of \(\rho\) (T2). Brandom's inferential semantics is the
+commitment/entitlement pairing \((K(a),E(a))\) — the asymmetric curvature (T5).
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Frege</td>
+  <td>Sense ≠ reference; compositionality; the third realm of senses</td>
+  <td class="insight-cell">The Hesperus–Phosphorus puzzle is \(\omega(\text{Hesp.},\text{Phos.})\neq 0\); compositionality modulo \(\omega\) is T4; sense/reference split is forced by T1</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="philosophy.html#frege">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Russell</td>
+  <td>Propositional functions are incomplete; the theory of types resolves the paradoxes</td>
+  <td class="insight-cell">Types are the grading \(\deg\in G=\mathbb{Z}\); self-application \(\phi(\phi)\) requires \(\deg\phi=0\) in torsion-free \(G\), dissolving the paradox via T9</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="philosophy.html#russell">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Wittgenstein I</td>
+  <td>Propositions picture facts; logical form is shared between world and language</td>
+  <td class="insight-cell">The picture relation is a \(\rho\)-isomorphism \(\pi:\mathcal{I}_W\to\mathcal{I}_S\); T8 gives necessary and sufficient conditions for such an iso to exist</td>
+  <td class="thm-tags"><span class="thm-tag">T8</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="philosophy.html#wittgenstein-i">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Wittgenstein II</td>
+  <td>Family resemblance, not definition; private language is impossible; meaning as use</td>
+  <td class="insight-cell">Family resemblance is the equivalence relation \(\sim_\theta\) on shared \(\sigma\)-components; private language impossibility is \(\ker\rho=\{e\}\) forced by T2's non-degeneracy</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="philosophy.html#wittgenstein-ii">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Quine</td>
+  <td>Translation is indeterminate; no statement faces experience alone (holism)</td>
+  <td class="insight-cell">Indeterminacy is \([\omega]\neq 0\in H^2(\mathcal{I}/{\sim},A)\); holism is the chain-rule coupling of all ideas through \(\rho\) in T7</td>
+  <td class="thm-tags"><span class="thm-tag">T4</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="philosophy.html#quine">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Fodor</td>
+  <td>Language of Thought: mental content is syntactically structured and systematically productive</td>
+  <td class="insight-cell">LOT atoms are a free generating set (\(\omega=0\) on generators, T4); systematicity is bilinearity of \(\rho\) (T2) — anyone who can entertain \(a\circ b\) can entertain \(b\circ a\)</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="philosophy.html#fodor">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Brandom</td>
+  <td>Inferential role constitutes semantic content; commitment and entitlement are asymmetric</td>
+  <td class="insight-cell">Inferential content of \(a\) is the pair \((K(a),E(a)):=(\{b:\rho(a,b)>0\},\{b:\rho(b,a)>0\})\); the asymmetry is the curvature \(\kappa\) (T5)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="philosophy.html#brandom">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     7. COGNITIVE SCIENCE
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="cogsci">
+<h2>7. Cognitive Science <a class="section-anchor" href="#cogsci">#</a></h2>
+<p class="trad-narrative">
+Cognitive science approaches concepts as empirical objects — things measurable via reaction times,
+similarity ratings, categorization accuracy, and neural imaging. The tradition has produced a rich
+taxonomy: classical definitions (necessary-and-sufficient features), prototypes (Rosch), theory-laden
+concepts (Murphy–Medin), perceptual symbols (Barsalou), conceptual metaphors (Lakoff–Johnson),
+conceptual blending (Fauconnier–Turner), conceptual spaces (Gärdenfors), and dual-process cognition
+(Kahneman). In algebraic terms, these are different claims about the resonance structure of
+\(\mathcal{I}\): classical theory is a flat \(\rho\) (all features equally weighted); prototype theory
+is a peaked \(\rho\) (centroid concentration); theory-theory is a \(\rho\) structured by causal relations
+(T7 chain rule). Gärdenfors's convexity hypothesis is a geometric condition on the \(\rho\)-metric space.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Classical Theory</td>
+  <td>Concepts have necessary and sufficient defining features</td>
+  <td class="insight-cell">Classical concepts are characteristic functions of sub-algebras defined by degree-1 feature intersections; \(\omega=0\) and \(\rho\) is flat (all features equally resonant)</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="science.html#classical-theory">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Rosch</td>
+  <td>Categories center on prototypes; typicality is graded and reaction-time-correlated</td>
+  <td class="insight-cell">The prototype is the \(\rho\)-centroid \(\pi_C=\sum_{a\in C}w(a)\cdot a\); typicality is cosine similarity to the centroid; asymmetric similarity is curvature \(\kappa\)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="science.html#rosch">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Theory-Theory</td>
+  <td>Concepts are embedded in intuitive theories; category coherence is causal, not featural</td>
+  <td class="insight-cell">Causal structure is the chain-rule network (T7); coherence of a category is the closure of its elements under the relevant sub-chain of T7 causal couplings</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="science.html#theory-theory">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Barsalou</td>
+  <td>Concepts are grounded in perceptual simulation; ad-hoc categories are task-assembled</td>
+  <td class="insight-cell">Perceptual symbols are the degree-0 generators; simulation is the reactivation of a stored composition \(a_1\circ\cdots\circ a_k\); ad-hoc categories are task-conditioned \(\sigma\)-projections (T3)</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T1</span></td>
+  <td class="link-cell"><a href="science.html#barsalou">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Fauconnier–Turner</td>
+  <td>Conceptual blending integrates structure from multiple input spaces into a blended space</td>
+  <td class="insight-cell">Blending is the Aufhebung (T3) of two input sub-algebras; the generic space is \(\sigma(I_1,I_2)\); the blend is \(\eta(I_1,I_2)\); selective projection is the cocycle \(\omega\) (T4)</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="science.html#fauconnier-turner">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Lakoff–Johnson</td>
+  <td>Abstract thought is structured by embodied conceptual metaphor; the body constrains cognition</td>
+  <td class="insight-cell">A conceptual metaphor is a \(\rho\)-preserving monoid map from a source sub-algebra to a target sub-algebra; its non-injectivity is the metaphorical entailment structure</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="science.html#lakoff-johnson">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Fillmore</td>
+  <td>Semantic frames provide the background structure for word meaning</td>
+  <td class="insight-cell">A frame is a sub-algebra \(F\subseteq\mathcal{I}\) closed under \(\circ\); word meaning is a \(\rho\)-projection onto \(F\); frame evocation is the restriction of resonance to \(F\)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="science.html#fillmore">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Gärdenfors</td>
+  <td>Concepts are convex regions in quality dimensions of a conceptual space</td>
+  <td class="insight-cell">The conceptual space is the metric space on \(V(\mathcal{I})\) induced by \(\rho\); convexity is the geometric condition that the \(\rho\)-metric ball around any prototype is contained in the concept region (T8)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="science.html#gardenfors">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Kahneman</td>
+  <td>Dual-process cognition: fast heuristic System 1 and slow deliberate System 2</td>
+  <td class="insight-cell">System 1 is the \(\sigma\)-projection (fast, preserving); System 2 is the full Aufhebung including \(\nu\) and \(\eta\) (deliberate, negating and elevating); heuristic bias is non-zero \(\kappa\) in System 1</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="science.html#kahneman">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Smolensky</td>
+  <td>Tensor product representations give connectionist networks combinatorial syntax</td>
+  <td class="insight-cell">\(\mathcal{I}\subseteq T(V)\) with \(a\circ b:=a\otimes b\) is an explicit model satisfying T1–T4; binding is \(\otimes\); unbinding is inner product with the role vector; \(\omega=0\) on pure tensors</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="science.html#smolensky">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     8. CONNECTIONISM & AI
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="connectionism">
+<h2>8. Connectionism &amp; AI <a class="section-anchor" href="#connectionism">#</a></h2>
+<p class="trad-narrative">
+Connectionism and AI provide the most quantitatively precise instantiations in the zoo: here, the eight
+algebra components have numerical implementations in specific architectures. Holographic reduced
+representations (Plate) instantiate a bandwidth-bounded approximate algebra where the cocycle \(\omega\)
+is the reconstruction noise. Word embeddings (word2vec, GloVe) instantiate the linear shadow of
+conjugation (T6): analogical arithmetic \(\mathbf{v}(\text{king})-\mathbf{v}(\text{man})+\mathbf{v}(\text{woman})\approx\mathbf{v}(\text{queen})\)
+is the first-order approximation to \(g\circ\mathit{king}\circ g^{-1}\). Transformers instantiate a
+learned non-symmetric \(\rho\) (the attention map, T2+T5) and in-context learning as conjugation by the
+prompt prefix (T6). LLMs are the farthest along the algebra's predictions: their emergent capabilities
+are the long-chain cocycle accumulation of T7.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Plate (HRR)</td>
+  <td>Circular convolution binds role/filler pairs in fixed-dimension vectors</td>
+  <td class="insight-cell">Circular convolution is \(\circ\); the cocycle \(\omega\) is the \(O(1/\sqrt{n})\) reconstruction noise; any bandwidth-bounded realization must accept a non-trivial cocycle (T4)</td>
+  <td class="thm-tags"><span class="thm-tag">T4</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="science.html#plate-hrr">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Word2Vec / GloVe</td>
+  <td>Word vectors encode semantic relations as linear differences; analogy as arithmetic</td>
+  <td class="insight-cell">Analogy arithmetic is the linear shadow of conjugation (T6); bias and polysemy collapse are non-zero curvature \(\kappa\) where the linearization fails (T5)</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="science.html#word2vec-glove">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Transformers</td>
+  <td>Attention is a learned bilinear map over token representations; enables in-context learning</td>
+  <td class="insight-cell">The attention map \(q_i^\top k_j/\sqrt{d}\) is a learned non-symmetric \(\rho\); in-context learning is conjugation by the prompt prefix \(g_\text{ctx}\in\mathcal{I}^\times\) (T6); curvature of attention is T5</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T5</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="science.html#transformers">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">LLMs</td>
+  <td>Large language models display emergent capabilities at scale not present in smaller models</td>
+  <td class="insight-cell">Emergent capabilities are long-chain cocycle accumulation (T7): scale increases chain length \(n\), and the no-collapse corollary guarantees non-trivial \(\eta\) above threshold \(n\)</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="science.html#llms">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     9. CULTURAL EVOLUTION
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="cultural">
+<h2>9. Cultural Evolution <a class="section-anchor" href="#cultural">#</a></h2>
+<p class="trad-narrative">
+Cultural evolution asks how ideas spread, transform, and accumulate across populations and generations.
+The algebraic representation maps this directly onto transmission chains. Each transmission step
+is an idea \(a_i\in\mathcal{I}\); fidelity is \(\rho(a_i\circ m,m)/\rho(m,m)\); the irreducible
+departure introduced by each step is the cocycle term \(\omega(a_i,m)\). Dawkins's meme is a
+replicator in this framework (T7). Sperber's cultural attractor is a \(\sigma\)-stable sub-monoid
+(T3). Henrich's ratchet is the monotone growth of cumulative \(\omega\) under long chains (T7).
+Boyd–Richerson's dual inheritance is two parallel sub-monoids with different transmission cocycles.
+Tomasello's shared intentionality is the emergence of a common sub-algebra from the Aufhebung of
+individual intention algebras (T3).
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Dawkins</td>
+  <td>Memes are cultural replicators subject to variation and selection</td>
+  <td class="insight-cell">Transmission of meme \(m\) through carrier \(a\) yields \(a\circ m\); replication fidelity is \(\rho(a\circ m,m)/\rho(m,m)\); variation is the cocycle \(\omega(a,m)\) (T7)</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="science.html#dawkins">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Sperber</td>
+  <td>Culture spreads by attraction to stable attractors, not by copying</td>
+  <td class="insight-cell">A cultural attractor is a \(\sigma\)-stable sub-monoid \(A\subseteq\mathcal{I}\) (T3); the attraction basin is \(\{a:\sigma^n(a,A)\in A\text{ for large }n\}\)</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="science.html#sperber">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Henrich</td>
+  <td>The cultural ratchet accumulates know-how across generations irreversibly</td>
+  <td class="insight-cell">Ratchet monotonicity: cumulative emergence \(\sum_i\omega(a_i,\cdot)\) is non-decreasing in chain length when \(\omega\geq 0\) (T7); the long-chain no-collapse corollary is the algebraic form of cumulative culture</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="science.html#henrich">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Boyd–Richerson</td>
+  <td>Dual inheritance: genetic and cultural evolution are two coupled channels</td>
+  <td class="insight-cell">Genetic \(\mathcal{I}_G\) and cultural \(\mathcal{I}_C\) are sub-monoids with distinct cocycles \(\omega_G,\omega_C\) (T1); conformist bias is orbit-collapse toward the \(\rho\)-maximum of the cultural population</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="science.html#boyd-richerson">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Mesoudi</td>
+  <td>Cultural evolution is Darwinian: variation, selection, and inheritance apply to culture</td>
+  <td class="insight-cell">Cultural variants are elements of the free sub-monoid on a generator set; selection is the resonance landscape maximization; inheritance is composition-chain transmission (T7)</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="science.html#mesoudi">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Blackmore</td>
+  <td>Memes compete for human brainspace; the "memetic drive" shapes cognitive architecture</td>
+  <td class="insight-cell">Meme fitness is the \(\rho\)-amplitude \(\rho(m,m)\) relative to competing memes; cognitive architecture is the structure of \(\mathcal{I}\) as constrained by the resonance landscape (T2)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="science.html#blackmore">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Tomasello</td>
+  <td>Shared intentionality is the uniquely human cognitive foundation for culture</td>
+  <td class="insight-cell">Shared intentionality is the emergence of a common sub-algebra \(\mathcal{I}_\text{shared}\) as the Aufhebung (T3) of individual intention algebras; joint attention is the \(\rho\)-symmetrization of individual resonances</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="science.html#tomasello">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     10. EMERGENCE
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="emergence">
+<h2>10. Emergence <a class="section-anchor" href="#emergence">#</a></h2>
+<p class="trad-narrative">
+The emergence literature asks when and how higher-level properties arise from lower-level components in
+ways not predictable by simple aggregation. In the algebra, this question has a precise answer: emergence
+is the non-vanishing of the cocycle \(\omega\). Weak emergence (Bedau) is \(\omega\neq 0\) but
+\([\omega]=0\in H^2\) — the emergent property is in principle deducible but computationally costly.
+Strong emergence (Chalmers, consciousness) is \([\omega]\neq 0\) — the property is not deducible even
+in principle. Mill's heteropathic laws are the case \(\omega(a,b)\neq 0\) for specific \(a,b\) in
+chemistry. Anderson's "More is Different" is the claim that the degree-\(n\) sub-algebra has
+structure not reducible to degree-\((n-1)\) components — a statement about the non-surjectivity of
+the degree map's section.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Mill</td>
+  <td>Heteropathic laws: chemical combinations produce effects irreducible to components</td>
+  <td class="insight-cell">Heteropathic combination is \(\omega(a,b)\neq 0\) for specific \(a,b\); homopathic (additive) combination is \(\omega=0\); T4 governs how heteropathic contributions compose</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="science.html#mill">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Broad</td>
+  <td>Emergent properties of wholes cannot be predicted from knowledge of their parts</td>
+  <td class="insight-cell">Unpredictability of emergent properties corresponds to \([\omega]\neq 0\in H^2(\mathcal{I}/{\sim},A)\) — the 2-cocycle class is the obstruction to predicting the whole from the parts</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="science.html#broad">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Anderson</td>
+  <td>"More is Different": each level of complexity has irreducible laws</td>
+  <td class="insight-cell">Each degree stratum \(\mathcal{I}_n\) has structure not recoverable from \(\mathcal{I}_{n-1}\) because the grading section does not split (T9); this non-splitting is Anderson's emergence at each scale</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="science.html#anderson">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Bedau</td>
+  <td>Weak emergence: derivable in principle but only by simulation, not by deduction</td>
+  <td class="insight-cell">Weak emergence is \(\omega\neq 0\) but \([\omega]=0\) (the cocycle is a coboundary — computable but non-trivial in complexity); strong emergence is \([\omega]\neq 0\) (genuinely new)</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="science.html#bedau">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Chalmers</td>
+  <td>Strong emergence: phenomenal consciousness is not logically supervenient on the physical</td>
+  <td class="insight-cell">Strong emergence is \([\omega]\neq 0\in H^2(\mathcal{I}_\text{phys},A)\) — the qualia cocycle is a genuine cohomology class not reducible to physical composition (T5)</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="science.html#chalmers">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Kim</td>
+  <td>Mental causation requires either reduction or epiphenomenalism; non-reductive physicalism is unstable</td>
+  <td class="insight-cell">Mental causation is non-trivial only when the emergent sub-algebra \(\mathcal{I}_M\) acts by non-trivial conjugation (T6) on \(\mathcal{I}_P\); epiphenomenalism is \(\omega(\mathcal{I}_M,\mathcal{I}_P)=0\)</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="science.html#kim">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Holland</td>
+  <td>Complex adaptive systems produce aggregate behavior through local interactions and feedback</td>
+  <td class="insight-cell">Agent interactions are compositions \(a_i\circ a_j\); aggregate behavior is the iterated-chain emergence (T7); feedback is the self-referential structure where aggregate ideas \(\eta\) re-enter as generators</td>
+  <td class="thm-tags"><span class="thm-tag">T5</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="science.html#holland">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     11. ECONOMICS & GAME THEORY
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="economics">
+<h2>11. Economics &amp; Game Theory <a class="section-anchor" href="#economics">#</a></h2>
+<p class="trad-narrative">
+Economics of ideas and game theory turn out to share a common algebraic substrate with the philosophy
+of language — and the algebra makes this precise. Arrow's non-rivalry is Theorem 1 (monoid closure:
+using \(a\) does not remove it). Romer's growth model is T9 (grading: the stock of ideas at time \(t\)
+is \(\mathcal{I}_{\leq n(t)}\), and non-rivalry is forced by the grading structure). Weitzman's
+recombinant growth is the free-monoid explosion in the number of degree-\(n\) elements. Game theory
+enters via the MeaningGames extension module: Nash equilibrium is a fixed point of best-response
+conjugation (T6+T8); Lewis conventions are equilibria of the structural-equivalence game; Schelling
+focal points are \(\rho\)-maxima of the salience landscape. Aumann's correlated equilibrium is a
+\(\rho\)-symmetric state over the joint algebra.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Arrow</td>
+  <td>Information is non-rival and partially non-excludable; markets under-supply it</td>
+  <td class="insight-cell">Non-rivalry is monoid closure (T1): \(a\in\mathcal{I}\) remains after any use. Non-excludability is T8 (structural equivalence): no transformation removes \(m\) from another speaker's algebra</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#arrow">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Hayek</td>
+  <td>The price system aggregates dispersed knowledge without central computation</td>
+  <td class="insight-cell">Local algebras \(\mathcal{I}_i\) aggregate via structural equivalence (T8); the convention equilibrium \(m^*\) is the "semantic price" — the T8 global element summarizing all local uses</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#hayek">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Romer</td>
+  <td>Non-rival ideas drive endogenous long-run growth; ideas are generators of inputs</td>
+  <td class="insight-cell">Idea stock \(\mathcal{I}_{\leq n(t)}\) grows by the grading (T9); non-rivalry is forced (elements remain in \(\mathcal{I}\) under \(\circ\)); growth rate is the rate of increase of degree-\((n+1)\) elements</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span><span class="thm-tag">T1</span></td>
+  <td class="link-cell"><a href="social.html#romer">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Weitzman</td>
+  <td>Recombinant growth: the number of possible combinations grows super-exponentially in idea stock</td>
+  <td class="insight-cell">Free monoid elements of degree \(n\) number \(|\mathcal{G}|^n\); the recombinant explosion is the super-exponential growth of \(|\mathcal{I}_n|\) — forced by T4 when \(\omega=0\) (clean recombination)</td>
+  <td class="thm-tags"><span class="thm-tag">T4</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="social.html#weitzman">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Jones</td>
+  <td>Semi-endogenous growth: growth rates depend on population size and research effort</td>
+  <td class="insight-cell">Research effort is the rate of extending composition chains; the algebra's chain-rule (T7) gives the per-step cocycle contribution; Jones's diminishing returns is \(\omega\) decreasing in chain length</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="social.html#jones">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Schumpeter</td>
+  <td>Creative destruction: innovation obsoletes existing technologies through disruptive combination</td>
+  <td class="insight-cell">Creative destruction is the Aufhebung (T3) of the new idea against the incumbent: \(\nu(\text{new},\text{old})\neq 0\) — the negating component is non-trivial — followed by \(\eta\) yielding the new industry</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="social.html#schumpeter">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Kahneman–Tversky</td>
+  <td>Prospect theory: value is reference-dependent; losses loom larger than gains</td>
+  <td class="insight-cell">The reference point is a conjugation context \(g_0\in\mathcal{I}^\times\); prospect value is the curvature-asymmetric resonance \(\rho(g_0\circ a\circ g_0^{-1},e)-\rho(e,g_0\circ a\circ g_0^{-1})\) (T5)</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="social.html#kahneman-tversky">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Ostrom</td>
+  <td>Commons can be self-governed by communities with the right institutional design</td>
+  <td class="insight-cell">Governing institutions are structural equivalences (T8) between individual use-algebras; Ostrom's design principles are conditions for the T8 equivalence to yield a stable aggregate convention</td>
+  <td class="thm-tags"><span class="thm-tag">T8</span><span class="thm-tag">T1</span></td>
+  <td class="link-cell"><a href="social.html#ostrom">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Von Neumann</td>
+  <td>Game theory formalizes rational strategic interaction; the minimax theorem secures equilibrium</td>
+  <td class="insight-cell">Strategies are elements of \(\mathcal{I}\); the minimax is the \(\rho\)-saddle point of the bilinear payoff form; the monoid structure (T1) ensures that mixed strategy compositions are well-defined</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="social.html#von-neumann">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Nash</td>
+  <td>Nash equilibrium: no player can improve by unilateral deviation</td>
+  <td class="insight-cell">Nash equilibrium is a fixed point of the best-response map, which is the conjugation action of each player's strategy on the joint algebra (T6); existence follows from T8 + fixed-point theorem</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#nash">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Schelling</td>
+  <td>Focal points: in coordination games, salient solutions are selected without communication</td>
+  <td class="insight-cell">The focal point is the \(\rho\)-maximum of the salience landscape — the idea \(a^*\) with highest resonance to all agents' background context (T2); uniqueness follows from non-degeneracy when salience peaks sharply</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#schelling">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Maynard Smith</td>
+  <td>Evolutionarily stable strategies resist invasion by any mutant strategy</td>
+  <td class="insight-cell">ESS is a structural-equivalence fixed point (T8): the ESS sub-algebra is closed under the invasion test composition \(a_\text{ESS}\circ a_\text{mut}\circ a_\text{ESS}^{-1}\) (T6)</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#maynard-smith">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Axelrod</td>
+  <td>In iterated Prisoner's Dilemma, Tit-for-Tat wins; cooperation can emerge without authority</td>
+  <td class="insight-cell">Each round is a composition step; Tit-for-Tat is the identity-preserving strategy: \(\sigma(a_\text{TFT},m)=m\) — it preserves the last move. The chain rule (T7) makes the full history available to each player</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="social.html#axelrod">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Aumann</td>
+  <td>Correlated equilibrium generalizes Nash; common knowledge of rationality implies it</td>
+  <td class="insight-cell">Correlated equilibrium is a \(\rho\)-symmetric distribution over the joint strategy algebra; common knowledge is the largest sub-algebra invariant under all players' information partitions (T8)</td>
+  <td class="thm-tags"><span class="thm-tag">T8</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="social.html#aumann">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Selten</td>
+  <td>Subgame perfect equilibrium: backward induction eliminates non-credible threats</td>
+  <td class="insight-cell">Subgame perfection is T9-graded equilibrium: at every degree stratum of the game tree, the equilibrium condition must hold; backward induction is the degree-decreasing sweep through the grading</td>
+  <td class="thm-tags"><span class="thm-tag">T9</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#selten">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<!-- ─────────────────────────────────────────────
+     12. SOCIOLOGY & LANGUAGE
+     ───────────────────────────────────────────── -->
+<div class="trad-section" id="sociology">
+<h2>12. Sociology &amp; Language <a class="section-anchor" href="#sociology">#</a></h2>
+<p class="trad-narrative">
+Sociology and the philosophy of language converge, in the algebra, on a single question: what is the
+relationship between an individual's idea-algebra and the collective one? Lovejoy's unit-ideas are
+the generators of a free sub-monoid (T1). Granovetter's weak ties are the non-unit elements that
+determine the aggregate (T7 silent-agent invariance). Bourdieu's habitus is conjugation by class
+position (T6). Latour's translation chains are composition chains with per-step cocycle costs (T7).
+Speech-act theory (Austin, Searle) treats illocutionary force as the Aufhebung (T3) applied to
+a locutionary idea: the act preserves propositional content (\(\sigma\)), negates prior felicity
+conditions (\(\nu\)), and produces new institutional facts (\(\eta\)). Kripkenstein's rule-following
+paradox is the non-vanishing of the curvature cocycle on the interpretation map.
+</p>
+<table class="zoo-table">
+<thead><tr>
+  <th>Thinker</th>
+  <th>Key claim</th>
+  <th class="insight-cell">Instantiation insight</th>
+  <th>Theorems</th>
+  <th>Full entry</th>
+</tr></thead>
+<tbody>
+<tr>
+  <td class="thinker-cell">Lovejoy</td>
+  <td>Intellectual history should track irreducible unit-ideas and their combinations</td>
+  <td class="insight-cell">Unit-ideas are degree-1 generators \(\mathcal{G}\subset\mathcal{I}\); doctrines are words in the free monoid; unique decomposition requires \(\omega^G=0\) on generators (T1, T9)</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="social.html#lovejoy">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Granovetter</td>
+  <td>Weak ties bridge cliques and dominate information diffusion</td>
+  <td class="insight-cell">Strong ties are silent insertions (\(a_i=e\)); the aggregate is determined entirely by non-unit (weak-tie) contributions — the silent-agent invariance theorem (T1, T7)</td>
+  <td class="thm-tags"><span class="thm-tag">T1</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="social.html#granovetter">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Bourdieu</td>
+  <td>Habitus is class-positional; taste is structured by embodied social position</td>
+  <td class="insight-cell">Class position \(g\in\mathcal{I}^\times\) acts by conjugation \(a\mapsto g\circ a\circ g^{-1}\) (T6); misrecognition is T6's invariance of structural invariants — class effects are invisible from within the orbit</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T3</span></td>
+  <td class="link-cell"><a href="social.html#bourdieu">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Latour</td>
+  <td>Facts are products of translation chains; every step transforms content while claiming to transmit it</td>
+  <td class="insight-cell">Each translation is \(a_i\in\mathcal{I}\); the chain-rule cost at step \(k\) is \(\omega(a_k,a_{k+1}\cdots a_n)\) (T7); the no-collapse corollary guarantees non-trivial output for long networks</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T4</span></td>
+  <td class="link-cell"><a href="social.html#latour">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Skinner (Q.)</td>
+  <td>Historical meaning is constituted by intellectual context; there are no perennial questions</td>
+  <td class="insight-cell">The intellectual context is \(g\in\mathcal{I}^\times\); meaning is \(g\circ a\circ g^{-1}\); T6 shows relative resonances are preserved across contexts but absolute values may shift — Skinner's contextual sensitivity</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="social.html#skinner-q">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Koselleck</td>
+  <td>Concepts have histories; the same word changes meaning as its temporal horizon shifts</td>
+  <td class="insight-cell">Concept history is the trajectory of an element through conjugation orbits as the context \(g_t\) changes over time (T6); semantic shifts are changes in the orbit representative</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T7</span></td>
+  <td class="link-cell"><a href="social.html#koselleck">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Mannheim</td>
+  <td>Knowledge is socially situated; different class positions produce different thought-styles</td>
+  <td class="insight-cell">Social situatedness is conjugation by position (T6); Mannheim's relational (not relativist) claim is that orbit representatives determine each other — structural equivalence (T8) holds across positions</td>
+  <td class="thm-tags"><span class="thm-tag">T6</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#mannheim">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Merton</td>
+  <td>Science progresses by cumulative priority claims; multiples show independent discovery</td>
+  <td class="insight-cell">Scientific discoveries are elements of the degree-\(n\) stratum; simultaneous discovery (multiples) is the emergence of the same element by different composition chains — predicted by T7's chain-rule degeneracy</td>
+  <td class="thm-tags"><span class="thm-tag">T7</span><span class="thm-tag">T9</span></td>
+  <td class="link-cell"><a href="social.html#merton">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Austin</td>
+  <td>Speech acts have illocutionary force; doing things with words changes the world</td>
+  <td class="insight-cell">Illocutionary force is the Aufhebung triple (T3): \(\sigma\) preserves propositional content, \(\nu\) cancels prior conditions, \(\eta\) produces the new institutional fact (promise, order, verdict)</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="social.html#austin">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Searle</td>
+  <td>Intentionality is the mark of the mental; social reality is constructed by collective intentionality</td>
+  <td class="insight-cell">Intentionality is non-degeneracy of \(\rho\) (T2); collective intentionality is the Aufhebung (T3) of individual intention algebras; institutional facts are the \(\eta\)-components of collective composition</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#searle">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Lewis</td>
+  <td>Conventions are regularities in behavior sustained by mutual knowledge of salience</td>
+  <td class="insight-cell">A convention is a Nash equilibrium (T8 fixed point) of the coordination game on the structural-equivalence space; salience is the \(\rho\)-maximum (T2) selecting among multiple equilibria</td>
+  <td class="thm-tags"><span class="thm-tag">T8</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="social.html#lewis">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Kripkenstein</td>
+  <td>Rule-following is paradoxical: no fact determines which rule is followed</td>
+  <td class="insight-cell">A rule is a parametric idea (monoid endomorphism); the skeptical indeterminacy is the non-vanishing curvature \(\kappa\) on the interpretation map (T5); community practice is the T7 chain that fixes interpretation</td>
+  <td class="thm-tags"><span class="thm-tag">T4</span><span class="thm-tag">T5</span></td>
+  <td class="link-cell"><a href="social.html#kripkenstein">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Davidson</td>
+  <td>Radical interpretation: meaning and belief are simultaneously attributed to maximize rationality</td>
+  <td class="insight-cell">Radical interpretation is the problem of finding a \(\rho\)-isomorphism (T8) between the interpreter's and the speaker's algebras simultaneously consistent with behavioral evidence; charity is the \(\rho\)-maximizing section</td>
+  <td class="thm-tags"><span class="thm-tag">T2</span><span class="thm-tag">T8</span></td>
+  <td class="link-cell"><a href="social.html#davidson">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Grice</td>
+  <td>Conversational implicature: speakers communicate more than they say via rational inference</td>
+  <td class="insight-cell">Implicature is the emergent \(\eta\)-component of the speech act composition: \(\eta(\text{what is said},\text{context})\) is what is implicated; the cooperative maxims are constraints on the form of \(\circ\) in conversation</td>
+  <td class="thm-tags"><span class="thm-tag">T3</span><span class="thm-tag">T2</span></td>
+  <td class="link-cell"><a href="social.html#grice">Entry →</a></td>
+</tr>
+<tr>
+  <td class="thinker-cell">Wittgenstein–Nash Bridge</td>
+  <td>Language games and Nash equilibria are the same phenomenon at different levels of description</td>
+  <td class="insight-cell">The language game is the meaning-game equilibrium of the MeaningGames extension: a Nash fixed point (T6+T8) on the structural-equivalence space that also satisfies the Wittgensteinian use-norm constraint</td>
+  <td class="thm-tags"><span class="thm-tag">T8</span><span class="thm-tag">T6</span></td>
+  <td class="link-cell"><a href="social.html#wittgenstein-nash">Entry →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<hr>
+
+<!-- ═══════════════════════════════════════════════════════
+     FURTHER READING
+     ═══════════════════════════════════════════════════════ -->
+<h2>Further Reading</h2>
+<p>
+The full entries — with formal instantiations, theorem derivations, status verdicts, and divergence
+notes — are in the three domain pages. The formal underpinnings (definitions of all eight components
+and the nine theorems) are in the <a href="../formalism/index.html">Formalism</a> section.
+Lean 4 proofs of T1–T9 and the extension modules are at <a href="../lean/index.html">Lean</a>.
+The <a href="../literature/index.html">Literature</a> page collects primary and secondary sources for
+each tradition. Chapter-by-chapter development is in the <a href="../chapters/index.html">Book</a>.
+</p>
+<div class="domain-tiles" style="margin-top:1.2em">
+  <a class="domain-tile" href="philosophy.html">
+    <h3>→ Philosophy</h3>
+    <p>Full entries for all six philosophical traditions (35 entries)</p>
+  </a>
+  <a class="domain-tile" href="science.html">
+    <h3>→ Science</h3>
+    <p>Full entries for cognitive science, AI, cultural evolution, emergence (30 entries)</p>
+  </a>
+  <a class="domain-tile" href="social.html">
+    <h3>→ Social</h3>
+    <p>Full entries for economics, game theory, sociology, language (30 entries)</p>
+  </a>
+</div>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Literature — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.lit-entry{margin:1.4em 0;padding:.7em 1em;border-left:3px solid var(--rule);background:var(--bg);}
+.lit-entry .bib-key{font-family:Inter,sans-serif;font-weight:700;font-size:1.0rem;color:var(--accent);}
+.lit-entry .bib-details{font-size:.92rem;color:var(--muted);margin-bottom:.35em;}
+.lit-entry .annotation{font-size:.97rem;}
+.thm{background:var(--accent-soft);border-left:3px solid var(--accent);padding:.6em 1em;margin:1em 0;}
+.section-intro{font-size:1.05rem;color:var(--muted);margin-bottom:1.2em;}
+.lean-link{font-family:Inter,sans-serif;font-size:.85rem;background:var(--code-bg);padding:.15em .5em;border-radius:3px;color:var(--accent);}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a class="active" href="index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content wide">
+<section class="hero">
+  <h1>Literature</h1>
+  <p class="lede">An annotated bibliography across five domains, tracing the ideas that became the algebra \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\).</p>
+</section>
+
+<p>Each section covers a domain from primary sources to contemporary formal work. Annotations explain the empirical claims, their formal status in Idea Theory, and (where applicable) which Lean module formalizes the connection.</p>
+
+<h2>Sections</h2>
+<ul>
+  <li><a href="#philosophy">1. Philosophy of Mind &amp; Ideas — Plato to Brandom</a></li>
+  <li><a href="#cogsci">2. Cognitive Science — Rosch through Transformers</a></li>
+  <li><a href="#cultural">3. Cultural Evolution &amp; Diffusion — Dawkins, Sperber, Henrich, Rogers</a></li>
+  <li><a href="#economics">4. Economics of Ideas — Arrow, Hayek, Romer, Weitzman, Jones</a></li>
+  <li><a href="#meaning">5. Meaning, Language &amp; Games — Wittgenstein, Lewis, Kripke, Nash, Schelling</a></li>
+</ul>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2 id="philosophy">1. Philosophy of Mind &amp; Ideas</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">The philosophical record on ideas spans twenty-five centuries and at least a dozen mutually incompatible idioms: Forms, universals, <em>species intelligibilis</em>, monads, schemata, sense, picture, family resemblance, rigid designator. The thesis of Chapter 8 is that all of these positions can be stated, compared, and adjudicated in a single language — the idea algebra \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\). The bibliography below is organized roughly chronologically and annotated for formal content.</p>
+
+<div class="lit-entry">
+  <div class="bib-key">Plato, <em>Republic</em> and <em>Parmenides</em> (c. 380–360 BCE)</div>
+  <div class="bib-details">Standard edition: Burnet OCT; trans. G.M.A. Grube (Hackett).</div>
+  <div class="annotation">The <em>Republic</em>'s theory of Forms introduces the idea that genuine knowledge is of eternal, self-identical patterns, participation in which explains predication. The <em>Parmenides</em> introduces the Third Man argument against Forms-as-separate, which Idea Theory reconstructs as the failure of the "Form ladder" \(F_0\supset F_1\supset\cdots\) to stabilize in algebras of unbounded \(\deg\) (Theorem 9). The <em>Sophist</em>'s <em>symplokē tōn eidōn</em> (blending of Forms) corresponds to the sub-monoid closure of \(\mathrm{Fix}_\circ(\mathcal{I})\). <strong>Formal status:</strong> Forms are conjugation fixed-points — contingent on the algebra's centre. <strong>Key theorem:</strong> Theorem 6 (Conjugation).</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Aristotle, <em>Metaphysics</em> Ζ and <em>Categories</em> (c. 350 BCE)</div>
+  <div class="bib-details">Trans. W.D. Ross (Oxford); trans. J.L. Ackrill (Clarendon).</div>
+  <div class="annotation">Book Ζ argues that universals are <em>in re</em>: the universal is what is preserved across predications. The four-fold scheme of the <em>Categories</em> sorts substances, quantities, qualities, and relations. Hylomorphism (form/matter) is the most durable Aristotelian contribution to the philosophy of mind and maps onto the Aufhebung decomposition with precision: form \(= \sigma\), matter \(= \nu\), substance \(= \eta\). Idea Theory shows that the contrast with Plato is algebraic — Plato locates universals in \(\mathrm{Fix}_\circ(\mathcal{I})\) (global fixed points), Aristotle locates them in \(\sigma\)-stability (local property of each composition). They coincide on commutative sub-algebras and diverge everywhere else. <strong>Formal status:</strong> True as a corollary of Theorems 3 and 6.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Aquinas, <em>Summa Theologiae</em> I, q. 84–85 (1265–1274)</div>
+  <div class="bib-details">Trans. Fathers of the English Dominican Province (Benziger, 1948).</div>
+  <div class="annotation">Aquinas distinguishes the <em>intellectus agens</em> (agent intellect, which abstracts the intelligible species from sensory material) from the <em>intellectus possibilis</em> (possible intellect, which receives the species). Idea Theory identifies the controversy over whether the agent intellect is universal (Averroes) or individual (Aquinas) with the question whether the graded section \(s_n:\mathcal{I}/{\sim}\to\mathcal{I}\) is globally or locally defined. The cohomological obstruction \([\omega]\in H^2(G,\ker\deg)\) determines whether a multiplicative section exists at all. Augustine's illumination doctrine is necessary exactly when \([\omega]\neq 0\). <strong>Formal status:</strong> Graded sections are contingent; their obstruction is the cohomology class of \(\omega\) (Theorem 4).</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Descartes, R., <em>Meditations on First Philosophy</em> (1641)</div>
+  <div class="bib-details">Trans. J. Cottingham (Cambridge).</div>
+  <div class="annotation">Meditation III introduces the tripartition of ideas (innate, adventitious, factitious) and the argument from formal reality — that the idea of an infinite God cannot have been composed by a finite mind. Idea Theory reads the <em>cogito</em> as Theorem 1 (\(a = e \circ a\) for all \(a\)) and the tripartition as the grading \(\deg\). The clarity-and-distinctness criterion translates to spectral isolation in the resonance pairing. Descartes' inference from the idea of God's infinity to God's existence is reconstructed as a degree argument: the idea cannot sit at any finite degree, so it must be innate (degree 0). Whether this is a valid inference in the algebra depends on whether degree-0 ideas include the idea of infinite perfection. <strong>Key theorem:</strong> Theorem 9 (Grading).</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Hume, D., <em>A Treatise of Human Nature</em>, Book I (1739)</div>
+  <div class="bib-details">Ed. L.A. Selby-Bigge, rev. P.H. Nidditch (Oxford, 1978).</div>
+  <div class="annotation">Hume's associationism (resemblance, contiguity, causation) and the impression/idea copy principle are the most direct precursors of the resonance pairing. The famous missing shade of blue — an idea not derived from any impression — is reconstructed as a coboundary that is not exact: it lies in \(\mathcal{I}_0\) but is not in the image of the copy map \(\pi:\mathcal{I}_1\to\mathcal{I}_0\). This is forced whenever \(H^1(\circ,\mathrm{im}\,\pi)\neq 0\). Hume's problem of induction is the failure of the symmetric part of \(\rho\) to extend uniquely from a finite sample, measured by the cohomology class of the curvature \(\kappa\). The psychological solution (habit and custom) is the default trivialization \(\kappa=0\). <strong>Key theorems:</strong> Theorems 2 and 5.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Kant, I., <em>Critique of Pure Reason</em> (A/1781, B/1787)</div>
+  <div class="bib-details">Trans. N. Kemp Smith (Macmillan, 1929; rpt. Palgrave 2007).</div>
+  <div class="annotation">The <em>Critique</em>'s architecture — forms of intuition, categories, schematism, transcendental unity of apperception, regulative Ideas — maps onto the algebra with unusual fidelity. Apperception is the identity element \(e\) (Theorem 1). Categories are \(\omega\)-twisted operators on the algebra. The schematism is the normalization that makes \(\omega_C\) explicit. Regulative Ideas are non-trivial \(H^1\)-classes — prescriptions that organize the algebra but are not themselves elements of it. The synthetic <em>a priori</em> is the structurally determined cocycle class: equations of the form \(v(a\circ b)=v(a)+v(b)+\omega(a,b)\) hold with determinate \(\omega\) fixed by the structure. The antinomies are the "transcendental illusion" of reading a cohomology class as if it were a chain element. <strong>Key theorem:</strong> Regulative-ideas lemma (Ch. 8, §Kant).</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Hegel, G.W.F., <em>Phenomenology of Spirit</em> (1807) and <em>Science of Logic</em> (1812–1816)</div>
+  <div class="bib-details">Trans. A.V. Miller (Oxford, 1977) and trans. G. di Giovanni (Cambridge, 2010).</div>
+  <div class="annotation">Hegel's Aufhebung — simultaneous preservation, negation, and elevation of a content — is the operation that names the central decomposition of Idea Theory. Theorem 3 is the Aufhebung decomposition theorem, named in direct homage. The content of the homage: any reasonable algebra of ideas <em>must</em> support such a decomposition or fail to support non-trivial composition at all. The dialectic is not a quirk of <em>Geist</em>; it is an algebraic identity: \(\sigma + \nu + \eta = \circ\). Hegel's "cunning of reason" is the asymptotic claim that the \(\eta\)-component grows over iterated composition while \(\nu\) stays bounded — an empirical property of the algebra, not a metaphysical guarantee. <strong>Formal status:</strong> True as Theorem 3 in every idea algebra — the only zoo entry that is a theorem without qualification.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Frege, G., "Über Sinn und Bedeutung" (1892)</div>
+  <div class="bib-details">Trans. M. Black, in <em>Translations from the Philosophical Writings of Gottlob Frege</em>, ed. Geach &amp; Black (Blackwell, 1952).</div>
+  <div class="annotation">Frege's distinction between sense (mode of presentation) and reference (object denoted) and his principle of compositionality are the immediate algebraic precursors of Idea Theory's formalism. The compositionality principle is \(v(a\circ b)=v(a)+v(b)+\omega(a,b)\); strict compositionality (\(\omega=0\)) is contingent. The "Hesperus/Phosphorus" puzzle is the non-vanishing of \(\omega\) on this pair, measuring precisely the information added by the identity statement. The "third realm" of senses is the fibre product \(\mathcal{I}/{\sim}\times A\). Frege's resistance to psychologism is the demand that \(\mathcal{I}/{\sim}\) be intersubjectively shareable. <strong>Key lemma:</strong> Compositionality-is-exact-mod-\(\omega\) lemma (Ch. 8, §Frege).</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Wittgenstein, L., <em>Tractatus Logico-Philosophicus</em> (1922) and <em>Philosophical Investigations</em> (1953)</div>
+  <div class="bib-details">Trans. D.F. Pears &amp; B.F. McGuinness (Routledge, 1961); trans. G.E.M. Anscombe et al. (Blackwell, 2009).</div>
+  <div class="annotation">The two Wittgenstein books constitute the sharpest contrast available: the <em>Tractatus</em> posits a \(\rho\)-isomorphism between world and language (the picture theory, contingent on Theorem 8), while the <em>Investigations</em> replaces essence with family resemblance (a threshold equivalence on the \(\sigma\)-component), attacks private language (impossible by Theorem 2's non-degeneracy), and raises the rule-following problem (indeterminacy of parametric extension, measured by \(\kappa\)). Both the picture theory and its rejection are well-posed structural conditions. The mystical of the <em>Tractatus</em> (\(\ker\pi\)) and the "forms of life" of the <em>Investigations</em> (\(\mathcal{I}\) as socially realized) are formally distinct hypotheses about the same algebra. <strong>Key lemmas:</strong> Family-resemblance partition (Ch. 8, §Wittgenstein II); Sections-and-indeterminacy lemma (Ch. 8, §Quine).</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Kripke, S.A., <em>Naming and Necessity</em> (1980)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Rigid designators — terms that pick out the same object in every possible world — are exactly Plato's Forms: elements of \(\mathrm{Fix}_\circ(\mathcal{I})\) invariant under all conjugations (Theorem 6). The <em>a posteriori</em> necessity of "Hesperus is Phosphorus" is conjugation-invariance (necessity) together with the empirical labor of detecting that two presentations name the same fixed point (a posteriori character). Kripkean essentialism about natural kinds is the empirical claim that natural-kind terms are rigid in this conjugation-invariant sense. The convergence of Kripke's modal apparatus and Plato's metaphysical one on the same algebraic locus is a structural observation, not a historical thesis. <strong>Key theorem:</strong> Theorem 6 (Conjugation); §Kripke in Ch. 8.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Brandom, R., <em>Making It Explicit</em> (1994)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Brandom's inferential semantics identifies the content of a concept with its inferential commitments and entitlements. These translate directly to the asymmetric resonance pairing: \(K(a)=\{b:\rho(a,b)>0\}\) (commitments) and \(E(a)=\{b:\rho(b,a)>0\}\) (entitlements), with the asymmetry being the curvature \(\kappa\). The injectivity of \(a\mapsto(K(a),E(a))\) modulo \(\ker\rho\) is Theorem 2. Brandom's score-keeping model of discursive practice is a groupoid action on \(\mathcal{I}\), and the well-foundedness of score-keeping — global reconciliation of scores — is equivalent to \([\omega]=0\). Idea Theory underwrites inferentialism structurally while clarifying why global score-reconciliation cannot be guaranteed. <strong>Key theorem:</strong> Theorem 5 (Curvature) for the antisymmetric inference asymmetry.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Putnam, H., "The Meaning of 'Meaning'" (1975)</div>
+  <div class="bib-details">In <em>Mind, Language, and Reality: Philosophical Papers</em>, vol. 2 (Cambridge).</div>
+  <div class="annotation">Putnam's Twin Earth argument that meanings "ain't in the head" is reconstructed as the non-vanishing of the environment-idea cocycle: \(\omega(g_E,a)\neq\omega(g_{E'},a)\) for environments \(E\neq E'\). The structural data is invariant under conjugation by environments (Theorem 6), but the value of a non-trivial valuation shifts by a coboundary term. Putnam's later "internal realism" is a gauge choice — fixing a standard environment and reading \(\omega\) relative to it. The various realisms of late twentieth-century philosophy of science are competing gauge fixings; the gauge-invariant content is the fixed-point set of §Plato. <strong>Key theorem:</strong> Theorem 6 (Conjugation).</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2 id="cogsci">2. Cognitive Science of Concepts</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">The cognitive science of concepts is a fractious discipline: definitional, prototype, theory-theoretic, exemplar, perceptual-symbolic, language-of-thought, embodied, conceptual-space, distributed, tensor-binding, and transformer approaches have been treated as competitors. Chapter 9 shows they are complements, each capturing a sub-structure of the full algebra. The bibliography covers the major positions and their formal status.</p>
+
+<div class="lit-entry">
+  <div class="bib-key">Rosch, E., "Natural categories" (1973); Rosch &amp; Mervis, "Family resemblances" (1975)</div>
+  <div class="bib-details"><em>Cognitive Psychology</em> 4:328–350; <em>Cognitive Psychology</em> 7:573–605.</div>
+  <div class="annotation">The two papers introducing prototype theory and the basic-level effect. Rosch demonstrated graded typicality (robins more typical than penguins as birds), basic-level effects (chair more accessible than furniture or Windsor chair), and family resemblance (no single feature common to all games). In the algebra: the prototype is the \(\rho\)-centroid \(\pi_C:=\sum_{a\in C}w(a)\cdot a\in V(\mathcal{I})\), and typicality is \(\tau_C(a)=\rho(a,\pi_C)/\sqrt{\rho(\pi_C,\pi_C)}\). Cor. 9.1 shows \(\pi_C\) is the unique \(C\)-maximum of the linear functional \(\tau_C\) and is conjugation-invariant (Theorem 6). The key empirical prediction of the algebra that goes beyond Rosch: asymmetric typicality ("North Korea is similar to China" more than vice versa) is the curvature \(\kappa(a,\pi_C)\neq 0\), predicted to correlate with reaction-time asymmetries in categorization. <span class="lean-link">Lean: IdeaTheory.Cogsci.Prototype</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Murphy, G.L. &amp; Medin, D.L., "The role of theories in conceptual coherence" (1985)</div>
+  <div class="bib-details"><em>Psychological Review</em> 92:289–316.</div>
+  <div class="annotation">Theory-theory's central claim: the "coherence" of a concept — which features hang together, which novel inferences are licensed — cannot be explained by similarity to a prototype. Concepts cohere because they are embedded in tacit domain theories. In the algebra, a domain theory \(T\) is a sub-monoid \(\mathcal{I}_T\) equipped with elevation axioms \(\Phi_T\); the theory is coherent on \(a,b\in\mathcal{I}_T\) when \(\eta_T(a,b)\in\langle\Phi_T\rangle_\circ\). Cross-domain compositions generically lift the elevation out of all sub-monoids — the felt incoherence of category mistakes. Each domain theory is itself an idea sub-algebra (Cor. 9.2 from Theorems 1 and 8). The debate between prototype and theory-theory is dissolved: both are projections onto different structural aspects of the same algebra.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Barsalou, L.W., "Ad hoc categories" (1983); "Perceptual symbol systems" (1999)</div>
+  <div class="bib-details"><em>Memory &amp; Cognition</em> 11:211–227; <em>Behavioral and Brain Sciences</em> 22:577–660.</div>
+  <div class="annotation">Barsalou's 1983 paper showed that people fluently form ad-hoc categories such as "things to take from a burning house" — categories with no stable mental representation but constructed on the fly. His 1999 paper argued more broadly that all concepts are perceptual simulators. In the algebra: ad-hoc categories are defined by a goal context \(g\in\mathcal{I}^\times\) as equivalence classes under \(\sim_g\) (the resonance with \(g\)-conjugation), well-defined by Cor. 9.3 (Theorem 6). Perceptual symbols are generators of a sensorimotor sub-monoid \(\mathcal{I}_P\). Both phenomena — the modality-specific simulator and the on-the-fly category — are consequences of Theorem 6, not additions. <span class="lean-link">Lean: IdeaTheory.Cogsci.AdHoc</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Fodor, J., <em>The Language of Thought</em> (1975)</div>
+  <div class="bib-details">Harvester Press (1976).</div>
+  <div class="annotation">Fodor's hypothesis that thought requires a combinatorial, syntactically structured medium — a Language of Thought (LOT) — is the atomistic limit of the algebra. LOT atoms are generators of a free sub-monoid: \(\mathsf{FreeMon}(G)\cong\langle G\rangle_\circ\), which requires \(\omega=0\) on atomic compositions (Cor. 9.4). This is the limit case where all conceptual emergence is syntactic and none is semantic: \(\eta=0\) at the level of atoms. The algebra vindicates LOT on its own terms while exposing the cost: zero cocycle at the atomic level prohibits semantic emergence in lexical composition. Post-Fodorian complaints about polysemy, lexical creativity, and metaphor are empirical demands that \(\eta\neq 0\). The boundary between LOT-like and non-LOT-like sub-monoids is an empirical question, not a principled objection to either view.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Fodor, J. &amp; Pylyshyn, Z., "Connectionism and cognitive architecture" (1988)</div>
+  <div class="bib-details"><em>Cognition</em> 28:3–71.</div>
+  <div class="annotation">The systematicity argument: any agent that can think "John loves Mary" can also think "Mary loves John." This was argued to refute connectionist architectures that cannot guarantee this generalization. In the algebra, systematicity is Cor. 9.5: the bilinear extension of \(\rho\) (Theorem 2) makes every argument-permutation representable in the same space. Any connectionist system whose representations inhabit a vector space with a bilinear binding operation (tensor product, circular convolution, multi-head attention) satisfies systematicity automatically. Fodor and Pylyshyn were right about the constraint and wrong about the architecture — the constraint is a theorem of the algebra, not a prerogative of classical symbolic processing. <span class="lean-link">Lean: IdeaTheory.Cogsci.Systematicity</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Fauconnier, G. &amp; Turner, M., <em>The Way We Think</em> (2002)</div>
+  <div class="bib-details">Basic Books.</div>
+  <div class="annotation">Conceptual blending theory: human imagination constructs blended mental spaces with emergent structure not present in either input. A "land yacht" inherits yacht luxury and land-vehicle function while generating new inferences (no sails). In the algebra, the blend is exactly the elevation component: \(\mathrm{Blend}(a,b)=\eta(a,b)\); the generic space is \(\sigma(a,b)\); clashes are \(\nu(a,b)\). Theorem 3 is the existence and uniqueness theorem for blends (modulo \(\ker\rho\)). The cocycle \(\omega(a,b)\) measures the emergent content. Cor. 9.6 shows iterated blends form a 2-cocycle chain — disciplining the proliferation problem. A predicted experimental signature: processing time for a novel blend should track \(|\omega(a,b)|\), not surface lexical novelty.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Lakoff, G. &amp; Johnson, M., <em>Metaphors We Live By</em> (1980)</div>
+  <div class="bib-details">University of Chicago Press.</div>
+  <div class="annotation">Conceptual metaphor theory: abstract concepts are structured by systematic mappings from concrete source domains. "Argument is War" licenses inferences (attacks, defenses, winning/losing) that are productive in the target domain. In the algebra, a conceptual metaphor is a partial graded monoid morphism \(M:S\rightharpoonup T\) satisfying \(\rho_T(M(a),M(b))=\lambda_M\rho_S(a,b)\). Image schemas are the \(\sigma\)-invariants of \(M\). The one-directionality of metaphor (one says "Her argument collapsed" but not "Her building was refuted") is the non-symmetry of \(\rho\) (curvature \(\kappa\)) blocking the construction of a two-sided morphism. The discipline for qualifying a candidate mapping as a genuine metaphor: it must be a partial morphism preserving \(\rho\) up to scale. <span class="lean-link">Lean: IdeaTheory.Cogsci.Metaphor</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Gärdenfors, P., <em>Conceptual Spaces</em> (2000)</div>
+  <div class="bib-details">MIT Press.</div>
+  <div class="annotation">Gärdenfors proposed that concepts are convex regions in multidimensional quality spaces anchored in perception, with prototypes as centroids and similarity as inverse Euclidean distance. The algebra extends this: pass to \(V(\mathcal{I})\), define quality dimensions as \(\rho\)-orthogonal subspaces, and the positive-definite restriction of \(\rho|_{V_n}\) gives a genuine metric \(d_\rho(x,y)=\sqrt{\rho(x-y,x-y)}\). Gärdenfors's geometry is the special case of symmetric, positive-definite \(\rho\). The algebra extends to the non-symmetric regime (curvature \(\kappa\)) and the non-positive regime, capturing moral, social, and narrative concepts where asymmetric similarity is the rule. Voronoi tessellations (generating convex categories around prototypes) are equivariant under conjugation (Cor. 9.7). <span class="lean-link">Lean: IdeaTheory.Cogsci.ConceptualSpaces</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Smolensky, P., "Tensor product variable binding" (1990)</div>
+  <div class="bib-details"><em>Artificial Intelligence</em> 46:159–216.</div>
+  <div class="annotation">Tensor product representations give connectionist networks a combinatorial syntax: \(a\circ b:=a\otimes b\), \(\rho(a,b):=\langle a,b\rangle_{T(V)}\). The tensor algebra \(T(V)\) is an explicit model of the idea algebra (Cor. 9.8) with \(\omega=0\) on pure tensors — the zero-cocycle, exact-representation limit. Cost: exponential growth of dimension with compositional depth. The Plate HRR is the bandwidth-bounded compromise. The Smolensky–Plate tradeoff delineates a tradeoff curve between rank and noise: any realization of the idea algebra must choose where on this plane it sits, and biological cognition appears to choose adaptively.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Plate, T., "Holographic reduced representations" (1995)</div>
+  <div class="bib-details"><em>IEEE Transactions on Neural Networks</em> 6:623–641.</div>
+  <div class="annotation">HRRs address the dimensionality explosion of tensor products by binding via circular convolution \(\circledast\) on \(\mathbb{R}^n\) for fixed \(n\). For random unit-norm vectors: \(\mathbb{E}[\rho(a\circledast b,c\circledast d)]=\rho(a,c)\rho(b,d)+O(1/n)\). The cocycle \(\omega\) is the residual approximation error (Cor. 9.9). Any bandwidth-bounded realization of the idea algebra must accept a non-trivial cocycle; the \(1/\sqrt{n}\) noise floor of circular convolution is the price of compression. The algebra predicts that improvements in working memory should appear as increases in effective \(n\) rather than as algorithmic improvements. <span class="lean-link">Lean: IdeaTheory.Cogsci.HRR</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Mikolov, T. et al., "Distributed representations of words" (2013); Pennington et al., "GloVe" (2014)</div>
+  <div class="bib-details"><em>NIPS 2013</em>; <em>EMNLP 2014</em>.</div>
+  <div class="annotation">Word vectors from large corpora encode semantic relations as linear differences: \(\mathbf{v}(\mathit{king})-\mathbf{v}(\mathit{man})+\mathbf{v}(\mathit{woman})\approx\mathbf{v}(\mathit{queen})\). In the algebra, cosine similarity is the symmetric part of \(\rho\); analogy is the linear shadow of conjugation (Theorem 6): for the gender invertible idea \(g\), \(\mathbf{v}(g\circ\mathit{king}\circ g^{-1})\approx\mathbf{v}(\mathit{queen})\) projected onto \(V_W\). Failures of analogy (bias, polysemy) are predicted by the non-symmetry of \(\rho\) (curvature \(\kappa\)). The "king–queen miracle" is not a miracle but Theorem 6 in a vocabulary whose relational structure has been faithfully captured by distributional learning. <span class="lean-link">Lean: IdeaTheory.Cogsci.WordEmbeddings</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Vaswani, A. et al., "Attention is all you need" (2017); Brown, T. et al., "GPT-3" (2020)</div>
+  <div class="bib-details"><em>NIPS 2017</em>; <em>NIPS 2020</em>.</div>
+  <div class="annotation">The Transformer architecture achieves state-of-the-art performance on nearly every NLP benchmark through multi-head attention. The attention map \(\rho_\mathrm{att}(x_i,x_j)=q_i^\top k_j/\sqrt{d}\) is a learned asymmetric bilinear form — a non-symmetric \(\rho\) in the sense of Theorem 2. The antisymmetric part is a curvature \(\kappa_\mathrm{att}\) (Theorem 5). In-context learning is conjugation by the prompt prefix (Theorem 6). The value projection acts as the elevation operator \(\eta\); the residual stream realizes \(\circ\); multi-head structure implements parallel restriction to multiple sub-monoids; layer normalization rescales \(\rho\). Each correspondence is structural, not metaphorical. <strong>Empirical implication:</strong> The success of transformers across linguistic and non-linguistic domains is evidence that the idea algebra is the natural target abstraction for any cognitive architecture that must compose high-dimensional structured representations under bandwidth and latency constraints. <span class="lean-link">Lean: IdeaTheory.Cogsci.Transformers</span></div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2 id="cultural">3. Cultural Evolution &amp; Diffusion</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">Cultural evolution studies how beliefs, practices, and artefacts spread and change across populations. The relevant formal structures — transmission chains, cumulative emergence, attractor basins — map directly onto Idea Theory's Theorems 6, 7, and the long-chain results of Chapter 6. The Lean module <code>IdeaTheory.Extensions.Diffusion</code> formalizes the core results.</p>
+
+<div class="lit-entry">
+  <div class="bib-key">Dawkins, R., <em>The Selfish Gene</em>, Ch. 11: "Memes: The New Replicators" (1976)</div>
+  <div class="bib-details">Oxford University Press.</div>
+  <div class="annotation">Dawkins coined "meme" for the cultural analogue of the gene: a unit of imitation and transmission subject to variation and selection. In the algebra, a meme is an element \(m\in\mathcal{I}\); transmission through carrier \(a\) yields \(a\circ m\); fidelity is \(\rho(a\circ m,m)/\rho(m,m)\); variation is the cocycle \(\omega(a,m)\). Darwinian dynamics on the resonance landscape are extra structure. Dawkins's proposal has been criticized for the lack of a precise mechanism; the algebra provides the mechanism (composition with a carrier, with the cocycle recording variation) while leaving the dynamics empirical. <span class="lean-link">Lean: IdeaTheory.Extensions.Diffusion</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Sperber, D., <em>Explaining Culture: A Naturalistic Approach</em> (1996)</div>
+  <div class="bib-details">Blackwell.</div>
+  <div class="annotation">Sperber argues that cultural representations are not copied but reconstructed from triggers, and that the successful representations are "cultural attractors" — stable states to which reconstruction converges independent of the starting representation. The epidemiology of representations is better modeled by attraction basins than by copying fidelity. In the algebra, an attractor is a \(\sigma\)-stable sub-monoid: for any \(a\in\mathcal{I}\), the iterated \(\sigma\)-projection toward the sub-monoid converges. This is the formal restatement of Sperber's claims, and it is well-defined by Theorem 3. The convergence of the formal apparatus with Sperber's verbal description is unusually close. <strong>Relation to Lean:</strong> The attractor construction ties to the fixed-point theory of \(\sigma\)-contractions in <code>IdeaTheory.Extensions.Diffusion</code>.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Boyd, R. &amp; Richerson, P.J., <em>Culture and the Evolutionary Process</em> (1985)</div>
+  <div class="bib-details">University of Chicago Press.</div>
+  <div class="annotation">Boyd and Richerson developed the first systematic mathematical theory of cultural transmission, showing that biased transmission (content bias, model bias, conformist bias) shapes which cultural variants spread. In the algebra, genetic and cultural ideas occupy different sub-monoids \(\mathcal{I}_G,\mathcal{I}_C\) with different transmission cocycles. Conformist bias is orbit-collapse in the resonance landscape: the population is pulled toward the \(\rho\)-maximum of the existing cultural distribution. The Boyd–Richerson algebra of variants (Ch. 7) identifies variants as elements of the free sub-monoid on a generator set. Chapter 7's zoo entry formalizes the variant algebra explicitly. <span class="lean-link">Lean: IdeaTheory.Extensions.Diffusion</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Henrich, J., <em>The Secret of Our Success</em> (2015)</div>
+  <div class="bib-details">Princeton University Press.</div>
+  <div class="annotation">Henrich argues that the human cognitive niche is primarily cultural: we survive through the cumulative, ratcheted build-up of collectively held know-how that no individual could have invented. The cultural ratchet is irreversible and positively monotone: each generation begins with a higher baseline than the last. In the algebra, the ratchet's monotonicity is the long-chain inequality (Ch. 6, Prop. cum-mon): cumulative emergence is non-decreasing in chain extension when \(\omega\geq 0\). The no-collapse corollary is the algebraic form of Henrich's observation that chains of social learners exceed individual reasoning capacity. The formalism predicts that the slope of cumulative emergence is \((n-1)L\) to leading order for per-step cocycle floor \(L\) — sharper than the verbal "ratchet." <span class="lean-link">Lean: IdeaTheory.Extensions.Diffusion</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Rogers, E., <em>Diffusion of Innovations</em>, 5th ed. (2003)</div>
+  <div class="bib-details">Free Press. (1st ed. 1962.)</div>
+  <div class="annotation">Rogers's classical account of innovation diffusion: a five-stage adoption decision process (awareness, persuasion, decision, implementation, confirmation) with an S-curve aggregate adoption curve. Late adopters face higher cumulative friction than early adopters. In the algebra, each adoption step is an idea \(a_i\); the cumulative resistance encountered at step \(k\) is the local cocycle term \(\omega(a_k,(a_{k+1},\ldots,a_n))\) from Theorem 7. The S-curve plateau corresponds to the long-chain theorem: if per-step resistance is bounded below by \(L>0\), total resistance grows linearly in chain length. The bias toward early adopters is the position-dependence of \(\omega\) on the depth of the suffix. The no-collapse corollary says that long adoption chains produce social structure that does not vanish on discontinuation of the original innovation. <span class="lean-link">Lean: IdeaTheory.Extensions.Diffusion</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Granovetter, M., "The Strength of Weak Ties" (1973, 1983)</div>
+  <div class="bib-details"><em>American Journal of Sociology</em> 78:1360–1380; <em>Sociological Theory</em> 1:201–233.</div>
+  <div class="annotation">Granovetter's empirical finding that job seekers more often find employment through weak ties (acquaintances) than strong ones (close friends). The algebraic interpretation: a strong tie is a silent insertion (\(a_i=e\), contributing nothing to the aggregate); a weak tie is a non-trivial insertion (\(a_i\neq e\)). By the silent-agent invariance theorem (Ch. 2): \(\mathrm{aggregate}(\mathbf{x})=\mathrm{aggregate}(\mathbf{x}_\text{weak})\). The prediction unique to the formalism: the bridging-vs-hub asymmetry is quantized (silent contributions add exactly nothing) rather than merely small, in any model that takes silence as an exact identity. <span class="lean-link">Lean: IdeaTheory.Extensions.Diffusion</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Latour, B., <em>Reassembling the Social</em> (2005)</div>
+  <div class="bib-details">Oxford University Press.</div>
+  <div class="annotation">Actor-Network Theory (ANT) analyzes scientific and social facts as products of heterogeneous translation chains. Every step — measurement, inscription, publication, institutional uptake — transforms content while purporting to transmit it. In the algebra, "translation chain" and "transmission chain" denote the same object. The cost of translation at step \(k\) is \(\omega(a_k,(a_{k+1},\ldots,a_n))\). Non-additivity of \(v\) along the chain is Latour's "the final fact is not the sum of its mediators." The no-collapse corollary: sufficiently long networks always produce non-trivial output from trivial inputs — society is constituted, not given. <strong>Lean relation:</strong> <code>IdeaTheory.Extensions.Diffusion</code> chain-rule and long-chain results cover ANT's translation algebra.</div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2 id="economics">4. Economics of Ideas</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">The economics of ideas — from Arrow's paradox to endogenous growth theory — is formally continuous with Idea Theory's grading and cocycle structure. Non-rivalry is the closure of \(\mathcal{I}\) under \(\circ\); non-excludability is a structural-equivalence consequence of Theorem 8; recombinant growth is the combinatorial explosion of a free graded monoid. The Lean module <code>IdeaTheory.Extensions.RecombinantGrowth</code> formalizes the key economic theorems.</p>
+
+<div class="lit-entry">
+  <div class="bib-key">Arrow, K.J., "Economic welfare and the allocation of resources for invention" (1962)</div>
+  <div class="bib-details">In <em>The Rate and Direction of Inventive Activity</em>, ed. R.R. Nelson. Princeton.</div>
+  <div class="annotation">Arrow identified the fundamental market failure for information goods: non-rivalry (one person's use does not diminish another's) and partial non-excludability (disclosure precludes prevention of further circulation). The formal corollary (Ch. 10): elements of \(M\) are non-rival (closure of \(\mathcal{I}\) under \(\circ\), Theorem 1) and non-excludable (structural equivalence of local algebras, Theorem 8), so their provision exhibits public-good under-supply. Arrow's 1962 insight — that the same structural property that makes ideas hard to monetize is what makes them inexhaustibly productive — is the Romer growth theorem stated two decades early. <strong>Formal implication:</strong> Policy instruments for intellectual property (patents, prizes, subsidies) are structurally identical to those for linguistic conventions (style guides, dictionaries, standards bodies). <span class="lean-link">Lean: IdeaTheory.Extensions.RecombinantGrowth</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Hayek, F.A., "The use of knowledge in society" (1945)</div>
+  <div class="bib-details"><em>American Economic Review</em> 35:519–530.</div>
+  <div class="annotation">Hayek argued that the economically relevant data is distributed across millions of agents, no one of whom commands the whole, and that the price system aggregates this information into a common signal without central authority. In the meaning-game formalism (Ch. 10): each speaker has a local algebra \(\mathcal{I}_i\); the global \(\mathcal{I}\) is the structural-equivalence quotient (Theorem 8); the convention's aggregate \(m^*\) is the "semantic price." Individual agents need only respond to the local convention signal; the global equilibrium is realized by distributed mutual adjustment, not any individual computation. The dispersed-knowledge reading clarifies why equilibrium in meaning games is not implausibly idealized: it is a distributed computation, not a central one. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Romer, P.M., "Endogenous technological change" (1990)</div>
+  <div class="bib-details"><em>Journal of Political Economy</em> 98:S71–S102.</div>
+  <div class="annotation">Romer's model broke with neoclassical growth theory by treating ideas as non-rival, partially excludable inputs with increasing returns. The stock of ideas appears in the production function as a multiplicative factor increasing without bound. In the algebra, the stock at time \(t\) is \(\mathcal{I}_{\leq n(t)}\); non-rivalry is forced by the grading (Theorem 9 — using an idea does not remove it from the stock); the growth equation \(\dot Y/Y=\alpha\dot n(t)\) is a statement about the rate of growth of \(|\mathcal{I}_g|\). The formalism makes precise where Romer's model breaks down: when \(\omega^G\neq 0\), recombination incurs emergence cost qualifying the "free" nonrival reuse. The Weitzman elaboration addresses this directly. <strong>Relation to Lean:</strong> <code>IdeaTheory.Extensions.RecombinantGrowth</code> formalizes the grading-based non-rivalry.</div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Weitzman, M.L., "Recombinant growth" (1998)</div>
+  <div class="bib-details"><em>Quarterly Journal of Economics</em> 113:331–360.</div>
+  <div class="annotation">Weitzman pushed the Romer move further: long-run growth is driven not just by idea accumulation but by <em>recombination</em> of an existing stock. With \(n\) existing seeds, the number of possible new ideas grows as \(\binom{n}{k}\) for \(k\)-fold recombinations — combinatorial explosion. In the algebra, the free graded monoid on \(n\) generators has \(\sum_k\binom{n}{k}=2^n\) distinct \(k\)-fold combinations. The cocycle \(\omega^G\) qualifies the explosion by penalizing non-novel combinations. Empirically observed long-tailed distributions of innovation value are the predicted cocycle distribution (most combinations have \(\omega\approx 0\); a few have large \(\omega\)). The formalism provides a sharper hypothesis than Weitzman's verbal model. <span class="lean-link">Lean: IdeaTheory.Extensions.RecombinantGrowth</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Jones, C.I., "R&amp;D-based models of economic growth" (1995)</div>
+  <div class="bib-details"><em>Journal of Political Economy</em> 103:759–784.</div>
+  <div class="annotation">Jones identified a flaw in Romer's model: it generates scale effects (doubling the research workforce doubles the long-run growth rate) that are inconsistent with historical data. His "semi-endogenous growth" model introduces decreasing returns to research ("fishing-out"), making growth depend on research effort as a limiting factor. In the algebra, fishing-out effects appear as the increasing cocycle cost \(\omega^G\) of composing elements of high degree: the higher the stratum, the larger the per-composition emergence correction. The rate of idea production scales with the size of the lower strata, not population per se. A society with many degree-1 generators but few compositions between them grows more slowly than one with a dense composition graph — consistent with the Romer–Jones literature on "research effort" as the limiting factor. <span class="lean-link">Lean: IdeaTheory.Extensions.RecombinantGrowth</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Olson, M., <em>The Logic of Collective Action</em> (1965)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Olson's argument that rational agents will free-ride on public goods rather than contributing to their provision, so that groups larger than a critical size will fail to achieve their collective goals, is the direct formal dual of the Granovetter result. In the algebra, a free-rider is a silent agent: \(a_i=e\). By the silent-agent invariance theorem (Ch. 2): \(\mathrm{aggregate}(\mathbf{x})=\mathrm{aggregate}(\mathbf{x}_\text{contrib})\). The free-riders contribute exactly \(e\). The nonlinear fall-off of public-good provision with group size — Olson's central prediction — requires the cocycle and grading machinery of Chapters 4 and 7, but the underlying "silent agents are invisible" fact is the direct corollary. <span class="lean-link">Lean: IdeaTheory.Coalitions (silent-agent invariance)</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Lakatos, I., "Falsification and the methodology of scientific research programmes" (1970)</div>
+  <div class="bib-details">In <em>Criticism and the Growth of Knowledge</em>, ed. Lakatos &amp; Musgrave (Cambridge).</div>
+  <div class="annotation">Lakatos replaced Popperian falsificationism with research programmes: a hard core, protective belt, and positive heuristic. A programme is progressive when its sequence of theories exhibits a preponderance of degree-increasing problem-shifts. In the algebra, this is a chain-novel lineage (Ch. 7): a sequence \((T_1,T_2,\ldots)\) with \(\deg T_{i+1}>\deg T_i\). The hard core is the degree-zero stratum \(\mathcal{I}_0\). The Anderson stratification (Ch. 7) guarantees that progressive programmes never revisit a previous degree-stratum — formalizing Lakatos's "cumulative" progress. The difficulty of accounting for theory revisions that retain predictive content but rearrange the auxiliary belt is the case where Aufhebung components \(\sigma\) and \(\nu\) change without altering \(\eta\), leaving \(\deg\) constant. <span class="lean-link">Lean: IdeaTheory.Extensions.RecombinantGrowth (grading)</span></div>
+</div>
+
+<hr>
+
+<!-- ============================================================ -->
+<h2 id="meaning">5. Meaning, Language &amp; Games</h2>
+<!-- ============================================================ -->
+
+<p class="section-intro">Chapter 10 shows that Wittgenstein's "meaning is use" and Nash's equilibrium concept converge on the same formal object: the meaning-game convention. Lewis conventions, Schelling focal points, Kripke's rule-following skepticism, and Hayek's price system are all structural features of the same algebra. The Lean module <code>IdeaTheory.Extensions.MeaningGames</code> formalizes the core results.</p>
+
+<div class="lit-entry">
+  <div class="bib-key">Wittgenstein, L., <em>Philosophical Investigations</em> §43, §201ff. (1953)</div>
+  <div class="bib-details">Trans. G.E.M. Anscombe et al. (Wiley-Blackwell, 4th ed. 2009).</div>
+  <div class="annotation">The §43 slogan — "the meaning of a word is its use in the language" — and the subsequent development of family resemblance, private-language argument, and rule-following considerations are the philosophical anchors of the meaning-game formalism. Meaning as use is the convention of a meaning game: the profile \(s^*\) whose aggregate \(\bigcirc_j s^*_j\) lies in \(M\) and which is a Nash equilibrium. The private-language argument is the game-theoretic private-language theorem: the only Nash equilibrium with aggregate in \(M\setminus\{e\}\) is one that involves multiple speakers — confirming, by game theory, the structural impossibility of private language from §Wittgenstein II's algebraic argument. Rule-following is the indeterminacy of parametric extension; the community solution is the convention of the rule-following game. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Lewis, D., <em>Convention: A Philosophical Study</em> (1969)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Lewis formalized the notion of convention as a solution to a coordination problem stabilized by common knowledge of salience. His central insight: salience selects among many Nash equilibria. In the algebra, salience is \(\sigma\)-idempotence: a meaning \(c\in M\) is salient if \(\sigma(c,c)=c\). The strict-Nash refinement theorem (Ch. 10) upgrades Lewis's empirical observation to a formal refinement: every strict Nash equilibrium with aggregate in \(M\setminus\{e\}\) has aggregate a salient idempotent. Lewis's convention is not an add-on to game theory but an algebraic property of the meaning space. The three-level analysis (Lewis: common-knowledge conspicuousness; Wittgenstein: forms of life; algebra: \(\sigma\)-idempotence) converges on the same equilibrium in the generic case. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames (strict Nash)</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Schelling, T., <em>The Strategy of Conflict</em> (1960)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Schelling observed empirically that subjects in coordination games without communication converge on "focal" equilibria distinguished by salience. The focal point theorem (Ch. 10): the focal convention is the one whose aggregate \(m^*\) maximizes \(\rho(m^*,m^*)\) over all conventions — an intrinsic algebraic selection principle, not imposed by hand. This prediction has empirical content: in any meaning game whose algebra is known, the focal points are the \(\rho\)-maximizing \(\sigma\)-idempotents on \(M\), computable in advance. The three-way comparison: Schelling explains convergence by empirical regularity; Lewis by common-knowledge salience; the algebra by algebraic structure. The algebra is preferable because it predicts which features will be focal rather than reading off which features were focal after the fact. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames (focal point)</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Nash, J.F., "Equilibrium points in \(n\)-person games" (1950)</div>
+  <div class="bib-details"><em>Proceedings of the National Academy of Sciences</em> 36:48–49.</div>
+  <div class="annotation">Nash's fixed-point theorem guarantees the existence of an equilibrium in any finite normal-form game. In the meaning-game context, the payoff is bilinear (Theorem 2 makes \(\rho\) the unique bilinear extension), so the game has a well-defined mixed extension and Nash's theorem applies directly. The existence-of-conventions theorem (Ch. 10) is Nash's theorem applied to the meaning-game framework. The deeper connection: Nash's equilibrium characterizes the stable use conventions that Wittgenstein's language-game philosophy treats as constitutive of meaning. The "Wittgenstein–Nash bridge" (§Conclusion of Ch. 10) is the central philosophical claim of the chapter: a stable meaning is a Nash equilibrium of the game of language. <strong>Formal status:</strong> True as a corollary of Nash's fixed-point theorem and Theorem 2. <span class="lean-link">Lean: IdeaTheory.Extensions.GameTheory</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Kripke, S.A., <em>Wittgenstein on Rules and Private Language</em> (1982)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Kripke's "skeptical paradox": no fact about past behavior determines a unique rule; any finite set of applications is compatible with infinitely many rules. The "skeptical solution": the correctness of a rule-application is a matter of community agreement. In the algebra: a rule is a parametric idea \(\phi:\mathcal{I}\to\mathcal{I}\); the indeterminacy is the failure of finite output data to determine \(\phi\) uniquely on all inputs, measured by the curvature \(\kappa\) of \(\rho\) on the space of parametrics. The community solution is the Nash-equilibrium convention of the rule-following game — the unique strict equilibrium (by the Lewis refinement) whose aggregate \(\sigma\)-idempotent is salient. The formalism makes the "straight" and "quus" rules into two sections of the projection \(\mathcal{I}\twoheadrightarrow\mathcal{I}/{\sim}\), differing by a coboundary. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Quine, W.V.O., <em>Word and Object</em> (1960)</div>
+  <div class="bib-details">MIT Press.</div>
+  <div class="annotation">Quine's thesis that translation is underdetermined (the "gavagai" example) is, in the algebra, the statement that inequivalent sections of \(\mathcal{I}\twoheadrightarrow\mathcal{I}/{\sim}\) exist, equivalent to \([\omega]\neq 0\in H^2(\mathcal{I}/{\sim},A)\). "Gavagai" is two sections that agree on observation sentences and differ on theoretical ones. Confirmation holism — no statement faces the tribunal of experience alone — is the algebraic fact that \(\rho\) couples every element to the full algebra through composition chains (Theorem 7). In the meaning-game context, the indeterminacy of translation is the multiplicity of Nash equilibria in the translation game; the "fact of the matter" about which is correct is the question whether any equilibrium selection criterion (Lewis salience, Schelling focal points) reduces the multiplicity to one. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Brandom, R., <em>Making It Explicit</em> (1994) [also listed in §1]</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Brandom's score-keeping model of discursive practice — interlocutors tracking each other's commitments and entitlements — is a groupoid action on \(\mathcal{I}\): each speaker carries a state \((K_i,E_i)\) and conversational moves act by composition with specified ideas. The well-foundedness of score-keeping (scores can be reconciled across speakers) is equivalent to the existence of a global section of the resulting fibration — again a cohomological condition on \(\omega\). No purely formal warrant for global score-reconciliation can be expected, since nothing in the algebra forces \([\omega]=0\). The meaning-game formalism places Brandom's normative pragmatics inside the game-theoretic framework: the normative ideal of global score-reconciliation is the limit of the distributed Hayek-style convention-formation process. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Sperber, D. &amp; Wilson, D., <em>Relevance: Communication and Cognition</em> (1986; 2nd ed. 1995)</div>
+  <div class="bib-details">Harvard University Press.</div>
+  <div class="annotation">Relevance theory argues that communication is governed by a single principle of relevance (maximal cognitive effect for minimal processing effort). The relevance of an interpretation is its effect divided by its effort. In the algebra: cognitive effect is the magnitude of the elevation \(|\eta(a,b)|\) (new content produced); processing effort is a measure of the chain length or degree \(\deg(a\circ b)-\deg b\). The relevance ratio is \(|\eta|/\Delta\deg\). Optimal relevance is the interpretation that maximizes this ratio, which in the meaning-game context is the Nash equilibrium with maximum \(\rho\)-payoff per unit of compositional cost. Relevance theory is thereby embedded in the game-theoretic framework as a principle of equilibrium selection. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames</span></div>
+</div>
+
+<div class="lit-entry">
+  <div class="bib-key">Grice, H.P., "Logic and conversation" (1975)</div>
+  <div class="bib-details">In <em>Speech Acts</em>, ed. P. Cole &amp; J.L. Morgan (<em>Syntax and Semantics</em>, vol. 3). Academic Press.</div>
+  <div class="annotation">Grice's cooperative principle and four maxims (Quantity, Quality, Relation, Manner) are widely taken as the pragmatic complement to semantic compositionality. In the algebra: the Quantity maxim is the condition that the speaker's contribution lies in the minimum-degree sub-algebra sufficient for the hearer to recover the intended meaning. The Relation maxim is maximum-relevance equilibrium (high \(\rho\)-payoff per compositional cost). The Manner maxim is minimum-curvature: avoiding \(\kappa\neq 0\) ambiguities. Gricean implicatures are the gap between what is literally said (the compositional semantics, \(v(a)\)) and what is implicated (the full inference pattern \(K(a)\)): the excess is exactly the curvature-weighted anti-symmetric part of the resonance pairing. <span class="lean-link">Lean: IdeaTheory.Extensions.MeaningGames (pragmatics)</span></div>
+</div>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

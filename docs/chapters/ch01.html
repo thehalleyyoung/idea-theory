@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 1: The Idea Monoid — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+.toc{background:var(--accent-soft);border:1px solid var(--rule);border-radius:6px;padding:.8em 1.2em;margin:1.5em 0;font-size:.93rem;}
+.toc h2{font-size:1rem;margin:.1em 0 .5em;border:none;padding:0;}
+.toc ol{margin:0;padding-left:1.4em;}
+.toc li{margin:.2em 0;}
+.toc a{border-bottom:none;color:var(--accent);}
+.toc a:hover{text-decoration:underline;}
+.proof{margin:.5em 0 .5em 1.2em;font-style:italic;font-size:.96rem;color:var(--muted);}
+.proof::before{content:"Proof. ";font-style:normal;font-weight:600;color:var(--accent);}
+.proof-end::after{content:" □";font-style:normal;}
+.remark{border-left:3px solid var(--rule);background:var(--bg);padding:.4em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.remark-label{font-family:Inter,sans-serif;font-weight:600;font-size:.9rem;color:var(--muted);}
+.example{border-left:3px solid #b8a98c;background:#faf6ee;padding:.4em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.example-label{font-family:Inter,sans-serif;font-weight:600;font-size:.9rem;color:#7a5c2e;}
+.zoo-entry{border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;}
+.zoo-entry h4{font-family:Inter,sans-serif;font-size:1rem;color:var(--accent);margin:.1em 0 .5em;}
+.zoo-entry .zoo-section{font-family:Inter,sans-serif;font-size:.85rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:.8em 0 .2em;}
+.chapter-nav{display:flex;justify-content:space-between;margin:3em 0 1em;padding-top:1em;border-top:1px solid var(--rule);}
+.chapter-nav a{font-family:Inter,sans-serif;font-size:.95rem;border-bottom:none;padding:.4em .8em;background:var(--accent-soft);border-radius:4px;color:var(--accent);}
+.chapter-nav a:hover{background:#ead9d3;}
+</style>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+      Ideas: '{\\mathcal{I}}',
+      compose: '{\\circ}',
+      unit: '{e}',
+      IdMon: '{(\\mathcal{I},\\circ,e)}',
+      chain: ['{\\mathsf{Ch}(#1)}', 1],
+      npow: '{\\mathsf{npow}}',
+      aggregate: '{\\mathsf{agg}}',
+      equivIdea: '{\\sim_{\\mathcal{I}}}',
+      defeq: '{:=}',
+      eqdef: '{:=}',
+      NN: '{\\mathbb{N}}',
+      ZZ: '{\\mathbb{Z}}',
+      RR: '{\\mathbb{R}}',
+    },
+    tags: 'ams',
+  }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+
+<p style="font-family:Inter,sans-serif;font-size:.9rem;color:var(--muted);margin-bottom:.3em;"><a href="index.html">Book</a> › Chapter 1</p>
+<h1>Chapter 1: The Idea Monoid</h1>
+
+<p><em>In which the bare combinatorial skeleton of Idea Theory is laid down. We isolate three axioms — associativity and a two-sided unit — which we defend on independent philosophical grounds; we show that they suffice to derive a full apparatus of powers, chains, sub-ideas, idempotents, cancellation, and invertibility; and we prove the three headline theorems and four corollaries that organize the rest of the volume. Every result of this chapter is machine-verified in the Lean&nbsp;4 module <code>IdeaTheory.Theorems1</code>. The chapter closes by showing that the bare monoid already suffices to host four classical positions on the nature of ideas: those of Locke, Hume, Frege, and the later Wittgenstein.</em></p>
+
+<nav class="toc">
+<h2>Contents</h2>
+<ol>
+  <li><a href="#s1">The axioms of an idea algebra</a></li>
+  <li><a href="#s2">Uniqueness of the unit and basic congruence lemmas</a></li>
+  <li><a href="#s3">Powers of an idea</a></li>
+  <li><a href="#s4">Chains</a></li>
+  <li><a href="#s5">Sub-ideals and idempotents</a></li>
+  <li><a href="#s6">Cancellation and invertibility</a></li>
+  <li><a href="#s7">Theorems 1.1–1.3 and Corollaries 1.1–1.4</a></li>
+  <li><a href="#s8">Three concrete examples</a></li>
+  <li><a href="#s9">The zoo: four classical positions</a></li>
+  <li><a href="#s10">Synopsis and what comes next</a></li>
+  <li><a href="#refs">References</a></li>
+</ol>
+</nav>
+
+<!-- ================================================================ -->
+<section id="s1">
+<h2>1. The axioms of an idea algebra</h2>
+
+<p>The whole edifice of Idea Theory rests on three axioms. We isolate them here, before introducing any further analytic structure, in order to make clear which results require nothing more than the bare monoid skeleton.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 1.1</span> (Idea algebra; bare layer).
+A <em>bare idea algebra</em> is a triple \(\IdMon\) in which \(\mathcal{I}\) is a set (the set of <em>ideas</em>), \(\circ : \mathcal{I} \times \mathcal{I} \to \mathcal{I}\) is a binary operation (<em>composition</em>), and \(e \in \mathcal{I}\) is a distinguished element (the <em>void idea</em>, or unit), subject to the following three axioms.
+<ul style="list-style:none;padding-left:.8em;">
+  <li><strong>(A1) Associativity.</strong> \((a \circ b) \circ c = a \circ (b \circ c)\) for all \(a,b,c \in \mathcal{I}\).</li>
+  <li><strong>(A2) Left unit.</strong> \(e \circ a = a\) for all \(a \in \mathcal{I}\).</li>
+  <li><strong>(A3) Right unit.</strong> \(a \circ e = a\) for all \(a \in \mathcal{I}\).</li>
+</ul>
+</div>
+
+<p>The mathematical content of Definition 1.1 is exactly that of a monoid in the sense of MacLane<sup class="cite">[5]</sup> or Bourbaki<sup class="cite">[6]</sup>; what is new is the interpretation we attach to it.</p>
+
+<p><strong>Why associativity (A1).</strong> Associativity is the algebraic shadow of <em>bracket-independence of content</em>. When two ideas \(a\) and \(b\) combine, the result \(a \circ b\) is itself an idea; if a third idea \(c\) is then brought into contact, we obtain \((a \circ b) \circ c\). Yet the same three ideas could equally have been combined in the order \(a\), then \(b \circ c\), producing \(a \circ (b \circ c)\). Axiom (A1) declares that these two ideas are identical, not merely equivalent. The empirical pull behind (A1) is strong: Hume's principle of association<sup class="cite">[2]</sup> is most naturally read as a non-bracketed enumeration; Frege's compositionality<sup class="cite">[3]</sup> requires that sense depend only on parts and their arrangement; Hegel's repeated Aufhebungen and Sperber's chains of cultural attractors all presuppose that bracketing is invisible at the level of content.</p>
+
+<p>We do <em>not</em> assume commutativity. "Newtonian mechanics composed with quantum mechanics" is a different idea from "quantum mechanics composed with Newtonian mechanics."</p>
+
+<p><strong>Why a two-sided unit (A2–A3).</strong> The void idea \(e\) models the <em>empty thought</em> — the contentless idea that, when prepended or appended to any other, leaves it unchanged. Every model we shall consider possesses a natural "do nothing" element: in Locke's combinatorial picture<sup class="cite">[1]</sup> it is the trivial complex idea built from no simple ideas at all; in modern semantic-vector models it is the zero context vector. The unit is harmless: if a candidate carrier \(\mathcal{I}'\) has no unit we may freely adjoin one.</p>
+
+<div class="remark">
+<span class="remark-label">Remark.</span> We refer to the structure \(\IdMon\) as an idea <em>algebra</em> rather than an idea <em>monoid</em> for two reasons. First, later chapters extend it with additional algebraic data; the resulting object is no longer a monoid in any standard sense. Second, the philosophical literature uses the word "algebra" loosely, and our use is intended to evoke the entire stack of structure. In this chapter "algebra" should be read as "algebra-with-only-the-bare-monoid-layer."
+</div>
+
+<div class="remark">
+<span class="remark-label">Notation.</span> Throughout this chapter the symbols \(a, b, c, x, y, z, p, q\) denote arbitrary elements of \(\mathcal{I}\); \(m, n, k\) denote natural numbers; \(e\) is always the unit of \(\IdMon\). We write \(a \circ b \circ c\) for \((a \circ b) \circ c\) (which equals \(a \circ (b \circ c)\) by (A1)), and we write \(a^n\) for the \(n\)-fold composition \(\mathsf{npow}(n,a)\) defined in §3.
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s2">
+<h2>2. Uniqueness of the unit and basic congruence lemmas</h2>
+
+<p>The first non-trivial fact about \(\IdMon\) is that the void idea is <em>unique</em> as a two-sided unit.</p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.1</span> (Uniqueness of two-sided units).
+Let \(e' \in \mathcal{I}\) satisfy \(e' \circ a = a\) and \(a \circ e' = a\) for every \(a \in \mathcal{I}\). Then \(e' = e\).
+</div>
+<p class="proof">By the left-unit hypothesis at \(a = e\) we have \(e' \circ e = e\). By (A3) applied to \(e'\) we have \(e' \circ e = e'\). Equating the two right-hand sides yields \(e' = e\). (Verified as <code>IdeaTheory.ident_unique_two_sided</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.2</span> (Left units are units).
+If \(e' \in \mathcal{I}\) satisfies \(e' \circ a = a\) for every \(a\), then \(e' = e\). Symmetrically for right units.
+</div>
+<p class="proof">Take \(a = e\) in the hypothesis to get \(e' \circ e = e\). By (A3), \(e' \circ e = e'\), so \(e' = e\). (Verified as <code>IdeaTheory.left_ident_eq_ident</code> and <code>right_ident_eq_ident</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.3</span> (Left congruence). If \(b = c\), then \(a \circ b = a \circ c\) for every \(a\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.4</span> (Right congruence). If \(b = c\), then \(b \circ a = c \circ a\) for every \(a\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.5</span> (Bilinear congruence). If \(a = c\) and \(b = d\), then \(a \circ b = c \circ d\).
+</div>
+<p class="proof">All three lemmas are immediate from the substitution principle. (Verified as <code>IdeaTheory.op_left_congr</code>, <code>op_right_congr</code>, <code>op_congr</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.6</span> (Stability of \(e\) under self-composition).
+\(e \circ e = e\).
+</div>
+<p class="proof">Take \(a = e\) in (A2). (Verified as <code>IdeaTheory.op_ident_ident</code>.)<span class="proof-end"></span></p>
+
+<p>Lemma 1.6 foreshadows the more general fact, proved in §5, that \(e\) is the canonical example of an <em>idempotent</em> idea.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s3">
+<h2>3. Powers of an idea</h2>
+
+<p>The first construction made possible by the bare monoid axioms is <em>iteration</em>. This is the formal correlate of repeated metaphor (Hume on the strengthening of association by repetition), liturgical recitation, repeated theorem application, or repeated activation of a neural ensemble.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 1.2</span> (Iterated composition).
+The <em>\(n\)-th power</em> of an idea \(a \in \mathcal{I}\), written \(a^n\) or \(\mathsf{npow}(n,a)\), is defined by recursion on \(n\):
+\[a^0 := e, \qquad a^{n+1} := a \circ a^n.\]
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.7</span> (Elementary identities for \(\mathsf{npow}\)).
+For every \(a \in \mathcal{I}\) and \(n \in \mathbb{N}\):
+\[\begin{align}
+a^0 &= e, \\
+a^{n+1} &= a \circ a^n, \\
+a^1 &= a, \\
+e^n &= e.
+\end{align}\]
+</div>
+<p class="proof">The first two are immediate from Definition 1.2. For \(a^1\): \(a^1 = a \circ a^0 = a \circ e = a\) by (A3). For \(e^n\): induct on \(n\); the base case \(n=0\) is the first identity; for the inductive step, \(e^{n+1} = e \circ e^n = e\) by (A2) and the inductive hypothesis. (Verified as <code>IdeaTheory.npow_zero</code>, <code>npow_succ</code>, <code>npow_one</code>, <code>npow_ident</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.8</span> (Right-unwinding of powers).
+\(a^{n+1} = a^n \circ a\) for every \(a \in \mathcal{I}\) and \(n \in \mathbb{N}\).
+</div>
+<p class="proof">Induction on \(n\). For \(n=0\): \(a^1 = a \circ e = a = e \circ a = a^0 \circ a\). For the inductive step, \(a^{k+2} = a \circ a^{k+1} = a \circ (a^k \circ a) = (a \circ a^k) \circ a = a^{k+1} \circ a\), where the second equality uses the inductive hypothesis and the third uses (A1). (Verified as <code>IdeaTheory.npow_succ'</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.9</span> (Self-commutativity of powers).
+For every \(a\) and \(k\), \(a \circ a^k = a^k \circ a\).
+</div>
+<p class="proof">Both expressions equal \(a^{k+1}\): the left-hand side by definition, the right-hand side by Lemma 1.8. (Verified as <code>IdeaTheory.npow_comm_self</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.10</span> (Additivity in the exponent).
+For every \(a \in \mathcal{I}\) and every \(m, n \in \mathbb{N}\):
+\[a^{m+n} = a^m \circ a^n.\]
+</div>
+<p class="proof">Induct on \(m\). For \(m=0\) both sides equal \(a^n\). Assuming the claim at \(m=k\):
+\[a^{(k+1)+n} = a^{(k+n)+1} = a \circ a^{k+n} = a \circ (a^k \circ a^n) = (a \circ a^k) \circ a^n = a^{k+1} \circ a^n.\]
+(Verified as <code>IdeaTheory.npow_add</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.11</span> (Multiplicativity in the exponent).
+For every \(a \in \mathcal{I}\) and every \(m, n \in \mathbb{N}\):
+\[a^{mn} = (a^n)^m.\]
+</div>
+<p class="proof">Induct on \(m\). For \(m=0\): \((a^n)^0 = e = a^0\). Assuming at \(m=k\): \((k+1)n = n + kn\), so \(a^{(k+1)n} = a^{n+kn} = a^n \circ a^{kn} = a^n \circ (a^n)^k = (a^n)^{k+1}\). (Verified as <code>IdeaTheory.npow_mul</code>.)<span class="proof-end"></span></p>
+
+<p>Together, Lemmas 1.10 and 1.11 say that for each fixed idea \(a\), the function \(n \mapsto a^n\) is a monoid homomorphism from \((\mathbb{N}, +, 0)\) into \(\IdMon\). These facts are packaged as Theorem 1.3 below.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s4">
+<h2>4. Chains</h2>
+
+<p>Iteration treats the same idea applied \(n\) times. More generally we wish to compose a finite sequence of (possibly distinct) ideas. The resulting construction — the <em>chain</em> of a list of ideas — is the bridge between the algebraic apparatus and the empirical phenomena of discourse, narrative, and cultural transmission.</p>
+
+<div class="defn">
+<span class="thm-label">Definition 1.3</span> (Chain composite).
+For a finite list \(L = [a_1, a_2, \dots, a_k]\) of ideas, the <em>chain composite</em> \(\mathsf{Ch}(L)\) is defined recursively by
+\[\mathsf{Ch}([]) := e, \qquad \mathsf{Ch}(a :: L) := a \circ \mathsf{Ch}(L).\]
+The <em>length</em> of \(L\), written \(|L|\), is its number of entries. The <em>void chain</em> of length \(n\) is the list \(e^{::n}\) consisting of \(n\) copies of \(e\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.12</span> (Singleton and constant chains).
+For every \(a \in \mathcal{I}\) and \(n \in \mathbb{N}\):
+\[\mathsf{Ch}([a]) = a, \qquad \mathsf{Ch}(\underbrace{[a,\ldots,a]}_{n}) = a^n, \qquad \mathsf{Ch}(\underbrace{[e,\ldots,e]}_{n}) = e.\]
+</div>
+<p class="proof">For the singleton: \(\mathsf{Ch}([a]) = a \circ \mathsf{Ch}([]) = a \circ e = a\) by (A3). The constant chain is proved by induction on \(n\), and the void case is a special case with \(a = e\). (Verified as <code>IdeaTheory.chain_singleton</code>, <code>chain_replicate</code>, <code>chain_replicate_ident</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.13</span> (Concatenation of chains).
+For any two finite lists \(L_1, L_2\) of ideas:
+\[\mathsf{Ch}(L_1 {+\!+} L_2) = \mathsf{Ch}(L_1) \circ \mathsf{Ch}(L_2).\]
+</div>
+<p class="proof">By induction on \(L_1\). If \(L_1 = []\), both sides equal \(\mathsf{Ch}(L_2)\) (using (A2) and \(\mathsf{Ch}([])=e\)). For the inductive step with \(L_1 = a :: L\):
+\[\mathsf{Ch}((a :: L) {+\!+} L_2) = a \circ \mathsf{Ch}(L {+\!+} L_2) = a \circ (\mathsf{Ch}(L) \circ \mathsf{Ch}(L_2)) = (a \circ \mathsf{Ch}(L)) \circ \mathsf{Ch}(L_2) = \mathsf{Ch}(a::L) \circ \mathsf{Ch}(L_2),\]
+using the inductive hypothesis and (A1). (Verified as <code>IdeaTheory.chain_append</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.14</span> (Splitting at an arbitrary index).
+For every list \(L\) and every \(n \in \mathbb{N}\):
+\[\mathsf{Ch}(L) = \mathsf{Ch}(\mathrm{take}_n\, L) \circ \mathsf{Ch}(\mathrm{drop}_n\, L).\]
+</div>
+<p class="proof">We have \(L = (\mathrm{take}_n\, L) {+\!+} (\mathrm{drop}_n\, L)\). Apply Lemma 1.13. (Verified as <code>IdeaTheory.chain_split</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.15</span> (Identity-padding).
+Let \(L\) be any list and let \(L'\) be obtained from \(L\) by inserting one copy of \(e\) at any position. Then \(\mathsf{Ch}(L') = \mathsf{Ch}(L)\).
+</div>
+<p class="proof">Write \(L = L_1 {+\!+} L_2\) where the insertion happens at the boundary. By Lemma 1.13:
+\[\mathsf{Ch}(L') = \mathsf{Ch}(L_1) \circ \mathsf{Ch}([e]) \circ \mathsf{Ch}(L_2) = \mathsf{Ch}(L_1) \circ e \circ \mathsf{Ch}(L_2) = \mathsf{Ch}(L_1) \circ \mathsf{Ch}(L_2) = \mathsf{Ch}(L).\]
+(Verified as <code>IdeaTheory.chain_concat_ident</code>.)<span class="proof-end"></span></p>
+
+<div class="remark">
+<span class="remark-label">Remark</span> (Chains as discourses).
+The chain construction is the formal correlate of any phenomenon in which ideas are arranged in a temporal or syntactic sequence. Hume's "trains of thought"<sup class="cite">[2]</sup> are chains; so are the cultural attractor sequences of Sperber, the inferential chains of Brandom, the syntactic compositions of Frege, and the narrative episodes of Ricoeur. The bracket-independence guaranteed by Lemma 1.14 is what entitles all of these authors to treat their primary unit of analysis as a sequence rather than a tree.
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s5">
+<h2>5. Sub-ideals and idempotents</h2>
+
+<div class="defn">
+<span class="thm-label">Definition 1.4</span> (Left and right sub-ideals).
+We say that \(a\) is a <em>left sub-ideal</em> of \(b\), written \(a \le_L b\), if there exists \(c \in \mathcal{I}\) with \(b = a \circ c\). Symmetrically, \(a\) is a <em>right sub-ideal</em> of \(b\), written \(a \le_R b\), if there exists \(c\) with \(b = c \circ a\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.16</span> (Order properties of \(\le_L\) and \(\le_R\)).
+The relations \(\le_L\) and \(\le_R\) are reflexive and transitive. The void idea \(e\) is below every idea: \(e \le_L a\) and \(e \le_R a\) for all \(a\). In particular, \(a \le_L a \circ b\) and \(b \le_R a \circ b\) for all \(a, b\).
+</div>
+<p class="proof">Reflexivity: \(a = a \circ e\) by (A3), so \(a \le_L a\) with witness \(c = e\). Transitivity: if \(b = a \circ x\) and \(c = b \circ y\), then \(c = (a \circ x) \circ y = a \circ (x \circ y)\) by (A1), so \(a \le_L c\) with witness \(x \circ y\). (Verified as <code>IdeaTheory.subideal_refl</code>, <code>subideal_trans</code>, <code>subideal_ident</code>.)<span class="proof-end"></span></p>
+
+<div class="defn">
+<span class="thm-label">Definition 1.5</span> (Idempotent and commuting ideas).
+An idea \(a \in \mathcal{I}\) is <em>idempotent</em> if \(a \circ a = a\). Two ideas \(a\) and \(b\) <em>commute</em> if \(a \circ b = b \circ a\); we write \(a \mathrel{\#} b\) for this relation. The <em>centralizer</em> of \(a\) is the set \(Z(a) := \{ b \in \mathcal{I} \mid a \mathrel{\#} b \}\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.17</span> (Basic facts about idempotents).
+(1) \(e\) is idempotent. (2) If \(a\) is idempotent and \(n \ge 1\), then \(a^n = a\) (and so \(a^n\) is itself idempotent).
+</div>
+<p class="proof">(1) Lemma 1.6. (2) Induct on \(n\). Base \(n=1\): \(a^1 = a\). Inductive step: \(a^{k+1} = a \circ a^k = a \circ a = a\) by the idempotency of \(a\). (Verified as <code>IdeaTheory.ident_idempotent</code>, <code>npow_idempotent</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.18</span> (Basic facts about commutation).
+The relation \(\mathrel{\#}\) is reflexive and symmetric; the void idea commutes with everything; in particular \(e \in Z(a)\) and \(a \in Z(a)\) for every \(a\).
+</div>
+<p class="proof">Reflexivity is immediate. Symmetry: if \(a \circ b = b \circ a\) then \(b \circ a = a \circ b\). \(e\) commutes with \(a\): \(e \circ a = a = a \circ e\) by (A2)–(A3). (Verified as <code>IdeaTheory.commute_refl</code>, <code>commute_symm</code>, <code>commute_ident_left</code>.)<span class="proof-end"></span></p>
+
+<p>The relation \(\mathrel{\#}\) is <em>not</em> in general transitive: \(a\) and \(b\) may both commute with \(c\) without commuting with each other. This failure reappears in Chapter 5 as the curvature of the resonance pairing.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s6">
+<h2>6. Cancellation and invertibility</h2>
+
+<div class="defn">
+<span class="thm-label">Definition 1.6</span> (Cancellative ideas).
+An idea \(a \in \mathcal{I}\) is
+<ul>
+  <li><em>left-cancellative</em> if \(a \circ b = a \circ c\) implies \(b = c\);</li>
+  <li><em>right-cancellative</em> if \(b \circ a = c \circ a\) implies \(b = c\);</li>
+  <li><em>cancellative</em> if both.</li>
+</ul>
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.19</span> (\(e\) is cancellative).
+\(e\) is both left- and right-cancellative.
+</div>
+<p class="proof">If \(e \circ b = e \circ c\), then by (A2) \(b = c\). Symmetric on the right. (Verified as <code>IdeaTheory.ident_cancellative</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.20</span> (Composition of cancellative ideas).
+If \(a\) and \(b\) are left-cancellative, so is \(a \circ b\). Symmetrically for right cancellation.
+</div>
+<p class="proof">Suppose \((a \circ b) \circ x = (a \circ b) \circ y\). By (A1): \(a \circ (b \circ x) = a \circ (b \circ y)\). Left cancellation by \(a\) gives \(b \circ x = b \circ y\), then by \(b\) gives \(x = y\). (Verified as <code>IdeaTheory.left_cancel_op</code>.)<span class="proof-end"></span></p>
+
+<div class="defn">
+<span class="thm-label">Definition 1.7</span> (Invertible ideas).
+An idea \(a \in \mathcal{I}\) is <em>invertible</em> if there exists \(b \in \mathcal{I}\) with \(a \circ b = e\) and \(b \circ a = e\). In that case \(b\) is called an <em>inverse</em> of \(a\).
+</div>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.21</span> (\(e\) is invertible).
+\(e\) is invertible, with inverse \(e\).
+</div>
+<p class="proof">\(e \circ e = e\) by Lemma 1.6. (Verified as <code>IdeaTheory.ident_invertible</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.22</span> (Inverses are unique).
+If \(b_1\) and \(b_2\) are both inverses of \(a\), then \(b_1 = b_2\).
+</div>
+<p class="proof">
+\[b_1 = b_1 \circ e = b_1 \circ (a \circ b_2) = (b_1 \circ a) \circ b_2 = e \circ b_2 = b_2.\]
+(Verified as <code>IdeaTheory.invertible_inv_unique</code>.)<span class="proof-end"></span></p>
+
+<div class="lemma">
+<span class="thm-label">Lemma 1.23</span> (Closure of invertibles under composition).
+If \(a\) and \(b\) are invertible, with inverses \(a'\) and \(b'\), then \(a \circ b\) is invertible with inverse \(b' \circ a'\).
+</div>
+<p class="proof">Check: \((a \circ b) \circ (b' \circ a') = a \circ ((b \circ b') \circ a') = a \circ (e \circ a') = a \circ a' = e\), and the left-inverse is symmetric. (Verified as <code>IdeaTheory.invertible_op</code>.)<span class="proof-end"></span></p>
+
+<div class="defn">
+<span class="thm-label">Definition 1.8</span> (The group of units).
+The <em>group of units</em> of an idea algebra \(\IdMon\) is the subset \(\mathcal{I}^\times\) of invertible ideas, equipped with the restriction of \(\circ\), the unit \(e\), and the inversion map \(a \mapsto a^{-1}\) (well defined by Lemma 1.22).
+</div>
+
+<p>The group \(\mathcal{I}^\times\) measures the <em>reversibility budget</em> of the algebra. In a free monoid (Locke's atomistic picture) we shall see that \(\mathcal{I}^\times = \{e\}\): nothing is reversible. In a group every idea is invertible.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s7">
+<h2>7. Theorems 1.1–1.3 and Corollaries 1.1–1.4</h2>
+
+<p>We now consolidate the structural payload of the chapter into three theorems and four corollaries. All seven results are formally verified in the Lean module <code>IdeaTheory.Theorems1</code>.</p>
+
+<div class="thm">
+<span class="thm-label">Theorem 1.1</span> (Bracketing-independence of chain composition).
+For every finite list \(L\) of ideas and every \(n \in \mathbb{N}\):
+\[\mathsf{Ch}(L) = \mathsf{Ch}(\mathrm{take}_n\, L) \circ \mathsf{Ch}(\mathrm{drop}_n\, L).\]
+</div>
+<p class="proof">Write \(L = L_1 {+\!+} L_2\) with \(L_1 = \mathrm{take}_n\, L\) and \(L_2 = \mathrm{drop}_n\, L\). Apply Lemma 1.13. (Verified as <code>IdeaTheory.theorem_1_1</code>.)<span class="proof-end"></span></p>
+
+<p>Theorem 1.1 is the algebraic guarantee that the composite content of a discourse, narrative, or transmission chain depends only on the linear order of its parts and not on any prior decision about how to bracket them. This is the formal version of the informal principle, common to Hume and Sperber, that "the order in which we group the units does not affect the result."</p>
+
+<div class="thm">
+<span class="thm-label">Theorem 1.2</span> (Uniqueness of the void; closure of the units; uniqueness of inverses).
+Let \(\IdMon\) be a bare idea algebra. Then:
+<ol>
+  <li>If \(e' \in \mathcal{I}\) is a two-sided unit, then \(e' = e\).</li>
+  <li>If \(a, b \in \mathcal{I}\) are invertible, then so is \(a \circ b\).</li>
+  <li>If \(b_1, b_2\) are inverses of the same idea \(a\), then \(b_1 = b_2\).</li>
+</ol>
+</div>
+<p class="proof">(1) Lemma 1.1. (2) Lemma 1.23. (3) Lemma 1.22. (Verified as <code>IdeaTheory.theorem_1_2</code>.)<span class="proof-end"></span></p>
+
+<div class="thm">
+<span class="thm-label">Theorem 1.3</span> (Iteration is a monoid homomorphism).
+For every fixed \(a \in \mathcal{I}\) the function \(n \mapsto a^n\) from \(\mathbb{N}\) to \(\mathcal{I}\) satisfies
+\[a^0 = e, \qquad a^{m+n} = a^m \circ a^n, \qquad a^{m+n+k} = (a^m \circ a^n) \circ a^k,\]
+for all \(m, n, k \in \mathbb{N}\). Equivalently, \(n \mapsto a^n\) is a monoid homomorphism \((\mathbb{N}, +, 0) \to \IdMon\).
+</div>
+<p class="proof">The first identity is Definition 1.2. The second is Lemma 1.10. For the third, apply Lemma 1.10 twice: \(a^{m+n+k} = a^{(m+n)} \circ a^k = (a^m \circ a^n) \circ a^k\). (Verified as <code>IdeaTheory.theorem_1_3</code>.)<span class="proof-end"></span></p>
+
+<div class="cor">
+<span class="thm-label">Corollary 1.1</span> (Reorganization of cultural transmission chains).
+For any finite lists \(L_1, L_2, L_3\) of ideas:
+\[\mathsf{Ch}(L_1 {+\!+} L_2 {+\!+} L_3) = \mathsf{Ch}(L_1 {+\!+} (L_2 {+\!+} L_3)).\]
+</div>
+<p class="proof">List concatenation is associative on the nose. Apply \(\mathsf{Ch}(\cdot)\). (Verified as <code>IdeaTheory.corollary_1_1</code>.) This corollary will be invoked in Volume II to prove that diffusion of an idea through a population is independent of the choice of intermediate broadcast points.<span class="proof-end"></span></p>
+
+<div class="cor">
+<span class="thm-label">Corollary 1.2</span> (Insertion of empty episodes).
+For any finite lists \(L_1, L_2\) and any \(n \in \mathbb{N}\):
+\[\mathsf{Ch}(L_1 {+\!+} e^{::n} {+\!+} L_2) = \mathsf{Ch}(L_1 {+\!+} L_2).\]
+</div>
+<p class="proof">By Lemma 1.13 applied twice and Lemma 1.12: \(\mathsf{Ch}(L_1 {+\!+} e^{::n} {+\!+} L_2) = (\mathsf{Ch}(L_1) \circ e) \circ \mathsf{Ch}(L_2) = \mathsf{Ch}(L_1) \circ \mathsf{Ch}(L_2)\). (Verified as <code>IdeaTheory.corollary_1_2</code>.) Two narratives differing only by the insertion of empty interludes have the same total content.<span class="proof-end"></span></p>
+
+<div class="cor">
+<span class="thm-label">Corollary 1.3</span> (Closure of reversible operations).
+The set \(\mathcal{I}^\times\) of invertible ideas is closed under composition. In particular, if \(a\) and \(b\) are invertible, so is \(a \circ b\).
+</div>
+<p class="proof">Lemma 1.23. (Verified as <code>IdeaTheory.corollary_1_3</code>.) The composition of two undoable operations is itself undoable.<span class="proof-end"></span></p>
+
+<div class="cor">
+<span class="thm-label">Corollary 1.4</span> (Idempotents are exhausted by themselves).
+If \(a \in \mathcal{I}\) is idempotent, then \(a^n = a\) for every \(n \ge 1\).
+</div>
+<p class="proof">Lemma 1.17(2). (Verified as <code>IdeaTheory.corollary_1_4</code>.) An absorbed cultural item does not grow under repetition.<span class="proof-end"></span></p>
+</section>
+
+<!-- ================================================================ -->
+<section id="s8">
+<h2>8. Three concrete examples</h2>
+
+<p>Before turning to the historical zoo, we exhibit three concrete idea algebras to ground the formalism.</p>
+
+<div class="example">
+<span class="example-label">Example 1.1</span> (The natural numbers under addition).
+Take \(\mathcal{I} = \mathbb{N}\), \(\circ = +\), and \(e = 0\). Axioms (A1)–(A3) are the standard properties of addition. In this model a chain \([n_1, \dots, n_k]\) has composite \(n_1 + \cdots + n_k\), and the \(n\)-th power of \(a\) is \(na\). Idempotents are exhausted by \(0\); invertible elements are again exhausted by \(0\). This model demonstrates that the formalism does not by itself force any non-trivial group of units.
+</div>
+
+<div class="example">
+<span class="example-label">Example 1.2</span> (Free idea algebra on a generating set \(S\)).
+Let \(S\) be any non-empty set and let \(\mathcal{I} = S^*\) denote the set of finite words on \(S\). Define \(\circ\) as concatenation and \(e\) as the empty word. This is the free monoid on \(S\), and it is the fundamental object underlying the Lockean reading below. The only idempotent is \(e\), and the only invertible element is again \(e\): in the free idea algebra nothing absorbs and nothing is reversible. These properties are the algebraic shadow of Locke's "inability to invent a new simple idea."
+</div>
+
+<div class="example">
+<span class="example-label">Example 1.3</span> (A two-atom finite world).
+Let \(\mathcal{I} = \{ e, a, b, c \}\) with \(a \circ a = a\), \(b \circ b = b\), \(a \circ b = b \circ a = c\), \(c \circ x = c\) for \(x \in \{a, b, c\}\), and \(e\) as two-sided unit. Both \(a\) and \(b\) are idempotent; \(c\) is the "saturated" idea that absorbs everything. This toy model illustrates how the bare monoid can encode the informal idea of "saturation by absorption": once \(c\) is reached, no further composition moves the system.
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s9">
+<h2>9. The zoo: four classical positions accommodated by the bare monoid</h2>
+
+<p>We now show that the bare monoid structure already suffices to host four canonical positions in the philosophy of ideas. Each entry follows the template: <em>Original Claim</em> / <em>Formal Restatement</em> / <em>Status</em> / <em>Commentary</em>.</p>
+
+<div class="zoo-entry" id="zoo-locke">
+<h4>Locke (1690): simple and complex ideas as monoid generators</h4>
+<div class="zoo-section">Original Claim</div>
+<p>Locke<sup class="cite">[1]</sup> divides ideas into the <em>simple</em> and the <em>complex</em> (Bk. II, Ch. II–XII). Simple ideas are received passively from sensation or reflection; the mind cannot manufacture them. Complex ideas are produced by acts of <em>combination</em>, <em>comparison</em>, and <em>abstraction</em> performed on simple ideas. The mind's productive power is exhausted by these operations: "it being not in the power of the most exalted wit ... to invent or frame one new simple idea." Hume<sup class="cite">[2]</sup> inherits and sharpens this combinatorial picture via the "copy principle."</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Let \(S \subseteq \mathcal{I}\) be the set of simple ideas. Locke's claim is that \(\mathcal{I}\) is the smallest sub-monoid of itself containing \(S\) and closed under \(\circ\). Equivalently, the inclusion \(S \hookrightarrow \mathcal{I}\) extends to a unique surjective monoid homomorphism from the free monoid \(S^*\) onto \(\mathcal{I}\). Concretely, every \(a \in \mathcal{I}\) is of the form \(\mathsf{Ch}([s_1, \dots, s_k])\) for some \(s_i \in S \cup \{e\}\).</p>
+<div class="zoo-section">Status</div>
+<p><strong>True for any choice of generators \(S\).</strong> By Lemma 1.13, the set of chain composites of finite sequences from \(S \cup \{e\}\) is closed under \(\circ\) and contains \(e\), hence is a sub-monoid. The non-trivial content — that \(\mathcal{I}\) <em>equals</em> the smallest such sub-monoid for some philosophically meaningful \(S\) — is a question about the existence of a generating set.</p>
+<div class="zoo-section">Commentary</div>
+<p>The bare monoid is faithful to Locke at the structural level but silent on which ideas count as simple and on whether the generation map \(S^* \to \mathcal{I}\) is injective. In a model where it is injective, Lockean atomism is exactly correct. In a model where it is not, two distinct combinations of simples can produce the same complex idea — the algebraic shadow of Aufhebung, taken up systematically in Chapter 3. Locke's notion of abstraction is recovered as the passage from \(\mathcal{I}\) to a quotient sub-monoid.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-hume">
+<h4>Hume (1739): chains as principles of association</h4>
+<div class="zoo-section">Original Claim</div>
+<p>Hume<sup class="cite">[2]</sup> (Bk. I, Pt. I, §IV) holds that ideas combine in the mind by three universal principles of association: resemblance, contiguity, and cause and effect. These principles operate on <em>trains</em> of ideas — sequences in which each new term is recruited by association with its predecessor. Locke's<sup class="cite">[1]</sup> own discussion of the "association of ideas" is Hume's immediate source.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Identify a Humean train with a finite list \(L = [a_1, \dots, a_k]\). The content of the train is its chain composite \(\mathsf{Ch}(L)\). Hume's first claim is that every complex idea is of this form. Hume's second claim — that the sequence is generated by a fixed associative process — is the demand that there be a function \(\alpha : \mathcal{I} \to \mathcal{I}\) with \(a_{i+1} = \alpha(a_i)\).</p>
+<div class="zoo-section">Status</div>
+<p><strong>Hume's first claim is true on the bare monoid.</strong> By Lemma 1.12 every idea \(a\) is itself a chain, and by Lemma 1.13 every composite of a finite collection is a chain. <strong>Hume's second claim is contingent.</strong> It can be made to hold or fail by appropriate choice of \(\alpha\) on the underlying carrier. The bare monoid is silent on the dynamics; later volumes equip \(\mathcal{I}\) with the resonance pairing \(\rho\) that makes "association by resemblance" formally tractable.</p>
+<div class="zoo-section">Commentary</div>
+<p>Hume's chain principle is one of the most under-defended assumptions in the early-modern theory of mind, and the formalization makes clear why: on the bare monoid it is mathematically empty. A concrete prediction of the formal version is Lemma 1.15: empty episodes inserted into a Humean train do not change its content. Any psychological theory in which inserting a contentless interval changes the train's outcome is incompatible with axioms (A1)–(A3).</p>
+</div>
+
+<div class="zoo-entry" id="zoo-frege">
+<h4>Frege (1892): composition of senses</h4>
+<div class="zoo-section">Original Claim</div>
+<p>Frege<sup class="cite">[3]</sup> introduces the distinction between <em>Sinn</em> (sense) and <em>Bedeutung</em> (reference). The sense of a complex expression is determined by the senses of its parts and their mode of combination — the principle of <em>compositionality</em>. The principle is reaffirmed in Wittgenstein<sup class="cite">[4]</sup> (Tractatus §3.318), which treats the proposition as a function of its constituent expressions.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Let \(\mathcal{I}\) be the set of senses, and let \(\circ\) be the operation "the sense of \(a\)-applied-to-\(b\)" (the saturation of a function-sense by an argument-sense). Compositionality is the demand that \(\circ\) be a <em>function</em> of its inputs. Together with the natural unit (the sense of the empty context), this yields exactly the bare idea algebra \(\IdMon\).</p>
+<div class="zoo-section">Status</div>
+<p><strong>True, but the substantive content is associativity.</strong> Frege's compositionality principle is, on its face, only the assertion that \(\circ\) is well defined as a function. Axiom (A1) is what makes the principle useful: it guarantees that the sense of a complex expression does not depend on the order in which its sub-expressions are saturated.</p>
+<div class="zoo-section">Commentary</div>
+<p>The bare monoid is faithful to Frege provided one reads Frege's "mode of combination" as encoded inside \(\circ\). A genuine prediction of the formalization that goes beyond Frege is Theorem 1.1: the sense of a complex expression is invariant under any contiguous re-grouping of its constituents, not merely under binary re-association. The emergence cocycle \(\omega\) (Chapter 5) measures exactly the non-Fregean residue of composition.</p>
+</div>
+
+<div class="zoo-entry" id="zoo-witt">
+<h4>Wittgenstein (1953): family resemblance as a quotient monoid</h4>
+<div class="zoo-section">Original Claim</div>
+<p>The later Wittgenstein<sup class="cite">[4]</sup> (§65–67) rejects the Lockean–Fregean picture of concepts as having essential content. Instead, the extension of a concept — his example is "game" — is held together by a network of overlapping similarities, which Wittgenstein labels <em>family resemblance</em> (<em>Familienähnlichkeit</em>). This is anticipated by Hume's<sup class="cite">[2]</sup> discussion of resemblance as one of the three principles of association.</p>
+<div class="zoo-section">Formal Restatement</div>
+<p>Fix an equivalence relation \(\sim_{\mathcal{I}}\) on \(\mathcal{I}\) generated by a symmetric "resemblance" relation. The family-resemblance class of \(a\) is \([a] := \{ b : a \sim_{\mathcal{I}} b \}\). Wittgenstein's claim is that the natural object of conceptual analysis is not \(\mathcal{I}\) but the quotient \(\mathcal{I}/{\sim_{\mathcal{I}}}\). The bare monoid hosts this construction provided \(\sim_{\mathcal{I}}\) is a <em>congruence</em> for \(\circ\): that is, \(a_1 \sim_{\mathcal{I}} a_2\) and \(b_1 \sim_{\mathcal{I}} b_2\) imply \(a_1 \circ b_1 \sim_{\mathcal{I}} a_2 \circ b_2\).</p>
+<div class="zoo-section">Status</div>
+<p><strong>Contingent on \(\sim_{\mathcal{I}}\) being a congruence.</strong> When this holds, the quotient \(\mathcal{I}/{\sim_{\mathcal{I}}}\) inherits a well-defined operation and is itself a bare idea algebra; the quotient map is a surjective homomorphism. When \(\sim_{\mathcal{I}}\) is not a congruence — the typical case for genuine family resemblance, since composing two "games" need not yield something resembling a "game" — the bare monoid structure does not descend to the quotient.</p>
+<div class="zoo-section">Commentary</div>
+<p>The formalization sharply discriminates two readings. On the <em>algebraic</em> reading, family resemblance is a congruence and Wittgenstein's classes are quotient ideas. On the <em>relational</em> reading, family resemblance is a mere relation that need not respect composition. The choice between the two readings is forced once a candidate \(\sim_{\mathcal{I}}\) is specified, by the testable question of whether it is a congruence. The bare monoid is what makes the question testable.</p>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<section id="s10">
+<h2>10. Synopsis and what comes next</h2>
+
+<p><strong>Accomplishments.</strong> We have isolated three axioms (A1)–(A3) and shown that they suffice to derive: the uniqueness of the void idea (Lemma 1.1); the basic arithmetic of iteration \(a^n\) (Lemmas 1.7–1.11); the homomorphism property of chain composition (Lemmas 1.13–1.15); the order properties of the sub-ideal relations (Lemma 1.16); the closure of idempotents and commuting pairs (Lemmas 1.17–1.18); the uniqueness of inverses and closure of \(\mathcal{I}^\times\) (Lemmas 1.22–1.23); and the three headline theorems (1.1–1.3) with their four corollaries (1.1–1.4). Every result is verified in the Lean module <code>IdeaTheory.Theorems1</code>.</p>
+
+<p><strong>Limitations of the bare monoid.</strong> The structure \(\IdMon\) is silent on three questions of immediate philosophical interest. First, it cannot distinguish two ideas that behave identically under composition. Second, it provides no measure of <em>distance</em> or <em>similarity</em> between ideas. Third, it has no notion of <em>weight</em> or <em>magnitude</em>.</p>
+
+<p><strong>Roadmap.</strong> The next chapter introduces coalitions and the aggregate operator. Chapter 3 develops the Aufhebung decomposition \(\sigma(a) \circ \nu(a) = a\) and proves its uniqueness modulo \(\ker\rho\). Chapter 5 introduces the emergence cocycle \(\omega\) that measures the failure of any content-valuation \(v : \mathcal{I} \to A\) to be a monoid homomorphism. Chapters 6–9 add conjugation, transmission chains, structural equivalence, and grading respectively.</p>
+
+<p><strong>A methodological closing remark.</strong> The conviction underlying the entire monograph is that the abundance of informal claims about "what ideas are" and "how they combine" has created, over centuries, a substantial body of <em>tacit algebra</em>. Untangling this tacit algebra and pinning down its minimal axiomatic core is the task of Idea Theory. The discipline imposed by working in a fully verified setting — the Lean module <code>IdeaTheory</code> contains no <code>sorry</code> and no <code>admit</code> — guarantees that the formal content of every claim is exactly what the prose says it is.</p>
+</section>
+
+<!-- ================================================================ -->
+<section id="refs">
+<h2>References</h2>
+<div class="refs">
+<ol>
+  <li id="ref1">Locke, J. (1690). <em>An Essay Concerning Human Understanding</em>.</li>
+  <li id="ref2">Hume, D. (1739). <em>A Treatise of Human Nature</em>.</li>
+  <li id="ref3">Frege, G. (1892). Über Sinn und Bedeutung. <em>Zeitschrift für Philosophie und philosophische Kritik</em> 100, 25–50. [On Sense and Reference]</li>
+  <li id="ref4">Wittgenstein, L. (1953). <em>Philosophical Investigations</em>. Blackwell.</li>
+  <li id="ref5">MacLane, S. (1998). <em>Categories for the Working Mathematician</em>, 2nd ed. Springer.</li>
+  <li id="ref6">Bourbaki, N. (1989). <em>Algebra I: Chapters 1–3</em>. Springer.</li>
+</ol>
+</div>
+</section>
+
+<div class="chapter-nav">
+  <span></span>
+  <a href="ch02.html">Chapter 2: Coalitions →</a>
+</div>
+
+</main>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>

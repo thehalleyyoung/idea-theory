@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameTheory — Lean Extension | Idea Theory</title>
+  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg: #fbf8f3;
+      --accent: #7a3b2e;
+      --accent-soft: #f1e7e3;
+    }
+    .thm {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: .9em 1.2em;
+      margin: 1.4em 0;
+      border-radius: 0 4px 4px 0;
+    }
+    .thm-label {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .proof-sketch {
+      color: #555;
+      display: block;
+      margin-top: .5em;
+    }
+    .zoo-entry {
+      border-left: 3px solid var(--accent);
+      background: var(--accent-soft);
+      padding: .8em 1.2em;
+      margin: 1.5em 0;
+    }
+    .zoo-entry h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    .implications-block {
+      background: #f0ede6;
+      border-left: 4px solid #5a3a2e;
+      padding: 1em 1.2em;
+      margin: 1.5em 0;
+      border-radius: 0 4px 4px 0;
+    }
+    pre code.language-lean {
+      font-size: .88em;
+    }
+    .section-intro {
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 1.4em;
+    }
+    table.thm-index {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9em;
+      margin: 1.2em 0 2em 0;
+    }
+    table.thm-index th {
+      background: var(--accent);
+      color: #fff;
+      padding: .4em .7em;
+      text-align: left;
+    }
+    table.thm-index td {
+      padding: .35em .7em;
+      border-bottom: 1px solid #e0d8d0;
+    }
+    table.thm-index tr:nth-child(even) td {
+      background: var(--accent-soft);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="nav-inner">
+    <a class="brand" href="../index.html">Idea Theory</a>
+    <div class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="../formalism/index.html">Formalism</a>
+      <a href="../theorems/index.html">Theorems</a>
+      <a href="../chapters/index.html">Book</a>
+      <a href="../zoo/index.html">Zoo</a>
+      <a href="../literature/index.html">Literature</a>
+      <a class="active" href="index.html">Lean</a>
+      <a href="../about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<main class="container" style="max-width:860px;margin:0 auto;padding:2em 1.2em;">
+
+  <header style="margin-bottom:2em;">
+    <div style="font-size:.85em;color:#888;margin-bottom:.4em;">
+      <a href="index.html">Lean</a> › Extensions › GameTheory
+    </div>
+    <h1 style="color:var(--accent);margin-bottom:.3em;">GameTheory.lean</h1>
+    <p style="color:#666;font-size:.95em;margin-bottom:.6em;">
+      <strong>File:</strong>
+      <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/GameTheory.lean"
+         style="font-family:monospace;font-size:.95em;">IdeaTheory/Extensions/GameTheory.lean</a>
+    </p>
+    <p style="color:#666;font-size:.9em;">
+      19 theorems &nbsp;·&nbsp; Nash equilibrium &nbsp;·&nbsp; Evolutionary stability &nbsp;·&nbsp;
+      Mixed strategies &nbsp;·&nbsp; Coalition aggregation
+    </p>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Overview</h2>
+
+  <p class="section-intro">
+    Ideas are strategies. The <em>payoff function</em> \(\rho(i,s)\) gives player \(i\)'s payoff
+    at strategy profile \(s : \mathrm{Fin}\,n \to \alpha\); a <strong>Nash equilibrium</strong> is
+    a profile from which no idea-holder can increase \(\rho\) by unilaterally switching ideas.
+    The identity element \(e\) acts as the <em>null strategy</em> — the algebraically natural
+    resting point that any player can adopt without affecting the product of the coalition.
+  </p>
+  <p class="section-intro">
+    The 19 theorems of <code>GameTheory.lean</code> constitute a complete algebraic game theory
+    for the idea monoid: strategy selection, equilibrium existence, mixed-strategy expected value,
+    evolutionary stability, and coalition aggregation. Every result is stated over an arbitrary type
+    \(\alpha\) carrying an <code>IdeaTheoryStructure</code> instance, so the proofs are
+    simultaneously valid for formal-language ideas, neural activation patterns, cultural schemas,
+    and any other carrier set that satisfies the axioms.
+  </p>
+
+  <p class="section-intro">
+    The module is organized in five groups. <strong>Nash equilibrium theorems</strong> (T1–T10)
+    establish the existence, characterization, and robustness of Nash equilibria in idea games.
+    <strong>Resonance theorems</strong> (T11–T12) formalize the zero-sum substructure of any
+    idea game via the anti-symmetric resonance pairing. <strong>Dominance and mixed-strategy
+    theorems</strong> (T13–T16) handle iterated elimination and the expectation calculus.
+    <strong>Evolutionary stability</strong> (T17) connects idempotency to the ESS criterion.
+    <strong>Coalition and update</strong> theorems (T18–T19) treat collective aggregation and
+    the independence of payoffs from prior slot values.
+  </p>
+  <p class="section-intro">
+    All 19 theorems are stated polymorphically over any type \(lpha\) that carries an
+    <code>IdeaTheoryStructure</code> instance — a type class bundling a monoid structure
+    (carrier, binary operation \(\mathbin{\circ}\), identity \(e\)) with the interpretation
+    axioms of Idea Theory. No theorem assumes commutativity, so the results hold for both
+    commutative idea spaces (where \(a \mathbin{\circ} b = b \mathbin{\circ} a\)) and
+    non-commutative ones (where sequential composition matters). The only assumptions beyond
+    the type class are finiteness (for existence results) and ordering on \(\mathbb{R}\)
+    (for payoff comparisons).
+  </p>
+
+  <!-- Quick reference table -->
+  <h3>Theorem Index</h3>
+  <table class="thm-index">
+    <tr><th>#</th><th>Lean name</th><th>One-line statement</th></tr>
+    <tr><td>T1</td><td><code>nash_of_constant_payoff</code></td><td>Constant payoffs → every profile is Nash</td></tr>
+    <tr><td>T2</td><td><code>nash_identProfile_of_global_max</code></td><td>Identity profile + global max → Nash</td></tr>
+    <tr><td>T3</td><td><code>isNash_iff_forall_best_response</code></td><td>Nash ↔ every player best-responds</td></tr>
+    <tr><td>T4</td><td><code>exists_best_response</code></td><td>Finite inhabited sets → best response exists</td></tr>
+    <tr><td>T5</td><td><code>exists_nash_one_player</code></td><td>One-player finite game has Nash equilibrium</td></tr>
+    <tr><td>T6</td><td><code>nash_pos_scale</code></td><td>Positive scaling preserves Nash</td></tr>
+    <tr><td>T7</td><td><code>nash_add_const</code></td><td>Adding constants preserves Nash</td></tr>
+    <tr><td>T8</td><td><code>nash_op_identProfile</code></td><td>Right-composing with identity preserves Nash</td></tr>
+    <tr><td>T9</td><td><code>nash_identProfile_op</code></td><td>Left-composing with identity preserves Nash</td></tr>
+    <tr><td>T10</td><td><code>nash_refine_id</code></td><td>Identity refinement preserves Nash</td></tr>
+    <tr><td>T11</td><td><code>resonance_antisymm</code></td><td>Resonance pairing is anti-symmetric</td></tr>
+    <tr><td>T12</td><td><code>resonance_diag_zero</code></td><td>Resonance vanishes on the diagonal</td></tr>
+    <tr><td>T13</td><td><code>iterated_dominance_terminates</code></td><td>Iterated elimination terminates</td></tr>
+    <tr><td>T14</td><td><code>mixed_expect_const</code></td><td>Expected value of constant = constant</td></tr>
+    <tr><td>T15</td><td><code>mixed_expect_add</code></td><td>Linearity of expectation</td></tr>
+    <tr><td>T16</td><td><code>mixed_expect_mono</code></td><td>Monotonicity of expectation</td></tr>
+    <tr><td>T17</td><td><code>ess_idempotent</code></td><td>Idempotent strategies are uninvadable</td></tr>
+    <tr><td>T18</td><td><code>coalition_all_ident_eq_ident</code></td><td>All-identity coalition aggregates to identity</td></tr>
+    <tr><td>T19</td><td><code>payoff_update_indep</code></td><td>Payoff after deviation is independent of prior slot value</td></tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Proof Architecture</h2>
+
+  <p class="section-intro">
+    The 19 proofs share a common vocabulary of Lean 4 lemmas. Understanding this vocabulary
+    makes the proof sketches below easy to reconstruct from scratch.
+  </p>
+
+  <h3>Key Lemmas Used</h3>
+  <ul style="line-height:1.9;">
+    <li><code>Function.update_eq_self</code> — updating slot \(i\) with the value already there
+        returns the original function: <code>update s i (s i) = s</code>.</li>
+    <li><code>Function.update_idem</code> — two updates to the same slot compose to the second:
+        <code>update (update s i a) i b = update s i b</code>.</li>
+    <li><code>mul_le_mul_left</code> — multiplying both sides of \(a \le b\) by a positive \(c\)
+        preserves the inequality.</li>
+    <li><code>Finset.exists_max_image</code> — on a non-empty finite set with a real-valued
+        objective, a maximizer exists.</li>
+    <li><code>Finset.sum_le_sum</code> — pointwise \(\le\) on summands lifts to the sum.</li>
+    <li><code>id_left</code>, <code>id_right</code> — the monoid identity laws:
+        \(e \mathbin{\circ} a = a\) and \(a \mathbin{\circ} e = a\).</li>
+    <li><code>List.foldl_nil</code>, <code>List.foldl_cons</code> — induction principles for
+        fold computations.</li>
+  </ul>
+
+  <h3>Proof Patterns</h3>
+  <p class="section-intro">
+    Three patterns recur across the module. First, <em>definitional unfolding</em>: many Nash
+    results require only expanding the definition of <code>IsNash</code> and applying a single
+    rewrite lemma. Second, <em>algebraic closure</em>: preservation theorems (T6–T10) proceed
+    by showing the composed or scaled profile satisfies the same definitional inequality as the
+    original, using the ring or order tactics. Third, <em>measure-theoretic induction</em>:
+    termination (T13) and coalition (T18) results use simple natural-number induction on the
+    cardinality of a finite set or the length of a list, respectively. No result requires
+    transfinite induction, continuity arguments, or choice axioms beyond the finite choice
+    implicit in <code>Finset.exists_max_image</code>.
+  </p>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Core Definitions</h2>
+
+  <p class="section-intro">
+    The following four definitions anchor the entire module. An <code>IdeaGame</code> bundles
+    a player count \(n\), a strategy type \(\alpha\), and a payoff function. Best response and
+    Nash equilibrium are defined in terms of the profile-update operation
+    <code>Function.update s i a</code>, which replaces slot \(i\) of \(s\) with \(a\).
+  </p>
+
+  <pre><code class="language-lean">-- IdeaGame: ideas as strategies
+structure IdeaGame (α : Type u) [IdeaTheoryStructure α] where
+  n      : ℕ
+  payoff : Fin n → (Fin n → α) → ℝ
+
+def identProfile (G : IdeaGame α) : Fin G.n → α := fun _ => ident
+def IsBestResponse (G : IdeaGame α) (i : Fin G.n) (s : Fin G.n → α) (a : α) : Prop :=
+  ∀ b : α, G.payoff i (update s i b) ≤ G.payoff i (update s i a)
+def IsNash (G : IdeaGame α) (s : Fin G.n → α) : Prop :=
+  ∀ (i : Fin G.n) (b : α), G.payoff i (update s i b) ≤ G.payoff i s</code></pre>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Nash Equilibrium Theorems</h2>
+
+  <p class="section-intro">
+    Theorems T1–T10 characterize, construct, and show the robustness of Nash equilibria
+    in idea games. The preservation results (T6–T10) are particularly important: they show
+    that the Nash property is invariant under the algebraic operations of the idea monoid —
+    scaling, translation, and composition with the identity. T1 and T2 are "boundary" results:
+    they show that degenerate games (constant payoffs, globally maximal identity profiles)
+    are fully covered by the Nash concept. T3 and T4 are the analytic heart: they connect
+    the global Nash condition to the local best-response condition and prove that best responses
+    always exist on finite sets. T5 lifts this to a one-player existence theorem. T6–T10 prove
+    that the Nash property travels well under the natural transformations of the idea monoid.
+  </p>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_of_constant_payoff).</span>
+    If every player's payoff is independent of the strategy profile — formally,
+    \(\forall i,s,t:\ \rho(i,s) = \rho(i,t)\) — then every profile is a Nash equilibrium:
+    \[ \forall s:\ \mathrm{IsNash}(G,s). \]
+    <br><small class="proof-sketch">Proof sketch: Each Nash deviation inequality
+    \(\rho(i,\,s[i \mapsto b]) \le \rho(i,s)\) becomes an equality under the hypothesis,
+    so <code>le_of_eq</code> closes every goal immediately.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_identProfile_of_global_max).</span>
+    If the all-identity profile \(e^n\) is a global maximum — no deviation improves it —
+    then it is a Nash equilibrium:
+    \[ \Bigl(\forall i,b:\ \rho\!\left(i,\,e^n[i\mapsto b]\right) \le \rho(i,e^n)\Bigr)
+       \;\Longrightarrow\; \mathrm{IsNash}(G,\, e^n). \]
+    <br><small class="proof-sketch">Proof sketch: The hypothesis is definitionally equal to
+    <code>IsNash</code> applied to the identity profile, since
+    <code>update (identProfile G) i b</code> is precisely the notation used in the definition
+    of <code>IsNash</code>.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (isNash_iff_forall_best_response).</span>
+    A profile is a Nash equilibrium if and only if every player plays a best response:
+    \[ \mathrm{IsNash}(G,s) \;\iff\; \forall i:\ \mathrm{IsBestResponse}(G,i,s,s(i)). \]
+    <br><small class="proof-sketch">Proof sketch: Both directions follow from
+    <code>Function.update_eq_self</code> — updating slot \(i\) of \(s\) with \(s(i)\)
+    recovers \(s\) — so <code>IsNash G s</code> and
+    <code>IsBestResponse G i s (s i)</code> are definitionally interchangeable once
+    that equation is substituted.</small>
+  </div>
+
+  <pre><code class="language-lean">-- T3: Nash iff best-response
+theorem isNash_iff_forall_best_response (G : IdeaGame α) (s : Fin G.n → α) :
+    IsNash G s ↔ ∀ i : Fin G.n, IsBestResponse G i s (s i)</code></pre>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (exists_best_response).</span>
+    On finite inhabited strategy sets, every player always has a best response:
+    \[ \forall i,\; \forall s:\ \exists a:\ \mathrm{IsBestResponse}(G,i,s,a). \]
+    <br><small class="proof-sketch">Proof sketch: <code>Finset.exists_max_image</code>
+    applied to <code>Finset.univ</code> delivers a maximizer \(a^*\) of
+    \(b \mapsto G.\mathrm{payoff}\,i\,(s[i\mapsto b])\); this maximizer is by definition
+    a best response since all other strategies yield payoff at most \(\rho(i,s[i\mapsto a^*])\).</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (exists_nash_one_player).</span>
+    Any one-player game on a finite inhabited strategy set has a Nash equilibrium:
+    \[ \exists s : \mathrm{Fin}\,1 \to \alpha,\; \mathrm{IsNash}(\langle 1,\,\lambda\_.\,\mathrm{payoff}\rangle,\, s). \]
+    <br><small class="proof-sketch">Proof sketch: Apply <code>exists_best_response</code>
+    for the single player \(i = 0\) to obtain a best response \(a\); set \(s = \lambda\_,a\).
+    The update-self identity then confirms that no deviation can improve
+    \(\rho(0, s[0\mapsto b])\) over \(\rho(0, s)\).</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_pos_scale).</span>
+    Multiplying all payoffs by a positive constant \(c > 0\) preserves Nash equilibria:
+    \[ \mathrm{IsNash}\!\left(\langle n,\,\lambda i\,s,\,c\cdot\rho(i,s)\rangle,\, s\right)
+       \;\iff\; \mathrm{IsNash}(G,s). \]
+    <br><small class="proof-sketch">Proof sketch: Forward direction divides both sides
+    of \(c\cdot\rho(i,s[i\mapsto b]) \le c\cdot\rho(i,s)\) by \(c\) using
+    <code>mul_le_mul_left</code>. Backward direction multiplies by \(c\) using
+    <code>mul_le_mul_of_nonneg_left</code> with <code>le_of_lt hc</code>.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_add_const).</span>
+    Adding player-specific constants to payoffs preserves Nash equilibria:
+    \[ \mathrm{IsNash}\!\left(\langle n,\,\lambda i\,s,\,\rho(i,s)+c(i)\rangle,\, s\right)
+       \;\iff\; \mathrm{IsNash}(G,s). \]
+    <br><small class="proof-sketch">Proof sketch: Both directions cancel \(c(i)\) from both
+    sides of the deviation inequality via <code>linarith</code>, using that \(c(i)\) appears
+    identically on both sides regardless of the strategy profile.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_op_identProfile).</span>
+    Composing every player's strategy with the identity on the right preserves Nash equilibria:
+    \[ \mathrm{IsNash}(G,s) \;\Longrightarrow\; \mathrm{IsNash}(G,\, \lambda i,\, s(i) \mathbin{\circ} e). \]
+    <br><small class="proof-sketch">Proof sketch: <code>id_right</code> gives
+    \(\mathrm{op}(s(i), e) = s(i)\) for every \(i\), so \(\lambda i,\,\mathrm{op}(s(i),e)\)
+    is definitionally equal to \(s\) and the original hypothesis applies directly.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_identProfile_op).</span>
+    Composing the identity on the left of every player's strategy preserves Nash equilibria:
+    \[ \mathrm{IsNash}(G,s) \;\Longrightarrow\; \mathrm{IsNash}(G,\, \lambda i,\, e \mathbin{\circ} s(i)). \]
+    <br><small class="proof-sketch">Proof sketch: <code>id_left</code> gives
+    \(\mathrm{op}(e,s(i)) = s(i)\) for every \(i\), so the composed profile reduces to
+    \(s\) and the hypothesis applies unchanged.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (nash_refine_id).</span>
+    Applying the identity refinement — the trivial transformation \(\mathrm{id} \circ s\) —
+    preserves Nash equilibria:
+    \[ \mathrm{IsNash}(G,s) \;\Longrightarrow\; \mathrm{IsNash}(G,\, \mathrm{id} \circ s). \]
+    <br><small class="proof-sketch">Proof sketch: \(\mathrm{id} \circ s = s\) definitionally
+    in Lean 4 (function extensionality is not needed), so the goal reduces to the hypothesis
+    immediately by <code>rfl</code> or <code>exact</code>.</small>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Resonance, Dominance, and Mixed Strategies</h2>
+
+  <p class="section-intro">
+    Theorems T11–T16 address the structure of payoff differences (resonance), the termination
+    of iterated elimination of dominated strategies, and the expectation calculus for mixed
+    strategies. Together they supply the formal toolkit needed to handle zero-sum reasoning
+    and probabilistic play within the idea monoid.
+  </p>
+  <p class="section-intro">
+    The resonance pairing \((i,j,s) \mapsto ho(i,s) - ho(j,s)\) is the fundamental
+    object of comparative game theory: it measures how much better player \(i\) is doing
+    than player \(j\) at profile \(s\). Theorems T11 and T12 establish that this pairing
+    is anti-symmetric (\(\mathrm{res}(i,j,s) = -\mathrm{res}(j,i,s)\)) and zero on the
+    diagonal (\(\mathrm{res}(i,i,s) = 0\)), making it a skew-symmetric bilinear form on
+    the player set. These two properties are the algebraic signature of zero-sum structure
+    and are prerequisites for stating von Neumann's minimax theorem in the context of
+    idea games.
+  </p>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (resonance_antisymm).</span>
+    The resonance pairing — the differential payoff between players — is anti-symmetric:
+    \[ \rho(i,s) - \rho(j,s) \;=\; -\bigl(\rho(j,s) - \rho(i,s)\bigr). \]
+    <br><small class="proof-sketch">Proof sketch: <code>ring</code> closes the goal
+    by arithmetic: negating a difference swaps its operands.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (resonance_diag_zero).</span>
+    The resonance pairing vanishes on the diagonal — a player's payoff differential
+    with themselves is zero:
+    \[ \rho(i,s) - \rho(i,s) \;=\; 0. \]
+    <br><small class="proof-sketch">Proof sketch: <code>ring</code> (or <code>sub_self</code>)
+    closes the goal. This confirms that the resonance pairing forms an anti-symmetric
+    relation on players, consistent with zero-sum structure.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (iterated_dominance_terminates).</span>
+    Any strictly decreasing chain of finite strategy sets terminates: if
+    \(T(k+1) \subsetneq T(k)\) for all \(k\), then
+    \[ \exists k \le \lvert T(0)\rvert + 1:\ T(k) = \emptyset. \]
+    <br><small class="proof-sketch">Proof sketch: By induction on strict inclusions,
+    \(\lvert T(k)\rvert + k \le \lvert T(0)\rvert\) at each step.
+    At \(k = \lvert T(0)\rvert + 1\), the cardinality must be 0, so \(T(k) = \emptyset\)
+    by <code>Finset.card_eq_zero</code>.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (mixed_expect_const).</span>
+    The expected value of a constant function under any mixed strategy equals that constant:
+    \[ \mu.\mathrm{expect}(\lambda\_,\,c) \;=\; c. \]
+    Explicitly: \(\displaystyle\sum_{b} \mu.\mathrm{prob}(b)\cdot c = c\).
+    <br><small class="proof-sketch">Proof sketch: Factor \(c\) out of the sum to get
+    \(c \cdot \sum_b \mu.\mathrm{prob}(b)\). Use the probability normalization axiom
+    \(\sum_b \mu.\mathrm{prob}(b) = 1\), then <code>mul_one</code>.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (mixed_expect_add).</span>
+    Expectation is linear — it distributes over pointwise sums of payoff functions:
+    \[ \mu.\mathrm{expect}(\lambda b,\, f(b)+g(b)) \;=\; \mu.\mathrm{expect}(f) + \mu.\mathrm{expect}(g). \]
+    <br><small class="proof-sketch">Proof sketch: Use <code>mul_add</code> to distribute
+    \(\mu.\mathrm{prob}(b)\) over \(f(b)+g(b)\), then apply
+    <code>Finset.sum_add_distrib</code> to split the sum.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (mixed_expect_mono).</span>
+    Expectation is monotone: pointwise dominance of payoffs implies dominance of expectations:
+    \[ \bigl(\forall b:\ f(b) \le g(b)\bigr) \;\Longrightarrow\; \mu.\mathrm{expect}(f) \le \mu.\mathrm{expect}(g). \]
+    <br><small class="proof-sketch">Proof sketch: Apply <code>Finset.sum_le_sum</code>;
+    at each term use <code>mul_le_mul_of_nonneg_left (h b) (μ.prob_nonneg b)</code> to
+    multiply the pointwise inequality by the non-negative probability.</small>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Evolutionary Stability and Coalition</h2>
+
+  <p class="section-intro">
+    Theorems T17–T19 connect the game theory of ideas to evolutionary epistemology and
+    collective action. The ESS theorem formalizes when an idempotent idea is uninvadable;
+    the coalition theorem establishes the algebraic identity as the fixed point of
+    communicative silence; and the update-independence theorem shows that payoffs are
+    well-defined on deviations regardless of history.
+  </p>
+  <p class="section-intro">
+    Together, T17–T19 answer three questions about idea dynamics that pure Nash theory
+    cannot address. T17 asks: <em>which ideas survive competition over time?</em> — answer:
+    idempotent ones that dominate all mutants under composition. T18 asks: <em>what does a
+    group produce when none of its members is committed to any idea?</em> — answer: the
+    identity, the null output. T19 asks: <em>does history affect a player's payoff from
+    a deviation?</em> — answer: no, only the current action matters. This last result
+    justifies the "strategic-form" representation of idea games: the payoff matrix fully
+    captures the relevant information, and no extensive-form history needs to be tracked.
+  </p>
+
+  <pre><code class="language-lean">-- T15: ESS — idempotent strategies are uninvadable
+theorem ess_idempotent {a : α} (ha : op a a = a)
+    (u : α → α → ℝ)
+    (hStrict : ∀ m, m ≠ a → u (op a m) a < u a a)
+    (hDom    : ∀ m, u m a ≤ u (op a m) a) :
+    ∀ m, m ≠ a → u m a < u a a</code></pre>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (ess_idempotent).</span>
+    Let \(a\) be an idempotent strategy (\(a \mathbin{\circ} a = a\)). If every mutant
+    \(m \ne a\) is strictly dominated after one round of composition —
+    \(u(a\mathbin{\circ}m,\,a) < u(a,a)\) — and every mutant is weakly dominated by its
+    composition —  \(u(m,a) \le u(a\mathbin{\circ}m,a)\) — then \(a\) is
+    evolutionarily stable:
+    \[ \forall m \ne a:\ u(m,a) < u(a,a). \]
+    <br><small class="proof-sketch">Proof sketch: Chain the two hypotheses:
+    \(u(m,a) \le u(a\mathbin{\circ}m,a) < u(a,a)\) via
+    <code>lt_of_le_of_lt (hDom m) (hStrict m hm)</code>.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (coalition_all_ident_eq_ident).</span>
+    A coalition in which every member holds the identity idea aggregates to the identity:
+    \[ \forall l : \mathrm{List}\,\alpha,\;
+       \bigl(\forall x \in l,\; x = e\bigr) \;\Longrightarrow\; l.\mathrm{foldl}(\mathbin{\circ},\, e) = e. \]
+    <br><small class="proof-sketch">Proof sketch: Induction on \(l\). Base case:
+    <code>rfl</code> for the empty list. Inductive step: the head satisfies \(h = e\)
+    by hypothesis; apply <code>id_right</code> to reduce
+    <code>foldl op e (h :: t) = foldl op (op e h) t = foldl op e t</code>, then
+    the inductive hypothesis closes the goal.</small>
+  </div>
+
+  <div class="thm">
+    <span class="thm-label">Theorem (payoff_update_indep).</span>
+    Player \(i\)'s payoff after a deviation to \(b\) is independent of the previous value
+    in slot \(i\) — only the final action \(b\) matters:
+    \[ \rho\!\left(i,\; (s[i\mapsto a])[i\mapsto b]\right) \;=\; \rho(i,\; s[i\mapsto b]). \]
+    <br><small class="proof-sketch">Proof sketch: Apply <code>congrFun</code> on the profile
+    argument; <code>Function.update_idem</code> (or the update-update cancellation lemma)
+    collapses \((s[i\mapsto a])[i\mapsto b] = s[i\mapsto b]\), completing the goal.</small>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Lean Code: Nash Characterizations</h2>
+
+  <pre><code class="language-lean">-- T1: Constant payoffs → every profile is Nash
+theorem nash_of_constant_payoff (G : IdeaGame α)
+    (h : ∀ (i : Fin G.n) (s t : Fin G.n → α), G.payoff i s = G.payoff i t)
+    (s : Fin G.n → α) : IsNash G s</code></pre>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Concept Zoo</h2>
+
+  <p class="section-intro">
+    Each entry below places one of Idea Theory's game-theoretic concepts in its intellectual
+    lineage, connecting the machine-verified theorems to the canonical social-science literature.
+  </p>
+
+  <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+    <h3>Nash Equilibrium</h3>
+    <p>
+      The central concept: a strategy profile \(s^*\) is a Nash equilibrium if no player can
+      strictly improve their payoff by unilateral deviation. In Idea Theory, ideas are strategies
+      and Nash equilibria are <em>stable idea profiles</em> — configurations from which no agent
+      benefits by switching to a different idea. The 19 theorems of <code>GameTheory.lean</code>
+      prove that this concept is algebraically well-founded: it is preserved by positive scaling
+      (T6), translation invariance (T7), and left/right composition with the identity (T8, T9).
+      The existence theorem (T5) shows that any finite one-player game always has a Nash
+      equilibrium. The best-response characterization (T3) links Nash equilibria to rationality:
+      each player is simultaneously playing optimally against the others. This makes Nash
+      equilibria not just stable but <em>justified</em> — a connection absent in purely
+      sociological accounts of conventions. The identity profile is always Nash in any game with
+      constant payoffs (T1), anchoring the theory to the algebraic identity.
+    </p>
+  </div>
+
+  <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+    <h3>Maynard Smith — Evolutionarily Stable Strategy</h3>
+    <p>
+      John Maynard Smith's ESS concept (1973, 1982) asks: which strategies are uninvadable by
+      mutants in an evolving population? A strategy \(a\) is an ESS if \(u(a,a) > u(m,a)\) for
+      all mutants \(m\) (strict stability), or if \(u(a,a)=u(m,a)\) and \(u(a,m)>u(m,m)\) (weak
+      stability). Theorem <code>ess_idempotent</code> (T17) formalizes the strict-stability
+      branch: an <em>idempotent</em> strategy \(a\) — one satisfying \(a\mathbin{\circ}a=a\), the
+      mathematical signature of a habit or schema — is uninvadable whenever every mutant is
+      strictly dominated after one round of composition. This connects ESS theory directly to the
+      algebraic structure: idempotent elements of the idea monoid are precisely the evolutionarily
+      stable strategies. The proof is a two-line chain of inequalities, but it is machine-verified
+      — there are no hidden assumptions about continuity or differentiability. Evolutionary
+      stability is here a purely algebraic property.
+    </p>
+  </div>
+
+  <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+    <h3>Schelling — Focal Points</h3>
+    <p>
+      Thomas Schelling's focal-point theory (<em>The Strategy of Conflict</em>, 1960) argues that
+      among multiple Nash equilibria, agents coordinate on "prominent" or "salient" ones without
+      explicit communication. The <code>nash_add_const</code> theorem (T7) formalizes the
+      irrelevance of absolute payoff levels for Nash selection: salience operates above the level
+      of Nash computation. This resonates with Schelling's insight that focal points are not
+      determined by the payoff matrix alone but by contextual factors. In Idea Theory, the
+      identity element \(e\) is the canonical focal point of any idea game — it is the
+      algebraically natural resting point, the default strategy. The
+      <code>nash_op_identProfile</code> and <code>nash_identProfile_op</code> theorems (T8, T9)
+      show that \(e\) absorbs silently: composing with the identity never moves a player away from
+      a Nash equilibrium. Schelling's focal points thus correspond, in the algebra, to fixed
+      points of the composition operation.
+    </p>
+  </div>
+
+  <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+    <h3>von Neumann — Minimax</h3>
+    <p>
+      John von Neumann's minimax theorem (1928) establishes that in two-player zero-sum games the
+      minimax value equals the maximin value, guaranteeing a unique equilibrium value for rational
+      play. Theorems <code>resonance_antisymm</code> (T11) and <code>resonance_diag_zero</code>
+      (T12) formalize the zero-sum structure of the resonance pairing: the differential payoff
+      \(\rho(i,s)-\rho(j,s)\) is anti-symmetric and vanishes on the diagonal. This is the
+      algebraic kernel of zero-sum reasoning. The mixed-strategy theorems
+      (<code>mixed_expect_const</code> T14; <code>mixed_expect_add</code> T15;
+      <code>mixed_expect_mono</code> T16) provide the expectation machinery needed to state the
+      minimax theorem in full generality. The <code>iterated_dominance_terminates</code> theorem
+      (T13) shows that iterated elimination of strictly dominated strategies terminates in finite
+      time, providing the algorithmic complement to von Neumann's existence result.
+    </p>
+  </div>
+
+  <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+    <h3>Axelrod — Cooperation and Iteration</h3>
+    <p>
+      Robert Axelrod's tournament experiments (<em>The Evolution of Cooperation</em>, 1984) showed
+      that Tit-for-Tat — an idempotent, retaliatory-but-forgiving strategy — was evolutionarily
+      stable in iterated Prisoner's Dilemma. The <code>iterated_dominance_terminates</code>
+      theorem (T13) provides the formal backbone: any sequence of strictly dominated strategy
+      eliminations halts. This mirrors Axelrod's finding that cooperation emerges not from
+      one-shot rationality but from iterated interaction — the shadow of the future eliminates
+      dominated defection. The <code>ess_idempotent</code> theorem (T17) formalizes why
+      Tit-for-Tat is stable: it is idempotent (playing it against itself yields itself) and
+      strictly dominates mutants under composition. Axelrod's lesson — cooperation is an
+      algebraic fixed point — is thus a theorem in Idea Theory's game-theoretic extension.
+    </p>
+  </div>
+
+  <div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+    <h3>Habermas — Communicative Rationality</h3>
+    <p>
+      Jürgen Habermas's communicative action theory (<em>The Theory of Communicative Action</em>,
+      1981) distinguishes strategic rationality (maximizing payoffs) from communicative rationality
+      (seeking mutual understanding through dialogue). The
+      <code>coalition_all_ident_eq_ident</code> theorem (T18) formalizes the Habermasian
+      "silent coalition": a group of agents who all hold the identity idea — who are not yet
+      committed to any substantive position — aggregate to the identity. This is communicative
+      rationality at the algebraic level: the absence of strategic commitment is itself a stable
+      state. A coalition can only produce non-identity output if at least one member holds a
+      non-identity idea. This contrasts sharply with strategic accounts: even a unanimous
+      coalition of null strategies fails to coordinate on any positive meaning. Habermas's ideal
+      speech situation — the presupposition of discourse — is thus the all-identity profile.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Implications</h2>
+
+  <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+    <p>
+      The 19 theorems of <code>GameTheory.lean</code> are not merely a formalization exercise.
+      They prove that strategic reasoning about ideas is <em>algebraically grounded</em> — not a
+      metaphor applied from economics, but a theorem derived from the axioms of the idea monoid.
+      The preservation results (T6, T7, T8, T9, T10) show that Nash equilibria are robust to the
+      specific form of the payoff function: they survive positive scaling, translation by
+      player-specific constants, and composition with the identity element. This means that the
+      concept of equilibrium in idea space is not fragile. Stable idea profiles exist not because
+      payoffs happen to align, but because the algebraic structure guarantees it.
+    </p>
+  </div>
+
+  <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+    <p>
+      The best-response characterization (T3) establishes a tight link between Nash equilibria and
+      individual rationality. Combined with the existence result (T5) for one-player games and
+      best-response existence on finite sets (T4), these theorems show that finite idea games
+      always have a rational solution concept. This is the algebraic analogue of the Nash existence
+      theorem for finite games — which requires fixed-point theorems — but the direct proofs here
+      use only list manipulation and order arithmetic. This shows that for the class of games
+      considered, the full machinery of fixed-point theory is unnecessary: the algebraic structure
+      itself is sufficient.
+    </p>
+  </div>
+
+  <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+    <p>
+      The evolutionary stability theorem (T17) connects the game theory of ideas to evolutionary
+      epistemology. An idempotent idea — a schema that reproduces itself under self-application —
+      is uninvadable if its composition with any mutant is strictly dominated. This is Dawkins's
+      "meme" recast in algebraic terms: a meme is an idempotent element of the idea monoid that
+      satisfies the ESS condition. The machine-verified proof ensures that no implicit assumptions
+      about continuity or differentiability enter. Evolutionary stability is a purely algebraic
+      property, not a biological one. Idempotency — the closure of a habit or schema under
+      self-reinforcement — is the algebraic signature of cultural persistence.
+    </p>
+  </div>
+
+  <div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+    <p>
+      The anti-symmetry and diagonality lemmas (T11, T12) reveal a hidden zero-sum structure
+      within every idea game. Even when the game is not explicitly zero-sum, the resonance
+      pairing — the differential payoff between any two players — is anti-symmetric. This means
+      that whenever player \(i\) gains by a unilateral deviation relative to player \(j\), player
+      \(j\) loses by exactly the same amount. Idea competition is thus partially zero-sum at the
+      level of relative standing, even when absolute payoffs are positive-sum. This structural
+      result has implications for the sociology of ideas: the claim that ideas are non-rivalrous
+      (correct in the production sense) does not imply that their adoption is non-rivalrous in
+      the social-attention economy.
+    </p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Mathematical Notation Summary</h2>
+
+  <p class="section-intro">
+    The following notation is used uniformly across the 19 theorems. Lean names are given
+    alongside the mathematical symbols to facilitate lookup in the source file.
+  </p>
+
+  <table class="thm-index">
+    <tr><th>Symbol</th><th>Lean name</th><th>Meaning</th></tr>
+    <tr><td>\(lpha\)</td><td><code>α</code></td><td>Type of ideas (strategy type)</td></tr>
+    <tr><td>\(e\)</td><td><code>ident</code></td><td>Identity idea (null strategy)</td></tr>
+    <tr><td>\(a \mathbin{\circ} b\)</td><td><code>op a b</code></td><td>Idea composition (strategy composition)</td></tr>
+    <tr><td>\(G\)</td><td><code>IdeaGame α</code></td><td>An idea game with \(n\) players</td></tr>
+    <tr><td>\(n\)</td><td><code>G.n</code></td><td>Number of players</td></tr>
+    <tr><td>\(ho(i,s)\)</td><td><code>G.payoff i s</code></td><td>Player \(i\)'s payoff at profile \(s\)</td></tr>
+    <tr><td>\(s[i \mapsto a]\)</td><td><code>update s i a</code></td><td>Profile \(s\) with slot \(i\) replaced by \(a\)</td></tr>
+    <tr><td>\(e^n\)</td><td><code>identProfile G</code></td><td>All-identity profile</td></tr>
+    <tr><td>\(\mathrm{IsNash}(G,s)\)</td><td><code>IsNash G s</code></td><td>Profile \(s\) is a Nash equilibrium of \(G\)</td></tr>
+    <tr><td>\(\mathrm{IsBR}(G,i,s,a)\)</td><td><code>IsBestResponse G i s a</code></td><td>Action \(a\) is a best response for \(i\) in profile \(s\)</td></tr>
+    <tr><td>\(\mu\)</td><td><code>MixedStrategy α</code></td><td>Mixed strategy (probability distribution over \(lpha\))</td></tr>
+    <tr><td>\(\mu.\mathrm{expect}(f)\)</td><td><code>μ.expect f</code></td><td>Expected value of \(f\) under \(\mu\)</td></tr>
+    <tr><td>\(u(a,b)\)</td><td><code>u a b</code></td><td>Payoff in two-player ESS game</td></tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <h2>Related Pages</h2>
+
+  <h3>Core Theorems</h3>
+  <ul>
+    <li><a href="../theorems/composition.html">Composition Theorems</a> — algebraic
+        foundations underlying strategy composition in idea games</li>
+    <li><a href="../theorems/meaning-curvature.html">Meaning Curvature</a> — non-linearity
+        in payoff space as ideas compose</li>
+  </ul>
+
+  <h3>Extensions</h3>
+  <ul>
+    <li><a href="meaning-games.html">MeaningGames.lean</a> — signaling games and
+        semantic equilibria over idea spaces</li>
+    <li><a href="diffusion.html">Diffusion.lean</a> — epidemic and diffusion models
+        for idea propagation on networks</li>
+  </ul>
+
+  <h3>Source</h3>
+  <ul>
+    <li>
+      <a href="https://github.com/thehalleyyoung/idea-theory/blob/main/lean/IdeaTheory/Extensions/GameTheory.lean">
+        IdeaTheory/Extensions/GameTheory.lean
+      </a> — complete Lean 4 source with all 19 theorems
+    </li>
+  </ul>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p>
+</footer>
+
+</body>
+</html>

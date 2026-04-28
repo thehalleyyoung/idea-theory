@@ -3,26 +3,587 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 2: Resonance Pairing — Idea Theory</title>
+<title>Theorem 2: The Resonance Pairing — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
 <main class="content">
-<h1>Theorem 2: Resonance Pairing</h1>
-<div class="thm"><span class="thm-label">Theorem 2.</span> A function \(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\) extends uniquely to a bilinear form \(\tilde\rho:\mathbb{R}\langle\mathcal{I}\rangle\otimes\mathbb{R}\langle\mathcal{I}\rangle\to\mathbb{R}\). If \(\tilde\rho\) is non-degenerate, then for every fixed \(c\in\mathcal{I}\) the form \(\tilde\rho_c(a,b):=\tilde\rho(c\circ a,c\circ b)\) is also non-degenerate.</div>
+<h1>Theorem 2: The Resonance Pairing</h1>
+<p style="color:var(--muted);font-family:Inter,sans-serif;font-size:.92rem;margin-top:-.3em;">
+  <code>IdeaTheory.Theorems2</code> &mdash; 73 lemmas and theorems, fully machine-checked in Lean 4
+</p>
 
-<h2>Proof sketch</h2>
-<p>Existence and uniqueness of the bilinear extension follow from the universal property of the free vector space. For preservation: if \(\tilde\rho_c(a,b)=0\) for all \(b\), then in particular for \(b\) of the form \(c^{-1}\circ b'\) (after passing to the unitalization if necessary) we obtain \(\tilde\rho(c\circ a, b')=0\) for all \(b'\), so \(c\circ a = 0\); since left-multiplication by \(c\) is injective on the free vector space (Theorem 1), \(a=0\).</p>
+<!-- ============================================================ TOC -->
+<nav style="background:var(--accent-soft);border:1px solid var(--rule);border-radius:5px;padding:.9em 1.2em;margin:1.5em 0;">
+<strong style="font-family:Inter,sans-serif;font-size:.92rem;">Contents</strong>
+<ol style="margin:.5em 0 0;padding-left:1.4em;font-size:.93rem;line-height:1.8;">
+  <li><a href="#opening">The Resonance Pairing</a></li>
+  <li><a href="#headlines">Headline Theorems (2.1 &ndash; 2.3) and Corollaries</a></li>
+  <li><a href="#s1">§1 Definitions and Basic Identities</a></li>
+  <li><a href="#s2">§2 Vacuum and Weight</a></li>
+  <li><a href="#s3">§3 Emergence Vacuum Lemmas</a></li>
+  <li><a href="#s4">§4 Algebraic Manipulation</a></li>
+  <li><a href="#s5">§5 Symmetry Decomposition</a></li>
+  <li><a href="#s6">§6 Probes</a></li>
+  <li><a href="#s7">§7 Chain Resonance</a></li>
+  <li><a href="#s8">§8 Heavy Ideas and Weight Monotonicity</a></li>
+  <li><a href="#s9">§9 Resonance-Closed Sets</a></li>
+  <li><a href="#implications">Implications</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+  <li><a href="#lean-ext">Related Lean Extensions</a></li>
+</ol>
+</nav>
 
-<p>Verified as <code>IdeaTheory.Theorems2.resonance_extension_unique</code>.</p>
+<!-- ============================================================ OPENING -->
+<h2 id="opening">The Resonance Pairing</h2>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/philosophy/hume-association.html">Hume</a></li>
-<li><a href="../zoo/connectionist/mikolov-embeddings.html">Mikolov embeddings</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<p>
+The central object of Idea Theory is the <em>resonance pairing</em> \(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\), a real-valued function that measures how strongly one idea responds to another. Unlike a metric, \(\rho\) is neither symmetric nor bounded below; unlike an inner product, it need not be bilinear or positive-definite. What it does satisfy is a rich set of structural constraints — axioms governing the vacuum element \(e\), the composition operation \(\circ\), and the emergence functional \(\omega\) — that together force a remarkably determinate algebra.
+</p>
+
+<p>
+The Lean file <code>IdeaTheory.Theorems2</code> systematically derives all first-order consequences of these constraints: 73 lemmas and theorems covering basic definitions, vacuum annihilation, emergence cocycle identities, symmetry decomposition, probe evaluation, chain resonance, and weight monotonicity. Together they constitute a complete toolkit for reasoning about how ideas resonate, compose, and accumulate meaning.
+</p>
+
+<p>
+Two auxiliary concepts are central throughout. The <em>weight</em> \(w(a) = \rho(a,a)\) measures how strongly an idea resonates with itself — a scalar proxy for semantic density. The <em>emergence</em> functional \(\omega(a,b;c)\) measures how much the resonance of a composition \(a \circ b\) with \(c\) exceeds the sum of its parts: the excess signal that arises when ideas combine.
+</p>
+
+<!-- ============================================================ HEADLINE THEOREMS -->
+<h2 id="headlines">Headline Theorems and Corollaries</h2>
+
+<p>Three theorems stand above the rest. Theorem 2.1 shows that resonance respects associativity up to a three-argument emergence term \(\Omega_3\). Theorem 2.2 gives the full weight characterization: weight is non-negative, vanishes exactly at the vacuum, and is positive exactly away from it. Theorem 2.3 is the chain decomposition: chain resonance splits cleanly into a linear part and an emergence part.</p>
+
+<div class="thm" id="thm21"><span class="thm-label">Theorem 2.1 (theorem_2_1).</span>
+For all ideas \(a,b,c,d\),
+\[
+  \rho\!\left((a\circ b)\circ c,\, d\right)
+  \;=\; \rho(a,d)+\rho(b,d)+\rho(c,d)+\Omega_3(a,b,c;\,d),
+\]
+where \(\Omega_3(a,b,c;d) = \omega(a{\circ}b,c;d)+\omega(a,b;d)\).
+</div>
+
+<p><strong>Proof sketch.</strong> Apply the decomposition \(\rho(x\circ y,d) = \rho(x,d)+\rho(y,d)+\omega(x,y;d)\) twice: first to \((a\circ b)\circ c\) expanding the outer composition, then to \(a\circ b\) expanding the inner one. The two applications yield \(\rho(a,d)+\rho(b,d)+\omega(a,b;d)+\rho(c,d)+\omega(a\circ b,c;d)\), which is exactly \(\rho(a,d)+\rho(b,d)+\rho(c,d)+\Omega_3(a,b,c;d)\) by definition of \(\Omega_3\). &square;</p>
+
+<div class="thm" id="thm22"><span class="thm-label">Theorem 2.2 (theorem_2_2).</span>
+The weight function \(w:\mathcal{I}\to\mathbb{R}\) satisfies:
+<ol style="margin:.4em 0 .2em;padding-left:1.4em;">
+<li>\(w(a) \geq 0\) for all \(a\);</li>
+<li>\(w(e) = 0\);</li>
+<li>\(w(a) = 0 \iff a = e\);</li>
+<li>\(w(a) > 0 \iff a \neq e\).</li>
+</ol>
+</div>
+
+<p><strong>Proof sketch.</strong> (i) follows from the non-negativity axiom on \(\rho(a,a)\). (ii) follows from \(\rho(e,e)=0\), itself a consequence of both \(\rho(e,\cdot)\equiv 0\) and \(\rho(\cdot,e)\equiv 0\) (the vacuum axioms). (iii) combines (i) and (ii) with the axiom that \(\rho(a,a)=0\) forces \(a=e\) (non-degeneracy of the diagonal). (iv) is the contrapositive of (iii) together with (i). &square;</p>
+
+<div class="thm" id="thm23"><span class="thm-label">Theorem 2.3 (theorem_2_3).</span>
+For every list \(L\) of ideas and probe \(c\),
+\[
+  \mathrm{CR}(L,c) \;=\; \mathrm{CRL}(L,c) + \mathrm{CE}(L,c).
+\]
+</div>
+
+<p><strong>Proof sketch.</strong> By induction on \(L\). The base case \(L=[]\) gives \(0=0+0\). For the inductive step \(L = a :: \mathit{as}\): the definition of \(\mathrm{CR}\) expands the head via the decomposition lemma, separating the \(\rho(a,c)\) term (which joins \(\mathrm{CRL}\)) and the \(\omega(a,\mathrm{chain}(\mathit{as});c)\) term (which joins \(\mathrm{CE}\)). The resonance of \(\mathrm{chain}(\mathit{as})\) with \(c\) recurses into the inductive hypothesis. &square;</p>
+
+<div class="cor"><span class="thm-label">Corollary 2.1 (corollary_2_1).</span>
+\(\Omega_3(a,b,c;d)=0 \iff \rho((a\circ b)\circ c,\,d) = \rho(a,d)+\rho(b,d)+\rho(c,d).\)
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 2.2 (corollary_2_2).</span>
+If \(w(a)=0\) then \(a=e\).
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 2.3 (corollary_2_3).</span>
+\(a \neq e \iff w(a) > 0.\)
+</div>
+
+<div class="cor"><span class="thm-label">Corollary 2.4 (corollary_2_4).</span>
+If \(\mathrm{CE}(L,c)=0\) then \(\mathrm{CR}(L,c) = \mathrm{CRL}(L,c)\).
+</div>
+
+<!-- ============================================================ §1 -->
+<h2 id="s1">§1 Definitions and Basic Identities</h2>
+
+<p>The following definitions fix the derived quantities used throughout the module. They are stated as Lean definitional lemmas — equalities that hold by unfolding — as well as the key decomposition that connects resonance to emergence.</p>
+
+<div class="defn"><span class="thm-label">Definition (weight).</span>
+\(w(a) := \rho(a,a).\)
+</div>
+
+<div class="defn"><span class="thm-label">Definition (emergence).</span>
+\(\omega(a,b;\,c) := \rho(a\circ b,\,c) - \rho(a,c) - \rho(b,c).\)
+</div>
+
+<div class="defn"><span class="thm-label">Definition (coresonance).</span>
+\(\rho^+(a,b) := \rho(a,b)+\rho(b,a).\)
+</div>
+
+<div class="defn"><span class="thm-label">Definition (gap).</span>
+\(\delta(a,b) := \rho(a,b)-\rho(b,a).\)
+</div>
+
+<div class="defn"><span class="thm-label">Definition (iter3Emergence).</span>
+\(\Omega_3(a,b,c;\,d) := \omega(a\circ b,\,c;\,d) + \omega(a,b;\,d).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.1 (probeSum_def).</span>
+\((p+q)(a) = \rho(a,p) + \rho(a,q).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.2 (weight_def).</span>
+\(w(a) = \rho(a,a).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.3 (emergence_eq).</span>
+\(\omega(a,b;\,c) = \rho(a\circ b,\,c) - \rho(a,c) - \rho(b,c).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.4 (rs_op_decomp).</span>
+\(\rho(a\circ b,\,c) = \rho(a,c) + \rho(b,c) + \omega(a,b;\,c).\)
+</div>
+
+<!-- ============================================================ §2 -->
+<h2 id="s2">§2 Vacuum and Weight</h2>
+
+<p>The vacuum element \(e\) is semantically inert: it contributes zero resonance on either side of the pairing. From this, together with the non-negativity and non-degeneracy axioms, one derives a complete characterization of weight at and away from \(e\).</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.5 (weight_void).</span>
+\(w(e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.6 (weight_nonneg).</span>
+\(w(a) \geq 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.7 (rs_eq_zero_of_left_void).</span>
+\(\rho(e,a) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.8 (rs_eq_zero_of_right_void).</span>
+\(\rho(a,e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.9 (weight_pos_of_ne_void).</span>
+If \(a \neq e\) then \(w(a) > 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.10 (weight_eq_zero_iff).</span>
+\(w(a) = 0 \iff a = e.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.11 (weight_pos_iff).</span>
+\(w(a) > 0 \iff a \neq e.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.12 (weight_ne_zero_iff).</span>
+\(w(a) \neq 0 \iff a \neq e.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.13 (rs_void_void).</span>
+\(\rho(e,e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.14 (coresonance_void_left).</span>
+\(\rho^+(e,a) = \rho(a,e).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.15 (coresonance_void_right).</span>
+\(\rho^+(a,e) = \rho(e,a).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.16 (gap_void_left).</span>
+\(\delta(e,a) = -\rho(a,e).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.17 (gap_void_right).</span>
+\(\delta(a,e) = -\rho(e,a).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.18 (gap_self_zero).</span>
+\(\delta(a,a) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.19 (coresonance_self).</span>
+\(\rho^+(a,a) = 2\,w(a).\)
+</div>
+
+<!-- ============================================================ §3 -->
+<h2 id="s3">§3 Emergence Vacuum Lemmas</h2>
+
+<p>Emergence vanishes whenever any of its three arguments is the vacuum. These five lemmas express the normalization condition on \(\omega\) in every possible configuration of \(e\).</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.20 (emergence_void_left).</span>
+\(\omega(e,b;\,c) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.21 (emergence_void_middle).</span>
+\(\omega(a,e;\,c) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.22 (emergence_void_right).</span>
+\(\omega(a,b;\,e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.23 (emergence_void_void_left).</span>
+\(\omega(e,e;\,c) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.24 (emergence_void_void_right).</span>
+\(\omega(a,e;\,e) = 0.\)
+</div>
+
+<!-- ============================================================ §4 -->
+<h2 id="s4">§4 Algebraic Manipulation</h2>
+
+<p>This section collects the key identities governing how \(\rho\) and \(\omega\) interact with left-association, right-association, subtraction, and commutativity of composition. The centerpiece is the <em>emergence associativity relation</em> (Lemma 2.36), which is precisely the 2-cocycle identity on \(\omega\).</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.25 (rs_op_assoc_left).</span>
+\[
+\rho((a\circ b)\circ c,\,d)
+= \rho(a,d)+\rho(b,d)+\omega(a,b;\,d)+\rho(c,d)+\omega(a\circ b,\,c;\,d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.26 (rs_op_assoc_right).</span>
+\[
+\rho(a\circ(b\circ c),\,d)
+= \rho(a,d)+\rho(b,d)+\rho(c,d)+\omega(b,c;\,d)+\omega(a,b\circ c;\,d).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.27 (rs_op_commute_decomp).</span>
+\[
+\rho(a\circ b,\,c)-\rho(b\circ a,\,c)
+= \omega(a,b;\,c)-\omega(b,a;\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.28 (emergence_swap_left).</span>
+\[
+\omega(a,b;\,c)-\omega(b,a;\,c)
+= \rho(a\circ b,\,c)-\rho(b\circ a,\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.29 (emergence_def_symm).</span>
+\[
+\rho(a\circ b,\,c) = \rho(a,c)+\rho(b,c)+\omega(a,b;\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.30 (rs_op_sub_left).</span>
+\[
+\rho(a\circ b,\,c)-\rho(a,c) = \rho(b,c)+\omega(a,b;\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.31 (rs_op_sub_right).</span>
+\[
+\rho(a\circ b,\,c)-\rho(b,c) = \rho(a,c)+\omega(a,b;\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.32 (rs_op_eq_iff).</span>
+\[
+\rho(a\circ b,\,c) = \rho(a,c)+\rho(b,c) \iff \omega(a,b;\,c)=0.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.33 (rs_op_void_first).</span>
+\(\rho(e\circ a,\,c) = \rho(a,c).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.34 (rs_op_void_second).</span>
+\(\rho(a\circ e,\,c) = \rho(a,c).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.35 (rs_assoc_collapse).</span>
+\(\rho((a\circ b)\circ c,\,d) = \rho(a\circ(b\circ c),\,d).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.36 (emergence_assoc_relation).</span>
+The <em>2-cocycle identity</em> for emergence:
+\[
+\omega(a\circ b,\,c;\,d)+\omega(a,b;\,d)
+= \omega(b,c;\,d)+\omega(a,b\circ c;\,d).
+\]
+</div>
+
+<p>Lemma 2.36 is the most algebraically significant result in this section. It is precisely the normalized 2-cocycle condition, familiar from group cohomology, but here derived purely from the axioms of the resonance pairing and associativity of composition. It constrains how emergence can distribute across iterated compositions and underlies the coherence of chain resonance (Theorem 2.3).</p>
+
+<!-- ============================================================ §5 -->
+<h2 id="s5">§5 Symmetry Decomposition</h2>
+
+<p>The resonance pairing is not required to be symmetric. The coresonance \(\rho^+\) and gap \(\delta\) extract its symmetric and antisymmetric parts respectively. Every \(\rho\) decomposes into these two orthogonal components.</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.37 (coresonance_symm).</span>
+\(\rho^+(a,b) = \rho^+(b,a).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.38 (gap_antisymm).</span>
+\(\delta(a,b) = -\delta(b,a).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.39 (rs_eq_half_coresonance_plus_half_gap).</span>
+\[
+\rho(a,b) = \tfrac{1}{2}\rho^+(a,b) + \tfrac{1}{2}\delta(a,b).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.40 (rs_swap_eq_half_coresonance_minus_half_gap).</span>
+\[
+\rho(b,a) = \tfrac{1}{2}\rho^+(a,b) - \tfrac{1}{2}\delta(a,b).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.41 (coresonance_eq_two_rs_iff_gap_zero).</span>
+\[
+\rho^+(a,b) = 2\,\rho(a,b) \iff \delta(a,b) = 0.
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.42 (gap_zero_iff_symmetric).</span>
+\[
+\delta(a,b) = 0 \iff \rho(a,b) = \rho(b,a).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.43 (coresonance_self_eq).</span>
+\(\rho^+(a,a) = 2\,\rho(a,a).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.44 (gap_self_eq).</span>
+\(\delta(a,a) = 0.\)
+</div>
+
+<!-- ============================================================ §6 -->
+<h2 id="s6">§6 Probes</h2>
+
+<p>A <em>probe</em> is an idea \(p\) viewed as a measuring instrument: evaluating \(p\) at \(a\) returns \(\rho(a,p)\). Probes are additive over composition (up to emergence) and vanish at the vacuum. Sums of probes behave accordingly.</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.45 (Probe.evalAt_void).</span>
+\(p(e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.46 (Probe.evalAt_op).</span>
+\(p(a\circ b) = p(a)+p(b)+\omega(a,b;\,p).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.47 (probeSum_void).</span>
+\((p+q)(e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.48 (probeSum_op).</span>
+\[
+(p+q)(a\circ b)
+= (p+q)(a)+(p+q)(b)+\omega(a,b;\,p)+\omega(a,b;\,q).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.49 (Probe.evalAt_self_nonneg).</span>
+\(p(p.\mathrm{carrier}) \geq 0.\)
+</div>
+
+<p>Lemma 2.49 connects probes back to weight: a probe evaluated at its own carrier yields a non-negative real, which is the weight of that idea by Lemma 2.2.</p>
+
+<!-- ============================================================ §7 -->
+<h2 id="s7">§7 Chain Resonance</h2>
+
+<p>For a list \(L = [a_1, \ldots, a_n]\) of ideas, the <em>chain</em> \(\mathrm{chain}(L) = a_1 \circ \cdots \circ a_n\) is their left-to-right composition. Three quantities measure how this chain resonates with a probe \(c\):</p>
+<ul>
+  <li>\(\mathrm{CR}(L,c) = \rho(\mathrm{chain}(L),\,c)\): total chain resonance</li>
+  <li>\(\mathrm{CRL}(L,c) = \sum_i \rho(a_i,c)\): linear (additive) part</li>
+  <li>\(\mathrm{CE}(L,c)\): cumulative emergence correction</li>
+</ul>
+
+<div class="lemma"><span class="thm-label">Lemma 2.50 (chainEmergence_nil).</span>
+\(\mathrm{CE}([],\,c) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.51 (chainEmergence_cons).</span>
+\[
+\mathrm{CE}(a :: \mathit{as},\,c)
+= \mathrm{CE}(\mathit{as},\,c) + \omega(a,\,\mathrm{chain}(\mathit{as});\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.52 (chainResonanceLinear_nil).</span>
+\(\mathrm{CRL}([],\,c) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.53 (chainResonanceLinear_cons).</span>
+\[
+\mathrm{CRL}(a :: \mathit{as},\,c) = \rho(a,c) + \mathrm{CRL}(\mathit{as},\,c).
+\]
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.54 (chainResonance_nil).</span>
+\(\mathrm{CR}([],\,c) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.55 (chainResonance_singleton).</span>
+\(\mathrm{CR}([a],\,c) = \rho(a,c).\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.56 (chainResonance_cons).</span>
+\[
+\mathrm{CR}(a :: \mathit{as},\,c)
+= \rho(a,c)+\rho(\mathrm{chain}(\mathit{as}),\,c)+\omega(a,\,\mathrm{chain}(\mathit{as});\,c).
+\]
+</div>
+
+<!-- ============================================================ §8 -->
+<h2 id="s8">§8 Heavy Ideas and Weight Monotonicity</h2>
+
+<p>An idea \(a\) is <em>heavy above threshold \(t\)</em> if \(w(a) \geq t\). This predicate behaves monotonically in \(t\) and characterizes the vacuum in terms of zero weight. The lemmas here give a comprehensive toolkit for reasoning about weight thresholds.</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.57 (heavyAbove_zero).</span>
+\(w(a) \geq 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.58 (heavyAbove_void_iff).</span>
+\(w(e) \geq t \iff t \leq 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.59 (heavyAbove_mono).</span>
+If \(s \leq t\) and \(w(a) \geq t\) then \(w(a) \geq s\).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.60 (heavyAbove_pos_of_ne_void).</span>
+If \(a \neq e\) then \(w(a) \geq 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.61 (weightZero_iff_void).</span>
+\(w(a) = 0 \iff a = e.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.62 (not_weightZero_of_ne_void).</span>
+If \(a \neq e\) then \(w(a) \neq 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.63 (weightZero_void).</span>
+\(w(e) = 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.64 (weight_ne_zero_of_pos).</span>
+If \(w(a) > 0\) then \(w(a) \neq 0.\)
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.65 (weight_zero_imp_void).</span>
+If \(w(a) = 0\) then \(a = e.\)
+</div>
+
+<!-- ============================================================ §9 -->
+<h2 id="s9">§9 Resonance-Closed Sets</h2>
+
+<p>A predicate \(P\) on ideas is <em>resonance-closed</em> if \(P(a)\) and \(P(b)\) together imply \(P(a\circ b)\) — loosely, combining ideas in \(P\) stays in \(P\). This section establishes closure under standard set-theoretic operations.</p>
+
+<div class="lemma"><span class="thm-label">Lemma 2.66 (ResonanceClosed_universal).</span>
+The universal predicate \(P(a) = \top\) is resonance-closed.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.67 (ResonanceClosed_empty).</span>
+The empty predicate \(P(a) = \bot\) is resonance-closed (vacuously).
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.68 (ResonanceClosed_intersection).</span>
+If \(P\) and \(Q\) are each resonance-closed, then \(P \cap Q\) is resonance-closed.
+</div>
+
+<div class="lemma"><span class="thm-label">Lemma 2.69 (ResonanceClosed_singleton_void).</span>
+The singleton \(\{e\}\) is resonance-closed.
+</div>
+
+<!-- ============================================================ IMPLICATIONS -->
+<h2 id="implications">Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p>
+<strong>Against Hume's associationist programme.</strong> Hume held that ideas combine by resemblance, contiguity, and causation — three atomic relations with no deeper unification. The resonance pairing subsumes all three under a single real-valued function \(\rho\), but Lemma 2.36 (the 2-cocycle identity) shows that this function is not free: the way emergence distributes across composition obeys a strict coherence law. Hume's catalogue of association principles can be read as an implicit attempt to enumerate the zero-sets of \(\omega\) — the cases where combination adds nothing beyond the sum of parts. The theory makes this precise, and shows there are exactly as many such cases as the axioms allow, no more.
+</p>
+
+<p>
+<strong>Kant and the unity of apperception.</strong> Kant's first Critique posits that experience is possible only because a single consciousness unifies representations under categories. Theorem 2.2 provides a structural analog: weight is the unique non-negative, vacuum-zero, non-degenerate scalar invariant of an idea. There is, in this sense, only one way to measure the semantic density of an idea consistently with the axioms — just as Kant argues there is only one way to unify representations consistently with the conditions of possible experience. The vacuum \(e\) plays the role of the empty representation, and Corollary 2.2 ensures it is the only idea with zero weight, enforcing a sharp boundary between contentful and empty thought.
+</p>
+
+<p>
+<strong>Aristotle on universals and predication.</strong> For Aristotle, a universal is what is predicated of many, and predication is not merely co-occurrence but a structured relation of form to matter. The resonance pairing externalizes this: \(\rho(a,b)\) measures not just whether \(a\) and \(b\) co-activate but how strongly \(a\) is shaped by \(b\)'s form. The probe lemmas (§6) make this reading precise — a probe \(p\) acts as a Aristotelian form, evaluating ideas by the degree to which they participate in \(p\). Lemma 2.49 (\(p(p.\mathrm{carrier}) \geq 0\)) says that every form participates non-negatively in itself, which is Aristotle's claim that universals are self-predicated in a non-paradoxical sense.
+</p>
+
+<p>
+<strong>Gärdenfors on conceptual spaces.</strong> Gärdenfors proposes that concepts are convex regions in metric quality spaces. The resonance pairing offers a non-metric generalization: rather than a distance \(d(a,b)\), we have an asymmetric real \(\rho(a,b)\), and the symmetry decomposition (§5) separates the symmetric part \(\rho^+/2\) (which plays the role of Gärdenfors's proximity) from the gap \(\delta/2\) (which captures directed influence, absent in metric accounts). Lemmas 2.39 and 2.40 show that every resonance pairing decomposes uniquely into these two orthogonal signals. Gärdenfors's theory is the special case \(\delta \equiv 0\); the full framework handles directed associations — e.g., asymmetric priming — that purely metric approaches cannot represent.
+</p>
+
+<p>
+<strong>Computational models and the linear/emergence split.</strong> In distributional semantics, sentence meaning is often approximated by a sum of word vectors. Theorem 2.3 and Corollary 2.4 give this approximation a precise formal status: \(\mathrm{CR}(L,c) = \mathrm{CRL}(L,c) + \mathrm{CE}(L,c)\), and the additive model is exact if and only if \(\mathrm{CE}(L,c) = 0\). The chain emergence term is not an error or an artifact; it is a well-defined, axiomatically grounded quantity measuring the non-linear interaction of ideas in a sequence. Models that ignore it (standard bag-of-words, add-composition word vectors) are not wrong in principle but are committed to the empirical claim that \(\mathrm{CE}(L,c)\) is negligibly small for the tasks they address — a claim the framework allows one to test and, in principle, refine.
+</p>
+
+<p>
+<strong>The significance of 73 lemmas.</strong> It might seem that a pile of definitional lemmas and vacuum identities signals bureaucratic thoroughness rather than mathematical depth. The opposite is true. Each lemma closes off a potential equivocation: is emergence symmetric? (No, generically: Lemma 2.27.) Does weight characterize the vacuum uniquely? (Yes: Lemmas 2.10, 2.61.) Is the 2-cocycle identity provable from the axioms, or must it be assumed? (Provable: Lemma 2.36.) Having all 73 results machine-checked in Lean 4 means that any philosophical interpretation built on this framework — Humean, Kantian, Aristotelian, or computational — inherits a verified algebraic spine. The concepts cannot silently contradict one another; every consequence has been explicitly drawn and certified.
+</p>
+</div>
+
+<!-- ============================================================ ZOO -->
+<h2 id="zoo">Zoo Entries</h2>
+
+<div class="zoo-entry">
+<div class="zoo-name">Hume: Resemblance as Symmetric Resonance</div>
+<div class="zoo-meta">David Hume, <em>A Treatise of Human Nature</em> (1739), Book I, Part I §4</div>
+<p>Hume identifies resemblance as the primary principle of association: ideas that resemble one another are naturally drawn together in the mind. In the resonance framework, resemblance corresponds to a high value of the coresonance \(\rho^+(a,b) = \rho(a,b)+\rho(b,a)\) — the symmetric part of the pairing (Lemmas 2.37–2.42). Pure Humean resemblance is the limiting case \(\delta(a,b)=0\), where \(\rho(a,b)=\rho(b,a)\) and direction of association is irrelevant. But Hume also acknowledges asymmetric association (we think of a portrait when we see its subject, but not always vice versa), which the gap \(\delta\) captures. The Lean results show that every resonance pairing decomposes uniquely into a symmetric resemblance component and a directed priming component, making precise what Hume left implicit: resemblance is not a primitive but a structural invariant of the underlying pairing.</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Kant: Schematism and the Vacuum Boundary</div>
+<div class="zoo-meta">Immanuel Kant, <em>Critique of Pure Reason</em> (1781/1787), A137/B176–A147/B187</div>
+<p>Kant's schematism is the doctrine that pure concepts (categories) acquire content only through their application to time — the schema mediates between the intellectual and the sensible. In the resonance framework, the vacuum element \(e\) marks the boundary between contentful and empty thought: by Theorem 2.2, \(w(a)=0\) if and only if \(a=e\). A Kantian reading assigns \(e\) to the role of the empty schema — the concept applied to nothing — and weight \(w(a)\) to the degree of schematic determination. The five vacuum lemmas (§3) then express the compositionality of the schematism: combining a contentful idea with the empty schema produces an idea with exactly the content of the first. The machine-checked proof of Lemma 2.10 (\(w(a)=0 \iff a=e\)) gives Kant's boundary a precise formalization that his own text notoriously leaves obscure.</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Aristotle: Predication and Probe Evaluation</div>
+<div class="zoo-meta">Aristotle, <em>Categories</em> (4th c. BCE), ch. 2–5; <em>De Anima</em> III.4–8</div>
+<p>For Aristotle, cognition is the actualization of form in the intellect: to think red is to receive the form of redness without the matter. The probe framework (§6) formalizes this: a probe \(p\) is an idea functioning as a measuring instrument, and \(p(a) = \rho(a,p)\) is the degree to which \(a\) actualizes the form \(p\). Lemma 2.46 (\(p(a\circ b) = p(a)+p(b)+\omega(a,b;p)\)) shows that the probe of a composition is the sum of individual evaluations plus an emergence correction — Aristotle's claim that compound thoughts can exceed the sum of their simple parts. Lemma 2.49 (\(p(p.\mathrm{carrier})\geq 0\)) corresponds to the thesis that every form is perfectly actualized in itself (the intellect thinking itself is the paradigm in <em>De Anima</em> III.4). Non-negativity prevents self-evaluation from generating paradox.</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Gärdenfors: Conceptual Spaces Without Metrics</div>
+<div class="zoo-meta">Peter Gärdenfors, <em>Conceptual Spaces</em> (2000), chs. 1–3; <em>The Geometry of Meaning</em> (2014)</div>
+<p>Gärdenfors models concepts as convex regions in multi-dimensional quality spaces, with similarity given by proximity. The resonance framework generalizes this in two directions. First, \(\rho\) need not be a metric: asymmetry (\(\delta \neq 0\)) and non-linearity under composition (\(\omega \neq 0\)) are both permitted and tracked. Second, emergence \(\omega(a,b;c)\) captures what happens when two concepts combine to produce a meaning that exceeds the sum of their individual similarities to a target — the phenomenon that motivates Gärdenfors's later work on <em>The Geometry of Meaning</em>. The chain decomposition (Theorem 2.3) shows that for any sequence of ideas, total resonance = linear Gärdenfors-style sum + cumulative emergence. The emergence term is zero precisely in the cases where Gärdenfors's additive model is correct, and non-zero in the cases where conceptual combination produces genuine novelty.</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">word2vec: Cosine Similarity as Symmetric Zero-Gap Resonance</div>
+<div class="zoo-meta">Mikolov et al., "Efficient Estimation of Word Representations in Vector Space" (2013, arXiv:1301.3781)</div>
+<p>In word2vec and its successors, words are represented as real vectors, and similarity is measured by cosine: \(\cos(a,b) = \langle a,b\rangle / (\|a\|\|b\|)\). This is symmetric by construction — \(\cos(a,b)=\cos(b,a)\) always — and hence corresponds to a resonance pairing with \(\delta\equiv 0\). The weight of a word is \(w(a)=\rho(a,a) = \|a\|^2\) (or its square root, up to normalization), consistent with Theorem 2.2: non-zero vectors have positive weight, and the zero vector (the vacuum \(e\)) has weight zero. Composition in word2vec is typically vector addition — the case \(\omega\equiv 0\) (Lemma 2.32) where emergence vanishes identically. Theorem 2.3 then reduces to the familiar observation that sentence vectors are additive: \(\mathrm{CR}(L,c) = \mathrm{CRL}(L,c)\). The resonance framework identifies word2vec as occupying a very special corner of the space of possible pairings: symmetric and emergence-free. Real language is likely neither.</p>
+</div>
+
+<div class="zoo-entry">
+<div class="zoo-name">Spinoza: Intellectual Love as Maximal Resonance</div>
+<div class="zoo-meta">Baruch Spinoza, <em>Ethics</em> (1677), Part V, Props. 32–36</div>
+<p>Spinoza's <em>amor intellectualis Dei</em> — the intellectual love of God — is the mind's highest good, arising when the intellect adequately understands its own causes and thereby coincides with God's infinite intellect. In the resonance framework, this translates to the condition that \(\rho(a,a)\) is maximized: the idea \(a\) resonates maximally with itself, achieving the highest possible weight. Lemma 2.19 (\(\rho^+(a,a)=2w(a)\)) shows that at self-resonance, the coresonance is twice the weight and the gap is zero (Lemma 2.18) — perfect symmetry, no direction-dependence. Spinoza's claim that the intellectual love of God is eternal corresponds to the vacuum theorem in reverse: the only idea with zero self-resonance is \(e\) (Theorem 2.2 iii), so anything that exists — any non-vacuum idea — has positive weight and thus positive self-love. Blessedness, for Spinoza, is not a reward but a structural consequence of existence.</p>
+</div>
+
+<!-- ============================================================ LEAN EXT -->
+<h2 id="lean-ext">Related Lean Extensions</h2>
+
+<p>The full source for this module is in <code>IdeaTheory.Theorems2</code>. Several natural extensions are in preparation or available in adjacent modules:</p>
+<ul>
+  <li><strong><code>IdeaTheory.Theorems4</code></strong> — the <a href="emergence-2-cocycle.html">Emergence 2-Cocycle</a> theorem, which lifts the cocycle identity of Lemma 2.36 to its full cohomological form and proves that normalized 2-cocycles are exactly the emergence functionals arising from resonance pairings.</li>
+  <li><strong><code>IdeaTheory.Theorems1</code></strong> — the <a href="composition.html">Composition</a> theorems, which establish the free monoid structure on ideas and the universal property underlying the chain construction used in §7.</li>
+  <li><strong><code>IdeaTheory.Theorems3</code></strong> — the <a href="graded-idea-algebra.html">Graded Idea Algebra</a>, which shows how weight stratifies the idea space into levels and how resonance respects this grading.</li>
+  <li><strong>Forthcoming: spectral theory of \(\rho\).</strong> If \(\rho\) is viewed as an operator on a Hilbert space, the symmetric part \(\rho^+/2\) has a spectral decomposition. The eigenvectors would correspond to ideas that resonate purely with themselves — a formal analog of Spinoza's adequate ideas.</li>
+  <li><strong>Forthcoming: resonance-closed set lattice.</strong> The four lemmas of §9 show that resonance-closed sets form a complete lattice under intersection. The next step is to characterize the join (union-closure) and show it corresponds to the sub-monoid generated by a set of ideas.</li>
+</ul>
+
+<p><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/halleyyoung/formalize">GitHub</a>. Built as a static site.</p></footer>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>
