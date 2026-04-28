@@ -173,3 +173,69 @@ sup.cite{font-size:.7em;color:var(--accent);}
 .lit-entry{margin:1.2em 0;padding-left:1em;border-left:2px solid var(--rule);}
 .lit-entry .lit-ref{font-family:Inter,sans-serif;font-size:.9rem;color:var(--muted);}
 .lit-entry .lit-note{margin:.3em 0 0;}
+
+/* documentation helpers */
+.guide-box,.reader-note,.theorem-key{
+  background:var(--accent-soft);
+  border:1px solid var(--rule);
+  border-radius:6px;
+  padding:1em 1.2em;
+  margin:1.2em 0 1.6em;
+}
+.guide-box h3,.reader-note h3,.theorem-key h3{
+  margin-top:0;
+  color:var(--accent);
+}
+.guide-box p:last-child,.reader-note p:last-child,.theorem-key p:last-child{
+  margin-bottom:0;
+}
+.plain-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.8em 1em;
+  margin:1em 0 1.2em;
+}
+.plain-card{
+  background:#fff;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  padding:.9em 1em;
+}
+.plain-card h4{
+  margin:.1em 0 .35em;
+  font-size:1rem;
+  color:var(--accent);
+}
+.plain-card p{
+  margin:.35em 0;
+  font-size:.96rem;
+}
+.theorem-key-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:.7em .9em;
+  margin:1em 0 0;
+}
+.theorem-key-item{
+  background:#fff;
+  border:1px solid var(--rule);
+  border-radius:6px;
+  padding:.85em .95em;
+}
+.theorem-key-item strong{
+  display:block;
+  font-family:Inter,sans-serif;
+  color:var(--accent);
+  margin-bottom:.2em;
+}
+.walkthrough{
+  border-left:3px solid var(--accent);
+  background:#fff;
+  padding:.8em 1em;
+  margin:1em 0;
+  border-radius:0 4px 4px 0;
+}
+.walkthrough h4{
+  margin:0 0 .35em;
+  color:var(--accent);
+}

@@ -23,12 +23,44 @@
   <a class="tile" href="literature/index.html"><h3>Literature</h3><p>An annotated bibliography across philosophy, cognitive science, sociology, economics, and emergence.</p></a>
 </div>
 
+<div class="guide-box">
+  <h3>Start Here If You Are Not a Mathematician</h3>
+  <p>
+    This site uses mathematical language because it is proving claims, not just suggesting analogies. But the intended reading order is still simple. First, treat an "idea" as anything that can be combined with another idea: a concept, a sentence, a theory, a norm, a technique, a cultural script, a scientific model. Second, treat the algebra as a disciplined way of asking three ordinary questions: what survives when two ideas meet, what cancels, and what genuinely new thing appears. Third, treat each theorem as a claim that one of those ordinary intuitions can be stated precisely and then checked by Lean.
+  </p>
+  <p>
+    If symbols are not yet comfortable, read every formula as compressed prose. For example, \(a \circ b\) means "compose idea \(a\) with idea \(b\)." The identity \(e\) means "the silent or empty contribution." The cocycle \(\omega(a,b)\) means "how much novelty shows up when \(a\) and \(b\) are brought together." The grading \(\deg(a)\) means "how high-level, complex, or socially wide-ranging \(a\) is in the chosen interpretation." The public pages now explain theorem references in these terms so that you do not need prior abstract algebra to follow the argument.
+  </p>
+</div>
+
 <h2>What is an idea?</h2>
 <p>In ordinary speech an <em>idea</em> is whatever can be entertained, communicated, combined with other ideas, and judged for fit with the world or with other ideas. Philosophers, cognitive scientists, sociologists, and economists have all tried to make this notion precise; each tradition has captured a real feature of the practice while idealizing away from others. <strong>Idea Theory</strong> takes the view that the best place to start is not with a definition of what ideas <em>are</em> but with a list of what we always do <em>with</em> them, and to ask what minimal algebraic structure makes those operations consistent.</p>
 
 <p>The answer turns out to be modest. An <em>idea algebra</em> is a monoid \((\mathcal{I},\circ,e)\) — there is a way of putting two ideas together, the operation is associative, and there is a trivial idea that does nothing — equipped with five further pieces of structure: a real-valued <em>resonance pairing</em> \(\rho\) measuring how well two ideas fit; a triple decomposition \(\sigma+\nu+\eta\) of every composite into preserved, negated and elevated parts (the <em>Aufhebung</em>); a 2-cocycle \(\omega\) tracking the irreducible novelty produced by composition; the antisymmetric part \(\kappa\) of \(\rho\), which we call the <em>meaning curvature</em>; and a grading \(\deg\) into a totally ordered abelian group recording the level or complexity of an idea.</p>
 
 <p>Together these axioms are strong enough to prove the nine foundational theorems below, and weak enough that almost every classical theory of ideas — from Plato's Forms to modern transformer embeddings — fits inside as a special case. The site shows how.</p>
+
+<h2>How to Read This Site</h2>
+<div class="plain-grid">
+  <div class="plain-card">
+    <h4>1. Read the plain-language theorem first</h4>
+    <p>
+      The <a href="theorems/index.html">Theorems</a> section now gives a non-technical summary for each core result before diving into Lean names and supporting lemmas. If a zoo entry cites T4 or T8, that page tells you what those labels mean in ordinary language.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>2. Use the zoo as worked examples</h4>
+    <p>
+      The <a href="zoo/index.html">Zoo</a> is where the abstract machinery meets real intellectual history. Each entry says what a thinker claimed, how the algebra instantiates that claim, which theorem actually does the work, and where the formalization necessarily departs from the historical source.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>3. Use Lean pages for verification</h4>
+    <p>
+      The <a href="lean/index.html">Lean</a> pages are the audit trail. They tell you which declarations exist, what the exact theorem names are, and where the machine-checked proofs live. Public-facing explanations point back to those declarations instead of asking you to trust prose alone.
+    </p>
+  </div>
+</div>
 
 <h2>Highlights: the nine foundational theorems, in plain English</h2>
 <ol>
@@ -44,6 +76,16 @@
 </ol>
 
 <p>Each is proven in <code>lean/IdeaTheory/Theorems{1..9}.lean</code> and described in detail under <a href="theorems/index.html">Theorems</a>.</p>
+
+<div class="reader-note">
+  <h3>Three Reading Paths</h3>
+  <p>
+    If you want the shortest route, read <a href="formalism/index.html">Formalism</a> then <a href="theorems/index.html">Theorems</a> then the worked example on <a href="zoo/index.html">the Zoo front page</a>. If you want intuition first, start with the Zoo and only click through to theorem pages when a theorem label recurs. If you want rigor first, start with the theorem index, then open the linked Lean and chapter pages for whichever result matters to you most.
+  </p>
+  <p>
+    The documentation now assumes that a theorem label by itself is not explanatory enough. Wherever possible, theorem references are paired with a short explanation of what they say and why that specific theorem matters to the example at hand.
+  </p>
+</div>
 
 </main>
 <footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>. Built as a static site.</p></footer>

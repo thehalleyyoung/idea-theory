@@ -55,6 +55,48 @@ The Lean file <code>IdeaTheory.Theorems2</code> systematically derives all first
 Two auxiliary concepts are central throughout. The <em>weight</em> \(w(a) = \rho(a,a)\) measures how strongly an idea resonates with itself — a scalar proxy for semantic density. The <em>emergence</em> functional \(\omega(a,b;c)\) measures how much the resonance of a composition \(a \circ b\) with \(c\) exceeds the sum of its parts: the excess signal that arises when ideas combine.
 </p>
 
+<div class="guide-box">
+  <h3>Why This Page Matters</h3>
+  <p>
+    T2 is where the theory stops talking only about combination and starts talking about meaning, fit, salience, payoff, affinity, and tension. If T1 says ideas can be combined, T2 says some combinations matter more than others. That is why so many zoo entries that look unrelated on the surface — prototype theory, Hayekian prices, Schelling focal points, Gricean relevance — all end up citing this page.
+  </p>
+</div>
+
+<div class="plain-grid">
+  <div class="plain-card">
+    <h4>Fast Reading</h4>
+    <p>
+      Read the opening definitions of resonance, weight, and emergence first. Then read Theorems 2.1 to 2.3 and the short corollaries. The many lemmas below mainly exist to show that these quantities behave coherently under void inputs, composition, symmetry decompositions, and chain constructions.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>Proof Idea</h4>
+    <p>
+      The proof strategy is to force every derived quantity back to the primitive resonance laws. Weight is just self-resonance; emergence is just a resonance difference term; coresonance and gap are just symmetric and antisymmetric reorganizations of the same data. Once those reductions are explicit, Lean can verify that the whole family of notions stays compatible.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>Zoo Examples</h4>
+    <p>
+      Rosch on prototypes, Barsalou on perceptual overlap, Hayek on price signals, and Nash-style payoff language in the social zoo all use T2-shaped reasoning. In each case, the key question is some version of: how strongly does one structured item answer to another?
+    </p>
+  </div>
+</div>
+
+<div class="walkthrough">
+  <h4>Walk Through T2 In Three Steps</h4>
+  <p><strong>Step 1.</strong> Start with raw resonance \(\rho(a,b)\): a disciplined way to say how strongly one idea answers to another.</p>
+  <p><strong>Step 2.</strong> Derive secondary quantities such as weight, emergence, coresonance, and gap from that single pairing.</p>
+  <p><strong>Step 3.</strong> Prove that these secondary notions still behave coherently under composition, void inputs, and chain constructions, so they are safe to use across the rest of the theory.</p>
+</div>
+
+<div class="reader-note">
+  <h3>See It In The Zoo</h3>
+  <p>
+    Direct examples: <a href="../zoo/science.html#rosch">Rosch</a>, <a href="../zoo/science.html#barsalou">Barsalou</a>, <a href="../zoo/social.html#schelling">Schelling</a>, and <a href="../zoo/social.html#grice">Grice</a>.
+  </p>
+</div>
+
 <!-- ============================================================ HEADLINE THEOREMS -->
 <h2 id="headlines">Headline Theorems and Corollaries</h2>
 

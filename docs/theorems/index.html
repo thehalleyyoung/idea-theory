@@ -20,6 +20,89 @@
   is at the <a href="../lean/index.html">Lean library</a>.
 </p>
 
+<div class="guide-box">
+  <h3>How To Read A Theorem Page</h3>
+  <p>
+    Each theorem page has two jobs at once. It has to tell a mathematically trained reader what the exact structural statement is, and it has to tell a general reader why anyone should care. To support both audiences, the theorem index now does the translation work first. Read the theorem label as a compact reference, then read the plain-English description as the real content. When a zoo page cites <code>T4</code>, for example, it means more than "see theorem 4": it means "the amount of novelty created by composing ideas behaves coherently across longer chains, so emergence is constrained rather than mysterious."
+  </p>
+  <p>
+    The pages are organized from large claim to supporting infrastructure. "Headline theorem" means the main result someone outside the codebase is likely to cite. "Lemmas" are the pieces the proof actually depends on. "Lean declaration" is the machine-checked name. If you are not trying to inspect the proof object itself, you can usually read the page in this order: plain-English summary, the formal statement, the worked examples, then the zoo links showing where the theorem matters.
+  </p>
+</div>
+
+<h2>Plain-English Map of T1-T12</h2>
+<table style="width:100%;border-collapse:collapse;margin:1.2em 0 1.8em">
+  <thead>
+    <tr style="background:var(--accent-soft)">
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Label</th>
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">What it says in ordinary language</th>
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Why a non-math reader should care</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="t1">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="composition.html">T1</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Ideas can be composed in sequence without ambiguity; there is a genuine "do nothing" idea; repeatable and reversible patterns can be defined precisely.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Whenever a page says a theory has stable building blocks, silent steps, reversible reframings, or compositional chains, it is usually leaning on T1.</td>
+    </tr>
+    <tr id="t2" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="resonance-pairing.html">T2</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">There is a principled way to measure how well two ideas fit, reinforce, oppose, or illuminate one another, and that measurement extends consistently to larger constructions.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Prototype effects, salience, payoff, similarity, explanatory force, and semantic fit all rely on T2-style structure somewhere in the zoo.</td>
+    </tr>
+    <tr id="t3">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="aufhebung-decomposition.html">T3</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">When two ideas meet, part of each is preserved, part is cancelled or displaced, and part can rise into something genuinely new.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">This is the theorem behind dialectic, conceptual blending, scientific revolution, creative destruction, and any example that talks about preservation plus loss plus novelty.</td>
+    </tr>
+    <tr id="t4" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="emergence-2-cocycle.html">T4</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Novelty is not arbitrary. The "extra" created when ideas combine fits a coherence law across longer chains of composition.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">If a page claims emergence can be measured, bounded, accumulated, telescoped, or compared across examples, T4 is the engine.</td>
+    </tr>
+    <tr id="t5">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="meaning-curvature.html">T5</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Resonance can be asymmetric: the path from idea \(a\) to idea \(b\) can matter differently from the reverse path, and that asymmetry has durable structure.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Framing effects, interpretive asymmetry, tension, conflict, path dependence, and one-way salience often amount to T5 phenomena.</td>
+    </tr>
+    <tr id="t6" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="conjugation.html">T6</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Reframing an idea by a context or higher-order operator can transform its appearance while preserving its underlying algebraic role.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Context effects, habitus, perspective shifts, belief reports, strategic framing, and situated meaning all cite T6 because they are formalized as controlled reframings.</td>
+    </tr>
+    <tr id="t7">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="transmission-chain.html">T7</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Long chains of transmission can be analyzed step by step without losing the total picture; silent steps can be inserted or removed without changing the result.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Whenever the docs talk about diffusion, education, repeated interaction, narrative inheritance, or cumulative emergence over time, T7 is doing the bookkeeping.</td>
+    </tr>
+    <tr id="t8" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="structural-equivalence.html">T8</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Two syntactically different expressions can still count as the same idea if they evaluate to the same structure, and there is a canonical way to represent that sameness.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Synonymy, deep structure, model-theoretic underdetermination, translation, and structuralism all need T8.</td>
+    </tr>
+    <tr id="t9">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="graded-idea-algebra.html">T9</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Ideas can be assigned a level, degree, or complexity that behaves consistently under composition.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Any page about hierarchy, salience, abstraction level, difficulty, ontological rank, or growth across levels relies on T9-style grading.</td>
+    </tr>
+    <tr id="t10" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="coalitions.html">T10</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Groups of agents or sub-ideas can aggregate into larger social structures while preserving detectable cohesion conditions.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Coalitions, committees, commons governance, and social alignment examples frequently appeal to T10.</td>
+    </tr>
+    <tr id="t11">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="transmission-chain.html">T11</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Cultural transmission can itself be treated as a compositional algebra with inheritance, identity cases, and faithful propagation behavior.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">This matters when the docs move from one-off compositions to historically extended transmission systems.</td>
+    </tr>
+    <tr id="t12" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="novelty.html">T12</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Novelty can be distinguished from mere recombination: some outputs are genuinely outside a lineage or closure set in a mathematically testable sense.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">This is the page to consult when a zoo entry claims that something is not merely a rearrangement of earlier material but a real structural innovation.</td>
+    </tr>
+  </tbody>
+</table>
+
 <!-- ═══════════════════════════════════════════════════════
      PART I: Foundational Theorems
      ═══════════════════════════════════════════════════════ -->
@@ -28,7 +111,7 @@
 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1em;margin:1.5em 0">
 
   <!-- Tile 1 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t1" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">1. The Idea Monoid</h3>
     <p style="font-size:.9em">\((\mathcal{I},\circ,e)\) is a monoid; the identity element is unique; invertible elements form a group.</p>
     <p style="font-size:.85em;color:#666">63 lemmas</p>
@@ -36,7 +119,7 @@
   </div>
 
   <!-- Tile 2 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t2" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">2. Resonance Pairing</h3>
     <p style="font-size:.9em">\(\rho\) extends uniquely to a bilinear form on \(\mathbb{R}\langle\mathcal{I}\rangle\); non-degeneracy is preserved by composition.</p>
     <p style="font-size:.85em;color:#666">73 lemmas</p>
@@ -44,7 +127,7 @@
   </div>
 
   <!-- Tile 3 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t3" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">3. Aufhebung Decomposition</h3>
     <p style="font-size:.9em">Every composition decomposes uniquely as \(a\circ b = \sigma(a,b)+\nu(a,b)+\eta(a,b)\).</p>
     <p style="font-size:.85em;color:#666">87 lemmas</p>
@@ -52,7 +135,7 @@
   </div>
 
   <!-- Tile 4 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t4" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">4. Emergence 2-Cocycle</h3>
     <p style="font-size:.9em">\(\omega\) is a normalized 2-cocycle: \(\partial\omega=0\), \(\omega(e,\cdot)=\omega(\cdot,e)=0\).</p>
     <p style="font-size:.85em;color:#666">63 lemmas</p>
@@ -60,7 +143,7 @@
   </div>
 
   <!-- Tile 5 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t5" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">5. Meaning Curvature</h3>
     <p style="font-size:.9em">The antisymmetric part \(\kappa\) of \(\rho\) is closed; its cohomology class is a structural invariant.</p>
     <p style="font-size:.85em;color:#666">98 lemmas</p>
@@ -68,7 +151,7 @@
   </div>
 
   <!-- Tile 6 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t6" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">6. Conjugation</h3>
     <p style="font-size:.9em">For any invertible \(g\), \(\mathrm{Ad}_g(a) = g\circ a\circ g^{-1}\) preserves all four structural maps.</p>
     <p style="font-size:.85em;color:#666">55 lemmas</p>
@@ -76,7 +159,7 @@
   </div>
 
   <!-- Tile 7 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t7" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">7+11. Transmission Chain &amp; Cultural Transmission</h3>
     <p style="font-size:.9em">Iterated composition, identity transparency, vertical transmission monoidal structure.</p>
     <p style="font-size:.85em;color:#666">153 lemmas</p>
@@ -84,7 +167,7 @@
   </div>
 
   <!-- Tile 8 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t8" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">8+9. Structural Equivalence &amp; Idea Structures</h3>
     <p style="font-size:.9em">Word evaluation, canonical forms, universal property; IdeaPair / IdeaTriple / BalancedIdea4 canonical forms.</p>
     <p style="font-size:.85em;color:#666">133 lemmas</p>
@@ -92,7 +175,7 @@
   </div>
 
   <!-- Tile 9 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t10" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">10. Coalitions &amp; Social Aggregation</h3>
     <p style="font-size:.9em">The aggregate map; silent-agent invisibility; social congruence theorem.</p>
     <p style="font-size:.85em;color:#666">70 lemmas</p>
@@ -100,7 +183,7 @@
   </div>
 
   <!-- Tile 10 -->
-  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+  <div id="tile-t12" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
     <h3 style="margin:0 0 .4em">12. Emergent Novelty</h3>
     <p style="font-size:.9em">\(\mathsf{EN}(a,b)\): \(a\circ b\) genuinely new; 65 lemmas on IsNovel, EmergentNovel, LineageNovel.</p>
     <p style="font-size:.85em;color:#666">65 lemmas</p>
@@ -114,6 +197,16 @@
      PART II: All Lemmas by File
      ═══════════════════════════════════════════════════════ -->
 <h2>Part II: All Lemmas by File</h2>
+
+<div class="reader-note">
+  <h3>What Counts As "Support" For A Theorem?</h3>
+  <p>
+    The theorem pages are long because the public claim and the machine proof sit at different scales. A theorem like T8 may be expressible in one sentence, but it requires dozens of smaller lemmas about words, appending, reassociation, canonical forms, and congruence before Lean can certify it. That is not padding. It is the formal analogue of showing every intermediate step instead of saying "it is obvious."
+  </p>
+  <p>
+    When a theorem page lists 50 or 100 supporting lemmas, the practical reading advice is: look first at the section names. They tell you what kinds of micro-facts had to be settled to make the headline statement trustworthy. The zoo pages typically cite the headline theorem, but the theorem page shows the scaffolding that makes the citation defensible.
+  </p>
+</div>
 
 <table style="width:100%;border-collapse:collapse;margin:1.5em 0">
   <thead>

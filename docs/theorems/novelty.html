@@ -49,6 +49,48 @@
 Theorem 12 develops a complete formal theory of <em>emergent novelty</em>: the condition under which the composition of two ideas produces a result that is genuinely new — not reducible to either ingredient. The central predicates are:
 </p>
 
+<div class="guide-box">
+  <h3>Why This Page Matters</h3>
+  <p>
+    T12 is the page that sharpens the difference between "different from before" and "genuinely novel." Earlier pages show that composition, resonance, and emergence are well-defined. This page asks the stricter question: when is the output not just another expression of what was already present in the inputs or their closure?
+  </p>
+</div>
+
+<div class="plain-grid">
+  <div class="plain-card">
+    <h4>Fast Reading</h4>
+    <p>
+      Start with the definitions of <code>IsNovel</code>, <code>EmergentNovel</code>, <code>LineageNovel</code>, and <code>Closed</code>. Then jump to the headline theorems near the end of the page. The earlier lemmas are there to make those notions transport cleanly through identities, lineages, and congruence arguments.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>Proof Idea</h4>
+    <p>
+      The proofs combine inequality reasoning with closure reasoning. First show what novelty cannot be, especially in the presence of identity elements and closed sets. Then show how novelty witnesses can be packaged, moved, and preserved across longer chains so that "genuinely new" becomes a stable formal claim rather than an impressionistic one.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>Zoo Examples</h4>
+    <p>
+      Chalmers on strong emergence, recombinant growth stories about new technological combinations, and lineage-based cultural examples all depend on T12. This page matters whenever the claim is that a result is not merely a restatement or recombination inside an already closed repertoire.
+    </p>
+  </div>
+</div>
+
+<div class="walkthrough">
+  <h4>Walk Through T12 In Three Steps</h4>
+  <p><strong>Step 1.</strong> Separate plain difference from genuine emergent novelty by defining what it means for a composite to differ from both of its inputs.</p>
+  <p><strong>Step 2.</strong> Rule out false positives, especially those created by identity elements or by already closed repertoires.</p>
+  <p><strong>Step 3.</strong> Extend the notion from pairs to lineages and transmission histories so novelty can be tracked historically rather than only locally.</p>
+</div>
+
+<div class="reader-note">
+  <h3>See It In The Zoo</h3>
+  <p>
+    Direct examples: <a href="../zoo/science.html#chalmers">Chalmers</a>, <a href="../zoo/science.html#holland">Holland</a>, <a href="../zoo/social.html#weitzman">Weitzman</a>, and <a href="../zoo/science.html#broad">Broad</a>.
+  </p>
+</div>
+
 <ul>
   <li><strong>\(\mathsf{IsNovel}(c, a)\)</strong> — defined as \(c \neq a\). One idea is novel relative to another simply when they differ. This predicate is irreflexive and symmetric in the obvious sense, but not transitive; it is a structural primitive.</li>
   <li><strong>\(\mathsf{EN}(a, b)\)</strong> (\(\mathsf{EmergentNovel}(a,b)\)) — defined as \(a \circ b \neq a\) and \(a \circ b \neq b\). The composition of \(a\) and \(b\) is <em>genuinely new</em>: it is not the same as either input. Left-novelty (\(\mathsf{ENL}\)) and right-novelty (\(\mathsf{ENR}\)) split this into its two components.</li>

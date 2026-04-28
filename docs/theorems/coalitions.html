@@ -49,6 +49,48 @@
 
 <p>The <code>Coalition</code> structure formalises social aggregation of ideas. A coalition is a <em>list</em> of agents — written \([a_1, \ldots, a_n]\) — where each agent holds an idea drawn from a monoid \((\mathcal{I}, \circ, e)\). The <em>aggregate</em> map \(\mathsf{agg}\) is the monoid right-fold over that list: it is exactly the free-monoid evaluation homomorphism applied to the coalition as a word. Three headline results are proved and machine-checked in <code>IdeaTheory/Theorems10.lean</code>:</p>
 
+<div class="guide-box">
+  <h3>Why This Page Matters</h3>
+  <p>
+    T10 is where the theory stops talking only about single ideas and starts talking about collective organization. It shows how groups aggregate, why silent members can be inserted without changing the whole, and how social equivalence can be defined without collapsing everything to unanimity or to mere set membership.
+  </p>
+</div>
+
+<div class="plain-grid">
+  <div class="plain-card">
+    <h4>Fast Reading</h4>
+    <p>
+      Read the three headline theorems in the overview and then the later headline/corollary package. The dozens of lemmas in the middle mainly prove that aggregation remains stable under insertions, appends, equivalence moves, and committee/assembly viewpoints.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>Proof Idea</h4>
+    <p>
+      The engine is the list-fold homomorphism. Once aggregation is treated as evaluation of a word in the monoid, the big social claims reduce to careful list algebra: append laws, identity insertions, and congruence steps. The social content comes from showing that these simple operations are exactly the ones collective reasoning needs.
+    </p>
+  </div>
+  <div class="plain-card">
+    <h4>Zoo Examples</h4>
+    <p>
+      Ostrom on polycentric governance, Bourdieu on field structure, coalition stories in game theory, and committee-style aggregation examples all use T10. In each case the issue is not just what one agent thinks, but how many agents compose into a collective result.
+    </p>
+  </div>
+</div>
+
+<div class="walkthrough">
+  <h4>Walk Through T10 In Three Steps</h4>
+  <p><strong>Step 1.</strong> Treat a coalition as a list whose collective content is obtained by folding composition across its members.</p>
+  <p><strong>Step 2.</strong> Show that appending, inserting silent members, and reorganizing equivalent coalitions preserve the aggregate in the expected way.</p>
+  <p><strong>Step 3.</strong> Use those list-level facts to define stable social equivalence and aggregation results for committees, assemblies, and collective actors.</p>
+</div>
+
+<div class="reader-note">
+  <h3>See It In The Zoo</h3>
+  <p>
+    Direct examples: <a href="../zoo/social.html#ostrom">Ostrom</a>, <a href="../zoo/social.html#nash">Nash</a>, <a href="../zoo/social.html#maynard-smith">Maynard Smith</a>, and <a href="../zoo/social.html#bourdieu">Bourdieu</a>.
+  </p>
+</div>
+
 <div class="thm"><span class="thm-label">Theorem 10.1 (aggregate_homomorphism).</span>
 \(\mathsf{agg}\) is a monoid homomorphism from \(\text{List}\,\mathcal{I}\) (under concatenation) to \(\mathcal{I}\) (under \(\circ\)):
 \[
