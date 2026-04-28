@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Social Sciences Zoo — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css"/>
+<script>
+MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','\\]']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+<style>
+.entry-title{font-family:Inter,sans-serif;font-weight:700;font-size:1.08rem;color:var(--accent);margin-bottom:.2em;}
+.entry-source{font-size:.9rem;color:var(--muted);font-style:italic;margin-bottom:.6em;}
+.entry-label{font-family:Inter,sans-serif;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-top:.9em;margin-bottom:.2em;}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.4em .8em;margin:1em 0 2em;}
+.toc-grid a{font-size:.95rem;}
+.section-lede{font-size:1.05rem;color:var(--muted);margin-bottom:1.2em;font-style:italic;}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a class="active" href="index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<header class="hero">
+<h1>Social Sciences Zoo</h1>
+<p class="hero-sub">Thirty thinkers from economics, game theory, sociology of knowledge, and philosophy of language — each formalized as a sub-instance of the idea algebra $(\mathcal{I}, \circ, e, \rho, \sigma, \nu, \eta, \omega, \deg)$.</p>
+</header>
+<main class="content wide">
+<p>This page works through a cross-disciplinary range of thinkers whose core claims turn on how ideas combine, spread, and acquire meaning. Each entry instantiates the full idea algebra and follows the standard format: the original position, its algebraic instantiation, the central claim as a theorem, what the formalism reveals, and where it necessarily diverges. Lean-verified results are drawn from the <a href="../lean/index.html">GameTheory, Diffusion, RecombinantGrowth, EmergenceLevels, and MeaningGames extension modules</a>.</p>
+<h2>Contents</h2>
+<div class="toc-grid">
+<a href="#econ">§1 Economics of Ideas</a>
+<a href="#game">§2 Game Theory</a>
+<a href="#socknow">§3 Sociology of Knowledge</a>
+<a href="#meaning">§4 Meaning and Language</a>
+</div>
+<h2 id="econ">§1 — Economics of Ideas</h2>
+<p class="section-lede">Arrow's information paradox, Hayek's dispersed knowledge, Romer's non-rivalry, Weitzman's recombinant growth, Jones's semi-endogenous correction, Schumpeter's creative destruction, Kahneman–Tversky framing effects, and Ostrom's polycentric governance.</p>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Arrow — Information as Commodity</div>
+<div class="entry-source"><em>"Economic Welfare and the Allocation of Resources for Invention," 1962</em></div>
+<div class="entry-label">The Position</div>
+<p>Information cannot be a normal market commodity because of a fundamental paradox: to evaluate whether information is worth buying, you must already know it — but knowing it means you already possess it. Arrow observed that this creates an irremediable market failure: competitive equilibrium cannot sustain efficient prices for information goods, so the production of new knowledge will be systematically undersupplied relative to the social optimum.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of information-bearing ideas. The resonance pairing $\rho(\text{buyer}, a)$ measures the buyer's ability to value idea $a$. Before purchase, $\rho(\text{buyer}, a)\big|_\text{pre} = 0$ (unknown value). After purchase the composition $\text{buyer} \circ a$ is irreversible — there is no left-inverse. Information-ideas have $\rho(a,a)>0$ (non-zero self-resonance) but no inverse $a^{-1}$ in $\mathcal{I}^\times$. The market-price mechanism requires a reversible exchange with a well-defined pre-purchase value, but none exists:</p>
+\[ \rho(\text{buyer},\, a)\big|_{\text{pre}} = 0 \quad\Longrightarrow\quad \nexists\; p : \rho(\text{buyer},\, a)\big|_{\text{post}} = p \cdot \rho(\text{buyer},\, a)\big|_{\text{pre}} \]
+<p>The purchase act is composition without inverse: information permanently changes the buyer's sub-algebra, and no payment can reverse this epistemic state-change.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Arrow's impossibility of efficient information pricing is the statement that no $\rho$-preserving price mechanism exists for non-invertible elements of $\mathcal{I}$. The group of invertibles is a proper subset (<a href="../theorems/index.html#t1">T1</a>), and non-degeneracy conditions (<a href="../theorems/index.html#t2">T2</a>) ensure self-resonant, non-invertible elements exist — precisely Arrow's information goods. Market failure is a theorem about the monoid structure, not a contingent institutional failure.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The irreversibility of learning is algebraically exact: information-ideas fail to belong to $\mathcal{I}^\times$, and this is why they fall outside the commodity framework that presupposes reversible exchange. Physical goods are approximately invertible (you can resell them); information is not. The formalism shows market failure is a structural consequence of the non-invertibility of knowledge acquisition, not a fixable institutional defect.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Arrow treats information as all-or-nothing — you either know it or you don't — while the algebra's continuous $\rho$ smears this boundary. Partial information (seeing an abstract but not a proof) requires a graded version of the irreversibility argument that the simple $\rho = 0$ formulation does not directly capture.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Hayek — Dispersed Knowledge and the Price System</div>
+<div class="entry-source"><em>"The Use of Knowledge in Society," <em>American Economic Review</em>, 1945</em></div>
+<div class="entry-label">The Position</div>
+<p>No single agent possesses all economically relevant knowledge. Hayek argued that prices do not merely express exchange ratios but constitute an information-processing system: they aggregate and transmit dispersed local knowledge — about scarcity, opportunity costs, and subjective values — that no central planner can possess or replicate. The case against central planning is fundamentally epistemological, not merely incentive-based.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}_\text{soc} = \bigoplus_i \mathcal{I}_i$ be the direct sum of individual sub-algebras, each $\mathcal{I}_i$ encoding agent $i$'s local knowledge. The cross-agent resonance $\rho(\mathcal{I}_i, \mathcal{I}_j) \approx 0$ for $i \neq j$ captures Hayek's claim that dispersed knowledge is largely non-communicable in raw form. The price system is the projection of $\rho$ onto the common sub-algebra $\mathcal{I}_\text{common}$:</p>
+\[ \text{price}(a) = \rho_\text{common}(a,\, \text{demand}), \qquad \rho_\text{common} = \pi_\text{common} \circ \rho \]
+<p>Central planning attempts to replace this aggregation with a single sub-algebra $\mathcal{I}_\text{planner}$, but since this is one summand of the direct sum, it cannot represent the full resonance structure of $\mathcal{I}_\text{soc}$.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Central planning is impossible: no single sub-algebra $\mathcal{I}_i$ contains sufficient resonance information to replicate $\rho$ on $\mathcal{I}_\text{soc}$. <a href="../theorems/index.html#t2">T2</a> (non-degeneracy of the full algebra requires all summands) and <a href="../theorems/index.html#t8">T8</a> (no proper sub-algebra is isomorphic to the whole) jointly make this precise. The impossibility is structural, not contingent.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The direct-sum decomposition makes the information-dispersal argument mathematically sharp: the impossibility of central planning is the impossibility of compressing a direct sum into one of its summands while preserving $\rho$. This is not a political or incentive claim but a structural impossibility about bilinear forms, independent of whether planners are benevolent or intelligent.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Hayek's price signals are scalar real numbers that compress enormously complex information into a single dimensionless index. The algebra's $\rho$ is a full bilinear pairing — richer than scalar prices. Real prices achieve their information-processing role precisely by discarding most of $\rho$'s structure, and the formalism may over-specify what prices actually carry.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Romer — Endogenous Growth and Non-Rivalry</div>
+<div class="entry-source"><em>"Endogenous Technological Change," <em>Journal of Political Economy</em>, 1990</em></div>
+<div class="entry-label">The Position</div>
+<p>Ideas are non-rival: one person's use of an idea does not prevent another's simultaneous use of the same idea. Romer showed that this non-rivalry, combined with partial excludability through patents, is the engine of sustained long-run economic growth. Because ideas are not "used up," combining them generates more productive capacity indefinitely — there is no diminishing marginal product of ideas in the aggregate.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the stock of technological ideas with $\deg(a)$ measuring the productivity value of $a$. Non-rivalry is the algebraic condition that using $a$ in a composition does not reduce $a$'s self-resonance: $\rho(a, a \circ b) = \rho(a, a)$. Because $a$ remains fully available after being combined with $b$, grading is non-decreasing along compositions:</p>
+\[ \deg(a \circ b) \;\geq\; \deg(a), \qquad \forall\, a,b \in \mathcal{I} \]
+<p>This contrasts with rival goods where composition consumes the input: $\deg(a \circ b) < \deg(a)$. Non-rivalry is a one-line algebraic condition on the grading, not an economic assumption requiring separate motivation.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Sustained growth means the binary closure of the idea stock grows without bound with non-decreasing grading. The <a href="../lean/index.html">RecombinantGrowth Lean module</a> provides bounds via <code>binaryClosure_card_le</code>, while <a href="../theorems/index.html#t9">T9</a> (grading bounds) ensures degree tracking is well-defined across closure steps. Non-rivalry is an intrinsic algebraic property distinguishing $\mathcal{I}$ from physical-good algebras.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>Non-rivalry is not an economic assumption but an algebraic property of the composition: $a$ is non-rival iff right-composition does not reduce self-resonance. This cleanly distinguishes ideas from physical goods at the algebraic level, without reference to legal institutions or market organization. The formalism makes precise what kinds of goods support unbounded growth and which do not.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Romer's model contains a key asymmetry: ideas are costless to copy once discovered but costly to discover. The non-decreasing degree condition captures non-rivalry of use but does not automatically encode the fixed-cost/zero-marginal-cost asymmetry between idea production and idea diffusion that drives Romer's monopolistic competition structure.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Weitzman — Recombinant Growth</div>
+<div class="entry-source"><em>"Recombinant Growth," <em>Quarterly Journal of Economics</em>, 1998</em></div>
+<div class="entry-label">The Position</div>
+<p>New ideas arise by combining existing ones. Weitzman's insight is that because the number of possible pairwise combinations of $n$ existing ideas grows as $\binom{n}{2}$, idea production can accelerate even without exogenous technological change. This recombinant mechanism implies super-exponential growth potential as the idea stock expands, providing a foundation for the observed acceleration of scientific and technological progress over history.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\text{binaryClosure}(S)$ denote all ideas reachable by finitely many $\circ$-compositions from an initial set $S \subseteq \mathcal{I}$. Weitzman's diversity index is $W(S) = \sum_{a \in \text{binaryClosure}(S)} \deg(a)$. The combinatorial lower bound on variety growth is:</p>
+\[ |\text{binaryClosure}(S)| \;\geq\; \binom{|S|}{2}, \qquad |S| \geq 2 \]
+<p>The quadratic lower bound follows from requiring that every pair $(a,b) \in S \times S$ generates at least one new composition $a \circ b \notin S$. As $|S|$ grows the number of available compositions grows quadratically while the stock only grows linearly from each round, so the boundary of the closure expands acceleratingly.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The Weitzman theorem is captured in the <a href="../lean/index.html">RecombinantGrowth Lean module</a> by <code>subset_binaryClosure</code> (the initial set embeds in its closure), <code>closureN_mono</code> (closure is monotone in the seed set), and <code>binaryClosure_card_le</code> (the cardinality lower bound). <a href="../theorems/index.html#t4">T4</a> and <a href="../theorems/index.html#t9">T9</a> provide the structural scaffolding for emergence and grading.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The binary closure is a standard algebraic construction with well-studied combinatorial growth theorems. Expressing Weitzman's growth intuition via closure theory connects economic growth theory to Ramsey theory and extremal combinatorics, suggesting natural generalizations: $n$-ary closure (combining $k$ ideas at once), weighted closure (with idea-specific combination probabilities), and directed closure (where composition is non-symmetric).</p>
+<div class="entry-label">Where It Diverges</div>
+<p>The binary closure counts all compositions, including economically useless duplicates and already-known combinations. Weitzman's empirical argument rests on the subset of genuinely distinct, practically valuable recombinations — a selection criterion that requires external economic judgment not intrinsic to the algebraic closure operation.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Jones — Semi-Endogenous Growth</div>
+<div class="entry-source"><em>"R&amp;D-Based Models of Economic Growth," <em>Journal of Political Economy</em>, 1995</em></div>
+<div class="entry-label">The Position</div>
+<p>Romer's endogenous growth model predicts that permanent increases in R&amp;D investment should permanently accelerate growth rates. But OECD data show roughly constant growth rates despite massive increases in research employment since World War II. Jones proposed a fix: each new idea is harder to find than the last because the most accessible ideas are discovered first — a "fishing out" effect creating diminishing returns to research productivity.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\omega(a,b)$ be the emergence cocycle measuring new productive capacity generated by combining ideas $a$ and $b$. In Romer's model $\omega$ is effectively unbounded. Jones's semi-endogenous correction is the algebraic condition that $\omega$ is uniformly bounded:</p>
+\[ \omega(a, b) \;\leq\; C \;<\; \infty, \qquad \forall\, a, b \in \mathcal{I} \]
+<p>As $\mathcal{I}$ grows, new compositions increasingly encounter already-discovered ideas; the average value of $\omega$ over new pairs falls over time even if the bound $C$ is constant. The "fishing out" effect is the gradual depletion of high-$\omega$ combinations from the frontier of the binary closure.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>When $\omega$ is uniformly bounded, total emergence from any finite window is finite, and long-run growth rates are determined by population growth rather than R&amp;D intensity alone. The <a href="../lean/index.html">RecombinantGrowth module</a> and <a href="../theorems/index.html#t4">T4</a> provide the framework; the uniform bound is a cohomological constraint ($[\omega] \in H^2_\text{bdd}$, bounded cohomology class).</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The "fishing out" effect has a clean algebraic interpretation: it is the condition that the emergence cocycle is bounded — a bounded-cohomology condition. This connects Jones's empirical observation to a cohomological property of the idea algebra, suggesting that whether an economy is in Romer-style or Jones-style growth is detectable from the asymptotic behavior of $\omega$ over the existing idea stock.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Jones's model is a continuous-time ODE system, and the "fishing out" dynamics arise from a specific functional form of the R&amp;D production function. The discrete cocycle bound $\omega \leq C$ is a static algebraic analogue capturing the qualitative constraint but not the specific differential-equation dynamics or Jones's empirical calibration.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Schumpeter — Creative Destruction</div>
+<div class="entry-source"><em><em>Capitalism, Socialism and Democracy</em>, 1942</em></div>
+<div class="entry-label">The Position</div>
+<p>Capitalism advances not through equilibrium optimization but through a gale of creative destruction: new innovations — products, methods, organizational forms — continuously displace existing firms, technologies, and institutional arrangements. Equilibrium economics that abstracts away from this perpetual turbulence misses the defining feature of the capitalist engine. The innovator, not the optimizer, is the central economic actor.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Innovation is the Aufhebung of old and new ideas: $a \circ b = \sigma(a,b) + \nu(a,b) + \eta(a,b)$, where $\sigma$ is preservation (what the old technology retains), $\nu$ is negation (what is destroyed), and $\eta$ is elevation (the genuinely novel synthesis). Creative destruction occurs when $\omega(a,b)$ is large and the negation component is non-trivial. The new synthesis must have strictly higher market resonance than the displaced technology:</p>
+\[ \rho\!\left(\eta(a,b),\, m\right) \;>\; \rho\!\left(a,\, m\right), \quad \nu(a,b) \neq 0 \;\text{(non-trivial destruction)} \]
+<p>The magnitude of destruction is proportional to $|\nu(a,b)|$; the magnitude of innovation is $\omega(a,b) = \|\eta(a,b)\|$. A large-$\omega$, large-$\nu$ composition is fully Schumpeterian; a large-$\omega$, near-zero-$\nu$ composition is merely incremental improvement.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Creative destruction is <a href="../theorems/index.html#t3">T3</a> (Aufhebung) in action: every composition with positive $\omega$ decomposes into inseparable preservation, negation, and elevation components. The elevation is the innovation; the negation is the destruction. <a href="../theorems/index.html#t4">T4</a> (emergence cocycle) ensures that when $\omega > 0$, the resulting $\eta(a,b)$ is genuinely new — not a recombination of $a$ and $b$ but a structurally novel idea.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic framework makes structurally exact something Schumpeter says only programmatically: preservation, destruction, and creation are three inseparable components of a single operation. You cannot have $\eta(a,b) \neq 0$ without $\nu(a,b) \neq 0$ when the Aufhebung is non-trivial. "Gentle innovation" — elevation without destruction — is algebraically impossible when $\omega > 0$.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Schumpeter's creative destruction operates at the level of firms, industries, and institutional complexes; it requires a sociology of who the innovator is and how they displace incumbents through financial credit and market competition. The idea algebra abstracts away these social carriers, treating destruction as a structural negation-component — losing Schumpeter's most interesting claims about the sociology of the entrepreneur.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Kahneman &amp; Tversky — Framing Effects and Prospect Theory</div>
+<div class="entry-source"><em>"Prospect Theory: An Analysis of Decision under Risk," <em>Econometrica</em>, 1979</em></div>
+<div class="entry-label">The Position</div>
+<p>Expected utility theory predicts preferences invariant to framing: the same outcome described as a gain or a loss relative to a reference point should produce identical choices. Kahneman and Tversky showed this is systematically false. People evaluate outcomes relative to a reference point, weight losses approximately twice as heavily as equivalent gains (loss aversion), and overweight small probabilities. Prospect theory replaces the utility function with an asymmetric value function centered on a variable reference point.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $g \in \mathcal{I}^\times$ be a frame (an invertible element) that conjugates the decision problem: ${}^g a = g \circ a \circ g^{-1}$. Framing effects are the observation that $\rho({}^{g_1}a, \text{pref}) \neq \rho({}^{g_2}a, \text{pref})$ for different frames $g_1$ (gain) and $g_2$ (loss). Loss aversion is the claim that the curvature $\kappa$ — the antisymmetric part of $\rho$ — is strictly larger in the loss direction than in the gain direction:</p>
+\[ \kappa(\ell, r) = \tfrac{1}{2}[\rho(\ell,r) - \rho(r,\ell)] \;>\; \kappa(g, r) = \tfrac{1}{2}[\rho(g,r) - \rho(r,g)] \]
+<p>The reference point is the identity element of the conjugation; shifting the reference point changes the conjugating frame and thereby changes all resonance evaluations, producing the full range of framing and anchoring effects documented by Kahneman and Tversky.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The value function of prospect theory is $\rho(a, \text{outcome})$ with reference-point dependence encoded in the conjugating frame, and loss aversion is the strict asymmetry of $\kappa$. This follows from <a href="../theorems/index.html#t6">T6</a> (conjugation-dependent resonance) and <a href="../theorems/index.html#t5">T5</a> (curvature as the antisymmetric component of $\rho$). Every algebra with non-central invertibles exhibits conjugation-dependent resonance; "irrationality" is not anomalous but structurally expected.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>Framing effects are not irrational anomalies but a structural consequence of conjugation: any idea algebra with non-central invertible elements necessarily exhibits frame-dependent resonance. The non-symmetry of $\rho$, measured exactly by $\kappa$, is a feature of any non-commutative resonance structure. This reframes the behavioral-economics debate: the question is not why humans are irrational, but why anyone expected a symmetric $\rho$ in the first place.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Kahneman and Tversky established the approximately 2:1 loss-aversion ratio through careful empirical experimentation with human subjects. The algebra provides a structural explanation for <em>why</em> $\kappa$ is asymmetric but says nothing about why it takes the specific value of roughly two rather than any other number — the quantitative calibration is entirely empirical.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Ostrom — Polycentric Governance of the Commons</div>
+<div class="entry-source"><em><em>Governing the Commons</em>, 1990</em></div>
+<div class="entry-label">The Position</div>
+<p>The "tragedy of the commons" argument holds that common-pool resources will be over-exploited unless privatized or controlled by the state. Ostrom's fieldwork across dozens of case studies showed this dichotomy is false: communities regularly develop polycentric governance arrangements — multiple overlapping centers of authority — that sustain commons sustainably without either privatization or state coercion. She identified eight design principles characteristic of successful institutions.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}_\text{commons}$ be the governance-ideas sub-algebra. Mutual positive resonance $\rho(u_i, u_j) > 0$ for all community members $u_i, u_j$ captures meaningful community connection and mutual monitoring. Governance rules are idempotent — applying a well-established rule repeatedly does not change the social state beyond the first application:</p>
+\[ \rho(u_i, u_j) > 0 \;\forall i,j, \quad r \circ r = r \;\forall r \in \mathcal{I}_\text{rules} \]
+<p>Polycentricity means there is no unique maximal graded element in $\mathcal{I}_\text{commons}$: authority is distributed across multiple non-comparable sub-algebras, none of which has $\rho$-dominance over the others. The commons is stable precisely because no single center can capture control.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Ostrom's eight design principles correspond to structural conditions on the commons sub-algebra: clear boundaries = $\mathcal{I}_\text{commons}$ is a genuine sub-algebra; collective-choice arrangements = shared composition operations; monitoring = $\rho$-measurement accessible to all members; sanctions = negative-resonance elements available. T10 (Coalitions) provides the stability condition — a coalition is cohesion-stable when all members have positive mutual resonance.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic framework explains why polycentricity is stable rather than merely convenient: idempotent rules are robust under iteration (governing is a stable fixed point, not a process that runs down), and mutual positive resonance guarantees T10 cohesion stability without external enforcement. The sub-algebra structure provides its own stability from within.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Ostrom's design principles are empirical generalizations from genuinely messy governance systems with partial overlap, contested membership, and evolving rules. The algebra's clean sub-algebra conditions impose a tidiness that may not hold in practice — real governance systems are only approximately sub-algebras, and the idempotency of governance rules is aspirational rather than exact.</p>
+</div>
+<h2 id="game">§2 — Game Theory</h2>
+<p class="section-lede">Von Neumann–Morgenstern minimax, Nash equilibrium, Schelling's focal points, Maynard Smith's ESS, Axelrod's evolution of cooperation, Aumann's common knowledge, and Selten's refinements — each as a claim about the resonance structure of strategy-idea algebras.</p>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Von Neumann &amp; Morgenstern — Expected Utility and Minimax</div>
+<div class="entry-source"><em><em>Theory of Games and Economic Behavior</em>, 1944</em></div>
+<div class="entry-label">The Position</div>
+<p>Rational agents maximize expected utility. For zero-sum two-player games, von Neumann proved the minimax theorem: the value each player can guarantee by minimax play equals the value the other can limit them to by maximin play. Extending to mixed strategies — probability distributions over pure strategies — guarantees the minimax value always exists in finite games, providing the foundation for rational game-theoretic analysis.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of pure strategy-ideas, and let $\mathbb{R}\langle\mathcal{I}\rangle$ be the free real vector space over $\mathcal{I}$ — the space of mixed strategies as formal linear combinations. The resonance pairing $\rho(a, b)$ is the expected payoff of mixed strategy $a$ against $b$. In a zero-sum game $\rho(a,b) + \rho(b,a) = 0$, making $\rho$ antisymmetric. The minimax theorem is the existence of a saddle point of $\rho$ over the probability simplex:</p>
+\[ \min_b \max_a \rho(a, b) \;=\; \max_a \min_b \rho(a, b) \]
+<p>The saddle point $(a^*, b^*)$ is the equilibrium mixed-strategy profile where neither player can improve by unilaterally changing their distribution.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The minimax theorem is the statement that the bilinear form $\rho$ has a saddle point over the mixed-strategy simplex. In the idea algebra, this is related to <a href="../theorems/index.html#t2">T2</a> (non-degeneracy implies existence of extremal elements), though the precise connection requires convexity of the simplex — an additional geometric condition beyond the algebra's intrinsic structure.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>Treating mixed strategies as elements of $\mathbb{R}\langle\mathcal{I}\rangle$ reveals that the minimax theorem is not specifically about games but about bilinear forms on convex sets — it holds for any non-degenerate $\rho$ defined on a compact convex domain. The "game theory" content is just the specific interpretation of $\rho$ as a payoff matrix, not the mathematical content of the saddle-point result.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Von Neumann–Morgenstern utility requires a full probability measure over outcomes, and mixed strategies are randomization devices. The idea algebra's $\rho$ is a bilinear pairing, not a probability weighting, so the subjective probability interpretation of mixed strategies — as epistemic uncertainty about the opponent's choice — is not directly recovered from the algebraic structure.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Nash — Nash Equilibrium</div>
+<div class="entry-source"><em>"Equilibrium Points in n-Person Games," <em>PNAS</em>, 1950</em></div>
+<div class="entry-label">The Position</div>
+<p>In any finite game with $n$ players, there exists at least one strategy profile from which no player can increase their payoff by unilaterally changing their strategy while all others hold theirs fixed. Nash equilibria are the natural resting points of rational strategic interaction because any other profile contains at least one player with an incentive to deviate.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $a_i \in \mathcal{I}$ denote player $i$'s strategy and $a_{-i}^*$ the equilibrium strategies of all other players. The resonance pairing $\rho(a_i, a_{-i}^*)$ gives player $i$'s payoff when playing $a_i$ against the others' equilibrium. Nash equilibrium is the condition that no unilateral deviation is profitable:</p>
+\[ \rho(a_i^*,\, a_{-i}^*) \;\geq\; \rho(a_i,\, a_{-i}^*) \qquad \forall a_i \in \mathcal{I},\; \forall i \]
+<p>This is a fixed-point condition on the mutual best-response map: $a_i^* = \arg\max_{a_i} \rho(a_i, a_{-i}^*)$ for each $i$ simultaneously. The full profile $(a_1^*, \ldots, a_n^*)$ is the global fixed point of this joint optimization.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Nash equilibrium is the fixed point of the mutual best-response correspondence. The <a href="../lean/index.html">GameTheory Lean module</a> verifies: <code>isNash_iff_forall_best_response</code> (Nash equilibrium iff mutual best response), <code>exists_best_response</code> (a best response always exists in finite games), and <code>exists_nash_one_player</code> (existence for the one-player case). The full $n$-player existence uses Kakutani's fixed-point theorem.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The resonance-maximization formulation shows that Nash equilibrium is a property of the $\rho$-structure alone, independent of how players reason about each other. Any system governed by a bilinear resonance pairing in which agents maximize their own resonance has Nash equilibria — the fixed-point structure is not uniquely game-theoretic but a general feature of resonance algebras.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Nash's full existence proof uses Kakutani's fixed-point theorem on mixed-strategy simplices, requiring convexity and continuity. The Lean module's <code>exists_best_response</code> covers pure strategies in finite games and does not yet fully subsume the mixed-strategy existence result; extending to continuous strategy spaces requires additional topological conditions beyond the discrete algebraic framework.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Schelling — Focal Points and Coordination</div>
+<div class="entry-source"><em><em>The Strategy of Conflict</em>, 1960</em></div>
+<div class="entry-label">The Position</div>
+<p>In coordination games — where players benefit from matching choices — there are often multiple Nash equilibria, and game theory alone does not predict which one players converge on. Schelling observed that without communication, players converge on "salient" or "focal" options: the most prominent, natural, or culturally obvious choice. This salience is a structural and cultural fact, not a psychological quirk or an accident.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of coordination options and assign $\deg(a)$ as the complexity or conspicuousness of option $a$ — lower degree meaning more prominent or culturally salient. A focal point is the idempotent option with the lowest degree — the self-sustaining option that most naturally "suggests itself" among all equilibria:</p>
+\[ a^* = \arg\min_{a:\, a\circ a = a} \deg(a) \]
+<p>Schelling's claim is that culture, language, and shared context determine the grading function $\deg$, so salience is a social fact encoded in the structure of the idea algebra. The focal point is not chosen by calculation but is the minimum-degree stable point of the coordination system.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Focal points exist iff the grading $\deg$ has a minimum over the set of idempotents of $\mathcal{I}$. Schelling's central claim — salience is structural, not psychological — becomes the algebraic claim that $\deg$ determines the focal set. <a href="../theorems/index.html#t9">T9</a> (grading) and the <a href="../lean/index.html">MeaningGames module</a> provide the relevant structure. When the minimum-degree idempotent is unique, the focal point is uniquely determined.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The formalism separates two questions Schelling conflates: existence (does a minimum-degree idempotent exist?) and uniqueness (is the focal point unique?). Uniqueness requires that $\deg$ is a strict total order on the set of idempotents, which may fail with multiple equally salient options — a degeneracy case the algebra represents precisely as a tie in $\deg$ that Schelling's informal account handles only by appeal to context.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Schelling's salience is irreducibly cultural and multi-dimensional — what makes "heads" focal in a coin flip or "Grand Central at noon" focal as a meeting point depends on enormously rich social context. The algebraic $\deg$ compresses this multi-dimensional salience into a single ordinal function, capturing the structural point while losing most of the cultural content.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Maynard Smith — Evolutionarily Stable Strategy</div>
+<div class="entry-source"><em><em>Evolution and the Theory of Games</em>, 1982</em></div>
+<div class="entry-label">The Position</div>
+<p>An evolutionarily stable strategy (ESS) is a strategy that, when adopted by the entire population, cannot be successfully invaded by a small group of mutants playing any alternative strategy. ESSs are the evolutionary analogue of Nash equilibria — but stricter, because they must be robust to invasion by any mutant. ESS provides a selection principle among Nash equilibria and explains the emergence of stable behavioral patterns through natural selection.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\rho(a,b)$ be the fitness (payoff) of strategy $a$ played against a population playing $b$. An ESS is an idempotent strategy $a^*$ — self-sustaining under composition — that achieves strictly higher resonance against itself than any alternative does against it:</p>
+\[ a^* \circ a^* = a^*, \quad \rho(a^*,\, a^*) \;>\; \rho(b,\, a^*) \;\; \forall b \neq a^* \]
+<p>The idempotency captures population-level self-reproduction: a population playing $a^*$ against $a^*$-players reproduces the same strategy. The strict inequality is the invasion resistance: no alternative has higher fitness in the $a^*$-dominated environment. Every strict ESS is also a Nash equilibrium, but not conversely — ESS is strictly stronger.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>ESS is a $\rho$-maximum idempotent that is resonance-stable under perturbation. This combines <a href="../theorems/index.html#t1">T1</a> (idempotents as fixed points of composition) with the stability condition from the <a href="../lean/index.html">GameTheory Lean module</a>. The algebraic framework unifies Nash equilibrium (resonance maximization) and ESS (resonance-stable idempotent) as two aspects of the same $\rho$-structure, differing only in the strictness of the resonance condition.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The unified framework reveals that Nash equilibrium and ESS are not independently motivated solution concepts but two aspects of the same algebraic structure. Nash requires no profitable unilateral deviation; ESS additionally requires idempotency and strict resonance dominance. This explains why every strict Nash equilibrium that is also a local fitness maximum is an ESS — the two concepts are co-extensional under additional strictness and idempotency conditions.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>ESS's biological meaning requires a specific replicator dynamic: evolutionary feedback from payoffs to population shares, governed by differential equations in continuous time. The static algebraic condition captures the stability criterion but says nothing about whether any particular replicator dynamic converges to the ESS or how quickly. The algebra is a necessary condition for ESS, not sufficient for evolutionary stability in all dynamic models.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Axelrod — The Evolution of Cooperation</div>
+<div class="entry-source"><em><em>The Evolution of Cooperation</em>, 1984</em></div>
+<div class="entry-label">The Position</div>
+<p>In the iterated Prisoner's Dilemma, Axelrod's computer tournaments showed that Tit-for-Tat — cooperate on the first move, then mirror the opponent's previous move — consistently outperformed all more complex alternatives. The success of TfT demonstrated that cooperation can evolve among purely self-interested agents through direct reciprocity, without altruism, kin selection, or central authority. The "shadow of the future" — the weight placed on continued interaction — is the key parameter.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $a_c$ be the cooperate action. Tit-for-Tat is idempotent: $a_\text{TfT} \circ a_\text{TfT} = a_\text{TfT}$ — playing TfT against TfT reproduces TfT. Mutual cooperation generates positive emergence: $\omega(a_c, a_c) > 0$. Cooperation is stable when the discounted emergence sum exceeds the one-shot defection temptation:</p>
+\[ \sum_{n=1}^{\infty} \delta^n\, \omega(a_c^n,\, a_c^n) \;>\; 0, \qquad \delta \in (0,1) \]
+<p>This sum converges because $\delta < 1$, and its positivity gives the exact threshold $\delta > \delta^*$ for cooperation stability. Below the threshold the series is insufficient to outweigh the defection gain; above it, mutual cooperation is the stable fixed point.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Cooperation is stable iff the discounted emergence sum is positive — the shadow of the future is precisely this convergent series. The stability threshold is the minimum $\delta$ making the series exceed the defection payoff. <a href="../lean/index.html">GameTheory</a> combined with <a href="../theorems/index.html#t4">T4</a> (emergence) and <a href="../theorems/index.html#t7">T7</a> (iteration convergence) provides the relevant theorems.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The emergence cocycle $\omega$ makes precise what "surplus from cooperation" means: it is the Aufhebung component of $a_c \circ a_c$ not present in either strategy before interaction — the genuinely new cooperative state created by mutual cooperation. Axelrod's numerical tournament results become a search for idempotents with maximal total discounted emergence, which has a clear resonance-optimization interpretation.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Axelrod's result is primarily empirical — it derives from simulations of strategies submitted by actual game theorists, capturing something about the human sociology of strategy selection. The algebraic discounted emergence series clarifies the mathematical structure but requires a specific replicator dynamics to generate the same numerical predictions.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Aumann — Common Knowledge and Agreeing to Disagree</div>
+<div class="entry-source"><em>"Agreeing to Disagree," <em>Annals of Statistics</em>, 1976</em></div>
+<div class="entry-label">The Position</div>
+<p>Two Bayesian agents who share a common prior and have common knowledge of their posterior beliefs cannot consistently disagree about the probability of any event. Genuine rational disagreement requires either different priors, different information, or — crucially — failure of common knowledge. The theorem simultaneously explains why rational disagreement is possible (common knowledge often fails) and why it is limited (under common knowledge it must vanish).</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $K_i$ be the knowledge operator for agent $i$ — the sub-algebra of ideas that agent $i$ knows. Common knowledge of event $E$ is the limit of iterated knowledge operators, not merely $K_1 E \wedge K_2 E$:</p>
+\[ K_\infty E \;=\; \lim_{n\to\infty} (K_1 K_2 \cdots K_n)^n E \]
+<p>In the idea algebra this is the fixed point of the iterated Aufhebung: $K_\infty E = \lim_{n \to \infty} (\sigma \circ \sigma \circ \cdots)^n E$, where $\sigma$ preserves only what is common. The iteration converges when the associated spectral radius of $\sigma$ is less than 1 — a condition on $\rho$'s structure.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>At the $K_\infty$ fixed point the resonance pairing becomes symmetric: $\rho(a_1^*, a_2^*) = \rho(a_2^*, a_1^*)$. Asymmetry of $\rho$ (disagreement) is eliminated by iterated application of $K_i$. <a href="../theorems/index.html#t6">T6</a> (conjugation reaches fixed point under iteration) and <a href="../theorems/index.html#t7">T7</a> (iteration convergence) are the relevant theorems.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The iterated-Aufhebung formulation reveals that common knowledge is not a static state but a fixed point of a dynamical process — it exists only when the iteration converges, which is a spectral condition on $\rho$. This makes precise when common knowledge is achievable and when the "infinite regress of I know that you know..." genuinely converges versus diverges.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Aumann's model uses a standard probability space with a Kripke-style partition structure — a tractable, well-understood framework. The idea algebra's iterated-Aufhebung limit operator is an algebraic abstraction that may not converge in all partition-model scenarios that Aumann's original framework handles cleanly, and the connection between the two formalisms requires additional axioms to be made fully precise.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Selten — Refinements of Nash Equilibrium</div>
+<div class="entry-source"><em>"Reexamination of the Perfectness Concept for Equilibrium Points in Extensive Games," 1975</em></div>
+<div class="entry-label">The Position</div>
+<p>The Nash equilibrium concept is too permissive: many Nash equilibria are sustained by non-credible threats — strategies that rational players would not actually execute if called upon. Selten proposed subgame-perfect equilibrium as the first major refinement, requiring optimal play in every proper subgame. He later introduced trembling-hand perfect equilibrium, requiring robustness to small perturbations, eliminating equilibria that rely on probability-zero events.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let the game tree define sub-algebras $\mathcal{I}_v$ for each proper subgame rooted at node $v$. Subgame perfection means the Nash equilibrium restricts to Nash in each $\mathcal{I}_v$. Trembling-hand perfection is stability under $\rho$-perturbation — small random "trembles" must not make deviations profitable:</p>
+\[ \rho(a^* + \epsilon b,\; c) \approx \rho(a^*,\; c) \quad \Rightarrow \quad a^* \text{ still Nash for all small } \epsilon > 0 \]
+<p>Trembling-hand perfect equilibria are the idempotents of the idea algebra that remain best responses under all small $\rho$-perturbations — the structurally stable equilibria of the game.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Trembling-hand perfect equilibria are resonance-stable idempotents. Selten's hierarchy of refinements (Nash $\supset$ subgame-perfect $\supset$ trembling-hand perfect $\supset \cdots$) is a hierarchy of stability conditions on the same fixed-point structure, imposing progressively stronger constraints on how Nash solutions restrict to sub-algebras. <a href="../lean/index.html">GameTheory</a> and <a href="../theorems/index.html#t5">T5</a>.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The sub-algebra formulation makes "subgame" algebraically explicit: a subgame is a sub-algebra of the game's idea algebra, and refinements are conditions on how Nash solutions restrict to sub-algebras — exactly the behavior of module structures under restriction. This also makes transparent why trembling-hand perfection is strictly stronger than subgame perfection: it imposes $\rho$-stability, not just sub-algebra restriction.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Selten's backward-induction argument for subgame perfection relies crucially on the finite tree structure and temporal ordering of moves — it is a sequential rationality argument, not an algebraic one. The algebraic formulation as "Nash in every sub-algebra" is coordinate-free and elegant but does not respect the causal/temporal ordering that makes backward induction compelling as a rationality principle.</p>
+</div>
+<h2 id="socknow">§3 — Sociology of Knowledge</h2>
+<p class="section-lede">Lovejoy's unit ideas, Granovetter's weak ties, Bourdieu's field theory, Latour's actor-networks, Skinner's linguistic contextualism, Koselleck's conceptual history, Mannheim's standpoint epistemology, and Merton's scientific norms — each formalized as a claim about sub-algebra structure, conjugation, or resonance topology.</p>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Lovejoy — Unit Ideas and the History of Philosophy</div>
+<div class="entry-source"><em><em>The Great Chain of Being: A Study of the History of an Idea</em>, 1936</em></div>
+<div class="entry-label">The Position</div>
+<p>The history of ideas, Lovejoy argued, is best understood as the history of "unit ideas" — elementary intellectual atoms that recur across epochs, disciplines, and literary genres, each with a distinctive logical structure. Philosophical history is not progress toward truth but the recombination of a small stock of unit ideas in new configurations. His masterwork traced a single unit idea — the Great Chain of Being (plenitude, gradation, continuity) — across two and a half millennia of Western cosmology, theology, literature, and philosophy.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the free algebra generated by Lovejoy's unit ideas: plenitude (everything possible must exist), gradation (being is hierarchically ordered), continuity (no gaps in the chain). The composition $\circ$ is conceptual combination; $\deg$ gives the position in the Great Chain. The "uniformitarian fallacy" — anachronistically reading modern meanings into ancient texts — is the error of treating $\rho_t$ as constant across historical periods:</p>
+\[ \rho_t(a, b) \;\neq\; \rho_{t'}(a, b) \quad \text{for } t \neq t' \text{ (different historical periods)} \]
+<p>The history of a unit idea is the trajectory of $\rho_t(a, \cdot)$ over time — the generator $a$ stays constant while the resonance structure of the surrounding algebra shifts. Lovejoy's great discovery is that plenitude as a unit idea drives very different philosophical conclusions in different resonance environments.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The principle of plenitude — everything possible must be actual — becomes the claim that $\mathcal{I}$ has no missing generators: every $\deg$-level is occupied. Lovejoy's intellectual-historical methodology is the study of the binary closure of unit-idea generators across different historical resonance structures $\rho_t$. <a href="../theorems/index.html#t1">T1</a> (generators and free algebra) and <a href="../theorems/index.html#t9">T9</a> (grading) are the relevant theorems.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The free-algebra structure makes Lovejoy's recombinant methodology algebraically exact: every idea in the history of philosophy is in the binary closure of the unit generators, and $\deg$ tracks metaphysical rank. The formalism crucially separates what Lovejoy conflates: generators are stable across time (unit ideas are truly "unit") but the resonance structure $\rho_t$ changes with historical context, explaining why the same unit idea produces different philosophical conclusions in different centuries.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Lovejoy treats unit ideas as genuinely atomic and trans-historical. But the idea algebra's composition $\circ$ allows every idea to be further decomposed into simpler components, so true atomicity requires an additional "irreducible generator" condition not intrinsic to the formalism. Unit ideas can only be modeled by stipulation — by declaring certain elements generators — not derived from the algebraic structure itself.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Granovetter — The Strength of Weak Ties</div>
+<div class="entry-source"><em>"The Strength of Weak Ties," <em>American Journal of Sociology</em>, 1973</em></div>
+<div class="entry-label">The Position</div>
+<p>Strong social ties — close friends, family, immediate colleagues — cluster in dense groups that share largely the same information. Weak ties — acquaintances, contacts in different social circles — bridge these clusters and are paradoxically the most valuable channels for diffusing novel information and finding jobs. Your most casual acquaintances are more valuable for accessing new ideas than your closest friends, because they connect you to information environments outside your own cluster.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let social ties be encoded in the resonance pairing $\rho(a, b)$ (tie strength between agents or idea-clusters $a$ and $b$). A weak tie has low $\rho(a,b)$ but non-zero curvature $\kappa(a,b)$ — it connects two different resonance regimes with asymmetric mutual influence. The bridging condition is:</p>
+\[ \rho(a, b) \ll 1 \;\;\text{but}\;\; \kappa(a,b) = \tfrac{\rho(a,b)-\rho(b,a)}{2} \neq 0 \]
+<p>A strong tie has high $\rho(a,b) \approx \rho(b,a)$ (symmetric, mutual, saturated) and thus $\kappa \approx 0$: no asymmetric information advantage. The weak tie's non-zero $\kappa$ is precisely what makes it a bridge to a different epistemic environment — one that recognizes the other's ideas more than it is recognized in return.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Novel compositions $\eta(a,b)$ arise predominantly from low-$\rho$, nonzero-$\kappa$ pairs. In large algebras, the bulk of the binary-closure boundary is generated by weak bridges. <a href="../theorems/index.html#t5">T5</a> (curvature as antisymmetric resonance) and the <a href="../lean/index.html">Diffusion module</a> provide the relevant framework; weak-tie bridges appear as low-weight paths connecting otherwise disconnected components of the resonance graph.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The curvature $\kappa$ precisely captures what makes a tie a bridge: a weak tie with $\kappa \neq 0$ connects two resonance regimes with asymmetric mutual influence — one cluster is more receptive to the other's ideas than vice versa. The Diffusion module models how information-ideas spread via $\rho$-weighted paths, and the weak-tie result becomes a theorem about the topology of low-$\rho$, high-$\kappa$ connectors.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Granovetter's original result is primarily empirical, based on interviews with job-finders in the Boston area. The curvature formalization captures the asymmetric-bridge intuition but cannot recover specific threshold effects from continuous $\kappa$: Granovetter's "bridge" is dichotomous (a tie either bridges or does not), while $\kappa$ is continuous and provides no natural threshold for when a tie counts as a structural bridge.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Bourdieu — Field, Habitus, and Capital</div>
+<div class="entry-source"><em><em>The Logic of Practice</em>, 1980</em></div>
+<div class="entry-label">The Position</div>
+<p>Social life is structured by relatively autonomous arenas — fields — each with its own internal logic, rules, and forms of valuable capital. Within each field, agents occupy positions defined by their capital holdings, and they carry a habitus — a system of durable, transposable dispositions acquired through socialization — that generates their practices without conscious calculation. The reproduction of social hierarchy is effected through the interaction of field structure and habitus, not through deliberate coordination or conspiracy.</p>
+<div class="entry-label">The Instantiation</div>
+<p>A field is a sub-algebra $\mathcal{I}_F \subset \mathcal{I}$ with field-specific resonance $\rho_F$, emergence cocycle $\omega_F$, and grading $\deg_F$. Habitus is the collection of idempotent conjugating operators $h$ such that ${}^h a = h \circ a \circ h^{-1}$ applies the agent's habitus-frame to ideas. Multiple capital forms are multiple compatible gradings on the same carrier:</p>
+\[ \deg_\text{econ}(a),\;\; \deg_\text{cult}(a),\;\; \deg_\text{soc}(a),\;\; \deg_\text{sym}(a) \]
+<p>Doxa — ideas taken for granted as undisputable within a field — is $\ker\rho_F$: ideas with zero resonance against everything else in the field, presupposed rather than contested. The boundaries of the sayable within a field are the boundaries of the non-zero resonance structure.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Field-capital conflicts are curvature phenomena: $\kappa_F(a,b) \neq 0$ when $a$ and $b$ represent competing positions, reflecting asymmetric mutual recognition. Reproduction of inequality corresponds to idempotent habitus operators preserving their own conjugation class. <a href="../theorems/index.html#t6">T6</a> (conjugation as habitus), <a href="../theorems/index.html#t9">T9</a> (multi-grading for capital forms), and T10 (field as coalition).</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The multi-grading structure makes capital-form incommensurability exact: $\deg_\text{econ}$ and $\deg_\text{cult}$ can both satisfy <a href="../theorems/index.html#t9">T9</a> while being mutually non-comparable — neither ordering refines the other. This captures Bourdieu's central claim that economic and cultural logics operate by genuinely different principles of valuation, not merely different scales of a common currency.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Bourdieu's habitus is historically sedimented and essentially pre-reflective — internalized bodily practice, not a deliberate cognitive strategy. The algebraic habitus as "any idempotent conjugating operator" is far broader, including deliberately chosen interpretive stances that Bourdieu would sharply distinguish from the unreflective dispositions habitus names. The formalism captures the structural role of habitus without its phenomenological character.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Latour — Actor-Network Theory and Black Boxing</div>
+<div class="entry-source"><em><em>Science in Action</em>, 1987</em></div>
+<div class="entry-label">The Position</div>
+<p>Scientific facts and technologies are produced by heterogeneous networks of actors — human and nonhuman — that must be enrolled into stable alliances. A claim becomes a fact not by being correct but by successfully mobilizing enough network support. "Black boxing" is the process by which a network's complexity is hidden inside a stable, taken-for-granted object: so stabilized that it no longer needs to be opened and examined.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of actors (scientists, instruments, texts, institutions — treated symmetrically). Composition $a \circ b$ represents translation: enrolling $b$ into $a$'s program. Enrollment strength is $\rho(a,b)$. Black-boxed objects are idempotent: $a \circ a = a$ — they translate without being translated themselves. The translation surplus — what is created by enrolling $b$ into $a$'s network — is the emergence component:</p>
+\[ \omega(a, b) = \|\eta(a,b)\| - \|a\| - \|b\| \quad\text{(new obligatory passage point created)} \]
+<p>An "obligatory passage point" — a node all network-members must pass through — is an element $a$ with $\rho(b, a) > 0$ for all network members $b$: maximal resonance-centrality in the network's $\rho$-graph.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Black boxing is the algebraic process of becoming idempotent: once black-boxed, $a$ transforms nothing in itself when composed — it passes through unchanged. Latour's "irreversibility" claim — that successful black-boxing is very difficult to undo — is the stability of idempotents under small $\rho$-perturbations. <a href="../theorems/index.html#t3">T3</a> (Aufhebung) and <a href="../theorems/index.html#t4">T4</a> (emergence).</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The formalism distinguishes Latour's three key concepts precisely: translation ($\circ$), enrollment ($\rho(a,b) > 0$), and black-boxing (idempotency $a \circ a = a$). This makes testable in principle the claim that stronger enrollment correlates with higher probability of idempotency: does $\rho(a,b) > \theta$ for all network members $b$ predict $a \circ a \approx a$?</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Latour's symmetry principle refuses a priori ontological distinctions between human and nonhuman actors. The algebra treats all elements of $\mathcal{I}$ uniformly — consistent with ANT's symmetry — but has no mechanism for generating the specific asymmetries between human agency and material resistance that constitute Latour's most detailed analyses of laboratory work and inscription devices.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Skinner — Linguistic Contextualism in Intellectual History</div>
+<div class="entry-source"><em>"Meaning and Understanding in the History of Ideas," <em>History and Theory</em>, 1969</em></div>
+<div class="entry-label">The Position</div>
+<p>The "textualist" tradition in the history of ideas reads great texts for their timeless wisdom while ignoring the linguistic and political context in which they were produced. Skinner showed that this commits systematic errors: understanding what a historical author meant requires recovering their illocutionary intentions — what they were doing with their words, what positions in contemporary debates they were accepting or rejecting. Meaning is irreducibly contextual and intentional, not immanent in the text itself.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of speech acts and texts. A context is an invertible element $c \in \mathcal{I}^\times$ that conjugates texts: ${}^c\!\text{text} = c \circ \text{text} \circ c^{-1}$. The resonance $\rho({}^c\!\text{text}, \text{intent})$ measures the fit between the contextualized reading and the author's intentions. The historian's task is to find the context $c^*$ maximizing this fit:</p>
+\[ c^* \;=\; \arg\max_c\; \rho\!\left({}^c\!\text{text},\; \text{intentions}\right) \]
+<p>Conceptual change across centuries is change in the conjugating context: ${}^{c_{1689}}\!\text{liberty} \;\neq\; {}^{c_{1789}}\!\text{liberty}$ — the same word-idea composed with different historical contexts yields genuinely different meanings, even when the surface text is identical.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The "fallacy of idealism" — assuming text-meaning is context-independent — is the false assumption that $c$ is central (commutes with all text-ideas). Skinner's contextualism is the algebraic claim that contexts are non-central, conjugation is non-trivial, and meaning is the $\rho$-value of the conjugated reading. <a href="../theorems/index.html#t6">T6</a> (conjugation determines meaning) gives the structural content.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic formulation makes Skinner's methodology into a precise inverse problem: given the output ${}^c\!\text{text}$ and the $\rho$-target (author's intentions), find the conjugating context $c$. Anachronism is a well-defined error: applying $c_\text{modern}$ when $c_\text{historical}$ is correct produces ${}^{c_\text{modern}}\!\text{text} \neq {}^{c_\text{historical}}\!\text{text}$, and the mismatch has a well-defined algebraic measure.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Skinner restricts his methodology to recovering intentional speech acts by individual authors in specific historical controversies. The algebraic framework applies to any composition, which is far broader than what the contextualist methodology licenses. In particular, the algebra makes no distinction between intentional acts (which Skinner cares about) and unintentional meaning effects (which his framework explicitly excludes).</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Koselleck — Conceptual History and the Temporalization of Ideas</div>
+<div class="entry-source"><em><em>Futures Past: On the Semantics of Historical Time</em>, 1979</em></div>
+<div class="entry-label">The Position</div>
+<p>Political concepts carry a temporal structure: they accumulate a "space of experience" (the weight of past events they have processed) and project a "horizon of expectation" (the range of futures they anticipate and enable). Koselleck identified the Sattelzeit (1750–1850) as a period of fundamental transformation in the temporal structure of major political concepts: "history," "progress," "revolution," and "democracy" all became future-oriented in ways they had not previously been, loading onto themselves enormous expectational weight.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of political concepts. Assign two resonance pairings: $\rho_\text{exp}(c, \text{past})$ measuring how much concept $c$ resonates with accumulated historical experience, and $\rho_\text{hope}(c, \text{future})$ measuring how much $c$ projects toward anticipated futures. The Sattelzeit is the period of rapid increase in concept degree:</p>
+\[ \deg_{1800}(\text{history}) \;>\;\deg_{1700}(\text{history}) \quad\text{(concept accumulates temporal depth and complexity)} \]
+<p>Begriffsgeschichte — conceptual history as a discipline — is the study of trajectories $t \mapsto \deg_t(c)$ and $t \mapsto (\rho_{\text{exp},t}(c, \cdot),\, \rho_{\text{hope},t}(c, \cdot))$ over historical time. A concept is "modern" in Koselleck's specific sense when $\rho_\text{hope}(c, \text{future}) \gg \rho_\text{exp}(c, \text{past})$.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Koselleck's "temporalization of concepts" is the claim that $\deg_t(c)$ is not constant across the Sattelzeit — concepts become more complex (higher degree) as they accumulate temporal layers. This is a claim about the dynamics of the grading function, governed by <a href="../theorems/index.html#t9">T9</a> (grading) and <a href="../theorems/index.html#t7">T7</a> (temporal iteration of composition).</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The dual resonance structure $(\rho_\text{exp}, \rho_\text{hope})$ makes Koselleck's central insight algebraically precise: a concept is "modern" exactly when expectational loading diverges from experiential weight — a measurable condition. This gives a criterion operationalizable through corpus-linguistic methods tracking the forward- and backward-looking contexts in which a concept appears across different historical periods.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Koselleck's analysis is resolutely historical and particular — the Sattelzeit is a specific claim about specific German and European concepts in a specific period, grounded in close reading of primary sources. The algebraic framework provides a general formal structure but cannot, from inside the formalism, identify which periods count as saddle periods or which concepts underwent genuine temporalization — this requires the detailed empirical historical work that is Koselleck's actual contribution.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Mannheim — Sociology of Knowledge and Standpoint Relativity</div>
+<div class="entry-source"><em><em>Ideology and Utopia</em>, 1936</em></div>
+<div class="entry-label">The Position</div>
+<p>All knowledge — including social-scientific knowledge — is "standpoint-bound": shaped by the social position, class interests, and generational location of the knower. Ideology is the unreflective identification of one's particular standpoint with universal truth; utopia is the unreflective projection of one's aspirations onto historical destiny. Mannheim sought a sociology of knowledge that could achieve partial emancipation from standpoint by studying how different standpoints relate to each other.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the shared idea-stock and let social standpoints $s$ (bourgeois, proletarian, intelligentsia) determine different resonance pairings $\rho_s$ on the same carrier. Two agents with different standpoints share the compositional structure but have different evaluative structures:</p>
+\[ \rho_\text{bourgeois}(a, b) \;\neq\; \rho_\text{proletarian}(a, b) \quad\text{for ideologically contested ideas } a, b \]
+<p>Mannheim's free-floating intelligentsia — the educated stratum who can partially transcend standpoint — are agents whose resonance approximates the weighted average $\sum_s w_s \rho_s$ over standpoints, synthesizing the partial perspectives without fully occupying any one of them.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The "total conception of ideology" — Mannheim's strongest claim that entire ways of thinking are standpoint-bound — is the algebraic claim that different standpoints induce genuinely different idea algebras $( \mathcal{I}, \circ, \rho_s)$. <a href="../theorems/index.html#t2">T2</a> (different $\rho$ gives different algebras) and <a href="../theorems/index.html#t8">T8</a> (isomorphism conditions — standpoints are isomorphic iff $\rho_s \cong \rho_{s'}$) provide the relevant theorems.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic framework distinguishes Mannheim's "particular" ideology (same $\rho$, different individual claims) from "total" ideology (genuinely different $\rho$-structures) — a distinction Mannheim makes only programmatically. The isomorphism condition of <a href="../theorems/index.html#t8">T8</a> gives a precise criterion for when two social positions "see the same reality" versus "live in different worlds," making Mannheim's relativism exactly measurable in principle.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Mannheim believed the free-floating intelligentsia could achieve partial synthesis transcending standpoint — a hope generating enormous controversy. The algebraic weighted average $\sum_s w_s \rho_s$ is itself just another resonance pairing and thus another standpoint, which supports the more pessimistic post-Mannheimian conclusion that no standpoint-transcendence is possible. The algebra cannot recover Mannheim's hope for partial synthesis.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Merton — The Normative Structure of Science (CUDOS)</div>
+<div class="entry-source"><em>"The Normative Structure of Science," 1942</em></div>
+<div class="entry-label">The Position</div>
+<p>Science is not merely a collection of methods and findings but a normatively structured social institution. Merton identified four institutional imperatives — Communalism (scientific knowledge is a public good), Universalism (claims evaluated by objective criteria regardless of the claimant's identity), Disinterestedness (motivation is knowledge advancement, not personal gain), and Organized Skepticism (all claims subject to systematic critique) — that together constitute the scientific ethos and underwrite science's capacity to produce reliable knowledge.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}_\text{sci}$ be the scientific idea algebra. The CUDOS norms translate into algebraic conditions:</p>
+\[ \text{Communalism: } \rho(a, \mathcal{I}) \not\equiv 0 \;\forall a, \qquad \text{Universalism: } \rho(a, \mathcal{I}_\text{sci}) \perp \text{source}(a) \]
+\[ \text{Disinterest: } \omega \geq 0, \qquad \text{Skepticism: } \rho \text{ non-degenerate} \]
+<p>Communalism: every idea has non-zero resonance with the community — no idea is simply irrelevant. Universalism: $\rho(a, \cdot)$ is orthogonal to the social identity of $a$'s producer. Disinterestedness: $\omega \geq 0$ means science creates rather than destroys. Organized Skepticism: non-degeneracy means no idea is so entrenched it cannot in principle be falsified.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>CUDOS are the four structural conditions that make $( \mathcal{I}_\text{sci}, \circ, \rho)$ a well-behaved idea algebra satisfying <a href="../theorems/index.html#t1">T1</a> and <a href="../theorems/index.html#t2">T2</a>. Violations — fraud (falsifying $\rho$), secrecy (reducing communalism), careerism (making $\rho$ non-orthogonal to source) — are violations of non-degeneracy or positivity of $\omega$ that structurally undermine the algebra's capacity to produce stable scientific facts.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic formulation shows CUDOS norms are not externally imposed ethical requirements but structurally necessary conditions for the scientific idea algebra to satisfy T1–T2: any algebra persistently violating these norms cannot sustain the fixed-point structure (stable facts, replicable results) or distinguish true from false claims (non-degeneracy of $\rho$). The norms are constitutive of science's epistemological function, not merely regulative ideals.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Merton's norms are descriptive-normative — claims about what institutional norms actually govern science and why those norms are functionally necessary. The algebraic conditions are purely formal requirements on a mathematical structure. The empirical question of whether actual scientific practice satisfies these conditions — and extensive post-Mertonian sociology of science suggesting it often does not — is left entirely open by the formalism.</p>
+</div>
+<h2 id="meaning">§4 — Meaning and Language</h2>
+<p class="section-lede">Austin's speech acts, Searle's intentionality, Lewis's conventions, Kripkenstein's rule-following paradox, Davidson's radical interpretation, Grice's implicature, and the Wittgenstein–Nash capstone — unified in the MeaningGames Lean module.</p>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Austin — Speech Act Theory</div>
+<div class="entry-source"><em><em>How to Do Things with Words</em>, 1962</em></div>
+<div class="entry-label">The Position</div>
+<p>Utterances are not merely propositions evaluable as true or false. Austin showed that language is primarily action: utterances perform acts — promising, warning, declaring, ordering, apologizing — and these acts have conditions of success (felicity conditions) distinct from conditions of truth. The illocutionary act — what you are doing in saying something — succeeds only in the right institutional and conversational context; without that context, the act misfires and no social fact is created.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of illocutionary acts with $\circ$ representing sequential speech-act composition. The Aufhebung decomposition maps onto Austin's tripartite distinction: $\sigma(a,b)$ is locutionary preservation (propositional content preserved), $\nu(a,b)$ is illocutionary failure (misfire when felicity conditions fail), and $\eta(a,b)$ is perlocutionary elevation (new social state brought into existence). Performatives — acts that create the state they describe — are idempotent:</p>
+\[ a_\text{perf} \circ a_\text{perf} \;=\; a_\text{perf} \]
+<p>Saying "I promise" twice creates one promise, not two. The second utterance does not add to the social reality already created by the first — the performative is a fixed point of its own iteration. The felicity conditions for a successful performative are precisely the conditions ensuring $\eta \neq 0$.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The Aufhebung decomposition is the algebraic theory of speech acts: $\sigma$ = locutionary preservation, $\nu$ = illocutionary misfire, $\eta$ = perlocutionary elevation. A performative is an idempotent with $\eta \neq 0$: it creates a new social fact. Austin's three act-levels are algebraically forced — they are the three irreducible components of any Aufhebung, per <a href="../theorems/index.html#t3">T3</a>.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The decomposition $\sigma + \nu + \eta$ reveals why Austin needed three distinct levels: they are not a theoretically convenient division but algebraically forced. The "infelicity conditions" — conditions under which a speech act fails — are conditions on when $\nu$ is non-zero (misfire is non-trivial). The success conditions are conditions on when $\eta$ is non-zero — when new social reality is genuinely created.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Austin's theory is irreducibly context-sensitive: a performative succeeds only if the right speaker in the right circumstances utters the right formula. The algebraic condition $\eta \neq 0$ is purely structural and cannot encode whether the institutional context is correct — it says only that something new is created, not whether that creation is felicitous or constitutes a social fact recognized by others.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Searle — Intentionality and the Chinese Room</div>
+<div class="entry-source"><em>"Minds, Brains, and Programs," 1980; <em>Intentionality</em>, 1983</em></div>
+<div class="entry-label">The Position</div>
+<p>Syntactic symbol manipulation is not sufficient for semantics: a system can perform any computational function without genuine understanding. The Chinese Room thought experiment imagines someone manipulating Chinese symbols according to formal rules without understanding Chinese. The missing ingredient is intentionality — the property of mental states whereby they are "about" something. Intentionality cannot be reduced to syntax or computation.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}_1$ be the Chinese Room's idea algebra and $\mathcal{I}_2$ be a genuine understander's. The Chinese Room and the understander may be isomorphic as monoids — same formal rules, same input-output behavior — but have different resonance structures:</p>
+\[ (\mathcal{I}_1, \circ) \;\cong\; (\mathcal{I}_2, \circ) \quad\text{but}\quad \rho_1 \;\neq\; \rho_2 \]
+<p>The monoid isomorphism captures syntactic equivalence; the difference in $\rho$ is the semantic gap. Intentionality is the resonance structure $\rho$: it is what connects symbols to referents, the "aboutness" that formal syntax lacks. Two systems can be computationally identical ($\circ$-isomorphic) while semantically different ($\rho$-non-isomorphic).</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The Chinese Room argument is the claim that monoid isomorphism (<a href="../theorems/index.html#t8">T8</a> structural equivalence) does not imply $\rho$-isomorphism (semantic equivalence). Intentionality is the additional structure of $\rho$ not recoverable from $\circ$ alone. <a href="../theorems/index.html#t2">T2</a> (non-degeneracy of $\rho$ as the condition for semantic content — for ideas to genuinely "mean" anything) completes the picture.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The formalism makes the syntax/semantics gap mathematically precise: the gap is exactly the difference between isomorphism as monoids and isomorphism as full idea algebras (the latter requires $\rho$-preservation in addition to $\circ$-preservation). This raises a sharply formulated question: what physical or biological conditions determine $\rho$? The algebra is neutral on this — it represents the structure of intentionality without specifying what produces it.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Searle's "biological naturalism" holds that only biological brains can produce genuine intentionality, because intentionality is a causal power of biological tissue. The algebra is entirely substrate-neutral: it represents the structure of intentionality ($\rho$) without specifying what physical process produces it. The deepest question Searle raises — why do brains have $\rho$ while functionally equivalent programs do not? — lies completely outside the formalism.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Lewis — Convention and the Game Theory of Language</div>
+<div class="entry-source"><em><em>Convention: A Philosophical Study</em>, 1969</em></div>
+<div class="entry-label">The Position</div>
+<p>Philosophers from Aristotle onward noted that linguistic meaning is conventional. Lewis provided the first rigorous analysis: a convention is a regularity in behavior that (1) is a Nash equilibrium of a coordination game, (2) is common knowledge among the relevant community, and (3) would have been replaced by an alternative had history gone differently. Language, money, norms of road-use, and social rituals are all conventional in this sense.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of behavioral regularities in a meaning-game. A convention is an idempotent strategy $c^*$ — self-sustaining and stable — satisfying Nash equilibrium and maximal self-resonance among all regularities:</p>
+\[ c^* \circ c^* = c^*, \quad \rho(c^*, c^*) \;=\; \max_{a\in\mathcal{I}}\; \rho(a, a) \]
+<p>The convention is not unique — many regularities could serve as the linguistic convention — but each stable convention is an idempotent that is a local maximum of self-resonance, representing a stable social equilibrium. The contingency of conventions (things could have been otherwise) is the multiplicity of idempotents; their stability is idempotency itself.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Lewis's convention existence claim is verified in the <a href="../lean/index.html">MeaningGames Lean module</a> as <code>wittgenstein_nash_existence</code>: for any finite non-empty meaning set $M$, a Nash equilibrium convention exists. Convention stability is <code>coord_convention_of_meaning</code>. <a href="../theorems/index.html#t1">T1</a> (idempotent stability) and the MeaningGames extension provide the relevant theorems.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The MeaningGames module proves convention existence as a theorem in a formal proof assistant, not merely as an empirical observation. This means conventions are necessary features of any meaning game satisfying the module's conditions — a stronger claim than Lewis himself makes. Lewis's conventions are contingent in their content (they could have been otherwise) but necessary in their existence (given the meaning game structure, some convention must exist).</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Lewis's full definition requires both Nash equilibrium and common knowledge of the convention. The algebraic <code>wittgenstein_nash_existence</code> gives Nash equilibrium existence, but the common knowledge component requires the additional iterated-Aufhebung convergence argument from the Aumann entry above. The full Lewis analysis requires both the MeaningGames and the epistemic-iteration structures working together.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Kripkenstein — The Rule-Following Paradox</div>
+<div class="entry-source"><em>Kripke, <em>Wittgenstein on Rules and Private Language</em>, 1982</em></div>
+<div class="entry-label">The Position</div>
+<p>Any finite record of how a rule has been applied is compatible with infinitely many different rules. If I have computed $68 + 57 = 125$ and many other addition facts, there is no fact in the world — no mental state, physical inscription, or past behavior — that determines whether I meant "plus" (standard addition) or "quus" (a deviant function that agrees with addition below 57 but gives 5 otherwise). This "sceptical paradox" threatens to make semantic facts — facts about what words mean, what rules one follows — radically indeterminate.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}$ be the algebra of meaning-rules. Given $n$ data points $(a_1, f(a_1)), \ldots, (a_n, f(a_n))$ constraining the rule, the underdetermination result is that infinitely many resonance pairings are compatible with the finite data:</p>
+\[ \#\left\{\rho' : \rho'(a_i, f(a_i)) = \rho(a_i, f(a_i)),\; i=1\ldots n,\; \rho' \neq \rho\right\} \;=\; \infty \]
+<p>No finite sample of rule-applications determines a unique $\rho$. Despite this underdetermination, the <a href="../lean/index.html">MeaningGames module</a>'s <code>wittgenstein_nash_existence</code> guarantees that a convention — a Nash equilibrium meaning practice — exists. Meaning is not impossible; it is just not grounded in individual mental facts but in social equilibria.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The rule-following paradox is the underdetermination theorem above: no finite data determines a unique $\rho$. Kripke's "sceptical solution" grounds meaning in community practice. The <a href="../lean/index.html">MeaningGames module</a>'s <code>wittgenstein_nash_existence</code> provides the positive side: even without a uniquely determined $\rho$, a stable equilibrium convention exists. Meaning is socially grounded rather than individually grounded.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The formalism cleanly separates two questions Kripke conflates: (1) Is there a fact about which rule an individual is following given their finite history? (No — underdetermination.) (2) Can language function despite this? (Yes — Nash equilibria in meaning games exist by <code>wittgenstein_nash_existence</code>.) The algebra shows conventions, not individual mental facts, are the appropriate ground of meaning, robust to individual-level underdetermination.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Kripke's "sceptical solution" grounds meaning in community assertion conditions — the community's practice of correcting and endorsing each other's rule-applications. But the formalism cannot show that community-level practice avoids the same underdetermination at the collective level: the community's finite history of rule-applications is equally compatible with infinitely many extensions. The Nash equilibrium existence theorem sidesteps rather than solves this deeper regress.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Davidson — Radical Interpretation and Triangulation</div>
+<div class="entry-source"><em>"Truth and Meaning," 1967; "Three Varieties of Knowledge," 1991</em></div>
+<div class="entry-label">The Position</div>
+<p>Understanding a speaker requires simultaneously constructing a theory of their words' meanings and a theory of their beliefs, in a way that makes their assertions mostly true and their inferences mostly valid. Davidson's "principle of charity" — maximize agreement and rational coherence in interpretation — is not optional but the only available entry point for radical interpretation. Triangulation of speaker, interpreter, and shared world grounds semantic content in causal relations to a common environment.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $\mathcal{I}_\text{sp}$ be the speaker's idea algebra and $\mathcal{I}_\text{int}$ the interpreter's. Radical interpretation is an idea-algebra homomorphism $f: \mathcal{I}_\text{sp} \to \mathcal{I}_\text{int}$ — a structure-preserving map. The principle of charity says choose the $f$ maximizing the resonance between the speaker's interpreted ideas and the interpreter's truth-ideas:</p>
+\[ f^* \;=\; \arg\max_f\; \rho_\text{int}(f(a),\; \text{truth}_\text{int}) \]
+<p>Triangulation — grounding interpretation in shared perceptual responses to a common world — is the condition that a common $\rho$ induced by the shared external world enables the homomorphism $f^*$ to be well-defined. Without the shared world, the charity-maximization problem is underdetermined.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Radical interpretation succeeds iff there exists a $\rho$-preserving homomorphism $f^*: (\mathcal{I}_\text{sp}, \circ, \rho) \to (\mathcal{I}_\text{int}, \circ, \rho)$ — an isomorphism of idea algebras up to the charity-maximizing map. <a href="../theorems/index.html#t8">T8</a> (structural equivalence/isomorphism conditions) and <a href="../theorems/index.html#t2">T2</a> (non-degeneracy) are the key theorems.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic formulation reveals that the principle of charity is not a pragmatic heuristic but a structural requirement: the only homomorphisms preserving both $\circ$ and $\rho$ (and hence meaning) are the charity-maximizing ones. Interpretation is structurally constrained by the requirement of algebra isomorphism, not merely guided by charitable goodwill. The constraint is necessary, not just methodologically useful.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Davidson's triangulation requires a physical world that causally grounds the shared $\rho$ — perceptual responses of speaker and interpreter to the same external objects create a common semantic foundation. The algebra's "common $\rho$" is postulated rather than causally derived: the formalism represents the structure Davidson claims the world provides, but says nothing about how the world causally produces that structure. The causal story — which is the heart of Davidson's externalism — lies completely outside the algebra.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Grice — Conversational Implicature</div>
+<div class="entry-source"><em>"Logic and Conversation," in <em>Studies in the Way of Words</em>, 1975</em></div>
+<div class="entry-label">The Position</div>
+<p>Speakers communicate far more than the literal content of their utterances. When a professor writes "her attendance was excellent" as a complete letter of recommendation, the reader infers poor academic ability — an implication not licensed by the words but by recognizing that a cooperative speaker would have said more. Grice explained this through the Cooperative Principle and four maxims: Quantity (say enough), Quality (don't assert falsehoods), Relation (be relevant), and Manner (be clear and brief).</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $a^*$ be the cooperative ideal — the utterance maximally resonant with the conversational context and purpose. The actual utterance $a$ may fall short, and implicature inference is the recovery of $a^*$ from $a$. The Quantity maxim is minimal grading: say the least complex utterance achieving the communicative goal:</p>
+\[ \min \deg(a) \quad\text{subject to}\quad \rho(a,\; \text{communicative goal}) \;\geq\; \theta \]
+<p>The Quality maxim is $\rho(a, \text{believed-true}) > 0$ — don't assert what you believe false. The Relation maxim is $\rho(a, \text{context}) > 0$ — don't say what is irrelevant. The Manner maxim is minimality of $\deg$ among all Quantity-satisfying utterances of equal Quality and Relation.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Conversational implicature is resonance-maximization recovery of the cooperative ideal $a^*$ from the actual utterance $a$. The four maxims are four constraints on $\rho$ — non-degeneracy (Quality), positivity of relevance (Relation), minimality of $\deg$ (Quantity/Manner) — that together define the cooperative resonance-maximization problem. <a href="../lean/index.html">MeaningGames</a> and <a href="../theorems/index.html#t9">T9</a> (grading as Quantity).</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The algebraic framework unifies Grice's four apparently independent maxims as four constraints on a single resonance-maximization problem: $a^* = \arg\max \rho(a, \text{context})$ subject to $\min \deg(a)$. Grice's original list of four maxims reduces to a single cooperative ideal with two constraints ($\rho$ and $\deg$), giving the Cooperative Principle a cleaner and more parsimonious formal structure.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Grice's maxims are defeasible pragmatic norms, not exceptionless algebraic laws: implicatures can be explicitly cancelled, and the cooperative presumption can be suspended in fiction or irony. The optimization framing $\arg\max_a \rho(a, \text{context})$ is too crisp to capture this contextual, negotiated, and cancellable character of conversational implicature.</p>
+</div>
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Wittgenstein–Nash Bridge — The Capstone Theorem</div>
+<div class="entry-source"><em>Wittgenstein, <em>Philosophical Investigations</em>, 1953; Nash, <em>PNAS</em>, 1950; Lewis, <em>Convention</em>, 1969</em></div>
+<div class="entry-label">The Position</div>
+<p>Wittgenstein's use-theory of meaning holds that meaning is determined by use: a word means what it does because of how it is used in the ongoing practices of a community. Lewis's convention theory holds that linguistic conventions are Nash equilibria of coordination games that have reached common knowledge. Nash's existence theorem holds that any finite coordination game has at least one Nash equilibrium. These three theories were developed largely independently and are often presented as competing. The claim of this entry is that, when formalized in the MeaningGames framework, they are not competing but co-extensional.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let $M$ be a finite non-empty set of meanings — possible "uses" in Wittgenstein's sense, possible coordination outcomes in Lewis's sense, possible Nash strategies in Nash's sense. The meaning game is a coordination game over $M$ with resonance pairing $\rho$ encoding payoffs. The capstone theorem:</p>
+\[ \exists\; c^* \in \Delta(M) \;:\; c^* \text{ is a Nash equilibrium of the meaning game on } M \]
+<p>This single existence statement is simultaneously (a) Wittgenstein: meaning is always already determined by practice — use always settles on an equilibrium; (b) Lewis: linguistic conventions exist and are stable; and (c) Nash: finite coordination games always have equilibria. The three theories are three interpretations of the same algebraic fixed point.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>The <a href="../lean/index.html">MeaningGames Lean module</a> verifies: <code>wittgenstein_nash_existence</code> — for any finite non-empty $M$ with $|M| \geq 1$, a Nash equilibrium convention exists in the meaning game on $M$. Stability is <code>coord_convention_of_meaning</code>. <a href="../theorems/index.html#t1">T1</a> (idempotent conventions), <a href="../theorems/index.html#t2">T2</a> (non-degeneracy of meaning), and the MeaningGames extension module provide the full algebraic structure.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The unified theorem shows that the three most influential 20th-century theories of linguistic meaning are not competing explanations but co-extensional descriptions of the same algebraic object — a stable idempotent fixed point in the meaning-game algebra. The formalization also makes new questions mathematically precise: Does the identification extend to infinite meaning sets? (Requires additional compactness conditions — open in the MeaningGames module.) Does it extend to dynamic meaning evolution? (Requires the DialecticalCycles extension.) These questions are now well-posed.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Wittgenstein would almost certainly have rejected the Nash equilibrium formalization of language games. His whole point was that language is embedded in a "form of life" — a background of shared practices, training, natural reactions, and social contexts — that cannot be captured by the thin rationality-theoretic structure of a Nash equilibrium. The bridge is mathematically clean and philosophically illuminating for those who accept the game-theoretic framework; for Wittgenstein himself, the formalization would represent exactly the calculus-fixation he spent the <em>Investigations</em> trying to dislodge.</p>
+</div>
+</main>
+<footer><p>© 2026 Idea Theory Project</p></footer>
+</body>
+</html>
