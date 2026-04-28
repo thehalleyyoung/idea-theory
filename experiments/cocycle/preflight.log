@@ -1,0 +1,51 @@
+/opt/homebrew/lib/python3.14/site-packages/requests/__init__.py:113: RequestsDependencyWarning: urllib3 (2.5.0) or chardet (7.4.0.post1)/charset_normalizer (3.4.4) doesn't match a supported version!
+  warnings.warn(
+INFO  TransformerLens not available; falling back to HuggingFace on mps
+INFO  TransformerLens not available; falling back to HuggingFace on mps
+WARNING  sae_lens not installed — using stub random SAE directions.
+WARNING  openwebtext requires a custom loading script not supported by this datasets version. Using wikitext-2 fallback for corpus.
+INFO  Loading corpus from wikitext-2-raw-v1 train
+INFO  Corpus: 256 tokens → 1 batches of 4×64
+`loss_type=None` was set in the config but it is unrecognized. Using the default loss: `ForCausalLMLoss`.
+============================================================
+  Cocycle Experiments — Preflight Check
+============================================================
+
+── Device ────────────────────────────────────────────
+  [✓] MPS available  (Apple Silicon GPU backend active)
+     device = mps
+
+── Imports ───────────────────────────────────────────
+  [✗] transformer_lens  (NOT installed — using HuggingFace fallback)
+  [✗] sae_lens  (NOT installed — using random SAE stub)
+  [✓] transformers (HF fallback)  (4.57.3)
+  [✓] scipy  (1.16.3)
+  [✓] sklearn  (1.7.2)
+  [✓] numpy  (2.4.3)
+  [✓] yaml  (6.0.3)
+
+── Model Loading ─────────────────────────────────────
+  [✓] load_model()  (backend=transformers, device=mps)
+
+── SAE / Feature Directions ──────────────────────────
+  [✓] SAE weights loaded  (shape=(24576, 768), release=stub)
+  [✓] W_dec rows approx unit-norm  (mean_norm=1.0000)
+
+── Corpus / Tokenisation ─────────────────────────────
+  [✓] corpus loaded  (1 batches × torch.Size([4, 64]) (batch,seq))
+
+── Forward Pass + ΔLoss ──────────────────────────────
+  [✓] clean forward pass  (loss=4.2446, 0.4s)
+  [✓] single ablation  (loss=4.2708, 0.0s)
+  [✓] pair ablation  (loss=4.3301, 0.0s)
+  [✓] rs(a,b) is finite  (rs=-0.000867)
+  [✓] rs3(a,b,d) is finite  (rs3=-0.032334)
+  [✓] Hochschild boundary computes  (∂c=0.000000)
+
+  ΔLoss baseline: rs(a,b)=-0.0009  rs3(a,b,d)=-0.0323
+  Hochschild boundary |∂c| = 0.0000
+
+── Summary ───────────────────────────────────────────
+
+  ✓  PREFLIGHT OK — ready to run experiments
+

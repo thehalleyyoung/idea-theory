@@ -1,0 +1,45 @@
+model:
+  name: gpt2                          # HuggingFace / TransformerLens model id
+  hook_layer: 8                       # layer index for resid_pre hook
+  hook_point: "blocks.8.hook_resid_pre"
+  d_model: 768
+  dtype: float32                      # fp32 only — MPS fp16 is buggy in PyTorch < 2.5
+
+sae:
+  release: "gpt2-small-res-jb"        # SAELens release id
+  sae_id: "blocks.8.hook_resid_pre_24576"
+  n_features_total: 24576
+
+corpus:
+  dataset: "Skylion007/openwebtext"
+  split: "train"
+  row_start: 8000001
+  row_end: 8100001
+  n_tokens: 10000                     # tokens for corpus (reduced for MPS budget)
+  seed: 42
+  max_seq_len: 128                    # MPS constraint: ≤ 128 tokens per sequence
+
+device:
+  prefer: "mps"                       # "mps" | "cpu"
+  batch_size: 8                       # MPS constraint: ≤ 8 sequences per batch
+
+experiments:
+  n_features: 50                      # feature subset size (500 on A100, 50 for MPS 16 GB)
+  seed_features: 0
+  seed_e1_quadruples: 1
+  n_quadruples: 10000
+  seed_e2_test_triples: 2
+  n_test_triples: 500
+  n_train_sketch: 5000                # LASSO sketch size
+  seed_lasso: 10
+  seed_kmeans: 99
+  n_clusters: 5
+
+paths:
+  activations_dir: "activations"
+  results_dir: "results"
+
+preflight:
+  n_features: 10                      # tiny subset for preflight
+  n_tokens: 200
+  batch_size: 4

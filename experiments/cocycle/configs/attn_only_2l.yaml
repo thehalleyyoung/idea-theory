@@ -1,0 +1,57 @@
+model:
+  name: "attn-only-2l"               # TransformerLens built-in toy model
+  hook_layer: 1                       # layer index (2 total: 0-1)
+  hook_point: "blocks.1.hook_resid_pre"
+  d_model: 256
+  d_head: 32
+  n_heads: 8
+  n_layers: 2
+  arch: "tl_attn_only"               # TransformerLens attention-only model
+  dtype: float32
+  tokenizer_name: "gpt2"             # attn-only-2l uses GPT-2 tokenizer
+
+# NOTE: No SAEs exist for attn-only-2l.
+# Features are extracted as attention head output directions: for each head h
+# in each layer l, the W_O matrix row for that head gives a direction in d_model
+# space. With 8 heads × 2 layers = 16 total head directions.
+# This affects E3 interpretation: features represent specific attention head
+# output directions, not polysemantic SAE features. See README for details.
+sae:
+  feature_type: "attn_head"          # attention head W_O directions, NOT an SAE
+  source_layers: [0, 1]              # both layers
+  n_heads: 8
+  n_features_total: 16               # 8 heads × 2 layers
+
+corpus:
+  dataset: "Skylion007/openwebtext"
+  split: "train"
+  row_start: 8000001
+  row_end: 8010000
+  n_tokens: 10000
+  seed: 42
+  max_seq_len: 128
+
+device:
+  prefer: "mps"
+  batch_size: 8
+
+experiments:
+  n_features: 16                     # use all 16 head directions
+  seed_features: 0
+  seed_e1_quadruples: 1
+  n_quadruples: 5000                 # fewer since only 16 features
+  seed_e2_test_triples: 2
+  n_test_triples: 200
+  n_train_sketch: 1000
+  seed_lasso: 10
+  seed_kmeans: 99
+  n_clusters: 3                      # 16 features → fewer clusters
+
+paths:
+  activations_dir: "activations/attn_only_2l"
+  results_dir: "results/attn_only_2l"
+
+preflight:
+  n_features: 10
+  n_tokens: 200
+  batch_size: 4

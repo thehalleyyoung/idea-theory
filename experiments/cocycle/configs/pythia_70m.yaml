@@ -1,0 +1,49 @@
+model:
+  name: "EleutherAI/pythia-70m-deduped"   # HF / TransformerLens model id
+  hook_layer: 3                             # layer index (6 total: 0-5)
+  hook_point: "blocks.3.hook_resid_post"   # matches SAELens release
+  d_model: 512
+  n_layers: 6
+  arch: "neox"                             # GPT-NeoX architecture (for HF fallback)
+  dtype: float32
+  tokenizer_name: "EleutherAI/pythia-70m-deduped"
+
+sae:
+  release: "pythia-70m-deduped-res-sm"     # SAELens pretrained release
+  sae_id: "blocks.3.hook_resid_post"       # SAE identifier within release
+  n_features_total: 32768                  # 512 * 64 expansion
+  feature_type: "sae"                      # features come from a pretrained SAE
+
+corpus:
+  dataset: "Skylion007/openwebtext"
+  split: "train"
+  row_start: 8000001
+  row_end: 8100001
+  n_tokens: 10000
+  seed: 42
+  max_seq_len: 128
+
+device:
+  prefer: "mps"
+  batch_size: 8
+
+experiments:
+  n_features: 50
+  seed_features: 0
+  seed_e1_quadruples: 1
+  n_quadruples: 10000
+  seed_e2_test_triples: 2
+  n_test_triples: 500
+  n_train_sketch: 5000
+  seed_lasso: 10
+  seed_kmeans: 99
+  n_clusters: 5
+
+paths:
+  activations_dir: "activations/pythia_70m"
+  results_dir: "results/pythia_70m"
+
+preflight:
+  n_features: 10
+  n_tokens: 200
+  batch_size: 4

@@ -1,0 +1,26 @@
+# MPS-friendly requirements for Apple Silicon
+# Tested on Python 3.11+, PyTorch 2.3+ with MPS backend
+# fp32 only (MPS fp16 buggy in PyTorch < 2.5)
+
+# Core ML stack
+torch>=2.3.0
+numpy>=1.26.0
+scipy>=1.11.0
+scikit-learn>=1.3.0
+
+# Model loading (TransformerLens for GPT-2-small with hooks)
+transformer_lens>=2.2.2
+transformers>=4.38.0
+
+# SAE loading
+sae_lens>=3.0.0
+
+# Dataset streaming
+datasets>=2.18.0
+
+# Config / serialization
+pyyaml>=6.0.1
+tqdm>=4.66.0
+
+# Optional: Neuronpedia API queries (E3)
+requests>=2.31.0

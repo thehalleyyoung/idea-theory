@@ -1,0 +1,56 @@
+model:
+  name: "roneneldan/TinyStories-33M"  # HuggingFace model id (GPT-Neo architecture)
+  hook_layer: 2                        # layer index (4 total: 0-3)
+  hook_point: "blocks.2.hook_resid_pre"
+  d_model: 768                         # hidden_size for TinyStories-33M
+  n_layers: 4
+  arch: "gpt_neo"                      # GPT-Neo architecture (for HF fallback)
+  dtype: float32
+  tokenizer_name: "roneneldan/TinyStories-33M"
+
+# NOTE: No pretrained SAEs exist for TinyStories-33M.
+# Features are extracted as MLP output-weight directions (W_out rows from each
+# MLP layer). Each row W_out[i] ∈ R^{d_model} is the direction in residual space
+# corresponding to neuron i. This affects E3 interpretation: neuron-direction
+# features capture MLP specialization rather than polysemantic SAE features.
+# See README "Multi-model reproduction" section for full discussion.
+sae:
+  feature_type: "mlp_neuron"           # MLP neuron directions, NOT an SAE
+  source_layers: [0, 1, 2, 3]         # extract neurons from all 4 MLP layers
+  d_mlp: 3072                          # intermediate_size for TinyStories-33M
+  n_features_total: 3072               # one direction per MLP neuron in source layer
+  source_layer: 2                      # primary layer for neuron extraction
+
+corpus:
+  dataset: "roneneldan/TinyStories"    # in-domain corpus matches model training data
+  split: "train"
+  row_start: 0
+  row_end: 10000
+  n_tokens: 10000
+  seed: 42
+  max_seq_len: 128
+
+device:
+  prefer: "mps"
+  batch_size: 8
+
+experiments:
+  n_features: 50
+  seed_features: 0
+  seed_e1_quadruples: 1
+  n_quadruples: 10000
+  seed_e2_test_triples: 2
+  n_test_triples: 500
+  n_train_sketch: 5000
+  seed_lasso: 10
+  seed_kmeans: 99
+  n_clusters: 5
+
+paths:
+  activations_dir: "activations/tinystories_33m"
+  results_dir: "results/tinystories_33m"
+
+preflight:
+  n_features: 10
+  n_tokens: 200
+  batch_size: 4
