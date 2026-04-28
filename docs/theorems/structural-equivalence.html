@@ -3,22 +3,986 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 8: Structural Equivalence — Idea Theory</title>
+<title>Theorems 8 &amp; 9: Words, Structural Equivalence &amp; Idea Structures — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script>
+MathJax = {
+  tex: {
+    macros: {
+      llbracket: "\\mathopen{[\\![}",
+      rrbracket: "\\mathclose{]\\!]}"
+    }
+  }
+};
+</script>
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../chapters/index.html">Book</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
-<h1>Theorem 8: Structural Equivalence</h1>
-<div class="thm"><span class="thm-label">Theorem 8.</span> Let \((\mathcal{I},\ldots)\) and \((\mathcal{I}',\ldots)\) be idea algebras. They are isomorphic as idea algebras if and only if there is a bijection \(\Phi:\mathcal{I}\to\mathcal{I}'\) such that \(\Phi\) is a graded monoid isomorphism and \(\Phi\) intertwines \(\rho,\sigma,\nu,\omega\).</div>
 
-<h2>Proof sketch</h2>
-<p>The forward direction is by definition. For the converse, observe that \(\eta = a\circ b - \sigma(a,b)-\nu(a,b)\) is then automatically preserved, and \(\kappa\) is determined by \(\rho\). Hence \(\Phi\) preserves all structure.</p>
+<h1>Theorems 8 &amp; 9: Words, Structural Equivalence &amp; Idea Structures</h1>
+<p class="entry-meta">Source: <code>Theorems8.lean</code> (49 lemmas — words, evalWord, structural equivalence) &middot; <code>Theorems9.lean</code> (84 lemmas — IdeaPair, IdeaTriple, grading) &middot; ~133 machine-verified results</p>
 
-<p>Verified as <code>IdeaTheory.Theorems8.structural_equivalence</code>.</p>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<div class="toc-box">
+<strong>Contents</strong>
+<ol>
+  <li><a href="#sec-headline">Headline Theorems</a>
+    <ol>
+      <li><a href="#thm-8-1">Theorem 8.1 — Structural Equivalence Theorem</a></li>
+      <li><a href="#thm-8-2">Theorem 8.2 — Canonical Form</a></li>
+      <li><a href="#thm-8-3">Theorem 8.3 — Universal Property</a></li>
+      <li><a href="#thm-9-1">Theorem 9.1 — Padding Theorem for Pairs</a></li>
+      <li><a href="#thm-9-2">Theorem 9.2 — Canonical Form for Triples</a></li>
+      <li><a href="#thm-9-3">Theorem 9.3 — IdeaEquiv is a Congruence</a></li>
+    </ol>
+  </li>
+  <li><a href="#sec-8">§8 — Word Evaluation &amp; Structural Equivalence</a>
+    <ol>
+      <li><a href="#sec-8a">§8.A Word Evaluation (7 lemmas)</a></li>
+      <li><a href="#sec-8b">§8.B Structural Equivalence Properties (4 lemmas)</a></li>
+      <li><a href="#sec-8c">§8.C Congruence Operations (6 lemmas)</a></li>
+      <li><a href="#sec-8d">§8.D Associativity up to StructEquiv (3 lemmas)</a></li>
+      <li><a href="#sec-8e">§8.E Identity Insertion (8 lemmas)</a></li>
+      <li><a href="#sec-8f">§8.F Reassociation (5 lemmas)</a></li>
+      <li><a href="#sec-8g">§8.G Canonical Forms (5 lemmas)</a></li>
+      <li><a href="#sec-8h">§8.H Homomorphisms &amp; Corollaries (8 lemmas)</a></li>
+    </ol>
+  </li>
+  <li><a href="#sec-9">§9 — IdeaPair, IdeaTriple &amp; Grading</a>
+    <ol>
+      <li><a href="#sec-9a">§9.A Trivial Forms &amp; Basic Compositions (5 lemmas)</a></li>
+      <li><a href="#sec-9b">§9.B Triple Canonical Forms (6 lemmas)</a></li>
+      <li><a href="#sec-9c">§9.C Trivial-Component Lemmas (4 lemmas)</a></li>
+      <li><a href="#sec-9d">§9.D Sandwich &amp; Chain Lemmas (10 lemmas)</a></li>
+      <li><a href="#sec-9e">§9.E Triple Identity Placements (6 lemmas)</a></li>
+      <li><a href="#sec-9f">§9.F BalancedIdea4 Lemmas (13 lemmas)</a></li>
+      <li><a href="#sec-9g">§9.G IdeaEquiv Properties (7 lemmas)</a></li>
+      <li><a href="#sec-9h">§9.H Component-wise Congruence (11 lemmas)</a></li>
+      <li><a href="#sec-9i">§9.I Four-Element Associativity (6 lemmas)</a></li>
+      <li><a href="#sec-9j">§9.J Component Equality Lemmas (9 lemmas)</a></li>
+      <li><a href="#sec-9cor">Corollaries (10 entries)</a></li>
+    </ol>
+  </li>
+  <li><a href="#sec-implications">Implications</a></li>
+  <li><a href="#sec-zoo">Zoo Entries</a></li>
+</ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 1 — HEADLINE THEOREMS
+     ═══════════════════════════════════════════════════════ -->
+<h2 id="sec-headline">1. Headline Theorems</h2>
+
+<h3>From <code>Theorems8.lean</code></h3>
+
+<p>Throughout, \(\llbracket w \rrbracket\) denotes the evaluation of word \(w\) in the idea algebra \((\mathcal{I}, \circ, e)\), and \(w_1 \simeq w_2\) denotes structural equivalence.</p>
+
+<div class="thm" id="thm-8-1">
+<span class="thm-label">Theorem 8.1 (Structural Equivalence Theorem).</span>
+Let \(w_1, w_2 \in \mathrm{Word}\,\mathcal{I}\). The following hold:
+<ol>
+  <li><em>Characterisation.</em> \(\displaystyle w_1 \simeq w_2 \;\iff\; \llbracket w_1 \rrbracket = \llbracket w_2 \rrbracket.\)</li>
+  <li><em>Cons-congruence.</em> If \(w_1 \simeq w_2\) then \(a :: w_1 \simeq a :: w_2\) for any \(a \in \mathcal{I}\).</li>
+  <li><em>Append-congruence.</em> If \(w_1 \simeq w_1'\) and \(w_2 \simeq w_2'\) then \(w_1 \mathbin{+\!+} w_2 \simeq w_1' \mathbin{+\!+} w_2'\).</li>
+</ol>
+</div>
+
+<div class="thm" id="thm-8-2">
+<span class="thm-label">Theorem 8.2 (Canonical Form / Normal Form).</span>
+<ol>
+  <li>Every word \(w\) is structurally equivalent to its canonical singleton: \(w \simeq [\llbracket w \rrbracket]\).</li>
+  <li>Two words are structurally equivalent iff their canonical forms are equal as lists: \(w_1 \simeq w_2 \iff \mathrm{canonical}(w_1) = \mathrm{canonical}(w_2)\).</li>
+  <li>The canonical form always has length exactly 1: \(|\mathrm{canonical}(w)| = 1\).</li>
+</ol>
+</div>
+
+<div class="thm" id="thm-8-3">
+<span class="thm-label">Theorem 8.3 (Universal Property of Structural Equivalence).</span>
+<ol>
+  <li>\(\simeq\) is the coarsest equivalence relation on \(\mathrm{Word}\,\mathcal{I}\) contained in the evaluation kernel.</li>
+  <li>Any relation \(R\) satisfying \(R\,w_1\,w_2 \Rightarrow \llbracket w_1 \rrbracket = \llbracket w_2 \rrbracket\) is contained in \(\simeq\).</li>
+  <li>Any relation that exactly characterises the evaluation kernel is equal to \(\simeq\).</li>
+</ol>
+</div>
+
+<h3>From <code>Theorems9.lean</code></h3>
+
+<p>An <code>IdeaPair</code> \(p = (a, b)\) carries \(p.\mathrm{compose} = a \circ b\). An <code>IdeaTriple</code> \(t = (a,b,c)\) carries \(t.\mathrm{composeL} = (a \circ b) \circ c\) and \(t.\mathrm{composeR} = a \circ (b \circ c)\). The padding maps are \(\mathrm{padR}(a,b) = (a,b,e)\), \(\mathrm{padL}(a,b) = (e,a,b)\), \(\mathrm{padM}(a,b) = (a,e,b)\).</p>
+
+<div class="thm" id="thm-9-1">
+<span class="thm-label">Theorem 9.1 (Padding Theorem for Pairs).</span>
+For any <code>IdeaPair</code> \(p = (a,b)\), all three padding operations yield the same composition:
+\[\mathrm{padR}(p).\mathrm{composeL} \;=\; \mathrm{padL}(p).\mathrm{composeL} \;=\; \mathrm{padM}(p).\mathrm{composeL} \;=\; a \circ b.\]
+</div>
+
+<div class="thm" id="thm-9-2">
+<span class="thm-label">Theorem 9.2 (Canonical Form for Triples).</span>
+For any <code>IdeaTriple</code> \(t = (a,b,c)\), left-leaning and right-leaning parenthesisations agree:
+\[t.\mathrm{composeL} \;=\; (a \circ b) \circ c \;=\; a \circ (b \circ c) \;=\; t.\mathrm{composeR}.\]
+</div>
+
+<div class="thm" id="thm-9-3">
+<span class="thm-label">Theorem 9.3 (IdeaEquiv is a Congruence).</span>
+<code>IdeaEquiv</code> satisfies:
+<ul>
+  <li><em>Reflexivity.</em> \(a \equiv a\) for all \(a\).</li>
+  <li><em>Symmetry.</em> \(a \equiv b \Rightarrow b \equiv a\).</li>
+  <li><em>Transitivity.</em> \(a \equiv b\) and \(b \equiv c\) implies \(a \equiv c\).</li>
+  <li><em>Left congruence.</em> \(a \equiv b \Rightarrow c \circ a \equiv c \circ b\).</li>
+  <li><em>Right congruence.</em> \(a \equiv b \Rightarrow a \circ c \equiv b \circ c\).</li>
+</ul>
+Moreover, \(\mathrm{IdeaEquiv}(a,b) \iff a = b\).
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 2 — THEOREMS8.LEAN LEMMAS
+     ═══════════════════════════════════════════════════════ -->
+<h2 id="sec-8">2. Word Evaluation &amp; Structural Equivalence — <em>Theorems8.lean</em></h2>
+
+<!-- §8.A ────────────────────────────────────────────── -->
+<h3 id="sec-8a">§8.A Word Evaluation</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.1 (evalWord_singleton).</span>
+For any \(a \in \mathcal{I}\),
+\[\llbracket [a] \rrbracket = a.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.2 (evalWord_pair).</span>
+\[\llbracket [a,\, b] \rrbracket = a \circ b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.3 (evalWord_triple).</span>
+\[\llbracket [a,\, b,\, c] \rrbracket = a \circ (b \circ c).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.4 (evalWord_append).</span>
+For words \(w_1, w_2\),
+\[\llbracket w_1 \mathbin{+\!+} w_2 \rrbracket \;=\; \llbracket w_1 \rrbracket \circ \llbracket w_2 \rrbracket.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.5 (evalWord_snoc).</span>
+\[\llbracket w \mathbin{+\!+} [a] \rrbracket \;=\; \llbracket w \rrbracket \circ a.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.6 (evalWord_append_three).</span>
+\[\llbracket w_1 \mathbin{+\!+} w_2 \mathbin{+\!+} w_3 \rrbracket \;=\; \llbracket w_1 \rrbracket \circ \llbracket w_2 \rrbracket \circ \llbracket w_3 \rrbracket.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.A.7 (evalWord_replicate_ident).</span>
+For any \(n \geq 0\), the word consisting of \(n\) copies of \(e\) evaluates to \(e\):
+\[\llbracket \underbrace{[e, \ldots, e]}_{n} \rrbracket = e.\]
+</div>
+
+<!-- §8.B ────────────────────────────────────────────── -->
+<h3 id="sec-8b">§8.B Structural Equivalence Properties</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.B.1 (equivalence).</span>
+\(\simeq\) is an equivalence relation on \(\mathrm{Word}\,\mathcal{I}\): it is reflexive, symmetric, and transitive.
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.B.2 (eq_nil_iff_eval_ident).</span>
+For any word \(w\),
+\[w \simeq [] \;\iff\; \llbracket w \rrbracket = e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.B.3 (singleton_singleton_iff).</span>
+\[[a] \simeq [b] \;\iff\; a = b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.B.4 (singleton_iff_eval).</span>
+\[[a] \simeq w \;\iff\; a = \llbracket w \rrbracket.\]
+</div>
+
+<!-- §8.C ────────────────────────────────────────────── -->
+<h3 id="sec-8c">§8.C Congruence Operations</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.C.1 (cons_congr).</span>
+If \(w_1 \simeq w_2\) then \(a :: w_1 \simeq a :: w_2\) for any \(a\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.C.2 (append_congr).</span>
+If \(w_1 \simeq w_1'\) and \(w_2 \simeq w_2'\) then
+\[w_1 \mathbin{+\!+} w_2 \;\simeq\; w_1' \mathbin{+\!+} w_2'.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.C.3 (append_left_congr).</span>
+If \(w_1 \simeq w_1'\) then \(w_1 \mathbin{+\!+} w_2 \simeq w_1' \mathbin{+\!+} w_2\) for any fixed \(w_2\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.C.4 (append_right_congr).</span>
+If \(w_2 \simeq w_2'\) then \(w_1 \mathbin{+\!+} w_2 \simeq w_1 \mathbin{+\!+} w_2'\) for any fixed \(w_1\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.C.5 (snoc_congr).</span>
+If \(w_1 \simeq w_2\) then \(w_1 \mathbin{+\!+} [a] \simeq w_2 \mathbin{+\!+} [a]\) for any \(a\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.C.6 (replicate_congr_letter).</span>
+If \(a = b\) then \(\mathrm{replicate}(n, a) \simeq \mathrm{replicate}(n, b)\) for any \(n \geq 0\).
+</div>
+
+<!-- §8.D ────────────────────────────────────────────── -->
+<h3 id="sec-8d">§8.D Associativity up to Structural Equivalence</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.D.1 (append_assoc).</span>
+\[(w_1 \mathbin{+\!+} w_2) \mathbin{+\!+} w_3 \;\simeq\; w_1 \mathbin{+\!+} (w_2 \mathbin{+\!+} w_3).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.D.2 (nil_append).</span>
+\[[] \mathbin{+\!+} w \;\simeq\; w.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.D.3 (append_nil).</span>
+\[w \mathbin{+\!+} [] \;\simeq\; w.\]
+</div>
+
+<!-- §8.E ────────────────────────────────────────────── -->
+<h3 id="sec-8e">§8.E Identity Insertion Lemmas</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.1 (cons_ident).</span>
+\[e :: w \;\simeq\; w.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.2 (snoc_ident).</span>
+\[w \mathbin{+\!+} [e] \;\simeq\; w.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.3 (insert_ident).</span>
+\[w_1 \mathbin{+\!+} [e] \mathbin{+\!+} w_2 \;\simeq\; w_1 \mathbin{+\!+} w_2.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.4 (replicate_ident_nil).</span>
+For any \(n \geq 0\), \(\underbrace{[e, \ldots, e]}_{n} \simeq []\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.5 (sandwich_replicate_ident).</span>
+For any \(n \geq 0\),
+\[w_1 \mathbin{+\!+} \underbrace{[e,\ldots,e]}_{n} \mathbin{+\!+} w_2 \;\simeq\; w_1 \mathbin{+\!+} w_2.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.6 (double_ident_collapse).</span>
+\[[e] \mathbin{+\!+} w \mathbin{+\!+} [e] \;\simeq\; w.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.7 (snoc_add_ident).</span>
+Snoc-form of identity absorption: \(w \mathbin{+\!+} [e] \simeq w\), established via the snoc characterisation of evaluation.
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.E.8 (cons_add_ident).</span>
+Cons-form of identity absorption: \(e :: w \simeq w\), established via the cons characterisation of evaluation.
+</div>
+
+<!-- §8.F ────────────────────────────────────────────── -->
+<h3 id="sec-8f">§8.F Reassociation</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.F.1 (reassoc_three).</span>
+Three-word reassociation is a \(\simeq\)-equivalence:
+\[(w_1 \mathbin{+\!+} w_2) \mathbin{+\!+} w_3 \;\simeq\; w_1 \mathbin{+\!+} (w_2 \mathbin{+\!+} w_3).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.F.2 (reassoc_four_mid).</span>
+Four-word middle regrouping:
+\[(w_1 \mathbin{+\!+} w_2) \mathbin{+\!+} (w_3 \mathbin{+\!+} w_4) \;\simeq\; w_1 \mathbin{+\!+} (w_2 \mathbin{+\!+} w_3) \mathbin{+\!+} w_4.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.F.3 (reassoc_four_left).</span>
+Four-word left regrouping:
+\[((w_1 \mathbin{+\!+} w_2) \mathbin{+\!+} w_3) \mathbin{+\!+} w_4 \;\simeq\; w_1 \mathbin{+\!+} w_2 \mathbin{+\!+} w_3 \mathbin{+\!+} w_4.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.F.4 (pair_cons_unfold).</span>
+\[[a] \mathbin{+\!+} (b :: w) \;\simeq\; a :: b :: w.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.F.5 (cons_eq_append).</span>
+\[b :: w \;\simeq\; [b] \mathbin{+\!+} w.\]
+</div>
+
+<!-- §8.G ────────────────────────────────────────────── -->
+<h3 id="sec-8g">§8.G Canonical Forms</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.G.1 (canonical_size).</span>
+The canonical form of any word has length exactly one:
+\[|\mathrm{canonical}(w)| = 1.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.G.2 (canonical_append).</span>
+The canonical form of an appended word is the singleton of the composed evaluations:
+\[\mathrm{canonical}(w_1 \mathbin{+\!+} w_2) = [\llbracket w_1 \rrbracket \circ \llbracket w_2 \rrbracket].\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.G.3 (to_canonical).</span>
+Every word is structurally equivalent to its canonical form:
+\[w \;\simeq\; \mathrm{canonical}(w).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.G.4 (equiv_iff_canonical).</span>
+\[w_1 \simeq w_2 \;\iff\; \mathrm{canonical}(w_1) = \mathrm{canonical}(w_2).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.G.5 (canonical_idem).</span>
+The canonical map is idempotent:
+\[\mathrm{canonical}(\mathrm{canonical}(w)) = \mathrm{canonical}(w).\]
+</div>
+
+<!-- §8.H ────────────────────────────────────────────── -->
+<h3 id="sec-8h">§8.H Homomorphisms and Corollaries</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.H.1 (evalWord_mapWord).</span>
+If \(f : \mathcal{I} \to \mathcal{J}\) is an algebra homomorphism, evaluation commutes with the word-image map:
+\[\llbracket \mathrm{mapWord}(f,\, w) \rrbracket \;=\; f\!\left(\llbracket w \rrbracket\right).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 8.H.2 (mapWord_congr).</span>
+Homomorphisms preserve structural equivalence: if \(w_1 \simeq w_2\) then
+\[\mathrm{mapWord}(f,\, w_1) \;\simeq\; \mathrm{mapWord}(f,\, w_2).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 8.1 (corollary_8_1).</span>
+Every algebra homomorphism \(f\) descends to a well-defined map on \(\simeq\)-classes: the assignment \([w]_{\simeq} \mapsto \mathrm{mapWord}(f, w)\) is independent of the chosen representative.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 8.2 (corollary_8_2 — DecidableRel).</span>
+When equality of elements of \(\mathcal{I}\) is decidable, structural equivalence is a decidable relation on \(\mathrm{Word}\,\mathcal{I}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 8.3 (corollary_8_3).</span>
+The canonical form is idempotent on \(\simeq\)-classes: \(\mathrm{canonical}(w) \simeq w\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 8.4 (corollary_8_4).</span>
+If \(\llbracket w_1 \rrbracket = e\) and \(\llbracket w_2 \rrbracket = e\) then \(w_1 \simeq [] \simeq w_2\): both words are equivalent to the empty word.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 8.5 (corollary_8_5).</span>
+Append is associative up to \(\simeq\):
+\[(w_1 \mathbin{+\!+} w_2) \mathbin{+\!+} w_3 \;\simeq\; w_1 \mathbin{+\!+} (w_2 \mathbin{+\!+} w_3).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 8.6 (corollary_8_6).</span>
+Any \(n\)-fold replicate of \(e\) is invisible under insertion:
+\[w_1 \mathbin{+\!+} \underbrace{[e,\ldots,e]}_{n} \mathbin{+\!+} w_2 \;\simeq\; w_1 \mathbin{+\!+} w_2.\]
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 3 — THEOREMS9.LEAN LEMMAS
+     ═══════════════════════════════════════════════════════ -->
+<h2 id="sec-9">3. IdeaPair, IdeaTriple &amp; Grading — <em>Theorems9.lean</em></h2>
+
+<!-- §9.A ────────────────────────────────────────────── -->
+<h3 id="sec-9a">§9.A Trivial Forms and Basic Compositions</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.A.1 (IdeaPair.compose_trivial).</span>
+The trivial pair \((e, e)\) composes to \(e\):
+\[e \circ e = e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.A.2 (IdeaTriple.composeL_trivial).</span>
+\[\mathrm{composeL}(e,\, e,\, e) = e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.A.3 (IdeaTriple.composeR_trivial).</span>
+\[\mathrm{composeR}(e,\, e,\, e) = e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.A.4 (IdeaPair.compose_right_ident).</span>
+For any \(a \in \mathcal{I}\), \(a \circ e = a\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.A.5 (IdeaPair.compose_left_ident).</span>
+For any \(a \in \mathcal{I}\), \(e \circ a = a\).
+</div>
+
+<!-- §9.B ────────────────────────────────────────────── -->
+<h3 id="sec-9b">§9.B Triple Canonical Forms</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.B.1 (IdeaTriple.composeL_eq_composeR).</span>
+For any triple \(t = (a, b, c)\),
+\[t.\mathrm{composeL} = t.\mathrm{composeR}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.B.2 (IdeaTriple.composeR_eq_composeL).</span>
+Symmetric: \(t.\mathrm{composeR} = t.\mathrm{composeL}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.B.3 (IdeaPair.compose_padR).</span>
+Padding a pair on the right with \(e\) and computing left-leaning recovers the original composition:
+\[\mathrm{padR}(p).\mathrm{composeL} \;=\; p.\mathrm{compose}.\]
+Explicitly: \((a \circ b) \circ e = a \circ b\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.B.4 (IdeaPair.compose_padL).</span>
+Padding on the left:
+\[\mathrm{padL}(p).\mathrm{composeL} \;=\; p.\mathrm{compose}.\]
+Explicitly: \((e \circ a) \circ b = a \circ b\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.B.5 (IdeaPair.compose_padM).</span>
+Padding in the middle, right-leaning:
+\[\mathrm{padM}(p).\mathrm{composeR} \;=\; p.\mathrm{compose}.\]
+Explicitly: \(a \circ (e \circ b) = a \circ b\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.B.6 (IdeaPair.compose_padM_L).</span>
+Padding in the middle, left-leaning:
+\[\mathrm{padM}(p).\mathrm{composeL} \;=\; p.\mathrm{compose}.\]
+Explicitly: \((a \circ e) \circ b = a \circ b\).
+</div>
+
+<!-- §9.C ────────────────────────────────────────────── -->
+<h3 id="sec-9c">§9.C Trivial-Component Lemmas</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.C.1 (IdeaPair.compose_of_right_trivial).</span>
+If the right component of \(p\) equals \(e\), then \(p.\mathrm{compose}\) equals the left component: \(p.\mathrm{fst} \circ e = p.\mathrm{fst}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.C.2 (IdeaPair.compose_of_left_trivial).</span>
+If the left component of \(p\) equals \(e\), then \(p.\mathrm{compose}\) equals the right component: \(e \circ p.\mathrm{snd} = p.\mathrm{snd}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.C.3 (IdeaPair.swap_trivial).</span>
+The trivial pair is fixed by swap: \(\mathrm{swap}(e,\, e) = (e,\, e)\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.C.4 (IdeaPair.swap_swap).</span>
+Swap is an involution: \(\mathrm{swap}(\mathrm{swap}(p)) = p\).
+</div>
+
+<!-- §9.D ────────────────────────────────────────────── -->
+<h3 id="sec-9d">§9.D Sandwich and Chain Lemmas</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.1 (sandwich_collapse).</span>
+\[(a \circ e) \circ a \;=\; a \circ a.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.2 (double_sandwich).</span>
+Double sandwiching collapses:
+\[(a \circ e) \circ (e \circ a) \;=\; a \circ a.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.3 (ident_chain4).</span>
+\[e \circ e \circ e \circ e \;=\; e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.4 (ident_chain5).</span>
+\[e \circ e \circ e \circ e \circ e \;=\; e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.5 (insert_ident_mid_R).</span>
+\[a \circ (e \circ c) \;=\; a \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.6 (insert_ident_mid_L).</span>
+\[(a \circ e) \circ c \;=\; a \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.7 (fold_ident_head_L).</span>
+\[(e \circ b) \circ c \;=\; b \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.8 (fold_ident_tail_R).</span>
+\[a \circ (b \circ e) \;=\; a \circ b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.9 (fold_ident_tail_L).</span>
+\[(a \circ b) \circ e \;=\; a \circ b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.D.10 (fold_ident_head_R).</span>
+\[b \circ (e \circ c) \;=\; b \circ c.\]
+</div>
+
+<!-- §9.E ────────────────────────────────────────────── -->
+<h3 id="sec-9e">§9.E Triple Identity Placements</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.E.1 (IdeaTriple.composeL_left_ident).</span>
+Setting the first component to \(e\) in composeL:
+\[\mathrm{composeL}(e,\, b,\, c) \;=\; b \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.E.2 (IdeaTriple.composeL_right_ident).</span>
+Setting the third component to \(e\):
+\[\mathrm{composeL}(a,\, b,\, e) \;=\; a \circ b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.E.3 (IdeaTriple.composeL_mid_ident).</span>
+Setting the middle component to \(e\):
+\[\mathrm{composeL}(a,\, e,\, c) \;=\; a \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.E.4 (IdeaTriple.composeR_left_ident).</span>
+\[\mathrm{composeR}(e,\, b,\, c) \;=\; b \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.E.5 (IdeaTriple.composeR_right_ident).</span>
+\[\mathrm{composeR}(a,\, b,\, e) \;=\; a \circ b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.E.6 (IdeaTriple.composeR_mid_ident).</span>
+\[\mathrm{composeR}(a,\, e,\, c) \;=\; a \circ c.\]
+</div>
+
+<!-- §9.F ────────────────────────────────────────────── -->
+<h3 id="sec-9f">§9.F BalancedIdea4 Lemmas</h3>
+
+<p>A <code>BalancedIdea4</code> \(q = (a, b, c, d)\) carries three composition forms: \(q.\mathrm{composeL} = ((a \circ b) \circ c) \circ d\), \(q.\mathrm{composeR} = a \circ (b \circ (c \circ d))\), and \(q.\mathrm{composeB} = (a \circ b) \circ (c \circ d)\).</p>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.1 (BalancedIdea4.compose_trivial).</span>
+The trivial quadruple \((e, e, e, e)\) composes to \(e\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.2 (BalancedIdea4.composeL_trivial).</span>
+\[\mathrm{composeL}(e,\, e,\, e,\, e) = e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.3 (BalancedIdea4.composeR_trivial).</span>
+\[\mathrm{composeR}(e,\, e,\, e,\, e) = e.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.4 (BalancedIdea4.composeB_eq_composeL).</span>
+Balanced and left-leaning parenthesisation agree:
+\[q.\mathrm{composeB} = q.\mathrm{composeL}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.5 (BalancedIdea4.composeB_eq_composeR).</span>
+\[q.\mathrm{composeB} = q.\mathrm{composeR}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.6 (BalancedIdea4.composeL_eq_composeR).</span>
+Four-tuple associativity — left equals right:
+\[q.\mathrm{composeL} = q.\mathrm{composeR}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.7 (BalancedIdea4.composeR_eq_composeL).</span>
+Symmetric: \(q.\mathrm{composeR} = q.\mathrm{composeL}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.8 (BalancedIdea4.composeL_eq_composeB).</span>
+\[q.\mathrm{composeL} = q.\mathrm{composeB}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.9 (BalancedIdea4.composeR_eq_composeB).</span>
+\[q.\mathrm{composeR} = q.\mathrm{composeB}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.10 (BalancedIdea4.composeB_first_ident).</span>
+If the first entry equals \(e\):
+\[\mathrm{composeB}(e,\, b,\, c,\, d) = (b \circ c) \circ d.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.11 (BalancedIdea4.composeB_second_ident).</span>
+If the second entry equals \(e\):
+\[\mathrm{composeB}(a,\, e,\, c,\, d) = a \circ (c \circ d).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.12 (BalancedIdea4.composeB_third_ident).</span>
+If the third entry equals \(e\):
+\[\mathrm{composeB}(a,\, b,\, e,\, d) = (a \circ b) \circ d.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.F.13 (BalancedIdea4.composeB_fourth_ident).</span>
+If the fourth entry equals \(e\):
+\[\mathrm{composeB}(a,\, b,\, c,\, e) = a \circ b \circ c.\]
+</div>
+
+<!-- §9.G ────────────────────────────────────────────── -->
+<h3 id="sec-9g">§9.G IdeaEquiv Properties</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.1 (IdeaEquiv.refl).</span>
+\(a \equiv a\) for all \(a \in \mathcal{I}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.2 (IdeaEquiv.symm).</span>
+If \(a \equiv b\) then \(b \equiv a\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.3 (IdeaEquiv.trans).</span>
+If \(a \equiv b\) and \(b \equiv c\) then \(a \equiv c\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.4 (IdeaEquiv.iff_eq).</span>
+\[\mathrm{IdeaEquiv}(a,\, b) \;\iff\; a = b.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.5 (IdeaEquiv.op_left).</span>
+If \(a \equiv b\) then \(c \circ a \equiv c \circ b\) for any \(c\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.6 (IdeaEquiv.op_right).</span>
+If \(a \equiv b\) then \(a \circ c \equiv b \circ c\) for any \(c\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.G.7 (IdeaEquiv.op_congr).</span>
+Joint congruence: if \(a_1 \equiv a_2\) and \(b_1 \equiv b_2\) then \(a_1 \circ b_1 \equiv a_2 \circ b_2\).
+</div>
+
+<!-- §9.H ────────────────────────────────────────────── -->
+<h3 id="sec-9h">§9.H Component-wise Congruence</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.1 (IdeaPair.compose_congr).</span>
+If pairs \(p\) and \(q\) agree component-wise (\(p.\mathrm{fst} = q.\mathrm{fst}\) and \(p.\mathrm{snd} = q.\mathrm{snd}\)) then \(p.\mathrm{compose} = q.\mathrm{compose}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.2 (IdeaTriple.composeL_congr).</span>
+If triples \(s\) and \(t\) agree component-wise then \(s.\mathrm{composeL} = t.\mathrm{composeL}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.3 (IdeaTriple.composeR_congr).</span>
+If triples \(s\) and \(t\) agree component-wise then \(s.\mathrm{composeR} = t.\mathrm{composeR}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.4 (IdeaPair.compose_eq_of_snd_eq).</span>
+If \(b_1 = b_2\) then \(a \circ b_1 = a \circ b_2\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.5 (IdeaPair.compose_eq_of_fst_eq).</span>
+If \(a_1 = a_2\) then \(a_1 \circ b = a_2 \circ b\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.6 (IdeaPair.compose_right_left_ident_eq).</span>
+Right and left identity coincide: \(a \circ e = a = e \circ a\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.7 (IdeaPair.compose_right_ident').</span>
+Alternative proof path for right identity: \(a \circ e = a\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.8 (IdeaPair.compose_of_both_ident).</span>
+If both components equal \(e\) then the composition equals \(e\): \(e \circ e = e\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.9 (IdeaPair.compose_right_ident_op).</span>
+\[(a \circ e) \circ c \;=\; a \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.10 (IdeaPair.compose_left_ident_op).</span>
+\[(e \circ a) \circ c \;=\; a \circ c.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.H.11 (IdeaTriple.trivial_compose_eq).</span>
+Both composition orders on the trivial triple agree and equal \(e\):
+\[\mathrm{composeL}(e,\, e,\, e) \;=\; \mathrm{composeR}(e,\, e,\, e) \;=\; e.\]
+</div>
+
+<!-- §9.I ────────────────────────────────────────────── -->
+<h3 id="sec-9i">§9.I Four-Element Associativity</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.I.1 (op_assoc4_LR).</span>
+Left-to-right four-fold associativity:
+\[a \circ (b \circ (c \circ d)) \;=\; ((a \circ b) \circ c) \circ d.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.I.2 (op_assoc4_RL).</span>
+Right-to-left form:
+\[((a \circ b) \circ c) \circ d \;=\; a \circ (b \circ (c \circ d)).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.I.3 (op_assoc4_B).</span>
+Balanced form agrees with left-leaning:
+\[(a \circ b) \circ (c \circ d) \;=\; ((a \circ b) \circ c) \circ d.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.I.4 (op_assoc4_B_left).</span>
+Left-leaning agrees with balanced:
+\[((a \circ b) \circ c) \circ d \;=\; (a \circ b) \circ (c \circ d).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.I.5 (op_ident_in4_2).</span>
+Identity in the second slot of four:
+\[a \circ (e \circ (c \circ d)) \;=\; a \circ (c \circ d).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.I.6 (op_ident_in4_3).</span>
+Identity in the third slot of four:
+\[a \circ (b \circ (e \circ d)) \;=\; a \circ (b \circ d).\]
+</div>
+
+<!-- §9.J ────────────────────────────────────────────── -->
+<h3 id="sec-9j">§9.J Component Equality Lemmas</h3>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.1 (IdeaPair.compose_eq_of_components_eq).</span>
+Equal components imply equal compositions: if \(p.\mathrm{fst} = q.\mathrm{fst}\) and \(p.\mathrm{snd} = q.\mathrm{snd}\) then \(p.\mathrm{compose} = q.\mathrm{compose}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.2 (IdeaTriple.composeL_eq_of_components_eq).</span>
+If triples \(s\) and \(t\) have equal components, their left-leaning compositions are equal.
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.3 (IdeaTriple.composeR_eq_of_components_eq).</span>
+If triples \(s\) and \(t\) have equal components, their right-leaning compositions are equal.
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.4 (IdeaTriple.composeL_diag).</span>
+Left-leaning composition of a diagonal triple:
+\[\mathrm{composeL}(a,\, a,\, a) \;=\; (a \circ a) \circ a.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.5 (IdeaTriple.composeR_diag).</span>
+Right-leaning composition of a diagonal triple:
+\[\mathrm{composeR}(a,\, a,\, a) \;=\; a \circ (a \circ a).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.6 (IdeaTriple.diag_composeL_eq_composeR).</span>
+On the diagonal triple both orders agree:
+\[\mathrm{composeL}(a,\, a,\, a) \;=\; \mathrm{composeR}(a,\, a,\, a).\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.7 (IdeaPair.swap_involutive).</span>
+Swap is involutive: \(\mathrm{swap} \circ \mathrm{swap} = \mathrm{id}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.8 (IdeaPair.swap_fst).</span>
+\[\mathrm{swap}(p).\mathrm{fst} \;=\; p.\mathrm{snd}.\]
+</div>
+
+<div class="thm">
+<span class="thm-label">Lemma 9.J.9 (IdeaPair.swap_snd).</span>
+\[\mathrm{swap}(p).\mathrm{snd} \;=\; p.\mathrm{fst}.\]
+</div>
+
+<!-- §9.Cor ───────────────────────────────────────────── -->
+<h3 id="sec-9cor">Corollaries</h3>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.1 (Padding Theorem — compiled).</span>
+Synthesises Lemmas 9.B.3–9.B.6: for any pair \(p = (a, b)\),
+\[\mathrm{padR}(p).\mathrm{composeL} \;=\; \mathrm{padL}(p).\mathrm{composeL} \;=\; \mathrm{padM}(p).\mathrm{composeL} \;=\; a \circ b.\]
+All three paddings are transparent to left-leaning composition.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.2 (Triple Associativity — compiled).</span>
+Synthesises Lemmas 9.B.1–9.B.2 and 9.E.1–9.E.6: all parenthesisations of a three-element composition agree, i.e.\ \((a \circ b) \circ c = a \circ (b \circ c)\). This is not an axiom but a consequence of the structure of the idea algebra.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.3 (IdeaEquiv Congruence — compiled).</span>
+Synthesises Lemmas 9.G.1–9.G.7: <code>IdeaEquiv</code> is an equivalence relation, a congruence with respect to \(\circ\), and \(\mathrm{IdeaEquiv}(a,\, b) \iff a = b\). The structural identity relation collapses to definitional equality.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.4 (Four-fold Associativity — compiled).</span>
+Synthesises Lemmas 9.F.4–9.F.9 and 9.I.1–9.I.4: all five standard parenthesisations of \(a \circ b \circ c \circ d\)—left-fold, right-fold, balanced, and their transposes—are equal. Composition of four elements is fully parenthesisation-independent.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.5 (Identity Absorption in Triples — compiled).</span>
+Synthesises Lemmas 9.E.1–9.E.6: setting any one of the three components of a triple to \(e\) reduces both composeL and composeR to the composition of the remaining two elements, for all six possible slot × orientation combinations.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.6 (All Six Padded Evaluations Agree).</span>
+Extends Corollary 9.1 using Lemma 9.B.1: for any pair \(p\), all six evaluations \(\mathrm{padR}(p).\mathrm{composeL}\), \(\mathrm{padR}(p).\mathrm{composeR}\), \(\mathrm{padL}(p).\mathrm{composeL}\), \(\mathrm{padL}(p).\mathrm{composeR}\), \(\mathrm{padM}(p).\mathrm{composeL}\), \(\mathrm{padM}(p).\mathrm{composeR}\) are all equal to \(p.\mathrm{compose}\).
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.7 (BalancedIdea4 Full Equivalence — compiled).</span>
+Synthesises all of §9.F: composeB, composeL, and composeR agree on every <code>BalancedIdea4</code>, and all three collapse to the expected value when any component equals \(e\). This constitutes a machine-verified proof that four-element composition is parenthesisation-independent across all three structural forms.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.8 (Swap and Composition).</span>
+Synthesises Lemmas 9.C.3–9.C.4, 9.J.7–9.J.9: swap is involutive, fixes the trivial pair, and transposes components. The composition of a pair and its swap are in general unequal, witnessing that \(\circ\) is not commutative; but the trivial pair is symmetric.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.9 (Diagonal Triples).</span>
+Synthesises Lemmas 9.J.4–9.J.6: the diagonal triple \((a, a, a)\) satisfies composeL \(= (a \circ a) \circ a =\) composeR \(= a \circ (a \circ a)\), recovering associativity as a special case of the general triple theorem.
+</div>
+
+<div class="thm">
+<span class="thm-label">Corollary 9.10 (Chain Identities).</span>
+Synthesises Lemmas 9.D.3–9.D.10: any finite chain of identity elements composes to \(e\), and inserting \(e\) at any interior position of a composition leaves the value unchanged. Together these constitute a complete set of absorption rules for the monoid identity.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 4 — IMPLICATIONS
+     ═══════════════════════════════════════════════════════ -->
+<h2 id="sec-implications">4. Implications</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<p><strong>Completeness of the evaluation semantics.</strong> Theorem 8.1 establishes that two idea-words compute the same idea if and only if they are structurally equivalent. This is a completeness theorem for the formalism: no semantic information is lost by passing from syntactic words to algebraic values. Two idea systems are structurally identical if and only if they satisfy the same evaluation function — the algebra perfectly separates and identifies. The machine-checked proof means this is not a convenient assumption but a hard consequence of the axioms.</p>
+
+<p><strong>Unique canonical representatives.</strong> Theorem 8.2 and §8.G show that every word has a unique canonical representative of length exactly 1: the singleton \([\llbracket w \rrbracket]\). The quotient \(\mathrm{Word}/{\simeq}\) is in canonical bijection with the algebra \(\mathcal{I}\) itself, and normalisation is always available in constant output size regardless of how long the original word is. Lemma 8.G.5 and Corollary 8.3 close the loop: normalising a normal form is a no-op. This makes canonical forms genuinely useful as a computational primitive.</p>
+
+<p><strong>Associativity as a witnessed principle, not an axiom.</strong> The 84 lemmas of <code>Theorems9.lean</code> are not merely a law stated once. They witness associativity in 84 distinct configurations — pairs padded three ways (§9.B), triples with each component set to \(e\) (§9.E), four-tuples in every parenthesisation (§9.I), balanced four-tuples (§9.F), diagonal triples (§9.J), and chains of identity elements (§9.D). The collective force is that <em>every</em> structurally reasonable grouping of composition gives the same result. Associativity in idea theory is not assumed but instantiated, and instantiated comprehensively.</p>
+
+<p><strong>Four-element compositions are fully parenthesisation-independent.</strong> The BalancedIdea4 lemmas (§9.F) extend the associativity principle to four-component compositions. The "balanced" parenthesisation \((a \circ b) \circ (c \circ d)\) — which arises neither from left-fold nor right-fold — is proved equal to both. This demonstrates that idea composition admits a tree-structured evaluation semantics: any binary tree whose leaves are elements and whose internal nodes are \(\circ\) computes the same value, independent of the tree's shape.</p>
+
+<p><strong>IdeaEquiv is equality.</strong> Lemma 9.G.4 (<code>IdeaEquiv.iff_eq</code>) establishes that <code>IdeaEquiv a b</code> is equivalent to \(a = b\). This is non-trivial: <code>IdeaEquiv</code> was introduced as a potentially weaker relation to allow proof by structural congruence, and its collapse to definitional equality is a verified fact, not a stipulation. Every subsequent use of "structural identity" in the formalism is therefore grounded in Lean 4's propositional equality. There are no hidden equivalences that are weaker than equality: the algebra has no room for distinct but structurally indiscernible ideas.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 5 — ZOO ENTRIES
+     ═══════════════════════════════════════════════════════ -->
+<h2 id="sec-zoo">5. Zoo Entries</h2>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<div class="zoo-name">Structuralism — Lévi-Strauss</div>
+<div class="zoo-meta">Structural anthropology · 20th century · <em>Structural Anthropology</em> (1958)</div>
+<p>Lévi-Strauss held that the deeper logic of human thought operates through transformations of underlying structures: myths, kinship systems, and totems are surface forms sharing a single structural grammar. Structural equivalence formalises this precisely: two idea-words \(w_1\) and \(w_2\) are structurally equivalent iff \(\llbracket w_1 \rrbracket = \llbracket w_2 \rrbracket\) — they share the same deep semantic object. The canonical form theorem gives each structural class a unique representative, which is the formal correlate of Lévi-Strauss's "canonical formula" for mythemes. What was a methodological intuition in 1958 is a proved theorem here: structural analysis is exactly the study of \(\simeq\)-classes.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<div class="zoo-name">Chomsky — Deep Structure</div>
+<div class="zoo-meta">Transformational generative grammar · <em>Syntactic Structures</em> (1957), <em>Aspects of the Theory of Syntax</em> (1965)</div>
+<p>Chomsky's distinction between surface structure and deep structure posits that sentences with different syntactic forms can share the same underlying meaning. In the idea-theory formalism, the surface form is the word \(w \in \mathrm{Word}\,\mathcal{I}\) — the particular sequence of operations chosen — and the deep structure is its evaluation \(\llbracket w \rrbracket \in \mathcal{I}\). Two surface forms are structurally equivalent iff they share deep structure. Theorem 8.3 (Universal Property) goes further: \(\simeq\) is the <em>coarsest</em> such identification, so deep-structure equivalence is the maximal meaning-preserving abstraction from surface form. There is no coarser quotient that still respects evaluation.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<div class="zoo-name">Leibniz — Identity of Indiscernibles</div>
+<div class="zoo-meta">Metaphysics · <em>Discourse on Metaphysics</em> (1686), <em>Monadology</em> (1714)</div>
+<p>Leibniz's principle asserts that entities sharing all their properties are numerically identical. Lemma 9.G.4 (<code>IdeaEquiv.iff_eq</code>) is the formal instance: two ideas satisfying the same structural-identity predicate are literally equal as objects of the type. The principle is not assumed but proved — <code>IdeaEquiv</code> was introduced as a potentially weaker equivalence, and its collapse to Lean's propositional equality is a non-trivial verified fact. Leibniz's principle holds in this formalism not by definitional fiat but because the axioms of the idea algebra leave no structural room for distinct yet indiscernible ideas.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<div class="zoo-name">Quine — Ontological Relativity</div>
+<div class="zoo-meta">Philosophy of language · "Ontological Relativity" (1968)</div>
+<p>Quine argued that reference is inscrutable: there is no theory-independent fact about what terms refer to. Structural equivalence vindicates this as a theorem rather than a paradox. Words that differ syntactically but agree in evaluation are genuinely interchangeable — no internal feature of the algebra distinguishes them. But crucially, Theorem 8.2 provides a canonical choice of reference: among all synonymous words for any idea, there is always a shortest canonical representative \([\llbracket w \rrbracket]\) that the formalism can canonically pick out. Ontological indeterminacy is bounded, not unbounded: the canonical form resolves the underdetermination at the level of word-representations while confirming Quine's insight at the level of non-canonical expressions.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<div class="zoo-name">Putnam — Model-Theoretic Argument</div>
+<div class="zoo-meta">Philosophy of language · "Models and Reality" (1980)</div>
+<p>Putnam's model-theoretic argument holds that any theory admits multiple models satisfying all its sentences, so theories do not uniquely determine their referents. Theorem 8.3 (Universal Property of Structural Equivalence) is the formal analogue: \(\simeq\) is the coarsest equivalence relation consistent with evaluation, and any other equivalence satisfying the same evaluation kernel is contained in it. This means reference is not determined by words alone but only by evaluations — the "intended model" is unique only up to \(\simeq\). The theorem converts Putnam's philosophical challenge into a mathematical precision theorem: the evaluation map is surjective onto \(\mathcal{I}\), the indeterminacy is exactly the kernel of this map, and the canonical form provides a canonical section.</p>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+<div class="zoo-name">Saussure — Langue and Parole</div>
+<div class="zoo-meta">Structural linguistics · <em>Course in General Linguistics</em> (1916, posthumous)</div>
+<p>Saussure distinguished <em>langue</em> (the abstract system of language, the shared code) from <em>parole</em> (individual speech acts, particular utterances). The word-evaluation duality in Theorems 8–9 models this precisely. The idea algebra \((\mathcal{I}, \circ, e)\) is the <em>langue</em> — the abstract compositional system. Individual words \(w \in \mathrm{Word}\,\mathcal{I}\) are <em>parole</em> — particular sequences chosen by a speaker. The evaluation map \(\llbracket \cdot \rrbracket : \mathrm{Word}\,\mathcal{I} \to \mathcal{I}\) sends parole to langue, and structural equivalence is exactly its kernel: the set of parole expressions realising the same langue element. The canonical form theorem says every langue element has a minimal parole expression, the singleton \([\llbracket w \rrbracket]\), which is the canonical utterance of that idea.</p>
+</div>
+
+<hr>
+<p><strong>See also:</strong> <a href="meaning-curvature.html">Theorem 5: Meaning Curvature</a> · <a href="graded-idea-algebra.html">Theorem 9: Graded Idea Algebra</a></p>
+<p><a href="index.html">&larr; Back to Theorems</a></p>
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>. Built as a static site.</p></footer>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

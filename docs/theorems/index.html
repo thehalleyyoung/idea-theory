@@ -8,23 +8,283 @@
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../chapters/index.html">Book</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
-<h1>Theorems</h1>
-<p>The nine foundational theorems of Idea Theory. Each is machine-checked under <code>lean/IdeaTheory/Theorems{1..12}.lean</code>.</p>
-<ul class='entry-list'>
-<li><a href='composition.html'>Theorem 1: Composition</a><span class='blurb'>\((\mathcal{I},\circ,e)\) is a monoid: identity is unique and elements with two-sided inverses are cancellative.</span></li>
-<li><a href='resonance-pairing.html'>Theorem 2: Resonance Pairing</a><span class='blurb'>\(\rho\) extends uniquely to a bilinear form on \(\mathbb{R}\langle\mathcal{I}\rangle\); non-degeneracy is preserved by composition.</span></li>
-<li><a href='aufhebung-decomposition.html'>Theorem 3: Aufhebung Decomposition</a><span class='blurb'>For every \(a,b\in\mathcal{I}\), the decomposition \(a\circ b = \sigma(a,b)+\nu(a,b)+\eta(a,b)\) exists and is unique modulo \(\ker\rho\).</span></li>
-<li><a href='emergence-2-cocycle.html'>Theorem 4: Emergence 2-Cocycle</a><span class='blurb'>\(\omega\) is a normalized 2-cocycle: \(\partial\omega=0\) and \(\omega(e,\cdot)=\omega(\cdot,e)=0\).</span></li>
-<li><a href='meaning-curvature.html'>Theorem 5: Meaning Curvature</a><span class='blurb'>The antisymmetric part \(\kappa\) of \(\rho\) is closed; its cohomology class is a structural invariant.</span></li>
-<li><a href='conjugation.html'>Theorem 6: Conjugation</a><span class='blurb'>For any invertible \(g\in\mathcal{I}\), the inner automorphism \(\mathrm{Ad}_g(a) = g\circ a\circ g^{-1}\) preserves \(\rho,\sigma,\nu,\omega\).</span></li>
-<li><a href='transmission-chain.html'>Theorem 7: Transmission Chain</a><span class='blurb'>For a chain \(a_1,\ldots,a_n\), the cumulative cocycle telescopes.</span></li>
-<li><a href='structural-equivalence.html'>Theorem 8: Structural Equivalence</a><span class='blurb'>Two idea algebras are isomorphic iff there is a graded monoid isomorphism preserving \(\rho,\sigma,\nu,\omega\).</span></li>
-<li><a href='graded-idea-algebra.html'>Theorem 9: Grading</a><span class='blurb'>\(\deg\) extends to a homomorphism into \(G\) compatible with \(\rho\), Aufhebung, and \(\omega\).</span></li>
-</ul>
+
+<h1>All Theorems</h1>
+
+<p>
+  Idea Theory is backed by <strong>~980 machine-verified theorems and lemmas</strong> spanning
+  12 Theorem files and 5 extension modules. Every statement on these pages has been formally
+  verified in Lean&nbsp;4 with no <code>sorry</code> or <code>admit</code>. The source code
+  is at the <a href="../lean/index.html">Lean library</a>.
+</p>
+
+<!-- ═══════════════════════════════════════════════════════
+     PART I: Foundational Theorems
+     ═══════════════════════════════════════════════════════ -->
+<h2>Part I: Foundational Theorems</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1em;margin:1.5em 0">
+
+  <!-- Tile 1 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">1. The Idea Monoid</h3>
+    <p style="font-size:.9em">\((\mathcal{I},\circ,e)\) is a monoid; the identity element is unique; invertible elements form a group.</p>
+    <p style="font-size:.85em;color:#666">63 lemmas</p>
+    <a href="composition.html">Theorem 1 →</a>
+  </div>
+
+  <!-- Tile 2 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">2. Resonance Pairing</h3>
+    <p style="font-size:.9em">\(\rho\) extends uniquely to a bilinear form on \(\mathbb{R}\langle\mathcal{I}\rangle\); non-degeneracy is preserved by composition.</p>
+    <p style="font-size:.85em;color:#666">73 lemmas</p>
+    <a href="resonance-pairing.html">Theorem 2 →</a>
+  </div>
+
+  <!-- Tile 3 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">3. Aufhebung Decomposition</h3>
+    <p style="font-size:.9em">Every composition decomposes uniquely as \(a\circ b = \sigma(a,b)+\nu(a,b)+\eta(a,b)\).</p>
+    <p style="font-size:.85em;color:#666">87 lemmas</p>
+    <a href="aufhebung-decomposition.html">Theorem 3 →</a>
+  </div>
+
+  <!-- Tile 4 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">4. Emergence 2-Cocycle</h3>
+    <p style="font-size:.9em">\(\omega\) is a normalized 2-cocycle: \(\partial\omega=0\), \(\omega(e,\cdot)=\omega(\cdot,e)=0\).</p>
+    <p style="font-size:.85em;color:#666">63 lemmas</p>
+    <a href="emergence-2-cocycle.html">Theorem 4 →</a>
+  </div>
+
+  <!-- Tile 5 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">5. Meaning Curvature</h3>
+    <p style="font-size:.9em">The antisymmetric part \(\kappa\) of \(\rho\) is closed; its cohomology class is a structural invariant.</p>
+    <p style="font-size:.85em;color:#666">98 lemmas</p>
+    <a href="meaning-curvature.html">Theorem 5 →</a>
+  </div>
+
+  <!-- Tile 6 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">6. Conjugation</h3>
+    <p style="font-size:.9em">For any invertible \(g\), \(\mathrm{Ad}_g(a) = g\circ a\circ g^{-1}\) preserves all four structural maps.</p>
+    <p style="font-size:.85em;color:#666">55 lemmas</p>
+    <a href="conjugation.html">Theorem 6 →</a>
+  </div>
+
+  <!-- Tile 7 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">7+11. Transmission Chain &amp; Cultural Transmission</h3>
+    <p style="font-size:.9em">Iterated composition, identity transparency, vertical transmission monoidal structure.</p>
+    <p style="font-size:.85em;color:#666">153 lemmas</p>
+    <a href="transmission-chain.html">Theorems 7+11 →</a>
+  </div>
+
+  <!-- Tile 8 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">8+9. Structural Equivalence &amp; Idea Structures</h3>
+    <p style="font-size:.9em">Word evaluation, canonical forms, universal property; IdeaPair / IdeaTriple / BalancedIdea4 canonical forms.</p>
+    <p style="font-size:.85em;color:#666">133 lemmas</p>
+    <a href="structural-equivalence.html">Theorems 8+9 →</a>
+  </div>
+
+  <!-- Tile 9 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">10. Coalitions &amp; Social Aggregation</h3>
+    <p style="font-size:.9em">The aggregate map; silent-agent invisibility; social congruence theorem.</p>
+    <p style="font-size:.85em;color:#666">70 lemmas</p>
+    <a href="coalitions.html">Theorem 10 →</a>
+  </div>
+
+  <!-- Tile 10 -->
+  <div style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">12. Emergent Novelty</h3>
+    <p style="font-size:.9em">\(\mathsf{EN}(a,b)\): \(a\circ b\) genuinely new; 65 lemmas on IsNovel, EmergentNovel, LineageNovel.</p>
+    <p style="font-size:.85em;color:#666">65 lemmas</p>
+    <a href="novelty.html">Theorem 12 →</a>
+  </div>
+
+</div><!-- end grid -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PART II: All Lemmas by File
+     ═══════════════════════════════════════════════════════ -->
+<h2>Part II: All Lemmas by File</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:1.5em 0">
+  <thead>
+    <tr style="background:var(--accent-soft)">
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">File</th>
+      <th style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">Lemmas</th>
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Topics</th>
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems1</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">63</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Monoid laws, identity, congruence, invertible elements</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="composition.html">Composition</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems2</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">73</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Resonance pairing, bilinear form, probes, weights</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="resonance-pairing.html">Resonance Pairing</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems3</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">87</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Aufhebung decomposition: \(\sigma\), \(\nu\), \(\eta\) maps</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="aufhebung-decomposition.html">Aufhebung</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems4</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">63</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Emergence 2-cocycle, normalized cocycle, \(\partial\omega=0\)</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="emergence-2-cocycle.html">Emergence 2-Cocycle</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems5</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">98</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Structural invariants, meaning curvature \(\kappa\), cohomology</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="meaning-curvature.html">Meaning Curvature</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems6</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">55</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Conjugation action, inner automorphisms, \(\mathrm{Ad}_g\)</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="conjugation.html">Conjugation</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems7+11</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">153</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Powers, compPow, chains, Transmission, leftMul, faithful</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="transmission-chain.html">Transmission Chain</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems8+9</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">133</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Words, evalWord, StructEquiv, IdeaPair, IdeaTriple, BalancedIdea4</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="structural-equivalence.html">Structural Equivalence</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems9+RG</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">105</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Grading, recombinant closure, combinatorial growth</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="graded-idea-algebra.html">Graded Idea Algebra</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems10</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">70</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Coalition, aggregate, committee, assembly, social congruence</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="coalitions.html">Coalitions</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Theorems12</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">65</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">IsNovel, EmergentNovel, LineageNovel, Closed sets</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="novelty.html">Novelty</a></td>
+    </tr>
+    <tr style="background:var(--accent-soft);font-weight:600">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)" colspan="4"><strong>Total: ~980+ lemmas</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PART III: Lean Extension Modules
+     ═══════════════════════════════════════════════════════ -->
+<h2>Part III: Lean Extension Modules</h2>
+
+<table style="width:100%;border-collapse:collapse;margin:1.5em 0">
+  <thead>
+    <tr style="background:var(--accent-soft)">
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Module</th>
+      <th style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">Theorems</th>
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Topics</th>
+      <th style="padding:.6em 1em;text-align:left;border:1px solid var(--accent)">Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">GameTheory</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">19</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Nash equilibria, best response, ESS, silent coalition</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../lean/game-theory.html">game-theory.html</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Diffusion</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">34</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Adoption dynamics, S-curve, Granovetter weak-tie theorem</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../lean/diffusion.html">diffusion.html</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">RecombinantGrowth</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">21</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Combinatorial growth, binaryClosure, non-rivalry</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../lean/recombinant-growth.html">recombinant-growth.html</a></td>
+    </tr>
+    <tr style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">EmergenceLevels</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">25</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">2-cocycle valuation levels, bounded/strongly emergent</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../lean/emergence-levels.html">emergence-levels.html</a></td>
+    </tr>
+    <tr>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">MeaningGames</td>
+      <td style="padding:.6em 1em;text-align:center;border:1px solid var(--accent)">24</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Wittgenstein–Nash conventions, effectiveMeaning, Salient</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../lean/meaning-games.html">meaning-games.html</a></td>
+    </tr>
+    <tr style="background:var(--accent-soft);font-weight:600">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)" colspan="4"><strong>Grand total: ~980+ machine-verified theorems and lemmas</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="font-size:.9em;color:#555">
+  Extension module pages are planned; source files are browsable at
+  <a href="../lean/index.html">the Lean library</a>.
+</p>
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PART IV: How to Read the Theorems
+     ═══════════════════════════════════════════════════════ -->
+<h2>Part IV: How to Read the Theorems</h2>
+
+<p>
+  Each theorem page contains every lemma from its source file presented in a
+  <code>&lt;div class="thm"&gt;</code> box with a rendered LaTeX statement. Results are
+  grouped by theme — definitions first, then structural lemmas, then the headline theorem —
+  so you can follow the logical thread from axioms to conclusion without consulting the raw
+  source.
+</p>
+
+<p>
+  Lean code blocks on each page show the actual verified proof sketch: the
+  <code>theorem</code> or <code>lemma</code> statement as it appears in the
+  <code>.lean</code> file, together with its proof term or tactic block. Because every
+  statement is closed (no <code>sorry</code>), the code blocks are a faithful record of
+  what Lean accepted.
+</p>
+
+<p>
+  Zoo entries connect formal results to the intellectual history of ideas. Where a theorem
+  has a classical counterpart — e.g.\ the Aufhebung decomposition echoing Hegel, or the
+  emergence 2-cocycle echoing group extension theory — the corresponding
+  <a href="../zoo/index.html">Zoo</a> entry provides the conceptual bridge and points to
+  the relevant <a href="../literature/index.html">literature</a>.
+</p>
 
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>. Built as a static site.</p></footer>
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>
