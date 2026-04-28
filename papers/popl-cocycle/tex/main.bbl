@@ -1,0 +1,299 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{20}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{} and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showURL #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Aguirre et~al\mbox{.}(2021)]%
+        {aguirre2021general}
+\bibfield{author}{\bibinfo{person}{Alejandro Aguirre}, \bibinfo{person}{Gilles
+  Barthe}, \bibinfo{person}{Marco Gaboardi}, \bibinfo{person}{Deepak Garg},
+  \bibinfo{person}{Justin Hsu}, {and} \bibinfo{person}{Pierre-Yves Strub}.}
+  \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{A General and Categorical Framework for Graded
+  Hoare Logic}. In \bibinfo{booktitle}{\emph{Proceedings of the {ACM} on
+  Programming Languages}}, Vol.~\bibinfo{volume}{5}.
+  \bibinfo{publisher}{{ACM}}, \bibinfo{pages}{1--30}.
+\newblock
+\href{https://doi.org/10.1145/3434336}{doi:\nolinkurl{10.1145/3434336}}
+
+
+\bibitem[Atkey(2018)]%
+        {atkey2018quantitative}
+\bibfield{author}{\bibinfo{person}{Robert Atkey}.}
+  \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Syntax and Semantics of Quantitative Type Theory}.
+\newblock  (\bibinfo{year}{2018}), \bibinfo{pages}{56--65}.
+\newblock
+\href{https://doi.org/10.1145/3209108.3209189}{doi:\nolinkurl{10.1145/3209108.3209189}}
+
+
+\bibitem[Barthe et~al\mbox{.}(2020)]%
+        {barthe2019probabilistic}
+\bibfield{author}{\bibinfo{person}{Gilles Barthe}, \bibinfo{person}{Justin
+  Hsu}, {and} \bibinfo{person}{Kevin Liao}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{A Probabilistic Separation Logic}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the {ACM} on Programming
+  Languages}}, Vol.~\bibinfo{volume}{4}. \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{55:1--55:30}.
+\newblock
+\href{https://doi.org/10.1145/3371136}{doi:\nolinkurl{10.1145/3371136}}
+
+
+\bibitem[Batz et~al\mbox{.}(2019)]%
+        {batz2019quantitative}
+\bibfield{author}{\bibinfo{person}{Kevin Batz},
+  \bibinfo{person}{Benjamin~Lucien Kaminski}, \bibinfo{person}{Joost-Pieter
+  Katoen}, \bibinfo{person}{Christoph Matheja}, {and} \bibinfo{person}{Thomas
+  Noll}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Quantitative Separation Logic}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the {ACM} on Programming
+  Languages}}, Vol.~\bibinfo{volume}{3}. \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{34:1--34:29}.
+\newblock
+\href{https://doi.org/10.1145/3290347}{doi:\nolinkurl{10.1145/3290347}}
+
+
+\bibitem[Calcagno et~al\mbox{.}(2007)]%
+        {calcagno2007local}
+\bibfield{author}{\bibinfo{person}{Cristiano Calcagno},
+  \bibinfo{person}{Peter~W. O'Hearn}, {and} \bibinfo{person}{Hongseok Yang}.}
+  \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Local Action and Abstract Separation Logic}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 22nd Annual {IEEE} Symposium on
+  Logic in Computer Science ({LICS})}}. \bibinfo{publisher}{{IEEE} Computer
+  Society}, \bibinfo{pages}{366--378}.
+\newblock
+\href{https://doi.org/10.1109/LICS.2007.30}{doi:\nolinkurl{10.1109/LICS.2007.30}}
+
+
+\bibitem[Cauligi et~al\mbox{.}(2020)]%
+        {cauligi2020constant}
+\bibfield{author}{\bibinfo{person}{Sunjay Cauligi}, \bibinfo{person}{Gary
+  Soeller}, \bibinfo{person}{Brian Johannesmeyer}, \bibinfo{person}{Fraser
+  Brown}, \bibinfo{person}{Riad~S. Wahby}, \bibinfo{person}{John Renner},
+  \bibinfo{person}{Benjamin Gr{\'{e}}goire}, \bibinfo{person}{Gilles Barthe},
+  \bibinfo{person}{Ranjit Jhala}, {and} \bibinfo{person}{Deian Stefan}.}
+  \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Constant-Time Foundations for the New {Spectre}
+  Era}. In \bibinfo{booktitle}{\emph{Proceedings of the 41st {ACM} {SIGPLAN}
+  Conference on Programming Language Design and Implementation ({PLDI})}}.
+  \bibinfo{publisher}{{ACM}}, \bibinfo{pages}{913--926}.
+\newblock
+\href{https://doi.org/10.1145/3385412.3386007}{doi:\nolinkurl{10.1145/3385412.3386007}}
+
+
+\bibitem[Choudhury and Krishnaswami(2021)]%
+        {choudhury2021graded}
+\bibfield{author}{\bibinfo{person}{Vikraman Choudhury} {and}
+  \bibinfo{person}{Neel Krishnaswami}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Recovering Purity with Comonads and Capabilities}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the {ACM} on Programming
+  Languages}}, Vol.~\bibinfo{volume}{5}. \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{1--29}.
+\newblock
+\href{https://doi.org/10.1145/3473592}{doi:\nolinkurl{10.1145/3473592}}
+
+
+\bibitem[Dockins et~al\mbox{.}(2009)]%
+        {dockins2009separation}
+\bibfield{author}{\bibinfo{person}{Robert Dockins}, \bibinfo{person}{Aquinas
+  Hobor}, {and} \bibinfo{person}{Andrew~W. Appel}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{A Fresh Look at Separation Algebras and Share
+  Accounting}. In \bibinfo{booktitle}{\emph{Asian Symposium on Programming
+  Languages and Systems ({APLAS})}} \emph{(\bibinfo{series}{Lecture Notes in
+  Computer Science}, Vol.~\bibinfo{volume}{5904})}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{161--177}.
+\newblock
+\href{https://doi.org/10.1007/978-3-642-10672-9_13}{doi:\nolinkurl{10.1007/978-3-642-10672-9_13}}
+
+
+\bibitem[Hochschild(1945)]%
+        {hochschild1945cohomology}
+\bibfield{author}{\bibinfo{person}{Gerhard Hochschild}.}
+  \bibinfo{year}{1945}\natexlab{}.
+\newblock \showarticletitle{On the Cohomology Groups of an Associative
+  Algebra}.
+\newblock \bibinfo{journal}{\emph{Annals of Mathematics}} \bibinfo{volume}{46},
+  \bibinfo{number}{1} (\bibinfo{year}{1945}), \bibinfo{pages}{58--67}.
+\newblock
+\urldef\tempurl%
+\url{https://www.jstor.org/stable/1969145}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Jung et~al\mbox{.}(2018)]%
+        {jung2018iris}
+\bibfield{author}{\bibinfo{person}{Ralf Jung}, \bibinfo{person}{Jacques-Henri
+  Jourdan}, \bibinfo{person}{Robbert Krebbers}, {and} \bibinfo{person}{Lars
+  Birkedal}.} \bibinfo{year}{2018}\natexlab{}.
+\newblock \showarticletitle{Iris from the Ground Up: A Modular Foundation for
+  Higher-Order Concurrent Separation Logic}.
+\newblock \bibinfo{journal}{\emph{Journal of Functional Programming}}
+  \bibinfo{volume}{28} (\bibinfo{year}{2018}), \bibinfo{pages}{e20}.
+\newblock
+\href{https://doi.org/10.1017/S0956796818000151}{doi:\nolinkurl{10.1017/S0956796818000151}}
+
+
+\bibitem[Loader(1997)]%
+        {loader1997equational}
+\bibfield{author}{\bibinfo{person}{Ralph Loader}.}
+  \bibinfo{year}{1997}\natexlab{}.
+\newblock \showarticletitle{Equational Theories for Inductive Types}. In
+  \bibinfo{booktitle}{\emph{Typed Lambda Calculi and Applications ({TLCA}
+  1997)}} \emph{(\bibinfo{series}{Lecture Notes in Computer Science},
+  Vol.~\bibinfo{volume}{1210})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{246--261}.
+\newblock
+\href{https://doi.org/10.1007/3-540-62688-3_40}{doi:\nolinkurl{10.1007/3-540-62688-3_40}}
+
+
+\bibitem[McDermott and Mycroft(2022)]%
+        {mcdermott2022flexible}
+\bibfield{author}{\bibinfo{person}{Dylan McDermott} {and} \bibinfo{person}{Alan
+  Mycroft}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{Flexible Presentations of Graded Monads}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the {ACM} on Programming
+  Languages}}, Vol.~\bibinfo{volume}{6}. \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{1--29}.
+\newblock
+\href{https://doi.org/10.1145/3547654}{doi:\nolinkurl{10.1145/3547654}}
+
+
+\bibitem[Melli{\`e}s(2009)]%
+        {mellies2009categorical}
+\bibfield{author}{\bibinfo{person}{Paul-Andr{\'e} Melli{\`e}s}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Categorical Semantics of Linear Logic}.
+\newblock \bibinfo{journal}{\emph{Panoramas et Synth{\`e}ses}}
+  \bibinfo{volume}{27}.
+\newblock
+\newblock
+\shownote{Available at \url{https://www.irif.fr/~mellies/papers/panorama.pdf}}.
+
+
+\bibitem[Murawski and Tzevelekos(2012)]%
+        {murawski2012algorithmic}
+\bibfield{author}{\bibinfo{person}{Andrzej~S. Murawski} {and}
+  \bibinfo{person}{Nikos Tzevelekos}.} \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Algorithmic Games for Full Ground References}. In
+  \bibinfo{booktitle}{\emph{Foundations of Software Science and Computational
+  Structures ({FoSSaCS})}} \emph{(\bibinfo{series}{Lecture Notes in Computer
+  Science}, Vol.~\bibinfo{volume}{7213})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{312--327}.
+\newblock
+\href{https://doi.org/10.1007/978-3-642-28729-9_21}{doi:\nolinkurl{10.1007/978-3-642-28729-9_21}}
+
+
+\bibitem[O'Hearn et~al\mbox{.}(2001)]%
+        {ohearn2001local}
+\bibfield{author}{\bibinfo{person}{Peter~W. O'Hearn}, \bibinfo{person}{John~C.
+  Reynolds}, {and} \bibinfo{person}{Hongseok Yang}.}
+  \bibinfo{year}{2001}\natexlab{}.
+\newblock \showarticletitle{Local Reasoning about Programs that Alter Data
+  Structures}. In \bibinfo{booktitle}{\emph{Computer Science Logic ({CSL}
+  2001)}} \emph{(\bibinfo{series}{Lecture Notes in Computer Science},
+  Vol.~\bibinfo{volume}{2142})}. \bibinfo{publisher}{Springer},
+  \bibinfo{pages}{1--19}.
+\newblock
+\href{https://doi.org/10.1007/3-540-44802-0_1}{doi:\nolinkurl{10.1007/3-540-44802-0_1}}
+
+
+\bibitem[Ong and Tzevelekos(2009)]%
+        {ong2009normal}
+\bibfield{author}{\bibinfo{person}{C.-H.~Luke Ong} {and} \bibinfo{person}{Nikos
+  Tzevelekos}.} \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Normalisation and Equivalence in Game Semantics}.
+  In \bibinfo{booktitle}{\emph{Proceedings of the 24th Annual {IEEE} Symposium
+  on Logic in Computer Science ({LICS})}}. \bibinfo{publisher}{{IEEE}},
+  \bibinfo{pages}{369--378}.
+\newblock
+\href{https://doi.org/10.1109/LICS.2009.22}{doi:\nolinkurl{10.1109/LICS.2009.22}}
+
+
+\bibitem[Orchard et~al\mbox{.}(2019)]%
+        {orchard2019quantitative}
+\bibfield{author}{\bibinfo{person}{Dominic Orchard},
+  \bibinfo{person}{Vilem-Benjamin Liepelt}, {and} \bibinfo{person}{Harley~Eades
+  III}.} \bibinfo{year}{2019}\natexlab{}.
+\newblock \showarticletitle{Quantitative Program Reasoning with Graded Modal
+  Types}.
+\newblock \bibinfo{journal}{\emph{Proceedings of the {ACM} on Programming
+  Languages}} \bibinfo{volume}{3}, \bibinfo{number}{{ICFP}}
+  (\bibinfo{year}{2019}), \bibinfo{pages}{110:1--110:30}.
+\newblock
+\href{https://doi.org/10.1145/3341714}{doi:\nolinkurl{10.1145/3341714}}
+
+
+\bibitem[Reynolds(2002)]%
+        {reynolds2002separation}
+\bibfield{author}{\bibinfo{person}{John~C. Reynolds}.}
+  \bibinfo{year}{2002}\natexlab{}.
+\newblock \showarticletitle{Separation Logic: A Logic for Shared Mutable Data
+  Structures}. In \bibinfo{booktitle}{\emph{Proceedings of the 17th Annual
+  {IEEE} Symposium on Logic in Computer Science ({LICS})}}.
+  \bibinfo{publisher}{{IEEE} Computer Society}, \bibinfo{pages}{55--74}.
+\newblock
+\href{https://doi.org/10.1109/LICS.2002.1029817}{doi:\nolinkurl{10.1109/LICS.2002.1029817}}
+
+
+\bibitem[Statman(1979)]%
+        {statman1979completeness}
+\bibfield{author}{\bibinfo{person}{Richard Statman}.}
+  \bibinfo{year}{1979}\natexlab{}.
+\newblock \showarticletitle{The Typed $\lambda$-Calculus is Not Elementary
+  Recursive}.
+\newblock \bibinfo{journal}{\emph{Theoretical Computer Science}}
+  \bibinfo{volume}{9}, \bibinfo{number}{1} (\bibinfo{year}{1979}),
+  \bibinfo{pages}{73--81}.
+\newblock
+\href{https://doi.org/10.1016/0304-3975(79)90007-0}{doi:\nolinkurl{10.1016/0304-3975(79)90007-0}}
+
+
+\bibitem[ya~Katsumata(2014)]%
+        {katsumata2014parametric}
+\bibfield{author}{\bibinfo{person}{Shin ya Katsumata}.}
+  \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{Parametric Effect Monads and Semantics of Effect
+  Systems}. In \bibinfo{booktitle}{\emph{Proceedings of the 41st {ACM}
+  {SIGPLAN-SIGACT} Symposium on Principles of Programming Languages ({POPL})}}.
+  \bibinfo{publisher}{{ACM}}, \bibinfo{pages}{633--645}.
+\newblock
+\href{https://doi.org/10.1145/2535838.2535846}{doi:\nolinkurl{10.1145/2535838.2535846}}
+
+
+\end{thebibliography}

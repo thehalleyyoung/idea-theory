@@ -1,0 +1,83 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: ../bib/refs.bib
+I was expecting a `{' or a `('---line 6 of file ../bib/refs.bib
+ : %% Lines marked  % UNVERIFIED  above the @-line 
+ :                                                 could not be fully confirmed;
+I'm skipping whatever remains of this entry
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--can't use both volume and number fields in aguirre2021general
+Warning--empty address in aguirre2021general
+Warning--no journal in atkey2018quantitative
+Warning--no number and no volume in atkey2018quantitative
+Warning--can't use both volume and number fields in barthe2019probabilistic
+Warning--empty address in barthe2019probabilistic
+Warning--can't use both volume and number fields in batz2019quantitative
+Warning--empty address in batz2019quantitative
+Warning--empty address in calcagno2007local
+Warning--empty address in cauligi2020constant
+Warning--can't use both volume and number fields in choudhury2021graded
+Warning--empty address in choudhury2021graded
+Warning--empty address in dockins2009separation
+Warning--empty address in loader1997equational
+Warning--can't use both volume and number fields in mcdermott2022flexible
+Warning--empty address in mcdermott2022flexible
+Warning--empty booktitle in mellies2009categorical
+Warning--page numbers missing in both pages and numpages fields in mellies2009categorical
+Warning--empty address in murawski2012algorithmic
+Warning--empty address in ohearn2001local
+Warning--empty address in ong2009normal
+Warning--empty address in reynolds2002separation
+Warning--empty address in katsumata2014parametric
+You've used 20 entries,
+            6273 wiz_defined-function locations,
+            1657 strings with 22251 characters,
+and the built_in function-call counts, 24196 in all, are:
+= -- 2991
+> -- 626
+< -- 0
++ -- 209
+- -- 225
+* -- 1653
+:= -- 2198
+add.period$ -- 101
+call.type$ -- 20
+change.case$ -- 135
+chr.to.int$ -- 20
+cite$ -- 43
+duplicate$ -- 2310
+empty$ -- 1611
+format.name$ -- 277
+if$ -- 5900
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 95
+newline$ -- 209
+num.names$ -- 140
+pop$ -- 885
+preamble$ -- 1
+purify$ -- 295
+quote$ -- 0
+skip$ -- 863
+stack$ -- 0
+substring$ -- 1977
+swap$ -- 246
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 531
+warning$ -- 23
+while$ -- 159
+width$ -- 0
+write$ -- 450
+(There was 1 error message)

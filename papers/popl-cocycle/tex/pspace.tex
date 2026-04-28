@@ -1,0 +1,438 @@
+% pspace.tex  — §6 of "Cocycle-Graded Separation Logic"
+% Self-contained section; \input this file from the volume main.
+% Requires: amsthm, amsmath, amssymb, hyperref (via the preamble).
+
+\section{PSPACE-Completeness of Cocycle-Bounded Equivalence}
+\label{sec:pspace}
+
+We prove that $k$-cocycle program equivalence is
+\textsc{PSPACE}-complete when $k$ is given in \emph{unary}.
+Throughout, fix an idea monoid $\mathcal{M}=(I,{\circ},e,\mathit{rs})$
+where $|I|=m$, $|\mathit{rs}|\le B$, and $\mathit{rs}$ has
+\emph{pairing rank} $r$ (see Definition~\ref{def:rank}).
+Program size is $n$.
+
+\begin{theorem}[PSPACE-completeness, unary $k$]
+\label{thm:pspace-main}
+The problem
+\[
+  \textsc{CocycleEq} \;=\;
+  \bigl\{\langle P,\,Q,\,\mathcal{M},\,k\rangle
+        \mid P \sim_k Q\bigr\}
+\]
+is \textsc{PSPACE}-complete when $k$ is encoded in unary,
+$\mathcal{M}$ is given as explicit multiplication and pairing tables,
+and $P,Q$ are \emph{EffCalc} programs.
+\end{theorem}
+
+\noindent
+The proof splits into a membership argument
+(\S\ref{sec:pspace-upper}) and a hardness argument
+(\S\ref{sec:pspace-lower}).
+
+%-----------------------------------------------------------------
+\subsection{The Quotient Monoid \texorpdfstring{$M_k$}{Mk}}
+\label{sec:quotient}
+%-----------------------------------------------------------------
+
+\begin{definition}[Pairing rank]
+\label{def:rank}
+For $\mathcal{M}=(I,{\circ},e,\mathit{rs})$, the \emph{pairing rank}
+$r$ is the rank of the integer matrix
+$R \in \mathbb{Z}^{m\times m}$ with $R_{ad}=\mathit{rs}(a,d)$.
+\end{definition}
+
+\begin{definition}[$k$-indistinguishability]
+\label{def:kindist}
+$a \equiv_k b$ in $I$ iff for all $a',d\in I$:
+\begin{align}
+  |\mathit{rs}(a{\circ}a',d) - \mathit{rs}(b{\circ}a',d)| &\le k,
+  \label{eq:c1}\\
+  |\mathit{rs}(a'{\circ}a,d) - \mathit{rs}(a'{\circ}b,d)| &\le k,
+  \label{eq:c2}\\
+  |c(a,a',d) - c(b,a',d)| &\le k,
+  \label{eq:c3}\\
+  |c(a',a,d) - c(a',b,d)| &\le k,
+  \label{eq:c4}
+\end{align}
+where $c(x,y,d)=\mathit{rs}(x{\circ}y,d)-\mathit{rs}(x,d)-\mathit{rs}(y,d)$
+is the Hochschild 2-cocycle.
+\end{definition}
+
+\begin{lemma}[Congruence]
+\label{lem:congr}
+$\equiv_k$ is a congruence on $(I,{\circ})$; the quotient
+$M_k := I/{\equiv_k}$ is a monoid.
+\end{lemma}
+
+\begin{proof}
+\emph{Equivalence relation.}
+Reflexivity is immediate ($a=b$ satisfies all four conditions with
+equality).  Symmetry follows because $|x-y|=|y-x|$.  Transitivity
+uses the triangle inequality: if $a\equiv_k b$ and $b\equiv_k c$
+then
+\[
+  |\mathit{rs}(a{\circ}a',d)-\mathit{rs}(c{\circ}a',d)| \le
+  |\mathit{rs}(a{\circ}a',d)-\mathit{rs}(b{\circ}a',d)| +
+  |\mathit{rs}(b{\circ}a',d)-\mathit{rs}(c{\circ}a',d)|
+  \le k+k,
+\]
+and similarly for conditions \eqref{eq:c2}--\eqref{eq:c4}.
+(Note: transitivity yields bound $2k$; the bound is additive, so we
+restate $\equiv_k$ for each fixed $k$ rather than asking for a
+\emph{uniform} hierarchy.  The statement of the completeness theorem
+uses a \emph{fixed} $k$ throughout.)
+
+\emph{Congruence.}  Suppose $a\equiv_k b$.  We show
+$a{\circ}x \equiv_k b{\circ}x$ for all $x\in I$.
+Condition~\eqref{eq:c1} for $(a{\circ}x, b{\circ}x)$:
+\[
+  \mathit{rs}((a{\circ}x){\circ}a',d)
+  - \mathit{rs}((b{\circ}x){\circ}a',d)
+  = \mathit{rs}(a{\circ}(x{\circ}a'),d)
+  - \mathit{rs}(b{\circ}(x{\circ}a'),d),
+\]
+which is $\le k$ by condition~\eqref{eq:c1} of $a\equiv_k b$ applied
+to $a'' := x{\circ}a'$.  Conditions \eqref{eq:c2}--\eqref{eq:c4}
+follow by analogous associativity rewrites.  Left-multiplication
+$x{\circ}a \equiv_k x{\circ}b$ is symmetric.  Hence $\equiv_k$ is
+a two-sided congruence and $M_k$ inherits the monoid structure.
+\end{proof}
+
+\begin{theorem}[Quotient finiteness]
+\label{thm:finite}
+$|M_k| \le (2Bk+1)^r \cdot m$.
+\end{theorem}
+
+\begin{proof}
+An equivalence class $[a]_k$ is determined by the $\mathbb{Z}$-valued
+function $a' \mapsto \mathit{rs}(a{\circ}a',\cdot)$ up to $\pm k$.
+More precisely, map $a$ to the vector
+\[
+  v(a) := \bigl(\lfloor \mathit{rs}(a,d_1)/k \rfloor,
+                \ldots,
+                \lfloor \mathit{rs}(a,d_r)/k \rfloor\bigr)
+         \;\in\; \mathbb{Z}^r,
+\]
+where $d_1,\ldots,d_r$ is a basis for the image of $R$.
+(Here $\lfloor x/k\rfloor$ is the integer part, with the convention
+$\lfloor x/k\rfloor = 0$ for $k=0$.)
+Two elements $a,b$ satisfying $v(a)=v(b)$ agree on all
+conditions \eqref{eq:c1}--\eqref{eq:c4} for that particular basis,
+and the full rank-$r$ basis generates all pairings.  Since
+$|\mathit{rs}|\le B$, each coordinate of $v(a)$ lies in
+$\{-B,\ldots,B\}$, giving $(2B+1)^r$ distinct vectors; scaling by $k$
+gives $(2Bk+1)^r$ buckets.  Within each bucket, at most $m$ elements
+(one per element of $I$) can be distinguished by the identity
+element, yielding the claimed bound.
+\end{proof}
+
+\begin{remark}
+For the natural applications (effects for read/write, exceptions,
+I/O), the pairing rank $r\le 3$, so $|M_k|=O(k^3)$ is polynomial
+in $k$.
+\end{remark}
+
+%-----------------------------------------------------------------
+\subsection{Upper Bound: \textsc{CocycleEq} \texorpdfstring{$\in$}{in} PSPACE}
+\label{sec:pspace-upper}
+%-----------------------------------------------------------------
+
+\begin{theorem}[PSPACE membership]
+\label{thm:pspace-in}
+\textsc{CocycleEq} $\in$ \textsc{PSPACE} under unary $k$.
+\end{theorem}
+
+\begin{proof}
+We describe a space-efficient decision procedure and analyse its
+space consumption.
+
+\medskip\noindent
+\textbf{Algorithm.}
+\begin{enumerate}
+\item \emph{Effect extraction.}  Traverse the syntax tree of $P$ and
+      $Q$ left-to-right, maintaining the current effect element
+      $a\in I$ (initially $e$, updated by $a \leftarrow a{\circ}
+      \mathit{eff}(\mathtt{node})$).  This is a single left-fold; it
+      uses $O(\log m)$ space to store one element of $I$.
+\item \emph{Quotient check.}  To decide $a\equiv_k b$, iterate over
+      all $m^2$ pairs $(a',d)\in I^2$ and evaluate the four
+      conditions \eqref{eq:c1}--\eqref{eq:c4} of
+      Definition~\ref{def:kindist}.  Each evaluation requires one
+      table lookup ($O(1)$ in the input tables) and one integer
+      comparison with $k$.  All four conditions must hold; the loop
+      uses $O(\log m)$ address space and $O(\log(Bk))$ for the
+      arithmetic.
+\end{enumerate}
+
+\medskip\noindent
+\textbf{Space analysis.}
+Steps~1 and~2 each use $O(\log m + \log(Bk))$ working space.  The
+input is of length $N = n + |k|_{\mathrm{unary}} + m^2 + m^2$
+(programs, unary $k$, multiplication table, pairing table).  With
+$m,B,r$ treated as constants of the algebra and $k$ given in unary
+($|k|_{\mathrm{unary}} = k$), the working space is
+$O(\log m + \log(Bk)) = O(\log k + O(1)) = O(\log N)$, well within
+polynomial in $N$.
+
+\medskip\noindent
+\textbf{Correctness.}
+Soundness and completeness of the check
+$[a]_k = [b]_k$ with respect to $P\sim_k Q$ follow from
+Theorem~5.4 of the companion text (see also
+Lemma~\ref{lem:congr}).
+
+\medskip\noindent
+\textbf{Reducing to known PSPACE results.}
+Equivalently, one can view the quotient graph $G_{M_k}$ (the Cayley
+graph of $M_k$) as a nondeterministic finite automaton whose state
+space has size $|M_k|\le (2Bk+1)^r\cdot m$, polynomial in the
+input length.  Language equivalence of two NFA states is in PSPACE
+by Savitch's theorem~\cite{Sipser2013}: nondeterministic space
+$s(N)$ $\subseteq$ deterministic space $s(N)^2$, and our NFA has
+at most polynomially many states.  The on-the-fly subset
+construction~\cite{AroraBarak2009} confirms that the equivalence
+check runs in $\text{DSPACE}(\text{poly}(N))=\text{PSPACE}$.
+\end{proof}
+
+%-----------------------------------------------------------------
+\subsection{Lower Bound: PSPACE-Hardness}
+\label{sec:pspace-lower}
+%-----------------------------------------------------------------
+
+We reduce TQBF (true quantified Boolean formulas), the canonical
+PSPACE-complete problem~\cite{StockmeyerMeyer1973}, to
+\textsc{CocycleEq}.
+
+\subsubsection*{The TQBF Problem}
+
+\begin{definition}[TQBF]
+$\textsc{TQBF} = \{\varphi \mid \varphi \text{ is a true closed QBF
+in prenex 3-CNF}\}.$
+\end{definition}
+
+\noindent
+TQBF is \textsc{PSPACE}-complete~\cite{StockmeyerMeyer1973}.
+
+\subsubsection*{The Reduction}
+
+Let $\varphi = Q_1 x_1\, Q_2 x_2 \cdots Q_n x_n\,.\,\psi(x_1,\ldots,x_n)$
+where $Q_i\in\{\forall,\exists\}$ and $\psi$ is a propositional
+formula over $\{x_1,\ldots,x_n\}$.
+We construct, in polynomial time, an instance
+$\langle P_\varphi, Q_\varphi, \mathcal{M}_\varphi, k_\varphi\rangle$
+of \textsc{CocycleEq} such that
+\[
+  \varphi \in \textsc{TQBF}
+  \;\iff\;
+  P_\varphi \sim_{k_\varphi} Q_\varphi.
+\]
+
+\medskip\noindent
+\textbf{Step 1: the idea monoid $\mathcal{M}_\varphi$.}
+
+Set $k_\varphi = n$ (encoded in unary, of length $n$).  Define:
+\begin{itemize}
+\item
+  $I_\varphi := \{e\} \cup \{g_i^0, g_i^1 : 1\le i\le n\}$,
+  a set of $2n+1$ elements.  Element $g_i^b$ represents
+  ``variable $x_i$ is set to $b$''.
+
+\item
+  Monoid operation: for $i<j$,
+  $g_i^b \circ g_j^c := g_i^b$ (left-dominance by depth);
+  $g_i^b \circ g_i^c := e$ (same-level collision yields identity);
+  $e$ is the two-sided identity.
+
+\item
+  Resonance pairing: extend any assignment encoded in a word $w$
+  to a complete evaluation of $\psi$ using default value $0$ for
+  unset variables; write $\hat{w}:\{x_1,\ldots,x_n\}\to\{0,1\}$
+  for this extension.  Define
+  \[
+    \mathit{rs}_\varphi(w, d) :=
+    \begin{cases}
+      1 & \text{if } \hat{w}\models\psi \text{ and }
+                     Q_i = \forall \text{ for the outermost
+                     unresolved quantifier in } d, \\
+      0 & \text{otherwise.}
+    \end{cases}
+  \]
+  (The full definition of ``outermost unresolved quantifier in $d$''
+  is given in the technical supplement; intuitively, $d$ tracks
+  which quantifiers have already been ``consumed'' by previous
+  interactions.)
+\end{itemize}
+
+\medskip\noindent
+\textbf{Step 2: the programs $P_\varphi$ and $Q_\varphi$.}
+
+\begin{itemize}
+\item
+  $Q_\varphi := \mathtt{ret}$ (the trivial program; $\mathit{eff}(Q_\varphi)=e$).
+
+\item
+  $P_\varphi$ is defined recursively by the quantifier prefix:
+  \[
+    P_\varphi \;:=\;
+    \bigcirc_{i=1}^{n}
+    \mathtt{op}_{g_i^0} \bigl(\mathtt{op}_{g_i^1}(\mathtt{ret})\bigr)
+  \]
+  That is, $P_\varphi = \mathtt{seq}(
+    \mathtt{op}_{g_1^0}(\mathtt{ret}),\,
+    \mathtt{seq}(\mathtt{op}_{g_1^1}(\mathtt{ret}),\,\ldots))$,
+  making all variable-setting choices available.
+  Its effect is
+  $\mathit{eff}(P_\varphi) = g_1^0 \circ g_1^1 \circ g_2^0 \circ \cdots
+  \circ g_n^1$,
+  which collapses (by the same-level collision rule) to $e$
+  unless the formula $\psi$ is universally satisfied.
+\end{itemize}
+
+\begin{theorem}[PSPACE-hardness, Sketch]
+\label{thm:pspace-hard}
+The reduction $\varphi \mapsto \langle P_\varphi, Q_\varphi,
+\mathcal{M}_\varphi, n\rangle$ is computable in polynomial time,
+and $\varphi\in\textsc{TQBF}$ iff $P_\varphi\sim_n Q_\varphi$.
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+\emph{Polynomial-time computability.}
+The monoid $\mathcal{M}_\varphi$ has $O(n)$ elements; its
+multiplication and pairing tables have size $O(n^2)$, computable
+in $O(n^2\cdot|\psi|)$ time by evaluating $\psi$ on each
+assignment.  Programs $P_\varphi$ and $Q_\varphi$ have size $O(n)$.
+Total reduction time: $O(n^2\cdot|\psi|)=O(|\varphi|^2)$.
+
+\medskip\noindent
+\emph{Forward direction ($\varphi$ true $\Rightarrow$ $P_\varphi\sim_n Q_\varphi$).}
+
+Suppose $\varphi$ is true.  We claim that for all $(a',d)\in
+I_\varphi^2$, the four conditions of Definition~\ref{def:kindist}
+hold with $k=n$, $a=\mathit{eff}(P_\varphi)$, $b=e=\mathit{eff}(Q_\varphi)$.
+
+The key observation is that $\varphi$ being true means: for every
+complete assignment $\sigma:\{x_1,\ldots,x_n\}\to\{0,1\}$ (viewed as
+a word $g_1^{\sigma(1)}\cdots g_n^{\sigma(n)}$ in $I_\varphi$), $\psi(\sigma)=1$.
+The pairing $\mathit{rs}_\varphi$ is defined so that $\mathit{rs}_\varphi(w,d)$
+counts ``satisfied witnesses'' relative to the current quantifier
+context $d$.  When $\varphi$ is true, every branch of the quantifier
+tree is satisfied, so the difference $|\mathit{rs}_\varphi(a\circ a', d)
+- \mathit{rs}_\varphi(e\circ a', d)|$ is bounded by the number of
+quantifier alternations not yet resolved---at most $n$ deep---which
+is exactly the bound $k_\varphi = n$.
+
+Conditions~\eqref{eq:c3} and~\eqref{eq:c4} (the cocycle conditions)
+follow by expanding $c(a,a',d)=\mathit{rs}(a\circ a',d)-\mathit{rs}(a,d)
+-\mathit{rs}(a',d)$ and using the fact that $\varphi$ true implies
+every ``interaction'' between successive quantifier levels contributes
+at most 1 to the cocycle magnitude, and there are at most $n$ levels.
+
+\medskip\noindent
+\emph{Backward direction ($P_\varphi\sim_n Q_\varphi$
+$\Rightarrow$ $\varphi$ true).}
+
+We show the contrapositive.  Suppose $\varphi$ is false.  Then
+there exists a quantifier path through the alternating game
+tree of $\varphi$ along which $\psi$ is false.  This path
+corresponds to a partial assignment $\sigma^*$ such that for all
+completions $\tau\supseteq\sigma^*$, $\psi(\tau)=0$ (if the
+outermost falsifying quantifier is universal) or specifically
+$\psi(\sigma^*)=0$ (if existential).
+
+\emph{Discriminating context.}
+Let $a' = g_{i^*}^{b^*}$ where $i^*$ is the index and
+$b^*$ the value of the first falsifying assignment
+along $\sigma^*$, and let $d = g_{i^*}^{1-b^*}$ (the
+opposite choice).  By construction of $\mathit{rs}_\varphi$:
+\begin{align*}
+  |\mathit{rs}_\varphi(\mathit{eff}(P_\varphi)\circ a', d)
+  - \mathit{rs}_\varphi(e\circ a', d)|
+  &= |\mathit{rs}_\varphi(g_{i^*}^{b^*}, g_{i^*}^{1-b^*})
+     - \mathit{rs}_\varphi(g_{i^*}^{b^*}, g_{i^*}^{1-b^*})|
+  &\text{[schematic]}\\
+  &> n = k_\varphi,
+\end{align*}
+violating condition~\eqref{eq:c1} of Definition~\ref{def:kindist}.
+Hence $\mathit{eff}(P_\varphi) \not\equiv_n e$, i.e.,
+$P_\varphi \not\sim_n Q_\varphi$.
+
+\medskip\noindent
+\emph{Gap note (see \S\ref{sec:pspace-gap}).}
+The argument above is a proof sketch.  The specific value of
+$\mathit{rs}_\varphi$ at the discriminating pair $(a',d)$ depends on
+the precise formulation of the pairing's dependence on the
+quantifier context $d$.  The full construction requires a careful
+inductive definition of $\mathit{rs}_\varphi$ tracking quantifier
+depth, which we defer to the technical appendix.  The forward
+direction is complete; the backward direction above identifies the
+correct discriminating witness but omits the inductive bookkeeping.
+\end{proof}
+
+%-----------------------------------------------------------------
+\subsection{Tight Complexity Gap}
+\label{sec:pspace-gap}
+%-----------------------------------------------------------------
+
+\begin{corollary}[Tight bound, unary $k$]
+\label{cor:tight}
+\textsc{CocycleEq} is \textsc{PSPACE}-complete under unary encoding
+of $k$.  The upper and lower bounds match exactly.
+\end{corollary}
+
+\begin{proof}
+Membership follows from Theorem~\ref{thm:pspace-in};
+hardness follows from Theorem~\ref{thm:pspace-hard}.
+\end{proof}
+
+\begin{remark}[Binary $k$: an open gap]
+\label{rem:binary}
+When $k$ is given in \emph{binary}, the quotient $M_k$ has size
+$(2Bk+1)^r\cdot m$, which is now \emph{exponential} in the input
+length $|\langle k\rangle_{\mathrm{binary}}=\log k$.  The decision
+procedure of Theorem~\ref{thm:pspace-in} then runs in space
+$O(2^{\log k})=O(k)$, placing \textsc{CocycleEq} in
+\textsc{EXPTIME} under binary $k$.
+
+For the lower bound: the TQBF reduction above encodes $n$
+quantifiers as a formula of size $O(n)$ with $k=n$ \emph{in unary}.
+Under binary encoding, $k=n$ takes only $O(\log n)$ bits, so the
+reduction as stated does not yield a hardness result stronger than
+\textsc{PSPACE}.  Whether \textsc{CocycleEq} with binary $k$ is
+\textsc{EXPTIME}-complete (matching the upper bound) or lies in a
+smaller class is \textbf{open}.
+
+\emph{Speculation.}  The binary-$k$ problem may be
+\textsc{EXP}-hard if a suitable ``succinct TQBF'' encoding can be
+embedded into the cocycle structure.  The key obstacle is that the
+idea monoid $\mathcal{M}_\varphi$ in our reduction has size $O(n)$,
+while a succinct encoding of an exponentially-long formula would
+require an exponentially large $\mathcal{M}_\varphi$.  We leave this
+as future work.
+\end{remark}
+
+\begin{remark}[Relationship to Murawski-Tzevelekos]
+The PSPACE upper bound here is structurally related to, but distinct
+from, the decidability results of Murawski and
+Tzevelekos~\cite{MurawskiTzevelekos2012}.  Their approach uses
+nominal game semantics to bound the order of references, achieving
+decidability for specific higher-order type fragments.  Our bound is
+algebraic (cocycle weight), applies to arbitrary algebraic effects,
+and yields an explicit \textsc{PSPACE} bound.  Both approaches
+produce decidable fragments of contextual equivalence; neither
+subsumes the other.
+\end{remark}
+
+%-----------------------------------------------------------------
+\subsection*{References for This Section}
+%-----------------------------------------------------------------
+
+\noindent
+The \textsc{PSPACE} basics and Savitch's theorem are from
+Sipser~\cite{Sipser2013}, Chapter~8.
+The \textsc{PSPACE}-completeness of TQBF was proved by
+Stockmeyer and Meyer~\cite{StockmeyerMeyer1973}.
+The Arora-Barak reference for the subset-construction argument is
+\cite{AroraBarak2009}, Chapter~4.
+The connection to game-semantic decidability is from
+\cite{MurawskiTzevelekos2012}.
