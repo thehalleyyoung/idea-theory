@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Philosophy Zoo — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css"/>
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'ams'},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a class="active" href="index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content wide">
+
+<h1>Philosophy Zoo</h1>
+<p class="lead">Thirty-five thinkers, each instantiated as a sub-algebra of the Idea Theory structure \(({\mathcal I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\).</p>
+
+<div class="toc-box">
+<h2>How to read this zoo</h2>
+<p>Each entry follows five fixed rubrics:</p>
+<ol>
+<li><strong>The Position</strong> — what the philosopher actually claimed.</li>
+<li><strong>The Instantiation</strong> — how each component \((\circ,\rho,\sigma,\nu,\eta,\omega,\deg)\) is concretely interpreted.</li>
+<li><strong>Central Claim as Theorem</strong> — the position restated as a provable (or falsifiable) assertion about the algebra, keyed to theorems T1–T9.</li>
+<li><strong>What the Formalism Adds</strong> — novel structure, predictions, or illuminations the algebraic view provides.</li>
+<li><strong>Where It Diverges</strong> — what the formalism forces open or cannot capture.</li>
+</ol>
+<p>The base algebra is recalled here for reference:</p>
+\[
+({\mathcal I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)
+\]
+<ul>
+<li>\(\circ\) — composition (synthesis of ideas)</li>
+<li>\(e\) — identity idea (empty content)</li>
+<li>\(\rho\) — resonance pairing \(\rho:{\mathcal I}\times{\mathcal I}\to\mathbb{R}\)</li>
+<li>\(\sigma\) — curvature map \(\sigma:{\mathcal I}\to\Omega^2\)</li>
+<li>\(\nu\) — negation / dialectical complement</li>
+<li>\(\eta\) — reframing conjugation</li>
+<li>\(\omega\) — transmission / propagation operator</li>
+<li>\(\deg\) — grading (complexity, scope, abstraction level)</li>
+</ul>
+</div>
+
+<nav class="toc-box" aria-label="Sections">
+<h2>Sections</h2>
+<ul class="toc-grid">
+<li><a href="#ancient">Ancient</a></li>
+<li><a href="#early-modern">Early Modern</a></li>
+<li><a href="#german-idealism">German Idealism</a></li>
+<li><a href="#phenomenology">Phenomenology</a></li>
+<li><a href="#post-structuralism">Post-Structuralism</a></li>
+<li><a href="#analytic">Analytic</a></li>
+</ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2 id="ancient">Ancient</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div id="plato" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Plato</h3>
+  <p class="zoo-meta">428–348 BCE · Idealist</p>
+  <h4>The Position</h4>
+  <p>Ideas (Forms) are the only true objects of knowledge; sensible things are shadows. Knowledge consists in anamnesis—recollection of Forms encountered before birth.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{Forms}\}\), \(\circ\) = participation (a Form \(\circ\) b = the Form containing b's participation in a), \(\rho(a,b)\) = degree of kinship between Forms, \(\sigma\) = the curvature of the Divided Line, \(\nu(a)\) = the material shadow of \(a\), \(\eta\) = the Socratic elenchus (dialectical reframing), \(\omega\) = pedagogical transmission (ascending the Line), \(\deg\) = ontological rank (Being &gt; Becoming).</p>
+  \[
+    \deg(\text{Form}) > \deg(\text{shadow}) \quad \text{and} \quad \omega(\text{Form}) = \text{Form}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The Forms are fixed points of \(\omega\) (T7: transmission). The elenchus \(\eta\) lowers \(\deg\) by stripping away accidental properties. The Divided Line is the grading filtration (T9).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The participation relation becomes a well-defined \(\circ\) with a monoid identity \(e\) = the Form of the Good (T1). \(\rho\) measures analogy between Forms, giving a quantitative account of Platonic kinship.</p>
+  <h4>Where It Diverges</h4>
+  <p>The formalism treats \({\mathcal I}\) as a set; Plato's Forms are not a set but a hierarchy. The participation relation is one-directional (many-to-one), violating the group-like symmetry \(\nu \circ \nu = e\).</p>
+</div>
+
+<div id="aristotle" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Aristotle</h3>
+  <p class="zoo-meta">384–322 BCE · Hylomorphist</p>
+  <h4>The Position</h4>
+  <p>Form and matter are inseparable; substances are composites. The intellect abstracts form from matter, producing universal concepts.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{hylomorphic composites}\}\), \(\circ\) = predication (substance \(\circ\) accident = informed substance), \(\rho(a,b)\) = similarity of form, \(\sigma\) = potentiality–actuality curvature, \(\nu(a)\) = the privation of \(a\), \(\eta\) = abstraction (stripping matter), \(\omega\) = inductive generalization, \(\deg\) = categories (substance &gt; quality &gt; quantity …).</p>
+  \[
+    \eta(a \circ m) = \eta(a) \quad \text{(abstraction removes matter } m\text{)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Predication is the monoid operation (T1). \(\eta\) is a retraction onto the universal (T6). The Categories give a natural grading (T9).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The form–matter distinction becomes a kernel of the map \(\eta\); matter is exactly what \(\eta\) kills. \(\sigma\) captures the tension between potentiality and actuality as a non-trivial curvature.</p>
+  <h4>Where It Diverges</h4>
+  <p>Aristotle's syllogistic is richer than monoid composition; the formalism loses figure and mood. The four causes are not captured by any single algebraic operator.</p>
+</div>
+
+<div id="plotinus" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Plotinus</h3>
+  <p class="zoo-meta">204–270 CE · Neoplatonist</p>
+  <h4>The Position</h4>
+  <p>All reality emanates from the One through successive hypostases: Nous (Intellect), Soul, and Matter. The One itself is beyond being and predication.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I}\) = ideas at each hypostatic level, \(\circ\) = emanation–participation, \(\rho(a,b)\) = ontological proximity to the One, \(\sigma\) = the curvature of procession (\(\pi\rho\acute{o}\omicron\delta\omicron\varsigma\)) vs. return (\(\dot{\epsilon}\pi\iota\sigma\tau\rho\omicron\phi\acute{\eta}\)), \(\nu(a)\) = the shadow of \(a\) in lower reality, \(\eta\) = the soul's return (\(\dot{\epsilon}\pi\iota\sigma\tau\rho\omicron\phi\acute{\eta}\)), \(\omega\) = emanation as transmission, \(\deg\) = hypostatic level (One &gt; Nous &gt; Soul &gt; Matter).</p>
+  \[
+    \omega^n(e) \xrightarrow{n\to\infty} \text{Matter}, \quad \eta^n(a) \xrightarrow{n\to\infty} e_{\text{One}}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Emanation is iterated \(\omega\) (T7). Return is iterated \(\eta\) converging to the identity near the One (T6). The grading \(\deg\) strictly decreases under \(\omega\) (T9).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The convergence structure of \(\eta\) makes the mystical union with the One a precise fixed-point theorem. The curvature \(\sigma\) distinguishes procession (positive) from return (negative).</p>
+  <h4>Where It Diverges</h4>
+  <p>The One is beyond \({\mathcal I}\)—it cannot be an element. The formalism breaks down at the apex, which is precisely Plotinus's point about ineffability.</p>
+</div>
+
+<div id="augustine" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Augustine of Hippo</h3>
+  <p class="zoo-meta">354–430 CE · Christian Platonist</p>
+  <h4>The Position</h4>
+  <p>Divine Ideas in the mind of God are the eternal archetypes of creation. Human knowledge is illuminated by divine light; truth is found by turning inward.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I}\) = divine ideas in the mind of God, \(\circ\) = creative participation, \(\rho(a,b)\) = analogical distance from God, \(\sigma\) = the curvature between temporal and eternal, \(\nu(a)\) = the fallen shadow of \(a\) in creation, \(\eta\) = illumination (interior teacher), \(\omega\) = providential ordering, \(\deg\) = degree of participation in divine being.</p>
+  \[
+    \rho(a, e_{\text{God}}) \leq \rho(a, b) \quad \forall b \in {\mathcal I}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>God (\(e_{\text{God}}\)) is the global resonance maximum (T2). \(\eta\) = illumination is a conjugation that aligns human ideas with divine archetypes (T6). Providence is the transmission \(\omega\) ordering creation toward its end (T7).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The priority of interiority ("return to yourself") becomes a claim that \(\eta\) is a retraction onto the image of God in the soul. \(\rho\) makes the analogical distance from God quantitative.</p>
+  <h4>Where It Diverges</h4>
+  <p>The formalism has no operator for grace; the asymmetry of divine love is not captured by any algebraic symmetry.</p>
+</div>
+
+<div id="aquinas" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Thomas Aquinas</h3>
+  <p class="zoo-meta">1225–1274 · Scholastic</p>
+  <h4>The Position</h4>
+  <p>Being (<em>esse</em>) is the act of acts; essence limits being. Analogy of being bridges the difference between God and creatures.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I}\) = beings ordered by analogical proportion, \(\circ\) = participation in being, \(\rho(a,b)\) = analogical proportion, \(\sigma\) = the act-potency curvature, \(\nu(a)\) = non-being / privation, \(\eta\) = analogical predication, \(\omega\) = causal dependence (second causes), \(\deg\) = degree of actuality (pure act &gt; actualized potency).</p>
+  \[
+    \rho(a, b) = \frac{\deg(a)}{\deg(b)} \quad \text{(analogical proportion of being)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The Five Ways are demonstrations that \(\deg\) has a unique maximum (T9 + T1). \(\eta\)-analogy preserves partial structure while admitting difference (T6). The act-potency distinction is captured by the non-trivial \(\sigma\) (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The analogy of being becomes a precise metric on \({\mathcal I}\). The compatibility of faith and reason is the claim that \(\eta\) (theological predication) and \(\circ\) (philosophical predication) commute.</p>
+  <h4>Where It Diverges</h4>
+  <p>The real distinction between <em>esse</em> and <em>essentia</em> is not a set-theoretic distinction; the formalism conflates them unless care is taken to separate grading from structure.</p>
+</div>
+
+<div id="ockham" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">William of Ockham</h3>
+  <p class="zoo-meta">1287–1347 · Nominalist</p>
+  <h4>The Position</h4>
+  <p>Universals have no extra-mental existence; only individual things exist. Mental terms (concepts) are natural signs of individuals.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{individual mental acts}\}\), \(\circ\) = mental composition (propositional synthesis), \(\rho(a,b)\) = co-occurrence in mental acts, \(\sigma = 0\) (no universal curvature; every loop is trivial), \(\nu(a)\) = the negation of the mental term \(a\), \(\eta\) = suppositio (contextual interpretation), \(\omega\) = inference, \(\deg\) = degree of complexity (simple &gt; compound).</p>
+  \[
+    \sigma(a) = 0 \quad \forall a \in {\mathcal I} \quad \text{(Ockham's Razor: flat curvature)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>\(\sigma = 0\) is the formal statement of Ockham's Razor (T5): there is no real curvature/universality over and above individual mental acts. The algebra is flat; all loops are contractible.</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The Razor becomes a topological claim (zero curvature). This makes explicit what Ockham's parsimony demands: the absence of any non-trivial holonomy.</p>
+  <h4>Where It Diverges</h4>
+  <p>Ockham's logic is richer than a flat monoid; he developed a sophisticated theory of syncategorematic terms that \(\circ\) cannot model.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2 id="early-modern">Early Modern</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div id="descartes" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">René Descartes</h3>
+  <p class="zoo-meta">1596–1650 · Rationalist</p>
+  <h4>The Position</h4>
+  <p>Clear and distinct ideas, perceived by the intellect alone, are the model for all knowledge. The cogito is the bedrock; the method of doubt strips away everything not clearly and distinctly perceived.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{clear and distinct ideas}\}\), \(\circ\) = deductive inference, \(\rho(a,b)\) = mutual entailment strength, \(\sigma\) = the curvature of doubt (how much an idea can withstand the Evil Demon), \(\nu(a)\) = the confused, obscure counterpart of \(a\), \(\eta\) = methodic doubt (stripping to the clear core), \(\omega\) = chain of reasons (long deduction), \(\deg\) = clarity-and-distinctness (fully clear &gt; obscure).</p>
+  \[
+    \eta(a) = \operatorname{cl}(a) \quad \text{(the clear and distinct core of } a\text{)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The cogito is the unique fixed point of \(\eta\) (T6): \(\eta(\text{cogito}) = \text{cogito}\). The method of deduction is \(\omega\) as a telescoping chain (T7). Clarity-and-distinctness is the grading (T9).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The systematic doubt becomes a retraction map \(\eta\); the cogito is its unique fixed point. The long chains of reason are modeled as \(\omega\)-orbits with monotone \(\deg\).</p>
+  <h4>Where It Diverges</h4>
+  <p>The mind-body problem—the union of substances—is not captured by \(\circ\); the real distinction between substances resists algebraic composition.</p>
+</div>
+
+<div id="locke" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">John Locke</h3>
+  <p class="zoo-meta">1632–1704 · Empiricist</p>
+  <h4>The Position</h4>
+  <p>The mind is a blank slate; all ideas come from experience (sensation and reflection). Complex ideas are composed from simple ideas.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{simple ideas}\} \cup \{\text{complex ideas}\}\), \(\circ\) = mental composition, \(\rho(a,b)\) = co-occurrence in experience, \(\sigma\) = the curvature of association, \(\nu(a)\) = the idea of deprivation/absence, \(\eta\) = abstraction (forming nominal essence), \(\omega\) = habit and association, \(\deg\) = complexity (simple &lt; complex &lt; relation &lt; substance).</p>
+  \[
+    a \text{ simple} \Rightarrow \deg(a) = 0, \quad a \circ b \text{ complex} \Rightarrow \deg(a\circ b) = \deg(a) + \deg(b) + 1
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Simple ideas are the generators of the free monoid (T1); all complex ideas decompose uniquely (T3 Aufhebung). \(\omega\) = habit fixes associations over time (T7).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The tabula rasa is the claim that the initial state of \({\mathcal I}\) has no pre-installed generators; all generators are empirically given. T3 gives a unique decomposition theorem that validates Lockean analysis.</p>
+  <h4>Where It Diverges</h4>
+  <p>Locke's nominal vs. real essences don't map cleanly to a single \(\deg\). The incoherence of "substance" (something I know not what) resists algebraic treatment.</p>
+</div>
+
+<div id="hume" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">David Hume</h3>
+  <p class="zoo-meta">1711–1776 · Empiricist/Skeptic</p>
+  <h4>The Position</h4>
+  <p>Ideas are faint copies of impressions; the mind bundles perceptions by association. Causation is not necessary connection but custom and expectation.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{impressions}\} \cup \{\text{ideas}\}\), \(\circ\) = association, \(\rho(a,b)\) = associative strength (resemblance, contiguity, causation), \(\sigma = 0\) for rational connections (all non-zero curvature is associative habit), \(\nu(a)\) = the missing shade of blue (gap), \(\eta\) = skeptical reduction (replacing idea with its impression), \(\omega\) = repeated experience forming habit, \(\deg\) = vivacity (impression &gt; idea).</p>
+  \[
+    \rho(a,b) = w_{\text{res}}\cdot\text{res}(a,b) + w_{\text{cont}}\cdot\text{cont}(a,b) + w_{\text{caus}}\cdot\text{caus}(a,b)
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>There is no rational \(\circ\) connecting cause to effect; the only real \(\rho\) is associative (T2). The bundle theory is the claim that there is no identity idea \(e\) in the self—the self is just \(\rho\)-clusters (T1 fails for personal identity).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Hume's associationism is a weighted resonance metric (T2). The missing shade of blue is a gap in the generator set—an element of \({\mathcal I}\) not reachable by \(\circ\).</p>
+  <h4>Where It Diverges</h4>
+  <p>The formalism assumes a well-defined \({\mathcal I}\); Hume's skepticism about the self undermines the carrier set itself.</p>
+</div>
+
+<div id="leibniz" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Gottfried Leibniz</h3>
+  <p class="zoo-meta">1646–1716 · Rationalist/Monadologist</p>
+  <h4>The Position</h4>
+  <p>Monads are windowless, non-interacting substances that mirror the universe from their own perspective. Pre-established harmony ensures their coordination without causal interaction.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \prod_i {\mathcal I}_i\) (product of monad-algebras), \(\circ_i\) = internal perception within monad \(i\), \(\rho(a,b)\) = harmony score between monads, \(\sigma\) = curvature of perception (petites perceptions), \(\nu_i(a)\) = the confused complement, \(\eta\) = apperception (reflection on one's perceptions), \(\omega\) = universal harmony (God's pre-established ordering), \(\deg\) = degree of distinctness of perception.</p>
+  \[
+    {\mathcal I} = \prod_{i \in \text{Monads}} {\mathcal I}_i, \quad \omega = \mathrm{id} \text{ (no inter-monad causation)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Each monad is an autonomous copy of the full algebra (T1 for each \({\mathcal I}_i\)). Pre-established harmony is the claim that \(\rho\) achieves a global maximum at the actual world (T2). The windowlessness is \(\omega = \mathrm{id}\) between monads.</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The product structure makes Leibniz's "each monad mirrors the universe" a precise claim: each \({\mathcal I}_i\) is isomorphic to \({\mathcal I}\). The harmony measure \(\rho\) gives a criterion for God's choice of world.</p>
+  <h4>Where It Diverges</h4>
+  <p>The absence of inter-monad causation means \(\circ\) is trivial between algebras; the formalism cannot model the appearance of interaction that Leibniz must explain.</p>
+</div>
+
+<div id="spinoza" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Baruch Spinoza</h3>
+  <p class="zoo-meta">1632–1677 · Rationalist/Monist</p>
+  <h4>The Position</h4>
+  <p>There is only one substance (God or Nature) with infinitely many attributes. Modes are particular ways the one substance is expressed.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{modes of God/Nature}\}\), \(\circ\) = modal determination (one mode follows from another), \(\rho(a,b)\) = degree of shared attribute, \(\sigma\) = the curvature of adequate vs. inadequate ideas, \(\nu(a)\) = the opposite mode (finite negation), \(\eta\) = sub specie aeternitatis (viewing under eternity), \(\omega\) = the causal-logical order of Nature, \(\deg\) = degree of power/conatus.</p>
+  \[
+    \omega(a) = a \quad \forall a \in {\mathcal I} \quad \text{(}{\mathit Deus sive Natura}\text{: all is immanent)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The one substance is the identity \(e\) of the entire algebra (T1). \(\omega = \mathrm{id}\) because nothing is outside Nature (T7). \(\eta\) (sub specie aeternitatis) is a retraction onto adequate ideas (T6).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Spinoza's parallelism (thought and extension as attributes) becomes the claim that the two attribute-subalgebras are isomorphic under \(\eta\). Conatus = \(\deg\) gives a quantitative account of striving.</p>
+  <h4>Where It Diverges</h4>
+  <p>Spinoza's infinite attributes (beyond thought and extension) are not finitely representable in \({\mathcal I}\). The necessitarianism (all is necessary) means \(\sigma = 0\), which flattens away the interesting curvature.</p>
+</div>
+
+<div id="berkeley" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">George Berkeley</h3>
+  <p class="zoo-meta">1685–1753 · Idealist/Immaterialist</p>
+  <h4>The Position</h4>
+  <p><em>Esse est percipi</em>—to be is to be perceived. Material substance is an incoherent concept; only minds and their ideas exist.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{ideas in minds}\}\), \(\circ\) = co-perception (ideas are combined by being perceived together), \(\rho(a,b)\) = co-occurrence in perception, \(\sigma = 0\) (no material substrate; all curvature is mental), \(\nu(a)\) = the idea that negates \(a\), \(\eta\) = abstraction (which Berkeley rejects as impossible for genuine ideas), \(\omega\) = God's sustaining perception (the permanent perceiver), \(\deg\) = vividness / immediacy of sensation.</p>
+  \[
+    \forall a \in {\mathcal I},\; \exists\, \text{mind } M: a \in {\mathcal I}_M \quad \text{(esse est percipi)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>\({\mathcal I}\) is a union of mental idea-sets; every idea belongs to some mind (T1 for mental monoids). \(\omega\) = God is the unique fixed-point perceiver ensuring continuity (T7). \(\eta\) (abstraction) is not well-defined in Berkeley's system (T6 fails for general abstraction).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Berkeley's rejection of abstract ideas is the claim that \(\eta\) has no image in \({\mathcal I}\) beyond what is actually perceived. God as \(\omega\) makes the persistence of objects a consequence of a universal transmitter.</p>
+  <h4>Where It Diverges</h4>
+  <p>The individuation of minds is external to the algebra; the formalism cannot distinguish perceptions of different minds without adding structure.</p>
+</div>
+
+<div id="kant" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Immanuel Kant</h3>
+  <p class="zoo-meta">1724–1804 · Transcendental Idealist</p>
+  <h4>The Position</h4>
+  <p>The mind imposes forms (space, time) and categories (causality, substance…) on the raw manifold of intuition. Things in themselves are unknowable; we know only appearances.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{representations in transcendental unity of apperception}\}\), \(\circ\) = synthesis (imagination + understanding), \(\rho(a,b)\) = schematized category coherence, \(\sigma\) = the curvature between phenomena and noumena, \(\nu(a)\) = the thing-in-itself corresponding to \(a\), \(\eta\) = transcendental reflection (uncovering conditions of possibility), \(\omega\) = schematism (applying categories to intuition), \(\deg\) = level of representation (intuition &lt; concept &lt; idea of reason).</p>
+  \[
+    \omega(a \otimes t) = \text{schema}(a)(t), \quad a \in \text{Categories},\; t \in \text{Time}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The twelve categories are the generators of \(\circ\) (T1). Schematism is \(\omega\): it bridges concepts and intuitions (T7). The Transcendental Unity is the identity idea \(e\); all synthesis is relative to it.</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The Transcendental Deduction is the proof that the categories are necessary conditions for \(\circ\) to be well-defined (T1 monoid axioms). \(\sigma \neq 0\) captures the unbridgeable gap between phenomena and noumena (T5).</p>
+  <h4>Where It Diverges</h4>
+  <p>The formalism cannot model the regulative use of Ideas of Reason (God, Freedom, Soul)—these are outside \({\mathcal I}\) in Kant's system.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2 id="german-idealism">German Idealism</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div id="fichte" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Johann Gottlieb Fichte</h3>
+  <p class="zoo-meta">1762–1814 · German Idealist</p>
+  <h4>The Position</h4>
+  <p>The self posits itself (I = I), then posits the not-I, and finally limits both. All reality is the activity of the absolute self.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{posited acts of the ego}\}\), \(\circ\) = ego-synthesis, \(\rho(a,b)\) = degree of mutual determination, \(\sigma\) = the curvature of the striving ego, \(\nu(a)\) = the not-I (Nicht-Ich), \(\eta\) = reflection (the ego grasps its own activity), \(\omega\) = the practical striving toward infinite self-positing, \(\deg\) = degree of self-determination.</p>
+  \[
+    e \circ e = e \quad (I = I), \quad e \circ \nu(e) = \text{World} \quad (I \text{ vs. Not-}I)
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The ego is the identity \(e\) (T1). \(\nu(e)\) = the not-I is the algebraic negation (T1 with \(\nu\)). \(\sigma \neq 0\) captures the practical striving: the ego can never fully absorb the not-I (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Fichte's dialectic of ego/not-I becomes the claim that \(\nu \neq \mathrm{id}\) and that \(e \circ \nu(e)\) generates the full algebra. The striving is a non-convergent \(\omega\)-orbit.</p>
+  <h4>Where It Diverges</h4>
+  <p>Fichte's Tathandlung (self-positing act) is not a static element but an act; the formalism reifies it as an element, losing the performative character.</p>
+</div>
+
+<div id="hegel" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Georg Wilhelm Friedrich Hegel</h3>
+  <p class="zoo-meta">1770–1831 · Absolute Idealist</p>
+  <h4>The Position</h4>
+  <p>The Absolute Idea develops through dialectical self-negation and sublation (Aufhebung). History and thought are the Absolute coming to know itself.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{determinations of the Concept}\}\), \(\circ\) = sublation (Aufhebung), \(\rho(a,b)\) = speculative identity, \(\sigma\) = the dialectical curvature (contradiction), \(\nu(a)\) = the determinate negation of \(a\), \(\eta\) = reflection (Erinnerung, internalization), \(\omega\) = the movement of the Concept through history, \(\deg\) = degree of self-determination / concreteness.</p>
+  \[
+    a \circ \nu(a) = \text{Aufhebung}(a) \succ a \quad (\deg(\text{Aufhebung}(a)) > \deg(a))
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Sublation is the central operation (T3 Aufhebung): every element \(a\) decomposes into moment + negation, which are then preserved-and-cancelled in a higher synthesis. \(\sigma \neq 0\) (the dialectic is genuinely contradictory, T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>T3 formalizes Aufhebung as a unique decomposition theorem. The progression of Spirit is a monotone sequence under \(\deg\)—a filtered colimit.</p>
+  <h4>Where It Diverges</h4>
+  <p>Hegel's Logic claims that contradictions are real, not just epistemic; the formalism, built on classical logic, cannot host genuine contradictions in \({\mathcal I}\).</p>
+</div>
+
+<div id="schelling" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Friedrich Schelling</h3>
+  <p class="zoo-meta">1775–1854 · Nature Philosopher</p>
+  <h4>The Position</h4>
+  <p>Nature is visible spirit; spirit is invisible nature. The Absolute is the identity of subject and object, not reached by reflection but by intellectual intuition.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{potencies of the Absolute}\}\), \(\circ\) = potentiation (raising a potency), \(\rho(a,b)\) = identity of subject and object pole, \(\sigma\) = the curvature of the "indifference point" between nature and spirit, \(\nu(a)\) = the opposite potency, \(\eta\) = intellectual intuition (immediate grasp of the Absolute), \(\omega\) = the cosmogonic process (potencies unfolding in time), \(\deg\) = degree of potency (\(A = A^0, A^1, A^2, \ldots\)).</p>
+  \[
+    \omega(A^n) = A^{n+1}, \quad \sigma\big|_{\text{indifference}} = 0
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The Absolute is the fixed point where \(\sigma = 0\)—the indifference of all potencies (T5). \(\omega\) = potentiation is the natural number grading (T9). \(\eta\) = intellectual intuition is the only map that reaches \(e\) (T6).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The potency series is a \(\mathbb{Z}\)-graded algebra; the indifference point is the grade-zero subalgebra. This makes Schelling's "Absolute as ground" a structural claim about the grading.</p>
+  <h4>Where It Diverges</h4>
+  <p>Schelling's Absolute precedes the subject-object split and therefore precedes \({\mathcal I}\) itself; the formalism begins after the split.</p>
+</div>
+
+<div id="schopenhauer" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Arthur Schopenhauer</h3>
+  <p class="zoo-meta">1788–1860 · Voluntarist</p>
+  <h4>The Position</h4>
+  <p>The world as representation is structured by the Principle of Sufficient Reason (space, time, causality). The world as will is a blind, purposeless striving underlying all representation.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{representations}\}\), \(\circ\) = causal-cognitive synthesis, \(\rho(a,b)\) = degree of resemblance in representation, \(\sigma\) = the curvature of the will's objectification, \(\nu(a)\) = the denial of will in \(a\), \(\eta\) = aesthetic contemplation (will-less perception), \(\omega\) = the will's objectification in phenomena, \(\deg\) = grade of will's objectification (Platonic Ideas &gt; natural forces &gt; human willing).</p>
+  \[
+    \eta(a) = \bar{a} \quad \text{(pure aesthetic representation: will-free image of } a\text{)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The will is \(\omega\)—the universal transmission that drives all ideas to objectify (T7). \(\eta\) = aesthetic contemplation is the unique retraction onto will-free representations (T6). \(\sigma \neq 0\) captures the irrationality of the will (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The aesthetic state \(\eta(a)\) is formally a fixed point of the will's drive: \(\omega(\eta(a)) = \eta(a)\). This makes art the algebra's fixed-point set—a precise claim about aesthetic redemption.</p>
+  <h4>Where It Diverges</h4>
+  <p>The will, as thing-in-itself, is outside \({\mathcal I}\); it is the carrier of \(\omega\) but cannot be an element. The formalism cannot host the noumenal will.</p>
+</div>
+
+<div id="marx" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Karl Marx</h3>
+  <p class="zoo-meta">1818–1883 · Historical Materialist</p>
+  <h4>The Position</h4>
+  <p>The material conditions of production determine consciousness (not the other way around). History is the story of class struggle driven by contradictions in the mode of production.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{socially produced ideas}\}\), \(\circ\) = ideological synthesis (superstructure composition), \(\rho(a,b)\) = class coherence (how much two ideas serve the same class interest), \(\sigma\) = the curvature of contradiction between forces and relations of production, \(\nu(a)\) = the class negation of ideology \(a\), \(\eta\) = critique of ideology (stripping false consciousness), \(\omega\) = historical materialism (material base determining ideas), \(\deg\) = distance from material base (infrastructure &lt; superstructure).</p>
+  \[
+    \omega(\text{base}) \to \text{superstructure}, \quad \deg(\text{base}) < \deg(\text{superstructure})
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Historical materialism is the claim that \(\omega\) is directed (from base to superstructure, T7), not symmetric. Class contradiction is \(\sigma \neq 0\) (T5). Revolutionary praxis is the operator that changes \(\omega\).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Ideology critique is a precise map \(\eta\) that reduces superstructure ideas to their base-level generators (T6). The contradiction \(\sigma \neq 0\) between forces and relations of production predicts instability.</p>
+  <h4>Where It Diverges</h4>
+  <p>The formalism is synchronic; Marx's historical dialectic is irreversibly diachronic. The algebra cannot model the one-way arrow of historical time.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2 id="phenomenology">Phenomenology</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div id="husserl" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Edmund Husserl</h3>
+  <p class="zoo-meta">1859–1938 · Phenomenologist</p>
+  <h4>The Position</h4>
+  <p>Phenomenology brackets the natural attitude to study pure structures of intentional consciousness. Every mental act has noetic (act-side) and noematic (content-side) components.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{noematic contents (senses)}\}\), \(\circ\) = intentional synthesis, \(\rho(a,b)\) = noematic overlap (fulfillment measure), \(\sigma\) = the curvature of intentional fulfillment vs. disappointment, \(\nu(a)\) = the empty intention lacking fulfillment for \(a\), \(\eta\) = epoché (bracketing existence), \(\omega\) = time-consciousness (retention-primal impression-protention), \(\deg\) = clarity of givenness (fulfilled &gt; empty &gt; signitive).</p>
+  \[
+    \omega(a) = \langle \text{ret}(a),\, a,\, \text{prot}(a) \rangle \quad \text{(time-consciousness triple)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Intentionality is \(\circ\) with the noema as the right-identity relative to the act (T1). Time-consciousness is \(\omega\) as a triple operator (T7). The epoché is the \(\eta\) that brackets the existential index (T6).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The fulfillment relation is \(\rho\): when \(\rho(a,b)\) is maximal, the empty intention \(a\) is fulfilled by intuition \(b\). This makes evidence a maximum of \(\rho\)—a precise claim about apodictic knowledge.</p>
+  <h4>Where It Diverges</h4>
+  <p>The first-person character of phenomenology resists algebraization; the formalism treats all subjects as equivalent, losing the essential indexical.</p>
+</div>
+
+<div id="heidegger" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Martin Heidegger</h3>
+  <p class="zoo-meta">1889–1976 · Phenomenologist/Existentialist</p>
+  <h4>The Position</h4>
+  <p>Being is not a being; it is the disclosure (Lichtung) in which beings appear. Dasein is the being for whom Being is an issue; authenticity requires owning one's finitude.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{meanings disclosed in a world}\}\), \(\circ\) = hermeneutic synthesis (interpretation), \(\rho(a,b)\) = ontological proximity (how near two meanings are in the clearing), \(\sigma\) = the ontological difference (Being vs. beings as irreducible curvature), \(\nu(a)\) = concealment / Verborgenheit of \(a\), \(\eta\) = Destruktion (dismantling the tradition to retrieve original meaning), \(\omega\) = thrownness-projection (Geworfenheit-Entwurf), \(\deg\) = degree of disclosure (owned vs. fallen).</p>
+  \[
+    \sigma \neq 0 \quad \text{(ontological difference: Being} \neq \text{beings)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The ontological difference is \(\sigma \neq 0\) (T5)—Being cannot be collapsed into any being, including the totality of beings. \(\eta\) = Destruktion is the map that reverses sedimentation (T6). Dasein is the unique self-referential element: \(\omega(\text{Dasein}) \ni \text{Dasein}\) (T7).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Being-in-the-world is the claim that there is no idea outside a context of significance (no decontextualized element of \({\mathcal I}\)). The clearing is the pre-algebraic condition for \({\mathcal I}\) itself.</p>
+  <h4>Where It Diverges</h4>
+  <p>Heidegger insists that Being cannot be mathematized; the formalism performs exactly the kind of "calculative thinking" he opposes. Its value is thus diagnostic, not descriptive.</p>
+</div>
+
+<div id="merleau-ponty" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Maurice Merleau-Ponty</h3>
+  <p class="zoo-meta">1908–1961 · Phenomenologist</p>
+  <h4>The Position</h4>
+  <p>Perception is not a mental representation of an external world but a bodily engagement with it. The body is the zero-point of orientation and the locus of pre-reflective intentionality.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{bodily-motor meanings}\}\), \(\circ\) = motor synthesis (habitual body schema combining skills), \(\rho(a,b)\) = gestural resonance, \(\sigma\) = the curvature of figure-ground (perceiving as structured field), \(\nu(a)\) = the motor failure / breakdown of \(a\), \(\eta\) = thematic reflection (making implicit motor skill explicit), \(\omega\) = habit formation (sedimentation of motor skills), \(\deg\) = degree of sedimentation / automaticity.</p>
+  \[
+    \omega^n(a) \to \text{habit}(a) \quad \text{(motor sedimentation as fixed point)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Habit is the fixed point of \(\omega\) (T7). The body schema is the identity \(e\) relative to motor synthesis \(\circ\) (T1). \(\sigma \neq 0\) captures the irreducibility of figure-ground structure (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The pre-reflective body schema is the monoid identity for motor synthesis; its breakdown (\(\nu\)) corresponds to phantom limb phenomena. \(\omega^n\)-convergence predicts the phenomenology of skill acquisition.</p>
+  <h4>Where It Diverges</h4>
+  <p>The lived body is not a set of elements but an ongoing self-organizing process; the formalism's static carrier set misses the dynamic constitution.</p>
+</div>
+
+<div id="gadamer" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Hans-Georg Gadamer</h3>
+  <p class="zoo-meta">1900–2002 · Hermeneuticist</p>
+  <h4>The Position</h4>
+  <p>Understanding is always situated in tradition; interpretation is a "fusion of horizons" between text and interpreter. The hermeneutic circle is not a problem but the structure of understanding itself.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{meanings within a tradition}\}\), \(\circ\) = horizon fusion (merging of interpretive contexts), \(\rho(a,b)\) = hermeneutic proximity (shared tradition), \(\sigma\) = the curvature of prejudice (fore-structure of understanding), \(\nu(a)\) = the alien horizon challenging \(a\), \(\eta\) = application (Anwendung: applying meaning to the present situation), \(\omega\) = tradition transmission (Wirkungsgeschichte), \(\deg\) = depth of sedimentation in tradition.</p>
+  \[
+    a \circ_H b = \text{fusion}(a, b), \quad \rho(a,b) = |\text{horizon}(a) \cap \text{horizon}(b)|
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Horizon fusion is \(\circ\) (T1). Tradition is \(\omega\)-transmission through history (T7). Prejudice is \(\sigma \neq 0\)—the irreducible curvature that makes understanding possible rather than impossible (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The hermeneutic circle is the claim that \(\circ\) is not free (context-dependent). Gadamer's positive rehabilitation of prejudice is \(\sigma \neq 0\): some curvature is enabling. Application \(\eta\) maps to the present context.</p>
+  <h4>Where It Diverges</h4>
+  <p>The playfulness of the text—the text's claim on the reader—is not a one-way \(\omega\) but a two-way event; the formalism's directed transmission misses this.</p>
+</div>
+
+<div id="ricoeur" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Paul Ricoeur</h3>
+  <p class="zoo-meta">1913–2005 · Hermeneuticist/Phenomenologist</p>
+  <h4>The Position</h4>
+  <p>Narrative is the primary mode of temporal self-understanding; the self is constituted by the stories it tells about itself. Symbol gives rise to thought.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{narrative meanings / symbols}\}\), \(\circ\) = emplotment (configuring events into a narrative), \(\rho(a,b)\) = narrative coherence, \(\sigma\) = the curvature of the hermeneutic arc (explanation ↔ understanding), \(\nu(a)\) = the counter-narrative / distanciation of \(a\), \(\eta\) = appropriation (making the meaning one's own), \(\omega\) = narrative transmission across time, \(\deg\) = narrative integration (episode &lt; emplotment &lt; life narrative).</p>
+  \[
+    \omega(n_1 \circ n_2) = \omega(n_1) \circ \omega(n_2) \quad \text{(narrative transmission is a homomorphism)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Emplotment is \(\circ\) (T1). The hermeneutic arc is the curvature \(\sigma\) between structural explanation and lived understanding (T5). Narrative identity is the fixed point of the \(\omega\)-transmission of one's own story (T7).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The concordance-discordance of narrative is the claim that \(\circ\) is not fully associative—the order of emplotment matters. This makes narrative time non-commutative.</p>
+  <h4>Where It Diverges</h4>
+  <p>The fragility of human identity (<em>self as another</em>, Soi-même comme un autre) involves irreducible alterity that \(\nu\) cannot fully capture.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2 id="post-structuralism">Post-Structuralism</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div id="saussure" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Ferdinand de Saussure</h3>
+  <p class="zoo-meta">1857–1913 · Structural Linguist</p>
+  <h4>The Position</h4>
+  <p>The linguistic sign is arbitrary; language is a system of differences with no positive terms. Meaning is purely relational and synchronic.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{signs} = (\text{signifier}, \text{signified}) \text{ pairs}\}\), \(\circ\) = syntagmatic combination, \(\rho(a,b)\) = paradigmatic opposition (negative, differential), \(\sigma\) = the curvature of the arbitrary relation between signifier and signified, \(\nu(a)\) = the differential opposite of \(a\) in the system, \(\eta\) = commutation test (distinguishing minimal pairs), \(\omega\) = diachronic change (langue evolving), \(\deg\) = syntactic rank in the sentence.</p>
+  \[
+    \rho(a,b) = -\delta_{a,b} + 1 \quad \text{(meaning is differential: } \rho(a,a) = 0\text{)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Meaning is purely relational: \(\rho(a,a) = 0\) (T2). The sign is arbitrary: \(\sigma \neq 0\) for the signifier-signified relation (T5). The system is a monoid under syntagmatic composition (T1).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The differential definition of meaning is an off-diagonal resonance metric—value only between distinct elements. This makes Saussurean linguistics a special case of T2 with a specific \(\rho\).</p>
+  <h4>Where It Diverges</h4>
+  <p>Saussure's system is fundamentally synchronic; the algebra's \(\omega\) introduces diachrony as an afterthought, but the langue/parole distinction is not captured.</p>
+</div>
+
+<div id="derrida" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Jacques Derrida</h3>
+  <p class="zoo-meta">1930–2004 · Deconstructionist</p>
+  <h4>The Position</h4>
+  <p>Meaning is never fully present; it is always deferred and differentiated (différance). Every text harbors contradictions and aporias that deconstruction brings to light.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{textual traces}\}\), \(\circ\) = iterability (repetition-with-difference), \(\rho(a,b)\) = trace-relation (neither identity nor total difference), \(\sigma\) = the curvature of différance (deferral and difference as non-zero permanent curvature), \(\nu(a)\) = the supplement of \(a\) (what \(a\) excludes to constitute itself), \(\eta\) = deconstruction (bringing out the supplement), \(\omega\) = dissemination (scattering of meaning across contexts), \(\deg\) = undefined (Derrida resists hierarchical grading).</p>
+  \[
+    \sigma(a) \neq 0 \quad \forall a \in {\mathcal I} \quad \text{(no presence without trace, no closure without supplement)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>\(\sigma \neq 0\) everywhere (T5): no element is fully present; all are constituted by traces. Iterability means \(\circ\) is the core operation but it always introduces difference (not a strict monoid). \(\omega\) = dissemination makes every transmission a divergence.</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Derrida's claim becomes: the algebra has no zero-curvature elements; the trace is the irreducible non-flatness. This makes deconstruction the proof that \(\sigma = 0\) fails everywhere.</p>
+  <h4>Where It Diverges</h4>
+  <p>Derrida would resist the formalism itself as a form of logocentrism—the attempt to fully presence meaning in a mathematical structure. The algebra instantiates what Derrida deconstructs.</p>
+</div>
+
+<div id="foucault" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Michel Foucault</h3>
+  <p class="zoo-meta">1926–1984 · Genealogist/Archaeologist</p>
+  <h4>The Position</h4>
+  <p>Knowledge and power are inseparable (power/knowledge). Discursive formations define what can be said, thought, and known in a given historical epoch.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{statements (énoncés) in a discursive formation}\}\), \(\circ\) = discursive combination (regulated by episteme), \(\rho(a,b)\) = epistemic coherence (how much \(a\) and \(b\) belong to the same discursive field), \(\sigma\) = the curvature of power/knowledge (how power bends what can be said), \(\nu(a)\) = the excluded / unsayable that defines \(a\), \(\eta\) = archaeological analysis (bringing out the rules of formation), \(\omega\) = genealogical transmission (how discourses are reproduced and transformed), \(\deg\) = discursive authority (centrality in the episteme).</p>
+  \[
+    \text{power}(a) \propto \deg(a) \quad \text{(centrality in discourse = power)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Discursive formations are the monoid \(\circ\) (T1). Power/knowledge is \(\sigma \neq 0\): the curvature of what can be said is not neutral (T5). Genealogy is \(\omega\) unwound: tracking how the current \(\circ\) was historically assembled (T7).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The episteme is a constraint on \(\circ\)—not all compositions are discursively permissible. The excluded (\(\nu\)) that defines each statement is structurally essential.</p>
+  <h4>Where It Diverges</h4>
+  <p>Foucault's analyses are radically historical and local; the formalism implies a stable algebra \({\mathcal I}\), whereas Foucault insists each epoch has a different \({\mathcal I}\).</p>
+</div>
+
+<div id="deleuze" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Gilles Deleuze</h3>
+  <p class="zoo-meta">1925–1995 · Philosopher of Difference/Immanence</p>
+  <h4>The Position</h4>
+  <p>Difference is primary; identity is derivative. Reality is a plane of immanence populated by virtual multiplicities that actualise into individual things through differentiation.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{virtual intensities / multiplicities}\}\), \(\circ\) = differentiation (actualisation of a virtual multiplicity), \(\rho(a,b)\) = intensity difference (not identity but variation), \(\sigma\) = the curvature of the virtual (non-zero everywhere; the virtual is pure difference), \(\nu(a)\) = the de-differentiated / dissolved intensity, \(\eta\) = counter-actualisation (returning to the virtual), \(\omega\) = the process of actualisation, \(\deg\) = intensity level (0 = pure virtual; higher = more actualized).</p>
+  \[
+    \sigma(a) \neq 0 \quad \forall a \in {\mathcal I}_{\text{virtual}}, \quad \deg(a) = 0 \Rightarrow a \text{ is purely virtual}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The virtual is the algebra of pure \(\sigma\)-curvature (T5). Actualisation is \(\omega\): the virtual realises as an actual idea with higher \(\deg\) (T9). Identity is derivative: \(e\) is the residue of differentiation, not its ground.</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The virtual/actual distinction maps to \(\deg = 0\) vs. \(\deg > 0\). Rhizomatic connection (no privileged root) is the claim that \(\circ\) has no canonical generators—all elements are equally generative.</p>
+  <h4>Where It Diverges</h4>
+  <p>Deleuze's philosophy of difference is hostile to any algebra that privileges identity (\(e\)) or stable structure; the monoid axioms represent exactly the "arborescent" thinking he opposes.</p>
+</div>
+
+<div id="bakhtin" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Mikhail Bakhtin</h3>
+  <p class="zoo-meta">1895–1975 · Dialogist</p>
+  <h4>The Position</h4>
+  <p>Language and meaning are irreducibly dialogic; every utterance is addressed to another and anticipates response. The novel is the supreme literary form because it orchestrates multiple unmerged voices.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{utterances as social-dialogic events}\}\), \(\circ\) = dialogic response (utterance \(\circ\) response = dialogic pair), \(\rho(a,b)\) = dialogic resonance (the degree to which \(a\) anticipates and is shaped by \(b\)), \(\sigma\) = the curvature of heteroglossia (the many voices in tension), \(\nu(a)\) = the monologic suppression of voice \(a\), \(\eta\) = polyphony (orchestrating voices without authorial merger), \(\omega\) = intertextual transmission (how utterances carry the traces of past utterances), \(\deg\) = degree of dialogic openness.</p>
+  \[
+    \rho(a,b) = \rho(b,a) \quad \text{(dialogic symmetry: each voice anticipates the other)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Dialogism is the claim that \(\rho\) is symmetric and high-dimensional (T2). The monologic voice is \(\nu\)-suppression; polyphony is \(\eta\) maximising the diversity of voices (T6). Heteroglossia is \(\sigma \neq 0\) (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The chronotope (time-space of a genre) is a specific \(\omega\)-transmission type. \(\rho\)-symmetry distinguishes Bakhtin's dialogism from power-asymmetric theories of communication.</p>
+  <h4>Where It Diverges</h4>
+  <p>The ethical dimension of answerability (being responsible to the other) involves a normative asymmetry that the symmetric \(\rho\) cannot capture.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2 id="analytic">Analytic</h2>
+<!-- ═══════════════════════════════════════════════════════ -->
+
+<div id="frege" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Gottlob Frege</h3>
+  <p class="zoo-meta">1848–1925 · Logicist</p>
+  <h4>The Position</h4>
+  <p>Arithmetic is reducible to pure logic. The sense (Sinn) of an expression determines its reference (Bedeutung) but is not identical to it; two expressions can have the same reference but different senses.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{senses (Sinne)}\}\), \(\circ\) = functional application (sense \(\circ\) argument = resulting sense), \(\rho(a,b)\) = co-reference (\(\rho(a,b) = 1\) if \(a,b\) have the same Bedeutung), \(\sigma\) = the curvature of the sense-reference gap (Hesperus/Phosphorus), \(\nu(a)\) = the negation of the proposition with sense \(a\), \(\eta\) = reference determination (the map Sinn \(\to\) Bedeutung), \(\omega\) = logical inference (Begriffsschrift derivation), \(\deg\) = logical complexity (atomic &lt; molecular &lt; higher-order).</p>
+  \[
+    \eta(\text{``Hesperus''}) = \eta(\text{``Phosphorus''}) = \text{Venus}, \quad \rho(\text{``Hesperus''},\text{``Phosphorus''}) = 1
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Sense is the primary element of \({\mathcal I}\); reference is the value of \(\eta\) (T6). Co-reference is the equivalence relation induced by \(\rho = 1\) (T2). Logical inference is \(\omega\): a formal derivation system (T7).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The sense-reference distinction becomes a fibre-bundle structure: \(\eta\) is the projection, and senses are fibres over references. Different senses over the same reference are elements with \(\rho = 1\) but \(\neq\) in \({\mathcal I}\).</p>
+  <h4>Where It Diverges</h4>
+  <p>Frege's Context Principle (only in sentence context does a word have reference) means \(\circ\) must be holistic; the formalism allows any composition, which is too liberal.</p>
+</div>
+
+<div id="russell" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Bertrand Russell</h3>
+  <p class="zoo-meta">1872–1970 · Logicist/Analytic</p>
+  <h4>The Position</h4>
+  <p>Definite descriptions are not names but quantified expressions. Logical analysis resolves apparent ontological commitments by showing that problematic entities are "incomplete symbols."</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{logical forms / propositional functions}\}\), \(\circ\) = logical conjunction/composition, \(\rho(a,b)\) = implication strength, \(\sigma\) = the curvature of Russell's paradox (the set of all sets as \(\sigma \neq 0\)), \(\nu(a)\) = negation, \(\eta\) = logical analysis (Russell's method of decomposition), \(\omega\) = logical derivation, \(\deg\) = type-theoretic level (individuals &lt; predicates &lt; predicates of predicates).</p>
+  \[
+    \eta(\iota x.\, F(x))(G) = \exists x\bigl(F(x) \wedge \forall y(F(y) \to y=x) \wedge G(x)\bigr)
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Russell's Theory of Descriptions is \(\eta\): it maps apparent names to quantified structures (T6). Type theory is the grading \(\deg\) that prevents Russell's paradox (T9). The paradox is \(\sigma \neq 0\) in an untyped system (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Type theory as grading (T9) explains why the paradox disappears: \(\sigma = 0\) within each type level because the self-referential composition is blocked by \(\deg\).</p>
+  <h4>Where It Diverges</h4>
+  <p>Russell's multiple-relation theory of judgment (abandoned) and his neutral monism are not captured; the formalism assumes \({\mathcal I}\) consists of logical forms, not sensibilia.</p>
+</div>
+
+<div id="wittgenstein-tractatus" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Ludwig Wittgenstein (Tractatus)</h3>
+  <p class="zoo-meta">1889–1951 · Logical Atomist</p>
+  <h4>The Position</h4>
+  <p>The world is the totality of facts; elementary propositions picture atomic facts. Logic takes care of itself; what cannot be said must be shown.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{elementary propositions}\}\), \(\circ\) = truth-functional composition, \(\rho(a,b)\) = pictorial form overlap, \(\sigma = 0\) (the world is logically transparent; all logical facts are tautologies with zero curvature), \(\nu(a) = \neg a\), \(\eta\) = analysis (decomposing molecular propositions to elementary), \(\omega\) = truth-table evaluation, \(\deg\) = truth-functional complexity.</p>
+  \[
+    \sigma(a) = 0 \quad \forall a \in {\mathcal I}_{\text{Tractatus}} \quad \text{(logic is tautological; no genuine curvature)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>The world is flat (\(\sigma = 0\), T5): all logical structure is tautological. Truth-functions are \(\circ\) (T1). Analysis \(\eta\) decomposes every proposition to elementary level (T3). The mystical (ethics, aesthetics) is outside \({\mathcal I}\).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The picture theory is the claim that \(\rho(a, \text{Fact}(a))\) is maximal when the proposition is true—a precise correspondence theory. \(\sigma = 0\) makes explicit the claim that logic adds nothing to the world.</p>
+  <h4>Where It Diverges</h4>
+  <p>The showing/saying distinction—what shows itself but cannot be said—corresponds to what is outside \({\mathcal I}\) but constitutive of it; the formalism has no native way to represent this.</p>
+</div>
+
+<div id="wittgenstein-investigations" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Ludwig Wittgenstein (Investigations)</h3>
+  <p class="zoo-meta">1889–1951 · Ordinary Language</p>
+  <h4>The Position</h4>
+  <p>Meaning is use. Philosophical problems arise from language going on holiday; the task of philosophy is therapeutic—to bring words back to their everyday home.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{language games as practices}\}\), \(\circ\) = language-game combination (different games composing into forms of life), \(\rho(a,b)\) = family resemblance (overlapping criss-crossing similarities), \(\sigma = 0\) for within-game use (each game is flat internally; illusions arise from mixing games), \(\nu(a)\) = the language game that exposes the idle running of \(a\), \(\eta\) = grammatical investigation (describing use), \(\omega\) = teaching/learning (how language games are transmitted), \(\deg\) = undefined (anti-essentialist: no single scale).</p>
+  \[
+    \rho(a,b) = |\{f : f \text{ is a feature shared by } a \text{ and } b\}| \quad \text{(family resemblance)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Meaning is use: there is no element of \({\mathcal I}\) apart from its role in \(\circ\) (T1). Family resemblance is \(\rho\) as an overlap count, not an essence (T2). Philosophy is \(\eta\): reminding us of how words actually work (T6).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Family resemblance becomes a precise \(\rho\)-metric without essential properties. The private language argument is the claim that \({\mathcal I}\) requires a public \(\circ\) to be well-defined—a social condition on the monoid.</p>
+  <h4>Where It Diverges</h4>
+  <p>The anti-theoretical stance of the Investigations directly opposes building a theory; the formalism produces exactly the kind of theory Wittgenstein II opposes.</p>
+</div>
+
+<div id="quine" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Willard Van Orman Quine</h3>
+  <p class="zoo-meta">1908–2000 · Naturalist/Holist</p>
+  <h4>The Position</h4>
+  <p>The unit of empirical significance is the whole of science, not individual statements. Analyticity and the analytic-synthetic distinction are dogmas. Ontology is relative to a theory.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{sentences of a total scientific theory}\}\), \(\circ\) = deductive closure (adding sentences to the web), \(\rho(a,b)\) = degree of mutual dependence in the web of belief, \(\sigma\) = the curvature of underdetermination (multiple theories fitting the same data), \(\nu(a)\) = recalcitrant experience that conflicts with \(a\), \(\eta\) = regimentation (translating into canonical logical notation), \(\omega\) = revision under empirical pressure (web adjustment), \(\deg\) = centrality in the web (logic/math &gt; theoretical &gt; observational).</p>
+  \[
+    \sigma \neq 0 \quad \text{(underdetermination: } \exists\, {\mathcal I}' \neq {\mathcal I},\; \rho({\mathcal I}', \text{data}) = \rho({\mathcal I}, \text{data})\text{)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Holism: every sentence's content depends on all others via \(\rho\) (T2 global). The web of belief is the connected algebra under \(\circ\) (T1). Underdetermination is \(\sigma \neq 0\): multiple total theories are empirically equivalent (T5).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The centrality \(\deg\) gives precise content to Quine's claim that logic and mathematics are more central (higher \(\deg\) = more resistant to revision). Ontological relativity: \({\mathcal I}\) and \({\mathcal I}'\) can be proxy-related while being non-isomorphic.</p>
+  <h4>Where It Diverges</h4>
+  <p>Quine's behaviorism about meaning (meaning is stimulus meaning) is not captured by the algebraic \(\rho\), which is theory-internal.</p>
+</div>
+
+<div id="fodor" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Jerry Fodor</h3>
+  <p class="zoo-meta">1935–2017 · Computational/Representationalist</p>
+  <h4>The Position</h4>
+  <p>Mental representations are the language of thought (Mentalese); cognitive processes are formal operations over syntactically structured representations. Content is determined by causal-informational relations.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{mental representations in Mentalese}\}\), \(\circ\) = syntactic composition (phrase structure), \(\rho(a,b)\) = inferential role (how much \(a\) licenses the same inferences as \(b\)), \(\sigma\) = the curvature of content (non-zero: narrow content \(\neq\) wide content), \(\nu(a)\) = the mental representation incompatible with \(a\), \(\eta\) = computational process (formal symbol manipulation), \(\omega\) = belief revision / inference, \(\deg\) = syntactic complexity (atomic &lt; molecular &lt; propositional attitude).</p>
+  \[
+    \eta(a \circ b) = \eta(a) \circ \eta(b) \quad \text{(compositionality of mental representations)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Compositionality: \(\eta\) is a homomorphism (T6, T1). The language of thought is a free monoid generated by atomic concepts (T1, T3). Content is wide: \(\rho\) tracks causal-informational connections to the world, not just inferential role.</p>
+  <h4>What the Formalism Adds</h4>
+  <p>Fodor's productivity (infinitely many thoughts from finite means) is the free-monoid property of \(\circ\) (T1). The formalism makes explicit that compositionality requires \(\eta\) to be a strict homomorphism—failures of compositionality are failures of T6.</p>
+  <h4>Where It Diverges</h4>
+  <p>The symbol grounding problem—how Mentalese gets its content—requires connecting \({\mathcal I}\) to a causal theory outside the algebra; the formalism cannot host intentionality without such an extension.</p>
+</div>
+
+<div id="brandom" class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+  <h3 class="zoo-name">Robert Brandom</h3>
+  <p class="zoo-meta">1950– · Inferentialist/Pragmatist</p>
+  <h4>The Position</h4>
+  <p>Meaning is inferential role; to understand a concept is to know what inferences it licenses and what commitments entitle one to it. Normative statuses (commitment, entitlement) are constituted by social practices of score-keeping.</p>
+  <h4>The Instantiation</h4>
+  <p>Let \({\mathcal I} = \{\text{deontic statuses: commitments and entitlements}\}\), \(\circ\) = inferential commitment (if committed to \(a\), then committed to \(a \circ b\) by an inference), \(\rho(a,b)\) = inferential proximity (how many steps separate \(a\) and \(b\)), \(\sigma\) = the curvature of incompatibility (non-zero: some pairs of commitments are incompatible), \(\nu(a)\) = the commitment incompatible with \(a\), \(\eta\) = substitution inference (semantic inferential equivalence), \(\omega\) = social score-keeping (attributing and assessing commitments), \(\deg\) = normative complexity (atomic claim &lt; compound &lt; metalinguistic).</p>
+  \[
+    a \vdash_\rho b \iff \rho(a,b) \leq \theta \quad \text{(entitlement: inference within radius } \theta\text{)}
+  \]
+  <h4>Central Claim as Theorem</h4>
+  <p>Inferential role is \(\rho\) (T2). Incompatibility is \(\nu\) and \(\sigma \neq 0\) (T5). Social score-keeping is \(\omega\): a distributed transmission of deontic statuses (T7). Substitution salva veritate is \(\eta\) (T6).</p>
+  <h4>What the Formalism Adds</h4>
+  <p>The material inference (non-logical entailment) is encoded in \(\rho\) directly. This makes the formalism a model of inferentialism in which logical constants are not primitive but are definable from \(\rho\) and \(\nu\).</p>
+  <h4>Where It Diverges</h4>
+  <p>Brandom's normative irreducibility—the claim that social norms cannot be reduced to natural facts—resists the formalism's mathematical naturalism.</p>
+</div>
+
+</main>
+
+<footer class="site-footer"><p>© 2025 Idea Theory · <a href="../about.html">About</a> · <a href="https://github.com/halleyyoung/formalize">GitHub</a></p></footer>
+</body>
+</html>
