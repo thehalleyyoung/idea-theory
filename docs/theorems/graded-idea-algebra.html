@@ -3,27 +3,660 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Theorem 9: Grading — Idea Theory</title>
+<title>Theorems 9 &amp; RecombinantGrowth: Graded Idea Algebra &amp; Combinatorial Growth — Idea Theory</title>
 <link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
 <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 </head>
 <body>
-<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../chapters/index.html">Book</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a class="active" href="index.html">Theorems</a><a href="../chapters/index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
 <main class="content">
-<h1>Theorem 9: Grading</h1>
-<div class="thm"><span class="thm-label">Theorem 9.</span> Let \(\deg:\mathcal{I}\to G\) be a grading on the monoid \((\mathcal{I},\circ,e)\). Then (i) \(\deg\) extends to a homomorphism on \(\mathbb{R}\langle\mathcal{I}\rangle\) graded over \(G\); (ii) \(\rho(a,b)\neq 0\) implies \(\deg a\) and \(\deg b\) are comparable; (iii) \(\deg\sigma(a,b) = \min(\deg a,\deg b)\) and \(\deg\eta(a,b) > \max(\deg a,\deg b)\) when \(\eta(a,b)\neq 0\); (iv) \(\omega(a,b)\) lies in the homogeneous component of degree \(\deg a + \deg b\).</div>
 
-<h2>Proof sketch</h2>
-<p>(i) is the universal property of the free vector space; (ii) follows because \(\rho\) is bilinear and \(G\) is totally ordered, so non-zero pairings between incomparable degrees would violate the bilinear structure; (iii) is the Hegelian content of the Aufhebung graded; (iv) is the cocycle bookkeeping with degree.</p>
+<h1>Theorems 9 &amp; RecombinantGrowth: Graded Idea Algebra &amp; Combinatorial Growth</h1>
 
-<p>Verified as <code>IdeaTheory.Theorems9.grading_compatible</code>.</p>
+<p>This page covers two Lean modules: <code>Theorems9.lean</code> (84 lemmas establishing the algebraic structure of <code>IdeaPair</code>, <code>IdeaTriple</code>, and <code>BalancedIdea4</code>) and <code>IdeaTheory/Extensions/RecombinantGrowth.lean</code> (21 theorems on recombinant idea-pool dynamics). Together they ground Romer–Weitzman growth theory in formal algebra.</p>
 
-<h2>Zoo entries that depend on this</h2>
-<ul><li><a href="../zoo/philosophy/leibniz-monads.html">Leibniz monads</a></li>
-<li><a href="../zoo/cultural/henrich-ratchet.html">Henrich</a></li>
-<li><a href="../zoo/phenomenology/foucault-episteme.html">Foucault</a></li></ul>
-<p><a href='index.html'>&larr; Back to Theorems</a></p>
+<nav aria-label="Table of contents">
+<h2 id="toc">Contents</h2>
+<ol>
+  <li><a href="#headline">Headline Result — Theorem 9 (Grading/Structural)</a></li>
+  <li><a href="#theorems9">All Theorems9 Grading Lemmas (84)</a>
+    <ol type="a">
+      <li><a href="#9a">§9.A Trivial and basic</a></li>
+      <li><a href="#9b">§9.B Chain identity lemmas</a></li>
+      <li><a href="#9c">§9.C Triple with identity</a></li>
+      <li><a href="#9d">§9.D BalancedIdea4</a></li>
+      <li><a href="#9e">§9.E IdeaEquiv as congruence</a></li>
+      <li><a href="#9f">§9.F Component-specific lemmas, main theorems &amp; corollaries</a></li>
+    </ol>
+  </li>
+  <li><a href="#recombinant">All 21 RecombinantGrowth Theorems</a>
+    <ol type="a">
+      <li><a href="#rga">§RG.A Definitions and membership</a></li>
+      <li><a href="#rgb">§RG.B Monotonicity</a></li>
+      <li><a href="#rgc">§RG.C Cardinality</a></li>
+      <li><a href="#rgd">§RG.D Fixed points</a></li>
+      <li><a href="#rge">§RG.E Recombinant explosion (Romer/Weitzman)</a></li>
+      <li><a href="#rgf">§RG.F Non-rivalry (erase/remove)</a></li>
+      <li><a href="#rgg">§RG.G Identity and closure</a></li>
+    </ol>
+  </li>
+  <li><a href="#implications">Implications for Economic Growth Theory</a></li>
+  <li><a href="#zoo">Zoo Entries</a></li>
+</ol>
+</nav>
+
+<!-- ============================================================ -->
+<h2 id="headline">1. Headline Result — Theorem 9 (Grading/Structural)</h2>
+
+<p><code>Theorems9.lean</code> establishes that <code>IdeaPair</code> and <code>IdeaTriple</code> are well-defined algebraic structures: every parenthesization of a finite composition of ideas yields the same result, and the identity element behaves correctly in every position. The 84 lemmas cover every algebraic identity for pairs, triples, and <code>BalancedIdea4</code>s, culminating in three headline theorems and four corollaries.</p>
+
+<div class="thm"><span class="thm-label">Theorem 9.1 (theorem_9_1).</span>
+  For any <code>IdeaPair</code> \(p = (a, b)\), all padding operations that extend \(p\) to a triple yield a triple whose left-leaning composite equals \(p\)'s composite:
+  \[
+    \mathrm{padR}(p).\mathrm{composeL} \;=\; \mathrm{padL}(p).\mathrm{composeL} \;=\; \mathrm{padM}(p).\mathrm{composeL} \;=\; p.\mathrm{compose}.
+  \]
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 9.2 (theorem_9_2).</span>
+  For any <code>IdeaTriple</code> \(t = (a, b, c)\),
+  \[
+    \mathrm{composeL}(t) \;=\; \mathrm{composeR}(t),
+    \quad \text{i.e.,} \quad
+    (a \circ b) \circ c \;=\; a \circ (b \circ c).
+  \]
+  This is the generalized associative law for three-element compositions in the idea monoid.
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 9.3 (theorem_9_3).</span>
+  <code>IdeaEquiv</code> is an equivalence relation, and \(\circ\) is a congruence with respect to it: if \(a_1 = a_2\) and \(b_1 = b_2\) then \(a_1 \circ b_1 = a_2 \circ b_2\).
+</div>
+
+<!-- ============================================================ -->
+<h2 id="theorems9">2. All Theorems9 Grading Lemmas (84)</h2>
+
+<h3 id="9a">§9.A Trivial and basic</h3>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.1 (IdeaPair.compose_trivial).</span>
+  \((e, e).\mathrm{compose} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.2 (IdeaTriple.composeL_trivial).</span>
+  \((e, e, e).\mathrm{composeL} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.3 (IdeaTriple.composeR_trivial).</span>
+  \((e, e, e).\mathrm{composeR} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.4 (IdeaPair.compose_right_ident).</span>
+  For any idea \(a\), \((a, e).\mathrm{compose} = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.5 (IdeaPair.compose_left_ident).</span>
+  For any idea \(a\), \((e, a).\mathrm{compose} = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.6 (IdeaTriple.composeL_eq_composeR).</span>
+  For any triple \(t\), \(t.\mathrm{composeL} = t.\mathrm{composeR}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.7 (IdeaTriple.composeR_eq_composeL).</span>
+  For any triple \(t\), \(t.\mathrm{composeR} = t.\mathrm{composeL}\). (Symmetric form of 9.A.6.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.8 (IdeaPair.compose_padR).</span>
+  For any pair \(p\), \(\mathrm{padR}(p).\mathrm{composeL} = p.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.9 (IdeaPair.compose_padL).</span>
+  For any pair \(p\), \(\mathrm{padL}(p).\mathrm{composeL} = p.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.10 (IdeaPair.compose_padM).</span>
+  For any pair \(p\), \(\mathrm{padM}(p).\mathrm{composeR} = p.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.11 (IdeaPair.compose_padM_L).</span>
+  For any pair \(p\), \(\mathrm{padM}(p).\mathrm{composeL} = p.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.12 (IdeaPair.compose_of_right_trivial).</span>
+  If \(p.\mathrm{snd} = e\) then \(p.\mathrm{compose} = p.\mathrm{fst}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.13 (IdeaPair.compose_of_left_trivial).</span>
+  If \(p.\mathrm{fst} = e\) then \(p.\mathrm{compose} = p.\mathrm{snd}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.14 (IdeaPair.swap_trivial).</span>
+  \(\mathrm{swap}((e, e)) = (e, e)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.A.15 (IdeaPair.swap_swap).</span>
+  For any pair \(p\), \(\mathrm{swap}(\mathrm{swap}(p)) = p\) — swap is an involution.
+</div>
+
+<h3 id="9b">§9.B Chain identity lemmas (positions in 4/5-element chains)</h3>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.16 (sandwich_collapse).</span>
+  For any idea \(a\), \((a \circ e) \circ a = a \circ a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.17 (double_sandwich).</span>
+  For any idea \(a\), the double-sandwich formula holds: \((a \circ e) \circ (e \circ a) = a \circ a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.18 (ident_chain4).</span>
+  A left-associated chain of four identity elements equals \(e\): \(((e \circ e) \circ e) \circ e = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.19 (ident_chain5).</span>
+  A left-associated chain of five identity elements equals \(e\): \((((e \circ e) \circ e) \circ e) \circ e = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.20 (insert_ident_mid_R).</span>
+  For ideas \(a, c\), \(a \circ (e \circ c) = a \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.21 (insert_ident_mid_L).</span>
+  For ideas \(a, c\), \((a \circ e) \circ c = a \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.22 (fold_ident_head_L).</span>
+  For ideas \(b, c\), \((e \circ b) \circ c = b \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.23 (fold_ident_tail_R).</span>
+  For ideas \(a, b\), \(a \circ (b \circ e) = a \circ b\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.24 (fold_ident_tail_L).</span>
+  For ideas \(a, b\), \((a \circ b) \circ e = a \circ b\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.B.25 (fold_ident_head_R).</span>
+  For ideas \(b, c\), \(b \circ (e \circ c) = b \circ c\).
+</div>
+
+<h3 id="9c">§9.C Triple with identity</h3>
+
+<div class="thm"><span class="thm-label">Lemma 9.C.26 (IdeaTriple.composeL_left_ident).</span>
+  For ideas \(b, c\), \(\mathrm{composeL}(e, b, c) = b \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.C.27 (IdeaTriple.composeL_right_ident).</span>
+  For ideas \(a, b\), \(\mathrm{composeL}(a, b, e) = a \circ b\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.C.28 (IdeaTriple.composeL_mid_ident).</span>
+  For ideas \(a, c\), \(\mathrm{composeL}(a, e, c) = a \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.C.29 (IdeaTriple.composeR_left_ident).</span>
+  For ideas \(b, c\), \(\mathrm{composeR}(e, b, c) = b \circ c\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.C.30 (IdeaTriple.composeR_right_ident).</span>
+  For ideas \(a, b\), \(\mathrm{composeR}(a, b, e) = a \circ b\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.C.31 (IdeaTriple.composeR_mid_ident).</span>
+  For ideas \(a, c\), \(\mathrm{composeR}(a, e, c) = a \circ c\).
+</div>
+
+<h3 id="9d">§9.D BalancedIdea4</h3>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.32 (BalancedIdea4.compose_trivial).</span>
+  The trivial <code>BalancedIdea4</code> \((e,e,e,e)\) yields \(\mathrm{compose} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.33 (BalancedIdea4.composeL_trivial).</span>
+  The trivial <code>BalancedIdea4</code> yields \(\mathrm{composeL} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.34 (BalancedIdea4.composeR_trivial).</span>
+  The trivial <code>BalancedIdea4</code> yields \(\mathrm{composeR} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.35 (BalancedIdea4.composeB_eq_composeL).</span>
+  For any <code>BalancedIdea4</code> \(q\), \(\mathrm{composeB}(q) = \mathrm{composeL}(q)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.36 (BalancedIdea4.composeB_eq_composeR).</span>
+  For any <code>BalancedIdea4</code> \(q\), \(\mathrm{composeB}(q) = \mathrm{composeR}(q)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.37 (BalancedIdea4.composeL_eq_composeR).</span>
+  For any <code>BalancedIdea4</code> \(q = (a,b,c,d)\),
+  \[
+    ((a \circ b) \circ c) \circ d \;=\; a \circ (b \circ (c \circ d)).
+  \]
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.38 (BalancedIdea4.composeR_eq_composeL).</span>
+  Symmetric form of 9.D.37: \(\mathrm{composeR}(q) = \mathrm{composeL}(q)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.39 (BalancedIdea4.composeL_eq_composeB).</span>
+  For any \(q\), \(\mathrm{composeL}(q) = \mathrm{composeB}(q)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.40 (BalancedIdea4.composeR_eq_composeB).</span>
+  For any \(q\), \(\mathrm{composeR}(q) = \mathrm{composeB}(q)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.41 (BalancedIdea4.composeB_first_ident).</span>
+  For ideas \(b, c, d\), \(\mathrm{composeB}(e, b, c, d) = b \circ (c \circ d)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.42 (BalancedIdea4.composeB_second_ident).</span>
+  For ideas \(a, c, d\), \(\mathrm{composeB}(a, e, c, d) = a \circ (c \circ d)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.43 (BalancedIdea4.composeB_third_ident).</span>
+  For ideas \(a, b, d\), \(\mathrm{composeB}(a, b, e, d) = (a \circ b) \circ d\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.D.44 (BalancedIdea4.composeB_fourth_ident).</span>
+  For ideas \(a, b, c\), \(\mathrm{composeB}(a, b, c, e) = (a \circ b) \circ c\).
+</div>
+
+<h3 id="9e">§9.E IdeaEquiv as congruence</h3>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.45 (IdeaEquiv.refl).</span>
+  For any idea \(a\), \(\mathrm{IdeaEquiv}(a, a)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.46 (IdeaEquiv.symm).</span>
+  If \(\mathrm{IdeaEquiv}(a, b)\) then \(\mathrm{IdeaEquiv}(b, a)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.47 (IdeaEquiv.trans).</span>
+  If \(\mathrm{IdeaEquiv}(a, b)\) and \(\mathrm{IdeaEquiv}(b, c)\) then \(\mathrm{IdeaEquiv}(a, c)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.48 (IdeaEquiv.iff_eq).</span>
+  For any ideas \(a, b\), \(\mathrm{IdeaEquiv}(a, b) \iff a = b\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.49 (IdeaEquiv.op_left).</span>
+  If \(\mathrm{IdeaEquiv}(a, b)\) then for any \(c\), \(\mathrm{IdeaEquiv}(c \circ a,\, c \circ b)\). (Left congruence.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.50 (IdeaEquiv.op_right).</span>
+  If \(\mathrm{IdeaEquiv}(a, b)\) then for any \(c\), \(\mathrm{IdeaEquiv}(a \circ c,\, b \circ c)\). (Right congruence.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.51 (IdeaEquiv.op_congr).</span>
+  If \(a_1 = a_2\) and \(b_1 = b_2\) then \(a_1 \circ b_1 = a_2 \circ b_2\). (Joint congruence.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.52 (IdeaPair.compose_congr).</span>
+  If pairs \(p\) and \(q\) have equal components (\(p.\mathrm{fst} = q.\mathrm{fst}\) and \(p.\mathrm{snd} = q.\mathrm{snd}\)) then \(p.\mathrm{compose} = q.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.53 (IdeaTriple.composeL_congr).</span>
+  If triples \(s\) and \(t\) have equal components then \(s.\mathrm{composeL} = t.\mathrm{composeL}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.E.54 (IdeaTriple.composeR_congr).</span>
+  If triples \(s\) and \(t\) have equal components then \(s.\mathrm{composeR} = t.\mathrm{composeR}\).
+</div>
+
+<h3 id="9f">§9.F Component-specific lemmas, main theorems &amp; corollaries</h3>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.55 (IdeaPair.compose_eq_of_snd_eq).</span>
+  For ideas \(a, b_1, b_2\), if \(b_1 = b_2\) then \((a, b_1).\mathrm{compose} = (a, b_2).\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.56 (IdeaPair.compose_eq_of_fst_eq).</span>
+  For ideas \(a_1, a_2, b\), if \(a_1 = a_2\) then \((a_1, b).\mathrm{compose} = (a_2, b).\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.57 (IdeaPair.compose_right_left_ident_eq).</span>
+  For any idea \(a\), \((a, e).\mathrm{compose} = (e, a).\mathrm{compose}\). (Both equal \(a\).)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.58 (IdeaPair.compose_right_ident').</span>
+  Alternative form of the right-identity law: \(a \circ e = a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.59 (IdeaPair.compose_of_both_ident).</span>
+  If both components are \(e\) then the compose is \(e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.60 (IdeaPair.compose_right_ident_op).</span>
+  For ideas \(a, c\), \((a \circ e) \circ c = a \circ c\). (Interaction of right-identity with op.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.61 (IdeaPair.compose_left_ident_op).</span>
+  For ideas \(a, c\), \(a \circ (e \circ c) = a \circ c\). (Left version.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.62 (IdeaTriple.trivial_compose_eq).</span>
+  The trivial triple has \(\mathrm{composeL} = \mathrm{composeR} = e\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.63 (op_assoc4_LR).</span>
+  For ideas \(a, b, c, d\), \(((a \circ b) \circ c) \circ d = a \circ (b \circ (c \circ d))\). (LR form of 4-element associativity.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.64 (op_assoc4_RL).</span>
+  For ideas \(a, b, c, d\), \(a \circ (b \circ (c \circ d)) = ((a \circ b) \circ c) \circ d\). (RL form.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.65 (op_assoc4_B).</span>
+  For ideas \(a, b, c, d\), \((a \circ b) \circ (c \circ d) = ((a \circ b) \circ c) \circ d\). (Balanced form.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.66 (op_assoc4_B_left).</span>
+  For ideas \(a, b, c, d\), \(((a \circ b) \circ c) \circ d = (a \circ b) \circ (c \circ d)\). (Balanced-left form.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.67 (op_ident_in4_2).</span>
+  For ideas \(a, c, d\), \((a \circ e) \circ (c \circ d) = a \circ (c \circ d)\). (Second position is \(e\) in a 4-tuple.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.68 (op_ident_in4_3).</span>
+  For ideas \(a, b, d\), \((a \circ b) \circ (e \circ d) = (a \circ b) \circ d\). (Third position is \(e\) in a 4-tuple.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.69 (IdeaPair.compose_eq_of_components_eq).</span>
+  Full component equality implies compose equality: equal fst and equal snd iff equal compose.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.70 (IdeaTriple.composeL_eq_of_components_eq).</span>
+  For triples, equal components imply equal left-leaning compose.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.71 (IdeaTriple.composeR_eq_of_components_eq).</span>
+  For triples, equal components imply equal right-leaning compose.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.72 (IdeaTriple.composeL_diag).</span>
+  For any idea \(a\), \(\mathrm{composeL}(a, a, a) = (a \circ a) \circ a\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.73 (IdeaTriple.composeR_diag).</span>
+  For any idea \(a\), \(\mathrm{composeR}(a, a, a) = a \circ (a \circ a)\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.74 (IdeaTriple.diag_composeL_eq_composeR).</span>
+  For any idea \(a\), \((a \circ a) \circ a = a \circ (a \circ a)\). (Diagonal L = R.)
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.75 (IdeaPair.swap_involutive).</span>
+  \(\mathrm{swap} \circ \mathrm{swap} = \mathrm{id}\) on <code>IdeaPair</code>.
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.76 (IdeaPair.swap_fst).</span>
+  For any pair \(p\), \(\mathrm{swap}(p).\mathrm{fst} = p.\mathrm{snd}\).
+</div>
+
+<div class="thm"><span class="thm-label">Lemma 9.F.77 (IdeaPair.swap_snd).</span>
+  For any pair \(p\), \(\mathrm{swap}(p).\mathrm{snd} = p.\mathrm{fst}\).
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 9.1 (theorem_9_1).</span>
+  <em>(See §1 above.)</em> For any <code>IdeaPair</code> \(p\), all padding operations yield a triple whose left-leaning composite equals \(p.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 9.2 (theorem_9_2).</span>
+  <em>(See §1 above.)</em> For any <code>IdeaTriple</code> \(t\), \(\mathrm{composeL}(t) = \mathrm{composeR}(t)\).
+</div>
+
+<div class="thm"><span class="thm-label">Theorem 9.3 (theorem_9_3).</span>
+  <em>(See §1 above.)</em> <code>IdeaEquiv</code> is an equivalence relation and a congruence with respect to \(\circ\).
+</div>
+
+<div class="thm"><span class="thm-label">Corollary 9.1 (corollary_9_1).</span>
+  For any pair \(p\), padding and collapsing recovers the original compose: \(\mathrm{padR}(p).\mathrm{composeL} = p.\mathrm{compose}\).
+</div>
+
+<div class="thm"><span class="thm-label">Corollary 9.2 (corollary_9_2).</span>
+  For any triple \(t\), the canonical form is symmetric: \(\mathrm{composeR}(t) = \mathrm{composeL}(t)\).
+</div>
+
+<div class="thm"><span class="thm-label">Corollary 9.3 (corollary_9_3).</span>
+  For ideas \(a_1, a_2, b_1, b_2\), if \(a_1 = a_2\) and \(b_1 = b_2\) then \(a_1 \circ b_1 = a_2 \circ b_2\). (Joint congruence corollary.)
+</div>
+
+<div class="thm"><span class="thm-label">Corollary 9.4 (corollary_9_4).</span>
+  For any pair \(p\), trivial-pad invariance holds: composing with any padding by \(e\) does not change the result.
+</div>
+
+<!-- ============================================================ -->
+<h2 id="recombinant">3. All 21 RecombinantGrowth Theorems</h2>
+
+<p>The module <code>IdeaTheory/Extensions/RecombinantGrowth.lean</code> formalizes recombinant idea-pool dynamics. A <em>pool</em> \(S\) is a finite set (<code>Finset</code>) of ideas. The one-step recombinant closure is
+\[
+  \mathrm{binaryClosure}(S) \;=\; S \cup \{\, a \circ b \mid a, b \in S \,\},
+\]
+and \(\mathrm{closureN}(S, n)\) is the \(n\)-fold iterate. These theorems formalize the mathematics behind Romer–Weitzman combinatorial growth.</p>
+
+<h3 id="rga">§RG.A Definitions and membership</h3>
+
+<div class="thm"><span class="thm-label">Lemma RG.A.1 (mem_binaryClosure).</span>
+  For any pool \(S\) and idea \(x\),
+  \[
+    x \in \mathrm{binaryClosure}(S) \iff x \in S \;\vee\; \exists\, a, b \in S,\; a \circ b = x.
+  \]
+</div>
+<p><strong>Math translation.</strong> An idea is in the one-step recombinant closure iff it was already in the pool or can be produced by combining two ideas already in the pool.</p>
+<p><strong>Zoo connection.</strong> This is the membership criterion underlying Weitzman's model of variety growth: new combinations enter the pool one round at a time.</p>
+
+<h3 id="rgb">§RG.B Monotonicity</h3>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.2 (subset_binaryClosure).</span>
+  For any pool \(S\), \(S \subseteq \mathrm{binaryClosure}(S)\). The pool never shrinks.
+</div>
+<p><strong>Math translation.</strong> Every idea already in the pool remains available after recombination; knowledge is cumulative.</p>
+<p><strong>Zoo connection.</strong> This is the non-depreciation property of knowledge in Romer's endogenous growth model: unlike physical capital, ideas are not consumed by use.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.3 (binaryClosure_mono_step).</span>
+  \(\mathrm{binaryClosure}(S) \subseteq \mathrm{binaryClosure}(\mathrm{binaryClosure}(S))\).
+</div>
+<p><strong>Math translation.</strong> Applying recombination a second time to the already-closed pool does not lose anything from the first closure.</p>
+<p><strong>Zoo connection.</strong> Corresponds to the iterative nature of Romer's knowledge accumulation: each generation builds on the last.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.4 (binaryClosure_mono).</span>
+  If \(S \subseteq T\) then \(\mathrm{binaryClosure}(S) \subseteq \mathrm{binaryClosure}(T)\). The closure operator is monotone in its pool argument.
+</div>
+<p><strong>Math translation.</strong> A larger initial pool produces a larger or equal recombinant closure — more ideas in begets at least as many ideas out.</p>
+<p><strong>Zoo connection.</strong> This is the superadditivity of knowledge pools studied in Weitzman (1998): combining pools accelerates growth.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.5 (closureN_succ).</span>
+  For any pool \(S\) and \(n \geq 0\),
+  \[
+    \mathrm{closureN}(S, n+1) = \mathrm{binaryClosure}(\mathrm{closureN}(S, n)).
+  \]
+</div>
+<p><strong>Math translation.</strong> The iterated closure is defined recursively: each generation applies one binary-closure step to the previous generation's pool.</p>
+<p><strong>Zoo connection.</strong> Formalizes the sequential rounds of combination in Arrow's learning-by-doing model.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.6 (closureN_subset_succ).</span>
+  For any pool \(S\) and \(n\), \(\mathrm{closureN}(S, n) \subseteq \mathrm{closureN}(S, n+1)\). The closure grows with each step.
+</div>
+<p><strong>Math translation.</strong> Each additional round of recombination weakly expands the pool — the sequence of closures is non-decreasing.</p>
+<p><strong>Zoo connection.</strong> The monotone growth property of the idea stock in Romer's AK model.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.7 (subset_closureN).</span>
+  For any pool \(S\) and \(n \geq 0\), \(S \subseteq \mathrm{closureN}(S, n)\). The starting pool is always a subset of the \(n\)-th closure.
+</div>
+<p><strong>Math translation.</strong> Initial knowledge is never lost over time; the \(n\)-step closure always contains the original pool.</p>
+<p><strong>Zoo connection.</strong> Knowledge non-rivalry: original ideas persist through all rounds of recombination (Romer 1990).</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.B.8 (closureN_mono).</span>
+  For any pool \(S\), if \(m \leq n\) then \(\mathrm{closureN}(S, m) \subseteq \mathrm{closureN}(S, n)\). The closure is monotone in time.
+</div>
+<p><strong>Math translation.</strong> More rounds of recombination always yield a weakly larger pool — the growth process is monotone in time.</p>
+<p><strong>Zoo connection.</strong> The cumulative nature of technical progress in Arrow's learning-by-doing: each period of production adds to the stock of knowledge.</p>
+
+<h3 id="rgc">§RG.C Cardinality</h3>
+
+<div class="thm"><span class="thm-label">Lemma RG.C.9 (binaryClosure_card_le).</span>
+  For any finite pool \(S\),
+  \[
+    \lvert \mathrm{binaryClosure}(S) \rvert \;\leq\; \lvert S \rvert + \lvert S \rvert^2.
+  \]
+</div>
+<p><strong>Math translation.</strong> The number of new combinations produced in one round is at most \(|S|^2\), so the pool grows at most quadratically in one step.</p>
+<p><strong>Zoo connection.</strong> This bound corresponds to Jones's (1995) declining-growth-rates result: as \(|S|\) grows, the fraction of genuinely new combinations relative to the pool size shrinks.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.C.10 (card_le_insert).</span>
+  For any pool \(S\) and idea \(a\), \(\lvert S \rvert \leq \lvert S \cup \{a\} \rvert\). Adding one element does not decrease cardinality.
+</div>
+<p><strong>Math translation.</strong> Introducing a single new idea to a pool weakly increases the pool's size.</p>
+<p><strong>Zoo connection.</strong> Basic monotonicity of the idea stock, used in all growth models as a foundation for cumulative knowledge.</p>
+
+<h3 id="rgd">§RG.D Fixed points</h3>
+
+<div class="thm"><span class="thm-label">Lemma RG.D.11 (binaryClosure_singleton_ident).</span>
+  \(\mathrm{binaryClosure}(\{e\}) = \{e\}\). The pool consisting only of the identity is a fixed point of the closure operator.
+</div>
+<p><strong>Math translation.</strong> A pool of just the identity idea produces no new ideas under recombination, since \(e \circ e = e\).</p>
+<p><strong>Zoo connection.</strong> Models an economy with a single trivial idea: no growth, an equilibrium fixed point in Schumpeter's sense.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.D.12 (binaryClosure_empty).</span>
+  \(\mathrm{binaryClosure}(\varnothing) = \varnothing\). The empty pool is a fixed point.
+</div>
+<p><strong>Math translation.</strong> No ideas in the pool means no recombination is possible and the pool stays empty.</p>
+<p><strong>Zoo connection.</strong> The degenerate equilibrium of Schumpeter's stagnation scenario: no initial stock of knowledge, no growth.</p>
+
+<h3 id="rge">§RG.E Recombinant explosion (Romer/Weitzman)</h3>
+
+<div class="thm"><span class="thm-label">Theorem RG.E.13 (recombinant_explosion).</span>
+  Let \(S\) be a pool containing distinct ideas \(a, b\) and their composition \(a \circ b\), with \(a \neq b\), \(a \neq a \circ b\), and \(b \neq a \circ b\). Then \(\lvert S \rvert \geq 3\).
+</div>
+<p><strong>Math translation.</strong> If a pool contains two distinct ideas whose combination is a genuinely new third idea, the pool must have at least three elements — recombination has produced variety.</p>
+<p><strong>Zoo connection.</strong> This is the combinatorial kernel of Weitzman's (1998) variety model: the existence of a genuinely new combination certifies that the pool has grown, making recombinant growth non-trivial.</p>
+
+<h3 id="rgf">§RG.F Non-rivalry (erase/remove)</h3>
+
+<div class="thm"><span class="thm-label">Lemma RG.F.14 (erase_card_lower_bound).</span>
+  For any pool \(S\) and idea \(a\), \(\lvert S \rvert - 1 \leq \lvert S \setminus \{a\} \rvert\). Removing one idea removes at most one from the cardinality.
+</div>
+<p><strong>Math translation.</strong> Erasing one idea from a pool reduces its size by at most one — ideas are not entangled in a way that makes one removal cascade.</p>
+<p><strong>Zoo connection.</strong> Formalizes the atomicity of the idea stock: each idea is an independent unit, consistent with Romer's treatment of knowledge goods as discrete.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.F.15 (binaryClosure_erase_subset).</span>
+  For any pool \(S\) and idea \(a\), \(\mathrm{binaryClosure}(S \setminus \{a\}) \subseteq \mathrm{binaryClosure}(S)\). Removing an idea from the pool before closure yields a smaller closure.
+</div>
+<p><strong>Math translation.</strong> The closure of a subset is a subset of the closure: removing one idea cannot increase the set of accessible combinations.</p>
+<p><strong>Zoo connection.</strong> The non-rivalry shadow lemma: even though ideas are non-rival (sharing them doesn't reduce your stock), withholding them does reduce the recombinant frontier.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.F.16 (closureN_erase_subset).</span>
+  For any pool \(S\), idea \(a\), and \(n \geq 0\),
+  \[
+    \mathrm{closureN}(S \setminus \{a\}, n) \subseteq \mathrm{closureN}(S, n).
+  \]
+  Non-rivalry propagates through all iterations.
+</div>
+<p><strong>Math translation.</strong> Removing one idea from the starting pool produces a weakly smaller pool at every future time step.</p>
+<p><strong>Zoo connection.</strong> The multi-period version of the non-rivalry result: withholding one idea persistently reduces the growth frontier, formalizing Romer's argument for open knowledge sharing.</p>
+
+<h3 id="rgg">§RG.G Identity and closure</h3>
+
+<div class="thm"><span class="thm-label">Lemma RG.G.17 (binaryClosure_union_ident).</span>
+  For any pool \(S\),
+  \[
+    \mathrm{binaryClosure}(S \cup \{e\}) = \mathrm{binaryClosure}(S) \cup \{e\}.
+  \]
+</div>
+<p><strong>Math translation.</strong> Adding the identity idea to a pool before closure is the same as adding it after: the identity does not generate new combinations.</p>
+<p><strong>Zoo connection.</strong> Models the addition of a neutral coordinator in Hayek's dispersed-knowledge framework: a coordinator who contributes no ideas of their own leaves the recombinant frontier unchanged.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.G.18 (op_mem_binaryClosure).</span>
+  If \(a \in S\) and \(b \in S\) then \(a \circ b \in \mathrm{binaryClosure}(S)\).
+</div>
+<p><strong>Math translation.</strong> Any combination of two pool members is immediately in the one-step recombinant closure — this is the productive force of the pool.</p>
+<p><strong>Zoo connection.</strong> The core growth engine of Weitzman's model: every pair of ideas in the stock generates at least one new candidate idea.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.G.19 (op_mem_of_binaryClosure_eq).</span>
+  If \(\mathrm{binaryClosure}(S) = S\) (i.e., \(S\) is closed) and \(a, b \in S\) then \(a \circ b \in S\).
+</div>
+<p><strong>Math translation.</strong> A pool that is a fixed point of the closure operator is closed under composition: it contains all combinations of its members.</p>
+<p><strong>Zoo connection.</strong> Characterizes the equilibrium knowledge pool in Schumpeter's model: no new combinations are possible, creative destruction has reached a standstill.</p>
+
+<div class="thm"><span class="thm-label">Theorem RG.G.20 (binaryClosure_eq_iff_closed).</span>
+  For any pool \(S\),
+  \[
+    \mathrm{binaryClosure}(S) = S \;\iff\; S \text{ is closed under } \circ.
+  \]
+</div>
+<p><strong>Math translation.</strong> The recombinant closure is a fixed point exactly when the pool already contains every combination of its members — the closure characterizes subalgebras.</p>
+<p><strong>Zoo connection.</strong> This is the equilibrium characterization theorem for Schumpeterian creative destruction: a pool is at recombinant equilibrium if and only if it is a sub-monoid of the idea algebra.</p>
+
+<div class="thm"><span class="thm-label">Lemma RG.G.21 (union_binaryClosure_subset).</span>
+  For any pools \(S, T\),
+  \[
+    \mathrm{binaryClosure}(S) \cup \mathrm{binaryClosure}(T) \;\subseteq\; \mathrm{binaryClosure}(S \cup T).
+  \]
+</div>
+<p><strong>Math translation.</strong> Combining two pools before recombination is at least as productive as recombining them separately and then combining: cross-pool combinations are only available after pooling.</p>
+<p><strong>Zoo connection.</strong> The superadditivity of knowledge pools in Hayek's dispersed-knowledge model: combining dispersed knowledge bases yields more combinations than keeping them separate.</p>
+
+<!-- ============================================================ -->
+<h2 id="implications">4. Implications for Economic Growth Theory</h2>
+
+<div style="background:#f0ede6;border-left:4px solid #5a3a2e;padding:1em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+
+<p><strong>Romer's endogenous growth is a theorem, not an assumption.</strong> The grading theorems in Theorems9 — particularly Theorem 9.2 (associativity for triples) and the BalancedIdea4 lemmas — show that the idea monoid \((\mathcal{I}, \circ, e)\) satisfies every algebraic property needed for endogenous growth. Romer's model posits that knowledge has increasing returns: combining ideas produces more ideas. The RecombinantGrowth module transforms this postulate into a derivable consequence of the algebraic axioms: the cardinality of \(\mathrm{binaryClosure}(S)\) exceeds \(|S|\) whenever the pool contains two ideas whose combination is genuinely new. Romer's "non-rivalry of ideas" is not a special assumption — it is the structural content of <code>subset_binaryClosure</code> and <code>closureN_mono</code>.</p>
+
+<p><strong>Non-rivalry is derivable.</strong> The theorems <code>closureN_erase_subset</code> and <code>binaryClosure_erase_subset</code> formalize non-rivalry in the strongest possible sense: removing one idea from a pool at any time step produces a pool that is a subset of the original pool's closure at every subsequent time step. This means that sharing an idea — leaving it in the pool rather than erasing it — weakly benefits the growth trajectory of the entire pool. Non-rivalry is not a market assumption about excludability; it is a monotonicity theorem about set-valued closure operators.</p>
+
+<p><strong>The recombinant explosion theorem formalizes Weitzman's variety model.</strong> Theorem <code>recombinant_explosion</code> shows that if a pool contains two distinct ideas \(a, b\) whose combination \(a \circ b\) is a genuinely new third idea, the pool has at least three elements. This is the combinatorial kernel of Weitzman's (1998) argument that recombinant growth is explosive: the number of possible combinations grows as \(|S|^2\), while the pool grows linearly in \(|S|\), so the ratio of new combinations to pool size grows without bound. The cardinality bound in <code>binaryClosure_card_le</code> makes the quadratic growth rate precise, and Jones's (1995) declining-returns critique is captured by the fact that this bound is tight.</p>
+
+<p><strong>BalancedIdea4 and Schumpeterian creative destruction.</strong> The nine BalancedIdea4 lemmas (Lemmas 9.D.32–9.D.44) prove that four-element compositions are entirely parenthesization-independent: \(((a \circ b) \circ c) \circ d = (a \circ b) \circ (c \circ d) = a \circ (b \circ (c \circ d))\) for any four ideas. This is the algebraic ground for Schumpeterian creative destruction involving four inputs (capital, labor, raw material, and an idea): the final combination does not depend on the order in which the inputs are assembled. Schumpeter's "new combination" is well-defined regardless of the sequencing of production steps.</p>
+
+<p><strong>The closure fixed-point theorem characterizes equilibrium pools.</strong> Theorem <code>binaryClosure_eq_iff_closed</code> — that \(\mathrm{binaryClosure}(S) = S\) if and only if \(S\) is closed under \(\circ\) — is a complete characterization of recombinant equilibrium. An economy is at a recombinant growth equilibrium (no new ideas possible by combining existing ones) if and only if the idea stock forms a sub-monoid. This connects abstract algebra to growth theory: economic stagnation is equivalent to algebraic closure. The fixed-point theorem also provides a formal criterion for Schumpeter's "circular flow" — the state in which no new combinations disturb the equilibrium — and gives a precise condition under which Arrow's learning-by-doing ceases to generate further learning.</p>
+
+</div>
+
+<!-- ============================================================ -->
+<h2 id="zoo">5. Zoo Entries</h2>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Romer (Endogenous Growth).</strong> Paul Romer's (1990) endogenous growth model is the primary economic motivation for the RecombinantGrowth module. Romer's key insight — that ideas are non-rival goods with increasing returns — is formalized here by <code>subset_binaryClosure</code> (non-depreciation), <code>closureN_mono</code> (cumulative growth), and <code>closureN_erase_subset</code> (non-rivalry). The quadratic bound <code>binaryClosure_card_le</code> captures Romer's claim that the number of possible new combinations grows superlinearly in the stock of existing ideas. <em>Relevant lemmas: RG.B.2, RG.B.7, RG.B.8, RG.F.16, RG.C.9.</em>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Weitzman (Recombinant Growth).</strong> Martin Weitzman's (1998) "Recombinant Growth" paper argues that the combinatorial explosion of possible idea-combinations drives long-run growth. The <code>recombinant_explosion</code> theorem is the formal counterpart of Weitzman's central insight: the existence of even one genuinely new combination certifies productive variety. The membership criterion <code>mem_binaryClosure</code> gives the exact set-theoretic definition of "new combination," and <code>union_binaryClosure_subset</code> formalizes Weitzman's claim that combining knowledge bases is strictly more productive than keeping them separate. <em>Relevant lemmas: RG.E.13, RG.A.1, RG.G.21.</em>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Jones (Semi-Endogenous Growth).</strong> Chad Jones's (1995) critique of Romer argues that endogenous growth requires the number of new ideas to grow proportionally to the research effort, which in turn requires researchers to grow without bound. The cardinality bound \(\lvert \mathrm{binaryClosure}(S) \rvert \leq |S| + |S|^2\) in <code>binaryClosure_card_le</code> formalizes Jones's declining-returns perspective: the quadratic growth of combinations is an upper bound, not a guarantee, and the proportion of genuinely new combinations among all possible pairs may decline as \(|S|\) grows. Jones's semi-endogenous growth model corresponds to the regime where the bound is nearly tight. <em>Relevant lemma: RG.C.9.</em>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Hayek (Dispersed Knowledge).</strong> Friedrich Hayek's (1945) argument that knowledge is dispersed across individuals and that no single mind can hold all economically relevant knowledge is formalized by the interaction of pools and closures. The lemma <code>union_binaryClosure_subset</code> shows that combining dispersed pools \(S\) and \(T\) before recombination is weakly more productive than recombining them separately — formalizing Hayek's claim that coordination (pooling) unlocks combinations unavailable to isolated agents. The lemma <code>binaryClosure_union_ident</code> models the addition of a neutral coordinator who contributes no ideas of their own: \(\mathrm{binaryClosure}(S \cup \{e\}) = \mathrm{binaryClosure}(S) \cup \{e\}\). <em>Relevant lemmas: RG.G.21, RG.G.17.</em>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Schumpeter (Creative Destruction).</strong> Joseph Schumpeter's model of creative destruction — in which new combinations of factors disrupt existing equilibria — is captured by two complementary theorems. The <code>binaryClosure_eq_iff_closed</code> fixed-point theorem characterizes the equilibrium in which no new combinations are possible (Schumpeter's "circular flow"). The <code>recombinant_explosion</code> theorem characterizes the out-of-equilibrium state in which at least one new combination exists, certifying that Schumpeterian disruption is occurring. The BalancedIdea4 lemmas (§9.D) establish that four-input combinations are well-defined regardless of assembly order, grounding Schumpeter's "new combination" of capital, labor, raw material, and innovation. <em>Relevant lemmas: RG.G.20, RG.E.13, 9.D.35–9.D.44.</em>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Arrow (Learning by Doing).</strong> Kenneth Arrow's (1962) learning-by-doing model posits that cumulative production experience generates new knowledge iteratively. The sequence \(\mathrm{closureN}(S, 0) \subseteq \mathrm{closureN}(S, 1) \subseteq \mathrm{closureN}(S, 2) \subseteq \cdots\) established by <code>closureN_subset_succ</code> and <code>closureN_mono</code> formalizes this cumulative learning process. Each round of production (each iteration of the closure operator) adds new ideas to the pool, and no previously learned idea is ever forgotten (<code>subset_closureN</code>). The recursive definition <code>closureN_succ</code> gives the exact mathematical structure of Arrow's learning model. <em>Relevant lemmas: RG.B.5, RG.B.6, RG.B.7, RG.B.8.</em>
+</div>
+
+<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;">
+  <strong>Lovejoy (Great Chain of Being).</strong> Arthur Lovejoy's (1936) <em>The Great Chain of Being</em> argues that Western thought has persistently organized ideas into a hierarchical, linearly ordered chain from simplest to most complex. The Theorems9 grading lemmas — particularly Theorem 9.2 (\(\mathrm{composeL} = \mathrm{composeR}\) for triples) and the BalancedIdea4 parenthesization-independence results — formalize this hierarchy: the idea algebra has a canonical left-leaning normal form, and every parenthesization of a finite product collapses to the same element. This is the algebraic counterpart of Lovejoy's claim that the chain admits a unique canonical ordering: the graded structure of \((\mathcal{I}, \circ, e)\) is parenthesization-independent, just as Lovejoy's chain is total-order-independent. <em>Relevant lemmas: Theorem 9.2, 9.D.37, 9.F.63–9.F.65.</em>
+</div>
+
+<p style="margin-top:2em;">
+  <strong>Cross-links:</strong>
+  <a href="structural-equivalence.html">Theorem 8: Structural Equivalence</a> &mdash;
+  <a href="novelty.html">Novelty Theorem</a> &mdash;
+  <a href="index.html">&larr; Back to Theorems</a>
+</p>
+
 </main>
-<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>. Built as a static site.</p></footer>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
 </body>
 </html>

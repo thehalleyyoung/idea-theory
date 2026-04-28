@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 9: Cognitive Science of Concepts, Reformalized — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.chapter-nav{display:flex;justify-content:space-between;margin:2em 0 1em;padding:.6em 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:Inter,sans-serif;font-size:.9rem;}
+.chapter-nav a{color:var(--accent);border-bottom:none;}
+.section-toc{background:var(--accent-soft);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;}
+.section-toc h3{margin:0 0 .5em;font-size:1rem;}
+.section-toc ol{margin:0;padding-left:1.4em;}
+.epigraph{border-left:3px solid var(--accent);padding:.4em 1em;margin:1.5em 0;font-style:italic;color:var(--muted);}
+.epigraph cite{display:block;margin-top:.4em;font-style:normal;font-size:.9em;}
+.proof{margin:.6em 0 1em;padding:.4em 1em .4em 1.2em;border-left:2px solid var(--rule);}
+.proof-label{font-style:italic;font-weight:600;}
+.thm,.defn,.cor,.lemma,.prop,.remark,.example{border-left:3px solid var(--accent);background:#fff;padding:.5em 1em;margin:1em 0;border-radius:0 4px 4px 0;}
+.remark{border-left-color:var(--muted);background:var(--accent-soft);}
+.example{border-left-color:#5a7a5a;background:#f5f9f5;}
+.label{font-family:Inter,sans-serif;font-weight:700;font-size:.9rem;color:var(--accent);margin-right:.4em;}
+.remark .label{color:var(--muted);}
+.example .label{color:#5a7a5a;}
+.zoo-entry{border:1px solid var(--rule);border-radius:6px;padding:.8em 1.2em;margin:1.2em 0;background:var(--accent-soft);}
+.zoo-entry h4{margin:.1em 0 .4em;font-size:1rem;color:var(--accent);}
+.key-theorems{background:var(--accent-soft);border:1px solid var(--accent);border-radius:6px;padding:1em 1.4em;margin:1.5em 0;}
+.key-theorems h3{margin:0 0 .6em;font-size:1rem;color:var(--accent);}
+.theory-section{border-top:2px solid var(--rule);padding-top:.8em;margin-top:2em;}
+.status-box{border-left:3px solid #5a7a5a;background:#f5f9f5;padding:.5em 1em;margin:.8em 0;border-radius:0 4px 4px 0;}
+.status-box .label{color:#5a7a5a;}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a class="active" href="index.html">Book</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content">
+
+<div class="chapter-nav">
+  <a href="ch08.html">← Ch. 8: Philosophy</a>
+  <a href="ch10.html">Ch. 10: Meaning Games →</a>
+</div>
+
+<h1>Chapter 9: Cognitive Science of Concepts, Reformalized</h1>
+
+<div class="epigraph">
+  <p>"The mind is not a single instrument but a workshop of instruments; each theory of the concept is, on close inspection, a description of one of its tools."</p>
+</div>
+
+<p>The cognitive science of concepts is a notoriously fractious discipline. Definitional, prototype, theory-theoretic, exemplar, perceptual-symbolic, language-of-thought, embodied, conceptual-space, distributed, tensor-binding, and transformer-based accounts each insist on their own ontology of what a concept <em>is</em>. The thesis of this chapter is that the idea algebra \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) is not a fifteenth competitor but a <em>translation manual</em>: every position can be reread as a coherent restriction or specialization of the formalism.</p>
+
+<p>Throughout this chapter we work inside a fixed idea algebra satisfying the foundational theorems of <a href="ch01.html">Chapter 1</a>. We write \(V(\mathcal{I})\) for the free \(\mathbb{R}\)-vector space on the carrier \(\mathcal{I}\) and extend \(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\) bilinearly (T2). Each section concludes with a <strong>Status</strong> clause naming the foundational theorem that underwrites the position. Cross-references to zoo entries appear at <a href="../zoo/science.html">../zoo/science.html</a>.</p>
+
+<div class="key-theorems">
+  <h3>Key Results of Chapter 9</h3>
+  <ul>
+    <li><strong>Cor. 9.1</strong> (Crispness) — On the Boolean sub-monoid: \(\sigma=\wedge\), \(\nu=\eta=0\), \(\omega\equiv 0\).</li>
+    <li><strong>Cor. 9.2</strong> (Prototype typicality maximizer) — \(\tau_C\) is the unique linear functional maximized at \(\pi_C\) up to scale; conjugation-invariant.</li>
+    <li><strong>Cor. 9.3</strong> (Sub-algebraic inheritance) — A domain theory is itself an idea sub-algebra (T1 + T8).</li>
+    <li><strong>Cor. 9.4</strong> (Conjugation-coherence of ad-hoc categories) — \(\sim_g\) is an equivalence; its quotient inherits the bilinear pairing \(\rho_g\).</li>
+    <li><strong>Cor. 9.5</strong> (LOT atomicity is a freeness condition) — \(\omega|_{\mathcal{I}_L}\equiv 0\) on a free sub-monoid.</li>
+    <li><strong>Cor. 9.6</strong> (Systematicity from bilinearity) — Any bilinear \(\rho\) plus free relational sub-monoid yields systematicity.</li>
+    <li><strong>Cor. 9.7</strong> (Blend uniqueness) — \(\eta(a,b)\) is unique mod \(\ker\rho\); iterated blends form a 2-cocycle chain.</li>
+    <li><strong>Cor. 9.8</strong> (Cross-domain \(\rho\) as systematic mapping) — A conceptual metaphor extends uniquely to a graded vector-space homomorphism.</li>
+    <li><strong>Cor. 9.9</strong> (Profiling as Aufhebung projection) — \(\sigma(\ell,\Phi_F)\) is unique mod \(\ker\rho\) and varies with \(\ell\) within a frame.</li>
+    <li><strong>Cor. 9.10</strong> (Gärdenfors convex regions stable under reweighting) — Conjugation preserves convexity and centroids.</li>
+    <li><strong>Cor. 9.11</strong> (Tensor algebra is a model of idea algebra).</li>
+    <li><strong>Cor. 9.12</strong> (HRR \(\rho\)-preserving compositional operator) — Circular convolution preserves \(\rho\) with \(O(1/\sqrt{n})\) noise.</li>
+    <li><strong>Cor. 9.13</strong> (Analogy as conjugation in \(V(\mathcal{I})\)).</li>
+    <li><strong>Cor. 9.14</strong> (Attention as learned non-symmetric \(\rho\)) — In-context learning is conjugation.</li>
+    <li><strong>Thm. 9.1</strong> (Layered idea-algebra architecture) — All fifteen positions are restrictions of \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\).</li>
+  </ul>
+</div>
+
+<div class="section-toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#orientation">Orientation</a></li>
+    <li><a href="#classical">The classical (definitional) theory</a></li>
+    <li><a href="#rosch">Rosch: prototype theory</a></li>
+    <li><a href="#theorytheory">Murphy &amp; Medin: theory-theory</a></li>
+    <li><a href="#barsalou">Barsalou: perceptual symbols and ad-hoc categories</a></li>
+    <li><a href="#lot">Fodor: Language of Thought</a></li>
+    <li><a href="#systematicity">Fodor &amp; Pylyshyn: systematicity</a></li>
+    <li><a href="#blending">Fauconnier &amp; Turner: conceptual blending</a></li>
+    <li><a href="#lakoff">Lakoff: conceptual metaphor</a></li>
+    <li><a href="#fillmore">Fillmore: frame semantics</a></li>
+    <li><a href="#gardenfors">Gärdenfors: conceptual spaces</a></li>
+    <li><a href="#smolensky">Smolensky: tensor product variable binding</a></li>
+    <li><a href="#plate">Plate: holographic reduced representations</a></li>
+    <li><a href="#mikolov">Mikolov / GloVe: word embeddings</a></li>
+    <li><a href="#transformers">Transformers as latent ideas</a></li>
+    <li><a href="#unification">A unifying picture</a></li>
+    <li><a href="#coda">Coda</a></li>
+  </ol>
+</div>
+
+<!-- ====================================================== -->
+<section id="orientation">
+<h2>§1. Orientation</h2>
+
+<p>The strategy of the chapter is uniform. Each position is presented in three movements: (1) the original claim is restated faithfully with citations; (2) the position is translated into the operators of the idea algebra; (3) the formal status is fixed by naming the foundational theorem or proving a small corollary. The taxonomy that emerges is not a hierarchy of right and wrong views; it is a stratification of a common algebraic object.</p>
+
+<p>When a position distinguishes a sub-monoid \(\mathcal{I}_C\subseteq\mathcal{I}\) closed under \(\circ\), the restriction
+\((\mathcal{I}_C,\circ,e,\rho|_C,\sigma|_C,\nu|_C,\eta|_C,\omega|_C,\deg|_C)\)
+is again an idea algebra; its existence and equivalence type are governed by T8 (Structural Equivalence).</p>
+</section>
+
+<!-- ====================================================== -->
+<section id="classical" class="theory-section">
+<h2>§2. The classical (definitional) theory</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#classical">Classical / Definitional Theory</a></h4>
+  <p>Traceable through Aristotle, Frege, and mid-twentieth-century psychology: a concept is a <em>definition</em>, a finite list of necessary and jointly sufficient features. Categorization is crisp set membership (Locke 1690; Fodor 1975).</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Fix a finite feature set \(F\subseteq\mathcal{I}\) and impose idempotence (\(f\circ f=f\)) and commutativity (\(f\circ g=g\circ f\)) for \(f,g\in F\). This presents the sub-monoid as the free Boolean meet sub-monoid \(\mathsf{Meet}(F)\cong 2^F\). A classical concept is a homomorphism \(c:\mathsf{Meet}(F)\to\{0,1\}\) given by an upward-closed filter: \(a\) falls under \(c\) iff \(\sigma(a,d_c)=d_c\) for some characteristic conjunction \(d_c\in\mathsf{Meet}(F)\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.1</span> (Crispness). On \(\mathsf{Meet}(F)\) with \(\rho_{\mathrm{cl}}(a,b)=\mathbf{1}[a\leq b]\), the resonance pairing is \(\{0,1\}\)-valued and the Aufhebung decomposition collapses to \(\sigma(a,b)=a\wedge b\), \(\nu(a,b)=0\), \(\eta(a,b)=0\). The cocycle \(\omega\equiv 0\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof sketch.</span> Idempotence makes \(\circ=\wedge\), hence \(\eta(a,b)=0\); commutativity kills any antisymmetric component, so \(\nu=0\); uniqueness mod \(\ker\rho\) from T3 then forces \(\sigma=a\wedge b\). The cocycle vanishes by T4 because the valuation \(v(a)=|a|\) on the Boolean lattice is already a homomorphism. □
+</div>
+
+<p>The empirical failures of the classical theory—typicality gradients, borderline cases, family resemblance—are precisely the failure modes of a model in which \(\rho\) is forced to be \(\{0,1\}\)-valued and \(\eta\) vanishes.</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> The classical theory is the restriction of the formalism to the Boolean sub-monoid generated by a finite feature set; structural collapse follows from Cor. 9.1 (T1 + T3 + T4).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="rosch" class="theory-section">
+<h2>§3. Rosch: prototype theory</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#rosch">Rosch (1973, 1975)</a></h4>
+  <p>Natural categories are organized around <em>prototypes</em>: best examples that compress statistical regularities. Typicality is graded, reaction-time-correlated, and not recoverable from any classical definition.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Let \(C\subseteq\mathcal{I}\) be a finite category with empirical weights \(w:C\to\mathbb{R}_{>0}\) summing to 1. Define the <em>prototype</em> of \(C\) as the \(\rho\)-centroid in \(V(\mathcal{I})\):
+\[\pi_C\;:=\;\sum_{a\in C}w(a)\,a\;\in\;V(\mathcal{I}).\]
+The <em>typicality</em> of \(a\in C\) is \(\tau_C(a):=\rho(a,\pi_C)/\sqrt{\rho(\pi_C,\pi_C)}\). Categorization of a fresh idea \(x\) is by maximum resonance: \(\arg\max_C\rho(x,\pi_C)\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.2</span> (Prototype typicality maximizer). Within the affine hull of \(C\), the function \(\tau_C\) is the unique linear functional that attains its \(C\)-maximum at \(\pi_C\) up to scale, and is preserved under conjugation by an invertible idea \(g\): \(\tau_{gCg^{-1}}(g\circ a\circ g^{-1})=\tau_C(a)\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> By T2, \(\rho\) extends uniquely as a bilinear form, so \(a\mapsto\rho(a,\pi_C)\) is linear and is maximized over the simplex \(\mathrm{conv}(C)\) at the centroid. T6 (Conjugation) gives \(\rho(g\circ a\circ g^{-1},g\circ b\circ g^{-1})=\rho(a,b)\), hence the conjugacy invariance. □
+</div>
+
+<p>Failures of prototype theory—asymmetric similarity, contextual flexibility—are the predicted residue when \(\rho\) is non-symmetric (curvature \(\kappa\neq 0\), Chapter 5).</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> Prototype theory is the bilinear-extension reading of \(\rho\), underwritten by T2 and Cor. 9.2. The formalism additionally predicts Tversky-style asymmetric similarity as a curvature phenomenon.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="theorytheory" class="theory-section">
+<h2>§4. Murphy &amp; Medin: theory-theory</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#theorytheory">Murphy &amp; Medin (1985)</a></h4>
+  <p>The "coherence" of a concept cannot be explained by similarity to a prototype or stored exemplars. Concepts cohere because they are embedded in tacit <em>theories</em>: domain-specific causal-explanatory schemata.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> A <em>domain theory</em> \(T\) over a sub-monoid \(\mathcal{I}_T\subseteq\mathcal{I}\) is a triple \((\mathcal{I}_T,\eta_T,\Phi_T)\) where \(\mathcal{I}_T\) is closed under \(\circ\), \(\eta_T\) is the restriction of the elevation operator, and \(\Phi_T\subseteq\mathcal{I}_T\) is a set of theory-internal axioms. The theory is <em>coherent</em> on input \(a,b\in\mathcal{I}_T\) when
+\[\eta_T(a,b)\;\in\;\langle\Phi_T\rangle_\circ.\]
+Cross-domain composition \(a\in\mathcal{I}_T,\;b\in\mathcal{I}_{T'}\) generically lifts \(\eta(a,b)\) out of both sub-monoids, predicting the felt incoherence of category-mistakes.</p>
+
+<div class="cor">
+<span class="label">Corollary 9.3</span> (Sub-algebraic inheritance). A domain theory \(T\) is itself an idea sub-algebra: the operators \(\rho_T,\sigma_T,\nu_T,\eta_T,\omega_T,\deg_T\) obtained by restriction satisfy the axioms of Chapter 1 on \(\mathcal{I}_T\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Closure of \(\mathcal{I}_T\) under \(\circ\) ensures T1 transfers. The remaining structure is preserved because each operator is defined pointwise on inputs in \(\mathcal{I}_T\), and T8 (Structural Equivalence) guarantees the restricted tuple is again an idea algebra up to isomorphism. □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> Theory-theory is the doctrine that conceptual processing is local to a sub-algebra; Cor. 9.3 (T1 + T8) makes the locality precise.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="barsalou" class="theory-section">
+<h2>§5. Barsalou: perceptual symbols and ad-hoc categories</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#barsalou">Barsalou (1983, 1999)</a></h4>
+  <p>Barsalou argued that concepts are <em>perceptual symbol systems</em>: simulators built from sensorimotor records. People fluently form "ad-hoc categories" such as <em>things to take from a burning house</em> that are constructed on the fly to serve a goal.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Ad-hoc categories are <em>transient quotient classes</em>. Given a goal-context idea \(g\in\mathcal{I}\), define
+\[a\sim_g b\quad\Leftrightarrow\quad\rho(g\circ a\circ g^{-1},e)=\rho(g\circ b\circ g^{-1},e).\]
+The ad-hoc category \([a]_g\) is the equivalence class. Perceptual symbols are generators of a sub-monoid \(\mathcal{I}_P\) in which \(\rho\) is realized by sensorimotor similarity; the simulator that runs a perceptual symbol \(p\) on context \(c\) is \(\eta(p,c)\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.4</span> (Conjugation-coherence of ad-hoc categories). For any invertible \(g\in\mathcal{I}\), the relation \(\sim_g\) is an equivalence on \(\mathcal{I}\) and its quotient inherits the bilinear pairing \(\rho_g([a],[b])=\rho(g\circ a\circ g^{-1},g\circ b\circ g^{-1})\), well-defined modulo \(\ker\rho\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Reflexivity, symmetry, and transitivity follow from equality on \(\mathbb{R}\). T6 (Conjugation) makes \(a\mapsto g\circ a\circ g^{-1}\) an inner automorphism preserving \(\rho\), so well-definedness of \(\rho_g\) on classes follows by the standard quotient argument modulo \(\ker\rho\). □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> Perceptual symbols are sub-monoid generators; ad-hoc categories are quotients by a context-conjugated resonance kernel, guaranteed by T6 and Cor. 9.4.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="lot" class="theory-section">
+<h2>§6. Fodor: Language of Thought</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#lot">Fodor (1975)</a></h4>
+  <p>Thinking requires a combinatorial, syntactically structured medium: a <em>Language of Thought</em> (LOT). Mental atoms are concept-words; combination is governed by formal rules; productivity and systematicity follow from the freeness of the resulting structure.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Identify LOT atoms with a generating set \(G\subseteq\mathcal{I}\) such that
+\[\Phi:\mathsf{FreeMon}(G)\;\xrightarrow{\cong}\;\langle G\rangle_\circ.\]
+<em>Productivity</em> is \(\Phi\) being surjective onto a thinker's entertainable ideas; <em>compositionality</em> is \(\Phi\) being well-defined; <em>systematicity</em> is \(\rho\) respecting the bilinear structure inherited from \(V(G)\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.5</span> (LOT atomicity is a freeness condition). A sub-monoid \(\mathcal{I}_L\subseteq\mathcal{I}\) admits a LOT presentation iff every element of \(\mathcal{I}_L\) has a unique factorization into \(G\)-atoms up to \(e\). In that case \(\omega|_{\mathcal{I}_L}\equiv 0\) on the cohomological abelian group \(A=\mathbb{Z}\langle G\rangle\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Existence and uniqueness of factorization is the universal property of \(\mathsf{FreeMon}(G)\). T4 then gives \(\omega(a,b)=v(a\circ b)-v(a)-v(b)\) where \(v\) counts atoms; this is identically zero on a free monoid since the count of atoms is additive over concatenation. □
+</div>
+
+<p>LOT is the limit case in which all conceptual emergence is syntactic and none is semantic: \(\eta=0\) at the level of atoms. Most post-Fodorian complaints—polysemy, lexical creativity, live metaphor—demand that \(\eta\) be non-zero.</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> Fodor's atomism is the freeness of the generated sub-monoid; Cor. 9.5 (T1 + T4) gives the precise algebraic content.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="systematicity" class="theory-section">
+<h2>§7. Fodor &amp; Pylyshyn: systematicity</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#systematicity">Fodor &amp; Pylyshyn (1988)</a></h4>
+  <p>Any agent that can think <em>John loves Mary</em> can also think <em>Mary loves John</em>; a connectionist system that fails this generalization fails to explain cognition. Systematicity, productivity, and inferential coherence form an inseparable triad.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Let \(G\) be a LOT generating set (§6), with a binding sub-monoid \(B\subseteq G\) of relational atoms. Bilinearity of \(\rho\) on \(V(\mathcal{I})\) delivers systematicity:
+\[\rho\bigl(r\circ(a_1\circ a_2),\;r\circ(a_2\circ a_1)\bigr)=\rho(r,r)\cdot\rho(a_1\circ a_2,a_2\circ a_1),\]
+provided \(\rho\) factors through \(\circ\) on the relational layer.</p>
+
+<div class="cor">
+<span class="label">Corollary 9.6</span> (Systematicity from bilinearity). If \(\rho\) extends bilinearly (T2) and the relational layer is a free sub-monoid (T1 + Cor. 9.5), then for every \(r,s\in B\) and every \(a_1,\ldots,a_k\) in the argument layer, every permutation \(r(a_{\pi(1)},\ldots,a_{\pi(k)})\) is an element of \(\mathcal{I}\) with the same dimension and computable resonance.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> The free sub-monoid contains all monomials in the generators; bilinearity then makes the resonance with any other monomial well-defined. The argument-permutation is itself a monomial. □
+</div>
+
+<p>The systematicity argument, far from refuting connectionist or algebraic semantics, becomes a <em>theorem</em> once the formalism includes a bilinear \(\rho\). Modern distributed systems—including transformers—satisfy bilinearity by construction.</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> Systematicity is Cor. 9.6, a direct corollary of T1 and T2.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="blending" class="theory-section">
+<h2>§8. Fauconnier &amp; Turner: conceptual blending</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#blending">Fauconnier &amp; Turner (2002)</a></h4>
+  <p>Human imagination constructs <em>blended mental spaces</em> in which selected structure from two or more input spaces is projected into a novel space that acquires <em>emergent structure</em>. A "land yacht" is a car that inherits land travel and yacht-like luxury, producing emergent inferences absent from either input.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> A mental space is an idea \(a\in\mathcal{I}\). A blend of inputs \(a,b\) is exactly the elevation component:
+\[\mathrm{Blend}(a,b):=\eta(a,b),\]
+with the preserved structure \(\sigma(a,b)\) playing the role of the "generic space" and the negated structure \(\nu(a,b)\) playing the role of clashes that the blend resolves. T3 (Aufhebung Decomposition) is, in cognitive-scientific terms, the existence and uniqueness of the blend up to resonance equivalence.</p>
+
+<div class="cor">
+<span class="label">Corollary 9.7</span> (Blend uniqueness). For any inputs \(a,b\in\mathcal{I}\) the blend \(\eta(a,b)\) is unique modulo \(\ker\rho\). Iterated blends form a 2-cocycle chain whose obstruction is exactly \(\omega(a,b)\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Uniqueness modulo \(\ker\rho\) is T3. Iterating \(\mathrm{Blend}(\mathrm{Blend}(a,b),c)\) versus \(\mathrm{Blend}(a,\mathrm{Blend}(b,c))\) yields a discrepancy controlled by
+\[\omega(a,b\circ c)-\omega(a\circ b,c)+\omega(b,c)-\omega(a,b),\]
+which vanishes by the cocycle identity (T4). □
+</div>
+
+<p>The \(\omega(a,b)\) measures exactly how much new content is added; the chain identity guarantees that iterated blends do not accumulate spurious structure.</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> Blending is the elevation operator \(\eta\) supplied by T3; emergent inferences are the cocycle \(\omega\) of T4; Cor. 9.7 packages these into existence and chain-coherence of blends.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="lakoff" class="theory-section">
+<h2>§9. Lakoff: conceptual metaphor</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#lakoff">Lakoff &amp; Johnson (1980)</a></h4>
+  <p>Abstract concepts are systematically structured by metaphorical mappings from concrete source domains: <em>argument is war</em>, <em>time is money</em>, <em>theories are buildings</em>. The mappings preserve image schemas and yield productive new inferences in the target.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Let \(S,T\subseteq\mathcal{I}\) be source and target sub-algebras (Cor. 9.3). A <em>conceptual metaphor</em> is a partial graded monoid morphism \(M:S\rightharpoonup T\) such that
+\[\rho_T(M(a),M(b))=\lambda_M\,\rho_S(a,b)\quad\text{for some }\lambda_M\in\mathbb{R}_{>0}.\]
+The metaphor is <em>productive</em> when \(M(a\circ b)=M(a)\circ M(b)\) wherever defined. Image schemas are the \(\sigma\)-invariants of \(M\): \(\sigma_T(M(a),M(b))=M(\sigma_S(a,b))\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.8</span> (Cross-domain \(\rho\) as systematic mapping). Equation above together with the morphism property of \(M\) implies that \(M\) extends uniquely to a graded vector-space homomorphism \(V(S)\to V(T)\) that is a similarity, preserving the bilinear shadow of all higher-order structure. The cocycle transports as \(\omega_T(M(a),M(b))=M_*\omega_S(a,b)\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Bilinear extension (T2) and uniqueness of the Aufhebung decomposition modulo \(\ker\rho\) (T3) make any morphism preserving \(\rho\) up to scale automatically preserve \(\sigma\) on inputs in its domain. T4's normalized 2-cocycle property is preserved by any monoid map that intertwines the valuations. □
+</div>
+
+<p>The asymmetry of metaphor—one can say "her argument collapsed" but not "her building was refuted"—is the report that \(M:\mathit{building}\to\mathit{argument}\) preserves \(\rho\) in one direction only; the curvature \(\kappa\) is non-zero and blocks a two-sided morphism.</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> Conceptual metaphor is a partial graded morphism between sub-algebras preserving \(\rho\) up to scale; Cor. 9.8 is its corollary status from T2, T3, and T9.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="fillmore" class="theory-section">
+<h2>§10. Fillmore: frame semantics</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#fillmore">Fillmore (1982)</a></h4>
+  <p>Lexical meaning is anchored in <em>frames</em>: structured background scenes that supply roles, fillers, and inferences. To understand <em>buy</em> is to access the commercial transaction frame. Lexical units evoke the frame; <em>profiling</em> selects which role is foregrounded.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> A <em>frame</em> is a sub-monoid \(\mathcal{I}_F=\langle L_F\rangle_\circ\) generated by a finite set \(L_F\subseteq\mathcal{I}\) of lexical units, equipped with a finite role set \(R_F=\{r_1,\ldots,r_n\}\subseteq\mathcal{I}\) and role-binding axioms \(r_i\circ f=f\circ r_i\) for \(f\in L_F\). <em>Profiling</em> is the \(\sigma\)-projection: profiling lexical unit \(\ell\) in frame \(F\) produces \(\sigma(\ell,\Phi_F)\) where \(\Phi_F=\bigcirc_i r_i\). Frame inheritance corresponds to nesting of sub-monoids.</p>
+
+<div class="cor">
+<span class="label">Corollary 9.9</span> (Profiling as Aufhebung projection). For each \(\ell\in L_F\) the profiling \(\sigma(\ell,\Phi_F)\) is uniquely defined modulo \(\ker\rho\) and varies with \(\ell\) within a single frame. The grading \(\deg\) restricts to \(\mathcal{I}_F\) and assigns each frame element a degree summing the degrees of its constituent roles and lexical units.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> T3 supplies uniqueness of \(\sigma\) modulo \(\ker\rho\). T9 extends \(\deg\) as a \(G\)-grading compatible with \(\circ\) on every sub-monoid; commuting roles ensure additivity on the frame. □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> A frame is a sub-monoid (T1); profiling is \(\sigma\)-projection (T3); the degree of a profiled element is extracted via T9—packaged as Cor. 9.9.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="gardenfors" class="theory-section">
+<h2>§11. Gärdenfors: conceptual spaces</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#gardenfors">Gärdenfors (2000)</a></h4>
+  <p>Concepts are <em>convex regions</em> in a multidimensional <em>conceptual space</em> whose quality dimensions are anchored in perception. Categories are convex; prototypes are centroids; similarity is inverse distance.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Pass to the free \(\mathbb{R}\)-vector space \(V(\mathcal{I})\). A <em>quality dimension</em> is a \(\rho\)-orthogonal one-dimensional subspace \(D_i\subseteq V(\mathcal{I})\). A <em>conceptual space</em> of dimension \(n\) is the orthogonal direct sum \(V_n=\bigoplus_{i=1}^n D_i\) with the restriction of \(\rho\) to \(V_n\) assumed positive-definite. A <em>concept</em> is a convex subset \(C\subseteq V_n\). The \(\rho\)-induced metric is
+\[d_\rho(x,y):=\sqrt{\rho(x-y,x-y)},\]
+which is a genuine metric by positive-definiteness of \(\rho|_{V_n}\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.10</span> (Convex regions stable under composition-respecting reweighting). Let \(C\subseteq V_n\) be convex, \(g\in\mathcal{I}\) invertible. Then \(g\circ C\circ g^{-1}:=\{g\circ x\circ g^{-1}:x\in C\}\) is convex in \(g\circ V_n\circ g^{-1}\), and the prototype satisfies \(\pi_{gCg^{-1}}=g\circ\pi_C\circ g^{-1}\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Conjugation by \(g\) is a linear isomorphism on \(V(\mathcal{I})\) (T6) and linear maps preserve convexity and centroids. □
+</div>
+
+<p>The algebra extends Gärdenfors's geometry to the non-symmetric and non-positive cases: where conceptual-space theory must locate asymmetric similarity outside the geometry, the algebra puts asymmetry inside, in the curvature \(\kappa\).</p>
+
+<div class="status-box">
+  <span class="label">Status.</span> Gärdenfors's convex-region thesis is the positive-definite, orthogonal-direct-sum specialization of \(\rho\) on \(V(\mathcal{I})\), with conjugation invariance from Cor. 9.10 (T2 and T6).
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="smolensky" class="theory-section">
+<h2>§12. Smolensky: tensor product variable binding</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#smolensky">Smolensky (1990)</a></h4>
+  <p>Smolensky introduced <em>tensor product representations</em> as a means of giving connectionist networks a combinatorial syntax: a structured object is a sum of role/filler tensor products \(\sum_i f_i\otimes r_i\).</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Realize \(\mathcal{I}\) as a sub-monoid of the tensor algebra \(T(V)=\bigoplus_{k\geq 0}V^{\otimes k}\) over a vector space \(V\) of fillers and roles. Set \(a\circ b:=a\otimes b\) with \(e=1\in V^{\otimes 0}\). Resonance is the natural inner product \(\rho(a,b):=\langle a,b\rangle_{T(V)}\). The Aufhebung decomposition reads as: \(\sigma(a,b)=\) symmetrization, \(\nu(a,b)=\) antisymmetrization, \(\eta(a,b)=\) irreducible higher-tensor remainder.</p>
+
+<div class="cor">
+<span class="label">Corollary 9.11</span> (Tensor algebra is a model of the idea algebra). The tuple \((T(V),\otimes,1,\langle\cdot,\cdot\rangle,\sigma,\nu,\eta,\omega,\mathrm{rank})\) satisfies the foundational axioms; in particular \(\omega\) is the rank-difference cocycle and is normalized.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Associativity of \(\otimes\) and the unit law for \(1\) are standard. Bilinearity of \(\langle\cdot,\cdot\rangle\) extends to \(T(V)\) by orthogonal direct sum. The Aufhebung pieces are the standard sym/antisym/remainder decomposition. The cocycle \(\omega(a,b)=\mathrm{rank}(a\otimes b)-\mathrm{rank}(a)-\mathrm{rank}(b)=0\) on pure tensors, recovering normalization. □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> The tensor algebra \(T(V)\) is an explicit model of the idea algebra; Cor. 9.11 is a transparent application of T1–4. The cost (exponential growth of dimension) is the predicted cost of refusing \(\omega\) to take values outside the trivial abelian group.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="plate" class="theory-section">
+<h2>§13. Plate: holographic reduced representations</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#plate">Plate (1995)</a></h4>
+  <p>Holographic Reduced Representations (HRRs) address the dimensional explosion of tensor products: bind by <em>circular convolution</em> \(\circledast\) and unbind by circular correlation. Dimension is preserved; binding is approximate but rich.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> For random-phase vectors \(a,b\in\mathbb{R}^n\), circular convolution realizes \(\circ=\circledast\) with resonance \(\rho(a\circledast b,c\circledast d)=\rho(a,c)\rho(b,d)+O(1/n)\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.12</span> (\(\rho\)-preserving compositional operator). Circular convolution gives a (commutative, associative) realization of \(\circ\) on \(\mathbb{R}^n\) for which \(\rho\) is asymptotically preserved with \(O(1/\sqrt{n})\) noise. The cocycle \(\omega\) is the residual \(\rho(a\circ b,\,c\circ d)-\rho(a,c)\rho(b,d)\), valued in \(\mathbb{R}\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Commutativity and associativity of \(\circledast\) are standard. The expected-value identity is the classical HRR result from independence of random phases. The cocycle interpretation follows from T4 by reading the residual as the obstruction to multiplicativity of \(\rho\). □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> Plate's HRR is a fixed-dimension realization of \(\circ\) and \(\rho\) where compositional preservation is approximate; Cor. 9.12 (T2 + T4) names the cocycle that records the approximation error. Biological cognition—itself bandwidth-bounded—should exhibit a structurally similar noise floor.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="mikolov" class="theory-section">
+<h2>§14. Mikolov / GloVe: word embeddings</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#mikolov">Mikolov (2013) / Pennington GloVe (2014)</a></h4>
+  <p>Word vectors learned from large corpora encode semantic similarity in cosine angles and semantic relations in linear differences:
+  \[\mathbf{v}(\mathit{king})-\mathbf{v}(\mathit{man})+\mathbf{v}(\mathit{woman})\approx\mathbf{v}(\mathit{queen}).\]</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> Let \(V_W\subseteq V(\mathcal{I})\) be the linear subspace spanned by a vocabulary \(W\subseteq\mathcal{I}\) embedded by a learned map \(\mathbf{v}:W\to\mathbb{R}^d\). The analogy \(\mathit{king}-\mathit{man}+\mathit{woman}=\mathit{queen}\) is the statement that the gender relation acts by a <em>conjugation</em> in the free vector space:
+\[\mathbf{v}(\mathit{queen})=\mathbf{v}(\mathit{king})+\bigl(\mathbf{v}(\mathit{woman})-\mathbf{v}(\mathit{man})\bigr),\]
+which is the linearization of the inner-automorphism action \(g\circ(\cdot)\circ g^{-1}\) for appropriate \(g\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.13</span> (Analogy as conjugation in \(V(\mathcal{I})\)). On the subspace where \(\rho\) is symmetric and positive-definite, conjugation by an invertible idea \(g\) acts as a translation in the linearization \(V_W\). Word-embedding analogy "\(a:b::c:d\)" is then the identity \(\mathbf{v}(d)=\mathbf{v}(c)+\mathbf{v}(b)-\mathbf{v}(a)\), recoverable as the projection of an exact conjugation onto \(V_W\).
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> By T6, conjugation by an invertible \(g\) is an inner automorphism preserving \(\rho\). Linearizing the multiplicative group action on \(V(\mathcal{I})\) around the identity yields an additive Lie-algebra action, i.e.\ translation. Restricting to \(V_W\) gives the embedding identity. □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> Cosine similarity is a symmetric specialization of \(\rho\); analogy is the linear shadow of conjugation (T6); Cor. 9.13. Failures of the analogy reflect the fact that \(\rho\) is not symmetric in general: the linearization is only a first-order approximation.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="transformers" class="theory-section">
+<h2>§15. Transformers as latent ideas</h2>
+
+<div class="zoo-entry">
+  <h4>Zoo entry — <a href="../zoo/science.html#transformers">Vaswani (2017) / Brown GPT-3 (2020)</a></h4>
+  <p>The Transformer architecture updates token representations by repeated attention blocks. In-context learning is the empirical observation that, given a few examples in the prompt, the network executes a new task without parameter updates.</p>
+</div>
+
+<p><span class="label">Formal embedding.</span> The (un-normalized) attention map is a learned, asymmetric bilinear form
+\[\rho_{\mathrm{att}}(x_i,x_j):=\frac{q_i^\top k_j}{\sqrt{d}},\]
+i.e.\ a non-symmetric resonance pairing on the latent idea space spanned by the token activations. The output update is the resonance-weighted composition
+\[x_i':=x_i\circ_{\mathrm{att}}\Bigl(\textstyle\sum_j\mathrm{softmax}_j(\rho_{\mathrm{att}}(x_i,x_j))\,v_j\Bigr).\]
+In-context learning is on-the-fly conjugation: the prompt prefix \(g_{\mathrm{ctx}}\) acts as an invertible context idea, and the attention machinery computes \(g_{\mathrm{ctx}}\circ x\circ g_{\mathrm{ctx}}^{-1}\) for each downstream token \(x\).</p>
+
+<div class="cor">
+<span class="label">Corollary 9.14</span> (Attention as learned non-symmetric \(\rho\)). The attention bilinear form \(\rho_{\mathrm{att}}\) is a non-symmetric specialization of \(\rho\); its antisymmetric part is a curvature \(\kappa_{\mathrm{att}}\) in the sense of T5, and the in-context learning operation is the corresponding inner-automorphism action in the sense of T6.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof.</span> Bilinearity of \(q_i^\top k_j\) in \(x_i\) and \(x_j\) (when \(q\) and \(k\) are linear projections) verifies T2. Asymmetry follows because \(W_Q\neq W_K\) in general; the antisymmetric part is a closed 2-cochain (T5). The conjugation interpretation of in-context learning is T6 applied to the prompt prefix as invertible idea. □
+</div>
+
+<div class="status-box">
+  <span class="label">Status.</span> Attention is a learned non-symmetric \(\rho\); in-context learning is conjugation; both guaranteed by T2, T5, and T6 (Cor. 9.14). The transformer is, of all architectures in this chapter, the one whose alignment with the algebra is the closest.
+</div>
+</section>
+
+<!-- ====================================================== -->
+<section id="unification" class="theory-section">
+<h2>§16. A unifying picture</h2>
+
+<p>The fifteen positions of this chapter span every layer of cognitive architecture from sensorimotor records to large-scale neural language models. The idea algebra reveals the classical oppositions—prototypes vs. definitions, simulators vs. symbols, classical vs. connectionist—to be artifacts of partial views.</p>
+
+<div class="thm">
+<span class="label">Theorem 9.1</span> (Layered idea-algebra architecture). Every position in §§2–15 is the restriction of the foundational idea algebra \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) to (i) a sub-monoid (a category, a domain theory, a frame, a vocabulary, a layer of activations); (ii) a choice of which operators are non-trivial (\(\rho\) alone for distributional models; \(\sigma\) for image schemas; \(\eta\) for blending); and (iii) a regime of \(\omega\) (zero for atomic LOT, controlled for HRR, graded for transformers). Each position is the formalism viewed through one of these three filters.
+</div>
+
+<div class="proof">
+<span class="proof-label">Proof sketch.</span> Each section above gave the explicit restriction. By T8 (Structural Equivalence), restricting to a sub-monoid and choosing the non-trivial operators preserves idea-algebra structure up to isomorphism; by T9, the grading is compatible with each restriction. The third filter (regime of \(\omega\)) is the choice of abelian group \(A\) for cohomology, which T4 leaves free. The union of the fifteen restrictions, glued along their shared sub-monoids, returns the full algebra. □
+</div>
+
+<p>The picture is layered, not contested: <em>perception</em> provides the fillers (Barsalou); <em>language</em> a generating set (Fodor, Fillmore); <em>categorization</em> a graded restriction of \(\rho\) (Rosch, Gärdenfors, Mikolov); <em>theory</em> a sub-algebra (Murphy &amp; Medin); <em>metaphor</em> a partial morphism (Lakoff); <em>imagination</em> an \(\eta\)-operation (Fauconnier &amp; Turner); <em>binding</em> a \(\circ\)-realization (Smolensky, Plate); <em>contextual computation</em> a learned non-symmetric \(\rho\) (Vaswani, Brown). The cognitive architecture is the limit of the diagram these layers form in the category of idea algebras.</p>
+
+<h3>What the unification buys</h3>
+<ol>
+  <li><em>A precise vocabulary for partial agreement.</em> Theorists agree on more than they disagree on, but lack vocabulary to state it precisely. Classical and prototype theories agree on the existence of the sub-monoid and disagree on the form of \(\rho\). Such precise statements open tractable empirical questions.</li>
+  <li><em>A roadmap for hybrid models.</em> A hybrid architecture combining LOT-style atoms with transformer-style continuous resonance is, in the algebra, one sub-monoid that is free (\(\eta=0\)) and another that admits a non-trivial cocycle.</li>
+  <li><em>Falsifiable predictions.</em> If \(\rho\) is genuinely bilinear, conjugation should preserve typicality. If \(\eta(a,b)\) is the substrate of conceptual blending, processing time should track the magnitude of the elevation, not surface lexical novelty. If in-context learning is conjugation, in-context behavior should be invariant under the inverse-conjugation of the prompt prefix.</li>
+  <li><em>Mathematical economy.</em> The fifteen positions previously required fifteen distinct vocabularies. The algebra requires one vocabulary, nine theorems, and a finite list of restrictions.</li>
+</ol>
+</section>
+
+<!-- ====================================================== -->
+<section id="coda" class="theory-section">
+<h2>§17. Coda</h2>
+
+<p>The history of cognitive science can be read as a sequence of partial discoveries about a single mathematical object. The classical theorists discovered that some compositions are exactly Boolean. Rosch discovered that resonance is graded. Murphy and Medin discovered that resonance is local to sub-algebras. Fodor discovered that some sub-algebras are free. Fauconnier and Turner discovered that elevation is a distinct operator from preservation. Lakoff discovered that partial morphisms transport resonance across sub-algebras. Smolensky and Plate discovered concrete realizations of composition. Mikolov discovered that resonance can be learned from co-occurrence. Vaswani and collaborators discovered that resonance can be learned non-symmetrically and applied dynamically.</p>
+
+<p>Each discovery, taken in isolation, looked like a refutation of its predecessors. Taken together, they describe the operators and the sub-algebras of a single idea algebra. The next chapter takes up the question of how this algebra is realized in the strategic foundation of meaning.</p>
+</section>
+
+<div class="chapter-nav">
+  <a href="ch08.html">← Ch. 8: Philosophy</a>
+  <a href="ch10.html">Ch. 10: Meaning Games →</a>
+</div>
+
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>
