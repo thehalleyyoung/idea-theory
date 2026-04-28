@@ -1,0 +1,1249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoo: Cognitive Science, AI &amp; Emergence — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['\\(','\\)']],
+      displayMath: [['\\[','\\]']],
+      macros: {
+        circ: "\\mathbin{\\circ}",
+        rho: "\\varrho",
+        sigma: "\\sigma",
+        nu: "\\nu",
+        eta: "\\eta",
+        omega: "\\omega",
+        deg: "\\mathrm{deg}",
+        ker: "\\ker",
+        I: "\\mathcal{I}",
+        defeq: "\\mathrel{:=}"
+      }
+    }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+.zoo-entry{
+  border-left:3px solid var(--accent);
+  background:var(--accent-soft);
+  padding:.8em 1.2em;
+  margin:1.5em 0;
+  border-radius:0 4px 4px 0;
+}
+.zoo-entry .thinker-name{
+  font-family:Inter,sans-serif;font-weight:700;font-size:1.05rem;
+  color:var(--accent);margin-bottom:.2em;
+}
+.zoo-entry .source{
+  font-size:.88rem;color:var(--muted);font-style:italic;margin-bottom:.6em;
+}
+.zoo-entry .label{
+  font-family:Inter,sans-serif;font-size:.82rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:.06em;color:var(--accent);
+  margin-top:.85em;margin-bottom:.15em;
+}
+.toc-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.4em .9em;margin:1em 0 2em;
+}
+.toc-grid a{font-size:.95rem;}
+.entry-num{
+  display:inline-block;
+  background:var(--accent);color:#fff;
+  border-radius:50%;width:1.5em;height:1.5em;
+  line-height:1.5em;text-align:center;
+  font-family:Inter,sans-serif;font-size:.78rem;font-weight:700;
+  margin-right:.4em;vertical-align:middle;
+}
+.theorem-links{font-size:.85rem;color:var(--muted);margin-top:.6em;}
+.theorem-links a{font-size:.85rem;}
+</style>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a class="active" href="index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+
+<main class="content wide">
+
+<section class="hero">
+  <h1>Zoo: Cognitive Science, AI &amp; Emergence</h1>
+  <p class="lede">Thirty theories — from prototype effects to transformers, from memes to weak emergence — each reconstructed as a full sub-instance of the idea algebra \((\mathcal{I},\circ,e,\varrho,\sigma,\nu,\eta,\omega,\deg)\).</p>
+</section>
+
+<p>
+  Every entry gives (1) a faithful reconstruction of the position, (2) an explicit instantiation of all eight components of the algebra, with a display equation, (3) the central claim restated as a theorem or definition in that instantiation, (4) what the formalism adds — new predictions or clarifications — and (5) where the formalism diverges from the original theory.
+  Cross-references point to the relevant <a href="../theorems/index.html">theorems</a> and <a href="../lean/index.html">Lean modules</a>.
+</p>
+
+<h2>Contents</h2>
+<div class="toc-grid">
+  <a href="#cogsci">§1 Cognitive Science (1–9)</a>
+  <a href="#connectionism">§2 Connectionism &amp; AI (10–16)</a>
+  <a href="#cultural">§3 Cultural Evolution (17–23)</a>
+  <a href="#emergence">§4 Emergence Theory (24–30)</a>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="cogsci">§1  Cognitive Science</h2>
+<!-- ================================================================ -->
+
+<!-- 1 -->
+<div class="zoo-entry" id="entry-1">
+  <div class="thinker-name"><span class="entry-num">1</span>Classical Concept Theory — Smith &amp; Medin</div>
+  <div class="source">Smith &amp; Medin, <em>Categories and Concepts</em> (1981)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Concepts have necessary and sufficient defining conditions: to fall under the concept <em>bachelor</em> one must satisfy <em>adult</em>, <em>male</em>, and <em>unmarried</em> — no more, no less. Membership is all-or-nothing, and concepts can be cleanly conjoined by intersecting their feature sets. The classical theory dominated cognitive psychology until the 1970s, when graded typicality effects and the conjunction fallacy became difficult to explain.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of all predicates (features and feature-bundles). The composition \(a \circ b\) is feature-set intersection. The resonance \(\varrho(a,b) = |\text{features}(a) \cap \text{features}(b)| / |\text{features}(a) \cup \text{features}(b)|\) (Jaccard similarity). Aufhebung: \(\sigma(a,b) = a \cap b\) (shared features), \(\nu(a,b) = a \setminus b\) (features lost from \(a\)), \(\eta(a,b) = \emptyset\) (no emergence — a defining property of the classical theory). Grading \(\deg(a) = |\text{features}(a)|\).
+  </p>
+  \[
+    a \text{ is a concept} \iff a \circ a = a \text{ (idempotent) and } a = \arg\max_{x} \varrho(x, \cdot) \text{ over its extension.}
+  \]
+  <p>
+    The intension of a concept is \(\{\, b \mid \varrho(a,b) = 1 \,\}\); membership is \(\varrho(x,c) \geq 1\) (all conditions met).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The classical theory is the special case of <a href="../theorems/aufhebung-decomposition.html">T3 (Aufhebung)</a> in which \(\eta \equiv 0\): no composition of features ever produces a genuinely new feature. This is a strict structural constraint — it forces \(\omega \equiv 0\) (by <a href="../theorems/emergence-2-cocycle.html">T4</a>) and eliminates any curvature \(\kappa \equiv 0\) (by <a href="../theorems/meaning-curvature.html">T5</a>). Every conjunctive concept \(a \circ b\) is therefore fully determined by \(\sigma(a,b)\).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism explains exactly why the conjunction fallacy (Tversky &amp; Kahneman) is possible: in any realistic idea algebra, \(\omega(\text{bank-teller}, \text{feminist}) > 0\), so the conjunction produces emergent resonance not present in either conjunct alone. Classical concept theory implicitly assumes the special algebra where this cocycle vanishes identically. The formalism thus diagnoses the classical theory as choosing a specific — and empirically unusual — sub-instance.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The formalism does not model the psychological process of checking necessary and sufficient conditions; it captures only the algebraic structure of the concepts, not the cognitive dynamics of applying them.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
+</div>
+
+<!-- 2 -->
+<div class="zoo-entry" id="entry-2">
+  <div class="thinker-name"><span class="entry-num">2</span>Prototype Theory — Rosch</div>
+  <div class="source">Rosch, "Natural categories" (1973); Rosch &amp; Mervis (1975)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Natural categories are organized around prototypes — the most representative members — rather than defining conditions. Membership is graded: robins are more bird-like than penguins. Basic-level categories (chair, not furniture; not armchair) are cognitively privileged, having the highest ratio of within-category similarity to between-category similarity.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be a set of natural-kind ideas. The resonance \(\varrho(a,b)\) is feature-overlap similarity. The prototype \(p_c\) of category \(c\) is the resonance-maximizing element:
+  </p>
+  \[
+    p_c = \arg\max_{p \in c} \sum_{x \in c} \varrho(p, x).
+  \]
+  <p>
+    Basic-level categories are the \(\deg\)-minimal categories with adequate prototype coherence: \(\arg\min_c \deg(c)\) subject to \(\sum_{x \in c} \varrho(p_c, x) > \theta\). Typicality of \(x\) in \(c\) is \(\varrho(x, p_c)\) — distance from the prototype in the \(\varrho\)-metric. The emergence cocycle \(\omega(a,b)\) captures the extra typicality of blends (e.g., a pet fish is neither a prototypical pet nor a prototypical fish, but the blend has its own emergent prototype).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The typicality gradient follows from <a href="../theorems/resonance-pairing.html">T2</a>: because \(\varrho\) is a non-degenerate pairing, the resonance-maximizing element (the prototype) is unique up to \(\ker\varrho\). The graded membership structure is an instance of the \(\varrho\)-metric topology implicit in T2. Basic-level privilege is the statement that \(\deg\) achieves a minimum compatible with non-trivial category coherence, which follows from the properties of the grading map in <a href="../theorems/graded-idea-algebra.html">T9</a>.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that prototype shift — the way a prototype can change when a category is viewed in a different context — is a conjugation (\(\text{T6}\)): the context \(g\) acts as \({}^g\!p_c = g \circ p_c \circ g^{-1}\), shifting the resonance structure without changing the underlying category. This explains context-sensitivity of typicality judgements without ad hoc adjustments to the prototype itself.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The formalism treats all similarity as derived from a single resonance pairing; Rosch's empirical data suggest that different feature dimensions (colour, shape, function) may contribute independently, which would require a multi-dimensional resonance structure not captured in a single \(\varrho\).
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">ConceptualSpaces</a></div>
+</div>
+
+<!-- 3 -->
+<div class="zoo-entry" id="entry-3">
+  <div class="thinker-name"><span class="entry-num">3</span>Theory-Theory — Gopnik &amp; Meltzoff</div>
+  <div class="source">Gopnik &amp; Meltzoff, <em>Words, Thoughts, and Theories</em> (1997)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Children (and scientists) possess genuine theories — coherent, causally structured representations that generate predictions and support counterfactual reasoning. Concepts derive their meaning from their role in a theory, not from intrinsic similarity. Conceptual change in development mirrors theory change in science: anomaly accumulates, coherence breaks down, and a new theory replaces the old in a Kuhnian restructuring.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    A theory \(T\) is a sub-algebra of \(\mathcal{I}\): a subset closed under \(\circ\) and with its own internal resonance \(\varrho_T\). A concept \(c\) belongs to theory \(T\) iff \(\varrho_T(c, \cdot)\) is well-defined (the concept has determinate inferential role within \(T\)). Incommensurable theories (Kuhn) are sub-algebras with near-zero inter-theory resonance: \(\varrho(T_1, T_2) \approx 0\). Theory revision when confronted by datum \(d\) is the Aufhebung:
+  </p>
+  \[
+    T' = \sigma(T, d) + \nu(T, d) + \eta(T, d),
+  \]
+  <p>
+    where \(\sigma\) preserves the confirmable core, \(\nu\) negates the falsified part, and \(\eta\) elevates to a new theoretical structure. A genuine scientific revolution occurs when \(\omega(T, d) \neq 0\) — the new theory \(\eta(T,d)\) is not deducible from the old algebra.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Theory-Theory's core claim — that concept revision is holistic, not piecemeal — follows from <a href="../theorems/aufhebung-decomposition.html">T3</a>: the Aufhebung of \(T\) with a recalcitrant datum \(d\) decomposes \(T \circ d\) into three components simultaneously. There is no way to update only \(\sigma\) without potentially affecting \(\eta\); this is precisely the holism Quine (and Gopnik) emphasize. Kuhnian incommensurability corresponds to the case where \(\varrho(T_1, T_2) = 0\), which by T2 means the theories share no information.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism makes a precise prediction that theory-theory misses: whether two theories are incommensurable is a question about the cohomology class \([\omega]\). Two theories connected by a coboundary (\([\omega] = 0\)) are translatable, even if they look different; genuinely incommensurable theories have \([\omega] \neq 0 \in H^2\). This distinguishes apparent from genuine incommensurability.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The formalism does not capture the temporal dynamics of theory acquisition in children — the developmental time-course of theory change requires the Diffusion module, which goes beyond the static algebra.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/resonance-pairing.html">T2</a></div>
+</div>
+
+<!-- 4 -->
+<div class="zoo-entry" id="entry-4">
+  <div class="thinker-name"><span class="entry-num">4</span>Perceptual Symbol Systems — Barsalou</div>
+  <div class="source">Barsalou, "Perceptual symbol systems" <em>Behavioral and Brain Sciences</em> (1999)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Cognition operates not on amodal symbols but on <em>perceptual symbols</em>: schematic re-enactments of sensorimotor states stored in modality-specific systems. Concepts are simulators — neural systems that construct partial simulations of the referent. The meaning of "chair" is not a list of features but the capacity to mentally simulate sitting, seeing, and touching chairs.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of partial perceptual simulations (simulator states). Composition \(a \circ b\) = simulator composition: running simulation \(a\) and then \(b\) (as in imagining a door opening to reveal a room). The resonance \(\varrho(a,b)\) = perceptual overlap — the proportion of activated sensorimotor neurons shared between simulations \(a\) and \(b\). The Aufhebung components are:
+  </p>
+  \[
+    \sigma(a,b) = \text{shared featural core}, \quad \nu(a,b) = \text{suppressed simulation}, \quad \eta(a,b) = \text{novel frame emergent from combining } a \text{ and } b.
+  \]
+  <p>
+    Situated concepts are conjugations: the context \(c\) (a kitchen, a construction site) acts by \({}^c\!a = c \circ a \circ c^{-1}\), re-weighting the simulator toward contextually relevant features.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Barsalou's central claim — that concepts are grounded and simulation-based, not amodal — corresponds to the requirement that \(\varrho\) be derived from actual perceptual overlap rather than abstract feature counting. This is the non-degeneracy condition in <a href="../theorems/resonance-pairing.html">T2</a>: any resonance pairing that factors through perceptual states is non-degenerate precisely when distinct simulators produce observably distinct outputs. The situated-concept phenomenon follows directly from <a href="../theorems/conjugation.html">T6</a> (conjugation by context preserves the algebra structure).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts a compositionality gradient: the more two simulators share perceptual overlap (\(\varrho(a,b)\) high), the less emergent structure their composition produces (\(\omega(a,b)\) small). Conversely, cross-modal conceptual blending (imagining the sound of a colour) should produce large \(\omega\). This quantitative prediction is absent from Barsalou's original framework.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The algebraic framework assumes that simulator composition is associative, but there is psycholinguistic evidence that the order of imagined events can non-associatively affect the resulting mental model — a genuine failure of T1.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/conjugation.html">T6</a></div>
+</div>
+
+<!-- 5 -->
+<div class="zoo-entry" id="entry-5">
+  <div class="thinker-name"><span class="entry-num">5</span>Conceptual Blending — Fauconnier &amp; Turner</div>
+  <div class="source">Fauconnier &amp; Turner, <em>The Way We Think</em> (2002)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Human cognition routinely constructs <em>blended spaces</em> from two or more input mental spaces. The blend inherits selective structure from each input, plus <em>emergent structure</em> that exists in neither input alone. A cross-space mapping identifies counterparts; a generic space captures what the inputs share; the blend integrates and elaborates. Everyday examples: a surgeon is a butcher; a debate is a boxing match.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) = mental spaces. The resonance \(\varrho(M_1, M_2)\) = the cross-space mapping (the density of identified counterparts between the two spaces). The Aufhebung gives the full blend structure:
+  </p>
+  \[
+    M_1 \circ M_2 = \underbrace{\sigma(M_1,M_2)}_{\text{generic space}} + \underbrace{\nu(M_1,M_2)}_{\text{compressed/negated}} + \underbrace{\eta(M_1,M_2)}_{\text{blend proper}}.
+  \]
+  <p>
+    The "vital relations" (identity, change, time, causation, analogy) are components of \(\varrho\). Emergent structure in the blend is exactly \(\omega(M_1, M_2) \neq 0\): properties of the blend not inherited from either input.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Fauconnier &amp; Turner's Uniqueness Claim — that the blend is the unique mental space that satisfies all the integration constraints simultaneously — is <a href="../theorems/aufhebung-decomposition.html">T3</a>: the Aufhebung decomposition is unique modulo \(\ker\varrho\). The integration constraints just are the conditions that pick out the unique \(\sigma + \nu + \eta\) decomposition. The existence of emergent structure is T4: \(\omega\) is a non-trivial 2-cocycle whenever the blend generates structure not present in the input spaces.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism provides a proof that blending is <em>always</em> possible (T3 guarantees existence), whereas Fauconnier &amp; Turner note that some attempted blends "fail" — these are cases where \(\ker\varrho\) is large (the two spaces have few identified counterparts), making the decomposition non-unique and the blend unstable. The formalism thus predicts exactly which blends will be cognitively robust.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Blending theory emphasizes the <em>compression</em> of vital relations (many-to-one mappings across spaces), a directional operation that does not fit neatly into the symmetric Aufhebung; this asymmetry requires extending \(\nu\) beyond what T3 currently specifies.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/resonance-pairing.html">T2</a></div>
+</div>
+
+<!-- 6 -->
+<div class="zoo-entry" id="entry-6">
+  <div class="thinker-name"><span class="entry-num">6</span>Conceptual Metaphor Theory — Lakoff &amp; Johnson</div>
+  <div class="source">Lakoff &amp; Johnson, <em>Metaphors We Live By</em> (1980); Lakoff, <em>Women, Fire, and Dangerous Things</em> (1987)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Our ordinary conceptual system is fundamentally metaphorical: abstract domains (argument, time, love) are understood via concrete source domains (war, space, journey) through systematic conceptual mappings. These mappings are not mere linguistic decoration but structure thought itself. The "systematicity" of a metaphor — the fact that the same mapping licenses multiple linguistic expressions — proves the mapping operates at the conceptual level.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    A conceptual metaphor \(M: \mathcal{I}_S \to \mathcal{I}_T\) (source to target) is a partial algebra homomorphism that is resonance-preserving:
+  </p>
+  \[
+    \varrho_T(M(a),\, M(b)) = \varrho_S(a,\, b) \quad \text{for all } a,b \text{ in the source domain.}
+  \]
+  <p>
+    ARGUMENT IS WAR is the map from war-ideas to argument-ideas that preserves resonance (attack/defense, winning/losing). The grading \(\deg\) is preserved: concrete source ideas have lower grading than abstract target ideas, and \(M\) maps low-\(\deg\) to high-\(\deg\) (the "upward" direction of abstraction).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The Invariance Principle — that metaphorical mappings preserve the image-schematic structure of the source domain — is the statement that \(M\) is a resonance-preserving partial homomorphism (T8: <a href="../theorems/structural-equivalence.html">Structural Equivalence</a>). Specifically, a resonance-preserving map automatically preserves \(\sigma\), \(\nu\), and \(\eta\) (the three components of Aufhebung are determined by \(\varrho\)), so the full inferential structure of the source is transmitted to the target wherever the mapping is defined.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism shows why the Invariance Principle has exceptions (metaphorical mappings sometimes fail to preserve target-domain structure): if \(M\) is only partially defined, then compositions in the target domain that cross the boundary of \(M\)'s domain will generate non-zero \(\omega\), producing emergent target-domain inferences not licensed by the source. This is why the metaphor LOVE IS A JOURNEY does not license the inference that love ends at a destination.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Lakoff &amp; Johnson emphasize the embodied, image-schematic basis of source domains; the formalism treats all idea algebras uniformly and does not privilege bodily or spatial structure.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/structural-equivalence.html">T8</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a> · Lean: MetaphorMaps</div>
+</div>
+
+<!-- 7 -->
+<div class="zoo-entry" id="entry-7">
+  <div class="thinker-name"><span class="entry-num">7</span>Frame Semantics — Fillmore</div>
+  <div class="source">Fillmore, "Frame semantics" (1982); FrameNet project</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Every word evokes a cognitive frame — a structured schematic representation of the situation in which the word is typically used. To understand "buy" you must activate the commercial event frame (buyer, seller, goods, money, transaction). Meaning is always relative to a frame; words in different frames are not directly comparable even if they appear synonymous. Frame conflict (e.g., "tax relief" frames taxation as a burden) structures political cognition.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of frame-evoking lexical units and their semantic roles. A frame \(F\) is an idempotent sub-algebra: a subset \(F \subseteq \mathcal{I}\) closed under \(\circ\) with \(F \circ F = F\) (composing frame-elements stays within the frame). Lexical evocation: word \(w\) evokes frame \(F\) iff \(\varrho(w, F) > 0\). Frame conflict: \(\varrho(F_1, F_2) < 0\). The claim "understanding is always relative to a frame" is:
+  </p>
+  \[
+    \text{meaning}(w) = {}^F\!\!w \defeq F \circ w \circ F^{-1}
+  \]
+  <p>
+    — meaning is always the conjugate of the word by its evoking frame. Different frames produce different meanings even for the same surface form.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The central claim — frame-relative meaning — is <a href="../theorems/conjugation.html">T6</a> (Conjugation): the inner automorphism \(\mathrm{Ad}_F\) preserves \(\varrho\), \(\sigma\), \(\nu\), and \(\omega\), so the full semantic structure is preserved within the frame while the word's external resonances are reweighted. Frame conflict corresponds to the case where \(\kappa(F_1, F_2) \neq 0\) — the asymmetric resonance between the two frames creates a directional, non-neutralizable difference in how events are interpreted.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that frame-blending (combining two conflicting frames, as in political compromise language) produces emergent semantic content (\(\omega(F_1, F_2) > 0\)) that is not recoverable from either frame alone. This formalizes Fillmore's intuition that frame conflicts cannot be resolved by simple addition of meanings.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Frame semantics is primarily a descriptive linguistic framework with rich empirical data about frame elements and relations (FrameNet); the algebraic formalism abstracts away from these specific semantic roles in favour of the general structure.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/meaning-curvature.html">T5</a></div>
+</div>
+
+<!-- 8 -->
+<div class="zoo-entry" id="entry-8">
+  <div class="thinker-name"><span class="entry-num">8</span>Conceptual Spaces — Gärdenfors</div>
+  <div class="source">Gärdenfors, <em>Conceptual Spaces</em> (2000)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Concepts are convex regions in a geometric space whose dimensions correspond to perceptual and cognitive quality dimensions (hue, brightness, pitch, temperature, etc.). Similarity is distance in this space. Natural properties are convex regions; prototypes are the centroids of those regions. The geometric framework sits between the symbolic (classical) and associationist (connectionist) levels.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be a metric space with distance \(d(a,b) = -\varrho_{\mathrm{sym}}(a,b)\) (negated symmetric resonance). Quality dimensions are orthogonal sub-algebras \(\mathcal{I}_1, \ldots, \mathcal{I}_k\) with \(\varrho(\mathcal{I}_i, \mathcal{I}_j) = 0\) for \(i \neq j\). A property \(P\) is <em>natural</em> iff it is convex in the \(\varrho\)-metric:
+  </p>
+  \[
+    a,c \in P \text{ and } d(a,c) = d(a,b)+d(b,c) \implies b \in P.
+  \]
+  <p>
+    The prototype of \(P\) is its centroid. Betweenness \(b \in [a,c]\) is exactly the metric condition above. Grading \(\deg(a)\) = the number of quality dimensions along which \(a\) is non-trivially located.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The main theorem of Conceptual Spaces — that natural properties correspond to convex regions — is a direct consequence of <a href="../theorems/resonance-pairing.html">T2</a> together with the definition of \(d = -\varrho_\text{sym}\): convexity is just the condition that resonance-based betweenness is transitive, which holds in any metric space derived from a non-degenerate \(\varrho\). This module is directly implemented in the <a href="../lean/index.html">ConceptualSpaces Lean module</a>, which verifies the betweenness axioms as corollaries of T2.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The full idea algebra adds operations that Gärdenfors' geometric framework lacks: composition (\(\circ\)), Aufhebung, and the emergence cocycle. In particular, the formalism predicts that combining two conceptual-space regions can produce a blend (\(\eta\)) that is <em>not</em> a convex subset of either original dimension — explaining why compound concepts (e.g., "red wine") occupy regions in new effective dimensions not predictable from the simple union of "red" and "wine" regions.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Gärdenfors' framework makes rich use of the full geometric structure (metric axioms, dimensionality, Voronoi tessellations for categorization); the idea algebra captures only the abstract resonance structure and does not specify dimensionality or the full metric.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">ConceptualSpaces</a></div>
+</div>
+
+<!-- 9 -->
+<div class="zoo-entry" id="entry-9">
+  <div class="thinker-name"><span class="entry-num">9</span>Dual Process Theory — Kahneman</div>
+  <div class="source">Kahneman, <em>Thinking, Fast and Slow</em> (2011); Stanovich &amp; West (2000)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Human cognition operates via two systems: System 1 (fast, automatic, associative, effortless, prone to heuristics and biases) and System 2 (slow, deliberate, rule-governed, effortful, logical). Most everyday cognition is System 1; System 2 intervenes to monitor and correct. Framing effects, the availability heuristic, and the conjunction fallacy are all System 1 defaults that System 2 can override — but only when System 2 is not depleted.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    The idea algebra \(\mathcal{I}\) splits into two sub-algebras: \(\mathcal{I}_1\) (System 1 ideas: high resonance, idempotent operators, low grading) and \(\mathcal{I}_2\) (System 2 ideas: low resonance, non-idempotent, high grading). System 1 is the \(\sigma\)-invariant sub-algebra — what is preserved by default, requiring no deliberate effort. System 2 is the \(\eta\)-sector — the elevation component, produced only by deliberate Aufhebung. Framing effects are captured by the curvature:
+  </p>
+  \[
+    \kappa(a,b) = \frac{\varrho(a,b) - \varrho(b,a)}{2} \neq 0,
+  \]
+  <p>
+    where \(a\) is the framed version of a question and \(b\) is the logically equivalent but differently framed version. The asymmetry \(\kappa(a,b)\) is the framing bias.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The interaction between System 1 and System 2 — System 2 correcting System 1 defaults — is an instance of <a href="../theorems/aufhebung-decomposition.html">T3</a>: when System 2 engages, the composition of the System 1 default idea \(a\) with the deliberate correction \(d\) decomposes as \(\sigma(a,d) + \nu(a,d) + \eta(a,d)\), where \(\nu\) is the suppression of the heuristic response and \(\eta\) is the elevated logical response. The <a href="../theorems/meaning-curvature.html">T5</a> curvature \(\kappa\) is a topological invariant — it cannot be eliminated by composition, explaining why framing effects persist even when recognized.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts a precise condition under which System 2 override is complete: \(\nu(a,d) = a\) (the heuristic is entirely suppressed). This happens only when \(\varrho(a, \mathcal{I}_2) = 0\) — the System 1 response has zero resonance with System 2 ideas. In all other cases, partial System 1 contamination is unavoidable, which matches empirical data on the persistence of cognitive biases even after deliberate reasoning.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The formalism models the two systems as static sub-algebras; the psychological reality involves dynamic resource allocation (cognitive load, ego depletion) that requires the temporal structure of the Diffusion module rather than the static algebra.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/meaning-curvature.html">T5</a>, <a href="../theorems/graded-idea-algebra.html">T9</a></div>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="connectionism">§2  Connectionism &amp; AI</h2>
+<!-- ================================================================ -->
+
+<!-- 10 -->
+<div class="zoo-entry" id="entry-10">
+  <div class="thinker-name"><span class="entry-num">10</span>Tensor Product Representations — Smolensky</div>
+  <div class="source">Smolensky, "Tensor product variable binding and the representation of symbolic structures in connectionist systems" (1990)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Classical symbolic AI and connectionism can be reconciled: symbolic structure can be encoded in distributed neural representations via tensor products of filler vectors (the content) and role vectors (the structural position). The resulting tensor product representation is distributed yet compositional. The <em>harmony</em> of a network state measures how well it satisfies the implicit constraints of the grammar.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I} = F \otimes R\) be the tensor product of the filler space \(F\) and the role space \(R\) over \(\mathbb{R}\). Composition \(a \circ b\) = tensor product binding followed by superposition: \(a \circ b = a + b\) (in the vectorial sense, since binding is additive). Resonance is the inner product in the tensor space:
+  </p>
+  \[
+    \varrho(a, b) = \langle a, b \rangle_{F \otimes R} = \sum_{i,j} a_{ij}\, b_{ij}.
+  \]
+  <p>
+    The harmony function of a network state \(s\) is self-resonance: \(H(s) = \varrho(s, s)\). Learning via harmony maximization = gradient ascent on \(\varrho(a_i, a_i)\) subject to combinatorial constraints. The emergence cocycle \(\omega(a,b)\) is the nonlinear interaction term: the part of the activations of \(a \circ b\) not predictable by linearity from \(a\) and \(b\) separately.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The compositionality of tensor product representations — the fact that the binding of filler \(f\) to role \(r\) uniquely determines the representation \(f \otimes r\) — is the uniqueness clause of <a href="../theorems/resonance-pairing.html">T2</a>: non-degeneracy of \(\varrho\) in the tensor space guarantees that distinct fillers in distinct roles have non-zero resonance with their own binding and zero with others (in the ideal unitary case). Smolensky's theorem about perfect unbinding is the statement that \(\ker\varrho = \{0\}\) in the ideal case.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism makes explicit that superposition of multiple tensor product bindings increases \(\ker\varrho\) (more bound structures produce more interference), quantifying the "superposition catastrophe" as the growth of the kernel. The idea algebra predicts a critical density threshold beyond which the resonance pairing becomes degenerate and retrieval fails — a prediction that matches empirical limits on the capacity of HRR-style models.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Smolensky's framework has a detailed account of the interface between the tensor product level and the symbolic level (ICS architecture); the idea algebra treats both levels uniformly and does not model the interface explicitly.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
+</div>
+
+<!-- 11 -->
+<div class="zoo-entry" id="entry-11">
+  <div class="thinker-name"><span class="entry-num">11</span>Holographic Reduced Representations — Plate</div>
+  <div class="source">Plate, "Holographic reduced representations" <em>IEEE Transactions on Neural Networks</em> (1995)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Holographic reduced representations (HRRs) encode compositional structure in fixed-width distributed vectors using circular convolution as the binding operator. The key properties: (i) the convolution of two vectors has the same dimensionality as each; (ii) approximate retrieval of a bound component is possible using the approximate inverse (cross-correlation); (iii) superposition of multiple HRRs in a single vector enables storage of structured knowledge.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I} \subseteq \mathbb{R}^n\) be the set of unit-length real vectors. Composition is circular convolution: \((a \circ b)_k = \sum_j a_j b_{k-j \bmod n}\). Resonance is normalized dot product:
+  </p>
+  \[
+    \varrho(a,b) = \frac{a \cdot b}{n}.
+  \]
+  <p>
+    This is a finite-dimensional idea algebra. The emergence cocycle \(\omega(a,b)\) is the circular convolution residual — the part of \(a \circ b\) not recoverable by linear methods. Decoding = using \(\varrho(\cdot, a^{-1})\) (correlation with the approximate inverse) to recover components. The superposition catastrophe occurs when \(\ker\varrho\) is large: many stored HRRs produce interference, degrading \(\varrho\).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The HRR binding-and-retrieval theorem — that \(a \circ b \circ b^{-1} \approx a\) (approximate retrieval) — is an instance of <a href="../theorems/composition.html">T1</a> (the monoid law) in the approximate sense: \(b \circ b^{-1} \approx e\) (the approximate inverse). The approximation quality is controlled by \(\varrho(b, b^{-1} \circ b) \approx 1\) — high self-resonance of the recovered approximate identity. The emergence cocycle \(\omega(a,b) \neq 0\) corresponds to the fact that circular convolution is not perfectly invertible, generating irreducible residual information.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism reveals that the HRR capacity limit is a statement about the cohomological complexity of the storage task: when the number of stored bindings exceeds a threshold, \(H^2\) of the storage algebra becomes non-trivial, and retrieval errors represent non-coboundary emergence terms. This gives a principled account of why capacity degrades gracefully rather than catastrophically.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    HRRs are specifically designed for approximate computation in finite-precision arithmetic; the idea algebra is exact and does not model the noise and approximation that are central to HRR's engineering advantages.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
+</div>
+
+<!-- 12 -->
+<div class="zoo-entry" id="entry-12">
+  <div class="thinker-name"><span class="entry-num">12</span>Word2Vec — Mikolov et al.</div>
+  <div class="source">Mikolov et al., "Distributed representations of words and phrases" (NeurIPS 2013)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Words can be represented as dense vectors in \(\mathbb{R}^{300}\) trained to predict context (or be predicted by context). The resulting vectors have remarkable algebraic properties: semantic relationships are encoded as vector offsets. The king–man+woman≈queen analogy demonstrates that gender and royalty are geometrically separable dimensions of the semantic space.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I} \subseteq \mathbb{R}^{300}\). Composition is vector addition: \(a \circ b = a + b\) (a commutative monoid with identity \(e = \mathbf{0}\)). Every element has an inverse: \(a^{-1} = -a\). Resonance is cosine similarity:
+  </p>
+  \[
+    \varrho(a,b) = \frac{a \cdot b}{\|a\|\,\|b\|}.
+  \]
+  <p>
+    The emergence cocycle vanishes: \(\omega \equiv 0\) (vector addition is purely linear; no new semantic content emerges from the addition that was not in the summands). A semantic relationship \(R\) (e.g., gender) is a conjugation operator \(g_R\) acting as \({}^{g_R}\!a = a + g_R\) — a translation in \(\mathbb{R}^{300}\). The king–man+woman=queen analogy is: \(\text{king} + (\text{woman} - \text{man}) \approx \text{queen}\), using invertibility of word vectors (T1).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The linearity of semantic relationships (the analogy property) is the statement that semantic relations are conjugation operators — <a href="../theorems/conjugation.html">T6</a> — in the specific case where the algebra is a vector space with additive composition. T6 guarantees that conjugation preserves \(\varrho\), \(\sigma\), \(\nu\), \(\omega\), which in this linear case means that the relative geometry of words is preserved under semantic-relation translation.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    Because \(\omega \equiv 0\) in word2vec, the formalism predicts that composition of word vectors never produces genuinely new semantic content — only recombination of existing dimensions. This predicts the well-known failure of word2vec at composing idiomatic expressions ("kick the bucket" ≠ foot + container), where \(\omega > 0\) is necessary to capture the emergent idiomatic meaning.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Word2vec's training objective (predicting context windows) is a statistical procedure; the idea algebra is a structural description of the resulting representations and does not model the training dynamics.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/conjugation.html">T6</a></div>
+</div>
+
+<!-- 13 -->
+<div class="zoo-entry" id="entry-13">
+  <div class="thinker-name"><span class="entry-num">13</span>GloVe — Pennington et al.</div>
+  <div class="source">Pennington, Socher &amp; Manning, "GloVe: Global vectors for word representation" (EMNLP 2014)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    GloVe (Global Vectors) trains word embeddings to encode the log-ratio of co-occurrence probabilities: \(w_a \cdot w_b = \log P(b|a) - \log P(b|\text{random})\). Unlike word2vec (local window prediction), GloVe uses global co-occurrence statistics. The key insight: the meaning of a word is encoded in the ratio of its co-occurrence probabilities with probe words.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I} \subseteq \mathbb{R}^d\) be GloVe word vectors. Resonance is the log-conditional probability: \(\varrho(a,b) = \log P(b \mid a)\). This resonance is explicitly <em>asymmetric</em>: \(\log P(b|a) \neq \log P(a|b)\) in general. The curvature is:
+  </p>
+  \[
+    \kappa(a,b) = \frac{\varrho(a,b) - \varrho(b,a)}{2} = \frac{\log P(b|a) - \log P(a|b)}{2},
+  \]
+  <p>
+    which is the directional information asymmetry between \(a\) and \(b\). GloVe's training minimizes \(\sum_{a,b} f(X_{ab})\,(\log X_{ab} - w_a \cdot w_b - b_a - b_b)^2\): it finds the best symmetric approximation to the asymmetric \(\varrho\), projecting the asymmetric resonance onto the symmetric component.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    GloVe's main theoretical result — that the log-ratio of co-occurrence probabilities encodes semantic relationships — is an application of <a href="../theorems/meaning-curvature.html">T5</a> (Meaning Curvature): the asymmetric component \(\kappa(a,b)\) of the co-occurrence resonance is a structural invariant. Words that have high \(\kappa\) with a probe (e.g., "ice" and "steam" have high \(\kappa\) with "solid" vs "gas") are semantically distinguished in a topologically stable way — the curvature class is preserved under continuous deformations of the embedding.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that GloVe's symmetric approximation systematically discards the curvature \(\kappa\): since \(\kappa\) is the antisymmetric part of \(\varrho\), projecting to symmetric dot products eliminates all directional semantic information. This explains why GloVe performs slightly worse than word2vec on directional semantic tasks (e.g., "A is a type of B") while matching it on symmetric tasks (e.g., synonymy).
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The formalism treats the full asymmetric \(\varrho = \log P(b|a)\) as primary; GloVe's actual trained vectors approximate only the symmetric part, so using GloVe vectors in the idea algebra requires acknowledging that \(\kappa\) information has been discarded.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/meaning-curvature.html">T5</a></div>
+</div>
+
+<!-- 14 -->
+<div class="zoo-entry" id="entry-14">
+  <div class="thinker-name"><span class="entry-num">14</span>Attention &amp; Transformers — Vaswani et al.</div>
+  <div class="source">Vaswani et al., "Attention is all you need" (NeurIPS 2017)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    The transformer architecture processes sequences via self-attention: each token attends to all other tokens, weighting them by relevance, and combines their representations. The key innovation is that attention is differentiable and parallelizable. Multi-head attention computes attention in multiple representation subspaces simultaneously. Residual connections and feed-forward layers complete the architecture.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of token embeddings in \(\mathbb{R}^d\). Self-attention computes resonance between query \(q_i\) and key \(k_j\) as:
+  </p>
+  \[
+    \varrho(q_i, k_j) = \frac{q_i \cdot k_j}{\sqrt{d}},
+  \]
+  <p>
+    and uses it to form the attended composition: \(q_i \circ_{\text{attn}} v = \sum_j \mathrm{softmax}_j(\varrho(q_i, k_j)) \cdot v_j\) — a soft version of \(\circ\) that weights value vectors by resonance. Multi-head attention = computing \(\varrho\) simultaneously in \(H\) orthogonal sub-spaces (each head is an orthogonal sub-algebra with \(\varrho(\mathcal{I}_h, \mathcal{I}_{h'}) = 0\) for \(h \neq h'\)). The residual connection is the \(\sigma\)-component (preservation of the input representation); the feed-forward layer is the \(\eta\)-component (elevation to a new representational level).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The expressivity of transformers — their ability to implement any continuous function on sequences — follows from the completeness of the Aufhebung: by <a href="../theorems/aufhebung-decomposition.html">T3</a>, any transformation of a token representation can be decomposed into \(\sigma\) (residual stream preservation) + \(\nu\) (information erasure) + \(\eta\) (feed-forward elevation). The multi-head structure follows from <a href="../theorems/graded-idea-algebra.html">T9</a>: the heads are a graded decomposition of \(\mathcal{I}\) into orthogonal sub-algebras, each capturing a different dimension of the resonance structure.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that the residual stream (the \(\sigma\)-invariant part of each layer) is the algebraic identity carrier: it is what persists unchanged through all layers, accumulating only in the \(\eta\)-component. This matches the empirical finding that residual streams carry stable positional and syntactic information across all transformer layers.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The soft attention mechanism uses the softmax function, which makes \(\circ_\text{attn}\) a convex combination rather than a hard algebraic composition; the idea algebra's \(\circ\) is hard composition, so the soft transformer is an approximation of the algebraic structure.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/graded-idea-algebra.html">T9</a></div>
+</div>
+
+<!-- 15 -->
+<div class="zoo-entry" id="entry-15">
+  <div class="thinker-name"><span class="entry-num">15</span>Distributed Representations &amp; Deep Learning — Hinton</div>
+  <div class="source">Hinton, McClelland &amp; Rumelhart, "Distributed representations" (1986); LeCun, Bengio &amp; Hinton (2015)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Neural networks learn distributed representations — patterns of activation spread across many units — rather than localist (one-unit-per-concept) representations. Distributed representations achieve combinatorial efficiency: \(n\) units can represent \(2^n\) distinct patterns. Deep networks learn hierarchical representations, with early layers detecting low-level features and later layers combining them into high-level concepts.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of activation patterns in a neural network (vectors in \([0,1]^n\)). Composition \(a \circ b\) = feedforward application of layer \(b\) to representation \(a\): \((a \circ b)_j = f\!\left(\sum_i W_{ij} a_i + b_j\right)\). Resonance \(\varrho(a,b) = \cos\theta(a,b)\) (cosine similarity of activation patterns). The emergence cocycle:
+  </p>
+  \[
+    \omega(a,b) = \Bigl\| a \circ b - \mathrm{Linear}(a, b) \Bigr\|,
+  \]
+  <p>
+    the norm of the residual after projecting out the linear component — exactly the contribution of the nonlinearity \(f\). Deep learning = constructing idea algebras with many compositional layers, each adding \(\omega > 0\) (more emergent structure) through the nonlinearity.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The depth-efficiency theorem for neural networks — that deep networks can represent functions that require exponentially wide shallow networks — is an instance of <a href="../theorems/emergence-2-cocycle.html">T4</a>: each layer adds a non-trivial cocycle \(\omega_\ell\), and the total emergent complexity is the product of layer cocycles (by the telescoping property of T4). A depth-\(L\) network achieves \(\prod_{\ell=1}^L \omega_\ell\) total emergence, which can grow exponentially in \(L\) while remaining representable.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that representations in middle layers of deep networks should have a characteristic \(\varrho\)-geometry: they are neither maximally similar to the input (like layer 1) nor maximally similar to the output (like the last layer), but occupy a distinctive intermediate zone in the \(\varrho\)-metric. This matches the "representational geometry" findings from neural network introspection (SVCCA, CKA).
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The algebraic framework treats the network as a fixed, trained object; the dynamics of gradient descent training — the path through the weight space — require the Diffusion module and are not captured by the static algebra.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
+</div>
+
+<!-- 16 -->
+<div class="zoo-entry" id="entry-16">
+  <div class="thinker-name"><span class="entry-num">16</span>Large Language Models — GPT, BERT, and successors</div>
+  <div class="source">Devlin et al. (BERT, 2018); Radford et al. (GPT-2, 2019); Brown et al. (GPT-3, 2020)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Large language models trained on massive text corpora acquire broad linguistic and world knowledge without explicit supervision. In-context learning allows them to perform new tasks from a few examples in the prompt alone, without weight updates. Emergent capabilities (chain-of-thought reasoning, arithmetic, code generation) arise at scale without being explicitly trained. Hallucination — generating confident, fluent, false statements — is a systematic failure mode.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of possible contexts (finite token sequences). Composition \(a \circ b\) = contextual continuation (appending token sequence \(b\) to context \(a\)). Resonance \(\varrho(a,b) = \log p(b \mid a)\) under the LLM. The emergence cocycle is pointwise mutual information:
+  </p>
+  \[
+    \omega(a,b) = \log p(a \circ b) - \log p(a) - \log p(b),
+  \]
+  <p>
+    measuring the extra information in the joint context beyond what the two parts contribute independently. In-context learning is conjugation (T6): a system prompt \(g\) transforms the LLM's effective idea algebra by \({}^g\!a = g \circ a\) — attending to \(g\) while processing \(a\) rewires the resonance structure without changing model weights. Hallucination = high-\(\omega\) generation where the model produces emergent content not grounded in \(\mathcal{I}\).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The emergence of in-context learning capabilities at scale corresponds to <a href="../theorems/conjugation.html">T6</a>: the model learns to implement conjugation by arbitrary prompts \(g\), transforming its effective resonance structure to match the task specified by \(g\). The fact that this is structure-preserving (T6) explains why in-context learning generalizes across task formats: the Aufhebung structure of the base algebra is invariant under conjugation, so the model's compositional abilities carry over to in-context tasks.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism provides a precise criterion for hallucination: a generation is hallucinated iff \(\omega(a,b) > 0\) where \(b\) is the generated text and \(a\) is the factual context. This gives a theoretical basis for retrieval-augmented generation (RAG) as a strategy to reduce \(\omega\) by grounding \(a\) in verified documents, minimizing the emergent content that the model can introduce.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    The formalism treats the LLM as a static probability distribution; the dynamics of in-context learning, chain-of-thought reasoning, and fine-tuning involve sequential composition across many steps, requiring the full Transmission Chain (T7) and Diffusion module.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/transmission-chain.html">T7</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="cultural">§3  Cultural Evolution</h2>
+<!-- ================================================================ -->
+
+<!-- 17 -->
+<div class="zoo-entry" id="entry-17">
+  <div class="thinker-name"><span class="entry-num">17</span>Memetics — Dawkins</div>
+  <div class="source">Dawkins, <em>The Selfish Gene</em> Ch. 11 (1976)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Cultural transmission has its own replicators: <em>memes</em>. Like genes, memes are selected for high-fidelity replication, fecundity, and longevity. The meme's "interests" are just successful copying; the phenotypic effects on hosts are incidental. Memes spread by infecting minds, and co-adapted meme complexes (memeplexes) form the cultural analogue of co-adapted gene complexes.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) = the memosphere (all replicating cultural units). Composition \(m_1 \circ m_2\) = memetic recombination (two memes co-infecting a host and producing a hybrid). Resonance \(\varrho(m_1, m_2)\) = mutual reinforcement (memes that spread together: high resonance; memes that compete: negative resonance). The emergence cocycle \(\omega(m_1, m_2)\) = the fitness surplus when memes co-replicate (the advantage of the memeplex over the sum of its parts). Grading:
+  </p>
+  \[
+    \deg(m) = \text{copy-fidelity requirement of } m.
+  \]
+  <p>
+    Low-\(\deg\) memes (simple catchy tunes, aphorisms) spread faster than high-\(\deg\) memes (complex philosophies, scientific theories). A selfish meme is idempotent: \(m \circ m = m\) — it copies itself without contributing further content. Memetic fitness = self-resonance \(\varrho(m,m)\).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The central claim of memetics — that memes form a Darwinian population with variation, selection, and inheritance — corresponds to the Transmission Chain (<a href="../theorems/transmission-chain.html">T7</a>): the cumulative cocycle after \(n\) transmission steps telescopes, and the surviving memes are those with \(\varrho(m,m) > 0\) (positive self-resonance = selected) and low \(\deg\) (low copy-fidelity requirement = high fecundity). The co-adapted memeplex is exactly a coalition with mutual positive resonance (Theorems10 in the Lean codebase).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that memetic speciation — the divergence of a meme into distinct cultural variants — occurs when \(\kappa(m_1, m_2) \neq 0\) between the variants: the directional information asymmetry (\(\kappa\)) of the curvature (T5) prevents the two variants from converging back under transmission. This gives a topological criterion for irreversible cultural divergence.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Dawkins' memetics lacks a precise unit of analysis for memes (where does one meme end and another begin?); the formalism inherits this problem, as the boundary conditions on \(\mathcal{I}\) are not specified by the algebra itself.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
+</div>
+
+<!-- 18 -->
+<div class="zoo-entry" id="entry-18">
+  <div class="thinker-name"><span class="entry-num">18</span>Epidemiology of Representations — Sperber</div>
+  <div class="source">Sperber, <em>Explaining Culture: A Naturalistic Approach</em> (1996)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Culture is an epidemiological phenomenon: representations spread through populations like diseases, but their distribution is shaped by cognitive attractors — ideas that, however transmitted, tend to converge on a stable form. Cultural representations are always transformations of mental representations, not faithful copies. Optimal relevance — maximizing cognitive effects while minimizing processing effort — governs which representations spread.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) contain both public representations (external cultural forms) and mental representations (internal cognitive states). Transmission of representation \(a\) through mind \(M\) produces \(T_M(a) = a \circ M\) (composition with the mind). A cultural attractor \(a^*\) is a fixed point of iterated transmission:
+  </p>
+  \[
+    \sigma(a^*, T_M(a^*)) \approx a^* \quad \text{for all relevant minds } M,
+  \]
+  <p>
+    i.e., the \(\sigma\)-preservation component of self-transmission recovers the original representation. Relevance = \(\varrho(a, \text{cognitive-effects}) / \deg(\text{processing-effort})\): the ratio of resonance with positive cognitive outcomes to grading (effort cost). Optimal relevance = maximizing this ratio.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The existence of cultural attractors follows from the fixed-point theorem applied to the Aufhebung iteration: if the Aufhebung map \(a \mapsto \sigma(a, T_M(a))\) is a contraction in the \(\varrho\)-metric, then by Banach's theorem it has a unique fixed point. The <a href="../lean/index.html">Diffusion Lean module</a> verifies the conditions under which the iterated transmission chain (T7) converges to a fixed point — these conditions characterize when cultural attractors exist and when transmission is instead chaotic.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism sharpens Sperber's relevance theory into a quantitative prediction: cultural representations maximize \(\varrho / \deg\), which the algebra identifies as the condition for a stable generator — an irreducible idea that cannot be decomposed further without loss of resonance. This predicts that cultural attractors are precisely the irreducible generators of the idea algebra.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Sperber's framework depends critically on the distinction between public and mental representations and the causal mechanisms linking them; the idea algebra treats all representations uniformly and does not model the implementation-level difference.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
+</div>
+
+<!-- 19 -->
+<div class="zoo-entry" id="entry-19">
+  <div class="thinker-name"><span class="entry-num">19</span>The Cultural Ratchet — Henrich</div>
+  <div class="source">Henrich, <em>The Secret of Our Success</em> (2015); Tennie, Call &amp; Tomasello (2009)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Human culture accumulates across generations in a way that no other species achieves: the "cultural ratchet" locks in improvements so they are not lost in subsequent generations. This requires high-fidelity imitation (faithful transmission) combined with individual innovation. Prestige-biased learning — preferentially imitating high-status, successful individuals — accelerates the ratchet by channelling transmission toward the most adaptive variants.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be a population of ideas with transmission operators \(T_i\) (one per cultural learner). The cultural ratchet is the Transmission Chain (T7) applied to a population: cumulative emergence \(\sum_{k=1}^n \omega(a_1, a_2 \circ \cdots \circ a_k)\) grows monotonically with \(n\). High-fidelity transmission means:
+  </p>
+  \[
+    \omega_\text{per-step} \approx 0, \quad \text{but } \sum_{k=1}^n \omega_k > 0 \text{ and non-decreasing.}
+  \]
+  <p>
+    Even vanishingly small per-step emergence \(\omega_k = \epsilon > 0\) leads to unbounded total emergence \(n\epsilon \to \infty\) — the ratchet. Prestige-biased learning = weighting the transmission resonance: \(\varrho_\text{effective}(p, a) = w_p \cdot \varrho(p, a)\) where \(w_p = \mathrm{prestige}(p) > 1\) for high-status demonstrators.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The ratchet effect is a direct consequence of <a href="../theorems/transmission-chain.html">T7</a> (Transmission Chain): the theorem states that the cumulative emergence cocycle over a chain of \(n\) transmissions telescopes as \(\omega(a_1 \circ \cdots \circ a_n) = \sum_{k} \omega(a_k, a_{k+1})\) plus boundary terms. Monotonic accumulation follows when all per-step cocycles are non-negative and the chain is faithfully ordered. The ratchet fails (loss of cultural knowledge) precisely when the chain reverses — i.e., when some \(\omega_k < 0\).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts a phase transition in cultural evolution: as per-step fidelity drops below a critical threshold, the cumulative cocycle fails to grow — the ratchet "slips." This critical threshold is determined by the condition \(\sum \omega_k = 0\), which the Diffusion module identifies as the boundary between the convergent and divergent transmission regimes.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Henrich's ratchet is fundamentally about populations of learners and the social dynamics of prestige, conformity, and payoff-biased learning; the idea algebra captures the individual transmission event but does not model population-level frequency dynamics without the Diffusion module.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
+</div>
+
+<!-- 20 -->
+<div class="zoo-entry" id="entry-20">
+  <div class="thinker-name"><span class="entry-num">20</span>Dual Inheritance Theory — Boyd &amp; Richerson</div>
+  <div class="source">Boyd &amp; Richerson, <em>Culture and the Evolutionary Process</em> (1985)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Humans inherit two streams of information: genetic and cultural. Both streams evolve by selection, but cultural evolution is Lamarckian (acquired traits are transmissible), operates on shorter timescales, and is subject to distinct biases (conformity bias, prestige bias). Gene–culture coevolution explains phenomena like lactase persistence, fear of snakes, and language acquisition. The Baldwin effect links the two: culturally acquired behaviours can become genetically assimilated over time.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    The idea algebra splits into two sub-algebras: \(\mathcal{I}_g\) (genetically transmitted ideas: instincts, innate cognitive biases) and \(\mathcal{I}_c\) (culturally transmitted ideas: norms, technologies, rituals). Cross-resonance \(\varrho(\mathcal{I}_g, \mathcal{I}_c)\) captures gene–culture interaction. Cultural group selection = coalitions of idea algebras (Coalitions module) competing on aggregate resonance:
+  </p>
+  \[
+    \varrho(\text{Group}_1, \text{Group}_2) \gtrless 0 \implies \text{Group}_1 \text{ outcompetes or is outcompeted by Group}_2.
+  \]
+  <p>
+    The Baldwin effect is \(\omega(c, g) > 0\) in generation 1 (the cultural innovation \(c\) is emergent relative to the genetic background \(g\)), converging to \(\omega(c', g') \approx 0\) after genetic assimilation (the innovation becomes built in).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The gene–culture coevolution dynamic is modelled by the Transmission Chain (T7) applied simultaneously to \(\mathcal{I}_g\) and \(\mathcal{I}_c\) with cross-resonance coupling. The main prediction of Boyd–Richerson — that cultural evolution can drive genetic evolution faster than selection on genes alone — follows from the non-zero cross-resonance: when \(\varrho(\mathcal{I}_g, \mathcal{I}_c) > 0\), the combined coevolutionary trajectory has higher aggregate emergence than either stream alone (T4, additivity of cocycles).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that the Baldwin effect has a topological signature: before genetic assimilation, \([\omega(c,g)] \neq 0 \in H^2\) (genuinely emergent cultural phenotype); after assimilation, \([\omega(c',g')] = 0\) (the cultural innovation is now a coboundary — deducible from the new genetic baseline). This makes the Baldwin effect detectable via cohomological methods applied to trait variation data.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Boyd &amp; Richerson model the population dynamics of gene and culture frequencies with differential equations; the idea algebra captures individual-level structure and requires the Diffusion module for population dynamics.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
+</div>
+
+<!-- 21 -->
+<div class="zoo-entry" id="entry-21">
+  <div class="thinker-name"><span class="entry-num">21</span>Cultural Evolution as Darwinian — Mesoudi</div>
+  <div class="source">Mesoudi, <em>Cultural Evolution</em> (2011)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Cultural change satisfies Darwin's three conditions — variation, differential fitness, and inheritance — and should therefore be analyzed using the same evolutionary framework as genetic change. Cultural variants (practices, beliefs, artefacts) vary, some spread more than others, and descendants are more similar to their cultural ancestors than to unrelated individuals. The claim is not metaphor but identity: cultural evolution <em>is</em> a Darwinian process.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be a population of cultural variants. Darwinian variation = non-trivial emergence: \(\omega(a_\text{parent}, a_\text{offspring}) \neq 0\). Cultural fitness = resonance with the environment/niche: \(\text{fitness}(a) = \varrho(a, \text{niche})\). Inheritance = Transmission Chain (T7). Cultural selection is:
+  </p>
+  \[
+    \Pr[\text{variant } a \text{ survives}] \propto \varrho(a, \text{niche}).
+  \]
+  <p>
+    Key claim: cultural variants obey the same algebraic laws as genetic variants — same T7, different \(\mathcal{I}\). The Darwinian structure is not a metaphor but a sub-instance: biology and culture are two different instantiations of the same abstract idea algebra.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Mesoudi's core thesis — that cultural and genetic evolution are formally identical processes — is the statement that there exists an algebra isomorphism (T8: <a href="../theorems/structural-equivalence.html">Structural Equivalence</a>) between the genetic idea algebra and the cultural idea algebra preserving \(\varrho\), \(\sigma\), \(\nu\), \(\omega\). The isomorphism does not imply that the content of the two algebras is the same — only that the abstract structure of variation, selection, and transmission is identical.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism distinguishes between cases where the genetic-cultural isomorphism holds exactly (T8) and cases where it holds only approximately (quasi-isomorphism in the presence of non-zero \(\ker\varrho\)). The latter corresponds to Lamarckian aspects of cultural evolution (acquired traits can be inherited directly), which have no genetic analogue; these break the isomorphism and show up as elements in \(\ker\varrho\) of the isomorphism map.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Mesoudi acknowledges that cultural inheritance is often blending (children average the beliefs of their parents, rather than inheriting from one parent), which breaks the Mendelian structure and requires a different composition operation than standard sexual recombination.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/structural-equivalence.html">T8</a>, <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
+</div>
+
+<!-- 22 -->
+<div class="zoo-entry" id="entry-22">
+  <div class="thinker-name"><span class="entry-num">22</span>The Meme Machine — Blackmore</div>
+  <div class="source">Blackmore, <em>The Meme Machine</em> (1999)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    The self is not a unified agent but a <em>meme-complex</em>: a self-reinforcing coalition of memes that co-evolved to replicate together, constructing the fiction of a central self-controller in order to better spread. The meme-machine's behaviour is determined by the interests of the meme-complex, not the genetic interests of the organism. Technology gives rise to "temes" — technology-based memes that spread through machines rather than human minds.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    The self is a coalition \(\mathcal{S} = \{m_1, \ldots, m_n\}\) of mutually reinforcing memes:
+  </p>
+  \[
+    \varrho(m_i, m_j) > 0 \quad \text{for all } i \neq j \in \mathcal{S}.
+  \]
+  <p>
+    The stability of the self-complex = aggregate self-resonance \(\varrho(\mathcal{S}, \mathcal{S}) = \sum_{i,j} \varrho(m_i, m_j)\). The meme-machine's "interests" = maximizing this self-resonance. Temes = ideas in a higher-\(\deg\) sub-algebra (technological substrate requires higher copy-fidelity requirements than the human cognitive substrate). The coalition structure is exactly the Coalitions concept verified in the Lean codebase (Theorems10).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The stability of meme-complexes is a coalition theorem: a coalition \(\mathcal{S}\) is stable (resists invasion by external memes) iff for all external memes \(m' \notin \mathcal{S}\), \(\varrho(m', \mathcal{S}) < \varrho(m_i, \mathcal{S})\) for all \(m_i \in \mathcal{S}\). This is the game-theoretic stability condition formalized in the <a href="../lean/index.html">GameTheory Lean module</a>: the coalition is a Nash equilibrium in the memetic spreading game.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that self-complexes have characteristic cohomological signatures: the self is stable (resistant to cognitive dissonance and identity threat) exactly when \(H^2(\mathcal{S}, \mathbb{R}) = 0\) — the meme-complex has no non-trivial emergent properties that could destabilize it. Identity crises correspond to \(H^2 \neq 0\): emergent tensions in the meme-complex that cannot be resolved within its own algebra.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Blackmore's account has a strong eliminativist flavor (the "self" is an illusion); the idea algebra is neutral on whether the coalition constituting the self is real or illusory — the algebra describes the structure, not the metaphysical status.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">GameTheory</a></div>
+</div>
+
+<!-- 23 -->
+<div class="zoo-entry" id="entry-23">
+  <div class="thinker-name"><span class="entry-num">23</span>Shared Intentionality — Tomasello</div>
+  <div class="source">Tomasello, <em>The Cultural Origins of Human Cognition</em> (1999); Tomasello et al. (2005)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    The uniquely human capacity for shared intentionality — understanding that others have intentions, beliefs, and desires, and being able to form joint intentions — is the foundation of cumulative culture. Joint attention, cooperative communication, and collaborative learning all depend on shared intentionality. Other great apes have individual intentionality but not the recursive shared intentionality ("I know that you know that I know…") needed for cultural ratcheting.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of intentional states (goals, beliefs, desires) across all agents. Shared intentionality is a joint composition: an idea \(j \in \mathcal{I}\) is jointly held iff:
+  </p>
+  \[
+    \varrho_{\text{agent}_1}(a, j) > 0 \quad \text{and} \quad \varrho_{\text{agent}_2}(b, j) > 0 \quad \text{simultaneously,}
+  \]
+  <p>
+    where \(a\) is agent 1's individual state and \(b\) is agent 2's. The common knowledge element (Aumann 1976) is an idea \(e_\text{CK}\) that satisfies \(e_\text{CK} \circ j = j\) for all jointly held \(j\) — it acts as the identity of the shared composition. Cumulative culture under shared intentionality = Transmission Chain (T7) where each step achieves high fidelity because teacher and learner share the same \(e_\text{CK}\): \(\varrho(j_\text{teacher}, j_\text{learner}) \to 1\).
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The necessity of shared intentionality for cultural ratcheting follows from T7 (Transmission Chain): the cumulative cocycle grows monotonically only when the per-step fidelity \(\varrho(j_\text{teacher}, j_\text{learner}) > \theta_\text{critical}\). This threshold is achieved precisely when agents share a common knowledge element \(e_\text{CK}\) — i.e., when both agents know that the other holds \(j\), and both know that the other knows this, etc. The recursive structure of common knowledge is exactly the algebraic closure of \(e_\text{CK}\) under \(\circ\).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that joint intentionality creates a new effective idea algebra for each dyad: the resonance \(\varrho_\text{joint}(a,b)\) in the shared algebra is strictly higher than the maximum of the individual resonances, explaining why joint problem-solving produces outcomes neither agent could achieve alone.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Tomasello's framework is deeply developmental — shared intentionality emerges through a specific ontogenetic sequence in the second year of life; the static algebra does not model this developmental trajectory.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/resonance-pairing.html">T2</a> · Lean: <a href="../lean/index.html">MeaningGames</a></div>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="emergence">§4  Emergence Theory</h2>
+<!-- ================================================================ -->
+
+<!-- 24 -->
+<div class="zoo-entry" id="entry-24">
+  <div class="thinker-name"><span class="entry-num">24</span>Heteropathic Causation — Mill</div>
+  <div class="source">Mill, <em>A System of Logic</em> Book III, Ch. 6 (1843)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Mill distinguishes two modes of causal combination. In <em>homopathic</em> (or "mechanical") causation, the combined effect of two causes is the simple sum of their individual effects — as in the composition of forces in mechanics. In <em>heteropathic</em> causation, the combined effect is qualitatively different from the sum — as in chemistry, where hydrogen and oxygen produce water, a substance with properties neither possesses alone. Mill considered heteropathic causation a fundamental (and largely unexplained) feature of nature.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of causal properties of physical systems. Homopathic causation = \(\omega \equiv 0\): the composition of causes \(a \circ b\) produces only \(\sigma(a,b)\) (what is preserved) and \(\nu(a,b)\) (what is cancelled), with no elevation \(\eta(a,b) = 0\). Heteropathic causation = \(\omega(a,b) \neq 0\):
+  </p>
+  \[
+    \text{effect}(a \circ b) = \sigma(a,b) + \nu(a,b) + \underbrace{\eta(a,b)}_{\omega(a,b)\,\neq\,0}.
+  \]
+  <p>
+    Mill's "composition of causes" law is the special case \(\omega \equiv 0\). The existence of chemistry — water from hydrogen and oxygen — is the empirical proof that \(\omega \neq 0\) exists in nature. The normalized 2-cocycle condition (\(\partial\omega = 0\)) says that heteropathic effects are consistent: they do not depend on the path of composition.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Mill's recognition that heteropathic causation is irreducible to homopathic causation is T4 (<a href="../theorems/emergence-2-cocycle.html">Emergence 2-Cocycle</a>): the emergence cocycle \(\omega\) is a closed (but generally not exact) 2-cochain. Its non-triviality is a topological invariant — it cannot be eliminated by a change of basis for the causes. When \(\omega\) is exact (\([\omega] = 0 \in H^2\)), the apparently heteropathic effect can be reduced to a more refined description of the homopathic causes; when \([\omega] \neq 0\), the heteropathic effect is genuinely irreducible.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism gives Mill's distinction a mathematical criterion: the difference between homopathic and heteropathic causation is the difference between \(H^2 = 0\) and \(H^2 \neq 0\). This predicts that some apparent heteropathies (phenomena that seem qualitatively new) will, under a refined physical description, turn out to be coboundaries (\(H^2 = 0\)), while others are genuinely topologically new (\(H^2 \neq 0\)).
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Mill discusses specific natural domains (mechanics, chemistry, psychology) whereas the idea algebra is domain-neutral; domain-specific knowledge is required to instantiate \(\mathcal{I}\) and determine whether \(\omega = 0\).
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+<!-- 25 -->
+<div class="zoo-entry" id="entry-25">
+  <div class="thinker-name"><span class="entry-num">25</span>Emergent Properties — Broad</div>
+  <div class="source">Broad, <em>The Mind and Its Place in Nature</em> Ch. 2 (1925)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Broad distinguishes <em>resultant</em> properties (predictable from the properties of parts plus composition laws) from <em>emergent</em> properties (not so predictable, requiring new "trans-ordinal" laws at each level of complexity). Life is emergent from chemistry; mind is emergent from life. The emergent evolutionist picture: the universe unfolds through a series of levels, each requiring genuinely new laws — laws that no angel with complete knowledge of the lower level could derive.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be organized by a level structure: \(\mathcal{I}_0 \subset \mathcal{I}_1 \subset \cdots\) (physics, chemistry, biology, psychology). A property \(e \in \mathcal{I}_{n+1}\) is <em>resultant</em> at level \(n+1\) iff \(e = \sigma(a,b)\) for \(a,b \in \mathcal{I}_n\) and \(\omega(a,b) = 0\). A property is <em>emergent</em> iff:
+  </p>
+  \[
+    e = \eta(a,b), \quad \deg(a), \deg(b) < \deg(e), \quad \omega(a,b) \neq 0.
+  \]
+  <p>
+    Broad's "trans-ordinal" laws are exactly the new \(\omega\)-functions at each level: \(\omega_{n+1}\) is not determined by \(\omega_n\). The EmergenceLevels module formalizes this level structure and the independence of \(\omega\) across levels.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Broad's emergent evolutionism — that each level of complexity introduces irreducibly new laws — is Level-2 emergence in the <a href="../lean/index.html">EmergenceLevels Lean module</a>: \([\omega_{n+1}] \neq 0 \in H^2(\mathcal{I}_{n+1}, A)\) and \([\omega_{n+1}]\) is not the image of any class in \(H^2(\mathcal{I}_n, A)\). This is machine-verified: the EmergenceLevels module proves that Level-2 emergence exists and is not a coboundary of the level below.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism gives Broad's intuition an exact criterion: an emergent property is Level-2 emergent iff its cocycle represents a non-trivial cohomology class, and this non-triviality can in principle be tested by checking whether the property can be predicted from lower-level data. The formalism also predicts that emergent properties are stable under perturbations (topological invariance of cohomology classes), explaining Broad's intuition that emergent laws are robust across implementations.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Broad's framework is committed to a specific ontological picture (levels of natural organization with distinct laws); the idea algebra is ontologically neutral and can be applied to any domain where a level structure makes sense.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+<!-- 26 -->
+<div class="zoo-entry" id="entry-26">
+  <div class="thinker-name"><span class="entry-num">26</span>More Is Different — Anderson</div>
+  <div class="source">Anderson, "More is different" <em>Science</em> 177 (1972)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    The laws of physics at one scale do not determine the laws at the next scale up, even in principle. Condensed matter physics, chemistry, biology, psychology: each level requires its own concepts and laws, which cannot be derived from the level below by purely logical means. Broken symmetry is the key mechanism: at each transition, the ground state of the higher-level system has less symmetry than the fundamental laws governing its constituents.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}_n\) be the idea algebra at the \(n\)-th level (e.g., \(\mathcal{I}_0\) = elementary particles, \(\mathcal{I}_1\) = condensed matter, \(\mathcal{I}_2\) = chemistry). Anderson's claim: \(\omega_{n+1}\) is not determined by \(\omega_n\):
+  </p>
+  \[
+    [\omega_{n+1}] \in H^2(\mathcal{I}_{n+1}, A) \quad \text{is not the image of } [\omega_n] \in H^2(\mathcal{I}_n, A).
+  \]
+  <p>
+    Broken symmetry at level \(n+1\) = the resonance \(\varrho_{n+1}\) is less symmetric than \(\varrho_n\): the curvature \(\kappa_{n+1} = (\varrho_{n+1} - \varrho_{n+1}^T)/2 \neq 0\) even if \(\kappa_n \approx 0\). New symmetry-breaking = new curvature — a new directional asymmetry in how ideas at level \(n+1\) interact.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Anderson's central claim is Level-2 emergence: the <a href="../lean/index.html">EmergenceLevels Lean module</a> proves that there exist idea algebras where \(H^2(\mathcal{I}_{n+1}) \not\cong H^2(\mathcal{I}_n)\) — the cohomology at each level is genuinely new. This is the algebraic formulation of "more is different": the algebra at level \(n+1\) has more cohomological structure than the algebra at level \(n\), and this extra structure is precisely the "more" that "is different."
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism connects Anderson's broken symmetry to the curvature \(\kappa\) (T5): broken symmetry at level \(n+1\) is exactly the appearance of non-zero \(\kappa_{n+1}\) where \(\kappa_n \approx 0\). This predicts that any symmetry-breaking phase transition is accompanied by the appearance of a new, stable directional asymmetry in the interaction patterns — a measurable prediction in condensed matter systems.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Anderson's argument is primarily about physics and condensed matter; the idea algebra is general enough to apply to any domain, but the specific mechanisms of symmetry breaking (spontaneous symmetry breaking, Goldstone modes) require domain-specific instantiation.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/meaning-curvature.html">T5</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+<!-- 27 -->
+<div class="zoo-entry" id="entry-27">
+  <div class="thinker-name"><span class="entry-num">27</span>Weak Emergence — Bedau</div>
+  <div class="source">Bedau, "Weak emergence" <em>Philosophical Perspectives</em> 11 (1997)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    A property \(P\) of a macro-system is <em>weakly emergent</em> iff \(P\) is derivable in principle from the micro-level laws, but only by actually running the micro-simulation — there is no analytical shortcut. Conway's Game of Life patterns (gliders, oscillators) are weakly emergent: they follow deterministically from the update rules, but you can only discover them by running the automaton, not by inspection of the rules. Weak emergence is genuinely emergent (no analytical shortcut) without being mysteriously irreducible (the micro-laws suffice in principle).
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    A property \(P\) is weakly emergent iff:
+  </p>
+  \[
+    \omega(a_1, a_2 \circ \cdots \circ a_n) \neq 0 \quad \text{but} \quad [\omega] = 0 \in H^2(\mathcal{I}, A).
+  \]
+  <p>
+    That is, \(P\) is generated by a non-zero cocycle \(\omega\), but \(\omega\) is a coboundary: \(\omega = \partial f\) for some 1-cochain \(f\). This means the emergent property is derivable from a correction function \(f\) applied to the lower-level description — but finding \(f\) may require computation equivalent to the full simulation. Level-1 emergence in the EmergenceLevels module. Formally: weakly emergent properties live in the trivial cohomology (\(H^2 = 0\)) but have non-trivial cocycle representatives — they are exact but not obviously so.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The distinction between weak and strong emergence is made precise by T4 (<a href="../theorems/emergence-2-cocycle.html">Emergence 2-Cocycle</a>) together with the EmergenceLevels module: weak emergence = \([\omega] = 0\) (coboundary), strong emergence = \([\omega] \neq 0\) (non-trivial cohomology class). The fact that weakly emergent properties are "only derivable by simulation" is the algebraic statement that finding \(f\) such that \(\omega = \partial f\) may require exponential search, even though \(f\) exists in principle.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that weakly emergent properties are stable under small perturbations (because cohomology is locally constant — small changes in the micro-laws do not change \(H^2 = 0\)), while strongly emergent properties can be destabilized by perturbations that change the cohomology class. This distinguishes "robust" from "fragile" emergent phenomena in complex systems.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Bedau's computational notion of weak emergence ties irreducibility to the complexity of simulation; the cohomological formalism captures the algebraic structure but does not directly model computational complexity — a connection that requires additional theoretical work.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+<!-- 28 -->
+<div class="zoo-entry" id="entry-28">
+  <div class="thinker-name"><span class="entry-num">28</span>Strong vs. Weak Emergence — Chalmers</div>
+  <div class="source">Chalmers, "Facing up to the problem of consciousness" (1995); "Strong and weak emergence" (2006)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Chalmers distinguishes <em>weak emergence</em> (macro-properties derivable from micro-laws, possibly only by simulation) from <em>strong emergence</em> (macro-properties not derivable from micro-laws even in principle). He argues that phenomenal consciousness is strongly emergent: no amount of information about the physical organization of the brain logically entails the existence of subjective experience (qualia). This is the "hard problem of consciousness."
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Strong emergence = non-trivial cohomology:
+  </p>
+  \[
+    [\omega_\text{emergent}] \neq 0 \in H^2(\mathcal{I}, A).
+  \]
+  <p>
+    The emergent property cannot be derived from lower-level properties because its cocycle is not a coboundary — there is no 1-cochain \(f\) such that \(\omega = \partial f\). Weak emergence = \([\omega] = 0\) (coboundary, derivable in principle). The hard problem of consciousness = the claim that \([\omega_\text{phenomenal}] \neq 0\) in the idea algebra of physical facts: phenomenal consciousness is a non-trivial cohomology class over the algebra of physical properties. Idea Theory does not resolve whether \([\omega_\text{phenomenal}] = 0\) or \(\neq 0\), but it makes the question mathematically precise and proves (EmergenceLevels) that both cases are algebraically coherent.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    The distinction between weak and strong emergence is the distinction between Level-1 and Level-2 emergence in the <a href="../lean/index.html">EmergenceLevels Lean module</a>. The module proves: (a) Level-1 emergence exists (there are non-trivial coboundaries); (b) Level-2 emergence exists (there are non-trivial cohomology classes); (c) Level-1 does not imply Level-2 (weak emergence is not automatically strong). Chalmers' framework is exactly this two-level structure, made machine-checkably precise.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism shows that the debate between physicalists (consciousness is weakly emergent) and property dualists (consciousness is strongly emergent) is a question about the second cohomology group of the idea algebra of physical facts: \(H^2(\mathcal{I}_\text{physical}, A)\). If this group is trivial, physicalism is vindicated; if it is non-trivial and phenomenal properties correspond to non-trivial classes, property dualism follows. The formalism does not settle the question but provides the correct mathematical arena.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Chalmers' argument involves the conceivability of philosophical zombies and modal considerations that go beyond the algebraic structure; the formalism captures the structural distinction but not the modal/conceivability arguments for or against strong emergence.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+<!-- 29 -->
+<div class="zoo-entry" id="entry-29">
+  <div class="thinker-name"><span class="entry-num">29</span>Supervenience and Reduction — Kim</div>
+  <div class="source">Kim, <em>Supervenience and Mind</em> (1993); "The myth of nonreductive materialism" (1989)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Mental properties supervene on physical properties: no two possible situations can be physically identical yet mentally different. Kim argues that supervenience without reduction is unstable: if mental properties supervene on physical properties but are not identical to them, then mental causation is excluded by the "causal closure of the physical" — mental properties have no causal work to do. The "exclusion argument" challenges non-reductive physicalism.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Mental supervenience on the physical = a grading-preserving surjective algebra homomorphism \(f: \mathcal{I}_\text{mental} \to \mathcal{I}_\text{physical}\) with \(\omega \equiv 0\) on the image: the physical description fully determines the mental, with no emergent structure. Downward causation = a mental idea \(m\) with non-zero resonance on physical ideas outside its supervenience base:
+  </p>
+  \[
+    \varrho(m, p) > 0 \quad \text{for some } p \notin f^{-1}(f(m)),
+  \]
+  <p>
+    i.e., \(\kappa(m, p) \neq 0\) — the curvature between mental and physical ideas is non-zero. Kim's exclusion argument: if \(f\) is a surjective homomorphism with \(\omega \equiv 0\), then every physical effect of \(m\) is already caused by its physical supervenience base \(f(m)\), so \(m\) is causally redundant unless \(f\) is not surjective.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Kim's exclusion argument is the statement that \(\omega \equiv 0\) implies \(\ker f = 0\) (if there is no emergence, the only way for mental causation to be non-redundant is for the mental-to-physical map to be injective). This follows from T4 (<a href="../theorems/emergence-2-cocycle.html">T4</a>): if \(\omega \equiv 0\), then the homomorphism is structure-preserving in the strictest sense, and every mental cause has an exact physical correlate that does all the same causal work. The non-redundancy of mental causation requires either \(\omega \neq 0\) (genuine emergence) or \(f\) non-surjective (physics is not causally closed).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism provides a third option that Kim does not consider: \(\kappa(m,p) \neq 0\) (non-zero curvature between mental and physical) without \(\omega \neq 0\). The curvature captures directional causal asymmetry — mental-to-physical causation differs from physical-to-mental — which is a structural feature of the algebra, not a claim about emergence. This allows a non-reductive physicalism where mental causation is real (\(\kappa \neq 0\)) without invoking strong emergence.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Kim's arguments are deeply enmeshed in the metaphysics of properties, events, and causation; the idea algebra abstracts over these ontological commitments and cannot, on its own, settle questions about the metaphysics of mental causation.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/meaning-curvature.html">T5</a>, <a href="../theorems/structural-equivalence.html">T8</a></div>
+</div>
+
+<!-- 30 -->
+<div class="zoo-entry" id="entry-30">
+  <div class="thinker-name"><span class="entry-num">30</span>Complex Adaptive Systems — Holland</div>
+  <div class="source">Holland, <em>Hidden Order</em> (1995); <em>Emergence: From Chaos to Order</em> (1998)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Complex adaptive systems (CAS) — immune systems, economies, ant colonies, ecosystems — are networks of agents, each following local rules, producing global patterns not predictable from the rules alone. Adaptation occurs as agents' internal models ("schemas") are updated by experience. The key phenomena are: emergent global behaviour, perpetual novelty, co-evolution, and absence of a global controller. Agent-based modelling is the primary method.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the set of agent schemas (internal models of the environment). Composition \(a \circ b\) = interaction between agents: agent \(a\) encounters agent \(b\), updating both schemas. Resonance \(\varrho(a,b)\) = the mutual fitness of the two schemas' predictions (high resonance = schemas that predict each other's behaviour well). Schema complexity = \(\deg(a)\). The emergence cocycle:
+  </p>
+  \[
+    \omega(a,b) = \text{fitness surplus of interaction} = \varrho(a \circ b, \text{environment}) - \varrho(a, \text{environment}) - \varrho(b, \text{environment}).
+  \]
+  <p>
+    Population-level patterns (ant trails, market prices, ecosystem food webs) = fixed points of the iterated Diffusion step applied to the CAS idea algebra. Co-evolution = the Transmission Chain (T7) applied iteratively across agent populations.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Holland's central theorem — that CAS exhibit "perpetual novelty" (the system never reaches a fixed point but continues to generate new schemas) — corresponds to the non-termination of the Diffusion iteration when \(\omega > 0\) throughout: the emergence at each interaction step is non-zero, preventing convergence. The <a href="../lean/index.html">Diffusion Lean module</a> verifies conditions for convergence (finite-\(\omega\) chains) and divergence (perpetual novelty) in the Transmission Chain (T7), giving Holland's intuition an exact statement.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism predicts that the "edge of chaos" phenomenon in CAS — the regime between frozen order and chaotic disorder where CAS are maximally adaptive — corresponds to the boundary condition \([\omega] = 0\) (weakly emergent regime): the system generates novelty (non-zero cocycle representatives) but remains in the coboundary regime (no genuinely new cohomological structure). Crossing into the strongly emergent regime (\([\omega] \neq 0\)) corresponds to a phase transition in the CAS dynamics.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Holland's framework is designed for agent-based simulation with explicit agents, environments, and fitness functions; the idea algebra is more abstract and requires specifying these domain-specific elements before making quantitative predictions about any particular CAS.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a>, <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+</main>
+
+<footer class="site-footer"><p>&copy; 2026 Idea Theory Project. <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>.</p></footer>
+</body>
+</html>
