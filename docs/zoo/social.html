@@ -35,7 +35,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 </div>
 <h2 id="econ">§1 — Economics of Ideas</h2>
 <p class="section-lede">Arrow's information paradox, Hayek's dispersed knowledge, Romer's non-rivalry, Weitzman's recombinant growth, Jones's semi-endogenous correction, Schumpeter's creative destruction, Kahneman–Tversky framing effects, and Ostrom's polycentric governance.</p>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="arrow" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Arrow — Information as Commodity</div>
 <div class="entry-source"><em>"Economic Welfare and the Allocation of Resources for Invention," 1962</em></div>
 <div class="entry-label">The Position</div>
@@ -51,7 +51,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Arrow treats information as all-or-nothing — you either know it or you don't — while the algebra's continuous $\rho$ smears this boundary. Partial information (seeing an abstract but not a proof) requires a graded version of the irreversibility argument that the simple $\rho = 0$ formulation does not directly capture.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="hayek" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Hayek — Dispersed Knowledge and the Price System</div>
 <div class="entry-source"><em>"The Use of Knowledge in Society," <em>American Economic Review</em>, 1945</em></div>
 <div class="entry-label">The Position</div>
@@ -67,7 +67,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Hayek's price signals are scalar real numbers that compress enormously complex information into a single dimensionless index. The algebra's $\rho$ is a full bilinear pairing — richer than scalar prices. Real prices achieve their information-processing role precisely by discarding most of $\rho$'s structure, and the formalism may over-specify what prices actually carry.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="romer" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Romer — Endogenous Growth and Non-Rivalry</div>
 <div class="entry-source"><em>"Endogenous Technological Change," <em>Journal of Political Economy</em>, 1990</em></div>
 <div class="entry-label">The Position</div>
@@ -83,7 +83,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Romer's model contains a key asymmetry: ideas are costless to copy once discovered but costly to discover. The non-decreasing degree condition captures non-rivalry of use but does not automatically encode the fixed-cost/zero-marginal-cost asymmetry between idea production and idea diffusion that drives Romer's monopolistic competition structure.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="weitzman" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Weitzman — Recombinant Growth</div>
 <div class="entry-source"><em>"Recombinant Growth," <em>Quarterly Journal of Economics</em>, 1998</em></div>
 <div class="entry-label">The Position</div>
@@ -99,7 +99,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>The binary closure counts all compositions, including economically useless duplicates and already-known combinations. Weitzman's empirical argument rests on the subset of genuinely distinct, practically valuable recombinations — a selection criterion that requires external economic judgment not intrinsic to the algebraic closure operation.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="jones" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Jones — Semi-Endogenous Growth</div>
 <div class="entry-source"><em>"R&amp;D-Based Models of Economic Growth," <em>Journal of Political Economy</em>, 1995</em></div>
 <div class="entry-label">The Position</div>
@@ -115,7 +115,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Jones's model is a continuous-time ODE system, and the "fishing out" dynamics arise from a specific functional form of the R&amp;D production function. The discrete cocycle bound $\omega \leq C$ is a static algebraic analogue capturing the qualitative constraint but not the specific differential-equation dynamics or Jones's empirical calibration.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="schumpeter" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Schumpeter — Creative Destruction</div>
 <div class="entry-source"><em><em>Capitalism, Socialism and Democracy</em>, 1942</em></div>
 <div class="entry-label">The Position</div>
@@ -131,7 +131,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Schumpeter's creative destruction operates at the level of firms, industries, and institutional complexes; it requires a sociology of who the innovator is and how they displace incumbents through financial credit and market competition. The idea algebra abstracts away these social carriers, treating destruction as a structural negation-component — losing Schumpeter's most interesting claims about the sociology of the entrepreneur.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="kahneman-tversky" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Kahneman &amp; Tversky — Framing Effects and Prospect Theory</div>
 <div class="entry-source"><em>"Prospect Theory: An Analysis of Decision under Risk," <em>Econometrica</em>, 1979</em></div>
 <div class="entry-label">The Position</div>
@@ -147,7 +147,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Kahneman and Tversky established the approximately 2:1 loss-aversion ratio through careful empirical experimentation with human subjects. The algebra provides a structural explanation for <em>why</em> $\kappa$ is asymmetric but says nothing about why it takes the specific value of roughly two rather than any other number — the quantitative calibration is entirely empirical.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="ostrom" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Ostrom — Polycentric Governance of the Commons</div>
 <div class="entry-source"><em><em>Governing the Commons</em>, 1990</em></div>
 <div class="entry-label">The Position</div>
@@ -165,7 +165,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 </div>
 <h2 id="game">§2 — Game Theory</h2>
 <p class="section-lede">Von Neumann–Morgenstern minimax, Nash equilibrium, Schelling's focal points, Maynard Smith's ESS, Axelrod's evolution of cooperation, Aumann's common knowledge, and Selten's refinements — each as a claim about the resonance structure of strategy-idea algebras.</p>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="von-neumann" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Von Neumann &amp; Morgenstern — Expected Utility and Minimax</div>
 <div class="entry-source"><em><em>Theory of Games and Economic Behavior</em>, 1944</em></div>
 <div class="entry-label">The Position</div>
@@ -181,7 +181,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Von Neumann–Morgenstern utility requires a full probability measure over outcomes, and mixed strategies are randomization devices. The idea algebra's $\rho$ is a bilinear pairing, not a probability weighting, so the subjective probability interpretation of mixed strategies — as epistemic uncertainty about the opponent's choice — is not directly recovered from the algebraic structure.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="nash" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Nash — Nash Equilibrium</div>
 <div class="entry-source"><em>"Equilibrium Points in n-Person Games," <em>PNAS</em>, 1950</em></div>
 <div class="entry-label">The Position</div>
@@ -197,7 +197,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Nash's full existence proof uses Kakutani's fixed-point theorem on mixed-strategy simplices, requiring convexity and continuity. The Lean module's <code>exists_best_response</code> covers pure strategies in finite games and does not yet fully subsume the mixed-strategy existence result; extending to continuous strategy spaces requires additional topological conditions beyond the discrete algebraic framework.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="schelling" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Schelling — Focal Points and Coordination</div>
 <div class="entry-source"><em><em>The Strategy of Conflict</em>, 1960</em></div>
 <div class="entry-label">The Position</div>
@@ -213,7 +213,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Schelling's salience is irreducibly cultural and multi-dimensional — what makes "heads" focal in a coin flip or "Grand Central at noon" focal as a meeting point depends on enormously rich social context. The algebraic $\deg$ compresses this multi-dimensional salience into a single ordinal function, capturing the structural point while losing most of the cultural content.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="maynard-smith" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Maynard Smith — Evolutionarily Stable Strategy</div>
 <div class="entry-source"><em><em>Evolution and the Theory of Games</em>, 1982</em></div>
 <div class="entry-label">The Position</div>
@@ -229,7 +229,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>ESS's biological meaning requires a specific replicator dynamic: evolutionary feedback from payoffs to population shares, governed by differential equations in continuous time. The static algebraic condition captures the stability criterion but says nothing about whether any particular replicator dynamic converges to the ESS or how quickly. The algebra is a necessary condition for ESS, not sufficient for evolutionary stability in all dynamic models.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="axelrod" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Axelrod — The Evolution of Cooperation</div>
 <div class="entry-source"><em><em>The Evolution of Cooperation</em>, 1984</em></div>
 <div class="entry-label">The Position</div>
@@ -245,7 +245,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Axelrod's result is primarily empirical — it derives from simulations of strategies submitted by actual game theorists, capturing something about the human sociology of strategy selection. The algebraic discounted emergence series clarifies the mathematical structure but requires a specific replicator dynamics to generate the same numerical predictions.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="aumann" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Aumann — Common Knowledge and Agreeing to Disagree</div>
 <div class="entry-source"><em>"Agreeing to Disagree," <em>Annals of Statistics</em>, 1976</em></div>
 <div class="entry-label">The Position</div>
@@ -261,7 +261,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Aumann's model uses a standard probability space with a Kripke-style partition structure — a tractable, well-understood framework. The idea algebra's iterated-Aufhebung limit operator is an algebraic abstraction that may not converge in all partition-model scenarios that Aumann's original framework handles cleanly, and the connection between the two formalisms requires additional axioms to be made fully precise.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="selten" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Selten — Refinements of Nash Equilibrium</div>
 <div class="entry-source"><em>"Reexamination of the Perfectness Concept for Equilibrium Points in Extensive Games," 1975</em></div>
 <div class="entry-label">The Position</div>
@@ -279,7 +279,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 </div>
 <h2 id="socknow">§3 — Sociology of Knowledge</h2>
 <p class="section-lede">Lovejoy's unit ideas, Granovetter's weak ties, Bourdieu's field theory, Latour's actor-networks, Skinner's linguistic contextualism, Koselleck's conceptual history, Mannheim's standpoint epistemology, and Merton's scientific norms — each formalized as a claim about sub-algebra structure, conjugation, or resonance topology.</p>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="lovejoy" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Lovejoy — Unit Ideas and the History of Philosophy</div>
 <div class="entry-source"><em><em>The Great Chain of Being: A Study of the History of an Idea</em>, 1936</em></div>
 <div class="entry-label">The Position</div>
@@ -295,7 +295,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Lovejoy treats unit ideas as genuinely atomic and trans-historical. But the idea algebra's composition $\circ$ allows every idea to be further decomposed into simpler components, so true atomicity requires an additional "irreducible generator" condition not intrinsic to the formalism. Unit ideas can only be modeled by stipulation — by declaring certain elements generators — not derived from the algebraic structure itself.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="granovetter" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Granovetter — The Strength of Weak Ties</div>
 <div class="entry-source"><em>"The Strength of Weak Ties," <em>American Journal of Sociology</em>, 1973</em></div>
 <div class="entry-label">The Position</div>
@@ -311,7 +311,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Granovetter's original result is primarily empirical, based on interviews with job-finders in the Boston area. The curvature formalization captures the asymmetric-bridge intuition but cannot recover specific threshold effects from continuous $\kappa$: Granovetter's "bridge" is dichotomous (a tie either bridges or does not), while $\kappa$ is continuous and provides no natural threshold for when a tie counts as a structural bridge.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="bourdieu" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Bourdieu — Field, Habitus, and Capital</div>
 <div class="entry-source"><em><em>The Logic of Practice</em>, 1980</em></div>
 <div class="entry-label">The Position</div>
@@ -327,7 +327,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Bourdieu's habitus is historically sedimented and essentially pre-reflective — internalized bodily practice, not a deliberate cognitive strategy. The algebraic habitus as "any idempotent conjugating operator" is far broader, including deliberately chosen interpretive stances that Bourdieu would sharply distinguish from the unreflective dispositions habitus names. The formalism captures the structural role of habitus without its phenomenological character.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="latour" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Latour — Actor-Network Theory and Black Boxing</div>
 <div class="entry-source"><em><em>Science in Action</em>, 1987</em></div>
 <div class="entry-label">The Position</div>
@@ -343,7 +343,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Latour's symmetry principle refuses a priori ontological distinctions between human and nonhuman actors. The algebra treats all elements of $\mathcal{I}$ uniformly — consistent with ANT's symmetry — but has no mechanism for generating the specific asymmetries between human agency and material resistance that constitute Latour's most detailed analyses of laboratory work and inscription devices.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="skinner-q" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Skinner — Linguistic Contextualism in Intellectual History</div>
 <div class="entry-source"><em>"Meaning and Understanding in the History of Ideas," <em>History and Theory</em>, 1969</em></div>
 <div class="entry-label">The Position</div>
@@ -359,7 +359,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Skinner restricts his methodology to recovering intentional speech acts by individual authors in specific historical controversies. The algebraic framework applies to any composition, which is far broader than what the contextualist methodology licenses. In particular, the algebra makes no distinction between intentional acts (which Skinner cares about) and unintentional meaning effects (which his framework explicitly excludes).</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="koselleck" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Koselleck — Conceptual History and the Temporalization of Ideas</div>
 <div class="entry-source"><em><em>Futures Past: On the Semantics of Historical Time</em>, 1979</em></div>
 <div class="entry-label">The Position</div>
@@ -375,7 +375,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Koselleck's analysis is resolutely historical and particular — the Sattelzeit is a specific claim about specific German and European concepts in a specific period, grounded in close reading of primary sources. The algebraic framework provides a general formal structure but cannot, from inside the formalism, identify which periods count as saddle periods or which concepts underwent genuine temporalization — this requires the detailed empirical historical work that is Koselleck's actual contribution.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="mannheim" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Mannheim — Sociology of Knowledge and Standpoint Relativity</div>
 <div class="entry-source"><em><em>Ideology and Utopia</em>, 1936</em></div>
 <div class="entry-label">The Position</div>
@@ -391,7 +391,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Mannheim believed the free-floating intelligentsia could achieve partial synthesis transcending standpoint — a hope generating enormous controversy. The algebraic weighted average $\sum_s w_s \rho_s$ is itself just another resonance pairing and thus another standpoint, which supports the more pessimistic post-Mannheimian conclusion that no standpoint-transcendence is possible. The algebra cannot recover Mannheim's hope for partial synthesis.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="merton" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Merton — The Normative Structure of Science (CUDOS)</div>
 <div class="entry-source"><em>"The Normative Structure of Science," 1942</em></div>
 <div class="entry-label">The Position</div>
@@ -410,7 +410,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 </div>
 <h2 id="meaning">§4 — Meaning and Language</h2>
 <p class="section-lede">Austin's speech acts, Searle's intentionality, Lewis's conventions, Kripkenstein's rule-following paradox, Davidson's radical interpretation, Grice's implicature, and the Wittgenstein–Nash capstone — unified in the MeaningGames Lean module.</p>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="austin" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Austin — Speech Act Theory</div>
 <div class="entry-source"><em><em>How to Do Things with Words</em>, 1962</em></div>
 <div class="entry-label">The Position</div>
@@ -426,7 +426,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Austin's theory is irreducibly context-sensitive: a performative succeeds only if the right speaker in the right circumstances utters the right formula. The algebraic condition $\eta \neq 0$ is purely structural and cannot encode whether the institutional context is correct — it says only that something new is created, not whether that creation is felicitous or constitutes a social fact recognized by others.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="searle" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Searle — Intentionality and the Chinese Room</div>
 <div class="entry-source"><em>"Minds, Brains, and Programs," 1980; <em>Intentionality</em>, 1983</em></div>
 <div class="entry-label">The Position</div>
@@ -442,7 +442,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Searle's "biological naturalism" holds that only biological brains can produce genuine intentionality, because intentionality is a causal power of biological tissue. The algebra is entirely substrate-neutral: it represents the structure of intentionality ($\rho$) without specifying what physical process produces it. The deepest question Searle raises — why do brains have $\rho$ while functionally equivalent programs do not? — lies completely outside the formalism.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="lewis" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Lewis — Convention and the Game Theory of Language</div>
 <div class="entry-source"><em><em>Convention: A Philosophical Study</em>, 1969</em></div>
 <div class="entry-label">The Position</div>
@@ -458,7 +458,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Lewis's full definition requires both Nash equilibrium and common knowledge of the convention. The algebraic <code>wittgenstein_nash_existence</code> gives Nash equilibrium existence, but the common knowledge component requires the additional iterated-Aufhebung convergence argument from the Aumann entry above. The full Lewis analysis requires both the MeaningGames and the epistemic-iteration structures working together.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="kripkenstein" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Kripkenstein — The Rule-Following Paradox</div>
 <div class="entry-source"><em>Kripke, <em>Wittgenstein on Rules and Private Language</em>, 1982</em></div>
 <div class="entry-label">The Position</div>
@@ -474,7 +474,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Kripke's "sceptical solution" grounds meaning in community assertion conditions — the community's practice of correcting and endorsing each other's rule-applications. But the formalism cannot show that community-level practice avoids the same underdetermination at the collective level: the community's finite history of rule-applications is equally compatible with infinitely many extensions. The Nash equilibrium existence theorem sidesteps rather than solves this deeper regress.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="davidson" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Davidson — Radical Interpretation and Triangulation</div>
 <div class="entry-source"><em>"Truth and Meaning," 1967; "Three Varieties of Knowledge," 1991</em></div>
 <div class="entry-label">The Position</div>
@@ -490,7 +490,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Davidson's triangulation requires a physical world that causally grounds the shared $\rho$ — perceptual responses of speaker and interpreter to the same external objects create a common semantic foundation. The algebra's "common $\rho$" is postulated rather than causally derived: the formalism represents the structure Davidson claims the world provides, but says nothing about how the world causally produces that structure. The causal story — which is the heart of Davidson's externalism — lies completely outside the algebra.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="grice" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Grice — Conversational Implicature</div>
 <div class="entry-source"><em>"Logic and Conversation," in <em>Studies in the Way of Words</em>, 1975</em></div>
 <div class="entry-label">The Position</div>
@@ -506,7 +506,7 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <div class="entry-label">Where It Diverges</div>
 <p>Grice's maxims are defeasible pragmatic norms, not exceptionless algebraic laws: implicatures can be explicitly cancelled, and the cooperative presumption can be suspended in fiction or irony. The optimization framing $\arg\max_a \rho(a, \text{context})$ is too crisp to capture this contextual, negotiated, and cancellable character of conversational implicature.</p>
 </div>
-<div class="zoo-entry" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="zoo-entry" id="wittgenstein-nash" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Wittgenstein–Nash Bridge — The Capstone Theorem</div>
 <div class="entry-source"><em>Wittgenstein, <em>Philosophical Investigations</em>, 1953; Nash, <em>PNAS</em>, 1950; Lewis, <em>Convention</em>, 1969</em></div>
 <div class="entry-label">The Position</div>
