@@ -24,7 +24,7 @@ Temporality is not an external label. It is built into the horizon category. Eac
 
 The theorem rules out the view that conceptual change is merely replacement of definitions. It predicts that a term may keep recognizable identity while its temporal grading changes dramatically. It also predicts that periods of acceleration will produce concepts with high expectation, high conflict, and unstable resonance pairing. Such concepts become sites where groups struggle over possible futures.
 
-Carefully stated: let the horizon category be indexed by historical periods, political conflicts, institutions, and semantic regimes. The horizon functor assigns to each horizon a local resonance pairing with past experience, a local resonance pairing with future expectation, and a local degree or grading. T14 applies because meanings fail to pull back unchanged across temporal morphisms. T15 applies when a basic concept keeps broad support across multiple horizons while absorbing new temporal layers.
+Carefully stated: let the horizon category be indexed by historical periods, political conflicts, institutions, and semantic regimes. The horizon functor assigns to each horizon a local resonance pairing with past experience, a local resonance pairing with future expectation, and a local degree or grading. The indexical pullback theorem applies because meanings fail to pull back unchanged across temporal morphisms. The profundity theorem applies when a basic concept keeps broad support across multiple horizons while absorbing new temporal layers.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ The formalism also risks making temporalization sound smooth. Koselleck's concep
 
 ## Horizon structure
 
-Koselleck belongs with both T14 and T15. The horizon category is temporally stratified: early modern, revolutionary, nineteenth-century, and later horizons carry different spaces of experience and horizons of expectation. Morphisms include semantic inheritance, political rupture, translation, reform, revolution, and retrospective reinterpretation.
+Koselleck belongs with both the indexical pullback theorem and the profundity theorem. The horizon category is temporally stratified: early modern, revolutionary, nineteenth-century, and later horizons carry different spaces of experience and horizons of expectation. Morphisms include semantic inheritance, political rupture, translation, reform, revolution, and retrospective reinterpretation.
 
-T14 names the failure of invariant meaning across temporal horizons. T15 names the depth of basic concepts that survive those transformations. Democracy, history, revolution, and progress are powerful because they keep enough identity to be contested across epochs while changing the futures they project.
+The indexical pullback theorem names the failure of invariant meaning across temporal horizons. The profundity theorem names the depth of basic concepts that survive those transformations. Democracy, history, revolution, and progress are powerful because they keep enough identity to be contested across epochs while changing the futures they project.
 
 ## Diagnostic derived primitives
 
@@ -52,4 +52,4 @@ A useful diagnostic is to listen for temporal imbalance. When a concept explains
 
 ## Chapter summary
 
-Koselleck gives Idea Theory an account of concepts as temporal structures. They preserve identity, change grading, and bend between experience and expectation. T14 captures temporal obstruction, while T15 captures the wide support of basic concepts across historical horizons.
+Koselleck gives Idea Theory an account of concepts as temporal structures. They preserve identity, change grading, and bend between experience and expectation. The indexical pullback theorem captures temporal obstruction, while the profundity theorem captures the wide support of basic concepts across historical horizons.

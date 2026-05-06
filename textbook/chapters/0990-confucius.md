@@ -64,7 +64,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -106,11 +106,11 @@ political order. Morphisms extend cultivated conduct from parent-child relations
 minister, friend-friend, and public governance, preserving role-propriety while widening its
 scope. perspective is the role-bearing person, schema or paradigm is tradition, is ritual
 attunement, and credence measures trustworthiness or humane reliability across contexts.
-This is T13: social harmony is the sheaf-gluing of role-local acts of lǐ into a coherent dào
-embodied by the jūnzǐ. For this reason the chapter should be heard through T13. T13 is the
+This is the hermeneutic sheaf theorem: social harmony is the sheaf-gluing of role-local acts of lǐ into a coherent dào
+embodied by the jūnzǐ. For this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives

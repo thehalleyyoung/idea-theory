@@ -22,7 +22,7 @@ The preservation part of the Chinese Room keeps syntax intact. The suppression p
 
 *Identical symbol composition does not by itself guarantee intentional resonance across a horizon.*
 
-This is T14 read through Searle. The theorem rules out the move from correct formal transition to genuine meaning without an account of horizon translation. It predicts that a syntactic horizon may preserve all visible behavior while failing to pull back the preservation part and emergence part of understanding. A chatbot, a clerk, and a fluent speaker may produce the same string, but the horizon in which the string is owned, meant, and understood can differ.
+This is the indexical pullback theorem read through Searle. The theorem rules out the move from correct formal transition to genuine meaning without an account of horizon translation. It predicts that a syntactic horizon may preserve all visible behavior while failing to pull back the preservation part and emergence part of understanding. A chatbot, a clerk, and a fluent speaker may produce the same string, but the horizon in which the string is owned, meant, and understood can differ.
 
 Carefully restated, the horizon category contains bodily agents, computational systems, linguistic communities, referents, and interpretive settings. The horizon functor assigns to each horizon a field of possible signs and acts. Composition governs transitions among symbols. Identity marks no change in symbolic state. The resonance pairing links signs to what they are about. The preservation part carries formal pattern, the suppression part blocks semantic ownership, and the emergence part would be intentional understanding. The relevant derived primitive is intentionality, with rigid reference nearby because reference must remain stable across uses.
 
@@ -40,7 +40,7 @@ Searle argues that biological brains have causal powers that computers, as compu
 
 ## Horizon structure
 
-Searle's horizon is embodied, causal, and semantic. It includes the speaker, the rule following system, the language community, and the world toward which mental states are directed. It most centrally instantiates T14, because the crucial obstruction appears when one tries to translate from a syntactic horizon to an intentional horizon. Preservation of input and output does not ensure preservation of aboutness.
+Searle's horizon is embodied, causal, and semantic. It includes the speaker, the rule following system, the language community, and the world toward which mental states are directed. It most centrally instantiates the indexical pullback theorem, because the crucial obstruction appears when one tries to translate from a syntactic horizon to an intentional horizon. Preservation of input and output does not ensure preservation of aboutness.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ The diagnostic derived primitives are intentionality, rigid reference, and poten
 
 ## Chapter summary
 
-Searle forces us to distinguish moving symbols from meaning them. Idea Theory restates his point by separating composition from resonance pairing. The Chinese Room preserves formal order but may lack the emergence part of intentional understanding. T14 gives the best horizon structure, because the problem is an obstruction in translation from syntax to semantics.
+Searle forces us to distinguish moving symbols from meaning them. Idea Theory restates his point by separating composition from resonance pairing. The Chinese Room preserves formal order but may lack the emergence part of intentional understanding. The indexical pullback theorem gives the best horizon structure, because the problem is an obstruction in translation from syntax to semantics.

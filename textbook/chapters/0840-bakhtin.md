@@ -54,7 +54,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that dialogism is the symmetry and high
 dimensionality of the resonance pairing. Each voice anticipates the other; the resonance
-structure is mutual rather than one-directional, and rich rather than thin. This is a T2
+structure is mutual rather than one-directional, and rich rather than thin. This is a the resonance theorem
 claim with strong symmetry. The second claim is that the monologic voice is the suppression
 suppression effect, while polyphony is the emergence part maximizing the diversity of voices.
 The prediction is that failures of understanding will not be accidental noise. They will
@@ -65,7 +65,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -107,11 +107,11 @@ horizon category is the dialogic field of voices, genres, chronotopes, and socia
 Morphisms are addressive translations: an utterance enters a new answerable context and
 changes through response, parody, quotation, or novelistic orchestration. perspective is
 voice-position, temporality is chronotope as time-space of narrative, schema or paradigm
-marks speech genres, and records evaluative accent. This is T13: polyphonic meaning is the
+marks speech genres, and records evaluative accent. This is the hermeneutic sheaf theorem: polyphonic meaning is the
 gluing of voice-local horizons without reducing them to a single monologic authority. For
-this reason the chapter should be heard through T13. T13 is the hermeneutic sheaf theorem,
-where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem,
+where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 

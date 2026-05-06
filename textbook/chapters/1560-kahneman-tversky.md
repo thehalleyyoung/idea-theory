@@ -20,7 +20,7 @@ In Idea Theory, a frame is a horizon-setting idea that changes the resonance pai
 
 The theorem rules out the expectation that equivalent outcome descriptions must yield equivalent preferences. It predicts framing effects whenever the same prospect is composed with different schemas that alter credence, attention, or signed valence. It also predicts that so-called irrationality may be structurally normal: a non-neutral horizon can change what counts as the salient comparison.
 
-Carefully stated, let identity preserve the extensional prospect across descriptions, let composition join that prospect with a gain frame or loss frame, let the resonance pairing measure preference force, and let meaning curvature register asymmetric evaluation around the reference point. If the preservation part keeps the described outcome while the suppression part and emergence part differ across frames, then the same prospect supports different choices in different horizons. This is T14, because the choice inference fails to pull back unchanged across framing morphisms.
+Carefully stated, let identity preserve the extensional prospect across descriptions, let composition join that prospect with a gain frame or loss frame, let the resonance pairing measure preference force, and let meaning curvature register asymmetric evaluation around the reference point. If the preservation part keeps the described outcome while the suppression part and emergence part differ across frames, then the same prospect supports different choices in different horizons. This is the indexical pullback theorem, because the choice inference fails to pull back unchanged across framing morphisms.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Kahneman and Tversky's achievement was empirical and quantitative. They measured
 
 ## Horizon structure
 
-The horizon category contains gain frames, loss frames, reference points, probability presentations, experimental prompts, and decision contexts. Morphisms are reframings that preserve the extensional prospect while changing salience and permitted inference. The horizon functor assigns different resonance pairings and signed valence profiles to the same underlying prospect. T14 is the theorem label: prospect theory is the canonical case where inference does not survive a horizon shift.
+The horizon category contains gain frames, loss frames, reference points, probability presentations, experimental prompts, and decision contexts. Morphisms are reframings that preserve the extensional prospect while changing salience and permitted inference. The horizon functor assigns different resonance pairings and signed valence profiles to the same underlying prospect. The indexical pullback theorem is the theorem label: prospect theory is the canonical case where inference does not survive a horizon shift.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ The practical lesson is humility. When advising, voting, investing, or choosing 
 
 ## Chapter summary
 
-Kahneman and Tversky show that framing changes choice. Idea Theory restates this as T14: identity of outcome can be preserved while resonance, suppression, emergence, and meaning curvature shift across horizons. The same prospect is not the same decision when the frame changes.
+Kahneman and Tversky show that framing changes choice. Idea Theory restates this as the indexical pullback theorem: identity of outcome can be preserved while resonance, suppression, emergence, and meaning curvature shift across horizons. The same prospect is not the same decision when the frame changes.

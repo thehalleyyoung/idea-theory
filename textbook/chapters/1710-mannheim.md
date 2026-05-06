@@ -24,7 +24,7 @@ Perspective is the key primitive. A standpoint is not a private mood. It is a ho
 
 The theorem rules out both simple objectivism and simple relativism. It denies that ideas are evaluated from nowhere, but it also denies that every claim is arbitrary. It predicts patterned differences: groups located differently in social space will not merely disagree about conclusions, but will often differ in salience, expectation, suspicion, and recognized evidence.
 
-Carefully stated: let the horizon category consist of classes, generations, parties, professions, institutions, and intellectual milieus. The horizon functor assigns to each social location a local resonance pairing, local credence structure, and local emergence part for shared ideas. T14 applies because knowledge claims do not pull back invariantly across standpoint morphisms. The obstruction appears as ideology when a local perspective claims universality, and as utopia when a local aspiration claims destiny.
+Carefully stated: let the horizon category consist of classes, generations, parties, professions, institutions, and intellectual milieus. The horizon functor assigns to each social location a local resonance pairing, local credence structure, and local emergence part for shared ideas. The indexical pullback theorem applies because knowledge claims do not pull back invariantly across standpoint morphisms. The obstruction appears as ideology when a local perspective claims universality, and as utopia when a local aspiration claims destiny.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ There is also a historical divergence. Mannheim wrote in the crisis of European 
 
 ## Horizon structure
 
-Mannheim belongs with T14. The horizon category is made of social locations: classes, generations, parties, educational strata, intellectual circles, and political movements. Morphisms include critique, conversion, generational translation, coalition, and attempted synthesis. The horizon functor records how resonance pairing, credence, and potentiality vary with location.
+Mannheim belongs with the indexical pullback theorem. The horizon category is made of social locations: classes, generations, parties, educational strata, intellectual circles, and political movements. Morphisms include critique, conversion, generational translation, coalition, and attempted synthesis. The horizon functor records how resonance pairing, credence, and potentiality vary with location.
 
-T14 names the obstruction to invariant translation. A claim that appears realistic in one standpoint may appear ideological in another. A future that appears utopian to one group may appear necessary to another. The obstruction is the social structure of knowledge, not a mere failure of intelligence.
+The indexical pullback theorem names the obstruction to invariant translation. A claim that appears realistic in one standpoint may appear ideological in another. A future that appears utopian to one group may appear necessary to another. The obstruction is the social structure of knowledge, not a mere failure of intelligence.
 
 ## Diagnostic derived primitives
 
@@ -52,4 +52,4 @@ A useful diagnostic is to ask what a standpoint makes difficult to notice. Every
 
 ## Chapter summary
 
-Mannheim gives Idea Theory a sociology of perspective. Standpoints are horizon-local tunings of resonance pairing and credence. T14 captures why knowledge claims do not translate unchanged across social locations, and why ideology and utopia are structural effects of standpoint. The diagnostic lesson is therefore modest and strong: situated thought can still be compared when its standpoint is made explicit.
+Mannheim gives Idea Theory a sociology of perspective. Standpoints are horizon-local tunings of resonance pairing and credence. The indexical pullback theorem captures why knowledge claims do not translate unchanged across social locations, and why ideology and utopia are structural effects of standpoint. The diagnostic lesson is therefore modest and strong: situated thought can still be compared when its standpoint is made explicit.

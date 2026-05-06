@@ -55,7 +55,7 @@ and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that sense is the primary element of the
 idea domain; reference is the value of the emergence part. The algebra operates on senses;
-references are derived. This is a T6 claim with the further content that the same reference
+references are derived. This is a the conjugation theorem claim with the further content that the same reference
 can be reached by many distinct senses. The second claim is that co-reference is the
 equivalence relation induced by the resonance pairing. The prediction is that failures of
 understanding will not be accidental noise. They will cluster where a local content cannot
@@ -66,7 +66,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -108,11 +108,11 @@ judgment-strokes, sharply separated from psychology. Morphisms translate ordinar
 propositions into Begriffsschrift, preserving inferential articulation while stripping away
 subjective association. rigid reference is reference, intentionality is sense as mode of
 presentation, and differentiation separates concept and object by type-theoretic role rather
-than empirical contrast. This is T15: a thought's objectivity is its trans-horizonal
+than empirical contrast. This is the profundity theorem: a thought's objectivity is its trans-horizonal
 stability across thinkers, languages, and presentations once expressed in logical form. For
-this reason the chapter should be heard through T15. T13 is the hermeneutic sheaf theorem,
-where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+this reason the chapter should be heard through the profundity theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem,
+where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 

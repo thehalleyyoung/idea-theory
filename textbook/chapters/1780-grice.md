@@ -22,7 +22,7 @@ The preservation part carries literal content. The suppression part marks what t
 
 *Implicature is the emergence of intended meaning from the gap between literal content and cooperative horizon.*
 
-This is T14 read through Grice. The theorem rules out a simple transfer model in which the hearer receives only preserved content. It predicts that meaning can arise precisely where preservation fails to carry everything. The obstruction is productive. A brief remark, a pause, or a selective compliment can generate an emergence part because the hearer translates the utterance through cooperative expectations.
+This is the indexical pullback theorem read through Grice. The theorem rules out a simple transfer model in which the hearer receives only preserved content. It predicts that meaning can arise precisely where preservation fails to carry everything. The obstruction is productive. A brief remark, a pause, or a selective compliment can generate an emergence part because the hearer translates the utterance through cooperative expectations.
 
 Carefully restated, the horizon category contains speaker, hearer, topic, purpose, background knowledge, and norms of cooperation. The horizon functor assigns to each situation the utterances that would count as informative, truthful, relevant, and orderly. Composition places an utterance inside the exchange. Identity is no change in common ground. The resonance pairing measures fit with the cooperative purpose. The preservation part is literal content, the suppression part is omitted or cancelled content, and the emergence part is the implicature. The diagnostic derived primitive is credence, because the hearer estimates what a cooperative speaker would have meant.
 
@@ -40,7 +40,7 @@ Grice's maxims are defeasible and psychologically subtle. Idea Theory can sound 
 
 ## Horizon structure
 
-Grice's horizon is conversational and cooperative. It includes shared purposes, social expectations, background knowledge, and the possibility of cancellation. It most centrally instantiates T14, because implicature depends on a horizon translation in which preservation of literal content is not enough. Meaning appears through the obstruction between what is said and what cooperation makes hearable.
+Grice's horizon is conversational and cooperative. It includes shared purposes, social expectations, background knowledge, and the possibility of cancellation. It most centrally instantiates the indexical pullback theorem, because implicature depends on a horizon translation in which preservation of literal content is not enough. Meaning appears through the obstruction between what is said and what cooperation makes hearable.
 
 ## Diagnostic derived primitives
 
@@ -51,4 +51,4 @@ The same structure explains why silence can speak. If a response is expected and
 
 ## Chapter summary
 
-Grice shows that conversation carries more than literal content. Idea Theory restates implicature as an emergence part created by cooperative resonance across a horizon. The preservation part is what is said, the suppression part is what is left unsaid or cancelled, and the emergence part is what is meant. T14 is central because pragmatic meaning arises through horizon translation.
+Grice shows that conversation carries more than literal content. Idea Theory restates implicature as an emergence part created by cooperative resonance across a horizon. The preservation part is what is said, the suppression part is what is left unsaid or cancelled, and the emergence part is what is meant. The indexical pullback theorem is central because pragmatic meaning arises through horizon translation.

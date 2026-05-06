@@ -52,7 +52,7 @@ articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that meaning is use: there is no element
 of the idea domain apart from its role in composition. To pull a word out of its language
-game and ask for its meaning in isolation is to encounter no meaning at all. This is a T1
+game and ask for its meaning in isolation is to encounter no meaning at all. This is a the composition theorem
 claim with extreme holism: identity of an element is exhausted by its compositional role.
 The second claim is that family resemblance is the resonance pairing as an overlap count,
 not an essence. The prediction is that failures of understanding will not be accidental
@@ -63,7 +63,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -104,12 +104,12 @@ language-games and forms of life. Morphisms are partial overlaps in use, trainin
 criteria, not hidden common essences; meaning is intra-horizonal and public. schema or
 paradigm is the form of life, perspective is the participant trained into rule-following,
 differentiation is contrastive use, and private-language fantasy is a failed singleton
-horizon. This is paradigmatic T14: cross-game inference fails, and the private-language
+horizon. This is paradigmatic the indexical pullback theorem: cross-game inference fails, and the private-language
 argument denies that any the horizon functor-section over an isolated private horizon is
-even definable. For this reason the chapter should be heard through T14. T13 is the
+even definable. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives

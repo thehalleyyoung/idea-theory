@@ -22,7 +22,7 @@ Austin's threefold distinction becomes the preservation part, the suppression pa
 
 *When a speech act is felicitous, its meaning is the social change it stably creates within a horizon.*
 
-This is T13 read through Austin. The theorem rules out the idea that a sentence has one complete meaning before the setting of use is considered. It predicts that the same words can preserve the same content while producing different force, or no force, when moved to another horizon. I promise, spoken on stage in a play, preserves the phrase but does not create the same obligation as I promise, spoken in earnest to a friend.
+This is the hermeneutic sheaf theorem read through Austin. The theorem rules out the idea that a sentence has one complete meaning before the setting of use is considered. It predicts that the same words can preserve the same content while producing different force, or no force, when moved to another horizon. I promise, spoken on stage in a play, preserves the phrase but does not create the same obligation as I promise, spoken in earnest to a friend.
 
 Carefully restated, the horizon category contains speakers, hearers, institutions, occasions, and authorized roles. The horizon functor assigns to each such horizon the available speech acts and their conditions of success. Composition orders utterances in time. Identity is the unaltered conversational situation. The resonance pairing tests fit between utterance and setting. The preservation part retains content, the suppression part marks failed felicity, and the emergence part creates obligation, permission, standing, or expectation. The relevant derived primitive is intentionality, because the act is directed toward a social uptake.
 
@@ -40,7 +40,7 @@ Austin was suspicious of over systematic theory. His genius lay in patient atten
 
 ## Horizon structure
 
-Austin's horizon is institutional and conversational. It includes who may speak, what formula is recognized, which audience can receive it, and what prior conditions must hold. It most centrally instantiates T13, because local utterances glue into a global social act only when the horizon functor carries the relevant felicity conditions. Failed speech acts are failures of gluing, not merely errors in wording.
+Austin's horizon is institutional and conversational. It includes who may speak, what formula is recognized, which audience can receive it, and what prior conditions must hold. It most centrally instantiates the hermeneutic sheaf theorem, because local utterances glue into a global social act only when the horizon functor carries the relevant felicity conditions. Failed speech acts are failures of gluing, not merely errors in wording.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ The diagnostic derived primitives are intentionality, perspective, and signed va
 
 ## Chapter summary
 
-Austin teaches that words are deeds under conditions. Idea Theory restates this by saying that an utterance composes with a horizon, preserves content, may be suppressed by infelicity, and may produce an emergence part that changes social reality. T13 is the natural home of this account, because speech acts succeed when local words, roles, and institutions glue into one performative event.
+Austin teaches that words are deeds under conditions. Idea Theory restates this by saying that an utterance composes with a horizon, preserves content, may be suppressed by infelicity, and may produce an emergence part that changes social reality. The hermeneutic sheaf theorem is the natural home of this account, because speech acts succeed when local words, roles, and institutions glue into one performative event.

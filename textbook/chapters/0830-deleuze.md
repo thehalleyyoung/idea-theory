@@ -52,7 +52,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that the virtual is the algebra of pure
 meaning curvature. The plane of immanence has no flat regions; differential intensity is its
-constitutive feature. This is a global T5 claim with ontological force: asymmetry is not a
+constitutive feature. This is a global the meaning curvature theorem claim with ontological force: asymmetry is not a
 defect to be overcome but the basic structure of the real. The second claim is that
 actualization is the emergence cocycle — the virtual realizes itself as actual ideas with
 higher degree. The prediction is that failures of understanding will not be accidental
@@ -63,7 +63,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -107,12 +107,12 @@ intensities, and lines of flight. Morphisms are deterritorialisations and
 reterritorialisations rather than hierarchical inclusions; they change the coordinates by
 which a concept can resonate. affect or conatus is intensity, differentiation is productive
 difference, potentiality is virtual potential, and schema or paradigm is the provisional
-assemblage rather than a fixed schema. This is T15 reworked as immanence: a concept is
+assemblage rather than a fixed schema. This is the profundity theorem reworked as immanence: a concept is
 profound when it remains generative across heterogeneous assemblages without becoming a
-transcendent universal. For this reason the chapter should be heard through T15. T13 is the
+transcendent universal. For this reason the chapter should be heard through the profundity theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives

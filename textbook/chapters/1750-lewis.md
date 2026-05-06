@@ -22,7 +22,7 @@ The preservation part carries the signal from one occasion to the next. The supp
 
 *A convention is a stable local meaning that becomes global when expectations glue across a community horizon.*
 
-This is T13 read through Lewis. The theorem rules out the idea that convention is either private choice or brute natural necessity. It predicts that stable meaning appears where local expectations overlap and reinforce each other. If two villages use the same signal differently, there may be two local sections. If trade, schooling, and repeated correction align them, those sections can glue into one larger convention.
+This is the hermeneutic sheaf theorem read through Lewis. The theorem rules out the idea that convention is either private choice or brute natural necessity. It predicts that stable meaning appears where local expectations overlap and reinforce each other. If two villages use the same signal differently, there may be two local sections. If trade, schooling, and repeated correction align them, those sections can glue into one larger convention.
 
 Carefully restated, the horizon category contains agents, signals, occasions, payoff expectations, and background alternatives. The horizon functor assigns to each horizon the regularities available for coordination. Composition repeats successful use. Identity is the absence of a selected convention. The resonance pairing measures mutual fit between signal, response, and expectation. The preservation part carries the pattern, the suppression part sidelines competing regularities, and the emergence part is the shared social standing of the convention. The diagnostic derived primitive is schema, because a convention supplies a repeatable pattern of action.
 
@@ -40,7 +40,7 @@ Lewis gave common knowledge a central role. Idea Theory can represent common kno
 
 ## Horizon structure
 
-Lewis's horizon is strategic and communal. It includes agents, their expectations, the possible signals, and the alternative equilibrating patterns that might have been selected. It most centrally instantiates T13, because convention exists when local regularities agree on overlaps and become a global pattern for a population. T13 also explains why fragmented conventions can coexist without contradiction when their horizons do not overlap.
+Lewis's horizon is strategic and communal. It includes agents, their expectations, the possible signals, and the alternative equilibrating patterns that might have been selected. It most centrally instantiates the hermeneutic sheaf theorem, because convention exists when local regularities agree on overlaps and become a global pattern for a population. The hermeneutic sheaf theorem also explains why fragmented conventions can coexist without contradiction when their horizons do not overlap.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ The diagnostic derived primitives are schema, credence, and signed valence. Sche
 
 ## Chapter summary
 
-Lewis shows that language is a coordination achievement. Idea Theory restates convention as a stable regularity whose resonance pairing is reinforced by mutual expectation. Composition repeats use, suppression excludes rivals, and emergence gives the convention social standing. T13 is central because conventions become real when local expectations glue into a shared horizon. The diagnostic lesson is that convention turns arbitrary selection into reliable public meaning through repeated expectation.
+Lewis shows that language is a coordination achievement. Idea Theory restates convention as a stable regularity whose resonance pairing is reinforced by mutual expectation. Composition repeats use, suppression excludes rivals, and emergence gives the convention social standing. The hermeneutic sheaf theorem is central because conventions become real when local expectations glue into a shared horizon. The diagnostic lesson is that convention turns arbitrary selection into reliable public meaning through repeated expectation.

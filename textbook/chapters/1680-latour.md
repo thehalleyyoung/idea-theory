@@ -24,7 +24,7 @@ A black box is a stabilized composite that behaves as a single generator in late
 
 The theorem rules out the idea that facts become strong merely by correspondence in isolation. It also rules out the idea that facts are only social opinions. It predicts that durability depends on successful composition across humans, instruments, texts, institutions, and material resistances. Once stabilized, the composite becomes available for further composition without requiring every user to reconstruct the whole network.
 
-Carefully stated: let the horizon category consist of laboratories, instruments, inscriptions, journals, funding bodies, machines, publics, and material settings. The horizon functor assigns local idea algebras in which claims, devices, and actors compose. Translation morphisms carry inscriptions and obligations across horizons. T13 applies when local inscriptions and alliances are compatible enough to glue into a global section. Black boxing is the stabilization of that section as a portable identity for later use.
+Carefully stated: let the horizon category consist of laboratories, instruments, inscriptions, journals, funding bodies, machines, publics, and material settings. The horizon functor assigns local idea algebras in which claims, devices, and actors compose. Translation morphisms carry inscriptions and obligations across horizons. The hermeneutic sheaf theorem applies when local inscriptions and alliances are compatible enough to glue into a global section. Black boxing is the stabilization of that section as a portable identity for later use.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ There is also a divergence around truth. Latour wants to avoid both naive realis
 
 ## Horizon structure
 
-Latour belongs with T13. The horizon category is heterogeneous: laboratories, machines, inscriptions, microbes, field sites, bureaucracies, journals, and publics. Morphisms are translations, citations, calibrations, replications, and enrollments. The horizon functor tracks how a claim changes as it moves, and how much must be preserved for it to remain usable.
+Latour belongs with the hermeneutic sheaf theorem. The horizon category is heterogeneous: laboratories, machines, inscriptions, microbes, field sites, bureaucracies, journals, and publics. Morphisms are translations, citations, calibrations, replications, and enrollments. The horizon functor tracks how a claim changes as it moves, and how much must be preserved for it to remain usable.
 
-T13 names the gluing of local sections. A measurement in one laboratory, a graph in a paper, a grant review, a machine setting, and a replication elsewhere must become mutually compatible. When they do, the network produces a fact that travels.
+The hermeneutic sheaf theorem names the gluing of local sections. A measurement in one laboratory, a graph in a paper, a grant review, a machine setting, and a replication elsewhere must become mutually compatible. When they do, the network produces a fact that travels.
 
 ## Diagnostic derived primitives
 
@@ -52,4 +52,4 @@ A useful diagnostic is to ask when a listener no longer needs the story of assem
 
 ## Chapter summary
 
-Latour gives Idea Theory a dynamic account of fact formation. Composition is translation, resonance pairing is enrollment, and black boxing turns a stabilized composite into a usable generator. T13 captures the gluing that makes heterogeneous local work travel as durable knowledge.
+Latour gives Idea Theory a dynamic account of fact formation. Composition is translation, resonance pairing is enrollment, and black boxing turns a stabilized composite into a usable generator. The hermeneutic sheaf theorem captures the gluing that makes heterogeneous local work travel as durable knowledge.

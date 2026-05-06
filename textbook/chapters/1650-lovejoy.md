@@ -40,7 +40,7 @@ There is another divergence. Lovejoy sometimes emphasizes continuity so strongly
 
 ## Horizon structure
 
-Lovejoy belongs most naturally with T15. The horizon category consists of epochs, disciplines, literary genres, schools, and doctrinal settings. The horizon functor tracks how a unit idea receives local resonance pairing and local grading in each setting. T15 is the theorem of broad support: an idea is historically deep when its support stretches across many horizons while still generating significant local composition.
+Lovejoy belongs most naturally with the profundity theorem. The horizon category consists of epochs, disciplines, literary genres, schools, and doctrinal settings. The horizon functor tracks how a unit idea receives local resonance pairing and local grading in each setting. The profundity theorem is the theorem of broad support: an idea is historically deep when its support stretches across many horizons while still generating significant local composition.
 
 The Great Chain of Being is a strong example. It moves through theology, metaphysics, natural history, poetry, and moral philosophy. It persists not because every horizon says the same thing, but because each horizon can make use of the same generator under different local constraints.
 
@@ -50,4 +50,4 @@ The main derived primitive is rigid reference: the unit idea must be identifiabl
 
 ## Chapter summary
 
-Lovejoy gives Idea Theory a model of intellectual history as the travel of generators through changing horizons. Unit ideas preserve identity, alter resonance, and produce new emergence parts when composed with local doctrines. T15 names their depth: broad support across horizons joined to continuing power of recombination.
+Lovejoy gives Idea Theory a model of intellectual history as the travel of generators through changing horizons. Unit ideas preserve identity, alter resonance, and produce new emergence parts when composed with local doctrines. The profundity theorem names their depth: broad support across horizons joined to continuing power of recombination.

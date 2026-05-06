@@ -70,7 +70,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -114,11 +114,11 @@ passing theories as local horizons of use. Morphisms are charitable translations
 jointly adjust belief, meaning, and truth-conditions while preserving enough rationality for
 interpretation to begin. perspective is intersubjective triangulation, credence is
 charitable truth-maximisation, and schema or paradigm is the holistic web rather than a
-separable language scheme. This is T13: radical interpretation glues speaker-local assent,
+separable language scheme. This is the hermeneutic sheaf theorem: radical interpretation glues speaker-local assent,
 interpreter theory, and worldly causes into one coherent truth-theoretic assignment. For
-this reason the chapter should be heard through T13. T13 is the hermeneutic sheaf theorem,
-where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem,
+where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 

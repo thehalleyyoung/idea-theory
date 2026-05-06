@@ -53,7 +53,7 @@ degree of articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that the world is flat: the preservation
 part is 0 everywhere. All logical structure is tautological; logic adds nothing to the world
-but exhibits the form already there. This is a T5 claim with negative valence: the algebra
+but exhibits the form already there. This is a the meaning curvature theorem claim with negative valence: the algebra
 has no irreducible curvature. The second claim is that truth-functions are composition: the
 only legitimate composition is truth-functional, and any apparent non-truth-functional
 combination is either further analyzable into truth-functional form or is nonsensical. The
@@ -65,7 +65,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -110,11 +110,11 @@ elementary propositions, logical form, and the limit of language. Morphisms proj
 propositions onto possible states of affairs when they share pictorial form; ethical,
 aesthetic, and metaphysical utterances lack such admissible projection. rigid reference
 binds names to objects, schema or paradigm is logical space, and R appears when the book's
-own propositions must be thrown away. This is T14: what can be shown does not pull back into
+own propositions must be thrown away. This is the indexical pullback theorem: what can be shown does not pull back into
 sayable propositions, so metaphysical sense fails at the boundary of the horizon category.
-For this reason the chapter should be heard through T14. T13 is the hermeneutic sheaf
-theorem, where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf
+theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 

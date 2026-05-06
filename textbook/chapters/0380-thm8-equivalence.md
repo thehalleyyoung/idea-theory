@@ -12,13 +12,13 @@ Careful semi formal restatement: consider two idea algebras, each with ideas, co
 
 ## Narrative proof sketch
 
-A dictionary is not enough. If one theory says force and another says interaction, the words may align locally. T8 asks whether the translation preserves what can be combined, what counts as silence, what resonates, what is suppressed, what emerges, and what level each construction occupies.
+A dictionary is not enough. If one theory says force and another says interaction, the words may align locally. The equivalence theorem asks whether the translation preserves what can be combined, what counts as silence, what resonates, what is suppressed, what emerges, and what level each construction occupies.
 
 The proof has two directions. If a structure preserving translation exists with an inverse of the same kind, then any theorem in one algebra can be carried across and brought back without loss. Conversely, if two algebras are genuinely equivalent, their sameness must show up as such a translation, because otherwise some operation or invariant would fail to travel.
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-The theorem is decisive for cross cultural and scientific comparison. It allows real pluralism without relativism. Two communities may speak differently and still share structure. They may also use similar words while failing to preserve resonance or emergence. T8 gives a test for the difference between deep translation and reassuring paraphrase.
+The theorem is decisive for cross cultural and scientific comparison. It allows real pluralism without relativism. Two communities may speak differently and still share structure. They may also use similar words while failing to preserve resonance or emergence. The equivalence theorem gives a test for the difference between deep translation and reassuring paraphrase.
 
 ## What it decides
 

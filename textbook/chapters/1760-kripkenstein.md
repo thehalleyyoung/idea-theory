@@ -22,7 +22,7 @@ The preservation part contains the past agreement. The suppression part contains
 
 *Finite private use does not determine meaning unless communal horizons stabilize the rule.*
 
-This is T13 read through Kripkenstein. The theorem rules out a purely private global meaning extracted from finite local data. It predicts that meaning becomes determinate only when local performances are embedded in a horizon where correction, training, and expectation glue them into a shared practice. Without that horizon, rival continuations remain possible.
+This is the hermeneutic sheaf theorem read through Kripkenstein. The theorem rules out a purely private global meaning extracted from finite local data. It predicts that meaning becomes determinate only when local performances are embedded in a horizon where correction, training, and expectation glue them into a shared practice. Without that horizon, rival continuations remain possible.
 
 Carefully restated, the horizon category contains learners, teachers, examples, corrections, future applications, and communal standards. The horizon functor assigns possible continuations to each local record of use. Composition extends a rule from case to case. Identity is no change in the accepted practice. The resonance pairing scores the fit between a response and the community standard. The preservation part keeps past applications, the suppression part rejects deviant continuations, and the emergence part is the socially stabilized rule. The diagnostic derived primitive is differentiation, because the rule separates correct from incorrect continuations.
 
@@ -40,7 +40,7 @@ Kripke presents the paradox with radical skeptical force. Idea Theory softens th
 
 ## Horizon structure
 
-Kripkenstein's horizon is pedagogical and communal. It includes past examples, future cases, teachers, learners, sanctions, and shared forms of life. It most centrally instantiates T13, because local uses need a sheaf like gluing condition to become one rule. When gluing fails, we get indeterminacy, disagreement, or a split practice.
+Kripkenstein's horizon is pedagogical and communal. It includes past examples, future cases, teachers, learners, sanctions, and shared forms of life. It most centrally instantiates the hermeneutic sheaf theorem, because local uses need a sheaf like gluing condition to become one rule. When gluing fails, we get indeterminacy, disagreement, or a split practice.
 
 ## Diagnostic derived primitives
 
@@ -50,4 +50,4 @@ One more point follows. The community does not determine meaning by vote at each
 
 ## Chapter summary
 
-Kripkenstein teaches that meaning cannot be secured by a finite private history. Idea Theory restates the paradox as a failure of local data to determine a unique global rule. Communal practice supplies a horizon in which preservation, suppression, and emergence stabilize rule following. T13 is central because meaning arises when local uses glue into a public practice.
+Kripkenstein teaches that meaning cannot be secured by a finite private history. Idea Theory restates the paradox as a failure of local data to determine a unique global rule. Communal practice supplies a horizon in which preservation, suppression, and emergence stabilize rule following. The hermeneutic sheaf theorem is central because meaning arises when local uses glue into a public practice.

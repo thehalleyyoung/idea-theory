@@ -20,7 +20,7 @@ In Idea Theory, the emergence cocycle measures the novelty produced when ideas c
 
 The theorem rules out the simple extrapolation from more researchers to ever faster growth. It predicts that economies may need increasing research effort merely to hold a steady growth path. It also predicts that frontier position matters: the same number of researchers can have different effects in early and late horizons. Growth remains idea-driven, but idea discovery is historically situated.
 
-Carefully stated, let composition combine existing ideas at a research frontier, let identity preserve the accumulated stock, let the resonance pairing measure tractable fit between problems and tools, and let the emergence cocycle record new productive capacity. If the horizon functor assigns later frontiers lower expected emergence for comparable effort, and if the emergence part is bounded within each finite research window, then total profundity cannot rise permanently from effort alone. This is T15 in limiting form, because support persists but emergence closure is constrained.
+Carefully stated, let composition combine existing ideas at a research frontier, let identity preserve the accumulated stock, let the resonance pairing measure tractable fit between problems and tools, and let the emergence cocycle record new productive capacity. If the horizon functor assigns later frontiers lower expected emergence for comparable effort, and if the emergence part is bounded within each finite research window, then total profundity cannot rise permanently from effort alone. This is the profundity theorem in limiting form, because support persists but emergence closure is constrained.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Jones works with macroeconomic models, data, and production functions. Idea Theo
 
 ## Horizon structure
 
-The horizon category is ordered by research time: early accessible problems, mature fields, hard frontiers, educational systems, laboratories, and policy environments. Morphisms are training, frontier advance, funding reallocation, instrumentation, and paradigm shift. The horizon functor assigns effort different expected resonance at different stages. T15 is the relevant theorem label, but with emphasis on bounded emergence rather than unlimited expansion.
+The horizon category is ordered by research time: early accessible problems, mature fields, hard frontiers, educational systems, laboratories, and policy environments. Morphisms are training, frontier advance, funding reallocation, instrumentation, and paradigm shift. The horizon functor assigns effort different expected resonance at different stages. The profundity theorem is the relevant theorem label, but with emphasis on bounded emergence rather than unlimited expansion.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ The same lens also helps compare fields. Some sciences slow because their questi
 
 ## Chapter summary
 
-Jones corrects the exuberant story of ideas with a frontier constraint. Idea Theory restates semi-endogenous growth as bounded emergence under a moving horizon functor. Research preserves accumulated identity and still creates novelty, but T15 is limited by temporality: later horizons make each new emergence harder to obtain.
+Jones corrects the exuberant story of ideas with a frontier constraint. Idea Theory restates semi-endogenous growth as bounded emergence under a moving horizon functor. Research preserves accumulated identity and still creates novelty, but the profundity theorem is limited by temporality: later horizons make each new emergence harder to obtain.

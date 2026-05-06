@@ -18,7 +18,7 @@ The proof builds global diffusion from local transmissions. Identity transmissio
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-T11 turns diffusion from a metaphor into a condition. It predicts that an idea can become stable not because every copy is perfect, but because the network revisits, repairs, and reinforces the pattern. It also predicts why some networks generate endless mutation. They transmit, but they do not recur in a way that lets coherence come back.
+The diffusion theorem turns diffusion from a metaphor into a condition. It predicts that an idea can become stable not because every copy is perfect, but because the network revisits, repairs, and reinforces the pattern. It also predicts why some networks generate endless mutation. They transmit, but they do not recur in a way that lets coherence come back.
 
 ## What it decides
 

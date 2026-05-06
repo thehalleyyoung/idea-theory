@@ -51,7 +51,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that experience is continuous: the stream
 of consciousness is the basic datum, and discrete sensations are abstractions from it.
-composition is everywhere active, with no atomic gaps. This is a T1 claim with strong
+composition is everywhere active, with no atomic gaps. This is a the composition theorem claim with strong
 continuist content. The second claim is the pragmatic conception of truth: the resonance
 pairing tracks practical cash-value. The prediction is that failures of understanding will
 not be accidental noise. They will cluster where a local content cannot be carried unchanged
@@ -61,7 +61,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -103,12 +103,12 @@ category is the pluralistic field of live options, experiential streams, tempera
 practices, and consequences. Morphisms test an idea by carrying it into future experience,
 where its cash-value appears in conduct and satisfaction. temporality is the stream of
 consciousness, credence is practical belief under uncertainty, is the felt fringe and will-
-to-believe, and schema or paradigm is plural rather than monistic world-making. This is T15
+to-believe, and schema or paradigm is plural rather than monistic world-making. This is the profundity theorem
 in pragmatist form: truth is what remains stable across experiential consequences and future
 verifications, not a static correspondence outside practice. For this reason the chapter
-should be heard through T15. T13 is the hermeneutic sheaf theorem, where local meanings glue
-into a global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+should be heard through the profundity theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue
+into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

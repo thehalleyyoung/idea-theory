@@ -20,7 +20,7 @@ In Idea Theory, creative destruction is the full decomposition of composition. W
 
 The theorem rules out the comforting idea that creation can be cleanly separated from destruction. It predicts that major innovations will reorganize horizons: incumbent firms, workers, investors, consumers, and regulators will not experience the same idea in the same way. It also predicts that a mature regime can become a source of its own negation, because established routines become material for entrepreneurial recombination.
 
-Carefully stated, let composition join an old industrial schema with a new entrepreneurial idea, let identity track what remains recognizable, let the resonance pairing measure fit with markets and institutions, and let the preservation part, suppression part, emergence part, and emergence cocycle describe the resulting transformation. If the emergence part has durable support across post-innovation horizons and the suppression part cancels incumbent arrangements, then the innovation is creative destruction. This invokes T14 for the break across incumbent horizons and T15 for the later profundity of the new regime.
+Carefully stated, let composition join an old industrial schema with a new entrepreneurial idea, let identity track what remains recognizable, let the resonance pairing measure fit with markets and institutions, and let the preservation part, suppression part, emergence part, and emergence cocycle describe the resulting transformation. If the emergence part has durable support across post-innovation horizons and the suppression part cancels incumbent arrangements, then the innovation is creative destruction. This invokes the indexical pullback theorem for the break across incumbent horizons and the profundity theorem for the later profundity of the new regime.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Schumpeter's theory is rich with institutions, credit, class, entrepreneurship, 
 
 ## Horizon structure
 
-The horizon category contains incumbent firms, entrepreneurial ventures, credit institutions, labor markets, consumers, regulators, and technological regimes. Morphisms are financing, entry, imitation, bankruptcy, standardization, and reorganization. The horizon functor assigns each standpoint a different preservation, suppression, and emergence profile. T14 names the failure of the innovation to pull back into the old incumbent horizon. T15 names the later condition under which the new synthesis becomes profound.
+The horizon category contains incumbent firms, entrepreneurial ventures, credit institutions, labor markets, consumers, regulators, and technological regimes. Morphisms are financing, entry, imitation, bankruptcy, standardization, and reorganization. The horizon functor assigns each standpoint a different preservation, suppression, and emergence profile. The indexical pullback theorem names the failure of the innovation to pull back into the old incumbent horizon. The profundity theorem names the later condition under which the new synthesis becomes profound.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ This is why the social accounting matters. A new regime must be judged by the ho
 
 ## Chapter summary
 
-Schumpeter makes innovation dialectical. Idea Theory restates creative destruction as composition with preservation part, suppression part, emergence part, and emergence cocycle. The break is T14 from the incumbent view, while the lasting new regime is T15 when the emergence stabilizes across horizons.
+Schumpeter makes innovation dialectical. Idea Theory restates creative destruction as composition with preservation part, suppression part, emergence part, and emergence cocycle. The break is the indexical pullback theorem from the incumbent view, while the lasting new regime is the profundity theorem when the emergence stabilizes across horizons.

@@ -57,7 +57,7 @@ In paragraph form, the claim rules out the fantasy that meaning is already compl
 context enters. The first theorem-shaped claim is that the Theory of Descriptions is the
 emergence part: an analytic operation that maps apparent names to quantified structures. The
 Russellian success is that the mapping eliminates ontological commitment to the apparent
-referent. This is a T6 claim with major metaphysical leverage. The second claim is that type
+referent. This is a the conjugation theorem claim with major metaphysical leverage. The second claim is that type
 theory is the grading degree that prevents Russell's paradox. The prediction is that
 failures of understanding will not be accidental noise. They will cluster where a local
 content cannot be carried unchanged across a change of horizon, or where an apparent
@@ -67,13 +67,13 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
 
 What the formalism adds is clarification without replacement. First, type theory as grading
-(T9) explains why the paradox disappears: the preservation part is 0 within each type level
+(the graded structure theorem) explains why the paradox disappears: the preservation part is 0 within each type level
 because the self-referential composition is blocked by degree. The hierarchy enables
 consistency without renouncing the logicist project. Second, the Theory of Descriptions
 becomes a precise structural transformation rather than a clever paraphrase. the emergence
@@ -109,11 +109,11 @@ scientific construction. Morphisms replace misleading grammatical form with logi
 especially by eliminating denoting phrases into quantificational structure. rigid reference
 is restricted to objects of acquaintance, R diagnoses self-reference and paradox,
 differentiation separates types, and credence appears in epistemic constructions from sense-
-data. This is T14: ordinary grammar fails to pull back into logical form without
+data. This is the indexical pullback theorem: ordinary grammar fails to pull back into logical form without
 obstruction, and the theory of descriptions is the controlled translation that removes it.
-For this reason the chapter should be heard through T14. T13 is the hermeneutic sheaf
-theorem, where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf
+theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 

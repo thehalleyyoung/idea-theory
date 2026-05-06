@@ -18,7 +18,7 @@ The proof compares any two candidate gradings that respect the same compositiona
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-T9 gives Idea Theory its account of cumulative culture. New tools, concepts, and institutions can be more complex than their ingredients without becoming unmeasurable. A society may rename levels, compress them, or refine them, but it cannot ignore the ordering if it wants the algebra of growth to remain coherent.
+The graded structure theorem gives Idea Theory its account of cumulative culture. New tools, concepts, and institutions can be more complex than their ingredients without becoming unmeasurable. A society may rename levels, compress them, or refine them, but it cannot ignore the ordering if it wants the algebra of growth to remain coherent.
 
 ## What it decides
 

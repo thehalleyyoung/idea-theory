@@ -20,7 +20,7 @@ Let each repeated strategy be an idea in a temporal strategic algebra. Compositi
 
 The theorem rules out the claim that self interest always destroys cooperation. It also rules out naive optimism, because cooperation fails when future interaction is too weak, noise is too high, or retaliation cannot be recognized. It predicts that stable cooperation requires temporal thickness, readable behavior, and a strategy that makes its response structure legible to others.
 
-Carefully restated, take a horizon category whose objects are one shot encounters, finite repetitions, indefinite repetitions, tournament populations, noisy implementation contexts, and memory limited strategies. The horizon functor assigns to each horizon a repeated game resonance algebra. Composition iterates actions and strategy rules. Identity preserves a strategy through rounds. Resonance pairing evaluates accumulated payoff. Preservation part carries relevant memory. Suppression part forgets or discounts remote history. Emergence part is the cooperative state created by reciprocal action. Emergence cocycle records the additional value produced by cooperation beyond isolated defection and response. Degree or grading ranks strategic simplicity. Meaning curvature appears when a strategy reads another more accurately than it is read in return. T15 applies because successful cooperation must extend across repeated horizons and remain stable under varied opponent distributions.
+Carefully restated, take a horizon category whose objects are one shot encounters, finite repetitions, indefinite repetitions, tournament populations, noisy implementation contexts, and memory limited strategies. The horizon functor assigns to each horizon a repeated game resonance algebra. Composition iterates actions and strategy rules. Identity preserves a strategy through rounds. Resonance pairing evaluates accumulated payoff. Preservation part carries relevant memory. Suppression part forgets or discounts remote history. Emergence part is the cooperative state created by reciprocal action. Emergence cocycle records the additional value produced by cooperation beyond isolated defection and response. Degree or grading ranks strategic simplicity. Meaning curvature appears when a strategy reads another more accurately than it is read in return. The profundity theorem applies because successful cooperation must extend across repeated horizons and remain stable under varied opponent distributions.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Axelrod's famous result came from tournaments with particular submitted strategi
 
 ## Horizon structure and theorem
 
-The horizon structure is temporal and transhorizonal. It includes the single encounter, the repeated series, the population of strategies, and the noisy environment. The horizon functor assigns a local payoff algebra to each. T15 governs the chapter because cooperation matters when it has wide support across future possible encounters, not merely when it works once.
+The horizon structure is temporal and transhorizonal. It includes the single encounter, the repeated series, the population of strategies, and the noisy environment. The horizon functor assigns a local payoff algebra to each. The profundity theorem governs the chapter because cooperation matters when it has wide support across future possible encounters, not merely when it works once.
 
 
 A concrete listening example is a pair of neighbors sharing a narrow driveway. If each interaction is isolated, grabbing advantage may seem rational. But if they meet every week, memory changes the payoff. Courtesy today can become easier passage tomorrow. Retaliation can discipline exploitation. Forgiveness can prevent one mistake from becoming permanent hostility. The strategy is not a single act but a rule moving through time.
@@ -50,4 +50,4 @@ Temporality is the first primitive because memory and future expectation change 
 
 ## Chapter summary
 
-Axelrod gives Idea Theory a dynamic account of cooperative emergence. Repeated composition lets strategies become histories; resonance pairing scores those histories; emergence cocycle names the surplus of stable reciprocity. The governing theorem is T15 because cooperation survives by carrying support across future horizons.
+Axelrod gives Idea Theory a dynamic account of cooperative emergence. Repeated composition lets strategies become histories; resonance pairing scores those histories; emergence cocycle names the surplus of stable reciprocity. The governing theorem is the profundity theorem because cooperation survives by carrying support across future horizons.

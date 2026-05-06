@@ -1014,13 +1014,13 @@ Careful semi formal restatement: consider two idea algebras, each with ideas, co
 
 ## Narrative proof sketch
 
-A dictionary is not enough. If one theory says force and another says interaction, the words may align locally. T8 asks whether the translation preserves what can be combined, what counts as silence, what resonates, what is suppressed, what emerges, and what level each construction occupies.
+A dictionary is not enough. If one theory says force and another says interaction, the words may align locally. The equivalence theorem asks whether the translation preserves what can be combined, what counts as silence, what resonates, what is suppressed, what emerges, and what level each construction occupies.
 
 The proof has two directions. If a structure preserving translation exists with an inverse of the same kind, then any theorem in one algebra can be carried across and brought back without loss. Conversely, if two algebras are genuinely equivalent, their sameness must show up as such a translation, because otherwise some operation or invariant would fail to travel.
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-The theorem is decisive for cross cultural and scientific comparison. It allows real pluralism without relativism. Two communities may speak differently and still share structure. They may also use similar words while failing to preserve resonance or emergence. T8 gives a test for the difference between deep translation and reassuring paraphrase.
+The theorem is decisive for cross cultural and scientific comparison. It allows real pluralism without relativism. Two communities may speak differently and still share structure. They may also use similar words while failing to preserve resonance or emergence. The equivalence theorem gives a test for the difference between deep translation and reassuring paraphrase.
 
 ## What it decides
 
@@ -1063,7 +1063,7 @@ The proof compares any two candidate gradings that respect the same compositiona
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-T9 gives Idea Theory its account of cumulative culture. New tools, concepts, and institutions can be more complex than their ingredients without becoming unmeasurable. A society may rename levels, compress them, or refine them, but it cannot ignore the ordering if it wants the algebra of growth to remain coherent.
+The graded structure theorem gives Idea Theory its account of cumulative culture. New tools, concepts, and institutions can be more complex than their ingredients without becoming unmeasurable. A society may rename levels, compress them, or refine them, but it cannot ignore the ordering if it wants the algebra of growth to remain coherent.
 
 ## What it decides
 
@@ -1148,7 +1148,7 @@ The proof builds global diffusion from local transmissions. Identity transmissio
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-T11 turns diffusion from a metaphor into a condition. It predicts that an idea can become stable not because every copy is perfect, but because the network revisits, repairs, and reinforces the pattern. It also predicts why some networks generate endless mutation. They transmit, but they do not recur in a way that lets coherence come back.
+The diffusion theorem turns diffusion from a metaphor into a condition. It predicts that an idea can become stable not because every copy is perfect, but because the network revisits, repairs, and reinforces the pattern. It also predicts why some networks generate endless mutation. They transmit, but they do not recur in a way that lets coherence come back.
 
 ## What it decides
 
@@ -1236,7 +1236,7 @@ The proof has three movements. Restrict the candidate global meaning to each loc
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-Hans-Georg Gadamer, pronounced *GAH dah mer*, called understanding a fusion of horizons. T13 gives that phrase a structural interpretation. A market price, a legal precedent, or a scientific consensus can all be heard as a glued meaning when local information is compatible enough. When overlap fails, gluing fails, and the alleged whole is only an imposed summary.
+Hans-Georg Gadamer, pronounced *GAH dah mer*, called understanding a fusion of horizons. The hermeneutic sheaf theorem gives that phrase a structural interpretation. A market price, a legal precedent, or a scientific consensus can all be heard as a glued meaning when local information is compatible enough. When overlap fails, gluing fails, and the alleged whole is only an imposed summary.
 
 ## What it decides
 
@@ -1320,7 +1320,7 @@ The proof combines support and closure. First, identify the horizons where the i
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-T15 does not define profundity as emotional intensity. An idea may move us because it is profound, but the theorem looks for the structure beneath that feeling. The idea must survive many horizon shifts and still organize new thought. This is why deep concepts often seem both ancient and unfinished.
+The profundity theorem does not define profundity as emotional intensity. An idea may move us because it is profound, but the theorem looks for the structure beneath that feeling. The idea must survive many horizon shifts and still organize new thought. This is why deep concepts often seem both ancient and unfinished.
 
 ## What it decides
 
@@ -2529,7 +2529,7 @@ In paragraph form, the claim rules out the fantasy that meaning is already compl
 context enters. The first theorem-shaped claim is that intentionality is composition with
 the noema as right-identity relative to the act. Every act is composed with its noema in a
 structurally specific way; without this composition there is no intentional content. This is
-a T1 claim: the very possibility of consciousness presupposes the algebra's basic operation.
+a the composition theorem claim: the very possibility of consciousness presupposes the algebra's basic operation.
 The second claim is that time-consciousness is the emergence cocycle realized as a triple
 operator. The prediction is that failures of understanding will not be accidental noise.
 They will cluster where a local content cannot be carried unchanged across a change of
@@ -2539,7 +2539,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -2580,11 +2580,11 @@ intersubjective confirmations. Morphisms are epoché-style bracketings and inten
 modifications that restrict the natural attitude to what is given as such. intentionality is
 explicit intentionality, perspective is the transcendental ego's perspectival field,
 temporality is inner time-consciousness, and R appears in reflection on constitution itself.
-This is the paradigmatic T13: constitution of an object is sheaf-gluing of profile-
+This is the paradigmatic the hermeneutic sheaf theorem: constitution of an object is sheaf-gluing of profile-
 perceptions across a covering family of perspectival horizons. For this reason the chapter
-should be heard through T13. T13 is the hermeneutic sheaf theorem, where local meanings glue
-into a global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue
+into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -2669,7 +2669,7 @@ In paragraph form, the claim rules out the fantasy that meaning is already compl
 context enters. The first theorem-shaped claim is that the ontological difference is the
 preservation part 0. Being cannot be collapsed into any being, including the totality of
 beings, because the structural curvature between disclosing and disclosed is irreducible.
-This is a T5 claim: the algebra has an essential asymmetry that no further synthesis can
+This is a the meaning curvature theorem claim: the algebra has an essential asymmetry that no further synthesis can
 dissolve. The second claim is that Destruktion is the reframing operator the emergence part
 that reverses sedimentation. The prediction is that failures of understanding will not be
 accidental noise. They will cluster where a local content cannot be carried unchanged across
@@ -2679,7 +2679,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -2724,11 +2724,11 @@ projection, and the temporal horizon of Being. Morphisms are disclosedness-shift
 anxiety, interpretation, and authentic retrieval—that change how entities show up.
 temporality is ecstatic temporality, perspective is Dasein as being-in-the-world, affect or
 conatus is care, and schema or paradigm names historical understandings of Being. This is
-T14: present-at-hand ontology fails to pull back across the ready-to-hand and existential
+The indexical pullback theorem: present-at-hand ontology fails to pull back across the ready-to-hand and existential
 horizons, revealing Being as horizon-relative disclosure. For this reason the chapter should
-be heard through T14. T13 is the hermeneutic sheaf theorem, where local meanings glue into a
-global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a
+global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -2809,7 +2809,7 @@ and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that habit is the fixed point of the
 emergence cocycle. Iterated practice converges on a stable motor pattern that is both
-effective and felt as effortless. This is a T7 claim with experiential content: transmission
+effective and felt as effortless. This is a the transmission theorem claim with experiential content: transmission
 terminates in fixed-point skills, and skill acquisition is exactly the trajectory of the
 emergence cocycle toward such fixed points. The second claim is that the body schema is the
 identity idea relative to motor synthesis. The prediction is that failures of understanding
@@ -2821,7 +2821,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -2863,11 +2863,11 @@ visible profiles, intercorporeal encounters, and the flesh of the world. Morphis
 sensorimotor translations that carry an object from one bodily orientation to another
 without reducing perception to judgment. perspective is embodied perspective, intentionality
 is motor intentionality, temporality is lived temporal thickness, and marks affective
-attunement in perception. This is T13: perceptual objectivity is the gluing of embodied
+attunement in perception. This is the hermeneutic sheaf theorem: perceptual objectivity is the gluing of embodied
 profiles across possible movements and shared bodily horizons. For this reason the chapter
-should be heard through T13. T13 is the hermeneutic sheaf theorem, where local meanings glue
-into a global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue
+into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -2947,7 +2947,7 @@ articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that horizon fusion is composition. Every
 interpretation is a composition of two horizons, and every act of understanding produces a
-new compound horizon. This is a T1 claim about composition, with the further content that
+new compound horizon. This is a the composition theorem claim about composition, with the further content that
 the operation is constitutively dialogic. The second claim is that tradition is the
 emergence cocycle-transmission through history. The prediction is that failures of
 understanding will not be accidental noise. They will cluster where a local content cannot
@@ -2958,7 +2958,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3000,12 +3000,12 @@ horizon category is the historically effected field of text, interpreter, tradit
 question, and application. Morphisms are fusions in which the interpreter's prejudgments and
 the text's claims form a pushout rather than a neutral reconstruction. schema or paradigm is
 tradition as connected horizon, temporality is Wirkungsgeschichte, and intentionality is the
-question-directedness that lets a text address the present. This is paradigmatic T13: fusion
+question-directedness that lets a text address the present. This is paradigmatic the hermeneutic sheaf theorem: fusion
 of horizons is the colimit h interpreter h text, and understanding is the unique gluing of
-local readings on that cover. For this reason the chapter should be heard through T13. T13
+local readings on that cover. For this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem
 is the hermeneutic sheaf theorem, where local meanings glue into a global one when they
-agree on overlaps. T14 is the indexical pullback theorem, where preservation and emergence
-fail to translate cleanly. T15 is the profundity theorem, where depth comes from breadth
+agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence
+fail to translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth
 across horizons and closure under emergence.
 
 ## Derived primitives
@@ -3087,7 +3087,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that emplotment is the central
 composition. To make sense of human time, one must compose events into plots; composition is
-the algebraic content of the Aristotelian mythos. This is a T1 claim with the additional
+the algebraic content of the Aristotelian mythos. This is a the composition theorem claim with the additional
 constraint that not all compositions are admissible: a plot must satisfy concordance-
 discordance constraints. The second claim is that the hermeneutic arc is the curvature the
 preservation part between structural explanation and lived understanding. The prediction is
@@ -3099,7 +3099,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3141,12 +3141,12 @@ horizon category is the hermeneutic arc from lived action, symbol, text, distanc
 explanation, and reappropriated self-understanding. Morphisms move from prefiguration
 through configuration to refiguration, especially in narrative time. temporality is
 narrative temporality, R is the self interpreted through signs, intentionality is reference
-opened by the text's world, and schema or paradigm marks symbolic traditions. This is T13:
+opened by the text's world, and schema or paradigm marks symbolic traditions. This is the hermeneutic sheaf theorem:
 interpretation glues explanatory, textual, and existential horizons so that the world of the
 text refigures the reader's own horizon. For this reason the chapter should be heard through
-T13. T13 is the hermeneutic sheaf theorem, where local meanings glue into a global one when
-they agree on overlaps. T14 is the indexical pullback theorem, where preservation and
-emergence fail to translate cleanly. T15 is the profundity theorem, where depth comes from
+The hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a global one when
+they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and
+emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where depth comes from
 breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -3227,7 +3227,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that meaning is purely relational: the
 resonance pairing. The value of any sign is exhausted by its differential relations to other
-signs; there is no surplus self-identical content. This is a T2 claim of unusual strength —
+signs; there is no surplus self-identical content. This is a the resonance theorem claim of unusual strength —
 resonance is not an enrichment of identity but a replacement for it. The second claim is
 that the sign is arbitrary: the preservation part 0 for the signifier-signified relation.
 The prediction is that failures of understanding will not be accidental noise. They will
@@ -3238,7 +3238,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3280,12 +3280,12 @@ as related but methodologically distinct horizons. Morphisms translate sign-valu
 within a system of differences; a sign cannot carry its value unchanged outside the
 structure that opposes it to others. differentiation is decisive as negative differential
 value, schema or paradigm is langue as connected schema, and temporality is bracketed when
-synchronic analysis is primary. This is T14: signification fails to pull back across
+synchronic analysis is primary. This is the indexical pullback theorem: signification fails to pull back across
 language-systems because the preservation part h is constituted by local differences, not
-positive substance. For this reason the chapter should be heard through T14. T13 is the
+positive substance. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives
@@ -3368,7 +3368,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that the preservation part 0 everywhere:
 no element is fully present; all are constituted by traces of what they are not. This is a
-global T5 claim — asymmetry is not a feature of certain elements but a structural fact about
+global the meaning curvature theorem claim — asymmetry is not a feature of certain elements but a structural fact about
 the entire algebra. The metaphysics of presence would require a region of zero curvature;
 deconstruction shows there is none. The second claim is that iterability is the basic
 operation, but it always introduces difference. The prediction is that failures of
@@ -3380,7 +3380,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3426,12 +3426,12 @@ marks, with no final horizon that fixes presence. Morphisms are reinscriptions: 
 survives by repeatability, but each repetition shifts its differential play. differentiation
 is différance as spacing and deferral, temporality is non-present temporalization, R governs
 deconstruction's application to its own terms, and rigid reference is persistently
-destabilised. This is T14: meaning is the systematic failure of the preservation part and
+destabilised. This is the indexical pullback theorem: meaning is the systematic failure of the preservation part and
 the emergence part to pull back invariantly across iterated contexts, not a defect to be
-repaired. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+repaired. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives
@@ -3516,7 +3516,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that discursive formations are the monoid
 composition restricted by an episteme. Composition is not free; it is governed by
-historically specific rules that select admissible statements. This is a T1 claim with
+historically specific rules that select admissible statements. This is a the composition theorem claim with
 strong rule-conditioning. The second claim is that power/knowledge is the preservation part
 0: the curvature of what can be said is not neutral but is bent by power. The prediction is
 that failures of understanding will not be accidental noise. They will cluster where a local
@@ -3527,7 +3527,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3569,12 +3569,12 @@ discursive formations, and regimes of power/knowledge. Morphisms are archival
 transformations, disciplinary techniques, and genealogical breaks that alter what can count
 as statement, subject, object, or truth. perspective is historically produced subject-
 position, credence is not belief but regime-specific verification, and temporality is
-discontinuous rather than progressive history. This is T14: an epistemic break is a morphism
+discontinuous rather than progressive history. This is the indexical pullback theorem: an epistemic break is a morphism
 with non-trivial monodromy, so inferences licensed in one episteme fail to pull back into
-another. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+another. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives
@@ -3653,7 +3653,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that the virtual is the algebra of pure
 meaning curvature. The plane of immanence has no flat regions; differential intensity is its
-constitutive feature. This is a global T5 claim with ontological force: asymmetry is not a
+constitutive feature. This is a global the meaning curvature theorem claim with ontological force: asymmetry is not a
 defect to be overcome but the basic structure of the real. The second claim is that
 actualization is the emergence cocycle — the virtual realizes itself as actual ideas with
 higher degree. The prediction is that failures of understanding will not be accidental
@@ -3664,7 +3664,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3708,12 +3708,12 @@ intensities, and lines of flight. Morphisms are deterritorialisations and
 reterritorialisations rather than hierarchical inclusions; they change the coordinates by
 which a concept can resonate. affect or conatus is intensity, differentiation is productive
 difference, potentiality is virtual potential, and schema or paradigm is the provisional
-assemblage rather than a fixed schema. This is T15 reworked as immanence: a concept is
+assemblage rather than a fixed schema. This is the profundity theorem reworked as immanence: a concept is
 profound when it remains generative across heterogeneous assemblages without becoming a
-transcendent universal. For this reason the chapter should be heard through T15. T13 is the
+transcendent universal. For this reason the chapter should be heard through the profundity theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives
@@ -3794,7 +3794,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that dialogism is the symmetry and high
 dimensionality of the resonance pairing. Each voice anticipates the other; the resonance
-structure is mutual rather than one-directional, and rich rather than thin. This is a T2
+structure is mutual rather than one-directional, and rich rather than thin. This is a the resonance theorem
 claim with strong symmetry. The second claim is that the monologic voice is the suppression
 suppression effect, while polyphony is the emergence part maximizing the diversity of voices.
 The prediction is that failures of understanding will not be accidental noise. They will
@@ -3805,7 +3805,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3847,11 +3847,11 @@ horizon category is the dialogic field of voices, genres, chronotopes, and socia
 Morphisms are addressive translations: an utterance enters a new answerable context and
 changes through response, parody, quotation, or novelistic orchestration. perspective is
 voice-position, temporality is chronotope as time-space of narrative, schema or paradigm
-marks speech genres, and records evaluative accent. This is T13: polyphonic meaning is the
+marks speech genres, and records evaluative accent. This is the hermeneutic sheaf theorem: polyphonic meaning is the
 gluing of voice-local horizons without reducing them to a single monologic authority. For
-this reason the chapter should be heard through T13. T13 is the hermeneutic sheaf theorem,
-where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem,
+where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 
@@ -3932,7 +3932,7 @@ a degree of articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that signification is irreducibly triadic:
 composition cannot be factored into dyadic operations. The Peircean insistence on triadicity
-is a structural fact about the algebra. This is a T1 claim with constitutive triadicity. The
+is a structural fact about the algebra. This is a the composition theorem claim with constitutive triadicity. The
 second claim is the pragmatic maxim: meaning is exhausted by conceivable practical bearings.
 The prediction is that failures of understanding will not be accidental noise. They will
 cluster where a local content cannot be carried unchanged across a change of horizon, or
@@ -3942,7 +3942,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -3985,11 +3985,11 @@ interpretants, habits, and future investigation. Morphisms carry a sign to furth
 interpretants, extending meaning through an indefinitely open chain constrained by reality.
 intentionality is triadic aboutness, temporality is inquiry's future orientation, credence
 is fallibilist credence, and schema or paradigm is the community of investigators as a
-connected horizon. This is T15: truth is the trans-horizonal stability toward which inquiry
+connected horizon. This is the profundity theorem: truth is the trans-horizonal stability toward which inquiry
 would converge under unlimited continuation of interpretant-morphisms. For this reason the
-chapter should be heard through T15. T13 is the hermeneutic sheaf theorem, where local
-meanings glue into a global one when they agree on overlaps. T14 is the indexical pullback
-theorem, where preservation and emergence fail to translate cleanly. T15 is the profundity
+chapter should be heard through the profundity theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local
+meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback
+theorem, where preservation and emergence fail to translate cleanly. The profundity theorem is the profundity
 theorem, where depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -4067,7 +4067,7 @@ emergence cocycle, a degree of articulation, and a context-sensitive horizon str
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that experience is continuous: the stream
 of consciousness is the basic datum, and discrete sensations are abstractions from it.
-composition is everywhere active, with no atomic gaps. This is a T1 claim with strong
+composition is everywhere active, with no atomic gaps. This is a the composition theorem claim with strong
 continuist content. The second claim is the pragmatic conception of truth: the resonance
 pairing tracks practical cash-value. The prediction is that failures of understanding will
 not be accidental noise. They will cluster where a local content cannot be carried unchanged
@@ -4077,7 +4077,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -4119,12 +4119,12 @@ category is the pluralistic field of live options, experiential streams, tempera
 practices, and consequences. Morphisms test an idea by carrying it into future experience,
 where its cash-value appears in conduct and satisfaction. temporality is the stream of
 consciousness, credence is practical belief under uncertainty, is the felt fringe and will-
-to-believe, and schema or paradigm is plural rather than monistic world-making. This is T15
+to-believe, and schema or paradigm is plural rather than monistic world-making. This is the profundity theorem
 in pragmatist form: truth is what remains stable across experiential consequences and future
 verifications, not a static correspondence outside practice. For this reason the chapter
-should be heard through T15. T13 is the hermeneutic sheaf theorem, where local meanings glue
-into a global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+should be heard through the profundity theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue
+into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -4205,7 +4205,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that inquiry is the basic operation
 composition on situations. Knowledge is not a state but the achievement of a transformation
-of situations. This is a T1 claim with strong instrumentalist content. The second claim is
+of situations. This is a the composition theorem claim with strong instrumentalist content. The second claim is
 that ideas are tools: the resonance pairing tracks instrumental adequacy. The prediction is
 that failures of understanding will not be accidental noise. They will cluster where a local
 content cannot be carried unchanged across a change of horizon, or where an apparent
@@ -4215,7 +4215,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -4258,12 +4258,12 @@ horizon category is the ecology of problematic situations, inquiry, habits, publ
 schools, and democratic institutions. Morphisms transform an indeterminate situation into a
 resolved one by experimental action, not by spectatorship. temporality is inquiry's temporal
 arc, potentiality is potentiality in the situation, credence is warranted assertibility, and
-perspective is social intelligence distributed across a community. This is T13: knowledge
+perspective is social intelligence distributed across a community. This is the hermeneutic sheaf theorem: knowledge
 glues local operations, consequences, and revisions into a reconstructed situation whose
-meaning is publicly testable. For this reason the chapter should be heard through T13. T13
+meaning is publicly testable. For this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem
 is the hermeneutic sheaf theorem, where local meanings glue into a global one when they
-agree on overlaps. T14 is the indexical pullback theorem, where preservation and emergence
-fail to translate cleanly. T15 is the profundity theorem, where depth comes from breadth
+agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence
+fail to translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth
 across horizons and closure under emergence.
 
 ## Derived primitives
@@ -4345,7 +4345,7 @@ and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that sense is the primary element of the
 idea domain; reference is the value of the emergence part. The algebra operates on senses;
-references are derived. This is a T6 claim with the further content that the same reference
+references are derived. This is a the conjugation theorem claim with the further content that the same reference
 can be reached by many distinct senses. The second claim is that co-reference is the
 equivalence relation induced by the resonance pairing. The prediction is that failures of
 understanding will not be accidental noise. They will cluster where a local content cannot
@@ -4356,7 +4356,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -4398,11 +4398,11 @@ judgment-strokes, sharply separated from psychology. Morphisms translate ordinar
 propositions into Begriffsschrift, preserving inferential articulation while stripping away
 subjective association. rigid reference is reference, intentionality is sense as mode of
 presentation, and differentiation separates concept and object by type-theoretic role rather
-than empirical contrast. This is T15: a thought's objectivity is its trans-horizonal
+than empirical contrast. This is the profundity theorem: a thought's objectivity is its trans-horizonal
 stability across thinkers, languages, and presentations once expressed in logical form. For
-this reason the chapter should be heard through T15. T13 is the hermeneutic sheaf theorem,
-where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+this reason the chapter should be heard through the profundity theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem,
+where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 
@@ -4487,7 +4487,7 @@ In paragraph form, the claim rules out the fantasy that meaning is already compl
 context enters. The first theorem-shaped claim is that the Theory of Descriptions is the
 emergence part: an analytic operation that maps apparent names to quantified structures. The
 Russellian success is that the mapping eliminates ontological commitment to the apparent
-referent. This is a T6 claim with major metaphysical leverage. The second claim is that type
+referent. This is a the conjugation theorem claim with major metaphysical leverage. The second claim is that type
 theory is the grading degree that prevents Russell's paradox. The prediction is that
 failures of understanding will not be accidental noise. They will cluster where a local
 content cannot be carried unchanged across a change of horizon, or where an apparent
@@ -4497,13 +4497,13 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
 
 What the formalism adds is clarification without replacement. First, type theory as grading
-(T9) explains why the paradox disappears: the preservation part is 0 within each type level
+(the graded structure theorem) explains why the paradox disappears: the preservation part is 0 within each type level
 because the self-referential composition is blocked by degree. The hierarchy enables
 consistency without renouncing the logicist project. Second, the Theory of Descriptions
 becomes a precise structural transformation rather than a clever paraphrase. the emergence
@@ -4539,11 +4539,11 @@ scientific construction. Morphisms replace misleading grammatical form with logi
 especially by eliminating denoting phrases into quantificational structure. rigid reference
 is restricted to objects of acquaintance, R diagnoses self-reference and paradox,
 differentiation separates types, and credence appears in epistemic constructions from sense-
-data. This is T14: ordinary grammar fails to pull back into logical form without
+data. This is the indexical pullback theorem: ordinary grammar fails to pull back into logical form without
 obstruction, and the theory of descriptions is the controlled translation that removes it.
-For this reason the chapter should be heard through T14. T13 is the hermeneutic sheaf
-theorem, where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf
+theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 
@@ -4624,7 +4624,7 @@ degree of articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that the world is flat: the preservation
 part is 0 everywhere. All logical structure is tautological; logic adds nothing to the world
-but exhibits the form already there. This is a T5 claim with negative valence: the algebra
+but exhibits the form already there. This is a the meaning curvature theorem claim with negative valence: the algebra
 has no irreducible curvature. The second claim is that truth-functions are composition: the
 only legitimate composition is truth-functional, and any apparent non-truth-functional
 combination is either further analyzable into truth-functional form or is nonsensical. The
@@ -4636,7 +4636,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -4681,11 +4681,11 @@ elementary propositions, logical form, and the limit of language. Morphisms proj
 propositions onto possible states of affairs when they share pictorial form; ethical,
 aesthetic, and metaphysical utterances lack such admissible projection. rigid reference
 binds names to objects, schema or paradigm is logical space, and R appears when the book's
-own propositions must be thrown away. This is T14: what can be shown does not pull back into
+own propositions must be thrown away. This is the indexical pullback theorem: what can be shown does not pull back into
 sayable propositions, so metaphysical sense fails at the boundary of the horizon category.
-For this reason the chapter should be heard through T14. T13 is the hermeneutic sheaf
-theorem, where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf
+theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 
@@ -4764,7 +4764,7 @@ articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that meaning is use: there is no element
 of the idea domain apart from its role in composition. To pull a word out of its language
-game and ask for its meaning in isolation is to encounter no meaning at all. This is a T1
+game and ask for its meaning in isolation is to encounter no meaning at all. This is a the composition theorem
 claim with extreme holism: identity of an element is exhausted by its compositional role.
 The second claim is that family resemblance is the resonance pairing as an overlap count,
 not an essence. The prediction is that failures of understanding will not be accidental
@@ -4775,7 +4775,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -4816,12 +4816,12 @@ language-games and forms of life. Morphisms are partial overlaps in use, trainin
 criteria, not hidden common essences; meaning is intra-horizonal and public. schema or
 paradigm is the form of life, perspective is the participant trained into rule-following,
 differentiation is contrastive use, and private-language fantasy is a failed singleton
-horizon. This is paradigmatic T14: cross-game inference fails, and the private-language
+horizon. This is paradigmatic the indexical pullback theorem: cross-game inference fails, and the private-language
 argument denies that any the horizon functor-section over an isolated private horizon is
-even definable. For this reason the chapter should be heard through T14. T13 is the
+even definable. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives
@@ -4902,7 +4902,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is holism: every sentence's content depends
 on all others via the resonance pairing. There are no isolated atoms of content; meaning is
-global. This is a T2 claim with maximal scope. The second claim is that the web of belief is
+global. This is a the resonance theorem claim with maximal scope. The second claim is that the web of belief is
 the connected algebra under composition. The prediction is that failures of understanding
 will not be accidental noise. They will cluster where a local content cannot be carried
 unchanged across a change of horizon, or where an apparent identity hides suppressed
@@ -4912,7 +4912,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -4954,12 +4954,12 @@ ontological commitments, and regimentation into canonical notation. Morphisms re
 holistically or translate another language by matching stimulus meanings, but there is no
 unique fact selecting one manual. schema or paradigm is the conceptual scheme only insofar
 as it is a connected web, credence is empirical confidence distributed over the web, and
-rigid reference is relativised to background theory. This is T14: translation and ontology
+rigid reference is relativised to background theory. This is the indexical pullback theorem: translation and ontology
 fail to pull back uniquely across manuals, with indeterminacy appearing as a first
 cohomological obstruction in interpretation. For this reason the chapter should be heard
-through T14. T13 is the hermeneutic sheaf theorem, where local meanings glue into a global
-one when they agree on overlaps. T14 is the indexical pullback theorem, where preservation
-and emergence fail to translate cleanly. T15 is the profundity theorem, where depth comes
+through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a global
+one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation
+and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where depth comes
 from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -5043,7 +5043,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is compositionality: the language of thought preserves
 compositional structure. The semantic content of a complex representation is determined by the contents
-of its constituents and the way they are combined. This is a T6 and T1 claim jointly:
+of its constituents and the way they are combined. This is a the conjugation theorem and the composition theorem claim jointly:
 reframing preserves composition-structure. The second claim is that the language of thought
 is a free monoid generated by atomic concepts. The prediction is that failures of
 understanding will not be accidental noise. They will cluster where a local content cannot
@@ -5054,7 +5054,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14, T15;
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem, the profundity theorem;
 where translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5064,7 +5064,7 @@ argument becomes the free-monoid property of composition: finite atoms plus stru
 composition yield an infinite set of constructible representations, and the systematicity of
 related thoughts is a structural consequence. Second, the formalism makes explicit that
 compositionality requires the language of thought to preserve compositional structure strictly — failures of
-compositionality are failures of T6. Pragmatic effects, idiomaticity, and context-
+compositionality are failures of the conjugation theorem. Pragmatic effects, idiomaticity, and context-
 sensitivity that violate strict compositionality become structural deviations from the
 homomorphic ideal. Third, modularity becomes the structural assertion that certain sub-
 algebras of the idea domain admit composition-closure restricted to their own elements:
@@ -5099,13 +5099,13 @@ horizon category is the computational architecture of modules, central cognition
 representations, and causal-informational links to the world. Morphisms preserve syntactic
 structure across computations while attempting to secure semantic content by nomic
 relations. intentionality is mental aboutness, rigid reference is the atomistic concept as
-stable symbol, schema or paradigm marks modular domains, and T14 pressures arise where
-holism threatens compositionality. This is T15 for the language of thought: productivity and
+stable symbol, schema or paradigm marks modular domains, and the indexical pullback theorem pressures arise where
+holism threatens compositionality. This is the profundity theorem for the language of thought: productivity and
 systematicity require representational types stable across indefinitely many computational
-horizons. For this reason the chapter should be heard through T14, T15. T13 is the
+horizons. For this reason the chapter should be heard through the indexical pullback theorem, the profundity theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives
@@ -5186,7 +5186,7 @@ degree of articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that inferential role is the resonance
 pairing. Conceptual content is exhausted by the position a commitment occupies in the
-network of inferential relations. This is a T2 claim with strong inferentialist content:
+network of inferential relations. This is a the resonance theorem claim with strong inferentialist content:
 meaning reduces to resonance. The second claim is that incompatibility is the suppression
 part and the preservation part 0. The prediction is that failures of understanding will not
 be accidental noise. They will cluster where a local content cannot be carried unchanged
@@ -5196,7 +5196,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5240,11 +5240,11 @@ entitlements, material inferences, and recognitive communities. Morphisms update
 score as assertions are made, challenged, inherited, or withdrawn. perspective is the
 recognitive participant, intentionality is inferential role rather than mental pointing,
 schema or paradigm is the practice, and credence is entitlement status within the game of
-giving and asking for reasons. This is T13: conceptual content is the sheaf-gluing of
+giving and asking for reasons. This is the hermeneutic sheaf theorem: conceptual content is the sheaf-gluing of
 locally tracked commitments and entitlements into a public inferential role. For this reason
-the chapter should be heard through T13. T13 is the hermeneutic sheaf theorem, where local
-meanings glue into a global one when they agree on overlaps. T14 is the indexical pullback
-theorem, where preservation and emergence fail to translate cleanly. T15 is the profundity
+the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local
+meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback
+theorem, where preservation and emergence fail to translate cleanly. The profundity theorem is the profundity
 theorem, where depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -5336,7 +5336,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5380,12 +5380,12 @@ training, and normative inferential roles. Morphisms translate reports, observat
 theoretical posits into the space of reasons, rejecting any given item that bypasses
 conceptual uptake. schema or paradigm distinguishes manifest and scientific images,
 perspective is the language-entry participant, and intentionality is norm-governed
-classification rather than bare sensory givenness. This is T14: the Myth of the Given is the
+classification rather than bare sensory givenness. This is the indexical pullback theorem: the Myth of the Given is the
 false claim that sensory content pulls back into knowledge without inferential horizon-
-translation. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+translation. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives
@@ -5482,7 +5482,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5526,11 +5526,11 @@ passing theories as local horizons of use. Morphisms are charitable translations
 jointly adjust belief, meaning, and truth-conditions while preserving enough rationality for
 interpretation to begin. perspective is intersubjective triangulation, credence is
 charitable truth-maximisation, and schema or paradigm is the holistic web rather than a
-separable language scheme. This is T13: radical interpretation glues speaker-local assent,
+separable language scheme. This is the hermeneutic sheaf theorem: radical interpretation glues speaker-local assent,
 interpreter theory, and worldly causes into one coherent truth-theoretic assignment. For
-this reason the chapter should be heard through T13. T13 is the hermeneutic sheaf theorem,
-where local meanings glue into a global one when they agree on overlaps. T14 is the
-indexical pullback theorem, where preservation and emergence fail to translate cleanly. T15
+this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem,
+where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the
+indexical pullback theorem, where preservation and emergence fail to translate cleanly. The profundity theorem
 is the profundity theorem, where depth comes from breadth across horizons and closure under
 emergence.
 
@@ -5624,7 +5624,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15, T14;
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem, the indexical pullback theorem;
 where translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5669,12 +5669,12 @@ by baptismal contexts and causal chains of transmission. Rigid designators are e
 constant global sections rigid reference: the name's referent remains fixed while
 descriptions vary by world. credence separates epistemic evidence from modal necessity, and
 schema or paradigm appears in rule-following as the community horizon that fixes practice,
-if anything does. This is T15 for names and T14 for rules: rigidity is trans-horizonal
+if anything does. This is the profundity theorem for names and the indexical pullback theorem for rules: rigidity is trans-horizonal
 stability, while finite past use fails to pull back into a unique future the preservation
-part. For this reason the chapter should be heard through T15, T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+part. For this reason the chapter should be heard through the profundity theorem, the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives
@@ -5752,7 +5752,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5794,11 +5794,11 @@ substance-view. Morphisms of Madhyamaka analysis translate any asserted svabhāv
 dependent origination and then dissolve the analysis itself. R is decisive in emptiness of
 emptiness as fixed-point self-application of the horizon functor, differentiation prevents
 positive essence, and intentionality is conventional designation without intrinsic target.
-This is T14 plus R: the two truths are horizon-levels of the presheaf, and every attempt to
+This is the indexical pullback theorem plus R: the two truths are horizon-levels of the presheaf, and every attempt to
 make emptiness invariant as a doctrine fails reflexively. For this reason the chapter should
-be heard through T14. T13 is the hermeneutic sheaf theorem, where local meanings glue into a
-global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a
+global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives
@@ -5889,7 +5889,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -5931,11 +5931,11 @@ political order. Morphisms extend cultivated conduct from parent-child relations
 minister, friend-friend, and public governance, preserving role-propriety while widening its
 scope. perspective is the role-bearing person, schema or paradigm is tradition, is ritual
 attunement, and credence measures trustworthiness or humane reliability across contexts.
-This is T13: social harmony is the sheaf-gluing of role-local acts of lǐ into a coherent dào
-embodied by the jūnzǐ. For this reason the chapter should be heard through T13. T13 is the
+This is the hermeneutic sheaf theorem: social harmony is the sheaf-gluing of role-local acts of lǐ into a coherent dào
+embodied by the jūnzǐ. For this reason the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the
 hermeneutic sheaf theorem, where local meanings glue into a global one when they agree on
-overlaps. T14 is the indexical pullback theorem, where preservation and emergence fail to
-translate cleanly. T15 is the profundity theorem, where depth comes from breadth across
+overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and emergence fail to
+translate cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across
 horizons and closure under emergence.
 
 ## Derived primitives
@@ -6029,7 +6029,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -6073,12 +6073,12 @@ with no privileged terminal object. Morphisms are playful transformations—butt
 human, useful to useless, disputant to wanderer—that reveal the contingency of each
 distinction. perspective is perspectival standpoint, schema or paradigm is deliberately
 loosened, is ease or wandering, and R appears when distinctions about distinctions are
-themselves dissolved. This is maximal T14: every fixed discrimination fails to pull back
+themselves dissolved. This is maximal the indexical pullback theorem: every fixed discrimination fails to pull back
 across wandering perspectives, so wisdom is skillful movement through non-privileged
-horizons. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+horizons. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives
@@ -6172,9 +6172,9 @@ chain, or dependent origination.
 Carefully restated, the bridge uses a horizon category whose objects are practices, texts,
 meditative analyses, language-games, and historical situations. Horizon-translations carry a
 content from one such object to another. The horizon functor assigns a full local idea
-algebra to each horizon. T13 applies when overlapping practices can glue local meanings into
-a shared understanding. T14 applies when a sign, doctrine, or word fails to pull back
-cleanly into another setting. T15 applies when an insight becomes profound because it
+algebra to each horizon. The hermeneutic sheaf theorem applies when overlapping practices can glue local meanings into
+a shared understanding. The indexical pullback theorem applies when a sign, doctrine, or word fails to pull back
+cleanly into another setting. The profundity theorem applies when an insight becomes profound because it
 remains fertile across many horizons while continuing to generate new consequences.
 
 ## What the formalism adds
@@ -6211,9 +6211,9 @@ movable without being perfectly portable.
 
 The horizon category for this bridge has several connected regions: Buddhist analysis of
 dependent origination, post-structuralist textual interpretation, and ordinary language-
-games. Some translations between regions are fruitful, and some are obstructed. T13 appears
-whenever overlapping practices produce shared intelligibility. T14 appears whenever a word
-such as emptiness, trace, or game is mistranslated as a fixed doctrine. T15 appears because
+games. Some translations between regions are fruitful, and some are obstructed. The hermeneutic sheaf theorem appears
+whenever overlapping practices produce shared intelligibility. The indexical pullback theorem appears whenever a word
+such as emptiness, trace, or game is mistranslated as a fixed doctrine. The profundity theorem appears because
 the deepest insights here survive precisely by traveling across horizons without becoming a
 view from nowhere.
 
@@ -8025,7 +8025,7 @@ In Idea Theory, the buyer, the seller, and the idea occupy different horizons. T
 
 The theorem rules out the hope that better bargaining alone can make information behave like a standard commodity. It predicts systematic underinvestment in invention, secrecy, patents, licensing, and other institutions that try to create partial excludability around something whose use naturally spreads. The central obstruction is not greed or ignorance. It is that the act needed to measure value is itself a transformative act.
 
-Carefully stated, let composition join a buyer horizon with an information idea, let identity mark the repeatable content of that idea, let the resonance pairing measure the buyer's capacity to value it, and let the preservation part, suppression part, and emergence part describe what disclosure keeps, cancels, and creates. If the pre-disclosure resonance pairing cannot determine the post-disclosure resonance pairing, and if the composition cannot be undone by any identity-preserving return to ignorance, then no price rule preserves valuation across the transaction. This is a T14 obstruction, because inference fails to pull back from the informed horizon to the uninformed horizon.
+Carefully stated, let composition join a buyer horizon with an information idea, let identity mark the repeatable content of that idea, let the resonance pairing measure the buyer's capacity to value it, and let the preservation part, suppression part, and emergence part describe what disclosure keeps, cancels, and creates. If the pre-disclosure resonance pairing cannot determine the post-disclosure resonance pairing, and if the composition cannot be undone by any identity-preserving return to ignorance, then no price rule preserves valuation across the transaction. This is a the indexical pullback theorem obstruction, because inference fails to pull back from the informed horizon to the uninformed horizon.
 
 ## What formalism adds
 
@@ -8037,7 +8037,7 @@ Arrow often treats the problem in sharp before and after terms. Real information
 
 ## Horizon structure
 
-The horizon category contains seller informed, buyer uninformed, buyer after disclosure, patent market, public domain, and imitation horizon. Morphisms are disclosure, licensing, publication, patenting, and copying. The horizon functor assigns each horizon a different valuation algebra because the resonance pairing changes when the buyer learns. T14 is the relevant theorem label: the same idea does not support the same inference in pre-disclosure and post-disclosure horizons.
+The horizon category contains seller informed, buyer uninformed, buyer after disclosure, patent market, public domain, and imitation horizon. Morphisms are disclosure, licensing, publication, patenting, and copying. The horizon functor assigns each horizon a different valuation algebra because the resonance pairing changes when the buyer learns. The indexical pullback theorem is the relevant theorem label: the same idea does not support the same inference in pre-disclosure and post-disclosure horizons.
 
 ## Diagnostic derived primitives
 
@@ -8049,7 +8049,7 @@ The audiobook moral is simple. When you hear the word information, do not pictur
 
 ## Chapter summary
 
-Arrow teaches that information is not a normal commodity because its valuation depends on irreversible learning. Idea Theory restates this as horizon-changing composition: disclosure preserves some identity, suppresses ignorance, creates new evaluative capacity, and blocks the pullback needed for ordinary pricing. The result is T14 in economic form.
+Arrow teaches that information is not a normal commodity because its valuation depends on irreversible learning. Idea Theory restates this as horizon-changing composition: disclosure preserves some identity, suppresses ignorance, creates new evaluative capacity, and blocks the pullback needed for ordinary pricing. The result is the indexical pullback theorem in economic form.
 
 
 # Chapter 114 — Friedrich Hayek on Dispersed Knowledge
@@ -8074,7 +8074,7 @@ In Idea Theory, society is not one giant mind. It is a cover of local idea algeb
 
 The theorem rules out the fantasy of a benevolent mind that simply gathers all relevant facts and computes the right allocation. It predicts that functioning markets will often coordinate more than they explain, and that attempts to replace price signals with complete administrative descriptions will lose essential local knowledge. Prices are thin, but their thinness is part of their power: they transmit enough without requiring total disclosure.
 
-Carefully stated, let the horizon category be a cover of agent perspectives, firm contexts, and market situations. Let the horizon functor assign each horizon its own local algebra. Let the resonance pairing measure scarcity, preference, and opportunity cost inside each local situation. If no one horizon contains the full pattern of resonance pairings, then no planner identity can compose all fragments while preserving their local force. A global market section can still form when compatible price signals glue local adjustments. This is T13, because the market works by sheaf-like gluing across horizons.
+Carefully stated, let the horizon category be a cover of agent perspectives, firm contexts, and market situations. Let the horizon functor assign each horizon its own local algebra. Let the resonance pairing measure scarcity, preference, and opportunity cost inside each local situation. If no one horizon contains the full pattern of resonance pairings, then no planner identity can compose all fragments while preserving their local force. A global market section can still form when compatible price signals glue local adjustments. This is the hermeneutic sheaf theorem, because the market works by sheaf-like gluing across horizons.
 
 ## What formalism adds
 
@@ -8086,7 +8086,7 @@ Hayek often emphasizes the price system as a remarkably efficient communicator. 
 
 ## Horizon structure
 
-The horizon category contains households, firms, traders, regulators, technologies, inventories, and expectations. Morphisms are bids, substitutions, contracts, shortages, innovations, and price changes. The horizon functor assigns each perspective a restricted local algebra and lets price signals move among them without centralizing all knowledge. T13 is the governing theorem label: compatible local responses glue into a market-wide coordination pattern that no single agent horizon contains.
+The horizon category contains households, firms, traders, regulators, technologies, inventories, and expectations. Morphisms are bids, substitutions, contracts, shortages, innovations, and price changes. The horizon functor assigns each perspective a restricted local algebra and lets price signals move among them without centralizing all knowledge. The hermeneutic sheaf theorem is the governing theorem label: compatible local responses glue into a market-wide coordination pattern that no single agent horizon contains.
 
 ## Diagnostic derived primitives
 
@@ -8100,7 +8100,7 @@ One more implication is practical. A planner may collect reports, but reports ar
 
 ## Chapter summary
 
-Hayek makes the economy an epistemic structure. Idea Theory restates the price system as T13 gluing: local horizons preserve fragments, suppress overwhelming detail, and generate coordinated action. The market is not omniscient. It is a horizon device for using knowledge without possessing it all in one place.
+Hayek makes the economy an epistemic structure. Idea Theory restates the price system as the hermeneutic sheaf theorem gluing: local horizons preserve fragments, suppress overwhelming detail, and generate coordinated action. The market is not omniscient. It is a horizon device for using knowledge without possessing it all in one place.
 
 
 # Chapter 115 — Paul Romer on Endogenous Growth
@@ -8125,7 +8125,7 @@ In Idea Theory, a technological idea is an element that can enter many compositi
 
 The theorem rules out the picture of growth as only accumulation of rival inputs. It predicts that teaching, copying, licensing, and recombination can raise total productivity without requiring the original idea to be consumed. It also predicts institutional tension: if ideas diffuse too freely, private incentives weaken; if they are locked too tightly, social growth is slowed. Non-rivalry is powerful precisely because it separates use from depletion.
 
-Carefully stated, let composition join an idea with many production horizons, let identity mark the same design across uses, let the resonance pairing measure productive fit, and let degree or grading record the idea's breadth of support. If repeated composition preserves the idea's identity and does not reduce its resonance pairing with further horizons, then the preservation part remains available while the emergence part can generate new applications. The resulting idea is profound when its support and productive closure expand across horizons. This is T15, because profundity depends on stable trans-horizon support and growing emergence.
+Carefully stated, let composition join an idea with many production horizons, let identity mark the same design across uses, let the resonance pairing measure productive fit, and let degree or grading record the idea's breadth of support. If repeated composition preserves the idea's identity and does not reduce its resonance pairing with further horizons, then the preservation part remains available while the emergence part can generate new applications. The resulting idea is profound when its support and productive closure expand across horizons. This is the profundity theorem, because profundity depends on stable trans-horizon support and growing emergence.
 
 ## What formalism adds
 
@@ -8137,7 +8137,7 @@ Romer's economic models depend on incentives, research labor, monopoly rents, an
 
 ## Horizon structure
 
-The horizon category contains research labs, firms, patent offices, production lines, classrooms, software repositories, and consumer markets. Morphisms are copying, licensing, teaching, adapting, applying, and recombining. The horizon functor assigns the same idea different local resonance pairings while preserving its identity across many uses. T15 is the relevant theorem label: an idea becomes economically profound when its non-rival identity has wide support and its emergence part remains fertile.
+The horizon category contains research labs, firms, patent offices, production lines, classrooms, software repositories, and consumer markets. Morphisms are copying, licensing, teaching, adapting, applying, and recombining. The horizon functor assigns the same idea different local resonance pairings while preserving its identity across many uses. The profundity theorem is the relevant theorem label: an idea becomes economically profound when its non-rival identity has wide support and its emergence part remains fertile.
 
 ## Diagnostic derived primitives
 
@@ -8151,7 +8151,7 @@ The same point applies to education. Teaching an idea does not divide it among s
 
 ## Chapter summary
 
-Romer places ideas at the heart of growth because they can be used without being used up. Idea Theory restates this as preserved identity under repeated composition, with expanding resonance across production horizons. The result is T15 in growth form: non-rival ideas become profound when their support and emergence remain open over time.
+Romer places ideas at the heart of growth because they can be used without being used up. Idea Theory restates this as preserved identity under repeated composition, with expanding resonance across production horizons. The result is the profundity theorem in growth form: non-rival ideas become profound when their support and emergence remain open over time.
 
 
 # Chapter 116 — Martin Weitzman on Recombinant Growth
@@ -8176,7 +8176,7 @@ In Idea Theory, the stock of ideas is closed under composition only after work. 
 
 The theorem rules out a linear picture of discovery in which each idea contributes only itself. It predicts that diversity matters as much as quantity, because redundant components do not create rich new pairings. It also predicts sudden bursts when ideas from distant horizons become mutually visible. The value of a research community lies not only in what it already knows, but in the unrealized combinations its members can make.
 
-Carefully stated, let composition combine idea elements, let identity preserve recognizable components across recombination, let the resonance pairing decide which pairings are locally meaningful, and let the preservation part, suppression part, emergence part, and emergence cocycle measure what is retained, canceled, generated, and accumulated. If a growing seed stock contains sufficiently differentiated ideas and if many pairings have positive emergence part, then the closure of the stock expands in both variety and degree. This is T15, because profundity rises with the size and reach of emergence across many horizons.
+Carefully stated, let composition combine idea elements, let identity preserve recognizable components across recombination, let the resonance pairing decide which pairings are locally meaningful, and let the preservation part, suppression part, emergence part, and emergence cocycle measure what is retained, canceled, generated, and accumulated. If a growing seed stock contains sufficiently differentiated ideas and if many pairings have positive emergence part, then the closure of the stock expands in both variety and degree. This is the profundity theorem, because profundity rises with the size and reach of emergence across many horizons.
 
 ## What formalism adds
 
@@ -8188,7 +8188,7 @@ Weitzman's combinatorial story can make growth sound almost automatic. Idea Theo
 
 ## Horizon structure
 
-The horizon category contains laboratories, technical domains, industries, design traditions, standards bodies, and user practices. Morphisms are analogies, transfers, prototypes, interdisciplinary collaborations, and teaching. The horizon functor tracks which pairings are visible in which domain and how an idea changes when carried into a new one. T15 is the relevant theorem label: recombinant growth is profundity through expanding support and emergence closure.
+The horizon category contains laboratories, technical domains, industries, design traditions, standards bodies, and user practices. Morphisms are analogies, transfers, prototypes, interdisciplinary collaborations, and teaching. The horizon functor tracks which pairings are visible in which domain and how an idea changes when carried into a new one. The profundity theorem is the relevant theorem label: recombinant growth is profundity through expanding support and emergence closure.
 
 ## Diagnostic derived primitives
 
@@ -8202,7 +8202,7 @@ The listener can also hear a warning about monoculture. If every laboratory know
 
 ## Chapter summary
 
-Weitzman teaches that ideas multiply by meeting other ideas. Idea Theory restates recombinant growth as composition guided by resonance, with preservation, suppression, emergence, and emergence cocycle marking the structure of novelty. The theorem label is T15: an idea stock grows profound when its horizon-crossing combinations keep generating fertile emergence.
+Weitzman teaches that ideas multiply by meeting other ideas. Idea Theory restates recombinant growth as composition guided by resonance, with preservation, suppression, emergence, and emergence cocycle marking the structure of novelty. The theorem label is the profundity theorem: an idea stock grows profound when its horizon-crossing combinations keep generating fertile emergence.
 
 
 # Chapter 117 — Charles Jones on Semi-Endogenous Growth
@@ -8227,7 +8227,7 @@ In Idea Theory, the emergence cocycle measures the novelty produced when ideas c
 
 The theorem rules out the simple extrapolation from more researchers to ever faster growth. It predicts that economies may need increasing research effort merely to hold a steady growth path. It also predicts that frontier position matters: the same number of researchers can have different effects in early and late horizons. Growth remains idea-driven, but idea discovery is historically situated.
 
-Carefully stated, let composition combine existing ideas at a research frontier, let identity preserve the accumulated stock, let the resonance pairing measure tractable fit between problems and tools, and let the emergence cocycle record new productive capacity. If the horizon functor assigns later frontiers lower expected emergence for comparable effort, and if the emergence part is bounded within each finite research window, then total profundity cannot rise permanently from effort alone. This is T15 in limiting form, because support persists but emergence closure is constrained.
+Carefully stated, let composition combine existing ideas at a research frontier, let identity preserve the accumulated stock, let the resonance pairing measure tractable fit between problems and tools, and let the emergence cocycle record new productive capacity. If the horizon functor assigns later frontiers lower expected emergence for comparable effort, and if the emergence part is bounded within each finite research window, then total profundity cannot rise permanently from effort alone. This is the profundity theorem in limiting form, because support persists but emergence closure is constrained.
 
 ## What formalism adds
 
@@ -8239,7 +8239,7 @@ Jones works with macroeconomic models, data, and production functions. Idea Theo
 
 ## Horizon structure
 
-The horizon category is ordered by research time: early accessible problems, mature fields, hard frontiers, educational systems, laboratories, and policy environments. Morphisms are training, frontier advance, funding reallocation, instrumentation, and paradigm shift. The horizon functor assigns effort different expected resonance at different stages. T15 is the relevant theorem label, but with emphasis on bounded emergence rather than unlimited expansion.
+The horizon category is ordered by research time: early accessible problems, mature fields, hard frontiers, educational systems, laboratories, and policy environments. Morphisms are training, frontier advance, funding reallocation, instrumentation, and paradigm shift. The horizon functor assigns effort different expected resonance at different stages. The profundity theorem is the relevant theorem label, but with emphasis on bounded emergence rather than unlimited expansion.
 
 ## Diagnostic derived primitives
 
@@ -8255,7 +8255,7 @@ The same lens also helps compare fields. Some sciences slow because their questi
 
 ## Chapter summary
 
-Jones corrects the exuberant story of ideas with a frontier constraint. Idea Theory restates semi-endogenous growth as bounded emergence under a moving horizon functor. Research preserves accumulated identity and still creates novelty, but T15 is limited by temporality: later horizons make each new emergence harder to obtain.
+Jones corrects the exuberant story of ideas with a frontier constraint. Idea Theory restates semi-endogenous growth as bounded emergence under a moving horizon functor. Research preserves accumulated identity and still creates novelty, but the profundity theorem is limited by temporality: later horizons make each new emergence harder to obtain.
 
 
 # Chapter 118 — Joseph Schumpeter on Creative Destruction
@@ -8280,7 +8280,7 @@ In Idea Theory, creative destruction is the full decomposition of composition. W
 
 The theorem rules out the comforting idea that creation can be cleanly separated from destruction. It predicts that major innovations will reorganize horizons: incumbent firms, workers, investors, consumers, and regulators will not experience the same idea in the same way. It also predicts that a mature regime can become a source of its own negation, because established routines become material for entrepreneurial recombination.
 
-Carefully stated, let composition join an old industrial schema with a new entrepreneurial idea, let identity track what remains recognizable, let the resonance pairing measure fit with markets and institutions, and let the preservation part, suppression part, emergence part, and emergence cocycle describe the resulting transformation. If the emergence part has durable support across post-innovation horizons and the suppression part cancels incumbent arrangements, then the innovation is creative destruction. This invokes T14 for the break across incumbent horizons and T15 for the later profundity of the new regime.
+Carefully stated, let composition join an old industrial schema with a new entrepreneurial idea, let identity track what remains recognizable, let the resonance pairing measure fit with markets and institutions, and let the preservation part, suppression part, emergence part, and emergence cocycle describe the resulting transformation. If the emergence part has durable support across post-innovation horizons and the suppression part cancels incumbent arrangements, then the innovation is creative destruction. This invokes the indexical pullback theorem for the break across incumbent horizons and the profundity theorem for the later profundity of the new regime.
 
 ## What formalism adds
 
@@ -8292,7 +8292,7 @@ Schumpeter's theory is rich with institutions, credit, class, entrepreneurship, 
 
 ## Horizon structure
 
-The horizon category contains incumbent firms, entrepreneurial ventures, credit institutions, labor markets, consumers, regulators, and technological regimes. Morphisms are financing, entry, imitation, bankruptcy, standardization, and reorganization. The horizon functor assigns each standpoint a different preservation, suppression, and emergence profile. T14 names the failure of the innovation to pull back into the old incumbent horizon. T15 names the later condition under which the new synthesis becomes profound.
+The horizon category contains incumbent firms, entrepreneurial ventures, credit institutions, labor markets, consumers, regulators, and technological regimes. Morphisms are financing, entry, imitation, bankruptcy, standardization, and reorganization. The horizon functor assigns each standpoint a different preservation, suppression, and emergence profile. The indexical pullback theorem names the failure of the innovation to pull back into the old incumbent horizon. The profundity theorem names the later condition under which the new synthesis becomes profound.
 
 ## Diagnostic derived primitives
 
@@ -8308,7 +8308,7 @@ This is why the social accounting matters. A new regime must be judged by the ho
 
 ## Chapter summary
 
-Schumpeter makes innovation dialectical. Idea Theory restates creative destruction as composition with preservation part, suppression part, emergence part, and emergence cocycle. The break is T14 from the incumbent view, while the lasting new regime is T15 when the emergence stabilizes across horizons.
+Schumpeter makes innovation dialectical. Idea Theory restates creative destruction as composition with preservation part, suppression part, emergence part, and emergence cocycle. The break is the indexical pullback theorem from the incumbent view, while the lasting new regime is the profundity theorem when the emergence stabilizes across horizons.
 
 
 # Chapter 119 — Daniel Kahneman and Amos Tversky on Framing
@@ -8333,7 +8333,7 @@ In Idea Theory, a frame is a horizon-setting idea that changes the resonance pai
 
 The theorem rules out the expectation that equivalent outcome descriptions must yield equivalent preferences. It predicts framing effects whenever the same prospect is composed with different schemas that alter credence, attention, or signed valence. It also predicts that so-called irrationality may be structurally normal: a non-neutral horizon can change what counts as the salient comparison.
 
-Carefully stated, let identity preserve the extensional prospect across descriptions, let composition join that prospect with a gain frame or loss frame, let the resonance pairing measure preference force, and let meaning curvature register asymmetric evaluation around the reference point. If the preservation part keeps the described outcome while the suppression part and emergence part differ across frames, then the same prospect supports different choices in different horizons. This is T14, because the choice inference fails to pull back unchanged across framing morphisms.
+Carefully stated, let identity preserve the extensional prospect across descriptions, let composition join that prospect with a gain frame or loss frame, let the resonance pairing measure preference force, and let meaning curvature register asymmetric evaluation around the reference point. If the preservation part keeps the described outcome while the suppression part and emergence part differ across frames, then the same prospect supports different choices in different horizons. This is the indexical pullback theorem, because the choice inference fails to pull back unchanged across framing morphisms.
 
 ## What formalism adds
 
@@ -8345,7 +8345,7 @@ Kahneman and Tversky's achievement was empirical and quantitative. They measured
 
 ## Horizon structure
 
-The horizon category contains gain frames, loss frames, reference points, probability presentations, experimental prompts, and decision contexts. Morphisms are reframings that preserve the extensional prospect while changing salience and permitted inference. The horizon functor assigns different resonance pairings and signed valence profiles to the same underlying prospect. T14 is the theorem label: prospect theory is the canonical case where inference does not survive a horizon shift.
+The horizon category contains gain frames, loss frames, reference points, probability presentations, experimental prompts, and decision contexts. Morphisms are reframings that preserve the extensional prospect while changing salience and permitted inference. The horizon functor assigns different resonance pairings and signed valence profiles to the same underlying prospect. The indexical pullback theorem is the theorem label: prospect theory is the canonical case where inference does not survive a horizon shift.
 
 ## Diagnostic derived primitives
 
@@ -8361,7 +8361,7 @@ The practical lesson is humility. When advising, voting, investing, or choosing 
 
 ## Chapter summary
 
-Kahneman and Tversky show that framing changes choice. Idea Theory restates this as T14: identity of outcome can be preserved while resonance, suppression, emergence, and meaning curvature shift across horizons. The same prospect is not the same decision when the frame changes.
+Kahneman and Tversky show that framing changes choice. Idea Theory restates this as the indexical pullback theorem: identity of outcome can be preserved while resonance, suppression, emergence, and meaning curvature shift across horizons. The same prospect is not the same decision when the frame changes.
 
 
 # Chapter 120 — Elinor Ostrom on the Commons
@@ -8386,7 +8386,7 @@ In Idea Theory, a commons is a governance idea algebra distributed across users,
 
 The theorem rules out the claim that only privatization or centralized state control can prevent common ruin. It predicts that durable commons require compatible local rules, mutual monitoring, and institutions for revision. It also predicts failure when horizons do not glue: when boundaries are unclear, monitors lack standing, sanctions are not legitimate, or higher authorities refuse to recognize local rule-making.
 
-Carefully stated, let the horizon category contain user groups, monitoring sites, rule assemblies, sanctioning forums, and nested governance levels. Let the horizon functor assign each local arena a rule algebra. Let the resonance pairing measure mutual trust and enforceable expectation. If local rule compositions agree on overlaps while preserving autonomy, and if the preservation part sustains boundaries, the suppression part checks exploitation, and the emergence part supports collective problem solving, then the commons forms a global governance section. This is T13, because polycentric institutions glue local horizons into coherent order.
+Carefully stated, let the horizon category contain user groups, monitoring sites, rule assemblies, sanctioning forums, and nested governance levels. Let the horizon functor assign each local arena a rule algebra. Let the resonance pairing measure mutual trust and enforceable expectation. If local rule compositions agree on overlaps while preserving autonomy, and if the preservation part sustains boundaries, the suppression part checks exploitation, and the emergence part supports collective problem solving, then the commons forms a global governance section. This is the hermeneutic sheaf theorem, because polycentric institutions glue local horizons into coherent order.
 
 ## What formalism adds
 
@@ -8398,7 +8398,7 @@ Ostrom's evidence comes from messy, historically specific institutions. Idea The
 
 ## Horizon structure
 
-The horizon category contains resource sites, households, user associations, monitors, councils, courts, and larger political authorities. Morphisms are rule revisions, reports, sanctions, appeals, boundary negotiations, and information flows. The horizon functor lets local rule algebras agree where they overlap while remaining distinct. T13 is the relevant theorem label: successful commons governance is sheaf-like gluing across multiple perspectives.
+The horizon category contains resource sites, households, user associations, monitors, councils, courts, and larger political authorities. Morphisms are rule revisions, reports, sanctions, appeals, boundary negotiations, and information flows. The horizon functor lets local rule algebras agree where they overlap while remaining distinct. The hermeneutic sheaf theorem is the relevant theorem label: successful commons governance is sheaf-like gluing across multiple perspectives.
 
 ## Diagnostic derived primitives
 
@@ -8414,7 +8414,7 @@ This is also why trust is not a soft extra. Trust is a resonance condition that 
 
 ## Chapter summary
 
-Ostrom shows that commons can be governed through polycentric institutions. Idea Theory restates this as T13: local horizons of monitoring, rule choice, sanction, and resource use can glue into a durable governance section. The commons survives when preservation, suppression, and emergence are organized by rules that users can recognize and revise.
+Ostrom shows that commons can be governed through polycentric institutions. Idea Theory restates this as the hermeneutic sheaf theorem: local horizons of monitoring, rule choice, sanction, and resource use can glue into a durable governance section. The commons survives when preservation, suppression, and emergence are organized by rules that users can recognize and revise.
 
 
 # Chapter 121 — von Neumann and Morgenstern on Expected Utility
@@ -8439,7 +8439,7 @@ Let the strategic options form an idea algebra. Pure strategies are basic elemen
 
 The theorem rules out a picture of rational choice as mere appetite. If preferences over uncertain prospects obey the standard consistency requirements, then an agent behaves as if each outcome has a utility and each uncertainty has a credence. In strictly opposed play, the theorem predicts that strategic safety is not merely subjective caution. There is a shared value of the game, recovered from both perspectives, once mixed strategies are allowed.
 
-Carefully restated, take a horizon category whose objects are strategic situations, payoff descriptions, opponent perspectives, and mixed strategy contexts. The horizon functor assigns to each such horizon a payoff resonance algebra. Within that algebra, composition combines strategic ideas, identity preserves the idle option, resonance pairing evaluates payoff, preservation part retains utility relevant ordering, suppression part removes irrelevant description, emergence part produces expected value from outcome and credence, emergence cocycle records the surplus or loss introduced by strategic combination, degree or grading ranks complexity of strategies, and meaning curvature records asymmetry between opposed perspectives. T13 applies when compatible local maximin and minimax constraints glue into a global saddle like section.
+Carefully restated, take a horizon category whose objects are strategic situations, payoff descriptions, opponent perspectives, and mixed strategy contexts. The horizon functor assigns to each such horizon a payoff resonance algebra. Within that algebra, composition combines strategic ideas, identity preserves the idle option, resonance pairing evaluates payoff, preservation part retains utility relevant ordering, suppression part removes irrelevant description, emergence part produces expected value from outcome and credence, emergence cocycle records the surplus or loss introduced by strategic combination, degree or grading ranks complexity of strategies, and meaning curvature records asymmetry between opposed perspectives. The hermeneutic sheaf theorem applies when compatible local maximin and minimax constraints glue into a global saddle like section.
 
 ## What formalism adds
 
@@ -8451,7 +8451,7 @@ Von Neumann and Morgenstern require a strong probabilistic interpretation. The a
 
 ## Horizon structure and theorem
 
-The relevant horizon structure is a two player strategic horizon with payoff representations, mixed strategy spaces, and transformations of utility scale. The horizon functor sends each representation to its local resonance algebra. Player perspectives are different subhorizons over the same game. T13 is the guiding theorem because the result is a gluing claim: local security requirements from each perspective meet in a stable global value.
+The relevant horizon structure is a two player strategic horizon with payoff representations, mixed strategy spaces, and transformations of utility scale. The horizon functor sends each representation to its local resonance algebra. Player perspectives are different subhorizons over the same game. The hermeneutic sheaf theorem is the guiding theorem because the result is a gluing claim: local security requirements from each perspective meet in a stable global value.
 
 
 A simple example helps the ear. Suppose a commander can choose bold attack, cautious defense, or delay, while the opponent can choose reinforce, feint, or withdraw. In ordinary speech these are options. In the algebra they are strategic ideas. Mixing them means placing credence over them as part of the plan itself. The payoff is not attached to an isolated act but to the resonance pairing between one plan and the opponent's plan. A cautious plan may resonate well against a feint and poorly against reinforcement. Expected utility collects these local encounters into one evaluative voice.
@@ -8464,7 +8464,7 @@ Credence is primary because probabilities over actions make mixed strategy meani
 
 ## Chapter summary
 
-Von Neumann and Morgenstern teach Idea Theory that strategic reason is an algebra of evaluated possibilities. Expected utility makes credence audible as disciplined preference, and minimax makes opposition audible as a stable resonance value. Their chapter is governed by T13: when the local constraints of opposed strategic horizons are compatible, they glue into a single defensible form of play.
+Von Neumann and Morgenstern teach Idea Theory that strategic reason is an algebra of evaluated possibilities. Expected utility makes credence audible as disciplined preference, and minimax makes opposition audible as a stable resonance value. Their chapter is governed by the hermeneutic sheaf theorem: when the local constraints of opposed strategic horizons are compatible, they glue into a single defensible form of play.
 
 
 # Chapter 122 — John Nash on Equilibrium
@@ -8489,7 +8489,7 @@ Let each player's strategy be an idea in a shared strategic algebra. A full prof
 
 The theorem rules out explanations that depend on a commanding center. Stability can arise from mutual constraint alone. It also rules out any profile where at least one player has a profitable unilateral deviation, because that profile contains an internal pressure against itself. The theorem predicts that social patterns may persist even when everyone would prefer some other coordinated world, so long as no one can reach it alone.
 
-Carefully restated, begin with a horizon category whose objects are player perspectives, unilateral deviation contexts, payoff descriptions, and full strategy profiles. The horizon functor assigns to each object a local payoff resonance algebra. Composition forms a joint profile from player strategies. Identity leaves a player's current action unchanged. Resonance pairing evaluates that player's payoff against the others. Preservation part keeps the opponents' strategies fixed during a unilateral test. Suppression part ignores changes outside the deviating player's horizon. Emergence part is the profile level outcome created by the combination of actions. Emergence cocycle records gains or losses produced by interaction rather than by isolated choice. Degree or grading may rank strategy complexity. Meaning curvature appears when one player's improvement worsens another's position. T13 applies because local best response sections glue into one global equilibrium section when they are mutually compatible.
+Carefully restated, begin with a horizon category whose objects are player perspectives, unilateral deviation contexts, payoff descriptions, and full strategy profiles. The horizon functor assigns to each object a local payoff resonance algebra. Composition forms a joint profile from player strategies. Identity leaves a player's current action unchanged. Resonance pairing evaluates that player's payoff against the others. Preservation part keeps the opponents' strategies fixed during a unilateral test. Suppression part ignores changes outside the deviating player's horizon. Emergence part is the profile level outcome created by the combination of actions. Emergence cocycle records gains or losses produced by interaction rather than by isolated choice. Degree or grading may rank strategy complexity. Meaning curvature appears when one player's improvement worsens another's position. The hermeneutic sheaf theorem applies because local best response sections glue into one global equilibrium section when they are mutually compatible.
 
 ## What formalism adds
 
@@ -8501,7 +8501,7 @@ Nash's existence result for finite games depends on mixed strategies and fixed p
 
 ## Horizon structure and theorem
 
-The horizon category is the product of player horizons, together with maps that restrict attention to a single player's deviation problem. The horizon functor assigns each player a payoff algebra over the shared profile. T13 is the guiding theorem: the equilibrium profile is a global section assembled from local optimality conditions, one for each perspective.
+The horizon category is the product of player horizons, together with maps that restrict attention to a single player's deviation problem. The horizon functor assigns each player a payoff algebra over the shared profile. The hermeneutic sheaf theorem is the guiding theorem: the equilibrium profile is a global section assembled from local optimality conditions, one for each perspective.
 
 
 A small social example makes the idea vivid. Imagine several commuters choosing routes into a city. Each route's value depends on how many others choose it. A driver may dislike the present congestion, yet if every alternative route would be worse given current traffic, the pattern is an equilibrium. No central intelligence designed it. No driver loves it. Still, the profile holds because every local deviation has been tested and rejected from the relevant perspective.
@@ -8514,7 +8514,7 @@ Perspective is central because each player sees the same profile through a disti
 
 ## Chapter summary
 
-Nash gives Idea Theory its cleanest model of mutual stability. Composition creates a profile, resonance pairing evaluates deviations, and equilibrium is the point where every local test returns the same global arrangement. The chapter belongs under T13 because compatible local best responses glue into a strategic whole.
+Nash gives Idea Theory its cleanest model of mutual stability. Composition creates a profile, resonance pairing evaluates deviations, and equilibrium is the point where every local test returns the same global arrangement. The chapter belongs under the hermeneutic sheaf theorem because compatible local best responses glue into a strategic whole.
 
 
 # Chapter 123 — Thomas Schelling on Focal Points
@@ -8539,7 +8539,7 @@ Let coordination options be ideas in an algebra. Composition combines one player
 
 The theorem rules out the claim that payoffs alone always determine coordination. If several profiles are equally stable by payoff, the algebra still contains differences of degree, schema, and horizon. It predicts that people converge on options that are not merely beneficial but mutually legible. The chosen point may be a landmark, a round number, a conventional phrase, or a visibly symmetrical division.
 
-Carefully restated, take a horizon category whose objects are coordination settings, cultural frames, linguistic contexts, public symbols, and player perspectives. The horizon functor assigns to each horizon an algebra of coordination ideas. Composition joins candidate choices into joint outcomes. Identity is the no change option within a frame. Resonance pairing evaluates the payoff of matching. Preservation part retains the shared features that make an option recognizable. Suppression part filters out options that are formally possible but culturally dim. Emergence part is the coordinated outcome produced by mutual recognition. Emergence cocycle records the surplus created by successful matching. Degree or grading orders options by salience. Meaning curvature appears when one culture makes an option obvious while another does not. T14 applies because salience is horizon dependent and may fail to remain invariant under changes of frame.
+Carefully restated, take a horizon category whose objects are coordination settings, cultural frames, linguistic contexts, public symbols, and player perspectives. The horizon functor assigns to each horizon an algebra of coordination ideas. Composition joins candidate choices into joint outcomes. Identity is the no change option within a frame. Resonance pairing evaluates the payoff of matching. Preservation part retains the shared features that make an option recognizable. Suppression part filters out options that are formally possible but culturally dim. Emergence part is the coordinated outcome produced by mutual recognition. Emergence cocycle records the surplus created by successful matching. Degree or grading orders options by salience. Meaning curvature appears when one culture makes an option obvious while another does not. The indexical pullback theorem applies because salience is horizon dependent and may fail to remain invariant under changes of frame.
 
 ## What formalism adds
 
@@ -8551,7 +8551,7 @@ Schelling's salience is rich, historical, and often playful. A single degree or 
 
 ## Horizon structure and theorem
 
-The horizon category contains the social scenes within which options become visible: shared language, city space, ritual calendars, bargaining frames, and histories of precedent. The horizon functor makes the grading relative to these scenes. T14 is the governing theorem because focality changes when the horizon changes. The same option can be brilliant in one context and invisible in another.
+The horizon category contains the social scenes within which options become visible: shared language, city space, ritual calendars, bargaining frames, and histories of precedent. The horizon functor makes the grading relative to these scenes. The indexical pullback theorem is the governing theorem because focality changes when the horizon changes. The same option can be brilliant in one context and invisible in another.
 
 
 Consider two friends told to name the same positive whole number without speaking. Many answers could coordinate them, yet one is likely to appear before the others. Or imagine dividing a dessert when neither person can talk. The halfway division may stand out because symmetry itself is a public sign. In these examples, the payoff table does not create the answer alone. The shared schema does work. It marks one option as natural enough that both can expect the other to expect it.
@@ -8567,7 +8567,7 @@ Schema is the dominant primitive because focal points depend on shared patterns.
 
 ## Chapter summary
 
-Schelling gives Idea Theory the social logic of obviousness. A focal point is a stable coordination idea selected by shared grading within a horizon. The chapter belongs under T14 because salience is not invariant across frames; it is a horizon dependent structure of recognition.
+Schelling gives Idea Theory the social logic of obviousness. A focal point is a stable coordination idea selected by shared grading within a horizon. The chapter belongs under the indexical pullback theorem because salience is not invariant across frames; it is a horizon dependent structure of recognition.
 
 
 # Chapter 124 — John Maynard Smith on Evolutionarily Stable Strategies
@@ -8592,7 +8592,7 @@ Let strategies be ideas in a population algebra. Composition represents encounte
 
 The theorem rules out treating equilibrium as mere momentary rest. A biological strategy must survive perturbation by rare alternatives. It predicts that stable behavior is not simply what an individual would choose in isolation, but what a population can reproduce against the field of possible mutants. Stability is therefore ecological, temporal, and comparative.
 
-Carefully restated, consider a horizon category whose objects are populations, ecological niches, resident states, mutant invasion contexts, and payoff regimes. The horizon functor assigns to each horizon a fitness resonance algebra. Composition models strategic encounter and reproductive continuation. Identity is the resident type maintained without change. Resonance pairing evaluates fitness of one strategy in the environment shaped by another. Preservation part carries heritable structure through generations. Suppression part removes variants that fail under selection. Emergence part is the population pattern generated by repeated encounters. Emergence cocycle records the surplus stability or vulnerability created by the strategy meeting itself and others. Degree or grading may rank complexity or cost. Meaning curvature appears when fitness effects are asymmetric between resident and mutant perspectives. T15 applies because evolutionary stability requires support across a family of nearby horizons, not only one local game.
+Carefully restated, consider a horizon category whose objects are populations, ecological niches, resident states, mutant invasion contexts, and payoff regimes. The horizon functor assigns to each horizon a fitness resonance algebra. Composition models strategic encounter and reproductive continuation. Identity is the resident type maintained without change. Resonance pairing evaluates fitness of one strategy in the environment shaped by another. Preservation part carries heritable structure through generations. Suppression part removes variants that fail under selection. Emergence part is the population pattern generated by repeated encounters. Emergence cocycle records the surplus stability or vulnerability created by the strategy meeting itself and others. Degree or grading may rank complexity or cost. Meaning curvature appears when fitness effects are asymmetric between resident and mutant perspectives. The profundity theorem applies because evolutionary stability requires support across a family of nearby horizons, not only one local game.
 
 ## What formalism adds
 
@@ -8604,7 +8604,7 @@ Maynard Smith's biological account depends on actual population dynamics. Differ
 
 ## Horizon structure and theorem
 
-The horizon category contains resident populations, mutant neighborhoods, ecological contexts, and temporal sequences of generations. The horizon functor assigns a fitness algebra to each. T15 governs the chapter because the strategy must remain meaningful and stable across an expanded support: not only the present resident horizon, but also the possible horizons opened by mutation and invasion.
+The horizon category contains resident populations, mutant neighborhoods, ecological contexts, and temporal sequences of generations. The horizon functor assigns a fitness algebra to each. The profundity theorem governs the chapter because the strategy must remain meaningful and stable across an expanded support: not only the present resident horizon, but also the possible horizons opened by mutation and invasion.
 
 
 Think of animal contests over territory. A pure hawk pattern fights hard. A pure dove pattern displays and retreats. A mixed or conditional pattern may do better depending on the population around it. The question is not what one animal privately intends. The question is what happens when a type meets copies of itself and rare alternatives. If a resident type reproduces its own conditions and defeats invasion, it has strategic identity at the population level.
@@ -8622,7 +8622,7 @@ Temporality is central because stability is tested across generations. Credence 
 
 ## Chapter summary
 
-Maynard Smith gives Idea Theory a population version of strategic stability. A strategy is not profound because one chooser likes it, but because it reproduces itself and resists invasion across evolutionary horizons. This is T15 in biological form: stable meaning has support beyond its first local setting. This matters because the population itself becomes the listener: it tests a strategy by repetition, not by private deliberation.
+Maynard Smith gives Idea Theory a population version of strategic stability. A strategy is not profound because one chooser likes it, but because it reproduces itself and resists invasion across evolutionary horizons. This is the profundity theorem in biological form: stable meaning has support beyond its first local setting. This matters because the population itself becomes the listener: it tests a strategy by repetition, not by private deliberation.
 
 
 # Chapter 125 — Robert Axelrod on the Evolution of Cooperation
@@ -8647,7 +8647,7 @@ Let each repeated strategy be an idea in a temporal strategic algebra. Compositi
 
 The theorem rules out the claim that self interest always destroys cooperation. It also rules out naive optimism, because cooperation fails when future interaction is too weak, noise is too high, or retaliation cannot be recognized. It predicts that stable cooperation requires temporal thickness, readable behavior, and a strategy that makes its response structure legible to others.
 
-Carefully restated, take a horizon category whose objects are one shot encounters, finite repetitions, indefinite repetitions, tournament populations, noisy implementation contexts, and memory limited strategies. The horizon functor assigns to each horizon a repeated game resonance algebra. Composition iterates actions and strategy rules. Identity preserves a strategy through rounds. Resonance pairing evaluates accumulated payoff. Preservation part carries relevant memory. Suppression part forgets or discounts remote history. Emergence part is the cooperative state created by reciprocal action. Emergence cocycle records the additional value produced by cooperation beyond isolated defection and response. Degree or grading ranks strategic simplicity. Meaning curvature appears when a strategy reads another more accurately than it is read in return. T15 applies because successful cooperation must extend across repeated horizons and remain stable under varied opponent distributions.
+Carefully restated, take a horizon category whose objects are one shot encounters, finite repetitions, indefinite repetitions, tournament populations, noisy implementation contexts, and memory limited strategies. The horizon functor assigns to each horizon a repeated game resonance algebra. Composition iterates actions and strategy rules. Identity preserves a strategy through rounds. Resonance pairing evaluates accumulated payoff. Preservation part carries relevant memory. Suppression part forgets or discounts remote history. Emergence part is the cooperative state created by reciprocal action. Emergence cocycle records the additional value produced by cooperation beyond isolated defection and response. Degree or grading ranks strategic simplicity. Meaning curvature appears when a strategy reads another more accurately than it is read in return. The profundity theorem applies because successful cooperation must extend across repeated horizons and remain stable under varied opponent distributions.
 
 ## What formalism adds
 
@@ -8659,7 +8659,7 @@ Axelrod's famous result came from tournaments with particular submitted strategi
 
 ## Horizon structure and theorem
 
-The horizon structure is temporal and transhorizonal. It includes the single encounter, the repeated series, the population of strategies, and the noisy environment. The horizon functor assigns a local payoff algebra to each. T15 governs the chapter because cooperation matters when it has wide support across future possible encounters, not merely when it works once.
+The horizon structure is temporal and transhorizonal. It includes the single encounter, the repeated series, the population of strategies, and the noisy environment. The horizon functor assigns a local payoff algebra to each. The profundity theorem governs the chapter because cooperation matters when it has wide support across future possible encounters, not merely when it works once.
 
 
 A concrete listening example is a pair of neighbors sharing a narrow driveway. If each interaction is isolated, grabbing advantage may seem rational. But if they meet every week, memory changes the payoff. Courtesy today can become easier passage tomorrow. Retaliation can discipline exploitation. Forgiveness can prevent one mistake from becoming permanent hostility. The strategy is not a single act but a rule moving through time.
@@ -8677,7 +8677,7 @@ Temporality is the first primitive because memory and future expectation change 
 
 ## Chapter summary
 
-Axelrod gives Idea Theory a dynamic account of cooperative emergence. Repeated composition lets strategies become histories; resonance pairing scores those histories; emergence cocycle names the surplus of stable reciprocity. The governing theorem is T15 because cooperation survives by carrying support across future horizons.
+Axelrod gives Idea Theory a dynamic account of cooperative emergence. Repeated composition lets strategies become histories; resonance pairing scores those histories; emergence cocycle names the surplus of stable reciprocity. The governing theorem is the profundity theorem because cooperation survives by carrying support across future horizons.
 
 
 # Chapter 126 — Robert Aumann on Common Knowledge
@@ -8702,7 +8702,7 @@ Let each agent's information be a local subalgebra of ideas. Credence assigns pr
 
 The theorem rules out a familiar comfort: that two fully rational agents with the same prior may publicly know each other's posteriors and still disagree about the same event. It predicts that persistent public disagreement marks a structural failure somewhere. Perhaps priors differ. Perhaps information partitions differ. Perhaps the belief reports are not common knowledge. Perhaps the agents are not updating by the same rule.
 
-Carefully restated, take a horizon category whose objects are agent perspectives, information partitions, public announcement contexts, posterior belief states, and group knowledge horizons. The horizon functor assigns to each agent perspective a credence bearing idea algebra. Composition combines belief reports and information refinements. Identity leaves a belief state unchanged. Resonance pairing compares how credences meet across agents. Preservation part carries what remains mutually known. Suppression part removes merely private information at the group horizon. Emergence part is common knowledge as a group level idea. Emergence cocycle records the surplus generated by iterated mutual knowing. Degree or grading can measure depth of iteration or complexity of information. Meaning curvature records asymmetry between what one agent can infer about another and what returns. T13 applies because common knowledge is precisely a gluing condition over a cover of perspectives.
+Carefully restated, take a horizon category whose objects are agent perspectives, information partitions, public announcement contexts, posterior belief states, and group knowledge horizons. The horizon functor assigns to each agent perspective a credence bearing idea algebra. Composition combines belief reports and information refinements. Identity leaves a belief state unchanged. Resonance pairing compares how credences meet across agents. Preservation part carries what remains mutually known. Suppression part removes merely private information at the group horizon. Emergence part is common knowledge as a group level idea. Emergence cocycle records the surplus generated by iterated mutual knowing. Degree or grading can measure depth of iteration or complexity of information. Meaning curvature records asymmetry between what one agent can infer about another and what returns. The hermeneutic sheaf theorem applies because common knowledge is precisely a gluing condition over a cover of perspectives.
 
 ## What formalism adds
 
@@ -8714,7 +8714,7 @@ Aumann's theorem is built inside probability spaces and information partitions. 
 
 ## Horizon structure and theorem
 
-The horizon category is epistemic. Its objects are individual information states, shared prior contexts, public announcements, posterior reports, and the group horizon of common knowledge. The horizon functor sends each object to its local belief algebra. T13 governs the chapter because the agreement theorem is a gluing theorem: compatible local credences over a common knowledge cover form one global section.
+The horizon category is epistemic. Its objects are individual information states, shared prior contexts, public announcements, posterior reports, and the group horizon of common knowledge. The horizon functor sends each object to its local belief algebra. The hermeneutic sheaf theorem governs the chapter because the agreement theorem is a gluing theorem: compatible local credences over a common knowledge cover form one global section.
 
 
 An ordinary example helps. Two doctors begin with the same medical statistics. Each examines a different test result, updates, and reports only a final probability. If it becomes common knowledge that one says high risk and the other says low risk, and if all the Bayesian assumptions truly hold, then the disagreement itself carries information. Each should update on the fact of the other's posterior. When this updating is publicly stable, the two reported probabilities must meet.
@@ -8730,7 +8730,7 @@ Credence is central because the theorem concerns posterior probabilities. Perspe
 
 ## Chapter summary
 
-Aumann gives Idea Theory its clearest social use of T13. Local beliefs live in different perspectives, but common knowledge can make them glue. When shared prior, posterior reports, and public iteration line up, disagreement is not merely reduced; it is structurally ruled out.
+Aumann gives Idea Theory its clearest social use of the hermeneutic sheaf theorem. Local beliefs live in different perspectives, but common knowledge can make them glue. When shared prior, posterior reports, and public iteration line up, disagreement is not merely reduced; it is structurally ruled out.
 
 
 # Chapter 127 — Reinhard Selten on Refinements of Equilibrium
@@ -8755,7 +8755,7 @@ Let a game tree generate subalgebras, one for each subgame horizon. A full strat
 
 The theorem rules out equilibria held together by empty off path threats. It predicts that sequential rationality requires more than no profitable deviation at the beginning. Each later horizon must also validate the strategy. It also predicts that probability zero events cannot simply be ignored, because small chances of error reveal whether a strategy is truly robust.
 
-Carefully restated, take a horizon category whose objects are game tree nodes, proper subgames, full strategic profiles, perturbed games, and limiting tremble contexts. The horizon functor assigns to each object a local payoff resonance algebra. Composition forms strategies through sequential plans. Identity preserves the current profile. Resonance pairing evaluates payoffs against possible continuations. Preservation part carries strategic commitments through the tree. Suppression part removes noncredible threats when a subgame is tested. Emergence part is the sequential outcome generated by the whole plan. Emergence cocycle records the added stability or fragility created by off path contingencies. Degree or grading may rank refinement strength or strategic complexity. Meaning curvature appears when a threat has value from one horizon but fails from the later horizon where it would be used. T15 applies because credibility requires support across subgames and perturbation horizons.
+Carefully restated, take a horizon category whose objects are game tree nodes, proper subgames, full strategic profiles, perturbed games, and limiting tremble contexts. The horizon functor assigns to each object a local payoff resonance algebra. Composition forms strategies through sequential plans. Identity preserves the current profile. Resonance pairing evaluates payoffs against possible continuations. Preservation part carries strategic commitments through the tree. Suppression part removes noncredible threats when a subgame is tested. Emergence part is the sequential outcome generated by the whole plan. Emergence cocycle records the added stability or fragility created by off path contingencies. Degree or grading may rank refinement strength or strategic complexity. Meaning curvature appears when a threat has value from one horizon but fails from the later horizon where it would be used. The profundity theorem applies because credibility requires support across subgames and perturbation horizons.
 
 ## What formalism adds
 
@@ -8767,7 +8767,7 @@ Selten's reasoning is deeply temporal. Backward induction works because the game
 
 ## Horizon structure and theorem
 
-The horizon structure includes the initial game, every proper subgame, perturbed versions with small mistakes, and limiting cases where trembles become negligible. The horizon functor assigns local payoff algebras to each. T15 governs the chapter because a refined equilibrium is credible only when its support extends through these related horizons and remains stable under restriction.
+The horizon structure includes the initial game, every proper subgame, perturbed versions with small mistakes, and limiting cases where trembles become negligible. The horizon functor assigns local payoff algebras to each. The profundity theorem governs the chapter because a refined equilibrium is credible only when its support extends through these related horizons and remains stable under restriction.
 
 
 A simple bargaining story shows the need. One player threatens to burn a surplus if the other refuses a demand. At the initial node the threat may shape behavior. But if refusal actually occurs, burning the surplus may hurt the threatener too much to be rational. Nash equilibrium can record the threat as part of a stable plan. Selten asks whether the plan still makes sense in the subgame where the threat must be carried out.
@@ -8785,7 +8785,7 @@ Potentiality is central because trembles expose off path possibilities that ordi
 
 ## Chapter summary
 
-Selten gives Idea Theory a discipline of credibility. An equilibrium is not enough if it collapses in a subgame or under small errors. Refinement asks whether the strategic idea has transhorizonal support. That is why the chapter belongs under T15: credibility is stability across the horizons where play might go. This matters because credibility is not an ornament added after equilibrium; it is the test that lets equilibrium survive time.
+Selten gives Idea Theory a discipline of credibility. An equilibrium is not enough if it collapses in a subgame or under small errors. Refinement asks whether the strategic idea has transhorizonal support. That is why the chapter belongs under the profundity theorem: credibility is stability across the horizons where play might go. This matters because credibility is not an ornament added after equilibrium; it is the test that lets equilibrium survive time.
 
 
 # Chapter 128 — Arthur Lovejoy on Unit Ideas
@@ -8830,7 +8830,7 @@ There is another divergence. Lovejoy sometimes emphasizes continuity so strongly
 
 ## Horizon structure
 
-Lovejoy belongs most naturally with T15. The horizon category consists of epochs, disciplines, literary genres, schools, and doctrinal settings. The horizon functor tracks how a unit idea receives local resonance pairing and local grading in each setting. T15 is the theorem of broad support: an idea is historically deep when its support stretches across many horizons while still generating significant local composition.
+Lovejoy belongs most naturally with the profundity theorem. The horizon category consists of epochs, disciplines, literary genres, schools, and doctrinal settings. The horizon functor tracks how a unit idea receives local resonance pairing and local grading in each setting. The profundity theorem is the theorem of broad support: an idea is historically deep when its support stretches across many horizons while still generating significant local composition.
 
 The Great Chain of Being is a strong example. It moves through theology, metaphysics, natural history, poetry, and moral philosophy. It persists not because every horizon says the same thing, but because each horizon can make use of the same generator under different local constraints.
 
@@ -8840,7 +8840,7 @@ The main derived primitive is rigid reference: the unit idea must be identifiabl
 
 ## Chapter summary
 
-Lovejoy gives Idea Theory a model of intellectual history as the travel of generators through changing horizons. Unit ideas preserve identity, alter resonance, and produce new emergence parts when composed with local doctrines. T15 names their depth: broad support across horizons joined to continuing power of recombination.
+Lovejoy gives Idea Theory a model of intellectual history as the travel of generators through changing horizons. Unit ideas preserve identity, alter resonance, and produce new emergence parts when composed with local doctrines. The profundity theorem names their depth: broad support across horizons joined to continuing power of recombination.
 
 
 # Chapter 129 — Mark Granovetter on the Strength of Weak Ties
@@ -8869,7 +8869,7 @@ A weak tie has lower direct resonance, yet it may connect distinct regions of th
 
 The theorem rules out the assumption that the strongest interpersonal resonance always gives the strongest diffusion. It predicts that dense groups will preserve existing information well, but will often fail to generate novelty from inside themselves. It also predicts that a modest connection between distant clusters can create a large emergence part, because the receiving horizon lacks the information that the sending horizon treats as ordinary.
 
-Carefully stated: take a horizon category whose objects are friendship groups, workplaces, professions, neighborhoods, and institutional circles. The horizon functor assigns to each object a local idea algebra with its own resonance pairing and local stock of information. A weak tie is a morphism with modest interpersonal resonance but high bridging value between local algebras. T13 applies when local sections of information can glue through such morphisms into a wider opportunity horizon.
+Carefully stated: take a horizon category whose objects are friendship groups, workplaces, professions, neighborhoods, and institutional circles. The horizon functor assigns to each object a local idea algebra with its own resonance pairing and local stock of information. A weak tie is a morphism with modest interpersonal resonance but high bridging value between local algebras. The hermeneutic sheaf theorem applies when local sections of information can glue through such morphisms into a wider opportunity horizon.
 
 ## What formalism adds
 
@@ -8885,9 +8885,9 @@ There is also a caution about meaning curvature. Not every asymmetry is useful. 
 
 ## Horizon structure
 
-Granovetter belongs with T13. The horizon category consists of social clusters: families, friendship circles, occupations, neighborhoods, schools, voluntary associations, and professional networks. The horizon functor records what each cluster already knows, what it trusts, and what it can use. Weak ties are morphisms that allow partial sections from one cluster to be glued into another.
+Granovetter belongs with the hermeneutic sheaf theorem. The horizon category consists of social clusters: families, friendship circles, occupations, neighborhoods, schools, voluntary associations, and professional networks. The horizon functor records what each cluster already knows, what it trusts, and what it can use. Weak ties are morphisms that allow partial sections from one cluster to be glued into another.
 
-T13 says that global social knowledge can emerge from compatible local transmissions. Weak ties are the gluing paths. Strong ties thicken local support, but weak ties extend support across distance. A society without weak ties would be a set of dense islands.
+The hermeneutic sheaf theorem says that global social knowledge can emerge from compatible local transmissions. Weak ties are the gluing paths. Strong ties thicken local support, but weak ties extend support across distance. A society without weak ties would be a set of dense islands.
 
 ## Diagnostic derived primitives
 
@@ -8895,7 +8895,7 @@ Perspective is central, because actors see opportunities from their positions in
 
 ## Chapter summary
 
-Granovetter turns social weakness into structural strength. In Idea Theory, weak ties are low-intensity but high-bridge morphisms in the horizon category. They support T13 by allowing information from separated local worlds to glue into broader opportunity structures.
+Granovetter turns social weakness into structural strength. In Idea Theory, weak ties are low-intensity but high-bridge morphisms in the horizon category. They support the hermeneutic sheaf theorem by allowing information from separated local worlds to glue into broader opportunity structures.
 
 
 # Chapter 130 — Pierre Bourdieu on Field, Habitus, and Capital
@@ -8924,7 +8924,7 @@ Habitus acts like an embodied perspective that conjugates what an agent perceive
 
 The theorem rules out the idea that inequality is reproduced only by direct coercion or conscious conspiracy. It predicts that durable social patterns can arise from the interaction of local grading, habitual perception, and asymmetric recognition. When agents compose practices within a field, the preservation part often preserves position, the suppression part hides arbitrary history, and the emergence part appears as legitimate achievement.
 
-Carefully stated: take a horizon category whose objects are fields such as academic, artistic, political, and economic arenas. The horizon functor assigns to each field a local resonance pairing, local capital gradings, and local composition rules. Habitus is the agent's embodied perspective formed by a path through these horizons. T14 applies because preservation part, emergence part, and degree or grading do not pull back invariantly across field morphisms. The obstruction appears as hysteresis, misrecognition, or failed conversion of capital.
+Carefully stated: take a horizon category whose objects are fields such as academic, artistic, political, and economic arenas. The horizon functor assigns to each field a local resonance pairing, local capital gradings, and local composition rules. Habitus is the agent's embodied perspective formed by a path through these horizons. The indexical pullback theorem applies because preservation part, emergence part, and degree or grading do not pull back invariantly across field morphisms. The obstruction appears as hysteresis, misrecognition, or failed conversion of capital.
 
 ## What formalism adds
 
@@ -8940,9 +8940,9 @@ The formalism also risks underplaying struggle. A field is not only a stable loc
 
 ## Horizon structure
 
-Bourdieu belongs with T14. The horizon category is made of fields and trajectories through fields. The horizon functor assigns each field its capital gradings, doxa, resonances, and permissible compositions. Morphisms between fields are translations of capital, such as turning academic prestige into political authority or economic wealth into cultural legitimacy.
+Bourdieu belongs with the indexical pullback theorem. The horizon category is made of fields and trajectories through fields. The horizon functor assigns each field its capital gradings, doxa, resonances, and permissible compositions. Morphisms between fields are translations of capital, such as turning academic prestige into political authority or economic wealth into cultural legitimacy.
 
-T14 names the failure of invariance across those translations. What counts as brilliance in one field may count as pretension in another. What counts as refinement in one class fraction may count as coldness elsewhere. The obstruction is not noise. It is the structure of field-relative meaning.
+The indexical pullback theorem names the failure of invariance across those translations. What counts as brilliance in one field may count as pretension in another. What counts as refinement in one class fraction may count as coldness elsewhere. The obstruction is not noise. It is the structure of field-relative meaning.
 
 ## Diagnostic derived primitives
 
@@ -8950,7 +8950,7 @@ Perspective is habitus: the embodied standpoint from which the field is perceive
 
 ## Chapter summary
 
-Bourdieu gives Idea Theory a sociology of local valuation. Fields are horizon-local algebras, capital is plural grading, and habitus is embodied perspective. T14 names the central obstruction: meanings and values do not translate unchanged across fields.
+Bourdieu gives Idea Theory a sociology of local valuation. Fields are horizon-local algebras, capital is plural grading, and habitus is embodied perspective. The indexical pullback theorem names the central obstruction: meanings and values do not translate unchanged across fields.
 
 
 # Chapter 131 — Bruno Latour on Actor-Network Theory
@@ -8979,7 +8979,7 @@ A black box is a stabilized composite that behaves as a single generator in late
 
 The theorem rules out the idea that facts become strong merely by correspondence in isolation. It also rules out the idea that facts are only social opinions. It predicts that durability depends on successful composition across humans, instruments, texts, institutions, and material resistances. Once stabilized, the composite becomes available for further composition without requiring every user to reconstruct the whole network.
 
-Carefully stated: let the horizon category consist of laboratories, instruments, inscriptions, journals, funding bodies, machines, publics, and material settings. The horizon functor assigns local idea algebras in which claims, devices, and actors compose. Translation morphisms carry inscriptions and obligations across horizons. T13 applies when local inscriptions and alliances are compatible enough to glue into a global section. Black boxing is the stabilization of that section as a portable identity for later use.
+Carefully stated: let the horizon category consist of laboratories, instruments, inscriptions, journals, funding bodies, machines, publics, and material settings. The horizon functor assigns local idea algebras in which claims, devices, and actors compose. Translation morphisms carry inscriptions and obligations across horizons. The hermeneutic sheaf theorem applies when local inscriptions and alliances are compatible enough to glue into a global section. Black boxing is the stabilization of that section as a portable identity for later use.
 
 ## What formalism adds
 
@@ -8995,9 +8995,9 @@ There is also a divergence around truth. Latour wants to avoid both naive realis
 
 ## Horizon structure
 
-Latour belongs with T13. The horizon category is heterogeneous: laboratories, machines, inscriptions, microbes, field sites, bureaucracies, journals, and publics. Morphisms are translations, citations, calibrations, replications, and enrollments. The horizon functor tracks how a claim changes as it moves, and how much must be preserved for it to remain usable.
+Latour belongs with the hermeneutic sheaf theorem. The horizon category is heterogeneous: laboratories, machines, inscriptions, microbes, field sites, bureaucracies, journals, and publics. Morphisms are translations, citations, calibrations, replications, and enrollments. The horizon functor tracks how a claim changes as it moves, and how much must be preserved for it to remain usable.
 
-T13 names the gluing of local sections. A measurement in one laboratory, a graph in a paper, a grant review, a machine setting, and a replication elsewhere must become mutually compatible. When they do, the network produces a fact that travels.
+The hermeneutic sheaf theorem names the gluing of local sections. A measurement in one laboratory, a graph in a paper, a grant review, a machine setting, and a replication elsewhere must become mutually compatible. When they do, the network produces a fact that travels.
 
 ## Diagnostic derived primitives
 
@@ -9007,7 +9007,7 @@ A useful diagnostic is to ask when a listener no longer needs the story of assem
 
 ## Chapter summary
 
-Latour gives Idea Theory a dynamic account of fact formation. Composition is translation, resonance pairing is enrollment, and black boxing turns a stabilized composite into a usable generator. T13 captures the gluing that makes heterogeneous local work travel as durable knowledge.
+Latour gives Idea Theory a dynamic account of fact formation. Composition is translation, resonance pairing is enrollment, and black boxing turns a stabilized composite into a usable generator. The hermeneutic sheaf theorem captures the gluing that makes heterogeneous local work travel as durable knowledge.
 
 
 # Chapter 132 — Quentin Skinner on Linguistic Contextualism
@@ -9036,7 +9036,7 @@ The horizon category consists of controversies, conventions, genres, offices, au
 
 The theorem rules out the assumption that textual meaning is context-free. It predicts that the same words can carry different force when composed with different linguistic horizons. It also predicts that good interpretation is restrictive: it narrows possible readings by asking which acts were available, intelligible, and contestable at the time of utterance.
 
-Carefully stated: let a text be an element in an idea algebra of utterances. Let the horizon category contain historical controversies, linguistic conventions, genres, audiences, and institutions. The horizon functor assigns to each horizon a local resonance pairing and local preservation, suppression, and emergence parts. T14 applies because an utterance does not pull back invariantly from a modern horizon to a historical horizon. The obstruction is the anachronism that Skinner's method diagnoses.
+Carefully stated: let a text be an element in an idea algebra of utterances. Let the horizon category contain historical controversies, linguistic conventions, genres, audiences, and institutions. The horizon functor assigns to each horizon a local resonance pairing and local preservation, suppression, and emergence parts. The indexical pullback theorem applies because an utterance does not pull back invariantly from a modern horizon to a historical horizon. The obstruction is the anachronism that Skinner's method diagnoses.
 
 ## What formalism adds
 
@@ -9052,9 +9052,9 @@ There is also a risk of over-formalizing historical judgment. Real contexts are 
 
 ## Horizon structure
 
-Skinner belongs with T14. The horizon category is made of historical linguistic settings: parliamentary debate, religious controversy, legal argument, civic humanist rhetoric, and polemical exchange. Morphisms include translation, reception, anachronistic reading, and careful contextual recovery.
+Skinner belongs with the indexical pullback theorem. The horizon category is made of historical linguistic settings: parliamentary debate, religious controversy, legal argument, civic humanist rhetoric, and polemical exchange. Morphisms include translation, reception, anachronistic reading, and careful contextual recovery.
 
-T14 names the failure of invariance. The same sentence does not carry the same emergence part in every horizon. To say liberty, sovereignty, consent, or obligation is to act within a local field of available moves. Skinner's historian reconstructs that field before judging the act.
+The indexical pullback theorem names the failure of invariance. The same sentence does not carry the same emergence part in every horizon. To say liberty, sovereignty, consent, or obligation is to act within a local field of available moves. Skinner's historian reconstructs that field before judging the act.
 
 ## Diagnostic derived primitives
 
@@ -9064,7 +9064,7 @@ A useful diagnostic question is therefore modest but demanding: what would a com
 
 ## Chapter summary
 
-Skinner gives Idea Theory a discipline of contextual restriction. Texts are not free-floating propositions. They are horizon-local acts whose preservation, suppression, and emergence parts depend on historical conventions. T14 captures anachronism as failed pullback across horizons.
+Skinner gives Idea Theory a discipline of contextual restriction. Texts are not free-floating propositions. They are horizon-local acts whose preservation, suppression, and emergence parts depend on historical conventions. The indexical pullback theorem captures anachronism as failed pullback across horizons.
 
 
 # Chapter 133 — Reinhart Koselleck on Conceptual History
@@ -9093,7 +9093,7 @@ Temporality is not an external label. It is built into the horizon category. Eac
 
 The theorem rules out the view that conceptual change is merely replacement of definitions. It predicts that a term may keep recognizable identity while its temporal grading changes dramatically. It also predicts that periods of acceleration will produce concepts with high expectation, high conflict, and unstable resonance pairing. Such concepts become sites where groups struggle over possible futures.
 
-Carefully stated: let the horizon category be indexed by historical periods, political conflicts, institutions, and semantic regimes. The horizon functor assigns to each horizon a local resonance pairing with past experience, a local resonance pairing with future expectation, and a local degree or grading. T14 applies because meanings fail to pull back unchanged across temporal morphisms. T15 applies when a basic concept keeps broad support across multiple horizons while absorbing new temporal layers.
+Carefully stated: let the horizon category be indexed by historical periods, political conflicts, institutions, and semantic regimes. The horizon functor assigns to each horizon a local resonance pairing with past experience, a local resonance pairing with future expectation, and a local degree or grading. The indexical pullback theorem applies because meanings fail to pull back unchanged across temporal morphisms. The profundity theorem applies when a basic concept keeps broad support across multiple horizons while absorbing new temporal layers.
 
 ## What formalism adds
 
@@ -9109,9 +9109,9 @@ The formalism also risks making temporalization sound smooth. Koselleck's concep
 
 ## Horizon structure
 
-Koselleck belongs with both T14 and T15. The horizon category is temporally stratified: early modern, revolutionary, nineteenth-century, and later horizons carry different spaces of experience and horizons of expectation. Morphisms include semantic inheritance, political rupture, translation, reform, revolution, and retrospective reinterpretation.
+Koselleck belongs with both the indexical pullback theorem and the profundity theorem. The horizon category is temporally stratified: early modern, revolutionary, nineteenth-century, and later horizons carry different spaces of experience and horizons of expectation. Morphisms include semantic inheritance, political rupture, translation, reform, revolution, and retrospective reinterpretation.
 
-T14 names the failure of invariant meaning across temporal horizons. T15 names the depth of basic concepts that survive those transformations. Democracy, history, revolution, and progress are powerful because they keep enough identity to be contested across epochs while changing the futures they project.
+The indexical pullback theorem names the failure of invariant meaning across temporal horizons. The profundity theorem names the depth of basic concepts that survive those transformations. Democracy, history, revolution, and progress are powerful because they keep enough identity to be contested across epochs while changing the futures they project.
 
 ## Diagnostic derived primitives
 
@@ -9121,7 +9121,7 @@ A useful diagnostic is to listen for temporal imbalance. When a concept explains
 
 ## Chapter summary
 
-Koselleck gives Idea Theory an account of concepts as temporal structures. They preserve identity, change grading, and bend between experience and expectation. T14 captures temporal obstruction, while T15 captures the wide support of basic concepts across historical horizons.
+Koselleck gives Idea Theory an account of concepts as temporal structures. They preserve identity, change grading, and bend between experience and expectation. The indexical pullback theorem captures temporal obstruction, while the profundity theorem captures the wide support of basic concepts across historical horizons.
 
 
 # Chapter 134 — Karl Mannheim on Standpoint
@@ -9150,7 +9150,7 @@ Perspective is the key primitive. A standpoint is not a private mood. It is a ho
 
 The theorem rules out both simple objectivism and simple relativism. It denies that ideas are evaluated from nowhere, but it also denies that every claim is arbitrary. It predicts patterned differences: groups located differently in social space will not merely disagree about conclusions, but will often differ in salience, expectation, suspicion, and recognized evidence.
 
-Carefully stated: let the horizon category consist of classes, generations, parties, professions, institutions, and intellectual milieus. The horizon functor assigns to each social location a local resonance pairing, local credence structure, and local emergence part for shared ideas. T14 applies because knowledge claims do not pull back invariantly across standpoint morphisms. The obstruction appears as ideology when a local perspective claims universality, and as utopia when a local aspiration claims destiny.
+Carefully stated: let the horizon category consist of classes, generations, parties, professions, institutions, and intellectual milieus. The horizon functor assigns to each social location a local resonance pairing, local credence structure, and local emergence part for shared ideas. The indexical pullback theorem applies because knowledge claims do not pull back invariantly across standpoint morphisms. The obstruction appears as ideology when a local perspective claims universality, and as utopia when a local aspiration claims destiny.
 
 ## What formalism adds
 
@@ -9166,9 +9166,9 @@ There is also a historical divergence. Mannheim wrote in the crisis of European 
 
 ## Horizon structure
 
-Mannheim belongs with T14. The horizon category is made of social locations: classes, generations, parties, educational strata, intellectual circles, and political movements. Morphisms include critique, conversion, generational translation, coalition, and attempted synthesis. The horizon functor records how resonance pairing, credence, and potentiality vary with location.
+Mannheim belongs with the indexical pullback theorem. The horizon category is made of social locations: classes, generations, parties, educational strata, intellectual circles, and political movements. Morphisms include critique, conversion, generational translation, coalition, and attempted synthesis. The horizon functor records how resonance pairing, credence, and potentiality vary with location.
 
-T14 names the obstruction to invariant translation. A claim that appears realistic in one standpoint may appear ideological in another. A future that appears utopian to one group may appear necessary to another. The obstruction is the social structure of knowledge, not a mere failure of intelligence.
+The indexical pullback theorem names the obstruction to invariant translation. A claim that appears realistic in one standpoint may appear ideological in another. A future that appears utopian to one group may appear necessary to another. The obstruction is the social structure of knowledge, not a mere failure of intelligence.
 
 ## Diagnostic derived primitives
 
@@ -9178,7 +9178,7 @@ A useful diagnostic is to ask what a standpoint makes difficult to notice. Every
 
 ## Chapter summary
 
-Mannheim gives Idea Theory a sociology of perspective. Standpoints are horizon-local tunings of resonance pairing and credence. T14 captures why knowledge claims do not translate unchanged across social locations, and why ideology and utopia are structural effects of standpoint. The diagnostic lesson is therefore modest and strong: situated thought can still be compared when its standpoint is made explicit.
+Mannheim gives Idea Theory a sociology of perspective. Standpoints are horizon-local tunings of resonance pairing and credence. The indexical pullback theorem captures why knowledge claims do not translate unchanged across social locations, and why ideology and utopia are structural effects of standpoint. The diagnostic lesson is therefore modest and strong: situated thought can still be compared when its standpoint is made explicit.
 
 
 # Chapter 135 — Robert K. Merton on the Norms of Science
@@ -9207,7 +9207,7 @@ Composition occurs when claims combine with methods, instruments, theories, and 
 
 The theorem rules out the idea that scientific reliability is only an individual virtue or only a logical method. It predicts that reliability depends on social forms that make claims public, portable, criticizable, and source-insensitive. When those forms fail, the same technical intelligence may produce secrecy, faction, careerism, or dogma rather than knowledge.
 
-Carefully stated: let the horizon category contain laboratories, journals, peer-review settings, archives, replication sites, conferences, and public scientific communities. The horizon functor assigns to each horizon local evidence, local resonance pairing, and local credence. T13 applies when communalism, universalism, disinterestedness, and organized skepticism provide the compatibility conditions by which local sections glue into a stable communal section.
+Carefully stated: let the horizon category contain laboratories, journals, peer-review settings, archives, replication sites, conferences, and public scientific communities. The horizon functor assigns to each horizon local evidence, local resonance pairing, and local credence. The hermeneutic sheaf theorem applies when communalism, universalism, disinterestedness, and organized skepticism provide the compatibility conditions by which local sections glue into a stable communal section.
 
 ## What formalism adds
 
@@ -9223,9 +9223,9 @@ There is also a divergence in motivation. Disinterestedness in Merton does not r
 
 ## Horizon structure
 
-Merton belongs with T13. The horizon category is the institutional topology of science: laboratories, journals, archives, conferences, instruments, replication sites, and pedagogical communities. Morphisms are publication, citation, replication, criticism, retraction, and incorporation into textbooks or instruments.
+Merton belongs with the hermeneutic sheaf theorem. The horizon category is the institutional topology of science: laboratories, journals, archives, conferences, instruments, replication sites, and pedagogical communities. Morphisms are publication, citation, replication, criticism, retraction, and incorporation into textbooks or instruments.
 
-T13 names the gluing of local claims into communal knowledge. A result from one lab must be made public, evaluated by shared standards, tested by others, and integrated into a wider section. The norms are the gluing constraints that make this possible.
+The hermeneutic sheaf theorem names the gluing of local claims into communal knowledge. A result from one lab must be made public, evaluated by shared standards, tested by others, and integrated into a wider section. The norms are the gluing constraints that make this possible.
 
 ## Diagnostic derived primitives
 
@@ -9235,7 +9235,7 @@ A useful diagnostic is to ask which norm is failing when science malfunctions. I
 
 ## Chapter summary
 
-Merton gives Idea Theory a norm-based account of scientific reliability. Scientific institutions glue local results into communal knowledge by widening support, standardizing evaluation, constraining perspective, and organizing doubt. T13 captures the social topology that lets science become self-correcting.
+Merton gives Idea Theory a norm-based account of scientific reliability. Scientific institutions glue local results into communal knowledge by widening support, standardizing evaluation, constraining perspective, and organizing doubt. The hermeneutic sheaf theorem captures the social topology that lets science become self-correcting.
 
 
 # Chapter 136 — J. L. Austin on Speech Acts
@@ -9262,7 +9262,7 @@ Austin's threefold distinction becomes the preservation part, the suppression pa
 
 *When a speech act is felicitous, its meaning is the social change it stably creates within a horizon.*
 
-This is T13 read through Austin. The theorem rules out the idea that a sentence has one complete meaning before the setting of use is considered. It predicts that the same words can preserve the same content while producing different force, or no force, when moved to another horizon. I promise, spoken on stage in a play, preserves the phrase but does not create the same obligation as I promise, spoken in earnest to a friend.
+This is the hermeneutic sheaf theorem read through Austin. The theorem rules out the idea that a sentence has one complete meaning before the setting of use is considered. It predicts that the same words can preserve the same content while producing different force, or no force, when moved to another horizon. I promise, spoken on stage in a play, preserves the phrase but does not create the same obligation as I promise, spoken in earnest to a friend.
 
 Carefully restated, the horizon category contains speakers, hearers, institutions, occasions, and authorized roles. The horizon functor assigns to each such horizon the available speech acts and their conditions of success. Composition orders utterances in time. Identity is the unaltered conversational situation. The resonance pairing tests fit between utterance and setting. The preservation part retains content, the suppression part marks failed felicity, and the emergence part creates obligation, permission, standing, or expectation. The relevant derived primitive is intentionality, because the act is directed toward a social uptake.
 
@@ -9280,7 +9280,7 @@ Austin was suspicious of over systematic theory. His genius lay in patient atten
 
 ## Horizon structure
 
-Austin's horizon is institutional and conversational. It includes who may speak, what formula is recognized, which audience can receive it, and what prior conditions must hold. It most centrally instantiates T13, because local utterances glue into a global social act only when the horizon functor carries the relevant felicity conditions. Failed speech acts are failures of gluing, not merely errors in wording.
+Austin's horizon is institutional and conversational. It includes who may speak, what formula is recognized, which audience can receive it, and what prior conditions must hold. It most centrally instantiates the hermeneutic sheaf theorem, because local utterances glue into a global social act only when the horizon functor carries the relevant felicity conditions. Failed speech acts are failures of gluing, not merely errors in wording.
 
 ## Diagnostic derived primitives
 
@@ -9288,7 +9288,7 @@ The diagnostic derived primitives are intentionality, perspective, and signed va
 
 ## Chapter summary
 
-Austin teaches that words are deeds under conditions. Idea Theory restates this by saying that an utterance composes with a horizon, preserves content, may be suppressed by infelicity, and may produce an emergence part that changes social reality. T13 is the natural home of this account, because speech acts succeed when local words, roles, and institutions glue into one performative event.
+Austin teaches that words are deeds under conditions. Idea Theory restates this by saying that an utterance composes with a horizon, preserves content, may be suppressed by infelicity, and may produce an emergence part that changes social reality. The hermeneutic sheaf theorem is the natural home of this account, because speech acts succeed when local words, roles, and institutions glue into one performative event.
 
 
 # Chapter 137 — John Searle on Intentionality and the Chinese Room
@@ -9315,7 +9315,7 @@ The preservation part of the Chinese Room keeps syntax intact. The suppression p
 
 *Identical symbol composition does not by itself guarantee intentional resonance across a horizon.*
 
-This is T14 read through Searle. The theorem rules out the move from correct formal transition to genuine meaning without an account of horizon translation. It predicts that a syntactic horizon may preserve all visible behavior while failing to pull back the preservation part and emergence part of understanding. A chatbot, a clerk, and a fluent speaker may produce the same string, but the horizon in which the string is owned, meant, and understood can differ.
+This is the indexical pullback theorem read through Searle. The theorem rules out the move from correct formal transition to genuine meaning without an account of horizon translation. It predicts that a syntactic horizon may preserve all visible behavior while failing to pull back the preservation part and emergence part of understanding. A chatbot, a clerk, and a fluent speaker may produce the same string, but the horizon in which the string is owned, meant, and understood can differ.
 
 Carefully restated, the horizon category contains bodily agents, computational systems, linguistic communities, referents, and interpretive settings. The horizon functor assigns to each horizon a field of possible signs and acts. Composition governs transitions among symbols. Identity marks no change in symbolic state. The resonance pairing links signs to what they are about. The preservation part carries formal pattern, the suppression part blocks semantic ownership, and the emergence part would be intentional understanding. The relevant derived primitive is intentionality, with rigid reference nearby because reference must remain stable across uses.
 
@@ -9333,7 +9333,7 @@ Searle argues that biological brains have causal powers that computers, as compu
 
 ## Horizon structure
 
-Searle's horizon is embodied, causal, and semantic. It includes the speaker, the rule following system, the language community, and the world toward which mental states are directed. It most centrally instantiates T14, because the crucial obstruction appears when one tries to translate from a syntactic horizon to an intentional horizon. Preservation of input and output does not ensure preservation of aboutness.
+Searle's horizon is embodied, causal, and semantic. It includes the speaker, the rule following system, the language community, and the world toward which mental states are directed. It most centrally instantiates the indexical pullback theorem, because the crucial obstruction appears when one tries to translate from a syntactic horizon to an intentional horizon. Preservation of input and output does not ensure preservation of aboutness.
 
 ## Diagnostic derived primitives
 
@@ -9341,7 +9341,7 @@ The diagnostic derived primitives are intentionality, rigid reference, and poten
 
 ## Chapter summary
 
-Searle forces us to distinguish moving symbols from meaning them. Idea Theory restates his point by separating composition from resonance pairing. The Chinese Room preserves formal order but may lack the emergence part of intentional understanding. T14 gives the best horizon structure, because the problem is an obstruction in translation from syntax to semantics.
+Searle forces us to distinguish moving symbols from meaning them. Idea Theory restates his point by separating composition from resonance pairing. The Chinese Room preserves formal order but may lack the emergence part of intentional understanding. The indexical pullback theorem gives the best horizon structure, because the problem is an obstruction in translation from syntax to semantics.
 
 
 # Chapter 138 — David Lewis on Convention
@@ -9368,7 +9368,7 @@ The preservation part carries the signal from one occasion to the next. The supp
 
 *A convention is a stable local meaning that becomes global when expectations glue across a community horizon.*
 
-This is T13 read through Lewis. The theorem rules out the idea that convention is either private choice or brute natural necessity. It predicts that stable meaning appears where local expectations overlap and reinforce each other. If two villages use the same signal differently, there may be two local sections. If trade, schooling, and repeated correction align them, those sections can glue into one larger convention.
+This is the hermeneutic sheaf theorem read through Lewis. The theorem rules out the idea that convention is either private choice or brute natural necessity. It predicts that stable meaning appears where local expectations overlap and reinforce each other. If two villages use the same signal differently, there may be two local sections. If trade, schooling, and repeated correction align them, those sections can glue into one larger convention.
 
 Carefully restated, the horizon category contains agents, signals, occasions, payoff expectations, and background alternatives. The horizon functor assigns to each horizon the regularities available for coordination. Composition repeats successful use. Identity is the absence of a selected convention. The resonance pairing measures mutual fit between signal, response, and expectation. The preservation part carries the pattern, the suppression part sidelines competing regularities, and the emergence part is the shared social standing of the convention. The diagnostic derived primitive is schema, because a convention supplies a repeatable pattern of action.
 
@@ -9386,7 +9386,7 @@ Lewis gave common knowledge a central role. Idea Theory can represent common kno
 
 ## Horizon structure
 
-Lewis's horizon is strategic and communal. It includes agents, their expectations, the possible signals, and the alternative equilibrating patterns that might have been selected. It most centrally instantiates T13, because convention exists when local regularities agree on overlaps and become a global pattern for a population. T13 also explains why fragmented conventions can coexist without contradiction when their horizons do not overlap.
+Lewis's horizon is strategic and communal. It includes agents, their expectations, the possible signals, and the alternative equilibrating patterns that might have been selected. It most centrally instantiates the hermeneutic sheaf theorem, because convention exists when local regularities agree on overlaps and become a global pattern for a population. The hermeneutic sheaf theorem also explains why fragmented conventions can coexist without contradiction when their horizons do not overlap.
 
 ## Diagnostic derived primitives
 
@@ -9394,7 +9394,7 @@ The diagnostic derived primitives are schema, credence, and signed valence. Sche
 
 ## Chapter summary
 
-Lewis shows that language is a coordination achievement. Idea Theory restates convention as a stable regularity whose resonance pairing is reinforced by mutual expectation. Composition repeats use, suppression excludes rivals, and emergence gives the convention social standing. T13 is central because conventions become real when local expectations glue into a shared horizon. The diagnostic lesson is that convention turns arbitrary selection into reliable public meaning through repeated expectation.
+Lewis shows that language is a coordination achievement. Idea Theory restates convention as a stable regularity whose resonance pairing is reinforced by mutual expectation. Composition repeats use, suppression excludes rivals, and emergence gives the convention social standing. The hermeneutic sheaf theorem is central because conventions become real when local expectations glue into a shared horizon. The diagnostic lesson is that convention turns arbitrary selection into reliable public meaning through repeated expectation.
 
 
 # Chapter 139 — Kripkenstein on Rule-Following
@@ -9421,7 +9421,7 @@ The preservation part contains the past agreement. The suppression part contains
 
 *Finite private use does not determine meaning unless communal horizons stabilize the rule.*
 
-This is T13 read through Kripkenstein. The theorem rules out a purely private global meaning extracted from finite local data. It predicts that meaning becomes determinate only when local performances are embedded in a horizon where correction, training, and expectation glue them into a shared practice. Without that horizon, rival continuations remain possible.
+This is the hermeneutic sheaf theorem read through Kripkenstein. The theorem rules out a purely private global meaning extracted from finite local data. It predicts that meaning becomes determinate only when local performances are embedded in a horizon where correction, training, and expectation glue them into a shared practice. Without that horizon, rival continuations remain possible.
 
 Carefully restated, the horizon category contains learners, teachers, examples, corrections, future applications, and communal standards. The horizon functor assigns possible continuations to each local record of use. Composition extends a rule from case to case. Identity is no change in the accepted practice. The resonance pairing scores the fit between a response and the community standard. The preservation part keeps past applications, the suppression part rejects deviant continuations, and the emergence part is the socially stabilized rule. The diagnostic derived primitive is differentiation, because the rule separates correct from incorrect continuations.
 
@@ -9439,7 +9439,7 @@ Kripke presents the paradox with radical skeptical force. Idea Theory softens th
 
 ## Horizon structure
 
-Kripkenstein's horizon is pedagogical and communal. It includes past examples, future cases, teachers, learners, sanctions, and shared forms of life. It most centrally instantiates T13, because local uses need a sheaf like gluing condition to become one rule. When gluing fails, we get indeterminacy, disagreement, or a split practice.
+Kripkenstein's horizon is pedagogical and communal. It includes past examples, future cases, teachers, learners, sanctions, and shared forms of life. It most centrally instantiates the hermeneutic sheaf theorem, because local uses need a sheaf like gluing condition to become one rule. When gluing fails, we get indeterminacy, disagreement, or a split practice.
 
 ## Diagnostic derived primitives
 
@@ -9449,7 +9449,7 @@ One more point follows. The community does not determine meaning by vote at each
 
 ## Chapter summary
 
-Kripkenstein teaches that meaning cannot be secured by a finite private history. Idea Theory restates the paradox as a failure of local data to determine a unique global rule. Communal practice supplies a horizon in which preservation, suppression, and emergence stabilize rule following. T13 is central because meaning arises when local uses glue into a public practice.
+Kripkenstein teaches that meaning cannot be secured by a finite private history. Idea Theory restates the paradox as a failure of local data to determine a unique global rule. Communal practice supplies a horizon in which preservation, suppression, and emergence stabilize rule following. The hermeneutic sheaf theorem is central because meaning arises when local uses glue into a public practice.
 
 
 # Chapter 140 — Donald Davidson on Radical Interpretation
@@ -9476,7 +9476,7 @@ The preservation part carries recognizable structure from speaker to interpreter
 
 *Radical interpretation succeeds when speaker, interpreter, and world can be glued into one charitable horizon.*
 
-This is T13 read through Davidson. The theorem rules out translation as a word by word code detached from belief and world. It predicts that interpretation will fail or fragment when no shared objects, rational patterns, or truth preserving overlaps can be found. It also predicts that charity is structural, not optional, because gluing requires enough positive resonance among the three corners of the triangle.
+This is the hermeneutic sheaf theorem read through Davidson. The theorem rules out translation as a word by word code detached from belief and world. It predicts that interpretation will fail or fragment when no shared objects, rational patterns, or truth preserving overlaps can be found. It also predicts that charity is structural, not optional, because gluing requires enough positive resonance among the three corners of the triangle.
 
 Carefully restated, the horizon category contains the speaker's utterances, the interpreter's candidate meanings, shared worldly causes, and patterns of belief and action. The horizon functor assigns local interpretations to observed situations. Composition links utterance with inference and response. Identity is the uninterpreted baseline. The resonance pairing measures agreement with truth, rationality, and shared environment. The preservation part keeps inferential structure, the suppression part eliminates uncharitable mappings, and the emergence part is the interpretive theory that lets communication proceed. The diagnostic derived primitive is perspective, because interpretation joins different standpoints without erasing them.
 
@@ -9494,7 +9494,7 @@ Davidson avoided treating meanings as inner objects or abstract entities that st
 
 ## Horizon structure
 
-Davidson's horizon is triangular. It includes speaker, interpreter, and shared world as mutually constraining positions. It most centrally instantiates T13, because interpretation is possible when local assignments over observed situations glue into a global theory of meaning and belief. T14 appears when translation obstructions remain, but T13 carries the main constructive insight.
+Davidson's horizon is triangular. It includes speaker, interpreter, and shared world as mutually constraining positions. It most centrally instantiates the hermeneutic sheaf theorem, because interpretation is possible when local assignments over observed situations glue into a global theory of meaning and belief. The indexical pullback theorem appears when translation obstructions remain, but the hermeneutic sheaf theorem carries the main constructive insight.
 
 ## Diagnostic derived primitives
 
@@ -9505,7 +9505,7 @@ This is why radical interpretation is generous without being gullible. Charity d
 
 ## Chapter summary
 
-Davidson teaches that meaning, belief, and world must be interpreted together. Idea Theory restates radical interpretation as horizon gluing under charity. Composition preserves inference, resonance pairing links utterance to truth and action, and emergence produces a shared interpretive field. T13 is central because understanding succeeds when local evidence forms one coherent horizon.
+Davidson teaches that meaning, belief, and world must be interpreted together. Idea Theory restates radical interpretation as horizon gluing under charity. Composition preserves inference, resonance pairing links utterance to truth and action, and emergence produces a shared interpretive field. The hermeneutic sheaf theorem is central because understanding succeeds when local evidence forms one coherent horizon.
 
 
 # Chapter 141 — H. P. Grice on Implicature
@@ -9532,7 +9532,7 @@ The preservation part carries literal content. The suppression part marks what t
 
 *Implicature is the emergence of intended meaning from the gap between literal content and cooperative horizon.*
 
-This is T14 read through Grice. The theorem rules out a simple transfer model in which the hearer receives only preserved content. It predicts that meaning can arise precisely where preservation fails to carry everything. The obstruction is productive. A brief remark, a pause, or a selective compliment can generate an emergence part because the hearer translates the utterance through cooperative expectations.
+This is the indexical pullback theorem read through Grice. The theorem rules out a simple transfer model in which the hearer receives only preserved content. It predicts that meaning can arise precisely where preservation fails to carry everything. The obstruction is productive. A brief remark, a pause, or a selective compliment can generate an emergence part because the hearer translates the utterance through cooperative expectations.
 
 Carefully restated, the horizon category contains speaker, hearer, topic, purpose, background knowledge, and norms of cooperation. The horizon functor assigns to each situation the utterances that would count as informative, truthful, relevant, and orderly. Composition places an utterance inside the exchange. Identity is no change in common ground. The resonance pairing measures fit with the cooperative purpose. The preservation part is literal content, the suppression part is omitted or cancelled content, and the emergence part is the implicature. The diagnostic derived primitive is credence, because the hearer estimates what a cooperative speaker would have meant.
 
@@ -9550,7 +9550,7 @@ Grice's maxims are defeasible and psychologically subtle. Idea Theory can sound 
 
 ## Horizon structure
 
-Grice's horizon is conversational and cooperative. It includes shared purposes, social expectations, background knowledge, and the possibility of cancellation. It most centrally instantiates T14, because implicature depends on a horizon translation in which preservation of literal content is not enough. Meaning appears through the obstruction between what is said and what cooperation makes hearable.
+Grice's horizon is conversational and cooperative. It includes shared purposes, social expectations, background knowledge, and the possibility of cancellation. It most centrally instantiates the indexical pullback theorem, because implicature depends on a horizon translation in which preservation of literal content is not enough. Meaning appears through the obstruction between what is said and what cooperation makes hearable.
 
 ## Diagnostic derived primitives
 
@@ -9561,7 +9561,7 @@ The same structure explains why silence can speak. If a response is expected and
 
 ## Chapter summary
 
-Grice shows that conversation carries more than literal content. Idea Theory restates implicature as an emergence part created by cooperative resonance across a horizon. The preservation part is what is said, the suppression part is what is left unsaid or cancelled, and the emergence part is what is meant. T14 is central because pragmatic meaning arises through horizon translation.
+Grice shows that conversation carries more than literal content. Idea Theory restates implicature as an emergence part created by cooperative resonance across a horizon. The preservation part is what is said, the suppression part is what is left unsaid or cancelled, and the emergence part is what is meant. The indexical pullback theorem is central because pragmatic meaning arises through horizon translation.
 
 
 # Chapter 142 — Wittgenstein Nash Bridge
@@ -9588,7 +9588,7 @@ The preservation part carries an established use forward. The suppression part e
 
 *A language game, a convention, and an equilibrium are one stable horizon pattern heard in three voices.*
 
-This is T13 read through the Wittgenstein Nash bridge. The theorem rules out the idea that meaning is either a private mental item or a mere formal payoff pattern detached from use. It predicts that stable linguistic meaning appears when local uses, expectations, and responses glue into a global practice. It also predicts that multiple equilibria can exist, which explains why conventions are stable yet historically contingent.
+This is the hermeneutic sheaf theorem read through the Wittgenstein Nash bridge. The theorem rules out the idea that meaning is either a private mental item or a mere formal payoff pattern detached from use. It predicts that stable linguistic meaning appears when local uses, expectations, and responses glue into a global practice. It also predicts that multiple equilibria can exist, which explains why conventions are stable yet historically contingent.
 
 Carefully restated, the horizon category contains language users, signs, situations, responses, expectations, and incentives. The horizon functor assigns possible uses and coordination outcomes to each local setting. Composition iterates use. Identity is the unselected background. The resonance pairing measures fit among use, expectation, and response. The preservation part repeats the practice, the suppression part blocks destabilizing alternatives, and the emergence part is the shared convention. The diagnostic derived primitive is schema, because the bridge concerns stable patterns of coordinated use.
 
@@ -9606,7 +9606,7 @@ Wittgenstein would likely distrust a formal theorem about language games. His me
 
 ## Horizon structure
 
-The bridge horizon is strategic, linguistic, and communal. It includes signs, practices, expectations, corrections, payoffs, and forms of life. It most centrally instantiates T13, because the central question is how local uses become global conventions. T14 appears when meanings fail to translate between games, but the bridge itself is a gluing theorem.
+The bridge horizon is strategic, linguistic, and communal. It includes signs, practices, expectations, corrections, payoffs, and forms of life. It most centrally instantiates the hermeneutic sheaf theorem, because the central question is how local uses become global conventions. The indexical pullback theorem appears when meanings fail to translate between games, but the bridge itself is a gluing theorem.
 
 ## Diagnostic derived primitives
 
@@ -9616,7 +9616,7 @@ The bridge also explains repair. When a use begins to wobble, participants ask w
 
 ## Chapter summary
 
-The Wittgenstein Nash bridge says that meaning as use, convention as coordinated expectation, and equilibrium as stable mutual response are one structure viewed from different sides. Idea Theory restates that structure through composition, resonance pairing, suppression of rivals, and emergence of convention. T13 is central because stable meaning arises when local practices glue across a communal horizon.
+The Wittgenstein Nash bridge says that meaning as use, convention as coordinated expectation, and equilibrium as stable mutual response are one structure viewed from different sides. Idea Theory restates that structure through composition, resonance pairing, suppression of rivals, and emergence of convention. The hermeneutic sheaf theorem is central because stable meaning arises when local practices glue across a communal horizon.
 
 
 # Chapter 143 — Thomas Kuhn on Paradigms
@@ -9643,7 +9643,7 @@ The preservation part of a scientific revolution carries forward what remains us
 
 *A paradigm shift is a horizon translation whose obstruction becomes visible as incommensurability.*
 
-This is T14 read through Kuhn. The theorem rules out the simple picture in which revolutions are just additions to a common stock of facts. It predicts three cases. Some changes are merely verbal and preserve structure. Some reframe the same structure from a new angle. Some alter the horizon so deeply that preservation and emergence fail to pull back cleanly across the translation.
+This is the indexical pullback theorem read through Kuhn. The theorem rules out the simple picture in which revolutions are just additions to a common stock of facts. It predicts three cases. Some changes are merely verbal and preserve structure. Some reframe the same structure from a new angle. Some alter the horizon so deeply that preservation and emergence fail to pull back cleanly across the translation.
 
 Carefully restated, the horizon category contains scientific communities, instruments, exemplars, data, concepts, and standards of explanation. The horizon functor assigns legitimate questions and operations to each paradigm. Composition performs normal science inside a paradigm. Identity is unchanged practice. The resonance pairing measures fit between research moves and paradigm standards. The preservation part carries old successes, the suppression part marks abandoned commitments, and the emergence part forms the new paradigm. The diagnostic derived primitive is schema, also called paradigm, because Kuhn studies the organizing pattern of inquiry.
 
@@ -9661,7 +9661,7 @@ Kuhn wrote as a historian of science, attentive to episodes, communities, and te
 
 ## Horizon structure
 
-Kuhn's horizon is disciplinary and historical. It includes normal science, anomalies, exemplars, rival communities, and standards of legitimate explanation. It most centrally instantiates T14, because incommensurability is an obstruction in translating preservation and emergence between paradigms. T13 matters for normal science within a paradigm, but revolution belongs to T14.
+Kuhn's horizon is disciplinary and historical. It includes normal science, anomalies, exemplars, rival communities, and standards of legitimate explanation. It most centrally instantiates the indexical pullback theorem, because incommensurability is an obstruction in translating preservation and emergence between paradigms. The hermeneutic sheaf theorem matters for normal science within a paradigm, but revolution belongs to the indexical pullback theorem.
 
 ## Diagnostic derived primitives
 
@@ -9672,7 +9672,7 @@ The listener should notice that Kuhn's revolution is not mere fashion. A new par
  It must also teach a community how to notice, trust, and extend its own best questions. over time too.
 ## Chapter summary
 
-Kuhn teaches that scientific meaning is organized by paradigms and transformed by revolutions. Idea Theory restates normal science as composition inside a horizon and revolution as a horizon translation with nontrivial obstruction. Preservation carries old successes, suppression discards failing commitments, and emergence creates a new field of questions. T14 is central because incommensurability is a translation problem. The diagnostic lesson is that scientific change alters not only answers, but the field in which answers can appear.
+Kuhn teaches that scientific meaning is organized by paradigms and transformed by revolutions. Idea Theory restates normal science as composition inside a horizon and revolution as a horizon translation with nontrivial obstruction. Preservation carries old successes, suppression discards failing commitments, and emergence creates a new field of questions. The indexical pullback theorem is central because incommensurability is a translation problem. The diagnostic lesson is that scientific change alters not only answers, but the field in which answers can appear.
 
 
 # Chapter 144 — George Herbert Mead on the Social Self
@@ -9699,7 +9699,7 @@ The preservation part carries bodily impulse and prior habit. The suppression pa
 
 *The social self emerges when role taking stabilizes as reflexion across a communal horizon.*
 
-This is T15 read through Mead. The theorem rules out the idea that the self is either merely private substance or merely external conformity. It predicts that durable selfhood requires both breadth of horizon support and closure under emergence. A person must be able to carry many social perspectives without dissolving into them, and must be able to generate new action from that organized field.
+This is the profundity theorem read through Mead. The theorem rules out the idea that the self is either merely private substance or merely external conformity. It predicts that durable selfhood requires both breadth of horizon support and closure under emergence. A person must be able to carry many social perspectives without dissolving into them, and must be able to generate new action from that organized field.
 
 Carefully restated, the horizon category contains gestures, responses, roles, significant symbols, play, games, institutions, and communal expectations. The horizon functor assigns to each social setting the perspectives available for role taking. Composition links gesture, response, internalization, and action. Identity is the pre reflective agent. The resonance pairing measures mutual uptake. The preservation part carries impulse and habit, the suppression part checks socially unworkable action, and the emergence part is the reflexive self. The diagnostic derived primitive is reflexion, because the self turns back upon itself through the other.
 
@@ -9717,7 +9717,7 @@ Mead's prose is developmental, social, and pragmatist. Idea Theory risks making 
 
 ## Horizon structure
 
-Mead's horizon is interpersonal and communal. It includes gestures, significant symbols, role taking, play, games, institutions, and internalized expectations. It most centrally instantiates T15, because the self is profound in the technical sense of trans horizonal stability. It survives across many perspectives and remains generative under new social situations.
+Mead's horizon is interpersonal and communal. It includes gestures, significant symbols, role taking, play, games, institutions, and internalized expectations. It most centrally instantiates the profundity theorem, because the self is profound in the technical sense of trans horizonal stability. It survives across many perspectives and remains generative under new social situations.
 
 ## Diagnostic derived primitives
 
@@ -9727,7 +9727,7 @@ This also clarifies why recognition matters. To be recognized is not merely to b
 
 ## Chapter summary
 
-Mead teaches that mind and self emerge through symbolic interaction. Idea Theory restates the self as a reflexive horizon pattern formed by composition of gesture, response, and role taking. Preservation carries impulse, suppression disciplines action, and emergence produces the socially organized self. T15 is central because the self is stable across many horizons while remaining open to new action.
+Mead teaches that mind and self emerge through symbolic interaction. Idea Theory restates the self as a reflexive horizon pattern formed by composition of gesture, response, and role taking. Preservation carries impulse, suppression disciplines action, and emergence produces the socially organized self. The profundity theorem is central because the self is stable across many horizons while remaining open to new action.
 
 
 # Chapter 149 — The Thesis of the Book Restated
@@ -10896,7 +10896,7 @@ The eleven derived primitives show the main methodological promise of the book. 
 
 Each theorem is restated in three voices: headline, paragraph form, and careful semi-formal restatement. The restatements use role names rather than symbols so they can be heard clearly.
 
-## T1: Composition
+## the composition theorem: Composition
 
 Headline: *Ideas can be composed without ambiguity, and the silent idea is unique.*
 
@@ -10904,13 +10904,13 @@ Paragraph form: This rules out systems where putting ideas together depends on a
 
 Careful semi-formal restatement: Within each horizon, the carrier of ideas has a composition operation and an identity idea. Composition is associative, the identity leaves every idea unchanged on either side, and the ideas that can be reversed under composition form a coherent reversible subsystem.
 
-Listening example: When you hear T1, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the composition theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T1: Composition with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the composition theorem: Composition with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T2: Resonance pairing
+## the resonance theorem: Resonance pairing
 
 Headline: *Once basic resonances are fixed, resonance extends consistently to larger constructions.*
 
@@ -10918,13 +10918,13 @@ Paragraph form: This rules out arbitrary after-the-fact similarity scores. It pr
 
 Careful semi-formal restatement: The resonance pairing assigns directional fit between ideas and extends to combinations in the unique way compatible with addition of content and scaling of weight, while preserving non-degeneracy where the structure requires it.
 
-Listening example: When you hear T2, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the resonance theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T2: Resonance pairing with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the resonance theorem: Resonance pairing with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T3: Aufhebung decomposition
+## the aufhebung theorem: Aufhebung decomposition
 
 Headline: *Every meaningful composition preserves something, suppresses something, and generates something new.*
 
@@ -10932,13 +10932,13 @@ Paragraph form: This rules out the idea that combination is mere addition. It pr
 
 Careful semi-formal restatement: For every pair of ideas in a horizon, their composition decomposes into a preservation part, a suppression part, and an emergence part, with uniqueness measured by the resonance structure and with no extra component smuggled in.
 
-Listening example: When you hear T3, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the aufhebung theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T3: Aufhebung decomposition with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the aufhebung theorem: Aufhebung decomposition with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T4: Emergence cocycle
+## the emergence cocycle theorem: Emergence cocycle
 
 Headline: *Novelty is coherent across longer chains of composition.*
 
@@ -10946,13 +10946,13 @@ Paragraph form: This rules out mystical emergence that can say anything at any t
 
 Careful semi-formal restatement: The emergence part satisfies a closure condition across triples of ideas, is normalized at the identity idea, and determines a stable obstruction class measuring irreducible novelty.
 
-Listening example: When you hear T4, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the emergence cocycle theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T4: Emergence cocycle with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the emergence cocycle theorem: Emergence cocycle with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T5: Meaning curvature
+## the meaning curvature theorem: Meaning curvature
 
 Headline: *Directional asymmetry in resonance leaves a durable invariant.*
 
@@ -10960,13 +10960,13 @@ Paragraph form: This rules out the fantasy that all framing effects are removabl
 
 Careful semi-formal restatement: The antisymmetric component of the resonance pairing, called meaning curvature, is closed under the natural comparison of contexts and determines a structural invariant preserved by equivalence of idea algebras.
 
-Listening example: When you hear T5, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the meaning curvature theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T5: Meaning curvature with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the meaning curvature theorem: Meaning curvature with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T6: Conjugation and frames
+## the conjugation theorem: Conjugation and frames
 
 Headline: *Reframing can preserve internal structure while changing external resonance.*
 
@@ -10974,13 +10974,13 @@ Paragraph form: This rules out both naive relativism and naive neutrality. It pr
 
 Careful semi-formal restatement: Conjugation by an invertible frame sends ideas to reframed ideas, preserves composition, identity, decomposition, emergence, and grading internally, while allowing the resonance profile against outside ideas to be reweighted.
 
-Listening example: When you hear T6, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the conjugation theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T6: Conjugation and frames with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the conjugation theorem: Conjugation and frames with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T7: Transmission chains
+## the transmission theorem: Transmission chains
 
 Headline: *Long transmission can be analyzed step by step without losing the total effect.*
 
@@ -10988,13 +10988,13 @@ Paragraph form: This rules out treating diffusion as an unanalyzable blur. It pr
 
 Careful semi-formal restatement: A transmission chain is an iterated composition in which outputs feed later inputs, identity steps may be inserted or removed without changing the transmitted content, and the total transformation is recovered from the ordered chain.
 
-Listening example: When you hear T7, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the transmission theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T7: Transmission chains with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the transmission theorem: Transmission chains with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T8: Structural equivalence
+## the equivalence theorem: Structural equivalence
 
 Headline: *Different expressions can carry the same idea when their structure evaluates the same way.*
 
@@ -11002,13 +11002,13 @@ Paragraph form: This rules out confusing syntax with meaning. It predicts synony
 
 Careful semi-formal restatement: Two idea expressions are structurally equivalent when a structure-preserving translation carries one to the other while preserving composition, identity, resonance, decomposition, emergence, grading, and horizon behavior.
 
-Listening example: When you hear T8, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the equivalence theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T8: Structural equivalence with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the equivalence theorem: Structural equivalence with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T9: Graded idea algebra
+## the graded structure theorem: Graded idea algebra
 
 Headline: *Ideas can have degrees that behave consistently under composition.*
 
@@ -11016,13 +11016,13 @@ Paragraph form: This rules out treating depth as mere taste. It predicts hierarc
 
 Careful semi-formal restatement: Each idea receives a degree from an ordered grading system, the degree of a composition is determined by the degrees of the composed ideas, and horizon translations respect grading where the relevant preservation conditions hold.
 
-Listening example: When you hear T9, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the graded structure theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T9: Graded idea algebra with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the graded structure theorem: Graded idea algebra with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T10: Coalitions
+## the coalitions theorem: Coalitions
 
 Headline: *Groups of agents or sub-ideas can aggregate when cohesion conditions hold.*
 
@@ -11030,13 +11030,13 @@ Paragraph form: This rules out assuming that groups are either mere sums or myst
 
 Careful semi-formal restatement: A coalition aggregates member ideas or agents through a social composition operation, has identity and silent-member behavior, and satisfies congruence conditions that make the aggregate stable under recognized translations.
 
-Listening example: When you hear T10, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the coalitions theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T10: Coalitions with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the coalitions theorem: Coalitions with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T11: Cultural transmission
+## the diffusion theorem: Cultural transmission
 
 Headline: *Transmission itself forms an algebra with inheritance and faithful propagation.*
 
@@ -11044,13 +11044,13 @@ Paragraph form: This rules out one-off copying models of culture. It predicts li
 
 Careful semi-formal restatement: Cultural transmission is modeled as compositional propagation through agents and horizons, with identity cases, faithful maps, and inherited structure that can be compared across chains.
 
-Listening example: When you hear T11, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the diffusion theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T11: Cultural transmission with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the diffusion theorem: Cultural transmission with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T12: Emergent novelty
+## the novelty theorem: Emergent novelty
 
 Headline: *Some outputs are genuinely outside their prior closure.*
 
@@ -11058,13 +11058,13 @@ Paragraph form: This rules out calling every rearrangement creative. It predicts
 
 Careful semi-formal restatement: An idea is emergently novel when its composed output is not contained in the closure generated by its predecessors under the allowed operations, while still being produced by a lawful act of composition.
 
-Listening example: When you hear T12, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the novelty theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T12: Emergent novelty with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the novelty theorem: Emergent novelty with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T13: Hermeneutic sheaf
+## the hermeneutic sheaf theorem: Hermeneutic sheaf
 
 Headline: *Understanding is local agreement that glues into a unique whole.*
 
@@ -11072,13 +11072,13 @@ Paragraph form: This rules out purely private understanding and also rules out m
 
 Careful semi-formal restatement: Given a covering family of sub-horizons, local idea data count as understood at the larger horizon exactly when the restrictions agree on all overlaps and glue uniquely to a global section.
 
-Listening example: When you hear T13, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the hermeneutic sheaf theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T13: Hermeneutic sheaf with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the hermeneutic sheaf theorem: Hermeneutic sheaf with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T14: Indexical pullback
+## the indexical pullback theorem: Indexical pullback
 
 Headline: *Inference and resonance need not survive a change of horizon.*
 
@@ -11086,13 +11086,13 @@ Paragraph form: This rules out context-free semantics for indexicals, paradigms,
 
 Careful semi-formal restatement: A horizon translation preserves composition and identity, but preservation part, emergence part, resonance, and grading may fail to pull back strictly; the obstruction measures the failure of universal inference across horizons.
 
-Listening example: When you hear T14, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the indexical pullback theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T14: Indexical pullback with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the indexical pullback theorem: Indexical pullback with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
-## T15: Profundity
+## the profundity theorem: Profundity
 
 Headline: *Depth is broad horizon support plus faithful emergence-preserving transmission.*
 
@@ -11100,11 +11100,11 @@ Paragraph form: This rules out treating profundity as mere intensity or prestige
 
 Careful semi-formal restatement: The grading of a profound idea factors through the breadth of horizons on which it has coherent support and through its closure under emergence, so maximal profundity belongs to ideas stable across translations and faithful under transmission.
 
-Listening example: When you hear T15, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
+Listening example: When you hear the profundity theorem, imagine an ordinary case before imagining a formal one. A classroom explanation, a legal rule, a metaphor, a market signal, or a scientific model either keeps structure stable or fails in a describable way. The theorem tells you what kind of stability or failure to listen for.
 
 Diagnostic question: Ask what would have to be observed for this theorem to matter in practice. Does a composition stay coherent? Does a frame change resonance? Does a translation preserve inference? Does a group aggregate without losing cohesion? Does a novelty really exceed its lineage? The theorem is not a label for admiration; it is a test for structure.
 
-Memory cue: Pair T15: Profundity with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
+Memory cue: Pair the profundity theorem: Profundity with one ordinary verb. Compose, fit, split, cohere, curve, reframe, transmit, translate, grade, aggregate, inherit, innovate, glue, shift, or deepen. The verb is not the theorem, but it gives the ear a doorway back into the careful statement.
 
 ## Appendix summary
 

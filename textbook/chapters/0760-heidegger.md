@@ -58,7 +58,7 @@ In paragraph form, the claim rules out the fantasy that meaning is already compl
 context enters. The first theorem-shaped claim is that the ontological difference is the
 preservation part 0. Being cannot be collapsed into any being, including the totality of
 beings, because the structural curvature between disclosing and disclosed is irreducible.
-This is a T5 claim: the algebra has an essential asymmetry that no further synthesis can
+This is a the meaning curvature theorem claim: the algebra has an essential asymmetry that no further synthesis can
 dissolve. The second claim is that Destruktion is the reframing operator the emergence part
 that reverses sedimentation. The prediction is that failures of understanding will not be
 accidental noise. They will cluster where a local content cannot be carried unchanged across
@@ -68,7 +68,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -113,11 +113,11 @@ projection, and the temporal horizon of Being. Morphisms are disclosedness-shift
 anxiety, interpretation, and authentic retrieval—that change how entities show up.
 temporality is ecstatic temporality, perspective is Dasein as being-in-the-world, affect or
 conatus is care, and schema or paradigm names historical understandings of Being. This is
-T14: present-at-hand ontology fails to pull back across the ready-to-hand and existential
+The indexical pullback theorem: present-at-hand ontology fails to pull back across the ready-to-hand and existential
 horizons, revealing Being as horizon-relative disclosure. For this reason the chapter should
-be heard through T14. T13 is the hermeneutic sheaf theorem, where local meanings glue into a
-global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a
+global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

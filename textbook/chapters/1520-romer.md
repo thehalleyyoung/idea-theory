@@ -20,7 +20,7 @@ In Idea Theory, a technological idea is an element that can enter many compositi
 
 The theorem rules out the picture of growth as only accumulation of rival inputs. It predicts that teaching, copying, licensing, and recombination can raise total productivity without requiring the original idea to be consumed. It also predicts institutional tension: if ideas diffuse too freely, private incentives weaken; if they are locked too tightly, social growth is slowed. Non-rivalry is powerful precisely because it separates use from depletion.
 
-Carefully stated, let composition join an idea with many production horizons, let identity mark the same design across uses, let the resonance pairing measure productive fit, and let degree or grading record the idea's breadth of support. If repeated composition preserves the idea's identity and does not reduce its resonance pairing with further horizons, then the preservation part remains available while the emergence part can generate new applications. The resulting idea is profound when its support and productive closure expand across horizons. This is T15, because profundity depends on stable trans-horizon support and growing emergence.
+Carefully stated, let composition join an idea with many production horizons, let identity mark the same design across uses, let the resonance pairing measure productive fit, and let degree or grading record the idea's breadth of support. If repeated composition preserves the idea's identity and does not reduce its resonance pairing with further horizons, then the preservation part remains available while the emergence part can generate new applications. The resulting idea is profound when its support and productive closure expand across horizons. This is the profundity theorem, because profundity depends on stable trans-horizon support and growing emergence.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Romer's economic models depend on incentives, research labor, monopoly rents, an
 
 ## Horizon structure
 
-The horizon category contains research labs, firms, patent offices, production lines, classrooms, software repositories, and consumer markets. Morphisms are copying, licensing, teaching, adapting, applying, and recombining. The horizon functor assigns the same idea different local resonance pairings while preserving its identity across many uses. T15 is the relevant theorem label: an idea becomes economically profound when its non-rival identity has wide support and its emergence part remains fertile.
+The horizon category contains research labs, firms, patent offices, production lines, classrooms, software repositories, and consumer markets. Morphisms are copying, licensing, teaching, adapting, applying, and recombining. The horizon functor assigns the same idea different local resonance pairings while preserving its identity across many uses. The profundity theorem is the relevant theorem label: an idea becomes economically profound when its non-rival identity has wide support and its emergence part remains fertile.
 
 ## Diagnostic derived primitives
 
@@ -46,4 +46,4 @@ The same point applies to education. Teaching an idea does not divide it among s
 
 ## Chapter summary
 
-Romer places ideas at the heart of growth because they can be used without being used up. Idea Theory restates this as preserved identity under repeated composition, with expanding resonance across production horizons. The result is T15 in growth form: non-rival ideas become profound when their support and emergence remain open over time.
+Romer places ideas at the heart of growth because they can be used without being used up. Idea Theory restates this as preserved identity under repeated composition, with expanding resonance across production horizons. The result is the profundity theorem in growth form: non-rival ideas become profound when their support and emergence remain open over time.

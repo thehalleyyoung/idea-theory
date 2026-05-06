@@ -22,7 +22,7 @@ The preservation part carries recognizable structure from speaker to interpreter
 
 *Radical interpretation succeeds when speaker, interpreter, and world can be glued into one charitable horizon.*
 
-This is T13 read through Davidson. The theorem rules out translation as a word by word code detached from belief and world. It predicts that interpretation will fail or fragment when no shared objects, rational patterns, or truth preserving overlaps can be found. It also predicts that charity is structural, not optional, because gluing requires enough positive resonance among the three corners of the triangle.
+This is the hermeneutic sheaf theorem read through Davidson. The theorem rules out translation as a word by word code detached from belief and world. It predicts that interpretation will fail or fragment when no shared objects, rational patterns, or truth preserving overlaps can be found. It also predicts that charity is structural, not optional, because gluing requires enough positive resonance among the three corners of the triangle.
 
 Carefully restated, the horizon category contains the speaker's utterances, the interpreter's candidate meanings, shared worldly causes, and patterns of belief and action. The horizon functor assigns local interpretations to observed situations. Composition links utterance with inference and response. Identity is the uninterpreted baseline. The resonance pairing measures agreement with truth, rationality, and shared environment. The preservation part keeps inferential structure, the suppression part eliminates uncharitable mappings, and the emergence part is the interpretive theory that lets communication proceed. The diagnostic derived primitive is perspective, because interpretation joins different standpoints without erasing them.
 
@@ -40,7 +40,7 @@ Davidson avoided treating meanings as inner objects or abstract entities that st
 
 ## Horizon structure
 
-Davidson's horizon is triangular. It includes speaker, interpreter, and shared world as mutually constraining positions. It most centrally instantiates T13, because interpretation is possible when local assignments over observed situations glue into a global theory of meaning and belief. T14 appears when translation obstructions remain, but T13 carries the main constructive insight.
+Davidson's horizon is triangular. It includes speaker, interpreter, and shared world as mutually constraining positions. It most centrally instantiates the hermeneutic sheaf theorem, because interpretation is possible when local assignments over observed situations glue into a global theory of meaning and belief. The indexical pullback theorem appears when translation obstructions remain, but the hermeneutic sheaf theorem carries the main constructive insight.
 
 ## Diagnostic derived primitives
 
@@ -51,4 +51,4 @@ This is why radical interpretation is generous without being gullible. Charity d
 
 ## Chapter summary
 
-Davidson teaches that meaning, belief, and world must be interpreted together. Idea Theory restates radical interpretation as horizon gluing under charity. Composition preserves inference, resonance pairing links utterance to truth and action, and emergence produces a shared interpretive field. T13 is central because understanding succeeds when local evidence forms one coherent horizon.
+Davidson teaches that meaning, belief, and world must be interpreted together. Idea Theory restates radical interpretation as horizon gluing under charity. Composition preserves inference, resonance pairing links utterance to truth and action, and emergence produces a shared interpretive field. The hermeneutic sheaf theorem is central because understanding succeeds when local evidence forms one coherent horizon.

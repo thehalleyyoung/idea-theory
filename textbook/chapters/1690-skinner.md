@@ -24,7 +24,7 @@ The horizon category consists of controversies, conventions, genres, offices, au
 
 The theorem rules out the assumption that textual meaning is context-free. It predicts that the same words can carry different force when composed with different linguistic horizons. It also predicts that good interpretation is restrictive: it narrows possible readings by asking which acts were available, intelligible, and contestable at the time of utterance.
 
-Carefully stated: let a text be an element in an idea algebra of utterances. Let the horizon category contain historical controversies, linguistic conventions, genres, audiences, and institutions. The horizon functor assigns to each horizon a local resonance pairing and local preservation, suppression, and emergence parts. T14 applies because an utterance does not pull back invariantly from a modern horizon to a historical horizon. The obstruction is the anachronism that Skinner's method diagnoses.
+Carefully stated: let a text be an element in an idea algebra of utterances. Let the horizon category contain historical controversies, linguistic conventions, genres, audiences, and institutions. The horizon functor assigns to each horizon a local resonance pairing and local preservation, suppression, and emergence parts. The indexical pullback theorem applies because an utterance does not pull back invariantly from a modern horizon to a historical horizon. The obstruction is the anachronism that Skinner's method diagnoses.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ There is also a risk of over-formalizing historical judgment. Real contexts are 
 
 ## Horizon structure
 
-Skinner belongs with T14. The horizon category is made of historical linguistic settings: parliamentary debate, religious controversy, legal argument, civic humanist rhetoric, and polemical exchange. Morphisms include translation, reception, anachronistic reading, and careful contextual recovery.
+Skinner belongs with the indexical pullback theorem. The horizon category is made of historical linguistic settings: parliamentary debate, religious controversy, legal argument, civic humanist rhetoric, and polemical exchange. Morphisms include translation, reception, anachronistic reading, and careful contextual recovery.
 
-T14 names the failure of invariance. The same sentence does not carry the same emergence part in every horizon. To say liberty, sovereignty, consent, or obligation is to act within a local field of available moves. Skinner's historian reconstructs that field before judging the act.
+The indexical pullback theorem names the failure of invariance. The same sentence does not carry the same emergence part in every horizon. To say liberty, sovereignty, consent, or obligation is to act within a local field of available moves. Skinner's historian reconstructs that field before judging the act.
 
 ## Diagnostic derived primitives
 
@@ -52,4 +52,4 @@ A useful diagnostic question is therefore modest but demanding: what would a com
 
 ## Chapter summary
 
-Skinner gives Idea Theory a discipline of contextual restriction. Texts are not free-floating propositions. They are horizon-local acts whose preservation, suppression, and emergence parts depend on historical conventions. T14 captures anachronism as failed pullback across horizons.
+Skinner gives Idea Theory a discipline of contextual restriction. Texts are not free-floating propositions. They are horizon-local acts whose preservation, suppression, and emergence parts depend on historical conventions. The indexical pullback theorem captures anachronism as failed pullback across horizons.

@@ -20,7 +20,7 @@ In Idea Theory, the buyer, the seller, and the idea occupy different horizons. T
 
 The theorem rules out the hope that better bargaining alone can make information behave like a standard commodity. It predicts systematic underinvestment in invention, secrecy, patents, licensing, and other institutions that try to create partial excludability around something whose use naturally spreads. The central obstruction is not greed or ignorance. It is that the act needed to measure value is itself a transformative act.
 
-Carefully stated, let composition join a buyer horizon with an information idea, let identity mark the repeatable content of that idea, let the resonance pairing measure the buyer's capacity to value it, and let the preservation part, suppression part, and emergence part describe what disclosure keeps, cancels, and creates. If the pre-disclosure resonance pairing cannot determine the post-disclosure resonance pairing, and if the composition cannot be undone by any identity-preserving return to ignorance, then no price rule preserves valuation across the transaction. This is a T14 obstruction, because inference fails to pull back from the informed horizon to the uninformed horizon.
+Carefully stated, let composition join a buyer horizon with an information idea, let identity mark the repeatable content of that idea, let the resonance pairing measure the buyer's capacity to value it, and let the preservation part, suppression part, and emergence part describe what disclosure keeps, cancels, and creates. If the pre-disclosure resonance pairing cannot determine the post-disclosure resonance pairing, and if the composition cannot be undone by any identity-preserving return to ignorance, then no price rule preserves valuation across the transaction. This is a the indexical pullback theorem obstruction, because inference fails to pull back from the informed horizon to the uninformed horizon.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Arrow often treats the problem in sharp before and after terms. Real information
 
 ## Horizon structure
 
-The horizon category contains seller informed, buyer uninformed, buyer after disclosure, patent market, public domain, and imitation horizon. Morphisms are disclosure, licensing, publication, patenting, and copying. The horizon functor assigns each horizon a different valuation algebra because the resonance pairing changes when the buyer learns. T14 is the relevant theorem label: the same idea does not support the same inference in pre-disclosure and post-disclosure horizons.
+The horizon category contains seller informed, buyer uninformed, buyer after disclosure, patent market, public domain, and imitation horizon. Morphisms are disclosure, licensing, publication, patenting, and copying. The horizon functor assigns each horizon a different valuation algebra because the resonance pairing changes when the buyer learns. The indexical pullback theorem is the relevant theorem label: the same idea does not support the same inference in pre-disclosure and post-disclosure horizons.
 
 ## Diagnostic derived primitives
 
@@ -44,4 +44,4 @@ The audiobook moral is simple. When you hear the word information, do not pictur
 
 ## Chapter summary
 
-Arrow teaches that information is not a normal commodity because its valuation depends on irreversible learning. Idea Theory restates this as horizon-changing composition: disclosure preserves some identity, suppresses ignorance, creates new evaluative capacity, and blocks the pullback needed for ordinary pricing. The result is T14 in economic form.
+Arrow teaches that information is not a normal commodity because its valuation depends on irreversible learning. Idea Theory restates this as horizon-changing composition: disclosure preserves some identity, suppresses ignorance, creates new evaluative capacity, and blocks the pullback needed for ordinary pricing. The result is the indexical pullback theorem in economic form.

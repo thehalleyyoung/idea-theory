@@ -18,7 +18,7 @@ The proof combines support and closure. First, identify the horizons where the i
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-T15 does not define profundity as emotional intensity. An idea may move us because it is profound, but the theorem looks for the structure beneath that feeling. The idea must survive many horizon shifts and still organize new thought. This is why deep concepts often seem both ancient and unfinished.
+The profundity theorem does not define profundity as emotional intensity. An idea may move us because it is profound, but the theorem looks for the structure beneath that feeling. The idea must survive many horizon shifts and still organize new thought. This is why deep concepts often seem both ancient and unfinished.
 
 ## What it decides
 

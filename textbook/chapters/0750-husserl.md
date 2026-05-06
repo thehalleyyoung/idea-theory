@@ -52,7 +52,7 @@ In paragraph form, the claim rules out the fantasy that meaning is already compl
 context enters. The first theorem-shaped claim is that intentionality is composition with
 the noema as right-identity relative to the act. Every act is composed with its noema in a
 structurally specific way; without this composition there is no intentional content. This is
-a T1 claim: the very possibility of consciousness presupposes the algebra's basic operation.
+a the composition theorem claim: the very possibility of consciousness presupposes the algebra's basic operation.
 The second claim is that time-consciousness is the emergence cocycle realized as a triple
 operator. The prediction is that failures of understanding will not be accidental noise.
 They will cluster where a local content cannot be carried unchanged across a change of
@@ -62,7 +62,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -103,11 +103,11 @@ intersubjective confirmations. Morphisms are epoché-style bracketings and inten
 modifications that restrict the natural attitude to what is given as such. intentionality is
 explicit intentionality, perspective is the transcendental ego's perspectival field,
 temporality is inner time-consciousness, and R appears in reflection on constitution itself.
-This is the paradigmatic T13: constitution of an object is sheaf-gluing of profile-
+This is the paradigmatic the hermeneutic sheaf theorem: constitution of an object is sheaf-gluing of profile-
 perceptions across a covering family of perspectival horizons. For this reason the chapter
-should be heard through T13. T13 is the hermeneutic sheaf theorem, where local meanings glue
-into a global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue
+into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

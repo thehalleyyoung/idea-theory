@@ -20,7 +20,7 @@ In Idea Theory, the stock of ideas is closed under composition only after work. 
 
 The theorem rules out a linear picture of discovery in which each idea contributes only itself. It predicts that diversity matters as much as quantity, because redundant components do not create rich new pairings. It also predicts sudden bursts when ideas from distant horizons become mutually visible. The value of a research community lies not only in what it already knows, but in the unrealized combinations its members can make.
 
-Carefully stated, let composition combine idea elements, let identity preserve recognizable components across recombination, let the resonance pairing decide which pairings are locally meaningful, and let the preservation part, suppression part, emergence part, and emergence cocycle measure what is retained, canceled, generated, and accumulated. If a growing seed stock contains sufficiently differentiated ideas and if many pairings have positive emergence part, then the closure of the stock expands in both variety and degree. This is T15, because profundity rises with the size and reach of emergence across many horizons.
+Carefully stated, let composition combine idea elements, let identity preserve recognizable components across recombination, let the resonance pairing decide which pairings are locally meaningful, and let the preservation part, suppression part, emergence part, and emergence cocycle measure what is retained, canceled, generated, and accumulated. If a growing seed stock contains sufficiently differentiated ideas and if many pairings have positive emergence part, then the closure of the stock expands in both variety and degree. This is the profundity theorem, because profundity rises with the size and reach of emergence across many horizons.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Weitzman's combinatorial story can make growth sound almost automatic. Idea Theo
 
 ## Horizon structure
 
-The horizon category contains laboratories, technical domains, industries, design traditions, standards bodies, and user practices. Morphisms are analogies, transfers, prototypes, interdisciplinary collaborations, and teaching. The horizon functor tracks which pairings are visible in which domain and how an idea changes when carried into a new one. T15 is the relevant theorem label: recombinant growth is profundity through expanding support and emergence closure.
+The horizon category contains laboratories, technical domains, industries, design traditions, standards bodies, and user practices. Morphisms are analogies, transfers, prototypes, interdisciplinary collaborations, and teaching. The horizon functor tracks which pairings are visible in which domain and how an idea changes when carried into a new one. The profundity theorem is the relevant theorem label: recombinant growth is profundity through expanding support and emergence closure.
 
 ## Diagnostic derived primitives
 
@@ -46,4 +46,4 @@ The listener can also hear a warning about monoculture. If every laboratory know
 
 ## Chapter summary
 
-Weitzman teaches that ideas multiply by meeting other ideas. Idea Theory restates recombinant growth as composition guided by resonance, with preservation, suppression, emergence, and emergence cocycle marking the structure of novelty. The theorem label is T15: an idea stock grows profound when its horizon-crossing combinations keep generating fertile emergence.
+Weitzman teaches that ideas multiply by meeting other ideas. Idea Theory restates recombinant growth as composition guided by resonance, with preservation, suppression, emergence, and emergence cocycle marking the structure of novelty. The theorem label is the profundity theorem: an idea stock grows profound when its horizon-crossing combinations keep generating fertile emergence.

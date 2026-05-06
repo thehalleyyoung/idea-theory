@@ -66,7 +66,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15, T14;
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem, the indexical pullback theorem;
 where translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -111,12 +111,12 @@ by baptismal contexts and causal chains of transmission. Rigid designators are e
 constant global sections rigid reference: the name's referent remains fixed while
 descriptions vary by world. credence separates epistemic evidence from modal necessity, and
 schema or paradigm appears in rule-following as the community horizon that fixes practice,
-if anything does. This is T15 for names and T14 for rules: rigidity is trans-horizonal
+if anything does. This is the profundity theorem for names and the indexical pullback theorem for rules: rigidity is trans-horizonal
 stability, while finite past use fails to pull back into a unique future the preservation
-part. For this reason the chapter should be heard through T15, T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+part. For this reason the chapter should be heard through the profundity theorem, the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives

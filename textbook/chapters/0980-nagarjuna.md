@@ -51,7 +51,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -93,11 +93,11 @@ substance-view. Morphisms of Madhyamaka analysis translate any asserted svabhāv
 dependent origination and then dissolve the analysis itself. R is decisive in emptiness of
 emptiness as fixed-point self-application of the horizon functor, differentiation prevents
 positive essence, and intentionality is conventional designation without intrinsic target.
-This is T14 plus R: the two truths are horizon-levels of the presheaf, and every attempt to
+This is the indexical pullback theorem plus R: the two truths are horizon-levels of the presheaf, and every attempt to
 make emptiness invariant as a doctrine fails reflexively. For this reason the chapter should
-be heard through T14. T13 is the hermeneutic sheaf theorem, where local meanings glue into a
-global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a
+global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

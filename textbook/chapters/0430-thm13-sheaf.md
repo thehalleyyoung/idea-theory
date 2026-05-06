@@ -18,7 +18,7 @@ The proof has three movements. Restrict the candidate global meaning to each loc
 
 A useful way to hear the proof is as a cleaning operation. Start with a messy claim about ideas. Remove anything that depends only on wording. Remove anything that disappears when identity steps are inserted. Remove anything that changes only because a local description was chosen. What remains is the structure the theorem protects. In a formal proof, that cleaning is performed by definitions and lemmas. In the audiobook, the same movement can be heard as a sequence of disciplined comparisons.
 
-Hans-Georg Gadamer, pronounced *GAH dah mer*, called understanding a fusion of horizons. T13 gives that phrase a structural interpretation. A market price, a legal precedent, or a scientific consensus can all be heard as a glued meaning when local information is compatible enough. When overlap fails, gluing fails, and the alleged whole is only an imposed summary.
+Hans-Georg Gadamer, pronounced *GAH dah mer*, called understanding a fusion of horizons. The hermeneutic sheaf theorem gives that phrase a structural interpretation. A market price, a legal precedent, or a scientific consensus can all be heard as a glued meaning when local information is compatible enough. When overlap fails, gluing fails, and the alleged whole is only an imposed summary.
 
 ## What it decides
 

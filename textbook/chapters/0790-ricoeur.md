@@ -55,7 +55,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that emplotment is the central
 composition. To make sense of human time, one must compose events into plots; composition is
-the algebraic content of the Aristotelian mythos. This is a T1 claim with the additional
+the algebraic content of the Aristotelian mythos. This is a the composition theorem claim with the additional
 constraint that not all compositions are admissible: a plot must satisfy concordance-
 discordance constraints. The second claim is that the hermeneutic arc is the curvature the
 preservation part between structural explanation and lived understanding. The prediction is
@@ -67,7 +67,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -109,12 +109,12 @@ horizon category is the hermeneutic arc from lived action, symbol, text, distanc
 explanation, and reappropriated self-understanding. Morphisms move from prefiguration
 through configuration to refiguration, especially in narrative time. temporality is
 narrative temporality, R is the self interpreted through signs, intentionality is reference
-opened by the text's world, and schema or paradigm marks symbolic traditions. This is T13:
+opened by the text's world, and schema or paradigm marks symbolic traditions. This is the hermeneutic sheaf theorem:
 interpretation glues explanatory, textual, and existential horizons so that the world of the
 text refigures the reader's own horizon. For this reason the chapter should be heard through
-T13. T13 is the hermeneutic sheaf theorem, where local meanings glue into a global one when
-they agree on overlaps. T14 is the indexical pullback theorem, where preservation and
-emergence fail to translate cleanly. T15 is the profundity theorem, where depth comes from
+The hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a global one when
+they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation and
+emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where depth comes from
 breadth across horizons and closure under emergence.
 
 ## Derived primitives

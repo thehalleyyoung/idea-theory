@@ -54,7 +54,7 @@ and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that habit is the fixed point of the
 emergence cocycle. Iterated practice converges on a stable motor pattern that is both
-effective and felt as effortless. This is a T7 claim with experiential content: transmission
+effective and felt as effortless. This is a the transmission theorem claim with experiential content: transmission
 terminates in fixed-point skills, and skill acquisition is exactly the trajectory of the
 emergence cocycle toward such fixed points. The second claim is that the body schema is the
 identity idea relative to motor synthesis. The prediction is that failures of understanding
@@ -66,7 +66,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -108,11 +108,11 @@ visible profiles, intercorporeal encounters, and the flesh of the world. Morphis
 sensorimotor translations that carry an object from one bodily orientation to another
 without reducing perception to judgment. perspective is embodied perspective, intentionality
 is motor intentionality, temporality is lived temporal thickness, and marks affective
-attunement in perception. This is T13: perceptual objectivity is the gluing of embodied
+attunement in perception. This is the hermeneutic sheaf theorem: perceptual objectivity is the gluing of embodied
 profiles across possible movements and shared bodily horizons. For this reason the chapter
-should be heard through T13. T13 is the hermeneutic sheaf theorem, where local meanings glue
-into a global one when they agree on overlaps. T14 is the indexical pullback theorem, where
-preservation and emergence fail to translate cleanly. T15 is the profundity theorem, where
+should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue
+into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where
+preservation and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where
 depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

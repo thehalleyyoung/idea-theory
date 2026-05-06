@@ -53,7 +53,7 @@ a degree of articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that signification is irreducibly triadic:
 composition cannot be factored into dyadic operations. The Peircean insistence on triadicity
-is a structural fact about the algebra. This is a T1 claim with constitutive triadicity. The
+is a structural fact about the algebra. This is a the composition theorem claim with constitutive triadicity. The
 second claim is the pragmatic maxim: meaning is exhausted by conceivable practical bearings.
 The prediction is that failures of understanding will not be accidental noise. They will
 cluster where a local content cannot be carried unchanged across a change of horizon, or
@@ -63,7 +63,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T15; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the profundity theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -106,11 +106,11 @@ interpretants, habits, and future investigation. Morphisms carry a sign to furth
 interpretants, extending meaning through an indefinitely open chain constrained by reality.
 intentionality is triadic aboutness, temporality is inquiry's future orientation, credence
 is fallibilist credence, and schema or paradigm is the community of investigators as a
-connected horizon. This is T15: truth is the trans-horizonal stability toward which inquiry
+connected horizon. This is the profundity theorem: truth is the trans-horizonal stability toward which inquiry
 would converge under unlimited continuation of interpretant-morphisms. For this reason the
-chapter should be heard through T15. T13 is the hermeneutic sheaf theorem, where local
-meanings glue into a global one when they agree on overlaps. T14 is the indexical pullback
-theorem, where preservation and emergence fail to translate cleanly. T15 is the profundity
+chapter should be heard through the profundity theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local
+meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback
+theorem, where preservation and emergence fail to translate cleanly. The profundity theorem is the profundity
 theorem, where depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

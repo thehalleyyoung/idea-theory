@@ -54,7 +54,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is holism: every sentence's content depends
 on all others via the resonance pairing. There are no isolated atoms of content; meaning is
-global. This is a T2 claim with maximal scope. The second claim is that the web of belief is
+global. This is a the resonance theorem claim with maximal scope. The second claim is that the web of belief is
 the connected algebra under composition. The prediction is that failures of understanding
 will not be accidental noise. They will cluster where a local content cannot be carried
 unchanged across a change of horizon, or where an apparent identity hides suppressed
@@ -64,7 +64,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -106,12 +106,12 @@ ontological commitments, and regimentation into canonical notation. Morphisms re
 holistically or translate another language by matching stimulus meanings, but there is no
 unique fact selecting one manual. schema or paradigm is the conceptual scheme only insofar
 as it is a connected web, credence is empirical confidence distributed over the web, and
-rigid reference is relativised to background theory. This is T14: translation and ontology
+rigid reference is relativised to background theory. This is the indexical pullback theorem: translation and ontology
 fail to pull back uniquely across manuals, with indeterminacy appearing as a first
 cohomological obstruction in interpretation. For this reason the chapter should be heard
-through T14. T13 is the hermeneutic sheaf theorem, where local meanings glue into a global
-one when they agree on overlaps. T14 is the indexical pullback theorem, where preservation
-and emergence fail to translate cleanly. T15 is the profundity theorem, where depth comes
+through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local meanings glue into a global
+one when they agree on overlaps. The indexical pullback theorem is the indexical pullback theorem, where preservation
+and emergence fail to translate cleanly. The profundity theorem is the profundity theorem, where depth comes
 from breadth across horizons and closure under emergence.
 
 ## Derived primitives

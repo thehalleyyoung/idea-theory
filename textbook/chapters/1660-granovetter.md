@@ -24,7 +24,7 @@ A weak tie has lower direct resonance, yet it may connect distinct regions of th
 
 The theorem rules out the assumption that the strongest interpersonal resonance always gives the strongest diffusion. It predicts that dense groups will preserve existing information well, but will often fail to generate novelty from inside themselves. It also predicts that a modest connection between distant clusters can create a large emergence part, because the receiving horizon lacks the information that the sending horizon treats as ordinary.
 
-Carefully stated: take a horizon category whose objects are friendship groups, workplaces, professions, neighborhoods, and institutional circles. The horizon functor assigns to each object a local idea algebra with its own resonance pairing and local stock of information. A weak tie is a morphism with modest interpersonal resonance but high bridging value between local algebras. T13 applies when local sections of information can glue through such morphisms into a wider opportunity horizon.
+Carefully stated: take a horizon category whose objects are friendship groups, workplaces, professions, neighborhoods, and institutional circles. The horizon functor assigns to each object a local idea algebra with its own resonance pairing and local stock of information. A weak tie is a morphism with modest interpersonal resonance but high bridging value between local algebras. The hermeneutic sheaf theorem applies when local sections of information can glue through such morphisms into a wider opportunity horizon.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ There is also a caution about meaning curvature. Not every asymmetry is useful. 
 
 ## Horizon structure
 
-Granovetter belongs with T13. The horizon category consists of social clusters: families, friendship circles, occupations, neighborhoods, schools, voluntary associations, and professional networks. The horizon functor records what each cluster already knows, what it trusts, and what it can use. Weak ties are morphisms that allow partial sections from one cluster to be glued into another.
+Granovetter belongs with the hermeneutic sheaf theorem. The horizon category consists of social clusters: families, friendship circles, occupations, neighborhoods, schools, voluntary associations, and professional networks. The horizon functor records what each cluster already knows, what it trusts, and what it can use. Weak ties are morphisms that allow partial sections from one cluster to be glued into another.
 
-T13 says that global social knowledge can emerge from compatible local transmissions. Weak ties are the gluing paths. Strong ties thicken local support, but weak ties extend support across distance. A society without weak ties would be a set of dense islands.
+The hermeneutic sheaf theorem says that global social knowledge can emerge from compatible local transmissions. Weak ties are the gluing paths. Strong ties thicken local support, but weak ties extend support across distance. A society without weak ties would be a set of dense islands.
 
 ## Diagnostic derived primitives
 
@@ -50,4 +50,4 @@ Perspective is central, because actors see opportunities from their positions in
 
 ## Chapter summary
 
-Granovetter turns social weakness into structural strength. In Idea Theory, weak ties are low-intensity but high-bridge morphisms in the horizon category. They support T13 by allowing information from separated local worlds to glue into broader opportunity structures.
+Granovetter turns social weakness into structural strength. In Idea Theory, weak ties are low-intensity but high-bridge morphisms in the horizon category. They support the hermeneutic sheaf theorem by allowing information from separated local worlds to glue into broader opportunity structures.

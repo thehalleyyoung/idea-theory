@@ -58,7 +58,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that discursive formations are the monoid
 composition restricted by an episteme. Composition is not free; it is governed by
-historically specific rules that select admissible statements. This is a T1 claim with
+historically specific rules that select admissible statements. This is a the composition theorem claim with
 strong rule-conditioning. The second claim is that power/knowledge is the preservation part
 0: the curvature of what can be said is not neutral but is bent by power. The prediction is
 that failures of understanding will not be accidental noise. They will cluster where a local
@@ -69,7 +69,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -111,12 +111,12 @@ discursive formations, and regimes of power/knowledge. Morphisms are archival
 transformations, disciplinary techniques, and genealogical breaks that alter what can count
 as statement, subject, object, or truth. perspective is historically produced subject-
 position, credence is not belief but regime-specific verification, and temporality is
-discontinuous rather than progressive history. This is T14: an epistemic break is a morphism
+discontinuous rather than progressive history. This is the indexical pullback theorem: an epistemic break is a morphism
 with non-trivial monodromy, so inferences licensed in one episteme fail to pull back into
-another. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+another. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives

@@ -54,7 +54,7 @@ degree of articulation, and a context-sensitive horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that inferential role is the resonance
 pairing. Conceptual content is exhausted by the position a commitment occupies in the
-network of inferential relations. This is a T2 claim with strong inferentialist content:
+network of inferential relations. This is a the resonance theorem claim with strong inferentialist content:
 meaning reduces to resonance. The second claim is that incompatibility is the suppression
 part and the preservation part 0. The prediction is that failures of understanding will not
 be accidental noise. They will cluster where a local content cannot be carried unchanged
@@ -64,7 +64,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T13; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the hermeneutic sheaf theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -108,11 +108,11 @@ entitlements, material inferences, and recognitive communities. Morphisms update
 score as assertions are made, challenged, inherited, or withdrawn. perspective is the
 recognitive participant, intentionality is inferential role rather than mental pointing,
 schema or paradigm is the practice, and credence is entitlement status within the game of
-giving and asking for reasons. This is T13: conceptual content is the sheaf-gluing of
+giving and asking for reasons. This is the hermeneutic sheaf theorem: conceptual content is the sheaf-gluing of
 locally tracked commitments and entitlements into a public inferential role. For this reason
-the chapter should be heard through T13. T13 is the hermeneutic sheaf theorem, where local
-meanings glue into a global one when they agree on overlaps. T14 is the indexical pullback
-theorem, where preservation and emergence fail to translate cleanly. T15 is the profundity
+the chapter should be heard through the hermeneutic sheaf theorem. The hermeneutic sheaf theorem is the hermeneutic sheaf theorem, where local
+meanings glue into a global one when they agree on overlaps. The indexical pullback theorem is the indexical pullback
+theorem, where preservation and emergence fail to translate cleanly. The profundity theorem is the profundity
 theorem, where depth comes from breadth across horizons and closure under emergence.
 
 ## Derived primitives

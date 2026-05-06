@@ -24,7 +24,7 @@ Habitus acts like an embodied perspective that conjugates what an agent perceive
 
 The theorem rules out the idea that inequality is reproduced only by direct coercion or conscious conspiracy. It predicts that durable social patterns can arise from the interaction of local grading, habitual perception, and asymmetric recognition. When agents compose practices within a field, the preservation part often preserves position, the suppression part hides arbitrary history, and the emergence part appears as legitimate achievement.
 
-Carefully stated: take a horizon category whose objects are fields such as academic, artistic, political, and economic arenas. The horizon functor assigns to each field a local resonance pairing, local capital gradings, and local composition rules. Habitus is the agent's embodied perspective formed by a path through these horizons. T14 applies because preservation part, emergence part, and degree or grading do not pull back invariantly across field morphisms. The obstruction appears as hysteresis, misrecognition, or failed conversion of capital.
+Carefully stated: take a horizon category whose objects are fields such as academic, artistic, political, and economic arenas. The horizon functor assigns to each field a local resonance pairing, local capital gradings, and local composition rules. Habitus is the agent's embodied perspective formed by a path through these horizons. The indexical pullback theorem applies because preservation part, emergence part, and degree or grading do not pull back invariantly across field morphisms. The obstruction appears as hysteresis, misrecognition, or failed conversion of capital.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ The formalism also risks underplaying struggle. A field is not only a stable loc
 
 ## Horizon structure
 
-Bourdieu belongs with T14. The horizon category is made of fields and trajectories through fields. The horizon functor assigns each field its capital gradings, doxa, resonances, and permissible compositions. Morphisms between fields are translations of capital, such as turning academic prestige into political authority or economic wealth into cultural legitimacy.
+Bourdieu belongs with the indexical pullback theorem. The horizon category is made of fields and trajectories through fields. The horizon functor assigns each field its capital gradings, doxa, resonances, and permissible compositions. Morphisms between fields are translations of capital, such as turning academic prestige into political authority or economic wealth into cultural legitimacy.
 
-T14 names the failure of invariance across those translations. What counts as brilliance in one field may count as pretension in another. What counts as refinement in one class fraction may count as coldness elsewhere. The obstruction is not noise. It is the structure of field-relative meaning.
+The indexical pullback theorem names the failure of invariance across those translations. What counts as brilliance in one field may count as pretension in another. What counts as refinement in one class fraction may count as coldness elsewhere. The obstruction is not noise. It is the structure of field-relative meaning.
 
 ## Diagnostic derived primitives
 
@@ -50,4 +50,4 @@ Perspective is habitus: the embodied standpoint from which the field is perceive
 
 ## Chapter summary
 
-Bourdieu gives Idea Theory a sociology of local valuation. Fields are horizon-local algebras, capital is plural grading, and habitus is embodied perspective. T14 names the central obstruction: meanings and values do not translate unchanged across fields.
+Bourdieu gives Idea Theory a sociology of local valuation. Fields are horizon-local algebras, capital is plural grading, and habitus is embodied perspective. The indexical pullback theorem names the central obstruction: meanings and values do not translate unchanged across fields.

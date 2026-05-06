@@ -24,7 +24,7 @@ Composition occurs when claims combine with methods, instruments, theories, and 
 
 The theorem rules out the idea that scientific reliability is only an individual virtue or only a logical method. It predicts that reliability depends on social forms that make claims public, portable, criticizable, and source-insensitive. When those forms fail, the same technical intelligence may produce secrecy, faction, careerism, or dogma rather than knowledge.
 
-Carefully stated: let the horizon category contain laboratories, journals, peer-review settings, archives, replication sites, conferences, and public scientific communities. The horizon functor assigns to each horizon local evidence, local resonance pairing, and local credence. T13 applies when communalism, universalism, disinterestedness, and organized skepticism provide the compatibility conditions by which local sections glue into a stable communal section.
+Carefully stated: let the horizon category contain laboratories, journals, peer-review settings, archives, replication sites, conferences, and public scientific communities. The horizon functor assigns to each horizon local evidence, local resonance pairing, and local credence. The hermeneutic sheaf theorem applies when communalism, universalism, disinterestedness, and organized skepticism provide the compatibility conditions by which local sections glue into a stable communal section.
 
 ## What formalism adds
 
@@ -40,9 +40,9 @@ There is also a divergence in motivation. Disinterestedness in Merton does not r
 
 ## Horizon structure
 
-Merton belongs with T13. The horizon category is the institutional topology of science: laboratories, journals, archives, conferences, instruments, replication sites, and pedagogical communities. Morphisms are publication, citation, replication, criticism, retraction, and incorporation into textbooks or instruments.
+Merton belongs with the hermeneutic sheaf theorem. The horizon category is the institutional topology of science: laboratories, journals, archives, conferences, instruments, replication sites, and pedagogical communities. Morphisms are publication, citation, replication, criticism, retraction, and incorporation into textbooks or instruments.
 
-T13 names the gluing of local claims into communal knowledge. A result from one lab must be made public, evaluated by shared standards, tested by others, and integrated into a wider section. The norms are the gluing constraints that make this possible.
+The hermeneutic sheaf theorem names the gluing of local claims into communal knowledge. A result from one lab must be made public, evaluated by shared standards, tested by others, and integrated into a wider section. The norms are the gluing constraints that make this possible.
 
 ## Diagnostic derived primitives
 
@@ -52,4 +52,4 @@ A useful diagnostic is to ask which norm is failing when science malfunctions. I
 
 ## Chapter summary
 
-Merton gives Idea Theory a norm-based account of scientific reliability. Scientific institutions glue local results into communal knowledge by widening support, standardizing evaluation, constraining perspective, and organizing doubt. T13 captures the social topology that lets science become self-correcting.
+Merton gives Idea Theory a norm-based account of scientific reliability. Scientific institutions glue local results into communal knowledge by widening support, standardizing evaluation, constraining perspective, and organizing doubt. The hermeneutic sheaf theorem captures the social topology that lets science become self-correcting.

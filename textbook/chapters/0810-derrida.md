@@ -56,7 +56,7 @@ horizon structure.
 In paragraph form, the claim rules out the fantasy that meaning is already complete before
 context enters. The first theorem-shaped claim is that the preservation part 0 everywhere:
 no element is fully present; all are constituted by traces of what they are not. This is a
-global T5 claim — asymmetry is not a feature of certain elements but a structural fact about
+global the meaning curvature theorem claim — asymmetry is not a feature of certain elements but a structural fact about
 the entire algebra. The metaphysics of presence would require a region of zero curvature;
 deconstruction shows there is none. The second claim is that iterability is the basic
 operation, but it always introduces difference. The prediction is that failures of
@@ -68,7 +68,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -114,12 +114,12 @@ marks, with no final horizon that fixes presence. Morphisms are reinscriptions: 
 survives by repeatability, but each repetition shifts its differential play. differentiation
 is différance as spacing and deferral, temporality is non-present temporalization, R governs
 deconstruction's application to its own terms, and rigid reference is persistently
-destabilised. This is T14: meaning is the systematic failure of the preservation part and
+destabilised. This is the indexical pullback theorem: meaning is the systematic failure of the preservation part and
 the emergence part to pull back invariantly across iterated contexts, not a defect to be
-repaired. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+repaired. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives

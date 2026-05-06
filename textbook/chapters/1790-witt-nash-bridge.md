@@ -22,7 +22,7 @@ The preservation part carries an established use forward. The suppression part e
 
 *A language game, a convention, and an equilibrium are one stable horizon pattern heard in three voices.*
 
-This is T13 read through the Wittgenstein Nash bridge. The theorem rules out the idea that meaning is either a private mental item or a mere formal payoff pattern detached from use. It predicts that stable linguistic meaning appears when local uses, expectations, and responses glue into a global practice. It also predicts that multiple equilibria can exist, which explains why conventions are stable yet historically contingent.
+This is the hermeneutic sheaf theorem read through the Wittgenstein Nash bridge. The theorem rules out the idea that meaning is either a private mental item or a mere formal payoff pattern detached from use. It predicts that stable linguistic meaning appears when local uses, expectations, and responses glue into a global practice. It also predicts that multiple equilibria can exist, which explains why conventions are stable yet historically contingent.
 
 Carefully restated, the horizon category contains language users, signs, situations, responses, expectations, and incentives. The horizon functor assigns possible uses and coordination outcomes to each local setting. Composition iterates use. Identity is the unselected background. The resonance pairing measures fit among use, expectation, and response. The preservation part repeats the practice, the suppression part blocks destabilizing alternatives, and the emergence part is the shared convention. The diagnostic derived primitive is schema, because the bridge concerns stable patterns of coordinated use.
 
@@ -40,7 +40,7 @@ Wittgenstein would likely distrust a formal theorem about language games. His me
 
 ## Horizon structure
 
-The bridge horizon is strategic, linguistic, and communal. It includes signs, practices, expectations, corrections, payoffs, and forms of life. It most centrally instantiates T13, because the central question is how local uses become global conventions. T14 appears when meanings fail to translate between games, but the bridge itself is a gluing theorem.
+The bridge horizon is strategic, linguistic, and communal. It includes signs, practices, expectations, corrections, payoffs, and forms of life. It most centrally instantiates the hermeneutic sheaf theorem, because the central question is how local uses become global conventions. The indexical pullback theorem appears when meanings fail to translate between games, but the bridge itself is a gluing theorem.
 
 ## Diagnostic derived primitives
 
@@ -50,4 +50,4 @@ The bridge also explains repair. When a use begins to wobble, participants ask w
 
 ## Chapter summary
 
-The Wittgenstein Nash bridge says that meaning as use, convention as coordinated expectation, and equilibrium as stable mutual response are one structure viewed from different sides. Idea Theory restates that structure through composition, resonance pairing, suppression of rivals, and emergence of convention. T13 is central because stable meaning arises when local practices glue across a communal horizon.
+The Wittgenstein Nash bridge says that meaning as use, convention as coordinated expectation, and equilibrium as stable mutual response are one structure viewed from different sides. Idea Theory restates that structure through composition, resonance pairing, suppression of rivals, and emergence of convention. The hermeneutic sheaf theorem is central because stable meaning arises when local practices glue across a communal horizon.

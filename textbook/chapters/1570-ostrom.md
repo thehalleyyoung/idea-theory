@@ -20,7 +20,7 @@ In Idea Theory, a commons is a governance idea algebra distributed across users,
 
 The theorem rules out the claim that only privatization or centralized state control can prevent common ruin. It predicts that durable commons require compatible local rules, mutual monitoring, and institutions for revision. It also predicts failure when horizons do not glue: when boundaries are unclear, monitors lack standing, sanctions are not legitimate, or higher authorities refuse to recognize local rule-making.
 
-Carefully stated, let the horizon category contain user groups, monitoring sites, rule assemblies, sanctioning forums, and nested governance levels. Let the horizon functor assign each local arena a rule algebra. Let the resonance pairing measure mutual trust and enforceable expectation. If local rule compositions agree on overlaps while preserving autonomy, and if the preservation part sustains boundaries, the suppression part checks exploitation, and the emergence part supports collective problem solving, then the commons forms a global governance section. This is T13, because polycentric institutions glue local horizons into coherent order.
+Carefully stated, let the horizon category contain user groups, monitoring sites, rule assemblies, sanctioning forums, and nested governance levels. Let the horizon functor assign each local arena a rule algebra. Let the resonance pairing measure mutual trust and enforceable expectation. If local rule compositions agree on overlaps while preserving autonomy, and if the preservation part sustains boundaries, the suppression part checks exploitation, and the emergence part supports collective problem solving, then the commons forms a global governance section. This is the hermeneutic sheaf theorem, because polycentric institutions glue local horizons into coherent order.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Ostrom's evidence comes from messy, historically specific institutions. Idea The
 
 ## Horizon structure
 
-The horizon category contains resource sites, households, user associations, monitors, councils, courts, and larger political authorities. Morphisms are rule revisions, reports, sanctions, appeals, boundary negotiations, and information flows. The horizon functor lets local rule algebras agree where they overlap while remaining distinct. T13 is the relevant theorem label: successful commons governance is sheaf-like gluing across multiple perspectives.
+The horizon category contains resource sites, households, user associations, monitors, councils, courts, and larger political authorities. Morphisms are rule revisions, reports, sanctions, appeals, boundary negotiations, and information flows. The horizon functor lets local rule algebras agree where they overlap while remaining distinct. The hermeneutic sheaf theorem is the relevant theorem label: successful commons governance is sheaf-like gluing across multiple perspectives.
 
 ## Diagnostic derived primitives
 
@@ -48,4 +48,4 @@ This is also why trust is not a soft extra. Trust is a resonance condition that 
 
 ## Chapter summary
 
-Ostrom shows that commons can be governed through polycentric institutions. Idea Theory restates this as T13: local horizons of monitoring, rule choice, sanction, and resource use can glue into a durable governance section. The commons survives when preservation, suppression, and emergence are organized by rules that users can recognize and revise.
+Ostrom shows that commons can be governed through polycentric institutions. Idea Theory restates this as the hermeneutic sheaf theorem: local horizons of monitoring, rule choice, sanction, and resource use can glue into a durable governance section. The commons survives when preservation, suppression, and emergence are organized by rules that users can recognize and revise.

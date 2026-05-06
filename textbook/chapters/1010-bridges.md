@@ -67,9 +67,9 @@ chain, or dependent origination.
 Carefully restated, the bridge uses a horizon category whose objects are practices, texts,
 meditative analyses, language-games, and historical situations. Horizon-translations carry a
 content from one such object to another. The horizon functor assigns a full local idea
-algebra to each horizon. T13 applies when overlapping practices can glue local meanings into
-a shared understanding. T14 applies when a sign, doctrine, or word fails to pull back
-cleanly into another setting. T15 applies when an insight becomes profound because it
+algebra to each horizon. The hermeneutic sheaf theorem applies when overlapping practices can glue local meanings into
+a shared understanding. The indexical pullback theorem applies when a sign, doctrine, or word fails to pull back
+cleanly into another setting. The profundity theorem applies when an insight becomes profound because it
 remains fertile across many horizons while continuing to generate new consequences.
 
 ## What the formalism adds
@@ -106,9 +106,9 @@ movable without being perfectly portable.
 
 The horizon category for this bridge has several connected regions: Buddhist analysis of
 dependent origination, post-structuralist textual interpretation, and ordinary language-
-games. Some translations between regions are fruitful, and some are obstructed. T13 appears
-whenever overlapping practices produce shared intelligibility. T14 appears whenever a word
-such as emptiness, trace, or game is mistranslated as a fixed doctrine. T15 appears because
+games. Some translations between regions are fruitful, and some are obstructed. The hermeneutic sheaf theorem appears
+whenever overlapping practices produce shared intelligibility. The indexical pullback theorem appears whenever a word
+such as emptiness, trace, or game is mistranslated as a fixed doctrine. The profundity theorem appears because
 the deepest insights here survive precisely by traveling across horizons without becoming a
 view from nowhere.
 

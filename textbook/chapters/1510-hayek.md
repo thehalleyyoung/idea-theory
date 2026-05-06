@@ -20,7 +20,7 @@ In Idea Theory, society is not one giant mind. It is a cover of local idea algeb
 
 The theorem rules out the fantasy of a benevolent mind that simply gathers all relevant facts and computes the right allocation. It predicts that functioning markets will often coordinate more than they explain, and that attempts to replace price signals with complete administrative descriptions will lose essential local knowledge. Prices are thin, but their thinness is part of their power: they transmit enough without requiring total disclosure.
 
-Carefully stated, let the horizon category be a cover of agent perspectives, firm contexts, and market situations. Let the horizon functor assign each horizon its own local algebra. Let the resonance pairing measure scarcity, preference, and opportunity cost inside each local situation. If no one horizon contains the full pattern of resonance pairings, then no planner identity can compose all fragments while preserving their local force. A global market section can still form when compatible price signals glue local adjustments. This is T13, because the market works by sheaf-like gluing across horizons.
+Carefully stated, let the horizon category be a cover of agent perspectives, firm contexts, and market situations. Let the horizon functor assign each horizon its own local algebra. Let the resonance pairing measure scarcity, preference, and opportunity cost inside each local situation. If no one horizon contains the full pattern of resonance pairings, then no planner identity can compose all fragments while preserving their local force. A global market section can still form when compatible price signals glue local adjustments. This is the hermeneutic sheaf theorem, because the market works by sheaf-like gluing across horizons.
 
 ## What formalism adds
 
@@ -32,7 +32,7 @@ Hayek often emphasizes the price system as a remarkably efficient communicator. 
 
 ## Horizon structure
 
-The horizon category contains households, firms, traders, regulators, technologies, inventories, and expectations. Morphisms are bids, substitutions, contracts, shortages, innovations, and price changes. The horizon functor assigns each perspective a restricted local algebra and lets price signals move among them without centralizing all knowledge. T13 is the governing theorem label: compatible local responses glue into a market-wide coordination pattern that no single agent horizon contains.
+The horizon category contains households, firms, traders, regulators, technologies, inventories, and expectations. Morphisms are bids, substitutions, contracts, shortages, innovations, and price changes. The horizon functor assigns each perspective a restricted local algebra and lets price signals move among them without centralizing all knowledge. The hermeneutic sheaf theorem is the governing theorem label: compatible local responses glue into a market-wide coordination pattern that no single agent horizon contains.
 
 ## Diagnostic derived primitives
 
@@ -46,4 +46,4 @@ One more implication is practical. A planner may collect reports, but reports ar
 
 ## Chapter summary
 
-Hayek makes the economy an epistemic structure. Idea Theory restates the price system as T13 gluing: local horizons preserve fragments, suppress overwhelming detail, and generate coordinated action. The market is not omniscient. It is a horizon device for using knowledge without possessing it all in one place.
+Hayek makes the economy an epistemic structure. Idea Theory restates the price system as the hermeneutic sheaf theorem gluing: local horizons preserve fragments, suppress overwhelming detail, and generate coordinated action. The market is not omniscient. It is a horizon device for using knowledge without possessing it all in one place.

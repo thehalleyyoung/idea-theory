@@ -67,7 +67,7 @@ Carefully restated, the relevant idea algebra has a domain of contents, an ident
 associative composition, the resonance pairing, the preservation part, the suppression part,
 the emergence part, the emergence cocycle, degree, the horizon category, and the horizon
 functor. The central claim says that the philosopher's privileged object is stable only when
-these roles cooperate. Where local data can be glued, the chapter instantiates T14; where
+these roles cooperate. Where local data can be glued, the chapter instantiates the indexical pullback theorem; where
 translation fails, the obstruction is also audible as a horizon-functor effect.
 
 ## What the formalism adds
@@ -111,12 +111,12 @@ with no privileged terminal object. Morphisms are playful transformations—butt
 human, useful to useless, disputant to wanderer—that reveal the contingency of each
 distinction. perspective is perspectival standpoint, schema or paradigm is deliberately
 loosened, is ease or wandering, and R appears when distinctions about distinctions are
-themselves dissolved. This is maximal T14: every fixed discrimination fails to pull back
+themselves dissolved. This is maximal the indexical pullback theorem: every fixed discrimination fails to pull back
 across wandering perspectives, so wisdom is skillful movement through non-privileged
-horizons. For this reason the chapter should be heard through T14. T13 is the hermeneutic
-sheaf theorem, where local meanings glue into a global one when they agree on overlaps. T14
+horizons. For this reason the chapter should be heard through the indexical pullback theorem. The hermeneutic sheaf theorem is the hermeneutic
+sheaf theorem, where local meanings glue into a global one when they agree on overlaps. The indexical pullback theorem
 is the indexical pullback theorem, where preservation and emergence fail to translate
-cleanly. T15 is the profundity theorem, where depth comes from breadth across horizons and
+cleanly. The profundity theorem is the profundity theorem, where depth comes from breadth across horizons and
 closure under emergence.
 
 ## Derived primitives
