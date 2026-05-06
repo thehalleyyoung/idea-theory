@@ -690,6 +690,15 @@ For all \(a\) and all \(n\): \(\sigma^{n+1}(a) = \sigma^1(a)\).
 </div>
 
 <!-- ===== RELATED LEAN EXTENSIONS ===== -->
+<h2>Derived Primitives Engaged</h2>
+<p>This theorem actively involves the following derived primitives of the 10-tuple algebra (see <a href="../formalism/horizon.html#derived">derived variables</a> for explicit constructions):</p>
+<ul>
+  <li><strong>δ — Differentiation.</strong> The differential cell \(\delta_h(I)\) is the antidiagonal of \(\sigma_h\) on resonance-support, i.e. the ideas that fail to combine with \(I\) while still mattering to it. T3 gives the decomposition of that negative trace into positive, negative, and conserved moments.</li>
+  <li><strong>ψ — Signed affective valence.</strong> Signed valence is obtained by splitting \(\sigma_h(\mathrm{self}_\pi,I)\) into symmetric and antisymmetric components. T3's Aufhebung decomposition is the structural source of exactly this sym/asym separation.</li>
+  <li><strong>χ — Schema / Paradigm.</strong> What counts as preserved, negated, or lifted is evaluated inside a connected horizon-component. Hence different paradigms can assign different Aufhebung decompositions without changing the local form of the theorem.</li>
+</ul>
+<p>Methodological note: T3 is the theorem of determinate negation inside the 10-tuple. It explains why difference is not mere exclusion: the same \(\sigma\)-operation that blocks a composition can also conserve and elevate structure for later horizons.</p>
+
 <h2 id="extensions">Related Lean Extensions</h2>
 <ul>
   <li><strong><code>IdeaTheory.Foundations</code></strong> — the base <code>IdeaTheoryStructure</code> typeclass providing the monoid axioms on which <code>AufhebungStructure</code> is built.</li>

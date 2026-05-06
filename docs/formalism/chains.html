@@ -16,7 +16,7 @@
 <div class="defn"><span class="thm-label">Definition.</span> A <em>chain</em> in \(\mathcal{I}\) is a finite sequence \(a_1,\ldots,a_n\); its <em>composite</em> is \(a_1\circ\cdots\circ a_n\). For a valuation \(v:\mathcal{I}\to A\), the <em>cumulative cocycle</em> is
 \[ \Omega(a_1,\ldots,a_n) := v(a_1\circ\cdots\circ a_n) - \sum_{i} v(a_i). \]</div>
 
-<p>By Theorem 7, \(\Omega = \sum_{i<j} \omega(a_i, a_{i+1}\circ\cdots\circ a_j)\) up to a coboundary; in particular, \(\Omega\) is well-defined modulo bracketing.</p>
+<p>By Theorem 7, \(\Omega = \sum_{i&lt;j} \omega(a_i, a_{i+1}\circ\cdots\circ a_j)\) up to a coboundary; in particular, \(\Omega\) is well-defined modulo bracketing.</p>
 
 <h2>Worked example: cultural transmission</h2>
 <p>Boyd & Richerson model cultural inheritance as a transmission chain in which each generation composes received material with novel input. The cumulative emergence \(\Omega\) is what distinguishes a ratchet (\(\Omega\) strictly accumulating) from drift (\(\Omega\) bounded). See <a href="../zoo/cultural/boyd-richerson-dual-inheritance.html">Boyd–Richerson</a>, <a href="../zoo/cultural/henrich-ratchet.html">Henrich</a>.</p>
@@ -25,6 +25,15 @@
 <ul>
 <li><a href="../theorems/transmission-chain.html">Theorem 7</a></li>
 </ul>
+<h2>Derived Primitives Anchored Here</h2>
+<p>The following derived primitives in the 10-tuple algebra are constructed using this concept as a structural ingredient:</p>
+<ul>
+<li><strong>τ — Temporality.</strong> A temporal subcategory of \(\mathcal{H}\) is a chain of horizons, and \(\tau_\Delta=\xi(f_{t,t+\Delta})\) is the translation along one of its links. A biography, proof, or cultural lineage becomes temporal when its stages are organized as composable steps.</li>
+<li><strong>μ — Credence.</strong> Credence updates are compatible probability sections pushed along chain steps, \(\mu_{h'}=\xi(g)_*\mu_h\). Bayesian learning is therefore a transmission chain in which each observation moves the measure to the next horizon.</li>
+<li><strong>π — Perspective.</strong> Chain endpoints can serve as agent perspectives because a pointed connected subcategory records where an agent starts and which horizon steps are accessible. A dialogue links two perspectives when a chain of translations carries claims from one home horizon to the other.</li>
+</ul>
+<p>Chains make process visible without adding a separate process primitive. Time, belief revision, and perspective-taking can be derived by selecting different chain structures inside \(\mathcal{H}\) and reading them through \(\xi\). The methodological choice is whether to treat the path itself as primitive or to expose it as composable transmission.</p>
+
 <p><a href='index.html'>&larr; Back to Formalism</a></p>
 </main>
 <footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>. Built as a static site.</p></footer>

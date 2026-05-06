@@ -1170,6 +1170,16 @@ For any \(n\) and lineage \(\ell\): \(\ell \equiv \ell\mathbin{+\!+}\mathrm{repl
 <em>Formal translation.</em> Faithful transmission (\(\mathrm{transmitVertical}(\ell) = \mathrm{idTrans}\)) is the algebraic model of perfect intentional fidelity: the transmitted idea arrives at the recipient exactly as it left the sender. Theorem 11.2 provides the characterisation: faithfulness holds iff \(\mathrm{tradition}(\ell) = e\). Tomasello's claim is that human shared intentionality provides the cognitive scaffolding that makes \(\mathrm{tradition}(\ell)\approx e\) achievable at scale. The identity transmission \(\mathrm{idTrans}\) (Lemma 11.3.1) models the ideal limit of perfect shared-intentional fidelity. Deviations from faithfulness — \(\mathrm{tradition}(\ell)\neq e\) — correspond to failures of shared intentionality: misunderstandings, false attributions of intent, or substitution of the learner's own interpretation for the transmitter's. The composeTrans associativity (Lemma 11.1.5) guarantees that chains of shared-intentional acts are coherently composable, which Tomasello's theory requires.
 </div>
 
+<h2>Derived Primitives Engaged</h2>
+<p>This theorem actively involves the following derived primitives of the 10-tuple algebra (see <a href="../formalism/horizon.html#derived">derived variables</a> for explicit constructions):</p>
+<ul>
+  <li><strong>τ — Temporality.</strong> A transmission chain is a totally ordered sequence of horizon-morphisms, the concrete case of \(\mathcal{T}\hookrightarrow\mathcal{H}\). Each step is governed by a temporal restriction operator \(\tau_\Delta=\xi(f_{t,t+\Delta})\).</li>
+  <li><strong>μ — Credence / Probability.</strong> Transmission changes adoption probabilities and confidence in the transmitted idea. The theorem is the formal seat of Bayesian update along the chain, requiring \(\mu_{h'}=\xi(g)_*\mu_h\) at each handoff.</li>
+  <li><strong>π — Perspective / Agent.</strong> The endpoints and intermediates of a chain are agents or agent-horizons with their own pointed accessible regions. Transmission can therefore be read either as temporal diffusion or as movement between perspectives.</li>
+  <li><strong>χ — Schema / Paradigm.</strong> A chain contained in one connected component models ordinary cultural inheritance. A chain that crosses components marks paradigm translation, loss, or rupture.</li>
+</ul>
+<p>Methodological note: T7 is the formal seat of Bayesian transmission of credence (\(\mu\)) along time (\(\tau\)). Refining the horizon category lets one read the same theorem as either a diffusion fact or a perspective-aggregation fact, depending on whether \(\pi\) or \(\tau\) is foregrounded.</p>
+
 <p style="margin-top:1.5em;">See also: <a href="diffusion-extension.html">Diffusion Extension Theorems</a> &middot; <a href="recombinant-growth.html">Recombinant Growth Theorems</a></p>
 
 </main>
