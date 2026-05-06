@@ -22,10 +22,10 @@ MathJax = { tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['\\[','
 <nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a href="../formalism/index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../chapters/index.html">Book</a><a class="active" href="index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <header class="hero">
 <h1>Social Sciences Zoo</h1>
-<p class="hero-sub">Thirty thinkers from economics, game theory, sociology of knowledge, and philosophy of language — each formalized as a sub-instance of the idea algebra $(\mathcal{I}, \circ, e, \rho, \sigma, \nu, \eta, \omega, \deg)$.</p>
+<p class="hero-sub">Thirty-two thinkers from economics, game theory, sociology of knowledge, and philosophy of language — each formalized as a sub-instance of the idea algebra <strong>10-tuple</strong> $(\mathcal{H};\,\mathcal{I}, \circ, e, \rho, \sigma, \nu, \eta, \omega, \deg)$, where $\mathcal{H}$ is the horizon category fibered over by the eight operations (the <a href="../formalism/horizon.html">horizon functor ξ</a>).</p>
 </header>
 <main class="content wide">
-<p>This page works through a cross-disciplinary range of thinkers whose core claims turn on how ideas combine, spread, and acquire meaning. Each entry instantiates the full idea algebra and follows the standard format: the original position, its algebraic instantiation, the central claim as a theorem, what the formalism reveals, and where it necessarily diverges. Lean-verified results are drawn from the <a href="../lean/index.html">GameTheory, Diffusion, RecombinantGrowth, EmergenceLevels, and MeaningGames extension modules</a>.</p>
+<p>This page works through a cross-disciplinary range of thinkers whose core claims turn on how ideas combine, spread, and acquire meaning. Each entry instantiates the full idea algebra and follows the standard format: the original position, its algebraic instantiation, the central claim as a theorem, what the formalism reveals, where it necessarily diverges, and a <strong>Horizon Structure (ξ)</strong> section describing the relevant horizon category and which of the three horizon-functor theorems (<a href="../theorems/index.html#t13">T13</a> Hermeneutic Sheaf, <a href="../theorems/index.html#t14">T14</a> Indexical Pullback, <a href="../theorems/index.html#t15">T15</a> Profundity) the entry instantiates. Derived primitives (τ time, ι intentionality, π perspective, χ paradigm, μ credence, …) are not separate elements but projections of the 10-tuple. Lean-verified results are drawn from the <a href="../lean/index.html">GameTheory, Diffusion, RecombinantGrowth, EmergenceLevels, and MeaningGames extension modules</a>.</p>
 <div class="theorem-key">
 <h3>Theorem Guide For Economics, Games, And Social Theory</h3>
 <p>
@@ -41,6 +41,7 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <a href="#game">§2 Game Theory</a>
 <a href="#socknow">§3 Sociology of Knowledge</a>
 <a href="#meaning">§4 Meaning and Language</a>
+<a href="#additional-concepts">§5 Additional Concepts</a>
 </div>
 <h2 id="econ">§1 — Economics of Ideas</h2>
 <p class="section-lede">Arrow's information paradox, Hayek's dispersed knowledge, Romer's non-rivalry, Weitzman's recombinant growth, Jones's semi-endogenous correction, Schumpeter's creative destruction, Kahneman–Tversky framing effects, and Ostrom's polycentric governance.</p>
@@ -59,6 +60,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The irreversibility of learning is algebraically exact: information-ideas fail to belong to $\mathcal{I}^\times$, and this is why they fall outside the commodity framework that presupposes reversible exchange. Physical goods are approximately invertible (you can resell them); information is not. The formalism shows market failure is a structural consequence of the non-invertibility of knowledge acquisition, not a fixable institutional defect.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Arrow treats information as all-or-nothing — you either know it or you don't — while the algebra's continuous $\rho$ smears this boundary. Partial information (seeing an abstract but not a proof) requires a graded version of the irreversibility argument that the simple $\rho = 0$ formulation does not directly capture.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Arrow, \(\mathcal{H}\) is the category of informational positions around a transaction: seller-informed, buyer-uninformed, buyer-after-disclosure, patent-protected market, and public-domain market. Morphisms are disclosure, contracting, patenting, publication, and imitation shifts; ξ assigns each horizon a different valuation algebra because \(\rho_h\) and \(\eta_h\) change once the buyer learns the idea. The derived primitive μ appears as the buyer's pre-disclosure credence, while π marks the asymmetric perspectives of buyer and seller.</p>
+<p>Arrow's paradox chiefly instantiates T14: valuation does not pull back from the post-disclosure horizon to the pre-purchase horizon, so price formation has a non-trivial inference obstruction.</p>
 </div>
 <div class="zoo-entry" id="hayek" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Hayek — Dispersed Knowledge and the Price System</div>
@@ -75,6 +79,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The direct-sum decomposition makes the information-dispersal argument mathematically sharp: the impossibility of central planning is the impossibility of compressing a direct sum into one of its summands while preserving $\rho$. This is not a political or incentive claim but a structural impossibility about bilinear forms, independent of whether planners are benevolent or intelligent.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Hayek's price signals are scalar real numbers that compress enormously complex information into a single dimensionless index. The algebra's $\rho$ is a full bilinear pairing — richer than scalar prices. Real prices achieve their information-processing role precisely by discarding most of $\rho$'s structure, and the formalism may over-specify what prices actually carry.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Hayek, \(\mathcal{H}\) is the cover of local-knowledge horizons occupied by dispersed agents, firms, and markets. Morphisms are bids, price changes, entrepreneurial reallocations, and substitutions that translate tacit local facts into publicly usable signals without centralizing the underlying knowledge. ξ assigns each agent π a restricted algebra \(\mathcal{F}(h_i)\), while the price system is the trans-horizonal aggregation operator that makes compatible fragments visible across the market cover.</p>
+<p>Hayek's central claim instantiates T13: prices sheaf-glue horizon-local scarcity and preference data into a global market section no planner horizon can directly possess.</p>
 </div>
 <div class="zoo-entry" id="romer" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Romer — Endogenous Growth and Non-Rivalry</div>
@@ -91,6 +98,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>Non-rivalry is not an economic assumption but an algebraic property of the composition: $a$ is non-rival iff right-composition does not reduce self-resonance. This cleanly distinguishes ideas from physical goods at the algebraic level, without reference to legal institutions or market organization. The formalism makes precise what kinds of goods support unbounded growth and which do not.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Romer's model contains a key asymmetry: ideas are costless to copy once discovered but costly to discover. The non-decreasing degree condition captures non-rivalry of use but does not automatically encode the fixed-cost/zero-marginal-cost asymmetry between idea production and idea diffusion that drives Romer's monopolistic competition structure.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Romer, \(\mathcal{H}\) is the category of production, research, patent, and diffusion contexts through which a technological idea travels. Morphisms include copying, licensing, applying, teaching, and recombining; these shifts preserve the idea's availability even while changing its excludability and payoff environment. ξ makes non-rivalry a support property: a technological idea has coherent restrictions across many agent and firm horizons without being depleted by any one use, while λ records the unrealized productive applications latent in future markets.</p>
+<p>Romer's growth claim primarily instantiates T15: high-degree ideas are profound because their horizon-support is broad and their closure under \(\omega\)-generating recombination remains productive.</p>
 </div>
 <div class="zoo-entry" id="weitzman" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Weitzman — Recombinant Growth</div>
@@ -107,6 +117,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The binary closure is a standard algebraic construction with well-studied combinatorial growth theorems. Expressing Weitzman's growth intuition via closure theory connects economic growth theory to Ramsey theory and extremal combinatorics, suggesting natural generalizations: $n$-ary closure (combining $k$ ideas at once), weighted closure (with idea-specific combination probabilities), and directed closure (where composition is non-symmetric).</p>
 <div class="entry-label">Where It Diverges</div>
 <p>The binary closure counts all compositions, including economically useless duplicates and already-known combinations. Weitzman's empirical argument rests on the subset of genuinely distinct, practically valuable recombinations — a selection criterion that requires external economic judgment not intrinsic to the algebraic closure operation.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Weitzman, \(\mathcal{H}\) is the expanding landscape of technical domains, laboratories, industries, and design spaces in which old ideas can meet. Morphisms are cross-domain borrowings, analogies, engineering transfers, and interdisciplinary translations that carry an element from one local algebra into another where new compositions become possible. ξ tracks which pairings are visible in which horizon, and λ measures the potential recombinations not yet realized by any current research community.</p>
+<p>Weitzman's recombinant-growth thesis instantiates T15: an idea's economic profundity rises with broad horizon-support and the size of its \(\omega\)-closure across many combinatorial contexts.</p>
 </div>
 <div class="zoo-entry" id="jones" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Jones — Semi-Endogenous Growth</div>
@@ -123,6 +136,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The "fishing out" effect has a clean algebraic interpretation: it is the condition that the emergence cocycle is bounded — a bounded-cohomology condition. This connects Jones's empirical observation to a cohomological property of the idea algebra, suggesting that whether an economy is in Romer-style or Jones-style growth is detectable from the asymptotic behavior of $\omega$ over the existing idea stock.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Jones's model is a continuous-time ODE system, and the "fishing out" dynamics arise from a specific functional form of the R&amp;D production function. The discrete cocycle bound $\omega \leq C$ is a static algebraic analogue capturing the qualitative constraint but not the specific differential-equation dynamics or Jones's empirical calibration.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Jones, \(\mathcal{H}\) is temporally ordered by research frontiers: early accessible horizons, later harder discovery horizons, and institutional contexts that allocate researchers to the frontier. Morphisms are frontier advances, educational expansions, and R&amp;D reallocations; under ξ, the same research effort restricts to lower expected emergence as high-\(\omega\) opportunities are exhausted. The derived τ is central, because productivity depends on location in the historical sequence, and λ shrinks as nearby potential ideas are fished out.</p>
+<p>Jones's correction instantiates T15 in its limiting form: trans-horizonal support remains, but bounded \(\omega\)-closure prevents R&amp;D intensity alone from generating permanently rising profundity.</p>
 </div>
 <div class="zoo-entry" id="schumpeter" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Schumpeter — Creative Destruction</div>
@@ -139,6 +155,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic framework makes structurally exact something Schumpeter says only programmatically: preservation, destruction, and creation are three inseparable components of a single operation. You cannot have $\eta(a,b) \neq 0$ without $\nu(a,b) \neq 0$ when the Aufhebung is non-trivial. "Gentle innovation" — elevation without destruction — is algebraically impossible when $\omega > 0$.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Schumpeter's creative destruction operates at the level of firms, industries, and institutional complexes; it requires a sociology of who the innovator is and how they displace incumbents through financial credit and market competition. The idea algebra abstracts away these social carriers, treating destruction as a structural negation-component — losing Schumpeter's most interesting claims about the sociology of the entrepreneur.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Schumpeter, \(\mathcal{H}\) consists of industrial regimes, firm ecologies, credit institutions, and technological paradigms before, during, and after innovation. Morphisms are entrepreneurial disruptions, financing shifts, market-entry events, and institutional reorganizations that move an idea from an incumbent horizon into a new competitive order. ξ records that the same innovation has different \(\sigma\), \(\nu\), and \(\eta\) profiles for incumbents, entrants, workers, and consumers; π distinguishes these affected standpoints.</p>
+<p>Schumpeter's claim instantiates T14 and T15 together: innovation fails to pull back invariantly to incumbent horizons, yet becomes profound when its new \(\omega\)-closure stabilizes across the post-disruption market.</p>
 </div>
 <div class="zoo-entry" id="kahneman-tversky" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Kahneman &amp; Tversky — Framing Effects and Prospect Theory</div>
@@ -155,6 +174,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>Framing effects are not irrational anomalies but a structural consequence of conjugation: any idea algebra with non-central invertible elements necessarily exhibits frame-dependent resonance. The non-symmetry of $\rho$, measured exactly by $\kappa$, is a feature of any non-commutative resonance structure. This reframes the behavioral-economics debate: the question is not why humans are irrational, but why anyone expected a symmetric $\rho$ in the first place.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Kahneman and Tversky established the approximately 2:1 loss-aversion ratio through careful empirical experimentation with human subjects. The algebra provides a structural explanation for <em>why</em> $\kappa$ is asymmetric but says nothing about why it takes the specific value of roughly two rather than any other number — the quantitative calibration is entirely empirical.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Kahneman and Tversky, \(\mathcal{H}\) is the category of decision frames: gain frame, loss frame, reference-point shift, probability presentation, and experimental prompt. Morphisms are reframings that preserve the extensional lottery while changing which comparisons and inferences are licensed. ξ assigns different local \(\eta_h\) and μ structures to the same prospect; the derived ψ captures valenced attraction or aversion around the reference point, while π marks the decision-maker's situated perspective.</p>
+<p>The prospect-theory result is the canonical T14 case: \(\eta\) fails to pull back across framing morphisms, so the same lottery supports different choices in gain and loss horizons.</p>
 </div>
 <div class="zoo-entry" id="ostrom" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Ostrom — Polycentric Governance of the Commons</div>
@@ -171,6 +193,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic framework explains why polycentricity is stable rather than merely convenient: idempotent rules are robust under iteration (governing is a stable fixed point, not a process that runs down), and mutual positive resonance guarantees T10 cohesion stability without external enforcement. The sub-algebra structure provides its own stability from within.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Ostrom's design principles are empirical generalizations from genuinely messy governance systems with partial overlap, contested membership, and evolving rules. The algebra's clean sub-algebra conditions impose a tidiness that may not hold in practice — real governance systems are only approximately sub-algebras, and the idempotency of governance rules is aspirational rather than exact.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Ostrom, \(\mathcal{H}\) is a polycentric category of user groups, monitoring sites, rule-making assemblies, sanctioning forums, and nested governance levels. Morphisms are rule revisions, conflict-resolution procedures, boundary negotiations, and information flows between centers of authority. ξ makes a commons durable when local rule algebras agree on overlaps while retaining autonomy; π marks user positions, and χ is not a single sovereign paradigm but a network of partially overlapping institutional components.</p>
+<p>Ostrom's governance thesis instantiates T13: successful commons institutions sheaf-glue local monitoring, sanctioning, and rule-choice data into a coherent global governance section without collapsing polycentricity.</p>
 </div>
 <h2 id="game">§2 — Game Theory</h2>
 <p class="section-lede">Von Neumann–Morgenstern minimax, Nash equilibrium, Schelling's focal points, Maynard Smith's ESS, Axelrod's evolution of cooperation, Aumann's common knowledge, and Selten's refinements — each as a claim about the resonance structure of strategy-idea algebras.</p>
@@ -189,6 +214,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>Treating mixed strategies as elements of $\mathbb{R}\langle\mathcal{I}\rangle$ reveals that the minimax theorem is not specifically about games but about bilinear forms on convex sets — it holds for any non-degenerate $\rho$ defined on a compact convex domain. The "game theory" content is just the specific interpretation of $\rho$ as a payoff matrix, not the mathematical content of the saddle-point result.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Von Neumann–Morgenstern utility requires a full probability measure over outcomes, and mixed strategies are randomization devices. The idea algebra's $\rho$ is a bilinear pairing, not a probability weighting, so the subjective probability interpretation of mixed strategies — as epistemic uncertainty about the opponent's choice — is not directly recovered from the algebraic structure.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For von Neumann and Morgenstern, \(\mathcal{H}\) is the category of strategic situations, information sets, payoff representations, and mixed-strategy spaces. Morphisms are reductions from extensive to normal form, randomization maps, utility transformations, and opponent-perspective shifts. ξ assigns each horizon a payoff-resonance algebra, while μ appears explicitly as the probability measure over pure strategies and π distinguishes the opposed players in zero-sum contexts.</p>
+<p>The minimax theorem instantiates T13 in strategic form: compatible local best-response constraints glue to a global saddle-point section over the two-player zero-sum game horizon.</p>
 </div>
 <div class="zoo-entry" id="nash" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Nash — Nash Equilibrium</div>
@@ -205,6 +233,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The resonance-maximization formulation shows that Nash equilibrium is a property of the $\rho$-structure alone, independent of how players reason about each other. Any system governed by a bilinear resonance pairing in which agents maximize their own resonance has Nash equilibria — the fixed-point structure is not uniquely game-theoretic but a general feature of resonance algebras.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Nash's full existence proof uses Kakutani's fixed-point theorem on mixed-strategy simplices, requiring convexity and continuity. The Lean module's <code>exists_best_response</code> covers pure strategies in finite games and does not yet fully subsume the mixed-strategy existence result; extending to continuous strategy spaces requires additional topological conditions beyond the discrete algebraic framework.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Nash, \(\mathcal{H}\) is the product category of players' strategic horizons and their unilateral-deviation subcontexts. Morphisms are best-response updates, restriction to one player's deviation problem, and inclusion of mixed strategies into the full profile space. ξ assigns each player π a local payoff algebra, and equilibrium is a compatible family of local optimality sections that survives all unilateral pullbacks.</p>
+<p>Nash equilibrium instantiates T13: the profile is a global section obtained by gluing each player's horizon-local best-response condition into one mutually consistent fixed point.</p>
 </div>
 <div class="zoo-entry" id="schelling" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Schelling — Focal Points and Coordination</div>
@@ -221,6 +252,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The formalism separates two questions Schelling conflates: existence (does a minimum-degree idempotent exist?) and uniqueness (is the focal point unique?). Uniqueness requires that $\deg$ is a strict total order on the set of idempotents, which may fail with multiple equally salient options — a degeneracy case the algebra represents precisely as a tie in $\deg$ that Schelling's informal account handles only by appeal to context.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Schelling's salience is irreducibly cultural and multi-dimensional — what makes "heads" focal in a coin flip or "Grand Central at noon" focal as a meeting point depends on enormously rich social context. The algebraic $\deg$ compresses this multi-dimensional salience into a single ordinal function, capturing the structural point while losing most of the cultural content.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Schelling, \(\mathcal{H}\) is the category of coordination settings together with their cultural, linguistic, spatial, and historical salience contexts. Morphisms are context cues, analogies, public symbols, and frame shifts that make one equilibrium stand out without communication. ξ makes \(\deg_h\) horizon-relative: the same option can be focal at one cultural horizon and invisible at another, while χ records the shared form of life that supplies salience.</p>
+<p>Schelling's focal-point thesis instantiates T14: equilibrium selection is not invariant under salience-preserving payoff descriptions, because \(\deg\) and the licensed inference to a focal choice change across horizons.</p>
 </div>
 <div class="zoo-entry" id="maynard-smith" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Maynard Smith — Evolutionarily Stable Strategy</div>
@@ -237,6 +271,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The unified framework reveals that Nash equilibrium and ESS are not independently motivated solution concepts but two aspects of the same algebraic structure. Nash requires no profitable unilateral deviation; ESS additionally requires idempotency and strict resonance dominance. This explains why every strict Nash equilibrium that is also a local fitness maximum is an ESS — the two concepts are co-extensional under additional strictness and idempotency conditions.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>ESS's biological meaning requires a specific replicator dynamic: evolutionary feedback from payoffs to population shares, governed by differential equations in continuous time. The static algebraic condition captures the stability criterion but says nothing about whether any particular replicator dynamic converges to the ESS or how quickly. The algebra is a necessary condition for ESS, not sufficient for evolutionary stability in all dynamic models.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Maynard Smith, \(\mathcal{H}\) is the category of population environments, mutant-invasion contexts, ecological niches, and payoff regimes. Morphisms are rare-mutant introductions, environmental shifts, and changes in population composition that test whether a resident strategy remains stable. ξ assigns each horizon a fitness-resonance algebra; τ enters through evolutionary time, and π is generalized from individual agent to lineage or type occupying a niche.</p>
+<p>ESS instantiates T15: a strategy is profound in the evolutionary sense when its horizon-support includes nearby mutant contexts and its self-reproducing \(\omega\)-closure remains stable under invasion.</p>
 </div>
 <div class="zoo-entry" id="axelrod" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Axelrod — The Evolution of Cooperation</div>
@@ -253,6 +290,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The emergence cocycle $\omega$ makes precise what "surplus from cooperation" means: it is the Aufhebung component of $a_c \circ a_c$ not present in either strategy before interaction — the genuinely new cooperative state created by mutual cooperation. Axelrod's numerical tournament results become a search for idempotents with maximal total discounted emergence, which has a clear resonance-optimization interpretation.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Axelrod's result is primarily empirical — it derives from simulations of strategies submitted by actual game theorists, capturing something about the human sociology of strategy selection. The algebraic discounted emergence series clarifies the mathematical structure but requires a specific replicator dynamics to generate the same numerical predictions.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Axelrod, \(\mathcal{H}\) is the category of repeated-interaction horizons: one-shot encounter, finite repetition, indefinite repetition, tournament ecology, and noisy implementation. Morphisms are iteration, discounting, memory truncation, and migration of strategies between populations. ξ makes cooperation depend on τ and μ: future rounds and beliefs about continuation alter the local payoff algebra, while π distinguishes agents whose histories become mutually readable.</p>
+<p>Axelrod's result instantiates T15: Tit-for-Tat is stable because its cooperative pattern has trans-horizonal support across repeated-game contexts and positive \(\omega\)-closure under reciprocal interaction.</p>
 </div>
 <div class="zoo-entry" id="aumann" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Aumann — Common Knowledge and Agreeing to Disagree</div>
@@ -269,6 +309,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The iterated-Aufhebung formulation reveals that common knowledge is not a static state but a fixed point of a dynamical process — it exists only when the iteration converges, which is a spectral condition on $\rho$. This makes precise when common knowledge is achievable and when the "infinite regress of I know that you know..." genuinely converges versus diverges.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Aumann's model uses a standard probability space with a Kripke-style partition structure — a tractable, well-understood framework. The idea algebra's iterated-Aufhebung limit operator is an algebraic abstraction that may not converge in all partition-model scenarios that Aumann's original framework handles cleanly, and the connection between the two formalisms requires additional axioms to be made fully precise.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Aumann, \(\mathcal{H}\) is the epistemic category generated by agents' information partitions and iterated mutual-knowledge refinements. Morphisms are public announcements, posterior updates, partition refinements, and passages from individual knowledge to group knowledge. ξ assigns each agent π a local belief algebra with μ as credence; common knowledge of \(I\) at a group horizon means \(I\) is a global section of \(\mathcal{F}|_{\mathcal{H}_{\text{group}}}\).</p>
+<p>Aumann's agreement theorem instantiates T13: if posterior beliefs glue as a common-knowledge global section over the group cover, rational disagreement cannot persist.</p>
 </div>
 <div class="zoo-entry" id="selten" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Selten — Refinements of Nash Equilibrium</div>
@@ -285,6 +328,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The sub-algebra formulation makes "subgame" algebraically explicit: a subgame is a sub-algebra of the game's idea algebra, and refinements are conditions on how Nash solutions restrict to sub-algebras — exactly the behavior of module structures under restriction. This also makes transparent why trembling-hand perfection is strictly stronger than subgame perfection: it imposes $\rho$-stability, not just sub-algebra restriction.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Selten's backward-induction argument for subgame perfection relies crucially on the finite tree structure and temporal ordering of moves — it is a sequential rationality argument, not an algebraic one. The algebraic formulation as "Nash in every sub-algebra" is coordinate-free and elegant but does not respect the causal/temporal ordering that makes backward induction compelling as a rationality principle.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Selten, \(\mathcal{H}\) is the category of game-tree nodes, proper subgames, perturbed games, and limiting tremble regimes. Morphisms restrict a strategy profile to a subgame, introduce small-error perturbations, or take limits as trembles vanish. ξ requires equilibrium ideas to remain coherent under these restriction maps; τ encodes sequential order, and μ records the small probabilities assigned to off-path actions.</p>
+<p>Selten's refinement program instantiates T15: a credible equilibrium is one whose support extends across subgame and perturbation horizons while retaining stable \(\omega\)-closure under restriction.</p>
 </div>
 <h2 id="socknow">§3 — Sociology of Knowledge</h2>
 <p class="section-lede">Lovejoy's unit ideas, Granovetter's weak ties, Bourdieu's field theory, Latour's actor-networks, Skinner's linguistic contextualism, Koselleck's conceptual history, Mannheim's standpoint epistemology, and Merton's scientific norms — each formalized as a claim about sub-algebra structure, conjugation, or resonance topology.</p>
@@ -303,6 +349,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The free-algebra structure makes Lovejoy's recombinant methodology algebraically exact: every idea in the history of philosophy is in the binary closure of the unit generators, and $\deg$ tracks metaphysical rank. The formalism crucially separates what Lovejoy conflates: generators are stable across time (unit ideas are truly "unit") but the resonance structure $\rho_t$ changes with historical context, explaining why the same unit idea produces different philosophical conclusions in different centuries.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Lovejoy treats unit ideas as genuinely atomic and trans-historical. But the idea algebra's composition $\circ$ allows every idea to be further decomposed into simpler components, so true atomicity requires an additional "irreducible generator" condition not intrinsic to the formalism. Unit ideas can only be modeled by stipulation — by declaring certain elements generators — not derived from the algebraic structure itself.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Lovejoy, \(\mathcal{H}\) is the category of epochs, genres, disciplines, and doctrinal settings in which a unit idea recurs. Morphisms are translations, inheritances, revivals, and polemical redeployments that carry a generator into a new historical configuration. ξ preserves a unit idea as a recognizable section while allowing its \(\sigma_h\), \(\rho_h\), and \(\deg_h\) to vary; τ marks historical passage and β approximates the rigid-reference aspiration of a genuinely stable unit.</p>
+<p>Lovejoy's method instantiates T15: a unit idea matters historically when it has broad horizon-support across eras and generates large closure under recombination with local doctrines.</p>
 </div>
 <div class="zoo-entry" id="granovetter" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Granovetter — The Strength of Weak Ties</div>
@@ -319,6 +368,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The curvature $\kappa$ precisely captures what makes a tie a bridge: a weak tie with $\kappa \neq 0$ connects two resonance regimes with asymmetric mutual influence — one cluster is more receptive to the other's ideas than vice versa. The Diffusion module models how information-ideas spread via $\rho$-weighted paths, and the weak-tie result becomes a theorem about the topology of low-$\rho$, high-$\kappa$ connectors.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Granovetter's original result is primarily empirical, based on interviews with job-finders in the Boston area. The curvature formalization captures the asymmetric-bridge intuition but cannot recover specific threshold effects from continuous $\kappa$: Granovetter's "bridge" is dichotomous (a tie either bridges or does not), while $\kappa$ is continuous and provides no natural threshold for when a tie counts as a structural bridge.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Granovetter, \(\mathcal{H}\) is the category of social-network clusters, occupational circles, friendship groups, and bridge positions. Morphisms are weak-tie contacts, referrals, introductions, and diffusion paths that carry information from one dense component to another. ξ makes novelty horizon-relative: information redundant within a strong-tie cluster may be highly resonant in a neighboring cluster, while π is the agent's network location and χ the connected social component they normally inhabit.</p>
+<p>The weak-ties thesis instantiates T13: diffusion works when local information sections from otherwise separated clusters glue through bridge morphisms into a wider opportunity horizon.</p>
 </div>
 <div class="zoo-entry" id="bourdieu" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Bourdieu — Field, Habitus, and Capital</div>
@@ -335,6 +387,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The multi-grading structure makes capital-form incommensurability exact: $\deg_\text{econ}$ and $\deg_\text{cult}$ can both satisfy <a href="../theorems/index.html#t9">T9</a> while being mutually non-comparable — neither ordering refines the other. This captures Bourdieu's central claim that economic and cultural logics operate by genuinely different principles of valuation, not merely different scales of a common currency.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Bourdieu's habitus is historically sedimented and essentially pre-reflective — internalized bodily practice, not a deliberate cognitive strategy. The algebraic habitus as "any idempotent conjugating operator" is far broader, including deliberately chosen interpretive stances that Bourdieu would sharply distinguish from the unreflective dispositions habitus names. The formalism captures the structural role of habitus without its phenomenological character.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Bourdieu, each field is itself a horizon \(h\) in \(\mathcal{H}\): scientific, political, academic, aesthetic, and economic fields each carry their own capital gradings and doxa. Habitus is the agent's connected sub-category \(\mathcal{H}_\pi\), the durable path of field exposures through which dispositions are formed. Morphisms between fields translate capital and recognition, but often with non-trivial monodromy: what counts as value in one field returns transformed after passing through another.</p>
+<p>Bourdieu's field theory instantiates T14: \(\sigma\), \(\eta\), and \(\deg\) fail to pull back invariantly across field-translation morphisms, producing symbolic misrecognition and hysteresis.</p>
 </div>
 <div class="zoo-entry" id="latour" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Latour — Actor-Network Theory and Black Boxing</div>
@@ -351,6 +406,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The formalism distinguishes Latour's three key concepts precisely: translation ($\circ$), enrollment ($\rho(a,b) > 0$), and black-boxing (idempotency $a \circ a = a$). This makes testable in principle the claim that stronger enrollment correlates with higher probability of idempotency: does $\rho(a,b) > \theta$ for all network members $b$ predict $a \circ a \approx a$?</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Latour's symmetry principle refuses a priori ontological distinctions between human and nonhuman actors. The algebra treats all elements of $\mathcal{I}$ uniformly — consistent with ANT's symmetry — but has no mechanism for generating the specific asymmetries between human agency and material resistance that constitute Latour's most detailed analyses of laboratory work and inscription devices.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Latour, \(\mathcal{H}\) is a network category of laboratories, instruments, inscriptions, funding bodies, journals, microbes, machines, and publics. Morphisms are translations and enrollments that make one actor pass through another's program, while black boxes are stabilized sub-horizons treated as single nodes by later networks. ξ assigns different local algebras before and after black-boxing; R appears when networks represent and stabilize their own conditions of production.</p>
+<p>Actor-network theory instantiates T13: a fact becomes durable when heterogeneous horizon-local inscriptions and alliances glue into a global section that later actors can use without reopening the network.</p>
 </div>
 <div class="zoo-entry" id="skinner-q" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Skinner — Linguistic Contextualism in Intellectual History</div>
@@ -367,6 +425,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic formulation makes Skinner's methodology into a precise inverse problem: given the output ${}^c\!\text{text}$ and the $\rho$-target (author's intentions), find the conjugating context $c$. Anachronism is a well-defined error: applying $c_\text{modern}$ when $c_\text{historical}$ is correct produces ${}^{c_\text{modern}}\!\text{text} \neq {}^{c_\text{historical}}\!\text{text}$, and the mismatch has a well-defined algebraic measure.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Skinner restricts his methodology to recovering intentional speech acts by individual authors in specific historical controversies. The algebraic framework applies to any composition, which is far broader than what the contextualist methodology licenses. In particular, the algebra makes no distinction between intentional acts (which Skinner cares about) and unintentional meaning effects (which his framework explicitly excludes).</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Skinner, \(\mathcal{H}\) is the category of linguistic conventions, political controversies, authorial occasions, and available illocutionary moves at a historical moment. Morphisms are anachronistic readings, contextual recoveries, translations, and shifts between polemical settings. ξ is explicit here: the meaning of a text is its horizon-relative \(\sigma_h\) and \(\eta_h\), while ι is recovered as the author's illocutionary intention within that context.</p>
+<p>Skinner's contextualism instantiates T14: speech-act meaning fails to pull back from modern interpretive horizons to historical ones without obstruction, which is exactly the source of anachronism.</p>
 </div>
 <div class="zoo-entry" id="koselleck" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Koselleck — Conceptual History and the Temporalization of Ideas</div>
@@ -383,6 +444,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The dual resonance structure $(\rho_\text{exp}, \rho_\text{hope})$ makes Koselleck's central insight algebraically precise: a concept is "modern" exactly when expectational loading diverges from experiential weight — a measurable condition. This gives a criterion operationalizable through corpus-linguistic methods tracking the forward- and backward-looking contexts in which a concept appears across different historical periods.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Koselleck's analysis is resolutely historical and particular — the Sattelzeit is a specific claim about specific German and European concepts in a specific period, grounded in close reading of primary sources. The algebraic framework provides a general formal structure but cannot, from inside the formalism, identify which periods count as saddle periods or which concepts underwent genuine temporalization — this requires the detailed empirical historical work that is Koselleck's actual contribution.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Koselleck, \(\mathcal{H}\) is temporally stratified by spaces of experience and horizons of expectation, with special transition morphisms around saddle periods. Political concepts move along τ-indexed horizons in which the same term carries different past-loads, future-projections, and polemical roles. ξ makes a concept's meaning its local \(\sigma_h\), while λ captures projected possible futures and broad support marks concepts that survive epochal transformation.</p>
+<p>Koselleck's Begriffsgeschichte instantiates T14 and T15: meanings fail to pull back unchanged across temporal morphisms, yet epoch-bridging concepts are profound because their support spans multiple historical horizons.</p>
 </div>
 <div class="zoo-entry" id="mannheim" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Mannheim — Sociology of Knowledge and Standpoint Relativity</div>
@@ -399,6 +463,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic framework distinguishes Mannheim's "particular" ideology (same $\rho$, different individual claims) from "total" ideology (genuinely different $\rho$-structures) — a distinction Mannheim makes only programmatically. The isomorphism condition of <a href="../theorems/index.html#t8">T8</a> gives a precise criterion for when two social positions "see the same reality" versus "live in different worlds," making Mannheim's relativism exactly measurable in principle.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Mannheim believed the free-floating intelligentsia could achieve partial synthesis transcending standpoint — a hope generating enormous controversy. The algebraic weighted average $\sum_s w_s \rho_s$ is itself just another resonance pairing and thus another standpoint, which supports the more pessimistic post-Mannheimian conclusion that no standpoint-transcendence is possible. The algebra cannot recover Mannheim's hope for partial synthesis.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Mannheim, \(\mathcal{H}\) is the category of social locations, class positions, generations, parties, and intellectual milieux. A standpoint is the agent π as a connected sub-category \(\mathcal{H}_\pi\), determining which restrictions of the shared idea algebra are available and salient. Morphisms are ideological critique, generational translation, and attempted synthesis by the intelligentsia; ξ records how \(\rho_h\), \(\eta_h\), and μ vary with social position.</p>
+<p>Mannheim's sociology of knowledge instantiates T14: knowledge claims do not pull back invariantly across standpoint morphisms, leaving an obstruction that appears as ideology or utopia.</p>
 </div>
 <div class="zoo-entry" id="merton" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Merton — The Normative Structure of Science (CUDOS)</div>
@@ -416,6 +483,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic formulation shows CUDOS norms are not externally imposed ethical requirements but structurally necessary conditions for the scientific idea algebra to satisfy T1–T2: any algebra persistently violating these norms cannot sustain the fixed-point structure (stable facts, replicable results) or distinguish true from false claims (non-degeneracy of $\rho$). The norms are constitutive of science's epistemological function, not merely regulative ideals.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Merton's norms are descriptive-normative — claims about what institutional norms actually govern science and why those norms are functionally necessary. The algebraic conditions are purely formal requirements on a mathematical structure. The empirical question of whether actual scientific practice satisfies these conditions — and extensive post-Mertonian sociology of science suggesting it often does not — is left entirely open by the formalism.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Merton, \(\mathcal{H}\) is the institutional category of scientific communities, journals, laboratories, peer-review forums, priority systems, and public archives. Morphisms are publication, replication, criticism, citation, and norm enforcement, each moving claims between local and communal epistemic contexts. ξ makes CUDOS a set of gluing constraints: communalism widens support, universalism standardizes restrictions, disinterestedness constrains π, and organized skepticism tests compatibility on overlaps.</p>
+<p>Merton's scientific ethos instantiates T13: reliable science arises when local claims and replications glue into a communal knowledge section under the institutional topology of CUDOS.</p>
 </div>
 <h2 id="meaning">§4 — Meaning and Language</h2>
 <p class="section-lede">Austin's speech acts, Searle's intentionality, Lewis's conventions, Kripkenstein's rule-following paradox, Davidson's radical interpretation, Grice's implicature, and the Wittgenstein–Nash capstone — unified in the MeaningGames Lean module.</p>
@@ -434,6 +504,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The decomposition $\sigma + \nu + \eta$ reveals why Austin needed three distinct levels: they are not a theoretically convenient division but algebraically forced. The "infelicity conditions" — conditions under which a speech act fails — are conditions on when $\nu$ is non-zero (misfire is non-trivial). The success conditions are conditions on when $\eta$ is non-zero — when new social reality is genuinely created.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Austin's theory is irreducibly context-sensitive: a performative succeeds only if the right speaker in the right circumstances utters the right formula. The algebraic condition $\eta \neq 0$ is purely structural and cannot encode whether the institutional context is correct — it says only that something new is created, not whether that creation is felicitous or constitutes a social fact recognized by others.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Austin, \(\mathcal{H}\) is the category of institutional and conversational situations in which utterances can be felicitous or infelicitous. Morphisms are role assignments, ceremony changes, authority transfers, uptake by hearers, and shifts from ordinary talk to formal procedure. ξ assigns each situation a speech-act algebra; ι is the illocutionary force, π marks speaker and hearer roles, and \(\eta_h\) exists only where the relevant felicity conditions hold.</p>
+<p>Austin's speech-act theory instantiates T14: the same words do not pull back across institutional horizons with invariant force, so felicity is precisely horizon-relative inference.</p>
 </div>
 <div class="zoo-entry" id="searle" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Searle — Intentionality and the Chinese Room</div>
@@ -450,6 +523,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The formalism makes the syntax/semantics gap mathematically precise: the gap is exactly the difference between isomorphism as monoids and isomorphism as full idea algebras (the latter requires $\rho$-preservation in addition to $\circ$-preservation). This raises a sharply formulated question: what physical or biological conditions determine $\rho$? The algebra is neutral on this — it represents the structure of intentionality without specifying what produces it.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Searle's "biological naturalism" holds that only biological brains can produce genuine intentionality, because intentionality is a causal power of biological tissue. The algebra is entirely substrate-neutral: it represents the structure of intentionality ($\rho$) without specifying what physical process produces it. The deepest question Searle raises — why do brains have $\rho$ while functionally equivalent programs do not? — lies completely outside the formalism.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Searle, \(\mathcal{H}\) is the category of syntactic systems, biological agents, intentional states, linguistic communities, and institutional fact-contexts. Morphisms include simulation, translation, rule-following, and the move from brute physical facts to status functions. ξ separates formal symbol manipulation from horizons that carry genuine aboutness; ι is derived from the family of \(\rho_h\)-relations that connect mental states to their conditions of satisfaction.</p>
+<p>Searle's Chinese Room argument instantiates T14: syntactic isomorphism does not preserve intentional inference across horizon morphisms, so semantic \(\eta\) fails to pull back from understanding to simulation.</p>
 </div>
 <div class="zoo-entry" id="lewis" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Lewis — Convention and the Game Theory of Language</div>
@@ -466,6 +542,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The MeaningGames module proves convention existence as a theorem in a formal proof assistant, not merely as an empirical observation. This means conventions are necessary features of any meaning game satisfying the module's conditions — a stronger claim than Lewis himself makes. Lewis's conventions are contingent in their content (they could have been otherwise) but necessary in their existence (given the meaning game structure, some convention must exist).</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Lewis's full definition requires both Nash equilibrium and common knowledge of the convention. The algebraic <code>wittgenstein_nash_existence</code> gives Nash equilibrium existence, but the common knowledge component requires the additional iterated-Aufhebung convergence argument from the Aumann entry above. The full Lewis analysis requires both the MeaningGames and the epistemic-iteration structures working together.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Lewis, \(\mathcal{H}\) is the category of coordination communities, signaling systems, common-knowledge states, and alternative histories. Morphisms are precedent-setting events, public announcements, learning dynamics, and counterfactual shifts to rival conventions. ξ assigns each community a local convention algebra; μ is mutual expectation, π ranges over participants, and contingency appears as multiple idempotent sections that could have stabilized under different historical paths.</p>
+<p>Lewis's convention theory instantiates T13: a convention exists when agents' local expectations and practices glue into a common-knowledge global section over the community horizon.</p>
 </div>
 <div class="zoo-entry" id="kripkenstein" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Kripkenstein — The Rule-Following Paradox</div>
@@ -482,6 +561,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The formalism cleanly separates two questions Kripke conflates: (1) Is there a fact about which rule an individual is following given their finite history? (No — underdetermination.) (2) Can language function despite this? (Yes — Nash equilibria in meaning games exist by <code>wittgenstein_nash_existence</code>.) The algebra shows conventions, not individual mental facts, are the appropriate ground of meaning, robust to individual-level underdetermination.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Kripke's "sceptical solution" grounds meaning in community assertion conditions — the community's practice of correcting and endorsing each other's rule-applications. But the formalism cannot show that community-level practice avoids the same underdetermination at the collective level: the community's finite history of rule-applications is equally compatible with infinitely many extensions. The Nash equilibrium existence theorem sidesteps rather than solves this deeper regress.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Kripkenstein, \(\mathcal{H}\) is the category of finite rule-application histories, future extension contexts, individual dispositions, and communal correction practices. Morphisms extend a finite history, reinterpret it under a deviant rule, or submit an application to communal uptake. ξ exposes the underdetermination: many local sections agree on the observed finite cover but diverge on future horizons; π marks the individual whose private history cannot fix the rule alone.</p>
+<p>The rule-following paradox instantiates T14: rule-meaning fails to pull back uniquely from future applications to finite past horizons, producing an inference obstruction that community practice only stabilizes locally.</p>
 </div>
 <div class="zoo-entry" id="davidson" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Davidson — Radical Interpretation and Triangulation</div>
@@ -498,6 +580,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic formulation reveals that the principle of charity is not a pragmatic heuristic but a structural requirement: the only homomorphisms preserving both $\circ$ and $\rho$ (and hence meaning) are the charity-maximizing ones. Interpretation is structurally constrained by the requirement of algebra isomorphism, not merely guided by charitable goodwill. The constraint is necessary, not just methodologically useful.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Davidson's triangulation requires a physical world that causally grounds the shared $\rho$ — perceptual responses of speaker and interpreter to the same external objects create a common semantic foundation. The algebra's "common $\rho$" is postulated rather than causally derived: the formalism represents the structure Davidson claims the world provides, but says nothing about how the world causally produces that structure. The causal story — which is the heart of Davidson's externalism — lies completely outside the algebra.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Davidson, \(\mathcal{H}\) is the triangulation diagram \(h_{\text{speaker}}\to h_{\text{world}}\leftarrow h_{\text{interpreter}}\). Morphisms are causal perceptual links to the shared world and interpretive translations between speaker and interpreter. ξ assigns local belief-and-meaning algebras to each vertex; charity is the constraint that \(\eta\) and \(\rho\) restrict consistently along both legs, while π distinguishes the two agents and ι tracks shared aboutness.</p>
+<p>Davidson's radical interpretation instantiates T13: interpretation succeeds when speaker, world, and interpreter data glue into a single coherent section over the triangulated horizon.</p>
 </div>
 <div class="zoo-entry" id="grice" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Grice — Conversational Implicature</div>
@@ -514,6 +599,9 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The algebraic framework unifies Grice's four apparently independent maxims as four constraints on a single resonance-maximization problem: $a^* = \arg\max \rho(a, \text{context})$ subject to $\min \deg(a)$. Grice's original list of four maxims reduces to a single cooperative ideal with two constraints ($\rho$ and $\deg$), giving the Cooperative Principle a cleaner and more parsimonious formal structure.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Grice's maxims are defeasible pragmatic norms, not exceptionless algebraic laws: implicatures can be explicitly cancelled, and the cooperative presumption can be suspended in fiction or irony. The optimization framing $\arg\max_a \rho(a, \text{context})$ is too crisp to capture this contextual, negotiated, and cancellable character of conversational implicature.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Grice, \(\mathcal{H}\) is the category of conversational contexts, speaker intentions, hearer expectations, genre norms, and cooperative or non-cooperative settings. Morphisms are contextual enrichments, cancellations, irony shifts, relevance updates, and repairs of misunderstanding. ξ makes implicature a horizon-local \(\eta_h\): the utterance's literal content composes with the conversational horizon to yield what is meant, while ι and μ track speaker intention and hearer credence.</p>
+<p>Grice's implicature theory instantiates T14: inferred meaning does not pull back invariantly across conversational morphisms, because cancellation or irony changes which \(\eta\)-inferences are licensed.</p>
 </div>
 <div class="zoo-entry" id="wittgenstein-nash" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
 <div class="entry-title">Wittgenstein–Nash Bridge — The Capstone Theorem</div>
@@ -530,6 +618,62 @@ Several entries also cite Lean declarations from extension modules. Those citati
 <p>The unified theorem shows that the three most influential 20th-century theories of linguistic meaning are not competing explanations but co-extensional descriptions of the same algebraic object — a stable idempotent fixed point in the meaning-game algebra. The formalization also makes new questions mathematically precise: Does the identification extend to infinite meaning sets? (Requires additional compactness conditions — open in the MeaningGames module.) Does it extend to dynamic meaning evolution? (Requires the DialecticalCycles extension.) These questions are now well-posed.</p>
 <div class="entry-label">Where It Diverges</div>
 <p>Wittgenstein would almost certainly have rejected the Nash equilibrium formalization of language games. His whole point was that language is embedded in a "form of life" — a background of shared practices, training, natural reactions, and social contexts — that cannot be captured by the thin rationality-theoretic structure of a Nash equilibrium. The bridge is mathematically clean and philosophically illuminating for those who accept the game-theoretic framework; for Wittgenstein himself, the formalization would represent exactly the calculus-fixation he spent the <em>Investigations</em> trying to dislodge.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For the Wittgenstein–Nash bridge, \(\mathcal{H}\) is the category of language-games, coordination games, communities of use, and equilibrium-selection contexts. Morphisms translate uses into strategies, strategies into conventions, and conventions back into public criteria for correct use. ξ identifies meaning with a stable section over this mixed horizon: χ is the form of life, π the participant, and μ the shared expectation sustaining convention.</p>
+<p>The capstone theorem instantiates T13: use, convention, and equilibrium are three local presentations that glue into one global meaning-game section when the coordination conditions are met.</p>
+</div>
+<h2 id="additional-concepts">§5 — Additional Concepts</h2>
+<p class="section-lede">Two major additions that sit naturally between sociology of knowledge and meaning theory: Kuhn on paradigms and scientific revolutions, and Mead on symbolic interaction and the social formation of the self.</p>
+<div class="zoo-entry" id="kuhn" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Kuhn — Paradigms, Normal Science, and Incommensurability</div>
+<div class="entry-source"><em><em>The Structure of Scientific Revolutions</em>, 1962</em></div>
+<div class="entry-label">The Position</div>
+<p>Kuhn argues that science does not advance by a smooth linear accumulation of truths. Most of the time it proceeds as <em>normal science</em>: puzzle-solving within a paradigm that fixes legitimate questions, acceptable methods, and standards of explanation. Crises arise when anomalies accumulate. A scientific revolution occurs when a new paradigm reorganizes the field so thoroughly that old and new paradigms are not merely rival answers to the same question but partially different ways of posing the question at all. That is Kuhn's famous claim about incommensurability.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let a paradigm \(P \subseteq \mathcal{I}\) be a sub-algebra closed under the compositions scientists in that community treat as legitimate. Normal science is repeated composition inside \(P\): researchers combine accepted concepts, methods, and exemplars without leaving the paradigm. An anomaly \(d\) is a datum with weak resonance with the current paradigm:</p>
+\[
+  \varrho(P,d) \approx 0.
+\]
+<p>A crisis becomes revolutionary when the attempted repair of \(P\) by composition with \(d\) forces a non-trivial elevation component:</p>
+\[
+  P' = \sigma(P,d) + \nu(P,d) + \eta(P,d),
+  \qquad
+  \omega(P,d) \neq 0.
+\]
+<p>Here \(\sigma\) is what the old and new paradigms still share, \(\nu\) is what must be discarded, and \(\eta\) is the reorganized conceptual structure of the new paradigm. Inter-paradigm incommensurability is then the claim that \(\varrho(P,P')\) is too low for direct translation without passing through a non-trivial structural map.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Kuhn's picture is not one theorem but a tight package of <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, and <a href="../theorems/structural-equivalence.html">T8</a>. T3 supplies the preserve/negate/elevate decomposition that makes revolutions more than simple replacements. T4 explains why a paradigm shift can contain genuinely new conceptual structure rather than just a reshuffling of the old stock. T8 explains the exact issue in incommensurability debates: are two paradigms non-isomorphic, or are they structurally equivalent after the right quotient, translation, or change of presentation? Kuhn's strongest cases are those where \([\omega] \neq 0\), so no trivial translation kills the novelty.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The formalism separates three claims that are often run together under the word "incommensurable." First, mere vocabulary change: surface differences but structural equivalence. Second, reframing: the same core structure under a different contextual action. Third, deep revolution: non-trivial emergence class, where the new paradigm really changes the algebra of possible questions and explanations. That matters for readers who otherwise hear Kuhn as claiming all paradigm shifts are equally radical. The algebra says they are not. Some revolutions are mostly conjugational; some are genuinely cocyclic.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Kuhn's historical narratives involve training, exemplars, professional authority, and textbook rewriting. The algebra captures the structural shape of paradigm change but not the institutional struggle by which one community actually comes to inhabit a new paradigm. It formalizes the logic of revolution, not the sociology of persuasion.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Kuhn, \(\mathcal{H}\) decomposes into connected components χ corresponding to paradigms, with normal-science morphisms inside a component and revolutionary morphisms between components. Exemplars, instruments, textbooks, and standards of explanation are local structure in each horizon. ξ records monodromy around paradigm shifts: translating a term through crisis and back need not return the same inferential role, so anomalies are failures of local data to glue within the old component.</p>
+<p>Kuhn's incommensurability thesis is the canonical T14 case, while mature paradigm stability also illustrates T15 when a paradigm's concepts retain support across many scientific sub-horizons.</p>
+</div>
+<div class="zoo-entry" id="mead" style="border-left:3px solid var(--accent);background:var(--accent-soft);padding:.8em 1.2em;margin:1.5em 0;border-radius:0 4px 4px 0;">
+<div class="entry-title">Mead — Symbolic Interaction and the Social Self</div>
+<div class="entry-source"><em><em>Mind, Self, and Society</em>, 1934</em></div>
+<div class="entry-label">The Position</div>
+<p>Mead's central claim is that mind and self are not pre-social inner substances. They emerge through interaction mediated by significant symbols. A person becomes a self by learning to take the attitude of others toward their own conduct. The mature self is organized around the "generalized other": an internalized standpoint of the wider community that lets one monitor, correct, and coordinate one's own actions. Meaning is therefore inherently social before it becomes introspective.</p>
+<div class="entry-label">The Instantiation</div>
+<p>Let \(\mathcal{I}\) be the algebra of socially significant gestures, responses, and roles. A primitive action-token \(a\) becomes meaningful only when it sits inside a response-chain linking actor and other. The self is built through iterated transmission of such role-takings:
+</p>
+\[
+  s_{n+1} = r_n \circ s_n,
+  \qquad
+  s_n = r_n \circ r_{n-1} \circ \cdots \circ r_1 \circ s_0.
+\]
+<p>Here each \(r_k\) is a socially mediated response the agent learns to anticipate and incorporate. The generalized other is an idempotent social frame \(g\) satisfying \(g \circ g = g\): once internalized, applying the communal standpoint again leaves the basic organization of the self intact. Conjugation by that frame, \(g \circ a \circ g^{-1}\), models Mead's idea that an impulse is re-seen from the standpoint of the community before it becomes a fully socialized act. Mutual resonance \(\rho(a,b) > 0\) captures successful symbolic uptake between participants.</p>
+<div class="entry-label">Central Claim as Theorem</div>
+<p>Mead's theory is a natural combination of <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/conjugation.html">T6</a>, and <a href="../theorems/coalitions.html">T10</a>. T7 explains why the self can be a cumulative product of many interactions rather than a single foundational act. T6 explains how taking the role of the other transforms one's own impulse without erasing it: the act is recontextualized by a socially given frame. T10 explains why a community can sustain a generalized other at all: there must be enough positive mutual resonance for a stable common standpoint to exist. On this reading, Mead's "self" is not a primitive point in the algebra but an emergent chain-stabilized orbit under communal action.</p>
+<div class="entry-label">What the Formalism Adds</div>
+<p>The formalism makes Mead's often metaphorical vocabulary more explicit. "Taking the role of the other" is not just empathy in a loose sense; it is a structural operation that re-encodes a candidate act through a communal frame. It also distinguishes a temporary audience effect from a durable self. If the communal frame is not idempotent, the agent never stabilizes into a coherent social self; they are endlessly shifted by every interaction. Mead wants the opposite: a self that is socially made but stable enough to act. Idempotence and transmission together express exactly that.</p>
+<div class="entry-label">Where It Diverges</div>
+<p>Mead's framework is process philosophy as much as social theory. The living temporality of conversation, gesture, hesitation, and response is central to his view. The algebra abstracts from that phenomenology and keeps only the compositional skeleton. It is therefore a strong reconstruction of Mead's structure, but not a substitute for Mead's account of lived interaction.</p>
+<div class="entry-label">Horizon Structure (ξ)</div>
+<p>For Mead, \(\mathcal{H}\) is the category of interaction situations, role-taking episodes, play and game stages, significant-symbol exchanges, and generalized-other horizons. Morphisms are gestures, responses, internalizations, and shifts from immediate other to community standpoint. ξ makes the self a section assembled across social horizons rather than a primitive atom; π is the developing agent, R appears in self-reflexion, and τ tracks the temporal chain of interaction.</p>
+<p>Mead's social self instantiates T13: a stable self emerges when role-local responses and communal standpoints glue into a coherent reflexive section over the agent's interaction history.</p>
 </div>
 </main>
 <footer><p>© 2026 Idea Theory Project</p></footer>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon (ξ) — Idea Theory</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../chapters/index.html">Book</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
+<main class="content">
+<h1>Horizon (ξ)</h1>
+<p class="lead">The horizon functor ξ is the ninth structural element of an idea algebra. It promotes the 8-tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) into a presheaf over a category of contexts, making every operation context-relative.</p>
+
+<h2>Why a Ninth Element?</h2>
+<p>The original 8-tuple gives the internal anatomy of ideas (composition, resonance, negation, inference, transmission, grading) but treats the <em>context</em> in which an idea is intelligible as an unformalised parameter. Yet philosophers from Husserl, Heidegger, Gadamer, Wittgenstein-II, Davidson and Kuhn through to Foucault, Brandom, Habermas, Zhuāngzǐ and Nāgārjuna all centrally rely on a notion of <em>horizon</em>, <em>language-game</em>, <em>paradigm</em>, <em>episteme</em>, or <em>perspective</em> against which ideas have their meaning. ξ formalises this absent parameter and exhibits it as a presheaf base.</p>
+
+<div class="defn"><span class="thm-label">Definition (Horizon Category).</span> A <em>horizon category</em> is a small category \(\mathcal{H}\) equipped with finite limits, finite colimits, a terminal object \(\top\) (the universal/unrestricted horizon), an initial object \(\bot\) (the trivial horizon), and a Grothendieck topology \(J\) specifying which families \(\{f_i:h_i\to h\}\) count as <em>covers</em> (adequate decompositions of \(h\)).</div>
+
+<div class="defn"><span class="thm-label">Definition (Horizon Functor ξ).</span> Given a horizon category \(\mathcal{H}\), the horizon functor is a presheaf
+\[
+\kappa \;\equiv\; \mathcal{F}: \mathcal{H}^{\mathrm{op}} \longrightarrow \mathbf{IdeaAlg}_8,\qquad h \;\mapsto\; \big(\mathcal{I}_h,\circ_h,e_h,\rho_h,\sigma_h,\nu_h,\eta_h,\omega_h,\deg_h\big)
+\]
+assigning to each horizon \(h\) a complete 8-tuple algebra, and to each morphism \(f:h'\to h\) a restriction \(f^*:\mathcal{F}(h)\to\mathcal{F}(h')\) that preserves \((\circ,e)\) and the underlying carrier structure but is not in general required to preserve \((\sigma,\eta,\deg)\).</div>
+
+<h2>Constraints and Semantics</h2>
+<ul>
+<li><strong>Functoriality on \((\circ,e)\).</strong> For all \(f:h'\to h\), \(I,J\in\mathcal{F}(h)\): \(f^*(I\circ_h J)=f^*I\circ_{h'}f^*J\) and \(f^*(e_h)=e_{h'}\). Composition and identity are <em>universal</em> structure that horizon-shift always preserves.</li>
+<li><strong>Lax preservation of \(\rho\).</strong> \(f^*\rho_h(I)\subseteq\rho_{h'}(f^*I)\). Restriction may drop instances (a horizon-shift can render previously realised content unrealisable) but cannot introduce phantom realisations.</li>
+<li><strong>Non-preservation of \(\sigma,\eta\).</strong> Resonance and inference are horizon-relative: there exist \(I,J,h\) such that \(\sigma_h(I,J)\neq\bot\) yet \(\sigma_{h'}(f^*I,f^*J)=\bot\) for some \(f:h'\to h\). The failure is a feature, not a defect: it is the algebraic seat of indexicality, translation indeterminacy, and incommensurability.</li>
+<li><strong>Sheaf condition (Hermeneutic Gluing).</strong> An idea is <em>understood</em> at \(h\) iff for every cover \(\{h_i\to h\}\), local data \((I_i\in\mathcal{F}(h_i))\) agreeing on overlaps glue to a unique global section over \(h\). This is the algebraic form of Gadamerian fusion of horizons.</li>
+<li><strong>Fusion as colimit.</strong> The fusion of horizons \(h_1\sqcup h_2\) is the categorical coproduct (or pushout, when an overlap is given). New \(\sigma\)-relations may emerge in \(h_1\sqcup h_2\) that are not present in either component.</li>
+<li><strong>Trans-horizonal stability.</strong> The <em>support</em> of an idea \(I\), denoted \(\mathrm{Supp}(I)\), is the maximal full subcategory of \(\mathcal{H}\) on which \(I\) admits a coherent restriction. Profundity correlates with broad support.</li>
+<li><strong>Monodromy.</strong> A non-trivial loop in \(\mathcal{H}\) (a sequence of horizon-shifts returning to the starting horizon) need not act as the identity on \(\mathcal{F}\). The monodromy group records irreversible conceptual change — Kuhnian incommensurability as topological obstruction.</li>
+</ul>
+
+<h2>Worked Examples</h2>
+<ul>
+<li><strong>Husserl.</strong> \(\mathcal{H}\) = the lattice of noetic-noematic horizons; restriction is the operation of <em>bracketing</em> (epoché); the sheaf condition is the constitution of an object as the unity of its profile-system.</li>
+<li><strong>Wittgenstein (Investigations).</strong> \(\mathcal{H}\) = the discrete category of language-games; morphisms are family-resemblance overlaps; \(\sigma_h\) is the rules of game \(h\); cross-game inference fails functorially.</li>
+<li><strong>Kuhn / Foucault.</strong> \(\mathcal{H}\) has connected components = paradigms / epistemes; cross-component morphisms exist but have non-trivial monodromy; an inference internal to one paradigm need not pull back across a paradigm-shift.</li>
+<li><strong>Kripke modal semantics.</strong> \(\mathcal{H}\) = the category of possible worlds with accessibility morphisms; constant sections of \(\mathcal{F}\) over the connected component of the actual world are exactly the rigid designators.</li>
+<li><strong>Gadamer.</strong> The fusion of horizons \(h_{\text{interpreter}}\sqcup h_{\text{text}}\) is a non-trivial colimit whose new \(\sigma\)-relations are the content of understanding.</li>
+<li><strong>Davidson.</strong> Triangulation is the diagram \(h_{\text{speaker}}\xrightarrow{}h_{\text{world}}\xleftarrow{}h_{\text{interpreter}}\); charity is the constraint that \(\eta\) restrict consistently along both legs.</li>
+<li><strong>Heidegger.</strong> The temporal horizon of <em>care</em> is a directed sub-category of \(\mathcal{H}\); authentic existence is being-able to traverse one's own horizon-structure.</li>
+</ul>
+
+<h2>Derived Variables: τ, ι, π, φ, δ, β, λ, χ, μ, ψ, R (with derivations)</h2>
+<p>
+  Many notions that other formalisms reify as primitive structure are <em>derivable</em> from the 10-tuple
+  \((\mathcal{H};\,\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\). They are not new elements of the
+  signature; they are named projections, restrictions, limits, traces, gradients, sections, fixed points,
+  or invariants of what is already present. The economy of ξ is precisely that, by promoting context to
+  first-class structure, a great deal of standard philosophical apparatus collapses into <em>derivation</em>
+  rather than <em>postulation</em>. Each entry below gives the derivation explicitly: the input data, the
+  construction, and a one-line check that no new primitives are smuggled in.
+</p>
+
+<!-- ============================ τ ============================ -->
+<div class="defn"><span class="thm-label">τ — Temporality.</span>
+  <p><em>Input.</em> A totally-ordered subcategory \((\mathcal{T},\le)\hookrightarrow\mathcal{H}\) — objects are time-indexed horizons \(h_t\); for every \(s\le t\) there is exactly one morphism \(f_{s,t}:h_s\to h_t\) (no horizon-translations between incomparable times).</p>
+  <p><em>Derivation.</em> Define the <em>temporal evolution operator</em> at lag \(\Delta\) as the precomposition
+  \[\tau_\Delta \;:=\; \xi(f_{t,\,t+\Delta}):\mathcal{F}(h_{t+\Delta})\longrightarrow\mathcal{F}(h_t),\]
+  i.e. \(\tau_\Delta I = (f_{t,t+\Delta})^*I\). Time-extended ideas are sections of \(\xi\) over \(\mathcal{T}\); stable processes are sections invariant under all \(\tau_\Delta\); becoming (in the sense of Whitehead, Bergson, Hegel) is the failure of such invariance.</p>
+  <p><em>No new primitives.</em> τ is purely the choice of a sub-category of \(\mathcal{H}\) plus the action of \(\xi\) already given; no time variable beyond \(\mathcal{T}\subseteq\mathcal{H}\) is introduced.</p>
+</div>
+
+<!-- ============================ ι ============================ -->
+<div class="defn"><span class="thm-label">ι — Intentionality / Aboutness.</span>
+  <p><em>Input.</em> An idea \(I\in\mathcal{I}\) (an object of the total category \(\int_\mathcal{H}\xi\)).</p>
+  <p><em>Derivation.</em> Define the <em>intentional correlate</em> of \(I\) as the global section
+  \[\iota(I)\;:=\;\bigl(\rho_h(I,\,-)\bigr)_{h\in\mathcal{H}} \;\in\; \prod_{h\in\mathcal{H}}\mathrm{Hom}\!\bigl(\mathcal{F}(h),\mathbb{R}\bigr),\]
+  i.e. for each horizon, the resonance functional \(\rho_h(I,\,-)\) viewed pointwise. Naturality of \(\rho\) under \(\xi\)-restriction makes \(\iota(I)\) a natural transformation
+  \(\iota(I): \xi \Rightarrow \underline{\mathbb{R}}\), where \(\underline{\mathbb{R}}\) is the constant presheaf at \(\mathbb{R}\).</p>
+  <p>What this captures: \(\iota(I)\) is the trans-horizonal "directedness toward objects" — Husserl's noema, Brentano's intentional object. Empty/failed intentions are those \(\iota(I)\) whose support \(\mathrm{supp}(\iota(I)) = \{h : \rho_h(I,\,-) \not\equiv 0\}\) misses every horizon reachable from the agent's home \(h_\pi^0\). Strong intentions are those with full support.</p>
+  <p><em>No new primitives.</em> ι uses only ρ and ξ-restriction.</p>
+</div>
+
+<!-- ============================ π ============================ -->
+<div class="defn"><span class="thm-label">π — Perspective / Agent.</span>
+  <p><em>Input.</em> A pointed connected subcategory \((\mathcal{H}_\pi, h_\pi^0)\subseteq\mathcal{H}\) — the horizons accessible to the agent π, with the home horizon distinguished.</p>
+  <p><em>Derivation.</em> The agent <em>is</em> the restricted presheaf
+  \[\pi^*\xi \;:=\; \xi|_{\mathcal{H}_\pi}\;:\;\mathcal{H}_\pi^{\mathrm{op}}\to\mathbf{IdeaAlg}_8.\]
+  An agent's <em>belief at home</em> is \(\xi(h_\pi^0)\); an agent's <em>imaginative reach</em> is the colimit \(\mathrm{colim}_{\mathcal{H}_\pi}\xi\); an agent's <em>core commitments</em> are the limit \(\lim_{\mathcal{H}_\pi}\xi\) (whatever survives every horizon she can occupy).</p>
+  <p>Multiple agents \(\pi_1,\pi_2\) = multiple pointed subcategories; intersubjectivity is a span \(\mathcal{H}_{\pi_1}\hookleftarrow\mathcal{H}_{\pi_1}\cap\mathcal{H}_{\pi_2}\hookrightarrow\mathcal{H}_{\pi_2}\); Hegelian/Brandomian recognition is a 2-cell witnessing that one agent's home horizon embeds in another's accessible region.</p>
+  <p><em>No new primitives.</em> π is a sub-category of \(\mathcal{H}\) and a base-point — pure structure on the existing horizon category.</p>
+</div>
+
+<!-- ============================ φ ============================ -->
+<div class="defn"><span class="thm-label">φ — Affect / Conatus.</span>
+  <p><em>Input.</em> An idea \(I\) and a horizon \(h\) with at least one outgoing refinement morphism \(g:h\to h'\).</p>
+  <p><em>Derivation.</em> Define the <em>affective charge</em> as the directional difference of grading
+  \[\varphi_g(I) \;:=\; \deg_{h'}\!\bigl(\xi(g)^{-1}I\bigr) \;-\; \deg_h(I) \;\in\;G,\]
+  where \(\xi(g)^{-1}I\) denotes any pre-image of \(I\) under restriction (well-defined up to grading by axiom (5) of the 10-tuple). The <em>affective gradient</em> at \(h\) is the assignment \(g\mapsto \varphi_g(I)\) for all outgoing \(g\); the scalar conatus
+  \(\varphi_h(I) := \sup_g \varphi_g(I)\) measures the maximal grading-gain \(I\) admits by refining horizon.</p>
+  <p>Spinoza's <em>conatus</em> = the assertion that \(\varphi_h(I)>0\) for every \(I\) corresponding to the agent's persistence. Heidegger's <em>care</em> (Sorge) = the temporal sub-case where \(g\) ranges over \(\mathcal{T}\): the directedness of φ along the agent's future. Negative φ = ideas the agent's situation tends to deflate.</p>
+  <p><em>No new primitives.</em> φ uses only deg and the morphisms already in \(\mathcal{H}\).</p>
+</div>
+
+<!-- ============================ δ ============================ -->
+<div class="defn"><span class="thm-label">δ — Differentiation (Saussurean).</span>
+  <p><em>Input.</em> An idea \(I\) and a horizon \(h\); the local resonance/Aufhebung pair \(\rho_h,\sigma_h\).</p>
+  <p><em>Derivation.</em> Define the <em>differential cell</em> of \(I\) at \(h\) as the negative trace
+  \[\delta_h(I) \;:=\; \bigl\{J\in\mathcal{F}(h)\;:\; \sigma_h(I,J)=\bot \;\wedge\; \rho_h(I,J)\neq 0\bigr\},\]
+  the ideas with which \(I\) maximally fails to combine while still resonating. Equivalently, \(\delta_h(I)\) is the antidiagonal of \(\sigma_h\) restricted to the resonance-support of \(I\).</p>
+  <p>Saussure's "no positive terms — only differences" becomes the theorem: \(I\) at \(h\) is determined up to \(\xi(h)\)-isomorphism by \(\delta_h(I)\); equivalently, the Saussurean reduction is the quotient \(\mathcal{F}(h)\twoheadrightarrow\mathcal{F}(h)/\!\sim_\delta\) where \(I\sim_\delta J\) iff \(\delta_h(I)=\delta_h(J)\).</p>
+  <p><em>No new primitives.</em> δ is a derived predicate of σ and ρ at a single horizon; ξ contributes only the indexing.</p>
+</div>
+
+<!-- ============================ β ============================ -->
+<div class="defn"><span class="thm-label">β — Reference / Rigid Binding.</span>
+  <p><em>Input.</em> A candidate name (label) \(b\), and the question whether it picks out the same item across all horizons.</p>
+  <p><em>Derivation.</em> \(b\) is a <em>rigid designator</em> iff there exists a global section
+  \[b \;\in\;\Gamma(\mathcal{H},\xi) \;:=\; \lim_{\mathcal{H}}\xi\]
+  whose extension at every horizon is a singleton: \(|\rho_h(b,\,-)^{-1}(\text{distinguished value})|=1\) for all \(h\). Names that are <em>flaccid</em> (in the Kripkean sense) correspond to local sections that fail to extend to a global section.</p>
+  <p>Kripke's modal-rigidity claim "Aristotle in every world is the same individual" is exactly the statement that the section \(b_{\text{Aristotle}}\) extends globally over \(\mathcal{H}_{\text{worlds}}\). Failure of rigidity = obstruction to global extension lying in \(H^1(\mathcal{H};\,\xi)\).</p>
+  <p><em>No new primitives.</em> β uses only the limit of ξ and the existing ρ.</p>
+</div>
+
+<!-- ============================ λ ============================ -->
+<div class="defn"><span class="thm-label">λ — Potentiality.</span>
+  <p><em>Input.</em> An idea \(I\) at horizon \(h\) and the slice category \(h\!\downarrow\!\mathcal{H}\) of refinements \(g:h\to h'\).</p>
+  <p><em>Derivation.</em> Define the <em>potential of \(I\) at \(h\)</em> as the colimit of resonance under future refinement
+  \[\lambda_h(I) \;:=\; \mathrm{colim}_{(g:h\to h')\in h\downarrow\mathcal{H}} \;\rho_{h'}\!\bigl(\xi(g)^{-1}(I),\,-\bigr).\]
+  Since refinements add structure, \(\lambda_h(I)\supseteq\rho_h(I,-)\) always; the gap \(\lambda_h(I)\setminus\rho_h(I,-)\) is what \(I\) <em>could</em> mean but does not yet mean at \(h\).</p>
+  <p>Aristotle's distinction of <em>dynamis</em> (potency) and <em>energeia</em> (actuality): energeia at \(h\) is \(\rho_h(I,-)\); dynamis at \(h\) is the difference \(\lambda_h(I)\setminus\rho_h(I,-)\). Leibnizian <em>compossibility</em> = the constraint that two potentials can be jointly actualised in some refinement.</p>
+  <p><em>No new primitives.</em> λ uses only ρ and the universal property of colimit in the horizon category.</p>
+</div>
+
+<!-- ============================ χ ============================ -->
+<div class="defn"><span class="thm-label">χ — Conceptual Schema / Paradigm / Episteme.</span>
+  <p><em>Input.</em> An agent π with home horizon \(h_\pi^0\).</p>
+  <p><em>Derivation.</em> The <em>schema</em> of π is the connected component containing the home horizon
+  \[\chi(\pi) \;:=\; \mathrm{conn}_{\mathcal{H}}(h_\pi^0) \;\subseteq\; \mathcal{H},\]
+  the maximal subcategory all of whose objects are joined to \(h_\pi^0\) by a zig-zag of horizon-morphisms. ξ restricted to \(\chi(\pi)\) is the agent's <em>internally translatable</em> region; outside \(\chi(\pi)\) lie horizons the agent cannot reach by any chain of partial translations.</p>
+  <p>Kuhn's paradigm = a connected component (paradigm-shift = entering a different component, hence Kuhn's incommensurability claim that no continuous path of translations connects them). Foucault's episteme, Wittgenstein's form of life, Quine's web of belief, Hacking's style of reasoning are all instantiations of this same connected-component construction. The discreteness of paradigm-change is exactly the categorial fact that connected components are clopen.</p>
+  <p><em>No new primitives.</em> χ is the connected-component functor on \(\mathcal{H}\) — pure category theory.</p>
+</div>
+
+<!-- ============================ μ ============================ -->
+<div class="defn"><span class="thm-label">μ — Credence / Probability.</span>
+  <p><em>Input.</em> A horizon \(h\) and a σ-algebra structure on \(\mathcal{F}(h)\).</p>
+  <p><em>Derivation.</em> A <em>credence assignment</em> is a probability measure \(\mu_h:\Sigma(\mathcal{F}(h))\to[0,1]\) such that for every restriction \(g:h\to h'\) the diagram
+  \[\mu_{h'} \;=\; \xi(g)_*\,\mu_h\]
+  commutes (Bayesian-update compatibility): credences push forward correctly along ξ-restriction. The whole assignment \(\mu = (\mu_h)_h\) is a section of the probability presheaf associated to ξ.</p>
+  <p>Bayesian epistemology — conditioning, marginalisation, exchangeability — is recovered as structure <em>on</em> the presheaf, not as a separate algebra. Imprecise probability = credal-set-valued sections; subjective Bayesianism = picking a privileged section per agent π; objective Bayesianism = requiring the section to be invariant under a designated symmetry of \(\mathcal{H}\).</p>
+  <p><em>No new primitives.</em> μ adds only a measure-theoretic decoration on each \(\mathcal{F}(h)\); no new operations on \(\mathcal{I}\).</p>
+</div>
+
+<!-- ============================ ψ ============================ -->
+<div class="defn"><span class="thm-label">ψ — Signed Affective Valence.</span>
+  <p><em>Input.</em> An agent π with self-representation \(\mathrm{self}_\pi\in\mathcal{F}(h_\pi^0)\), and an idea \(I\).</p>
+  <p><em>Derivation.</em> Decompose the local Aufhebung \(\sigma_h(\mathrm{self}_\pi, I)\) into its symmetric and antisymmetric parts in the bilinear extension
+  \[\sigma_h(\mathrm{self}_\pi,I) \;=\; \underbrace{\tfrac{1}{2}\bigl(\sigma_h(\mathrm{self}_\pi,I)+\sigma_h(I,\mathrm{self}_\pi)\bigr)}_{\sigma^{\mathrm{sym}}} \;+\; \underbrace{\tfrac{1}{2}\bigl(\sigma_h(\mathrm{self}_\pi,I)-\sigma_h(I,\mathrm{self}_\pi)\bigr)}_{\sigma^{\mathrm{asym}}},\]
+  and define
+  \[\psi_h(I) \;:=\; \rho_h\!\bigl(\sigma^{\mathrm{sym}},\,e\bigr) \;-\; \rho_h\!\bigl(\sigma^{\mathrm{asym}},\,e\bigr) \;\in\;\mathbb{R}.\]
+  Positive ψ = attraction (the agent's self consonantly composes with \(I\)); negative ψ = aversion (compositional asymmetry dominates).</p>
+  <p>This recovers signed valence in classical affect theory (Frijda, Russell), the action-tendency dimension of Frijda, and the approach/avoid axis in neuroeconomic models — all from σ and ρ alone. ψ is exactly the signed refinement of the unsigned φ.</p>
+  <p><em>No new primitives.</em> ψ uses only π, σ, ρ, and the bilinear extension of axiom (2).</p>
+</div>
+
+<!-- ============================ R ============================ -->
+<div class="defn"><span class="thm-label">R — Reflexion (self-application).</span>
+  <p><em>Input.</em> The 10-tuple itself, considered as an object of a meta-category in which idea-algebras are themselves ideas.</p>
+  <p><em>Derivation.</em> Reflexion is the fixed-point operator
+  \[R \;:=\; \mathrm{Fix}\bigl(\xi \;\mapsto\; \xi(\,\xi\,)\bigr),\]
+  i.e. the colimit of the iterated chain \(\xi, \xi(\xi), \xi(\xi(\xi)), \dots\) when this chain stabilises. Concretely: an idea \(I\) is <em>reflexive</em> at \(h\) iff the inference \(\eta_h(I,I)\) yields back a section of ξ that contains \(I\) itself — the algebra speaking about itself, with itself as one of the terms.</p>
+  <p>Russell's paradox = the failure of \(\mathrm{Fix}\) to converge for naïve set-of-all-sets; Gödel sentences = stable fixed points whose value is "this sentence is unprovable"; Husserl's transcendental ego = the unique fixed point of perspective-taking applied to itself; Nāgārjuna's <em>śūnyatā śūnyatā</em> ("emptiness of emptiness") = the second iterate stabilising; Hofstadter's strange loops = trajectories of iterated R.</p>
+  <p><em>No new primitives.</em> R uses only the existing structure (ξ, η) plus the standard fixed-point construction in any category with the requisite limits.</p>
+</div>
+
+<h3>Summary table of derivations</h3>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:.9em">
+<thead><tr style="border-bottom:1px solid var(--accent)">
+<th style="text-align:left;padding:.4em">Symbol</th><th style="text-align:left;padding:.4em">Name</th><th style="text-align:left;padding:.4em">Derived from</th><th style="text-align:left;padding:.4em">Construction</th>
+</tr></thead>
+<tbody>
+<tr><td style="padding:.3em"><b>τ</b></td><td>Temporality</td><td>\(\mathcal{H}\)</td><td>totally-ordered subcategory \(\mathcal{T}\hookrightarrow\mathcal{H}\); \(\tau_\Delta = \xi(f_{t,t+\Delta})\)</td></tr>
+<tr><td style="padding:.3em"><b>ι</b></td><td>Intentionality</td><td>ρ, ξ</td><td>natural transformation \(\iota(I):\xi\Rightarrow\underline{\mathbb{R}}\), \(\iota(I)_h=\rho_h(I,-)\)</td></tr>
+<tr><td style="padding:.3em"><b>π</b></td><td>Perspective</td><td>\(\mathcal{H}\), ξ</td><td>pointed connected subcategory \((\mathcal{H}_\pi,h_\pi^0)\); restricted presheaf \(\xi|_{\mathcal{H}_\pi}\)</td></tr>
+<tr><td style="padding:.3em"><b>φ</b></td><td>Affect / Conatus</td><td>deg, \(\mathcal{H}\)</td><td>directional difference \(\varphi_g(I)=\deg_{h'}(\xi(g)^{-1}I)-\deg_h(I)\)</td></tr>
+<tr><td style="padding:.3em"><b>δ</b></td><td>Differentiation</td><td>σ, ρ</td><td>antidiagonal cell \(\delta_h(I)=\{J:\sigma_h(I,J)=\bot,\rho_h(I,J)\ne0\}\)</td></tr>
+<tr><td style="padding:.3em"><b>β</b></td><td>Rigid reference</td><td>ξ, ρ</td><td>global section \(b\in\Gamma(\mathcal{H},\xi)\) with singleton ρ-extension</td></tr>
+<tr><td style="padding:.3em"><b>λ</b></td><td>Potentiality</td><td>ρ, ξ</td><td>colimit \(\lambda_h(I)=\mathrm{colim}_{h\to h'}\rho_{h'}(\xi(g)^{-1}I,-)\)</td></tr>
+<tr><td style="padding:.3em"><b>χ</b></td><td>Schema / Paradigm</td><td>\(\mathcal{H}\)</td><td>connected component \(\chi(\pi)=\mathrm{conn}_\mathcal{H}(h_\pi^0)\)</td></tr>
+<tr><td style="padding:.3em"><b>μ</b></td><td>Credence</td><td>ξ</td><td>compatible probability section \((\mu_h)_h\) with \(\mu_{h'}=\xi(g)_*\mu_h\)</td></tr>
+<tr><td style="padding:.3em"><b>ψ</b></td><td>Signed valence</td><td>π, σ, ρ</td><td>\(\rho_h(\sigma^{\mathrm{sym}},e)-\rho_h(\sigma^{\mathrm{asym}},e)\), self-against-I</td></tr>
+<tr><td style="padding:.3em"><b>R</b></td><td>Reflexion</td><td>ξ, η</td><td>fixed point \(\mathrm{Fix}(\xi\mapsto\xi(\xi))\)</td></tr>
+</tbody></table>
+</div>
+
+<p style="margin-top:1em">
+  <strong>Methodological consequence.</strong> Apparent disagreements between philosophers about whether
+  intentionality, time, perspective, or paradigm are "primitive" become, under this analysis, disagreements
+  about <em>which structure on \(\mathcal{H}\) and ξ</em> the philosopher implicitly assumes. There is no
+  primitive vs. derived debate to be had at the level of the 10-tuple — every notion in the list above is
+  forced once \(\mathcal{H}\) and ξ are fixed.
+</p>
+
+<p>
+  The methodological pay-off: arguments that previously required positing additional primitive structure (an
+  intentionality operator, a temporal operator, a perspective primitive, a Bayesian-credence module) become
+  derivations within the 10-tuple. When two philosophers disagree about, say, the nature of intentionality,
+  the disagreement can now be located precisely as a disagreement about the structure of \(\mathcal{H}\) and
+  about which sections of the presheaf one privileges.
+</p>
+
+<h2>Compatibility with the rest of the structure</h2>
+<p>The horizon functor ξ does not replace any of the original eight components; it relativises them. The trivial horizon category \(\mathcal{H}=\mathbf{1}\) (one object, one morphism) recovers the original 8-tuple as a special case. All theorems T1–T9 of the original algebra continue to hold pointwise (within each horizon \(h\)). The new content is the three trans-horizonal theorems — the Hermeneutic Sheaf Theorem, the Indexical Pullback / Inference Non-invariance Theorem, and the Profundity Theorem — which connect ξ to \(\sigma,\eta,\omega,\deg\) and unify a wide range of philosophical positions (hermeneutics, perspectivism, indexicality, paradigm-relativity) that were previously informal.</p>
+
+<h2>Related theorems</h2>
+<ul>
+<li><a href="../theorems/index.html#t10">T10 — Hermeneutic Sheaf Theorem</a></li>
+<li><a href="../theorems/index.html#t11">T11 — Indexical Pullback / Inference Non-invariance</a></li>
+<li><a href="../theorems/index.html#t12">T12 — Profundity = Trans-horizonal Stability</a></li>
+</ul>
+<p><a href='index.html'>&larr; Back to Formalism</a></p>
+</main>
+<footer class="site-footer"><p>&copy; 2025 Idea Theory Project. Source on <a href="https://github.com/thehalleyyoung/idea-theory">GitHub</a>. Built as a static site.</p></footer>
+</body>
+</html>

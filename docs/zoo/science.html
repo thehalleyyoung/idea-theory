@@ -70,12 +70,12 @@
 
 <section class="hero">
   <h1>Zoo: Cognitive Science, AI &amp; Emergence</h1>
-  <p class="lede">Thirty theories — from prototype effects to transformers, from memes to weak emergence — each reconstructed as a full sub-instance of the idea algebra \((\mathcal{I},\circ,e,\varrho,\sigma,\nu,\eta,\omega,\deg)\).</p>
+  <p class="lede">Thirty-two theories — from prototype effects to transformers, from memes to weak emergence — each reconstructed as a full sub-instance of the idea algebra <strong>10-tuple</strong> \((\mathcal{H};\,\mathcal{I},\circ,e,\varrho,\sigma,\nu,\eta,\omega,\deg)\), where \(\mathcal{H}\) is the horizon category over which the eight operations are fibered as a presheaf (the <a href="../formalism/horizon.html">horizon functor ξ</a>).</p>
 </section>
 
 <p>
-  Every entry gives (1) a faithful reconstruction of the position, (2) an explicit instantiation of all eight components of the algebra, with a display equation, (3) the central claim restated as a theorem or definition in that instantiation, (4) what the formalism adds — new predictions or clarifications — and (5) where the formalism diverges from the original theory.
-  Cross-references point to the relevant <a href="../theorems/index.html">theorems</a> and <a href="../lean/index.html">Lean modules</a>.
+  Every entry gives (1) a faithful reconstruction of the position, (2) an explicit instantiation of all eight components of the algebra plus its <strong>Horizon Structure (ξ)</strong>, with a display equation, (3) the central claim restated as a theorem or definition in that instantiation, (4) what the formalism adds — new predictions or clarifications — and (5) where the formalism diverges from the original theory.
+  Cross-references point to the relevant <a href="../theorems/index.html">theorems</a> and <a href="../lean/index.html">Lean modules</a>. The horizon-functor theorems are <a href="../theorems/index.html#t13">T13</a> (Hermeneutic Sheaf), <a href="../theorems/index.html#t14">T14</a> (Indexical Pullback), and <a href="../theorems/index.html#t15">T15</a> (Profundity / Trans-horizonal Stability). Derived primitives (τ temporality, ι intentionality, π perspective, χ paradigm, μ credence, λ potentiality, …) are read off the 10-tuple rather than added to it.
 </p>
 
 <div class="theorem-key">
@@ -94,6 +94,7 @@
   <a href="#connectionism">§2 Connectionism &amp; AI (10–16)</a>
   <a href="#cultural">§3 Cultural Evolution (17–23)</a>
   <a href="#emergence">§4 Emergence Theory (24–30)</a>
+  <a href="#additional-concepts">§5 Additional Concepts (31–32)</a>
 </div>
 
 <!-- ================================================================ -->
@@ -135,6 +136,13 @@
   <p>
     The formalism does not model the psychological process of checking necessary and sufficient conditions; it captures only the algebraic structure of the concepts, not the cognitive dynamics of applying them.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For classical theory, \(\mathcal{H}\) is deliberately degenerate: one horizon, one identity morphism, and hence no genuine ξ-relativity. Concepts have invariant intensions, so every section of the presheaf is constant and the derived primitives \(\chi\), \(\pi\), and \(\mu\) collapse into a single context-free perspective. Morphisms cannot reweight membership or typicality because the theory treats definition as independent of use, task, or culture.
+  </p>
+  <p>
+    This makes T15 trivially satisfied while T14 is denied, marking exactly the breakage point later exposed by prototype and framing effects.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
 </div>
 
@@ -172,6 +180,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     The formalism treats all similarity as derived from a single resonance pairing; Rosch's empirical data suggest that different feature dimensions (colour, shape, function) may contribute independently, which would require a multi-dimensional resonance structure not captured in a single \(\varrho\).
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Rosch, \(\mathcal{H}\) is the lattice of category-contexts: ecological setting, task demand, contrast class, culture, and basic-level focus. Morphisms are refinements or translations between these contexts, such as moving from bird-in-general to backyard-bird or arctic-bird. Typicality is therefore \(arrho_h(x,p_c)\), not an absolute score; \(\chi\) names the local category schema and \(\mu\) records graded membership expectations within that schema.
+  </p>
+  <p>
+    Prototype shift is a paradigmatic T14 case: \(\varrho\) and \(\sigma\) fail to pull back invariantly across category horizons.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">ConceptualSpaces</a></div>
 </div>
@@ -211,6 +226,13 @@
   <p>
     The formalism does not capture the temporal dynamics of theory acquisition in children — the developmental time-course of theory change requires the Diffusion module, which goes beyond the static algebra.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Theory-Theory, \(\mathcal{H}\) is the category of explanatory theories available to a child or scientist, with morphisms given by translation, revision, specialization, and Kuhnian replacement. Each horizon supplies its own inferential roles \(\eta_h\) and resonance relations \(arrho_h\), so the same concept can mean different things inside folk physics, vitalism, or modern biology. The important derived primitives are \(\tau\) for developmental time, \(\chi\) for theory/paradigm, and \(\mu\) for changing credence under anomaly.
+  </p>
+  <p>
+    Conceptual change instantiates T14 when inference fails to transfer, and T13 when partial child-theories glue into a coherent mature theory.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/resonance-pairing.html">T2</a></div>
 </div>
 
@@ -248,6 +270,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     The algebraic framework assumes that simulator composition is associative, but there is psycholinguistic evidence that the order of imagined events can non-associatively affect the resulting mental model — a genuine failure of T1.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Barsalou, \(\mathcal{H}\) consists of situated sensorimotor horizons: seeing, grasping, sitting, navigating, imagining, and task-directed simulation contexts. Morphisms are shifts of modality, bodily posture, environmental affordance, or attentional goal that restrict a simulator to different perceptual traces. Thus \(\sigma_h\) is not amodal meaning but the horizon-local reenactment that a body can run; \(\pi\), \(\tau\), \(\phi\), and \(\lambda\) matter because agent, time-course, salience, and possible action shape the simulation.
+  </p>
+  <p>
+    Grounded concept use is T13: understanding a concept requires gluing partial modality-local simulations into one coherent situated section.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/conjugation.html">T6</a></div>
 </div>
@@ -287,6 +316,13 @@
   <p>
     Blending theory emphasizes the <em>compression</em> of vital relations (many-to-one mappings across spaces), a directional operation that does not fit neatly into the symmetric Aufhebung; this asymmetry requires extending \(\nu\) beyond what T3 currently specifies.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For conceptual blending, \(\mathcal{H}\) is a diagram category of mental spaces: input spaces, generic spaces, blend spaces, and elaboration contexts. Morphisms are cross-space mappings, projections, compressions, and selective injections of structure into the blend. Derived \(\chi\) marks the organizing frame of a space, \(\lambda\) captures unrealized blend potentials, and \(\pi\) tracks the interpreter whose mappings decide which vital relations are compressed.
+  </p>
+  <p>
+    A successful blend is T13 gluing over a cover of input spaces, while failed or unstable blends are failures of the sheaf condition.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/resonance-pairing.html">T2</a></div>
 </div>
 
@@ -324,6 +360,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Lakoff &amp; Johnson emphasize the embodied, image-schematic basis of source domains; the formalism treats all idea algebras uniformly and does not privilege bodily or spatial structure.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For conceptual metaphor, \(\mathcal{H}\) is organized by embodied source domains and abstract target domains, with morphisms given by partial metaphor maps such as journey-to-love or war-to-argument. A morphism preserves selected image-schematic structure while dropping or distorting other inferences, so \(\eta_h\) is horizon-relative. The key derived primitives are \(\chi\) for domain schema, \(\pi\) for embodied perspective, \(\iota\) for aboutness across domains, and \(\delta\) for contrastive entailments blocked by the metaphor.
+  </p>
+  <p>
+    Metaphorical inference is T14: source-domain inferences pull back only partially, producing systematic non-invariance in the target.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/structural-equivalence.html">T8</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a> · Lean: MetaphorMaps</div>
 </div>
@@ -363,6 +406,13 @@
   <p>
     Frame semantics is primarily a descriptive linguistic framework with rich empirical data about frame elements and relations (FrameNet); the algebraic formalism abstracts away from these specific semantic roles in favour of the general structure.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Fillmore, \(\mathcal{H}\) is the category of frames: commercial events, legal trials, medical encounters, political burdens, and their subframes. Morphisms are frame evocations, role alignments, reframings, and frame-to-frame translations. Meaning is explicitly \(\sigma_h(w)\) within a frame horizon; \(\chi\) is the active frame, \(\pi\) is the discourse participant's perspective, and \(\delta\) records the contrasts that a frame makes salient or invisible.
+  </p>
+  <p>
+    Frame semantics is a direct T14 theory: lexical meaning and inference do not pull back unchanged along reframing morphisms.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/meaning-curvature.html">T5</a></div>
 </div>
 
@@ -401,6 +451,13 @@
   <p>
     Gärdenfors' framework makes rich use of the full geometric structure (metric axioms, dimensionality, Voronoi tessellations for categorization); the idea algebra captures only the abstract resonance structure and does not specify dimensionality or the full metric.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Gärdenfors, \(\mathcal{H}\) is the family of quality-space coordinate systems and task-relative dimensional projections. Morphisms are changes of metric, dimension selection, scaling, prototype re-centering, and translations between perceptual domains. A convex region is therefore convex only relative to \(h\); \(\chi\) names the active conceptual space, \(\mu\) supports probabilistic categorization around centroids, and \(\delta\) captures discriminating dimensions.
+  </p>
+  <p>
+    Context-dependent similarity is T14, while robust natural properties approximate T15 by remaining stable across many admissible quality-space horizons.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">ConceptualSpaces</a></div>
 </div>
 
@@ -438,6 +495,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     The formalism models the two systems as static sub-algebras; the psychological reality involves dynamic resource allocation (cognitive load, ego depletion) that requires the temporal structure of the Diffusion module rather than the static algebra.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Kahneman, \(\mathcal{H}\) consists of decision horizons: frames, cognitive-load states, time-pressure regimes, default System 1 contexts, and reflective System 2 contexts. Morphisms are reframings, debiasing interventions, attention shifts, and changes in available working memory. The central derived primitives are \(\mu\) for subjective probability, \(\pi\) for the decision maker, \(\tau\) for fast/slow processing, and \(\phi\) for affective salience; the existing curvature notation in this entry remains T5 meaning-curvature, not ξ.
+  </p>
+  <p>
+    Framing effects are T14: \(\eta\), \(\varrho\), and credence fail to pull back invariantly along logically equivalent presentation morphisms.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/meaning-curvature.html">T5</a>, <a href="../theorems/graded-idea-algebra.html">T9</a></div>
 </div>
@@ -481,6 +545,13 @@
   <p>
     Smolensky's framework has a detailed account of the interface between the tensor product level and the symbolic level (ICS architecture); the idea algebra treats both levels uniformly and does not model the interface explicitly.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Smolensky, \(\mathcal{H}\) ranges over representational regimes: symbolic descriptions, distributed activation states, role-filler bases, and constraint-satisfaction settings. Morphisms are encodings, decodings, basis changes, tensor bindings, and relaxations from symbolic structures into connectionist harmony landscapes. \(\chi\) marks the active grammar or constraint system, \(\mu\) can represent harmony-weighted state probabilities, and \(\delta\) distinguishes role positions that are separable only in a given basis.
+  </p>
+  <p>
+    Tensor product representation is T13 when symbolic and subsymbolic local data glue into one structure, with T14 appearing when decoding is basis-sensitive.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
 </div>
 
@@ -518,6 +589,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     HRRs are specifically designed for approximate computation in finite-precision arithmetic; the idea algebra is exact and does not model the noise and approximation that are central to HRR's engineering advantages.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For HRRs, \(\mathcal{H}\) is the category of vector-symbolic coding regimes: dimensionality choices, noise levels, binding conventions, cleanup memories, and retrieval tasks. Morphisms are circular convolution binding, approximate unbinding, projection to lower precision, and cleanup-map restriction. The derived primitives \(\mu\) and \(\lambda\) matter because retrieval is probabilistic and a stored trace has many possible decodings; \(\delta\) measures interference among nearly orthogonal traces.
+  </p>
+  <p>
+    HRR robustness is a T15 phenomenon: a representation is profound or usable when its structure survives many noisy coding and retrieval horizons.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
 </div>
@@ -557,6 +635,13 @@
   <p>
     Word2vec's training objective (predicting context windows) is a statistical procedure; the idea algebra is a structural description of the resulting representations and does not model the training dynamics.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For word2vec, \(\mathcal{H}\) is the family of corpus and window horizons: local contexts, subsampling regimes, domains, languages, and analogy evaluation settings. Morphisms are restriction to a subcorpus, domain adaptation, window-size change, and linear alignment between embedding spaces. Word meaning is \(\sigma_h\) induced by visible co-occurrences; \(\mu\) is the predictive distribution over contexts, \(\chi\) is the corpus domain, and \(\delta\) is the contrastive neighborhood around a word.
+  </p>
+  <p>
+    Distributional shift is T14: vector offsets and resonances need not pull back unchanged across corpora or context-window morphisms.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/conjugation.html">T6</a></div>
 </div>
 
@@ -594,6 +679,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     The formalism treats the full asymmetric \(\varrho = \log P(b|a)\) as primary; GloVe's actual trained vectors approximate only the symmetric part, so using GloVe vectors in the idea algebra requires acknowledging that \(\kappa\) information has been discarded.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For GloVe, \(\mathcal{H}\) consists of global co-occurrence horizons: corpora, count matrices, weighting functions, probe-word sets, and frequency cutoffs. Morphisms aggregate, reweight, smooth, or restrict the co-occurrence statistics from which resonances are estimated. \(\mu\) is central because meaning is read from conditional probabilities; \(\chi\) marks corpus genre or domain, and \(\delta\) records which probe ratios distinguish two words.
+  </p>
+  <p>
+    GloVe's strength and limitation are T14: log-ratio meanings are stable only along morphisms that preserve the relevant global co-occurrence horizon.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/meaning-curvature.html">T5</a></div>
 </div>
@@ -633,6 +725,13 @@
   <p>
     The soft attention mechanism uses the softmax function, which makes \(\circ_\text{attn}\) a convex combination rather than a hard algebraic composition; the idea algebra's \(\circ\) is hard composition, so the soft transformer is an approximation of the algebraic structure.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For transformers, \(\mathcal{H}\) is the prefix/context-window category: objects are visible token horizons, layer/head regimes, masks, and positional contexts. Morphisms are prefix extension, masking, attention restriction, layer projection, and head-wise change of subspace. Attention computes \(arrho_h\) for the current visible horizon \(h\), so token meaning is its horizon-relative \(\sigma_h\); \(\tau\) orders positions, \(\pi\) can be a decoding perspective, and \(\mu\) is the next-token distribution.
+  </p>
+  <p>
+    In-context learning is T13 gluing of exemplars inside the prompt, while context-dependent token meaning is T14.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/aufhebung-decomposition.html">T3</a>, <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/graded-idea-algebra.html">T9</a></div>
 </div>
 
@@ -671,6 +770,13 @@
   <p>
     The algebraic framework treats the network as a fixed, trained object; the dynamics of gradient descent training — the path through the weight space — require the Diffusion module and are not captured by the static algebra.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For deep learning, \(\mathcal{H}\) is the category of computational regimes: datasets, learned weight states, layers, tasks, augmentations, and train/test distributions. Morphisms include forward propagation, fine-tuning, domain shift, representation projection, and ablation. \(\tau\) indexes training time or layer depth, \(\mu\) represents predictive uncertainty, \(\chi\) marks task manifold, and \(\lambda\) captures latent capabilities not yet elicited by a test horizon.
+  </p>
+  <p>
+    Generalization is T15 when a learned representation retains low loss and coherent resonance across many task and distribution horizons.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/composition.html">T1</a>, <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
 </div>
 
@@ -708,6 +814,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     The formalism treats the LLM as a static probability distribution; the dynamics of in-context learning, chain-of-thought reasoning, and fine-tuning involve sequential composition across many steps, requiring the full Transmission Chain (T7) and Diffusion module.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For LLMs, every prompt, system message, retrieved document set, tool state, and conversation history induces a horizon \(h\in\mathcal{H}\). Morphisms are prompt extension, summarization, retrieval injection, role change, fine-tuning, and truncation of context. \(\mu_h\) is the conditional next-token distribution, \(\pi\) is the speaker or assistant role, \(\chi\) is the task schema, and \(\lambda\) is the model's latent capability space under better prompting.
+  </p>
+  <p>
+    Generalization is T15, in-context learning is T13, and hallucination is attempted gluing where the sheaf condition fails against factual horizons.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/resonance-pairing.html">T2</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/transmission-chain.html">T7</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
 </div>
@@ -751,6 +864,13 @@
   <p>
     Dawkins' memetics lacks a precise unit of analysis for memes (where does one meme end and another begin?); the formalism inherits this problem, as the boundary conditions on \(\mathcal{I}\) are not specified by the algebra itself.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Dawkins, \(\mathcal{H}\) is the category of population horizons: minds, media ecologies, institutions, generations, and transmission channels. Morphisms are imitation, teaching, mutation, migration, platform amplification, and selection by host environment. Meme fitness is \(arrho_h(m,m)\) relative to a population horizon; \(\tau\) tracks generations, \(\pi\) host perspective, \(\chi\) cultural niche, and \(\mu\) adoption probability.
+  </p>
+  <p>
+    Memetic survival across many populations is exactly T15: high support across \(\mathcal{H}\) plus closure under transmission yields profundity.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
 </div>
 
@@ -788,6 +908,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Sperber's framework depends critically on the distinction between public and mental representations and the causal mechanisms linking them; the idea algebra treats all representations uniformly and does not model the implementation-level difference.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Sperber, \(\mathcal{H}\) is made of epidemiological contexts: individual cognitive environments, public representations, ecological attractor basins, and transmission situations. Morphisms are communication, reconstruction in memory, institutional stabilization, and transformation by cognitive bias. \(\pi\) matters because each mind supplies a local horizon, \(\mu\) gives adoption and recall probabilities, \(\chi\) marks attractor families, and \(\tau\) orders chains of diffusion.
+  </p>
+  <p>
+    Cultural attractors are T15 phenomena, while the non-identical reconstruction of representations at each transmission step is T14.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
 </div>
@@ -827,6 +954,13 @@
   <p>
     Henrich's ratchet is fundamentally about populations of learners and the social dynamics of prestige, conformity, and payoff-biased learning; the idea algebra captures the individual transmission event but does not model population-level frequency dynamics without the Diffusion module.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Henrich, \(\mathcal{H}\) consists of social-learning horizons: prestige structures, skill domains, institutions, ecological pressures, and group boundaries. Morphisms are imitation, teaching, norm enforcement, migration, payoff-biased copying, and prestige-biased copying. \(\pi\) identifies models and learners, \(\mu\) encodes copying probabilities, \(\chi\) names cultural packages, and \(\tau\) tracks cumulative ratcheting across generations. Tool traditions and ritual practices are therefore sections that must remain learnable under biased transmission.
+  </p>
+  <p>
+    Cumulative culture is T13 when partial skills glue into packages and T15 when those packages remain stable across groups and generations.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
 </div>
 
@@ -864,6 +998,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Boyd &amp; Richerson model the population dynamics of gene and culture frequencies with differential equations; the idea algebra captures individual-level structure and requires the Diffusion module for population dynamics.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Boyd and Richerson, \(\mathcal{H}\) is a two-stream coevolutionary category with genetic, cultural, ecological, and demographic horizons. Morphisms include genetic inheritance, cultural transmission, conformity bias, prestige bias, environmental feedback, and assimilation from learned behavior into selection pressure. \(\tau\) is essential because gene and culture move on different timescales; \(\mu\) gives variant frequencies, \(\chi\) marks group traditions, and \(\pi\) distinguishes individual learners.
+  </p>
+  <p>
+    Gene-culture coevolution is T14 when one stream changes the pullback structure of the other, and T15 when coupled traits stabilize trans-horizonally.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
 </div>
@@ -903,6 +1044,13 @@
   <p>
     Mesoudi acknowledges that cultural inheritance is often blending (children average the beliefs of their parents, rather than inheriting from one parent), which breaks the Mendelian structure and requires a different composition operation than standard sexual recombination.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Mesoudi, \(\mathcal{H}\) compares biological and cultural evolutionary horizons: populations, lineages, inheritance systems, experimental micro-societies, and ecological niches. Morphisms are descent, copying, mutation, recombination, blending, and selection. \(\tau\) supplies lineage time, \(\mu\) variant frequencies, \(\chi\) population structure, and \(\delta\) the contrasts between genetic and cultural inheritance rules. This lets the Darwinian comparison be tested as a map between horizon-indexed processes, not merely as analogy.
+  </p>
+  <p>
+    The Darwinian analogy is T13/T15 when variation-selection-inheritance data glue across domains, but Lamarckian cultural cases exhibit T14 non-invariance.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/structural-equivalence.html">T8</a>, <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a></div>
 </div>
 
@@ -941,6 +1089,13 @@
   <p>
     Blackmore's account has a strong eliminativist flavor (the "self" is an illusion); the idea algebra is neutral on whether the coalition constituting the self is real or illusory — the algebra describes the structure, not the metaphysical status.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Blackmore, \(\mathcal{H}\) includes host minds, self-narrative horizons, memeplex coalitions, technological media, and machine replication environments. Morphisms are imitation, coalition reinforcement, attention capture, technological copying, and displacement of human by teme substrates. \(\pi\) is unstable because the apparent agent is itself a memeplex; \(\chi\) names the self-complex schema, \(\mu\) adoption probability, and \(\phi\) affective pull.
+  </p>
+  <p>
+    The self as memeplex is T13 gluing of mutually reinforcing local memes, with T15 explaining why durable selves survive across situations.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">GameTheory</a></div>
 </div>
 
@@ -978,6 +1133,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Tomasello's framework is deeply developmental — shared intentionality emerges through a specific ontogenetic sequence in the second year of life; the static algebra does not model this developmental trajectory.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Tomasello, \(\mathcal{H}\) is the category of agent-perspective and joint-attention horizons: individual goals, dyadic shared scenes, common-ground states, and cooperative practices. Morphisms are gaze following, pointing, role reversal, teaching, and recursive common-knowledge embedding. \(\pi\) is central, \(\iota\) captures directedness toward shared objects, \(\tau\) tracks developmental emergence, and \(\chi\) marks the norm-governed practice in which a joint intention lives.
+  </p>
+  <p>
+    Shared intentionality is T13: two agent-local intentional sections glue into a single joint horizon supporting cumulative culture.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/resonance-pairing.html">T2</a> · Lean: <a href="../lean/index.html">MeaningGames</a></div>
 </div>
@@ -1021,6 +1183,13 @@
   <p>
     Mill discusses specific natural domains (mechanics, chemistry, psychology) whereas the idea algebra is domain-neutral; domain-specific knowledge is required to instantiate \(\mathcal{I}\) and determine whether \(\omega = 0\).
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Mill, \(\mathcal{H}\) is the category of causal description horizons: mechanical, chemical, biological, and psychological regimes, each with its own admissible composition laws. Morphisms refine or translate a causal description between regimes, for example from macroscopic chemistry to microphysical dynamics. \(\tau\) matters for causal process, \(\chi\) marks the scientific regime, and \(\lambda\) captures latent powers revealed only under a new compositional horizon.
+  </p>
+  <p>
+    Heteropathic causation is T14 when effects fail to pull back to lower-level laws, and T15 when the new causal pattern stabilizes across contexts.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
 </div>
 
@@ -1058,6 +1227,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Broad's framework is committed to a specific ontological picture (levels of natural organization with distinct laws); the idea algebra is ontologically neutral and can be applied to any domain where a level structure makes sense.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Broad, \(\mathcal{H}\) is a stratified level category: physics, chemistry, life, mind, and their possible cross-level translations. Morphisms are reductions, bridge laws, level ascents, and failed trans-ordinal translations. \(\chi\) is the level-schema, \(\lambda\) is the space of possible higher-level properties, and \(\tau\) tracks emergent evolution through successive orders. Each level carries local laws whose domains of validity need not coincide with those below.
+  </p>
+  <p>
+    Emergent properties are T14 when lower-level inference does not pull back, while stable trans-ordinal laws are T15 across multiple realizations.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/graded-idea-algebra.html">T9</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
 </div>
@@ -1097,6 +1273,13 @@
   <p>
     Anderson's argument is primarily about physics and condensed matter; the idea algebra is general enough to apply to any domain, but the specific mechanisms of symmetry breaking (spontaneous symmetry breaking, Goldstone modes) require domain-specific instantiation.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Anderson, \(\mathcal{H}\) is the hierarchy of scales and phases: particle, many-body, condensed-matter, chemical, biological, and social horizons. Morphisms are coarse-graining, renormalization, symmetry breaking, thermodynamic limiting, and effective-law translation. \(\chi\) names the phase or broken-symmetry schema, \(\delta\) records order-parameter distinctions, \(\tau\) covers phase transitions, and \(\lambda\) captures possible collective modes.
+  </p>
+  <p>
+    “More is different” is T14 at scale transitions and T15 when an effective law remains stable under renormalization across nearby horizons.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/meaning-curvature.html">T5</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
 </div>
 
@@ -1134,6 +1317,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Bedau's computational notion of weak emergence ties irreducibility to the complexity of simulation; the cohomological formalism captures the algebraic structure but does not directly model computational complexity — a connection that requires additional theoretical work.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Bedau, \(\mathcal{H}\) separates micro-rule horizons, simulation histories, macro-observation horizons, and explanatory compression regimes. Morphisms are running the simulation, coarse-graining, measuring macrovariables, and translating between rule-level and pattern-level descriptions. \(\tau\) is indispensable because weak emergence is derivability only by temporal unfolding; \(\mu\) handles stochastic simulations, \(\chi\) identifies macro-pattern schemas, and \(\lambda\) captures possible trajectories.
+  </p>
+  <p>
+    Weak emergence is T13 over time-indexed simulation covers, whereas failures of shortcut derivation are T14 relative to compressed explanatory horizons.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
 </div>
@@ -1173,6 +1363,13 @@
   <p>
     Chalmers' argument involves the conceivability of philosophical zombies and modal considerations that go beyond the algebraic structure; the formalism captures the structural distinction but not the modal/conceivability arguments for or against strong emergence.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Chalmers, \(\mathcal{H}\) has at least two linked subcategories: third-person scientific/functional horizons and first-person phenomenal horizons. Morphisms attempt psychophysical translation, structural description, neural correlation, and phenomenal report. \(\pi\) is decisive because perspective cannot be eliminated, \(\iota\) marks what experience is about, \(\chi\) separates physical and phenomenal schemas, and \(\lambda\) captures conceivability spaces such as zombies.
+  </p>
+  <p>
+    The explanatory gap is paradigmatic T14: \(\sigma\) fails to pull back along scientific-to-phenomenal morphisms, yielding non-trivial monodromy.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">EmergenceLevels</a></div>
 </div>
 
@@ -1210,6 +1407,13 @@
   <div class="label">Where It Diverges</div>
   <p>
     Kim's arguments are deeply enmeshed in the metaphysics of properties, events, and causation; the idea algebra abstracts over these ontological commitments and cannot, on its own, settle questions about the metaphysics of mental causation.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Kim, \(\mathcal{H}\) is the category of physical, mental, causal, and reductive-description horizons. Morphisms are supervenience maps, reductions, realization relations, exclusion arguments, and causal-closure projections. \(\chi\) distinguishes physicalist and nonreductive schemas, \(\pi\) marks the subject-level perspective, and \(\delta\) identifies differences that vanish under physical description but remain salient mentally. The same event can thus be tracked under competing explanatory horizons with different causal bookkeeping.
+  </p>
+  <p>
+    Supervenience demands T13-style gluing of mental facts over physical bases, while exclusion worries arise as T14 failures of causal/inferential pullback.
   </p>
   <div class="theorem-links">Theorems: <a href="../theorems/emergence-2-cocycle.html">T4</a>, <a href="../theorems/meaning-curvature.html">T5</a>, <a href="../theorems/structural-equivalence.html">T8</a></div>
 </div>
@@ -1249,7 +1453,112 @@
   <p>
     Holland's framework is designed for agent-based simulation with explicit agents, environments, and fitness functions; the idea algebra is more abstract and requires specifying these domain-specific elements before making quantitative predictions about any particular CAS.
   </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Holland, \(\mathcal{H}\) is the category of adaptive-system contexts: agents, niches, rule sets, schemas, populations, and environmental feedback regimes. Morphisms are local interaction, schema update, selection, recombination, niche construction, and agent-based simulation steps. \(\pi\) ranges over agents, \(\chi\) names internal schemas, \(\tau\) tracks adaptation, \(\mu\) gives strategy frequencies, and \(\lambda\) captures open-ended adjacent possibilities.
+  </p>
+  <p>
+    Complex adaptive order is T13 when local agent sections glue into macro-patterns, and T15 when those patterns persist through perturbation.
+  </p>
   <div class="theorem-links">Theorems: <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a> · Lean: <a href="../lean/index.html">Diffusion</a>, <a href="../lean/index.html">EmergenceLevels</a></div>
+</div>
+
+<!-- ================================================================ -->
+<h2 id="additional-concepts">§5  Additional Concepts</h2>
+<!-- ================================================================ -->
+
+<!-- 31 -->
+<div class="zoo-entry" id="vygotsky">
+  <div class="thinker-name"><span class="entry-num">31</span>Vygotsky — Concept Formation and Internalization</div>
+  <div class="source">Vygotsky, <em>Thought and Language</em> (1934); <em>Mind in Society</em> (1978)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Vygotsky argues that higher concepts are not private mental atoms that mature on their own. They are socially mediated achievements. A child first encounters a concept in shared activity with more competent others, typically through language, gesture, and norm-governed practice. Only later does that externally scaffolded practice become internal thought. His slogan is the famous movement from the interpsychological to the intrapsychological: what begins between people is gradually reorganized within the person.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let \(\mathcal{I}\) be the algebra of concept-tokens available to a learner. A socially provided sign-system \(g \in \mathcal{I}^{\times}\) acts as a frame that reorganizes what the learner can do with a primitive content \(a\). Internalization is not a one-shot insertion of information but an iterated context-action and transmission process:
+  </p>
+  \[
+    a_{n+1} = g_n \circ a_n \circ g_n^{-1},
+    \qquad
+    A_n = g_n \circ g_{n-1} \circ \cdots \circ g_1 \circ a_0.
+  \]
+  <p>
+    The first expression says each pedagogical context reframes the child's current conceptual state. The second says a mature concept is a chain-product of many such mediated encounters. Resonance \(\varrho(a,b)\) measures how well a child's current concept fits the socially stabilized use of that concept in a community. The emergence cocycle \(\omega(g,a)\) tracks the genuinely new capacity produced when a sign-system and a prior concept interact: the child acquires not just more information but a new way of organizing information.
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Vygotsky's core claim is that concept growth is mediated, path-dependent, and cumulative. In the algebra this is exactly the combination of <a href="../theorems/conjugation.html">T6</a> and <a href="../theorems/transmission-chain.html">T7</a>. T6 says context does real structural work: a sign-system changes the effective form of a concept by conjugation. T7 says repeated transmission does not collapse to a trivial repetition; each step contributes to an intelligible chain whose total effect can be tracked. Vygotsky's "zone of proximal development" is then the region where \(\varrho(a_n,\text{community target})\) is still too low for independent performance, but the conjugated step \(g_n \circ a_n \circ g_n^{-1}\) raises it enough for guided success.
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism distinguishes three cases that are often blurred together in informal discussions of learning. First, rote repetition: the same context is applied but \(\omega = 0\), so nothing genuinely new appears. Second, reframing: \(\omega = 0\) but conjugation changes which features of the concept are foregrounded. Third, genuine internalization: \(\omega \neq 0\), so a new conceptual capacity emerges from the instructional encounter. This gives a precise way to separate "the child heard the words" from "the child can now think with the concept."
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Vygotsky's account is developmental, embodied, and historically situated. The algebra captures the structural logic of mediation and accumulation, but not the full psychology of attention, affect, play, or classroom interaction. It says what sort of transformation internalization must be, not how a particular child actually undergoes it minute by minute.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Vygotsky, \(\mathcal{H}\) is the developmental-social category of interpsychological scenes, sign systems, classrooms, practices, and later intrapsychological horizons. Morphisms are scaffolding, imitation, linguistic mediation, internalization, and withdrawal of guidance. \(\tau\) tracks ontogenetic sequence, \(\pi\) distinguishes child and more competent other, \(\chi\) marks the cultural practice, and \(\iota\) captures shared directedness toward the task. The zone of proximal development is a cover by assisted horizons.
+  </p>
+  <p>
+    Internalization is T13: socially distributed local performances glue over time into a stable individual conceptual section.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/conjugation.html">T6</a>, <a href="../theorems/transmission-chain.html">T7</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
+</div>
+
+<!-- 32 -->
+<div class="zoo-entry" id="dennett">
+  <div class="thinker-name"><span class="entry-num">32</span>Dennett — Real Patterns and the Intentional Stance</div>
+  <div class="source">Dennett, "Real Patterns" (1991); <em>The Intentional Stance</em> (1987)</div>
+
+  <div class="label">The Position</div>
+  <p>
+    Dennett's claim is that higher-level patterns are real when they support successful compression and prediction. A chess program, a market, or a person can be described at the micro-level in exhaustive detail, but often a coarser description in terms of beliefs, desires, strategies, or roles predicts better for the purposes we care about. The intentional stance is therefore not mystical. It is a disciplined way of treating a complex system as if it were a rational agent because that treatment captures a real pattern in the system's behavior.
+  </p>
+
+  <div class="label">The Instantiation</div>
+  <p>
+    Let raw system states live in \(\mathcal{I}\), and let \(P\) be a higher-level pattern represented as an equivalence class in a quotient or coarse-graining of \(\mathcal{I}\). The grading \(\deg\) measures descriptive complexity, while resonance with observed behavior measures predictive fit. A pattern is real when it reduces descriptive burden without losing too much resonance:
+  </p>
+  \[
+    \deg(P) \;<\; \sum_{x \in [P]} \deg(x)
+    \qquad\text{and}\qquad
+    \varrho(P,\text{data}) \ge \theta.
+  \]
+  <p>
+    The first inequality says the higher-level description compresses many lower-level descriptions. The second says the compressed description still tracks what the system actually does. When a predictive pattern at the macro-level cannot be recovered by a trivial relabeling of microstates, the emergent surplus is measured by \(\omega\). Structural equivalence classes capture Dennett's point that many micro-realizations can count as "the same belief-pattern" or "the same strategy-pattern."
+  </p>
+
+  <div class="label">Central Claim as Theorem</div>
+  <p>
+    Dennett's real-pattern thesis is a joint application of <a href="../theorems/structural-equivalence.html">T8</a>, <a href="../theorems/graded-idea-algebra.html">T9</a>, and <a href="../theorems/emergence-2-cocycle.html">T4</a>. T8 explains why many token-level realizations can instantiate one structural pattern. T9 explains why the higher-level description can be objectively better by being lower-degree while retaining explanatory reach. T4 explains why the macro-level may have genuine predictive surplus rather than being a merely decorative restatement of the micro-level. On this reading, the intentional stance is warranted exactly when the agent-level quotient preserves enough \(\varrho\) while reducing \(\deg\).
+  </p>
+
+  <div class="label">What the Formalism Adds</div>
+  <p>
+    The formalism turns Dennett's deliberately pragmatic language into a sharper test. A merely convenient summary is not yet a real pattern. It must satisfy two independent demands: compression and predictive resonance. That matters because many audiences hear Dennett as saying "whatever is useful is real." The algebra imposes a stricter standard: usefulness must come from a stable structural quotient, not from arbitrary storytelling. This also clarifies why some stance-descriptions fail. If they lower degree but destroy resonance, they are oversimplifications; if they preserve resonance but do not lower degree, they are just redescriptions.
+  </p>
+
+  <div class="label">Where It Diverges</div>
+  <p>
+    Dennett intentionally leaves the standards of compression and predictive success somewhat context-sensitive, because different sciences care about different scales and error tolerances. The algebra can represent those standards, but only after thresholds and grading conventions are chosen. So it sharpens Dennett's framework at the cost of introducing explicit cutoffs that his prose often leaves flexible.
+  </p>
+  <div class="label">Horizon Structure (ξ)</div>
+  <p>
+    For Dennett, \(\mathcal{H}\) is the category of stances and compression regimes: physical stance, design stance, intentional stance, scientific interests, and error tolerances. Morphisms are coarse-grainings, predictive redescriptions, changes of observer purpose, and translations between microstate and pattern descriptions. \(\pi\) is the interpreter adopting a stance, \(\mu\) measures predictive success, \(\chi\) is the explanatory schema, and \(\delta\) separates real patterns from arbitrary projections.
+  </p>
+  <p>
+    Real patterns are T15: a stance is warranted when its compressed pattern remains predictively stable across relevant horizons.
+  </p>
+  <div class="theorem-links">Theorems: <a href="../theorems/structural-equivalence.html">T8</a>, <a href="../theorems/graded-idea-algebra.html">T9</a>, <a href="../theorems/emergence-2-cocycle.html">T4</a></div>
 </div>
 
 </main>

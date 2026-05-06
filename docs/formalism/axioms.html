@@ -11,25 +11,62 @@
 <nav class="topnav"><div class="nav-inner"><a class="brand" href="../index.html">Idea Theory</a><div class="nav-links"><a href="../index.html">Home</a><a class="active" href="index.html">Formalism</a><a href="../theorems/index.html">Theorems</a><a href="../zoo/index.html">Zoo</a><a href="../literature/index.html">Literature</a><a href="../chapters/index.html">Book</a><a href="../lean/index.html">Lean</a><a href="../about.html">About</a></div></div></nav>
 <main class="content">
 <h1>Axioms of an Idea Algebra</h1>
-<p>An <strong>idea algebra</strong> is a tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) consisting of a carrier set, a composition with identity, a resonance pairing, an Aufhebung decomposition, an emergence cocycle, and a grading. The bare idea algebra \((\mathcal{I},\circ,e)\) drops everything except composition.</p>
+<p>An <strong>idea algebra</strong> in its full form is a <strong>10-tuple</strong> \((\mathcal{H};\,\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) consisting of a horizon category \(\mathcal{H}\), a carrier set, a composition with identity, a resonance pairing, an Aufhebung decomposition, an emergence cocycle, and a grading — with an implicit horizon functor \(\xi:\mathcal{H}^{\mathrm{op}}\to\mathbf{IdeaAlg}_8\) that fibres the eight operations over \(\mathcal{H}\). The <em>bare</em> idea algebra \((\mathcal{I},\circ,e)\) drops everything except composition; the <em>8-tuple</em> idea algebra \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) is the special case where \(\mathcal{H}=\mathbf{1}\) (a single horizon).</p>
 
-<div class="defn"><span class="thm-label">Definition (idea algebra).</span>
-<p>An idea algebra is a tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) such that</p>
+<div class="defn"><span class="thm-label">Definition (8-tuple idea algebra).</span>
+<p>An <em>8-tuple idea algebra</em> is a tuple \((\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) such that</p>
 <ol>
 <li>\((\mathcal{I},\circ,e)\) is a monoid: \(\circ\) is associative, \(e\circ a = a\circ e = a\) for all \(a\).</li>
 <li>\(\rho:\mathcal{I}\times\mathcal{I}\to\mathbb{R}\) extends bilinearly to \(\mathbb{R}\langle\mathcal{I}\rangle\) and is non-degenerate after this extension.</li>
 <li>For each pair \((a,b)\) there exist \(\sigma(a,b),\nu(a,b),\eta(a,b)\in\mathbb{R}\langle\mathcal{I}\rangle\) with \(a\circ b=\sigma(a,b)+\nu(a,b)+\eta(a,b)\), unique modulo \(\ker\rho\).</li>
 <li>\(\omega:\mathcal{I}\times\mathcal{I}\to A\) (with \(A\) abelian) is a normalized 2-cocycle: \(\partial\omega=0\) and \(\omega(e,a)=\omega(a,e)=0\).</li>
 <li>\(\deg:\mathcal{I}\to G\) for some totally ordered abelian group \(G\), and \(\deg(a\circ b)=\deg a+\deg b\).</li>
-</ol></div>
+</ol>
+<p>Write \(\mathbf{IdeaAlg}_8\) for the category whose objects are 8-tuple idea algebras and whose morphisms are tuple-component-preserving monoid homomorphisms (preserving \(\rho,\sigma,\nu,\eta\) up to \(\ker\rho\), respecting \(\omega\) up to coboundary, and order-preserving on \(\deg\)).</p></div>
 
-<h2>Worked example: free idea algebra on two generators</h2>
-<p>Let \(X=\{x,y\}\) and let \(\mathcal{I}=X^{*}\) be the free monoid (finite words). Compose by concatenation; \(e\) is the empty word. Define \(\rho(u,v)=\) the length of the longest common prefix; then \(\rho\) is non-symmetric in the obvious way once we extend it to \(\mathbb{R}\langle X^{*}\rangle\). Take \(\sigma(u,v)=\) common prefix, \(\nu(u,v)=\) the part of \(u\) past the common prefix, \(\eta(u,v)=\) the suffix of \(v\) after the common prefix. Set \(\omega(u,v) = |uv| - |u| - |v| = 0\) (an honest cocycle, trivial here). Let \(\deg(w) = |w|\) into \(G=\mathbb{Z}\). All axioms are satisfied; this is the smallest non-trivial idea algebra.</p>
+<div class="defn"><span class="thm-label">Definition (10-tuple / full idea algebra).</span>
+<p>A <em>full (10-tuple) idea algebra</em> is a tuple \((\mathcal{H};\,\mathcal{I},\circ,e,\rho,\sigma,\nu,\eta,\omega,\deg)\) together with a horizon functor \(\xi\) such that</p>
+<ol>
+<li>\(\mathcal{H}\) is a small category — the <strong>horizon category</strong>. Objects \(h\in\mathrm{Ob}(\mathcal{H})\) are <em>horizons</em> (contexts, language-games, paradigms, possible worlds, time-slices, frames). Morphisms \(f:h'\to h\) are <em>horizon-translations</em> (refinement, restriction, framing, accessibility).</li>
+<li>\(\xi:\mathcal{H}^{\mathrm{op}}\to\mathbf{IdeaAlg}_8\) is a presheaf of 8-tuple idea algebras: to each horizon \(h\) it assigns an 8-tuple
+\[\xi(h) \;=\; \bigl(\mathcal{I}_h,\circ_h,e_h,\rho_h,\sigma_h,\nu_h,\eta_h,\omega_h,\deg_h\bigr),\]
+and to each \(f:h'\to h\) a restriction homomorphism \(\xi(f):\xi(h)\to\xi(h')\) in \(\mathbf{IdeaAlg}_8\), with \(\xi(\mathrm{id}_h)=\mathrm{id}_{\xi(h)}\) and \(\xi(g\circ f)=\xi(f)\circ\xi(g)\) (contravariance).</li>
+<li>The bare carriers fit together: \(\mathcal{I} \;=\; \int_{\mathcal{H}}\xi\) (the Grothendieck construction / total category of the presheaf), so an "idea" globally is a horizon-indexed family of local ideas, glued by the restriction maps.</li>
+<li>Axioms (1)–(5) of the 8-tuple definition hold in each fibre \(\xi(h)\).</li>
+<li><strong>Sheaf condition (optional, for hermeneutic models).</strong> When \(\mathcal{H}\) carries a Grothendieck topology, \(\xi\) is required to be a sheaf: for every covering family \(\{f_i:h_i\to h\}\), local sections \(a_i\in\mathcal{I}_{h_i}\) that agree on overlaps glue uniquely to a section \(a\in\mathcal{I}_h\). This is the formal seat of <a href="../theorems/index.html#t13">T13 (Hermeneutic Sheaf)</a>.</li>
+</ol>
+<p>The 8-tuple algebra of axiom (1) above is recovered from the 10-tuple by setting \(\mathcal{H}=\mathbf{1}\) (the terminal one-object category): \(\xi\) collapses to a single 8-tuple and all horizon-relativity vanishes.</p></div>
+
+<div class="defn"><span class="thm-label">Definition (derived primitives).</span>
+<p>A number of features that other formalisms posit as separate primitives are <em>derived</em> from the 10-tuple, not added to it. None expand the signature:</p>
+<ul>
+<li><strong>τ</strong> (temporality) — a totally-ordered subcategory \(\mathcal{T}\hookrightarrow\mathcal{H}\) of time-slices.</li>
+<li><strong>ι</strong> (intentionality / aboutness) — a global section \(\bigl(\rho_h(I,\,\cdot)\bigr)_{h\in\mathcal{H}}\) of the resonance fibration.</li>
+<li><strong>π</strong> (perspective / agent) — a connected sub-category \(\mathcal{H}_\pi\subseteq\mathcal{H}\) of horizons accessible to an agent.</li>
+<li><strong>φ</strong> (affect / conatus) — the gradient of \(\deg\) along morphisms of \(\mathcal{H}\).</li>
+<li><strong>δ</strong> (Saussurean differentiation) — the negative trace of \(\sigma_h\).</li>
+<li><strong>β</strong> (rigid reference) — a constant global section of \(\xi\).</li>
+<li><strong>λ</strong> (potentiality) — the colimit of \(\rho\) along future-refinements.</li>
+<li><strong>χ</strong> (schema / paradigm / episteme) — a connected component of \(\mathcal{H}\).</li>
+<li><strong>μ</strong> (credence) — a measure on \(\mathcal{F}(h):=\xi(h)\).</li>
+<li><strong>ψ</strong> (signed valence) — the symmetric+antisymmetric decomposition of \(\sigma_h(\text{self},I)\).</li>
+<li><strong>R</strong> (reflexion) — fixed-point self-application of \(\xi\) (i.e., \(\xi\) regarded as an object of its own target category).</li>
+</ul>
+<p>See <a href="horizon.html">the horizon-functor page</a> for the full derivation of each.</p></div>
+
+<h2>Worked example A: free 8-tuple idea algebra on two generators</h2>
+<p>Let \(X=\{x,y\}\) and let \(\mathcal{I}=X^{*}\) be the free monoid (finite words). Compose by concatenation; \(e\) is the empty word. Define \(\rho(u,v)=\) the length of the longest common prefix; then \(\rho\) is non-symmetric in the obvious way once we extend it to \(\mathbb{R}\langle X^{*}\rangle\). Take \(\sigma(u,v)=\) common prefix, \(\nu(u,v)=\) the part of \(u\) past the common prefix, \(\eta(u,v)=\) the suffix of \(v\) after the common prefix. Set \(\omega(u,v) = |uv| - |u| - |v| = 0\) (an honest cocycle, trivial here). Let \(\deg(w) = |w|\) into \(G=\mathbb{Z}\). All five 8-tuple axioms are satisfied; this is the smallest non-trivial 8-tuple idea algebra.</p>
+
+<h2>Worked example B: a non-trivial 10-tuple — the indexical pair</h2>
+<p>Let \(\mathcal{H}\) be the two-object category \(\{h_1\rightrightarrows h_2\}\) with two parallel non-identity morphisms \(f,g:h_1\to h_2\) (a minimal example with non-trivial monodromy). Take \(\xi(h_1)=\xi(h_2)=\) the free 8-tuple of Example A, but let \(\xi(f)\) and \(\xi(g)\) act on the alphabet by different permutations of \(\{x,y\}\): say \(\xi(f)=\mathrm{id}\) and \(\xi(g)\) swaps \(x\leftrightarrow y\). Then a section \(a\in\mathcal{I}_{h_2}\) restricts to two genuinely distinct elements \(\xi(f)(a)\) and \(\xi(g)(a)\) in \(\mathcal{I}_{h_1}\); the sheaf condition fails, and the obstruction class lives in \(H^1(\mathcal{H};\underline{\eta})\). This is the <em>minimal</em> instance of <a href="../theorems/index.html#t14">T14 (Indexical Pullback)</a>: a section of "meaning" exists locally on each horizon but cannot be glued globally — the categorial bare bones of indexicality, framing effects, and Kuhnian incommensurability.</p>
 
 <h2>Related theorems</h2>
 <ul>
 <li><a href="../theorems/composition.html">Theorem 1 (Composition)</a> shows the monoid axioms suffice to recover identity uniqueness and cancellation for invertibles.</li>
 <li><a href="../theorems/resonance-pairing.html">Theorem 2 (Resonance Pairing)</a> shows the bilinear extension is unique.</li>
+<li><a href="../theorems/index.html#t13">Theorem 13 (Hermeneutic Sheaf)</a> — understanding as sheaf-gluing of horizon-local sections of \(\xi\).</li>
+<li><a href="../theorems/index.html#t14">Theorem 14 (Indexical Pullback)</a> — \(\sigma,\eta\) fail to pull back functorially; obstruction in \(H^1(\mathcal{H};\underline{\eta})\).</li>
+<li><a href="../theorems/index.html#t15">Theorem 15 (Profundity = Trans-horizonal Stability)</a> — \(\deg(I)\) factors through horizon-support × ω-closure.</li>
 </ul>
 <p><a href='index.html'>&larr; Back to Formalism</a></p>
 </main>

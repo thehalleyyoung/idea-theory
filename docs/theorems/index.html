@@ -30,7 +30,7 @@
   </p>
 </div>
 
-<h2>Plain-English Map of T1-T12</h2>
+<h2>Plain-English Map of T1-T15</h2>
 <table style="width:100%;border-collapse:collapse;margin:1.2em 0 1.8em">
   <thead>
     <tr style="background:var(--accent-soft)">
@@ -99,6 +99,21 @@
       <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="novelty.html">T12</a></td>
       <td style="padding:.6em 1em;border:1px solid var(--accent)">Novelty can be distinguished from mere recombination: some outputs are genuinely outside a lineage or closure set in a mathematically testable sense.</td>
       <td style="padding:.6em 1em;border:1px solid var(--accent)">This is the page to consult when a zoo entry claims that something is not merely a rearrangement of earlier material but a real structural innovation.</td>
+    </tr>
+    <tr id="t13">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../formalism/horizon.html">T13</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><strong>Hermeneutic Sheaf Theorem.</strong> An idea is understood at a horizon iff its restrictions to a covering family of sub-horizons agree on overlaps and glue uniquely. Understanding = sheaf-gluing.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">Whenever a zoo entry invokes context, language-game, paradigm, episteme, fusion of horizons, or interpretive community, the convergence of meaning across local readings is T13.</td>
+    </tr>
+    <tr id="t14" style="background:#fafafa">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../formalism/horizon.html">T14</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><strong>Indexical Pullback / Inference Non-invariance.</strong> Inference \(\eta\) and resonance \(\sigma\) do not in general pull back along horizon-morphisms; the obstruction is a 1-cocycle on the horizon category.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">This is the algebraic seat of indexicality, translation indeterminacy, Kuhnian incommensurability, perspectivism, and conceptual change. When an entry says meaning shifts with context, the underlying claim is T14.</td>
+    </tr>
+    <tr id="t15">
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><a href="../formalism/horizon.html">T15</a></td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)"><strong>Profundity = Trans-horizonal Stability.</strong> The intensive grading \(\deg(I)\) factors through the horizon-support of \(I\) modulo its \(\omega\)-closure: profound ideas are exactly those that survive many horizon-translations and propagate faithfully.</td>
+      <td style="padding:.6em 1em;border:1px solid var(--accent)">When an entry says something is "more real," "eternal," "universal," or "profound," T15 says these are all the same algebraic invariant — broad horizon-support combined with stable transmission.</td>
     </tr>
   </tbody>
 </table>
@@ -190,7 +205,78 @@
     <a href="novelty.html">Theorem 12 →</a>
   </div>
 
+  <!-- Tile 11 -->
+  <div id="tile-t13" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">13. Hermeneutic Sheaf</h3>
+    <p style="font-size:.9em">\(I\in\mathcal{F}(h)\Leftrightarrow\) local sections \((I_i)\) on a cover \(\{h_i\to h\}\) agree on overlaps and glue uniquely. Understanding as sheaf-gluing.</p>
+    <p style="font-size:.85em;color:#666">ξ-extension</p>
+    <a href="../formalism/horizon.html">Theorem 13 →</a>
+  </div>
+
+  <!-- Tile 12 -->
+  <div id="tile-t14" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">14. Indexical Pullback</h3>
+    <p style="font-size:.9em">\(f^*\sigma_h(I,J)\not\equiv\sigma_{h'}(f^*I,f^*J)\); obstruction lives in \(H^1(\mathcal{H};\underline{\eta})\). Indexicality, incommensurability, translation.</p>
+    <p style="font-size:.85em;color:#666">ξ-extension</p>
+    <a href="../formalism/horizon.html">Theorem 14 →</a>
+  </div>
+
+  <!-- Tile 13 -->
+  <div id="tile-t15" style="border:1px solid var(--accent);border-radius:6px;padding:1em;background:var(--accent-soft)">
+    <h3 style="margin:0 0 .4em">15. Profundity Theorem</h3>
+    <p style="font-size:.9em">\(\deg(I) = \Phi(\mathrm{Supp}(I), \omega\text{-closure})\). Profundity = trans-horizonal stability under \(\omega\)-faithful transmission.</p>
+    <p style="font-size:.85em;color:#666">ξ-extension</p>
+    <a href="../formalism/horizon.html">Theorem 15 →</a>
+  </div>
+
 </div><!-- end grid -->
+
+
+<!-- ═══════════════════════════════════════════════════════
+     PART I.5: Horizon-Functor (ξ) Theorems — Detailed Statements
+     ═══════════════════════════════════════════════════════ -->
+<h2>Part I.5: The Horizon-Functor Theorems (T13–T15)</h2>
+
+<p>
+  These three theorems govern the horizon functor \(\xi: \mathcal{H}^{\mathrm{op}}\to\mathbf{IdeaAlg}_8\) introduced in the <a href="../formalism/horizon.html">Horizon (ξ)</a> formalism page. They connect the new context base \(\mathcal{H}\) to the
+  pre-existing operations \(\sigma,\eta,\omega,\deg\) of the 8-tuple, and they are the algebraic seat of hermeneutic
+  fusion, indexicality, and the philosophical notion of profundity.
+</p>
+
+<div id="t13-detail" class="defn"><span class="thm-label">Theorem 13 (Hermeneutic Sheaf).</span>
+  Let \(\{f_i:h_i\to h\}_{i\in I}\) be a covering family in the Grothendieck topology on \(\mathcal{H}\), and let \(I\) be a candidate global section.
+  Then \(I\in\mathcal{F}(h)\) (\(I\) is <em>understood</em> at \(h\)) iff there exist local data
+  \(I_i\in\mathcal{F}(h_i)\) such that for every pair \((i,j)\),
+  \[
+    I_i\big|_{h_i\times_h h_j} \;=\; I_j\big|_{h_i\times_h h_j}\,,
+  \]
+  and the family \((I_i)\) glues uniquely to a global section over \(h\). The σ- and η-structure of the algebra are precisely the gluing data: σ specifies what must agree on overlaps; η licenses the gluing.
+</div>
+
+<p><strong>Plain English.</strong> Understanding an idea is not a private mental act but a structural achievement: the same idea must restrict coherently to every local context the interpreter inhabits, and those local readings must be reconcilable. This is Gadamerian fusion of horizons made into a sheaf condition. Failure on overlaps is misunderstanding; failure to glue is bad faith or equivocation.</p>
+
+<div id="t14-detail" class="defn"><span class="thm-label">Theorem 14 (Indexical Pullback / Inference Non-invariance).</span>
+  For any horizon morphism \(f:h'\to h\), the restriction \(f^*\) is an algebra homomorphism on \((\circ,e,\rho)\) but not generally on \((\sigma,\eta,\deg)\). Specifically:
+  \[
+    \sigma_{h'}\!\big(f^*I,\, f^*J\big) \;\subseteq\; f^*\!\big(\sigma_h(I,J)\big)\quad\text{(possibly strict)},
+  \]
+  \[
+    \exists\, I,J,\,h,\,f:\ \eta_h(I,J)=\top \wedge \eta_{h'}(f^*I,\,f^*J)=\bot.
+  \]
+  The obstruction to universal validity of an inference is its class in \(H^1(\mathcal{H};\underline{\eta})\): an inference is universally valid across all horizon-morphisms iff its cohomology class vanishes.
+</div>
+
+<p><strong>Plain English.</strong> Translating a statement from one context to another may break the inferences that supported it. Davidsonian indeterminacy, Kuhnian incommensurability, indexical semantics, Wittgensteinian language-game relativity, Foucauldian epistemic discontinuity — these are not separate phenomena but a single algebraic fact about how σ and η fail to commute with horizon-shift. The cohomology class is what tells you whether the failure is repairable (boundary) or irreducible (non-trivial cocycle).</p>
+
+<div id="t15-detail" class="defn"><span class="thm-label">Theorem 15 (Profundity = Trans-horizonal Stability).</span>
+  Define the <em>horizon-support</em> of an idea \(I\) as the maximal full subcategory \(\mathrm{Supp}(I)\subseteq\mathcal{H}\) on which \(I\) admits a coherent restriction. Then the intensive grading factors as
+  \[
+    \deg(I) \;=\; \Phi\!\big(\mathrm{Supp}(I),\, \omega\text{-closure of }I\big),
+  \]
+  where \(\Phi\) is the unique invariant that is (i) monotone in support, (ii) additive under horizon-coproduct, (iii) preserved by \(\omega\). Equivalently: an idea has high \(\deg\) iff it survives many horizon-translations <em>and</em> propagates faithfully under transmission. Maximal \(\deg\) is achieved exactly by sections of the global sheaf that are also \(\omega\)-stable.
+</div>
+
+<p><strong>Plain English.</strong> "Depth," "profundity," "eternity," "universality," and Plato's "more real" are not separate attributes — they are one algebraic invariant: the breadth of horizons in which the idea remains coherent, weighted by how faithfully it is preserved under transmission. Plato's Forms, Frege's eternal thoughts, Heideggerian Tiefe, Habermasian universal validity claims, and Confucian jūnzǐ-level virtue are all asymptotic instances of the same maximisation. Adornian non-identity is its dual: ideas of low support that resist trans-horizonal generalisation are exactly the non-conceptual remainder.</p>
 
 
 <!-- ═══════════════════════════════════════════════════════
